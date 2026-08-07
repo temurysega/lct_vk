@@ -1530,13 +1530,17 @@ def _compute_effective_background(
     master_idx = layout.get("master_index", 0) if layout else 0
     master = masters_data[master_idx] if master_idx < len(masters_data) else None
 
-    slide_cover = _covering_color(slide_info)
-    if slide_cover:
-        return {"color": slide_cover, "source": "slide_shape"}
-
+    # Pictures are emitted after vector backgrounds by the PDF importer and
+    # therefore sit above them in the visual stack. Prefer a full-bleed image
+    # when both exist; otherwise a hidden PDF page rectangle can incorrectly
+    # turn a dark photographic cover into a light slide.
     slide_image = _covering_image(slide_info)
     if slide_image:
         return {"color": slide_image, "source": "slide_image"}
+
+    slide_cover = _covering_color(slide_info)
+    if slide_cover:
+        return {"color": slide_cover, "source": "slide_shape"}
 
     layout_cover = _covering_color(layout) if layout else None
     if layout_cover:

@@ -11,6 +11,11 @@ from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import MSO_ANCHOR, MSO_AUTO_SIZE
 from pptx.util import Inches, Pt
 
+MAX_PDF_VECTORS_PER_PAGE = 300
+MAX_PDF_IMAGES_PER_PAGE = 150
+MIN_PDF_VECTOR_AREA_INCHES = 0.003
+MIN_PDF_IMAGE_PIXELS = 5
+
 
 def _rgb_tuple(value: Any, fallback: str = "000000") -> RGBColor:
     if not isinstance(value, (list, tuple)) or len(value) < 3:
@@ -27,7 +32,13 @@ def _pdf_int_color(value: int | None, fallback: str = "000000") -> RGBColor:
 
 def _clean_font_name(value: str) -> str:
     value = re.sub(r"^[A-Z]{6}\+", "", value or "")
-    return value.replace("-Bold", "").replace("-Regular", "") or "Arial"
+    value = value.replace("-Bold", "").replace("-Regular", "")
+    aliases = {
+        "ArialMT": "Arial",
+        "Helvetica": "Arial",
+        "HelveticaNeue": "Arial",
+    }
+    return aliases.get(value, value) or "Arial"
 
 
 def _to_inches(value: float, page_points: float, slide_inches: float) -> float:
@@ -38,17 +49,27 @@ def _add_drawings(
     slide: Any, page: Any, slide_width: float, slide_height: float
 ) -> int:
     added = 0
-    for drawing in page.get_drawings()[:500]:
+    candidates: list[tuple[float, Any]] = []
+    for drawing in page.get_drawings():
         fill = drawing.get("fill")
         rect = drawing.get("rect")
         if fill is None or rect is None or rect.width <= 0 or rect.height <= 0:
             continue
+        area = (
+            _to_inches(rect.width, page.rect.width, slide_width)
+            * _to_inches(rect.height, page.rect.height, slide_height)
+        )
+        if area < MIN_PDF_VECTOR_AREA_INCHES:
+            continue
+        candidates.append((area, drawing))
+    candidates.sort(key=lambda item: item[0], reverse=True)
+    for _, drawing in candidates[:MAX_PDF_VECTORS_PER_PAGE]:
+        fill = drawing["fill"]
+        rect = drawing["rect"]
         x = _to_inches(rect.x0, page.rect.width, slide_width)
         y = _to_inches(rect.y0, page.rect.height, slide_height)
         w = _to_inches(rect.width, page.rect.width, slide_width)
         h = _to_inches(rect.height, page.rect.height, slide_height)
-        if w * h < 0.0008:
-            continue
         shape = slide.shapes.add_shape(
             MSO_SHAPE.RECTANGLE, Inches(x), Inches(y), Inches(w), Inches(h)
         )
@@ -73,9 +94,13 @@ def _add_images(
     slide_height: float,
 ) -> int:
     added = 0
-    seen: set[tuple[int, tuple[float, float, float, float]]] = set()
+    seen_rectangles: set[tuple[float, float, float, float]] = set()
     for image in page.get_images(full=True):
         xref = int(image[0])
+        width_px = int(image[2])
+        height_px = int(image[3])
+        if width_px < MIN_PDF_IMAGE_PIXELS or height_px < MIN_PDF_IMAGE_PIXELS:
+            continue
         try:
             extracted = document.extract_image(xref)
             payload = extracted.get("image")
@@ -85,10 +110,10 @@ def _add_images(
         except (RuntimeError, ValueError):
             continue
         for rect in rectangles:
-            key = (xref, tuple(round(value, 2) for value in rect))
-            if key in seen or rect.width <= 0 or rect.height <= 0:
+            key = tuple(round(value, 2) for value in rect)
+            if key in seen_rectangles or rect.width <= 0 or rect.height <= 0:
                 continue
-            seen.add(key)
+            seen_rectangles.add(key)
             x = _to_inches(rect.x0, page.rect.width, slide_width)
             y = _to_inches(rect.y0, page.rect.height, slide_height)
             w = _to_inches(rect.width, page.rect.width, slide_width)
@@ -99,6 +124,8 @@ def _add_images(
                 )
                 picture.name = f"PDF image {added + 1}"
                 added += 1
+                if added >= MAX_PDF_IMAGES_PER_PAGE:
+                    return added
             except (OSError, ValueError):
                 continue
     return added
@@ -193,7 +220,7 @@ def pdf_to_pptx(
         counts["text_blocks"] += _add_text(slide, page, slide_width, slide_height)
 
     prs.core_properties.title = source.stem
-    prs.core_properties.subject = "Editable reference imported from a public PDF deck"
+    prs.core_properties.subject = "Editable reference imported from a PDF template"
     target.parent.mkdir(parents=True, exist_ok=True)
     prs.save(target)
     document.close()

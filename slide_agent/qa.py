@@ -189,7 +189,12 @@ def inspect_presentation(
                             and str(shape.name).startswith("BrandDeck Native")
                             and not any(
                                 token in str(shape.name)
-                                for token in ("Footer", "Badge", "Number")
+                                for token in (
+                                    "Footer",
+                                    "Badge",
+                                    "Number",
+                                    "Navigation Label",
+                                )
                             )
                             and run.font.size
                             and run.font.size.pt < 14

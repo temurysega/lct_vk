@@ -24,7 +24,7 @@ def _print(value: Any, as_json: bool = False) -> None:
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="branddeck",
-        description="Analyze arbitrary PPTX templates and generate branded presentations.",
+        description="Analyze arbitrary PPTX/PDF templates and generate branded presentations.",
     )
     parser.add_argument(
         "--workspace", help="Workspace directory (default: ./slide-workspace)"
@@ -37,7 +37,7 @@ def _parser() -> argparse.ArgumentParser:
     analyze = sub.add_parser(
         "analyze", help="Extract a template design system and pattern catalog"
     )
-    analyze.add_argument("template", help="Path to a .pptx template")
+    analyze.add_argument("template", help="Path to a .pptx or .pdf template")
     analyze.add_argument("--name", help="Stable human-readable template name")
     analyze.add_argument(
         "--offline", action="store_true", help="Skip Inference API enhancement"
@@ -48,7 +48,7 @@ def _parser() -> argparse.ArgumentParser:
         "generate", help="Generate a presentation from analyzed template"
     )
     generate.add_argument(
-        "--template", help="Template id, analysis directory, or .pptx path"
+        "--template", help="Template id, analysis directory, or .pptx/.pdf path"
     )
     generate.add_argument(
         "--content", required=True, help="Content file path or inline text"
@@ -63,7 +63,9 @@ def _parser() -> argparse.ArgumentParser:
     run = sub.add_parser(
         "run", help="Analyze a template and generate a deck in one command"
     )
-    run.add_argument("--template", required=True, help="Path to a .pptx template")
+    run.add_argument(
+        "--template", required=True, help="Path to a .pptx or .pdf template"
+    )
     run.add_argument(
         "--content", required=True, help="Content file path or inline text"
     )

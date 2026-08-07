@@ -24,7 +24,7 @@ from .utils import (
     write_json,
 )
 
-ANALYSIS_SCHEMA_VERSION = "1.1"
+ANALYSIS_SCHEMA_VERSION = "1.2"
 
 
 def _load_extractor():
@@ -176,6 +176,173 @@ def _accent_candidate(observed: list[dict[str, Any]], excluded: set[str]) -> str
     return max(candidates, default=(0.0, ""))[1] or None
 
 
+def _color_luminance(value: str | None) -> float:
+    color = _normal_color(value) or "FFFFFF"
+    red, green, blue = (
+        int(color[offset : offset + 2], 16) / 255 for offset in (0, 2, 4)
+    )
+    return 0.2126 * red + 0.7152 * green + 0.0722 * blue
+
+
+def _header_navigation_rule(
+    slides: list[dict[str, Any]], width: float, height: float
+) -> dict[str, Any]:
+    """Infer a recurring row of compact navigation pills from slide geometry."""
+    groups: list[list[dict[str, Any]]] = []
+    for slide in slides:
+        candidates: list[dict[str, Any]] = []
+        for shape in slide.get("shapes", []):
+            left = shape.get("left")
+            top = shape.get("top")
+            shape_width = shape.get("width")
+            shape_height = shape.get("height")
+            fill = _normal_color(shape.get("fill", {}).get("color"))
+            if not all(
+                isinstance(value, (int, float))
+                for value in (left, top, shape_width, shape_height)
+            ):
+                continue
+            if (
+                fill
+                and 0.015 * height <= float(top) <= 0.13 * height
+                and 0.018 * height <= float(shape_height) <= 0.065 * height
+                and 0.03 * width <= float(shape_width) <= 0.2 * width
+            ):
+                candidates.append(shape)
+        if len(candidates) >= 3:
+            median_height = statistics.median(
+                float(item["height"]) for item in candidates
+            )
+            candidates = [
+                item
+                for item in candidates
+                if abs(float(item["height"]) - median_height)
+                <= max(0.04, median_height * 0.35)
+            ]
+        if len(candidates) >= 3:
+            groups.append(sorted(candidates, key=lambda item: float(item["left"])))
+
+    minimum_recurrence = max(2, round(len(slides) * 0.35))
+    if len(groups) < minimum_recurrence:
+        return {"detected": False}
+
+    counts = [len(group) for group in groups]
+    count = max(3, round(statistics.median(counts)))
+    representative = min(groups, key=lambda group: abs(len(group) - count))[:count]
+    all_items = [item for group in groups for item in group]
+    fills = [
+        _normal_color(item.get("fill", {}).get("color")) or "FFFFFF"
+        for item in all_items
+    ]
+    inactive_fill = _mode(fills, "FFFFFF")
+    active_fill = min(fills, key=_color_luminance, default="000000")
+    line_colors = [
+        _normal_color(item.get("line", {}).get("color"))
+        for item in all_items
+        if _normal_color(item.get("line", {}).get("color"))
+    ]
+    left = min(float(item["left"]) for item in representative)
+    right = max(
+        float(item["left"]) + float(item["width"]) for item in representative
+    )
+    ordered = sorted(representative, key=lambda item: float(item["left"]))
+    gaps = [
+        float(ordered[index]["left"])
+        - float(ordered[index - 1]["left"])
+        - float(ordered[index - 1]["width"])
+        for index in range(1, len(ordered))
+    ]
+    return {
+        "detected": True,
+        "recurring_slide_ratio": round(len(groups) / max(1, len(slides)), 3),
+        "count": count,
+        "left_inches": round(left, 3),
+        "top_inches": round(
+            statistics.median(float(item["top"]) for item in all_items), 3
+        ),
+        "right_inches": round(right, 3),
+        "height_inches": round(
+            statistics.median(float(item["height"]) for item in all_items), 3
+        ),
+        "gap_inches": round(statistics.median(gaps), 3) if gaps else 0.12,
+        "inactive_fill": inactive_fill,
+        "active_fill": active_fill,
+        "border_color": _mode(line_colors, inactive_fill),
+        "inactive_text": _contrast_text(inactive_fill),
+        "active_text": _contrast_text(active_fill),
+    }
+
+
+def _closing_panel_rule(
+    slides: list[dict[str, Any]], width: float, height: float
+) -> dict[str, Any]:
+    """Detect a full-height side panel used by the final slide composition."""
+    if not slides:
+        return {"detected": False}
+    candidates: list[dict[str, Any]] = []
+    closing = slides[-1]
+    for image in closing.get("images", []):
+        candidates.append(
+            {
+                "left": image.get("left"),
+                "top": image.get("top"),
+                "width": image.get("width"),
+                "height": image.get("height"),
+                "color": _normal_color(image.get("edge_color")),
+                "source": "image",
+            }
+        )
+    for shape in closing.get("shapes", []):
+        candidates.append(
+            {
+                "left": shape.get("left"),
+                "top": shape.get("top"),
+                "width": shape.get("width"),
+                "height": shape.get("height"),
+                "color": _normal_color(shape.get("fill", {}).get("color")),
+                "source": "shape",
+            }
+        )
+    matches: list[dict[str, Any]] = []
+    for item in candidates:
+        left, top, panel_width, panel_height = (
+            item.get("left"),
+            item.get("top"),
+            item.get("width"),
+            item.get("height"),
+        )
+        if not all(
+            isinstance(value, (int, float))
+            for value in (left, top, panel_width, panel_height)
+        ):
+            continue
+        ratio = float(panel_width) / max(width, 0.1)
+        aligned_left = float(left) <= width * 0.02
+        aligned_right = float(left) + float(panel_width) >= width * 0.98
+        if (
+            item.get("color")
+            and float(top) <= height * 0.02
+            and float(panel_height) >= height * 0.9
+            and 0.18 <= ratio <= 0.65
+            and (aligned_left or aligned_right)
+        ):
+            item["side"] = "left" if aligned_left else "right"
+            item["width_ratio"] = ratio
+            matches.append(item)
+    if not matches:
+        return {"detected": False}
+    panel = max(matches, key=lambda item: float(item["width"]) * float(item["height"]))
+    return {
+        "detected": True,
+        "side": panel["side"],
+        "width_ratio": round(float(panel["width_ratio"]), 3),
+        "background": panel["color"],
+        "heading": _contrast_text(panel["color"]),
+        "body": _contrast_text(panel["color"]),
+        "source_kind": panel["source"],
+    }
+
+
 def build_design_system(context: dict[str, Any]) -> dict[str, Any]:
     presentation = context.get("presentation", {})
     theme = context.get("theme", {})
@@ -249,7 +416,10 @@ def build_design_system(context: dict[str, Any]) -> dict[str, Any]:
     background = content_background
     content_title_sizes = [size for size in all_sizes if 28 <= size <= 56]
     readable_body_sizes = [size for size in body_sizes if 14 <= size <= 24]
-    content_title_size = min(40.0, max(30.0, median(content_title_sizes, 34.0)))
+    content_title_size = min(
+        36.0 if source_model["fragmented"] else 40.0,
+        max(30.0, median(content_title_sizes, 34.0)),
+    )
     body_size = min(20.0, max(16.0, median(readable_body_sizes, 18.0)))
 
     def colors_for(slide_subset: list[dict[str, Any]], *, heading: bool) -> list[str]:
@@ -276,6 +446,18 @@ def build_design_system(context: dict[str, Any]) -> dict[str, Any]:
         colors_for(cover_slides, heading=True), _contrast_text(cover_background)
     )
     cover_body = _mode(colors_for(cover_slides, heading=False), cover_heading)
+    closing_slides = slides[-1:] if len(slides) > 1 else []
+    closing_background = (
+        _normal_color(closing_slides[0].get("effective_background", {}).get("color"))
+        if closing_slides
+        else content_background
+    ) or content_background
+    closing_heading = _mode(
+        colors_for(closing_slides, heading=True), _contrast_text(closing_background)
+    )
+    closing_body = _mode(
+        colors_for(closing_slides, heading=False), closing_heading
+    )
     heading_color = content_heading
     body_color = content_body
     excluded = {
@@ -332,8 +514,15 @@ def build_design_system(context: dict[str, Any]) -> dict[str, Any]:
             "content_background": content_background,
             "content_heading": content_heading,
             "content_body": content_body,
+            "closing_background": closing_background,
+            "closing_heading": closing_heading,
+            "closing_body": closing_body,
         },
         "source_model": source_model,
+        "layout_rules": {
+            "header_navigation": _header_navigation_rule(slides, width, height),
+            "closing_panel": _closing_panel_rule(slides, width, height),
+        },
         "spacing": {
             "typical_left_margin_inches": 0.65
             if source_model["fragmented"]
@@ -950,8 +1139,8 @@ def analyze_template(
     source = Path(template_path).expanduser().resolve()
     if not source.is_file():
         raise FileNotFoundError(f"Template not found: {source}")
-    if source.suffix.lower() != ".pptx":
-        raise ValueError(f"Only .pptx templates are supported: {source}")
+    if source.suffix.lower() not in {".pptx", ".pdf"}:
+        raise ValueError(f"Only .pptx and .pdf templates are supported: {source}")
 
     digest = hashlib.sha256(source.read_bytes()).hexdigest()
     workspace_path = resolve_workspace(workspace)
@@ -968,7 +1157,14 @@ def analyze_template(
 
     output_dir.mkdir(parents=True, exist_ok=True)
     original = output_dir / "original.pptx"
-    copy_file(source, original)
+    pdf_import: dict[str, Any] | None = None
+    if source.suffix.lower() == ".pdf":
+        from .pdf_importer import pdf_to_pptx
+
+        copy_file(source, output_dir / "source.pdf")
+        pdf_import = pdf_to_pptx(source, original)
+    else:
+        copy_file(source, original)
     extract_template_context = _load_extractor()
     extraction_log = io.StringIO()
     try:
@@ -1014,6 +1210,8 @@ def analyze_template(
             "ai_enhanced": bool(llm_notes),
             "vision_preview_count": len(vision_manifest.get("previews", [])),
             "vision_assisted": bool(llm_notes and llm_notes.get("vision_inputs")),
+            "imported_from_pdf": pdf_import is not None,
+            "pdf_import": pdf_import,
         },
     )
     return output_dir

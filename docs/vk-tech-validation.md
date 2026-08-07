@@ -2,13 +2,14 @@
 
 ## Референсы и границы проверки
 
-Публичные материалы не включаются в git. Скрипт
-`examples/fetch_vk_tech_references.py` загружает их по исходным ссылкам и
-создаёт локальные fixtures для воспроизводимой проверки.
+Исходные материалы не включаются в git. Основной референс предоставлен как
+локальный PDF; публичные дополнительные наборы загружает скрипт
+`examples/fetch_vk_tech_references.py`.
 
-| Набор | Назначение | Публичный источник |
+| Набор | Назначение | Источник |
 |---|---|---|
-| «VK Tech — ведущий российский разработчик корпоративного ПО» | Основная приёмка синей корпоративной визуальной системы | [страница презентации](https://ppt-online.org/1691195), 33 публичных изображения слайдов |
+| `VK_Tech_prezentacziya_za_1_Q2026_ae725c0cff.pdf` | Основная приёмка корпоративной системы VK Tech: 14 страниц, I квартал 2026 года | Локальный файл, предоставленный для проверки |
+| «VK Tech — ведущий российский разработчик корпоративного ПО» | Дополнительная проверка синей корпоративной системы | [страница презентации](https://ppt-online.org/1691195), 33 публичных изображения слайдов |
 | «ПАК как опорная точка цифрового суверенитета», Станислав Погоржельский | Дополнительный stress-test тёмной продуктовой системы VK Cloud / VK Tech | [программа форума «ЦОД»](https://spb.dcforum.ru/archive/programm?day=1), [PDF](https://spb.dcforum.ru/sites/default/files/spb/15.00-15.20_pogorzhelskiy_2025_17_06_ivent_cod_v_spb_v2_short-1.pdf) |
 | «Как сделать линейку тренингов на основе матрицы компетенций» | Независимый stress-test адаптивности | [конференция «Цифровое образование. XXI век»](https://edu-forum.pro/), [публичный файл](https://disk.360.yandex.ru/i/aKyEeARywFax5g) |
 
@@ -44,14 +45,13 @@ selectable background shapes.
 
 ```powershell
 python -m pip install -e ".[dev,pdf-reference]"
-python .\examples\fetch_vk_tech_references.py --only vk-tech-blue-corporate
 $env:BRANDDECK_POWERPOINT_QA="1"
 
-branddeck --workspace .\external-fixtures\vk-tech\blue-workspace run `
-  --template .\external-fixtures\vk-tech\vk-tech-blue-corporate.pptx `
+branddeck --workspace .\external-fixtures\vk-tech\q1-2026-workspace run `
+  --template .\external-fixtures\vk-tech\VK_Tech_prezentacziya_za_1_Q2026_ae725c0cff.pdf `
   --content .\examples\vk_tech_case_content.md `
   --slides 10 --offline `
-  --output .\external-fixtures\vk-tech\generated-vk-tech-blue-native.pptx
+  --output .\external-fixtures\vk-tech\generated-vk-tech-q1-2026-native.pptx
 ```
 
 Удалите `--offline` и задайте `INFERENCE_BASE_URL`, `INFERENCE_API_KEY` и
@@ -59,24 +59,28 @@ branddeck --workspace .\external-fixtures\vk-tech\blue-workspace run `
 
 ## Фактический результат 7 августа 2026 года
 
-| Метрика | Синий корпоративный референс | Тёмный дополнительный stress-test |
-|---|---:|---:|
-| Использовано исходных примеров | 6 | 28 |
-| Классификация | `flattened`, ratio `1.0` | `fragmented`, PDF ratio `1.0` |
-| Режим композиции | `native_grid` | `native_grid` |
-| Сгенерировано слайдов | 10 | 10 |
-| Нативные паттерны | cover, cards, list, split, closing | cover, cards, list, split, closing |
-| Полноэкранные picture shapes | 0 | 0 |
-| Structural QA | `passed`, 100/100 | `passed`, 100/100 |
-| PowerPoint COM render | 10/10, `passed` | 10/10, `passed` |
-| Число попыток | 1 | 1 |
-| Размер результата | 58 009 байт | 76 244 байта |
-| SHA-256 | `776b498c307caa51685468d39b339596273e795501c1ae3aef0e2f64a460a17d` | `19a85c7b41bdb329db48435f995757da61081ec07a4be6ed58a9afbe278d3635` |
+| Метрика | VK Tech, I квартал 2026 |
+|---|---:|
+| Исходных страниц | 14 |
+| Импорт PDF | 652 вектора, 100 изображений, 112 текстовых блоков |
+| Классификация | `fragmented`, PDF ratio `1.0` |
+| Режим композиции | `native_grid` |
+| Извлечённые правила | 7 верхних вкладок; левая closing-панель 37% |
+| Сгенерировано слайдов | 10 |
+| Нативные паттерны | cover, cards, list, split, closing split |
+| Полноэкранные picture shapes | 0 |
+| Structural QA | `passed`, 100/100 |
+| PowerPoint COM render | 10/10, `passed` |
+| Число попыток | 1 |
+| Автоматические тесты | 15 passed |
+| Размер результата | 50 002 байта |
+| SHA-256 | `06dc29b02eab1eb8480668534bd12e35ef0f365c7c7ab68c810b0418c751f2e1` |
 
-Для синего набора автоматически извлечены тёмно-синий фон обложки `#091624`,
-светло-голубой контентный фон `#DCE6F2` и основной синий акцент `#1C76DE`.
-В generated PPTX на каждом слайде остаётся только небольшой wordmark; весь текст,
-карточки, списки, линии и cover motif являются редактируемыми нативными объектами.
+Автоматически извлечены почти чёрный фон обложки `#000106`, светлый
+контентный фон `#F6F7F9`, основной синий акцент `#0077FF`, повторяющаяся
+навигация и геометрия финального split-слайда. В generated PPTX весь текст,
+карточки, списки, вкладки, линии и cover motif являются редактируемыми
+нативными объектами.
 
 `powerpoint.py` открывает итоговый PPTX через установленный Microsoft PowerPoint,
 экспортирует все слайды в PNG 1600×900 и включает результат в QA feedback loop.

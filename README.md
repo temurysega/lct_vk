@@ -1,6 +1,6 @@
 # BrandDeck AI
 
-Open-source сервис, который анализирует произвольный `.pptx`-шаблон и создаёт новую презентацию в его стиле. Система извлекает дизайн-токены и паттерны, планирует структуру через OpenAI-compatible Inference API, выбирает подходящий реальный layout для каждого смыслового блока, собирает PowerPoint и запускает автоматический QA.
+Open-source сервис, который анализирует произвольный `.pptx`- или `.pdf`-шаблон и создаёт новую презентацию в его стиле. Система извлекает дизайн-токены и паттерны, планирует структуру через OpenAI-compatible Inference API, выбирает подходящий реальный layout для каждого смыслового блока, собирает PowerPoint и запускает автоматический QA.
 
 В основе лежит [anyideaz/pptx-skills](https://github.com/anyideaz/pptx-skills). Исходные парсер OOXML, промпты и совместимый PPTXGenJS-раннер сохранены; поверх них добавлен автономный Python-сервис, которому не нужны внешние ИИ-агенты или Node.js.
 
@@ -13,6 +13,7 @@ Open-source сервис, который анализирует произвол
 - Семантический выбор паттерна под cover, section, content, comparison, data, image и closing.
 - Ёмкостный layout mapping по геометрии текста, числу слотов, данным и изображениям с `why_fit`, рисками и альтернативами в `deck_plan.json`.
 - Два режима композиции: semantic layouts/exemplars для нормальных PPTX и `native_grid` для PDF-конверсий, где каждый слайд заново собирается из редактируемых объектов по извлечённой сетке.
+- Прямой приём PDF в CLI и REST API с фильтрацией служебных масок и ограничением декоративных PDF-фрагментов.
 - Удаление уникального исходного контента (скриншотов, клиентских логотипов и фото) с сохранением повторяющегося брендинга и полноэкранных фонов.
 - Генерация текста, таблиц, bar/pie charts, metric cards и timeline.
 - Проверка целостности OOXML, числа слайдов, границ элементов, переполнения, пересечений текста и шрифтовой консистентности; в Windows результат дополнительно рендерится настоящим PowerPoint и возвращается в QA-feedback loop.
@@ -110,7 +111,7 @@ curl -o result.pptx http://localhost:8000/v1/jobs/<job-id>/download
 ## Почему решение адаптируется к шаблону
 
 ```text
-PPTX template
+PPTX/PDF template
    ├─ OOXML parser ──> context.json
    ├─ source classifier ──> template_layout | native_grid
    ├─ token/grid extractor ──> design_system.json
@@ -133,6 +134,7 @@ Content ──> LLM planner ──> capacity-aware pattern scoring
 slide-workspace/
   templates/{name}-{sha256[:8]}/
     original.pptx
+    source.pdf             # если шаблон был загружен как PDF
     context.json
     extraction.log
     design_system.json
@@ -166,26 +168,27 @@ python -m pytest
 
 ### Проверка на VK Tech
 
-Основной acceptance-набор собирается из публичной синей презентации VK Tech.
-Исходные изображения не включаются в git и не переносятся в результат: они
-используются только для извлечения цветовых ролей и визуальных правил.
+Основной acceptance-набор — предоставленная презентация VK Tech за I квартал
+2026 года на 14 страниц. Исходный PDF не включается в git и не переносится в
+результат: он используется только для извлечения цветовых ролей, сетки и
+повторяющихся композиционных правил.
 
 ```powershell
 python -m pip install -e ".[dev,pdf-reference]"
-python .\examples\fetch_vk_tech_references.py --only vk-tech-blue-corporate
+$env:BRANDDECK_POWERPOINT_QA="1"
 
-branddeck --workspace .\external-fixtures\vk-tech\blue-workspace run `
-  --template .\external-fixtures\vk-tech\vk-tech-blue-corporate.pptx `
+branddeck --workspace .\external-fixtures\vk-tech\q1-2026-workspace run `
+  --template .\external-fixtures\vk-tech\VK_Tech_prezentacziya_za_1_Q2026_ae725c0cff.pdf `
   --content .\examples\vk_tech_case_content.md `
   --slides 10 --offline `
-  --output .\external-fixtures\vk-tech\generated-vk-tech-blue-native.pptx
+  --output .\external-fixtures\vk-tech\generated-vk-tech-q1-2026-native.pptx
 ```
 
-Результат воспроизводит тёмно-синюю обложку, светло-голубые контентные слайды,
-белые карточки и синий акцент исходного набора. Все композиции заново собираются
-нативными объектами; полноэкранных selectable pictures в слайдах нет. Тёмный
-спикерский материал VK Cloud / VK Tech и оформление конференции «Цифровое
-образование. XXI век» используются только как дополнительные stress-tests.
+Результат воспроизводит тёмную обложку, светлые контентные слайды, синюю
+акцентную систему, повторяющуюся верхнюю навигацию и split-композицию финала.
+Все композиции заново собираются нативными объектами; полноэкранных selectable
+pictures в слайдах нет. Публичный синий набор и тёмный спикерский материал
+используются только как дополнительные stress-tests.
 Источники, хэши, второй прогон и ограничения проверки приведены в
 [отчёте VK Tech](docs/vk-tech-validation.md).
 

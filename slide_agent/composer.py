@@ -105,8 +105,13 @@ def _luminance(value: str) -> float:
 def _native_tokens(design: dict[str, Any], role: str = "content") -> dict[str, Any]:
     brand = design.get("brand", {})
     colors = _theme_colors(design)
-    cover_role = role in {"cover", "section", "closing"}
-    prefix = "cover" if cover_role else "content"
+    prefix = (
+        "cover"
+        if role in {"cover", "section"}
+        else "closing"
+        if role == "closing"
+        else "content"
+    )
     background = _hex(
         brand.get(f"{prefix}_background", brand.get("background")), "0B1220"
     )
@@ -1180,6 +1185,155 @@ def _native_cover_motif(slide: Any, width: float, tokens: dict[str, Any]) -> Non
             pass
 
 
+def _short_navigation_label(value: str, fallback: str) -> str:
+    words = [word.strip(".,:;!?()[]{}") for word in value.split() if word.strip()]
+    label = " ".join(words[:2]).strip() or fallback
+    return label if len(label) <= 17 else label[:16].rstrip() + "…"
+
+
+def _native_navigation(
+    slide: Any,
+    design: dict[str, Any],
+    tokens: dict[str, Any],
+    titles: list[str],
+    active_index: int,
+) -> bool:
+    rule = design.get("layout_rules", {}).get("header_navigation", {})
+    if not rule.get("detected"):
+        return False
+    count = max(3, int(rule.get("count", 5)))
+    labels = [_short_navigation_label(value, f"{index + 1:02d}") for index, value in enumerate(titles)]
+    while len(labels) < count:
+        labels.append(f"{len(labels) + 1:02d}")
+    window_start = min(
+        max(0, active_index - count + 1), max(0, len(labels) - count)
+    )
+    labels = labels[window_start : window_start + count]
+    active_local = max(0, min(count - 1, active_index - window_start))
+
+    left = float(rule.get("left_inches", 0.65))
+    top = float(rule.get("top_inches", 0.28))
+    right = float(rule.get("right_inches", design["canvas"]["width_inches"] - 0.65))
+    height = max(0.18, float(rule.get("height_inches", 0.25)))
+    gap = max(0.06, min(0.16, float(rule.get("gap_inches", 0.12))))
+    pill_width = max(0.55, (right - left - gap * (count - 1)) / count)
+    for index, label in enumerate(labels):
+        x = left + index * (pill_width + gap)
+        active = index == active_local
+        fill_color = _hex(
+            rule.get("active_fill" if active else "inactive_fill"),
+            tokens["heading"] if active else tokens["surface"],
+        )
+        text_color = _hex(
+            rule.get("active_text" if active else "inactive_text"),
+            "FFFFFF" if active else tokens["body"],
+        )
+        pill = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            Inches(x),
+            Inches(top),
+            Inches(pill_width),
+            Inches(height),
+        )
+        pill.name = f"BrandDeck Native Navigation {index + 1}"
+        pill.fill.solid()
+        pill.fill.fore_color.rgb = _rgb(fill_color)
+        pill.line.color.rgb = _rgb(
+            _hex(rule.get("border_color"), tokens["body"])
+        )
+        pill.line.width = Pt(0.45)
+        try:
+            pill.adjustments[0] = 0.5
+        except (IndexError, ValueError):
+            pass
+        _add_textbox(
+            slide,
+            label,
+            (x + 0.04, top + 0.012, pill_width - 0.08, height - 0.024),
+            font_name=tokens["font"],
+            font_size=7.2,
+            color=text_color,
+            bold=active,
+            align=PP_ALIGN.CENTER,
+            min_font_size=6.5,
+            vertical_anchor=MSO_ANCHOR.MIDDLE,
+        ).name = f"BrandDeck Native Navigation Label {index + 1}"
+    return True
+
+
+def _native_closing_panel(
+    slide: Any,
+    title: str,
+    subtitle: str,
+    design: dict[str, Any],
+    tokens: dict[str, Any],
+) -> bool:
+    rule = design.get("layout_rules", {}).get("closing_panel", {})
+    if not rule.get("detected"):
+        return False
+    width = float(design["canvas"]["width_inches"])
+    height = float(design["canvas"]["height_inches"])
+    panel_width = min(width * 0.62, max(width * 0.24, width * float(rule.get("width_ratio", 0.38))))
+    side = str(rule.get("side", "left"))
+    panel_x = 0.0 if side == "left" else width - panel_width
+    panel = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE,
+        Inches(panel_x),
+        Inches(0),
+        Inches(panel_width),
+        Inches(height),
+    )
+    panel.name = "BrandDeck Native Closing Panel"
+    panel.fill.solid()
+    panel.fill.fore_color.rgb = _rgb(
+        _hex(rule.get("background"), tokens["heading"])
+    )
+    panel.line.fill.background()
+    try:
+        panel.adjustments[0] = 0.08
+    except (IndexError, ValueError):
+        pass
+    text_left = 0.72 if side == "left" else width - panel_width + 0.62
+    text_width = panel_width - 1.15
+    panel_heading = _hex(rule.get("heading"), "FFFFFF")
+    marker = slide.shapes.add_shape(
+        MSO_SHAPE.RECTANGLE,
+        Inches(text_left),
+        Inches(1.72),
+        Inches(0.72),
+        Inches(0.07),
+    )
+    marker.name = "BrandDeck Native Accent"
+    marker.fill.solid()
+    marker.fill.fore_color.rgb = _rgb(tokens["accent"])
+    marker.line.fill.background()
+    _add_textbox(
+        slide,
+        title,
+        (text_left, 2.06, text_width, 1.8),
+        font_name=tokens["heading_font"],
+        font_size=min(40.0, tokens["cover_size"]),
+        color=panel_heading,
+        bold=True,
+        min_font_size=28,
+    ).name = "BrandDeck Native Closing Title"
+    if subtitle:
+        content_left = panel_width + 0.72 if side == "left" else 0.72
+        content_width = width - panel_width - 1.35
+        _add_textbox(
+            slide,
+            subtitle,
+            (content_left, 2.35, content_width, 1.35),
+            font_name=tokens["font"],
+            font_size=max(18.0, tokens["body_size"]),
+            color=tokens["heading"],
+            bold=True,
+            min_font_size=16,
+            vertical_anchor=MSO_ANCHOR.MIDDLE,
+        ).name = "BrandDeck Native Closing Subtitle"
+    return True
+
+
 def _native_slide(
     slide: Any,
     slide_spec: dict[str, Any],
@@ -1189,6 +1343,8 @@ def _native_slide(
     *,
     slide_number: int,
     slide_count: int,
+    navigation_titles: list[str] | None = None,
+    navigation_index: int = 0,
 ) -> str:
     role = str(slide_spec.get("role", "content"))
     tokens = _native_tokens(design, role)
@@ -1238,6 +1394,15 @@ def _native_slide(
             ).name = "BrandDeck Native Cover Subtitle"
         mode = "native-cover"
     elif role == "closing":
+        if _native_closing_panel(slide, title, subtitle, design, tokens):
+            mode = "native-closing-split"
+            notes = slide_spec.get("speaker_notes")
+            if notes:
+                try:
+                    slide.notes_slide.notes_text_frame.text = notes
+                except (AttributeError, NotImplementedError):
+                    pass
+            return mode
         marker = slide.shapes.add_shape(
             MSO_SHAPE.RECTANGLE,
             Inches(left),
@@ -1271,11 +1436,21 @@ def _native_slide(
             ).name = "BrandDeck Native Closing Subtitle"
         mode = "native-closing"
     else:
+        has_navigation = _native_navigation(
+            slide,
+            design,
+            tokens,
+            navigation_titles or [],
+            navigation_index,
+        )
+        title_top = 0.76 if has_navigation else 0.52
+        marker_top = 1.56 if has_navigation else 1.38
+        content_top = 1.88 if has_navigation else 1.78
         title_width = max(4.6, right - left)
         _add_textbox(
             slide,
             title,
-            (left, 0.52, title_width, 0.72),
+            (left, title_top, title_width, 0.72),
             font_name=tokens["heading_font"],
             font_size=tokens["title_size"],
             color=tokens["heading"],
@@ -1285,7 +1460,7 @@ def _native_slide(
         marker = slide.shapes.add_shape(
             MSO_SHAPE.RECTANGLE,
             Inches(left),
-            Inches(1.38),
+            Inches(marker_top),
             Inches(0.72),
             Inches(0.06),
         )
@@ -1296,7 +1471,7 @@ def _native_slide(
         items = ([str(slide_spec.get("body"))] if slide_spec.get("body") else []) + [
             str(item) for item in slide_spec.get("bullets", []) if str(item).strip()
         ]
-        zone = (left, 1.78, max(4.8, right - left), 4.62)
+        zone = (left, content_top, max(4.8, right - left), 6.4 - content_top)
         visual = slide_spec.get("visual")
         if pattern_id == "native-list":
             _native_list(slide, items, zone, tokens)
@@ -1508,6 +1683,13 @@ def compose_presentation(
     selected_patterns: list[str] = []
     selected_source_patterns: list[str] = []
     slide_specs = plan.get("slides", [])
+    navigation_specs = [
+        item
+        for item in slide_specs
+        if str(item.get("role", "content")) not in {"cover", "section", "closing"}
+    ]
+    navigation_titles = [str(item.get("title", "")) for item in navigation_specs]
+    navigation_index = 0
     for generated_index, slide_spec in enumerate(slide_specs):
         layout_index = int(slide_spec.get("layout_index", 0))
         if layout_index < 0 or layout_index >= len(layouts):
@@ -1537,7 +1719,11 @@ def compose_presentation(
                 repeated_image_hashes,
                 slide_number=generated_index + 1,
                 slide_count=len(slide_specs),
+                navigation_titles=navigation_titles,
+                navigation_index=navigation_index,
             )
+            if role not in {"cover", "section", "closing"}:
+                navigation_index += 1
             selected_patterns.append(mode)
             continue
         example_indices = [
@@ -1560,6 +1746,9 @@ def compose_presentation(
     prs.core_properties.title = str(plan.get("title", "Generated presentation"))
     prs.core_properties.subject = "Template-adaptive presentation"
     prs.core_properties.keywords = "BrandDeck, template-adaptive, presentation"
+    prs.core_properties.author = ""
+    prs.core_properties.last_modified_by = ""
+    prs.core_properties.comments = ""
     output_path.parent.mkdir(parents=True, exist_ok=True)
     prs.save(output_path)
     result = {

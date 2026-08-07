@@ -46,12 +46,12 @@ def templates() -> list[dict]:
 
 @app.post("/v1/templates/analyze")
 def analyze_endpoint(
-    file: Annotated[UploadFile, File(description="PPTX template")],
+    file: Annotated[UploadFile, File(description="PPTX or PDF template")],
     name: Annotated[str | None, Form()] = None,
     offline: Annotated[bool, Form()] = False,
 ) -> dict:
-    if not file.filename or not file.filename.lower().endswith(".pptx"):
-        raise HTTPException(status_code=400, detail="A .pptx template is required")
+    if not file.filename or Path(file.filename).suffix.lower() not in {".pptx", ".pdf"}:
+        raise HTTPException(status_code=400, detail="A .pptx or .pdf template is required")
     temp_dir = Path(tempfile.mkdtemp(prefix="branddeck-upload-"))
     temp_file = temp_dir / Path(file.filename).name
     try:

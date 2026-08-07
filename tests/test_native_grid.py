@@ -37,6 +37,13 @@ def _fragmented_template(path: Path) -> None:
         slide = prs.slides.add_slide(prs.slide_layouts[6])
         slide.background.fill.solid()
         slide.background.fill.fore_color.rgb = RGBColor(7, 12, 24)
+        page_rectangle = slide.shapes.add_shape(
+            MSO_SHAPE.RECTANGLE, 0, 0, prs.slide_width, prs.slide_height
+        )
+        page_rectangle.name = f"PDF vector background {slide_index}"
+        page_rectangle.fill.solid()
+        page_rectangle.fill.fore_color.rgb = RGBColor(246, 247, 249)
+        page_rectangle.line.fill.background()
         slide.shapes.add_picture(str(canvas), 0, 0, prs.slide_width, prs.slide_height)
         slide.shapes.add_picture(
             str(logo), Inches(11.7), Inches(6.8), Inches(0.8), Inches(0.3)
@@ -48,6 +55,21 @@ def _fragmented_template(path: Path) -> None:
         title.text = f"Source slide {slide_index + 1}"
         title.text_frame.paragraphs[0].runs[0].font.name = "VK Sans Display"
         title.text_frame.paragraphs[0].runs[0].font.size = Pt(34)
+        for navigation_index in range(4):
+            navigation = slide.shapes.add_shape(
+                MSO_SHAPE.ROUNDED_RECTANGLE,
+                Inches(0.7 + navigation_index * 1.35),
+                Inches(0.28),
+                Inches(1.2),
+                Inches(0.24),
+            )
+            navigation.name = f"PDF vector navigation {navigation_index}"
+            navigation.fill.solid()
+            navigation.fill.fore_color.rgb = (
+                RGBColor(0, 0, 0)
+                if navigation_index == slide_index % 4
+                else RGBColor(255, 255, 255)
+            )
         for fragment_index in range(5):
             fragment = slide.shapes.add_shape(
                 MSO_SHAPE.RECTANGLE,
@@ -59,6 +81,17 @@ def _fragmented_template(path: Path) -> None:
             fragment.name = f"PDF vector {slide_index}-{fragment_index}"
             fragment.fill.solid()
             fragment.fill.fore_color.rgb = RGBColor(19, 31, 52)
+        if slide_index == 3:
+            closing_panel = slide.shapes.add_shape(
+                MSO_SHAPE.RECTANGLE,
+                0,
+                0,
+                Inches(4.4),
+                prs.slide_height,
+            )
+            closing_panel.name = "PDF vector closing panel"
+            closing_panel.fill.solid()
+            closing_panel.fill.fore_color.rgb = RGBColor(1, 19, 36)
     prs.save(path)
 
 
@@ -73,6 +106,9 @@ def test_fragmented_pdf_source_is_rebuilt_as_native_grid(tmp_path: Path):
     assert design["source_model"]["fragmented"] is True
     assert design["source_model"]["composition_mode"] == "native_grid"
     assert design["typography"]["heading_font"] == "VK Sans Display"
+    assert design["brand"]["cover_background"] == "070C18"
+    assert design["layout_rules"]["header_navigation"]["detected"] is True
+    assert design["layout_rules"]["closing_panel"]["detected"] is True
     assert any(
         pattern.get("source_kind") == "native_grid" for pattern in catalog["patterns"]
     )
@@ -95,6 +131,15 @@ def test_fragmented_pdf_source_is_rebuilt_as_native_grid(tmp_path: Path):
     assert all(
         any(shape.name.startswith("BrandDeck Native") for shape in slide.shapes)
         for slide in generated.slides
+    )
+    assert any(
+        shape.name.startswith("BrandDeck Native Navigation")
+        for slide in list(generated.slides)[1:-1]
+        for shape in slide.shapes
+    )
+    assert any(
+        shape.name == "BrandDeck Native Closing Panel"
+        for shape in generated.slides[-1].shapes
     )
     for slide in generated.slides:
         background = slide.element.cSld.find(qn("p:bg"))

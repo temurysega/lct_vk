@@ -56,7 +56,9 @@ def resolve_template(
         latest = find_latest(workspace_path / "templates")
         if latest:
             return latest
-        raise FileNotFoundError("No analyzed templates found; provide a .pptx template")
+        raise FileNotFoundError(
+            "No analyzed templates found; provide a .pptx or .pdf template"
+        )
 
     candidate = Path(template).expanduser()
     if candidate.is_dir() and (candidate / "manifest.json").exists():
@@ -64,10 +66,10 @@ def resolve_template(
     by_id = workspace_path / "templates" / str(template)
     if by_id.is_dir() and (by_id / "manifest.json").exists():
         return by_id.resolve()
-    if candidate.is_file() and candidate.suffix.lower() == ".pptx":
+    if candidate.is_file() and candidate.suffix.lower() in {".pptx", ".pdf"}:
         return analyze_template(candidate, workspace=workspace_path, client=client)
     raise FileNotFoundError(
-        f"Template id, analysis directory, or .pptx file not found: {template}"
+        f"Template id, analysis directory, or .pptx/.pdf file not found: {template}"
     )
 
 
