@@ -102,11 +102,23 @@ def inspect_presentation(
     )
     explicit_fonts: set[str] = set()
     slide_reports: list[dict[str, Any]] = []
+    expects_native_grid = bool(
+        (design_system or {}).get("source_model", {}).get("fragmented")
+    )
     for slide_index, slide in enumerate(prs.slides, 1):
         slide_issues: list[dict[str, Any]] = []
         text_count = 0
         text_shapes: list[Any] = []
         for shape in slide.shapes:
+            if expects_native_grid and str(shape.name).lower().startswith("pdf "):
+                slide_issues.append(
+                    {
+                        "severity": "error",
+                        "code": "source_fragment_leak",
+                        "shape": shape.name,
+                        "message": "A PDF-conversion fragment leaked into a native slide",
+                    }
+                )
             x, y, w, h = map(
                 _inches, (shape.left, shape.top, shape.width, shape.height)
             )
@@ -117,12 +129,22 @@ def inspect_presentation(
                 or y + h > slide_height + 0.02
             ):
                 generated_shape = str(shape.name).startswith("BrandDeck")
+                brand_bleed = shape.name in {
+                    "BrandDeck Background Asset",
+                    "BrandDeck Brand Asset",
+                }
                 slide_issues.append(
                     {
-                        "severity": "warning" if generated_shape else "info",
-                        "code": "out_of_bounds"
-                        if generated_shape
-                        else "template_bleed",
+                        "severity": (
+                            "info" if brand_bleed or not generated_shape else "warning"
+                        ),
+                        "code": (
+                            "brand_asset_bleed"
+                            if brand_bleed
+                            else "out_of_bounds"
+                            if generated_shape
+                            else "template_bleed"
+                        ),
                         "shape": shape.name,
                         "message": f"Shape bounds ({x:.2f}, {y:.2f}, {w:.2f}, {h:.2f}) exceed canvas",
                     }
@@ -145,6 +167,24 @@ def inspect_presentation(
                     for run in paragraph.runs:
                         if run.font.name:
                             explicit_fonts.add(run.font.name)
+                        if (
+                            expects_native_grid
+                            and str(shape.name).startswith("BrandDeck Native")
+                            and not any(
+                                token in str(shape.name)
+                                for token in ("Footer", "Badge", "Number")
+                            )
+                            and run.font.size
+                            and run.font.size.pt < 14
+                        ):
+                            slide_issues.append(
+                                {
+                                    "severity": "warning",
+                                    "code": "native_text_too_small",
+                                    "shape": shape.name,
+                                    "message": "Native slide text is smaller than 14 pt",
+                                }
+                            )
         for first_index, first in enumerate(text_shapes):
             for second in text_shapes[first_index + 1 :]:
                 if not (
@@ -179,6 +219,16 @@ def inspect_presentation(
                     "severity": "warning",
                     "code": "empty_slide",
                     "message": "No visible text detected",
+                }
+            )
+        if expects_native_grid and not any(
+            str(shape.name).startswith("BrandDeck Native") for shape in slide.shapes
+        ):
+            slide_issues.append(
+                {
+                    "severity": "error",
+                    "code": "native_grid_missing",
+                    "message": "Fragmented source was not rebuilt with native objects",
                 }
             )
         for item in slide_issues:
@@ -238,12 +288,20 @@ def inspect_presentation(
 
 def compact_plan(plan: dict[str, Any]) -> dict[str, Any]:
     """Deterministically reduce density before a QA retry."""
+
+    def truncate(value: Any, limit: int) -> str:
+        text = str(value)
+        if len(text) <= limit:
+            return text
+        shortened = text[: max(1, limit - 1)].rsplit(" ", 1)[0].rstrip(" ,;:-")
+        return f"{shortened or text[: max(1, limit - 1)]}…"
+
     compacted = {**plan, "slides": []}
     for slide in plan.get("slides", []):
         new_slide = dict(slide)
-        new_slide["body"] = str(new_slide.get("body", ""))[:420]
+        new_slide["body"] = truncate(new_slide.get("body", ""), 420)
         new_slide["bullets"] = [
-            str(item)[:88] for item in new_slide.get("bullets", [])[:4]
+            truncate(item, 88) for item in new_slide.get("bullets", [])[:4]
         ]
         visual = new_slide.get("visual")
         if isinstance(visual, dict):

@@ -19,7 +19,7 @@ dependencies = [
 api = ["fastapi>=0.115", "python-multipart>=0.0.9", "uvicorn>=0.30"]
 documents = ["markitdown[all]>=0.1.0"]
 pdf-reference = ["PyMuPDF>=1.24"]
-dev = ["pytest>=8.0", "ruff>=0.9", "fastapi>=0.115", "python-multipart>=0.0.9", "httpx2>=0.28", "PyMuPDF>=1.24"]
+dev = ["pytest>=8.0", "ruff>=0.9", "fastapi>=0.115", "python-multipart>=0.0.9", "httpx>=0.28", "PyMuPDF>=1.24"]
 
 [project.scripts]
 branddeck = "slide_agent.cli:main"

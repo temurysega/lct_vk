@@ -12,10 +12,10 @@ Open-source сервис, который анализирует произвол
 - Детерминированный локальный planner для работы без API и CI-тестов.
 - Семантический выбор паттерна под cover, section, content, comparison, data, image и closing.
 - Ёмкостный layout mapping по геометрии текста, числу слотов, данным и изображениям с `why_fit`, рисками и альтернативами в `deck_plan.json`.
-- Повторное использование исходных masters/layouts и клонирование репрезентативных слайдов вместе с media relationships.
+- Два режима композиции: semantic layouts/exemplars для нормальных PPTX и `native_grid` для PDF-конверсий, где каждый слайд заново собирается из редактируемых объектов по извлечённой сетке.
 - Удаление уникального исходного контента (скриншотов, клиентских логотипов и фото) с сохранением повторяющегося брендинга и полноэкранных фонов.
 - Генерация текста, таблиц, bar/pie charts, metric cards и timeline.
-- Проверка целостности OOXML, числа слайдов, границ элементов, переполнения, пересечений текста и шрифтовой консистентности; QA-feedback меняет layout при повторной сборке.
+- Проверка целостности OOXML, числа слайдов, границ элементов, переполнения, пересечений текста и шрифтовой консистентности; в Windows результат дополнительно рендерится настоящим PowerPoint и возвращается в QA-feedback loop.
 - CLI, REST API и Docker.
 - Асинхронные persistent jobs с загрузкой контентного файла, стадиями, прогрессом и отдельным download endpoint.
 
@@ -112,19 +112,20 @@ curl -o result.pptx http://localhost:8000/v1/jobs/<job-id>/download
 ```text
 PPTX template
    ├─ OOXML parser ──> context.json
-   ├─ token extractor ──> design_system.json
-   └─ pattern miner ──> pattern_catalog.json
+   ├─ source classifier ──> template_layout | native_grid
+   ├─ token/grid extractor ──> design_system.json
+   └─ semantic pattern miner ──> pattern_catalog.json
                               │
 Content ──> LLM planner ──> capacity-aware pattern scoring
                               │
                               v
-              original masters/layouts + cloned examples
+       native layouts/exemplars OR rebuilt native composition
                               │
                               v
-                    output.pptx ──> QA report ──> retry mapping
+          output.pptx ──> PowerPoint render ──> QA ──> retry
 ```
 
-Здесь нет заранее зашитого фирменного шаблона: папка анализа имеет content-addressed id, а каждый слайд плана явно связан с layout/master текущего PPTX. Декор, изображения, фоны и отношения внутри OOXML переносятся из выбранного примера. Создаваемые визуализации используют извлечённые шрифты и theme colors.
+Здесь нет заранее зашитого фирменного шаблона: папка анализа имеет content-addressed id. Для семантического PPTX каждый слайд плана связан с layout/master текущего файла. Если анализатор обнаруживает PDF-фрагментацию, исходные text/vector fragments не клонируются: composer переносит только повторяющиеся брендовые assets и заново строит cover, cards, list, split и closing по извлечённым шрифтам, цветам, полям и сетке.
 
 ## Артефакты
 
@@ -145,6 +146,7 @@ slide-workspace/
     outline.md
     output.pptx
     qa_report.json
+    powerpoint-render-N/     # PNG из PowerPoint COM, если доступен
     manifest.json
 ```
 
@@ -175,12 +177,14 @@ branddeck --workspace .\external-fixtures\vk-tech\workspace run `
   --template .\external-fixtures\vk-tech\vk-tech-private-cloud-2025.pptx `
   --content .\examples\vk_tech_case_content.md `
   --slides 10 --offline `
-  --output .\external-fixtures\vk-tech\generated-private-cloud-improved.pptx
+  --output .\external-fixtures\vk-tech\generated-private-cloud-native.pptx
 ```
 
-Проверены два независимых стиля на 28- и 12-слайдовых материалах. Оба
-10-слайдовых результата прошли QA с оценкой 100/100; облачный deck сохранил
-семейство VK Sans и цианово-тёмную палитру, учебный — зелёно-золотую систему.
+Корпоративный 28-слайдовый материал VK Cloud / VK Tech используется для основной
+приёмки бренда. 12-слайдовый материал конференции «Цифровое образование. XXI век»
+не считается корпоративным VK Tech-шаблоном и используется только как независимый
+stress-test адаптивности. Оба результата прошли structural QA и настоящий
+PowerPoint render-check с оценкой 100/100 с первой попытки.
 Источники, хэши, второй прогон и ограничения проверки приведены в
 [отчёте VK Tech](docs/vk-tech-validation.md).
 
@@ -195,13 +199,14 @@ branddeck --workspace .\external-fixtures\vk-tech\workspace run `
 | `INFERENCE_MAX_RETRIES` | Число сетевых попыток, по умолчанию 3 |
 | `INFERENCE_VISION` | `1` включает multimodal-анализ PNG-превью, `0` оставляет только JSON |
 | `BRANDDECK_WORKSPACE` | Альтернативная папка артефактов |
+| `BRANDDECK_POWERPOINT_QA` | `auto` по умолчанию; `1` требует PowerPoint render-check в Windows, `0` отключает его |
 
 Подробности архитектуры и расширения: [docs/architecture.md](docs/architecture.md).
 Сравнение с открытыми генераторами и принятые решения: [docs/reference-repo-audit.md](docs/reference-repo-audit.md).
 
 ## English
 
-BrandDeck AI analyzes any PowerPoint template, extracts its design system and reusable slide patterns, plans a new narrative through an OpenAI-compatible Inference API, composes a native `.pptx` from the original masters/layouts, and validates the result. Run `branddeck --help` for CLI usage or `branddeck serve` for the REST API.
+BrandDeck AI analyzes any PowerPoint template, classifies semantic versus PDF-fragmented sources, extracts a design system and reusable patterns, plans a new narrative through an OpenAI-compatible Inference API, composes editable native slides, and validates the result with structural QA and an optional real PowerPoint render loop. Run `branddeck --help` for CLI usage or `branddeck serve` for the REST API.
 
 ## License
 

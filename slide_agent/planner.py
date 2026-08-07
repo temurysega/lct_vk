@@ -454,8 +454,12 @@ def _score_pattern(
     if pattern.get("source_kind") == "slide_exemplar":
         score += 1.5
         reasons.append("проверенный exemplar-слайд")
+    elif pattern.get("source_kind") == "native_grid":
+        score += 4.0
+        reasons.append("чистая нативная сетка без PDF-фрагментов")
     score += min(len(pattern.get("example_slide_indices", [])), 2) * 0.2
-    score -= reuse_count * 0.02
+    reuse_penalty = 2.0 if pattern.get("source_kind") == "native_grid" else 0.02
+    score -= reuse_count * reuse_penalty
     if avoided:
         score -= 50.0
         risks.append("паттерн исключён предыдущим QA")

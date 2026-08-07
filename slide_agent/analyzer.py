@@ -94,11 +94,50 @@ def _font_samples(context: dict[str, Any]) -> list[tuple[str, float, str, bool]]
     return samples
 
 
+def _text_color_samples(context: dict[str, Any]) -> list[tuple[str, float]]:
+    samples: list[tuple[str, float]] = []
+    for slide in context.get("slides", []):
+        for element in slide.get("text_elements", []):
+            for paragraph in element.get("paragraphs", []):
+                font = paragraph.get("font", {})
+                color = _normal_color(font.get("color"))
+                size = font.get("size_pt")
+                if color and isinstance(size, (int, float)):
+                    samples.append((color, float(size)))
+    return samples
+
+
+def _mode(values: Iterable[str], fallback: str) -> str:
+    counts = Counter(value for value in values if value)
+    return counts.most_common(1)[0][0] if counts else fallback
+
+
+def _source_model(context: dict[str, Any]) -> dict[str, Any]:
+    shapes = [
+        shape
+        for slide in context.get("slides", [])
+        for shape in slide.get("shapes", [])
+    ]
+    pdf_shapes = [
+        shape
+        for shape in shapes
+        if str(shape.get("name", "")).lower().startswith("pdf ")
+    ]
+    ratio = len(pdf_shapes) / max(1, len(shapes))
+    fragmented = len(pdf_shapes) >= 10 and ratio >= 0.25
+    return {
+        "fragmented": fragmented,
+        "pdf_shape_ratio": round(ratio, 3),
+        "composition_mode": "native_grid" if fragmented else "template_layout",
+    }
+
+
 def build_design_system(context: dict[str, Any]) -> dict[str, Any]:
     presentation = context.get("presentation", {})
     theme = context.get("theme", {})
     fonts_summary = context.get("fonts_summary", {})
     samples = _font_samples(context)
+    color_samples = _text_color_samples(context)
 
     title_sizes = [size for _, size, role, _ in samples if "title" in role]
     body_sizes = [size for _, size, role, _ in samples if "title" not in role]
@@ -107,11 +146,23 @@ def build_design_system(context: dict[str, Any]) -> dict[str, Any]:
     if not font_families:
         font_families = sorted({name for name, _, _, _ in samples})
     theme_fonts = theme.get("font_scheme", {})
+    font_counts = Counter(name for name, _, _, _ in samples)
     primary_font = (
-        (font_families[0] if font_families else None)
+        (font_counts.most_common(1)[0][0] if font_counts else None)
+        or (font_families[0] if font_families else None)
         or theme_fonts.get("minorFont")
         or theme_fonts.get("majorFont")
         or "Arial"
+    )
+    heading_font_counts = Counter(
+        name
+        for name, size, role, bold in samples
+        if size >= 28 or "title" in role or bold
+    )
+    heading_font = (
+        heading_font_counts.most_common(1)[0][0]
+        if heading_font_counts
+        else primary_font
     )
 
     def median(values: list[float], fallback: float) -> float:
@@ -143,6 +194,35 @@ def build_design_system(context: dict[str, Any]) -> dict[str, Any]:
         for ph in placeholders
     ]
     positive_rights = [value for value in rights if value > 0]
+    background = _mode(
+        (
+            _normal_color(slide.get("effective_background", {}).get("color")) or ""
+            for slide in context.get("slides", [])
+        ),
+        "FFFFFF",
+    )
+    content_title_sizes = [size for size in all_sizes if 28 <= size <= 56]
+    readable_body_sizes = [size for size in body_sizes if 14 <= size <= 24]
+    content_title_size = min(40.0, max(30.0, median(content_title_sizes, 34.0)))
+    body_size = min(20.0, max(16.0, median(readable_body_sizes, 18.0)))
+    heading_color = _mode(
+        (color for color, size in color_samples if size >= 28),
+        "FFFFFF" if background != "FFFFFF" else "111827",
+    )
+    body_color = _mode(
+        (color for color, size in color_samples if 12 <= size < 28),
+        heading_color,
+    )
+    excluded = {background, heading_color, body_color, "000000", "FFFFFF"}
+    accent_color = (
+        body_color
+        if body_color not in {background, heading_color}
+        else next(
+            (item["hex"] for item in observed if item["hex"] not in excluded),
+            body_color,
+        )
+    )
+    source_model = _source_model(context)
 
     return {
         "schema_version": ANALYSIS_SCHEMA_VERSION,
@@ -153,10 +233,13 @@ def build_design_system(context: dict[str, Any]) -> dict[str, Any]:
         },
         "typography": {
             "primary_font": primary_font,
+            "heading_font": heading_font,
             "families": font_families,
             "theme_fonts": theme_fonts,
             "title_size_pt": median(title_sizes, max(all_sizes, default=32.0)),
-            "body_size_pt": median(body_sizes, min(all_sizes, default=18.0)),
+            "content_title_size_pt": content_title_size,
+            "cover_title_size_pt": min(52.0, max(40.0, content_title_size * 1.35)),
+            "body_size_pt": body_size,
             "observed_sizes_pt": sorted(
                 {size for _, size, _, _ in samples}, reverse=True
             ),
@@ -165,13 +248,22 @@ def build_design_system(context: dict[str, Any]) -> dict[str, Any]:
             "theme": palette,
             "observed": observed,
         },
+        "brand": {
+            "background": background,
+            "heading": heading_color,
+            "body": body_color,
+            "accent": accent_color,
+        },
+        "source_model": source_model,
         "spacing": {
-            "typical_left_margin_inches": round(statistics.median(lefts), 2)
-            if lefts
-            else 0.6,
-            "typical_right_margin_inches": round(statistics.median(positive_rights), 2)
-            if positive_rights
-            else 0.6,
+            "typical_left_margin_inches": 0.65
+            if source_model["fragmented"]
+            else (round(statistics.median(lefts), 2) if lefts else 0.6),
+            "typical_right_margin_inches": 0.65
+            if source_model["fragmented"]
+            else (
+                round(statistics.median(positive_rights), 2) if positive_rights else 0.6
+            ),
             "minimum_gap_inches": 0.12,
         },
         "imagery": {
@@ -592,6 +684,73 @@ def build_pattern_catalog(context: dict[str, Any]) -> dict[str, Any]:
 
     patterns.extend(_slide_exemplar_patterns(context))
 
+    if _source_model(context)["fragmented"]:
+        native_patterns = [
+            ("native-cover", ["cover"], "hero", 120, 0, 0),
+            (
+                "native-cards",
+                ["content", "comparison", "data"],
+                "bullet_list",
+                900,
+                4,
+                4,
+            ),
+            (
+                "native-list",
+                ["content", "section"],
+                "bullet_list",
+                900,
+                4,
+                4,
+            ),
+            (
+                "native-split",
+                ["content", "comparison", "data", "image"],
+                "two_column",
+                750,
+                3,
+                4,
+            ),
+            ("native-closing", ["closing"], "closing", 120, 0, 0),
+        ]
+        for (
+            pattern_id,
+            roles,
+            rhetorical,
+            body_chars,
+            body_zones,
+            bullets,
+        ) in native_patterns:
+            patterns.append(
+                {
+                    "id": pattern_id,
+                    "name": pattern_id.replace("native-", "Native ").title(),
+                    "layout_index": 6,
+                    "master_index": 0,
+                    "roles": roles,
+                    "placeholders": [],
+                    "capacity": {
+                        "title_chars": 120,
+                        "body_chars": body_chars,
+                        "body_zones": max(1, body_zones),
+                        "bullets_per_zone": max(2, bullets),
+                        "source_bullet_count": 0,
+                        "supports_image": pattern_id == "native-split",
+                        "supports_data": pattern_id in {"native-cards", "native-split"},
+                        "image_area_ratio": 0,
+                        "content_image_count": 0,
+                        "content_image_area_ratio": 0,
+                        "shape_count": 0,
+                        "complexity": 0.1,
+                        "rhetorical_pattern": rhetorical,
+                    },
+                    "example_slide_indices": [],
+                    "layout_assets": [],
+                    "background": {"type": "brand"},
+                    "source_kind": "native_grid",
+                }
+            )
+
     if patterns and not any("cover" in item["roles"] for item in patterns):
         patterns[0]["roles"].insert(0, "cover")
     if patterns and not any("closing" in item["roles"] for item in patterns):
@@ -617,9 +776,15 @@ def _guideline_markdown(
         "## Typography",
         "",
         f"- Primary font: `{typography['primary_font']}`",
+        f"- Heading font: `{typography['heading_font']}`",
         f"- Title size: approximately {typography['title_size_pt']} pt",
         f"- Body size: approximately {typography['body_size_pt']} pt",
         f"- Observed families: {', '.join(typography['families']) or 'not explicitly encoded'}",
+        "",
+        "## Source model",
+        "",
+        f"- Composition mode: `{design['source_model']['composition_mode']}`",
+        f"- PDF shape ratio: `{design['source_model']['pdf_shape_ratio']}`",
         "",
         "## Color palette",
         "",

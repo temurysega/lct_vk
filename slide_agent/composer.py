@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import io
 import math
 from collections import Counter
 from pathlib import Path
@@ -66,7 +67,66 @@ def _theme_colors(design: dict[str, Any]) -> dict[str, str]:
     result.setdefault("dk1", "1F2937")
     result.setdefault("lt1", "FFFFFF")
     result.setdefault("lt2", "F3F4F6")
+    brand = design.get("brand", {})
+    if brand:
+        result["accent1"] = _hex(brand.get("accent"), result["accent1"])
+        result["dk1"] = _hex(brand.get("body"), result["dk1"])
+        result["lt1"] = _hex(brand.get("heading"), result["lt1"])
     return result
+
+
+def _mix_color(first: str, second: str, ratio: float) -> str:
+    ratio = min(1.0, max(0.0, ratio))
+    left = _hex(first, "000000")
+    right = _hex(second, "FFFFFF")
+    channels = []
+    for offset in (0, 2, 4):
+        value = round(
+            int(left[offset : offset + 2], 16) * (1 - ratio)
+            + int(right[offset : offset + 2], 16) * ratio
+        )
+        channels.append(f"{value:02X}")
+    return "".join(channels)
+
+
+def _luminance(value: str) -> float:
+    color = _hex(value, "000000")
+    channels = [int(color[offset : offset + 2], 16) / 255 for offset in (0, 2, 4)]
+    linear = [
+        channel / 12.92 if channel <= 0.04045 else ((channel + 0.055) / 1.055) ** 2.4
+        for channel in channels
+    ]
+    return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2]
+
+
+def _native_tokens(design: dict[str, Any]) -> dict[str, Any]:
+    brand = design.get("brand", {})
+    colors = _theme_colors(design)
+    background = _hex(brand.get("background"), "0B1220")
+    dark = _luminance(background) < 0.35
+    heading = _hex(
+        brand.get("heading"), colors.get("lt1") if dark else colors.get("dk1")
+    )
+    body = _hex(brand.get("body"), heading)
+    accent = _hex(brand.get("accent"), colors.get("accent1"))
+    surface = _mix_color(background, "FFFFFF" if dark else "000000", 0.1)
+    surface_alt = _mix_color(background, accent, 0.16)
+    typography = design.get("typography", {})
+    return {
+        "background": background,
+        "heading": heading,
+        "body": body,
+        "accent": accent,
+        "surface": surface,
+        "surface_alt": surface_alt,
+        "font": typography.get("primary_font", "Arial"),
+        "heading_font": typography.get(
+            "heading_font", typography.get("primary_font", "Arial")
+        ),
+        "title_size": float(typography.get("content_title_size_pt", 34)),
+        "cover_size": float(typography.get("cover_title_size_pt", 46)),
+        "body_size": max(16.0, float(typography.get("body_size_pt", 18))),
+    }
 
 
 def _all_layouts(prs: Presentation) -> list[Any]:
@@ -250,6 +310,7 @@ def _set_text_frame(
     color: str | None = None,
     bold_first: bool = False,
     bullets: bool = False,
+    min_font_size: float = 9.0,
 ) -> None:
     existing_style = _shape_text_style(shape)
     font_name = font_name or existing_style.get("font_name")
@@ -261,7 +322,7 @@ def _set_text_frame(
         width = max(0.1, shape.width / 914400 - 0.08)
         height = max(0.1, shape.height / 914400 - 0.04)
         fitted_size = float(font_size)
-        while fitted_size > 9:
+        while fitted_size > min_font_size:
             chars_per_line = max(6, int(width * 72 / (fitted_size * 0.52)))
             line_count = sum(
                 max(1, math.ceil(len(str(text)) / chars_per_line))
@@ -273,8 +334,8 @@ def _set_text_frame(
             )
             if required_height <= height:
                 break
-            fitted_size -= 0.5
-        font_size = fitted_size
+            fitted_size = max(min_font_size, fitted_size - 0.5)
+        font_size = max(min_font_size, fitted_size)
     text_frame = shape.text_frame
     text_frame.clear()
     text_frame.word_wrap = True
@@ -314,6 +375,8 @@ def _add_textbox(
     color: str,
     bold: bool = False,
     align: PP_ALIGN = PP_ALIGN.LEFT,
+    min_font_size: float = 9.0,
+    vertical_anchor: MSO_ANCHOR = MSO_ANCHOR.TOP,
 ) -> Any:
     x, y, w, h = box
     shape = slide.shapes.add_textbox(Inches(x), Inches(y), Inches(w), Inches(h))
@@ -324,12 +387,14 @@ def _add_textbox(
         font_size=font_size,
         color=color,
         bold_first=bold,
+        min_font_size=min_font_size,
     )
     shape.text_frame.paragraphs[0].alignment = align
     shape.text_frame.margin_left = Inches(0.04)
     shape.text_frame.margin_right = Inches(0.04)
     shape.text_frame.margin_top = Inches(0.02)
     shape.text_frame.margin_bottom = Inches(0.02)
+    shape.text_frame.vertical_anchor = vertical_anchor
     return shape
 
 
@@ -741,6 +806,429 @@ def _add_visual(
         _add_timeline(slide, visual, zone, design)
 
 
+def _picture_hash(shape: Any) -> str:
+    try:
+        return str(shape.image.sha1)
+    except (AttributeError, ValueError):
+        return ""
+
+
+def _select_brand_source(
+    source_slides: list[Any], repeated_image_hashes: set[str]
+) -> Any | None:
+    if not source_slides:
+        return None
+    candidates = source_slides[1:-1] if len(source_slides) > 2 else source_slides
+
+    def score(slide: Any) -> tuple[int, float]:
+        count = 0
+        area = 0.0
+        for shape in slide.shapes:
+            if (
+                shape.shape_type == MSO_SHAPE_TYPE.PICTURE
+                and _picture_hash(shape) in repeated_image_hashes
+            ):
+                count += 1
+                area += shape.width * shape.height
+        return count, area
+
+    return max(candidates, key=score, default=source_slides[0])
+
+
+def _copy_brand_canvas(
+    slide: Any,
+    source: Any | None,
+    repeated_image_hashes: set[str],
+    design: dict[str, Any],
+) -> list[Any]:
+    tokens = _native_tokens(design)
+    fill = slide.background.fill
+    fill.solid()
+    fill.fore_color.rgb = _rgb(tokens["background"])
+    if source is None:
+        return []
+    canvas = design["canvas"]
+    canvas_area = max(
+        0.1, float(canvas["width_inches"]) * float(canvas["height_inches"])
+    )
+    copied: list[Any] = []
+    for source_shape in source.shapes:
+        if source_shape.shape_type != MSO_SHAPE_TYPE.PICTURE:
+            continue
+        image_hash = _picture_hash(source_shape)
+        if not image_hash or image_hash not in repeated_image_hashes:
+            continue
+        area_ratio = (
+            source_shape.width / 914400 * (source_shape.height / 914400) / canvas_area
+        )
+        if 0.4 < area_ratio < 0.45:
+            continue
+        try:
+            picture = slide.shapes.add_picture(
+                io.BytesIO(source_shape.image.blob),
+                source_shape.left,
+                source_shape.top,
+                source_shape.width,
+                source_shape.height,
+            )
+        except (AttributeError, ValueError):
+            continue
+        picture.name = (
+            "BrandDeck Background Asset"
+            if area_ratio >= 0.45
+            else "BrandDeck Brand Asset"
+        )
+        for crop_name in ("crop_left", "crop_right", "crop_top", "crop_bottom"):
+            try:
+                setattr(picture, crop_name, getattr(source_shape, crop_name))
+            except (AttributeError, ValueError):
+                pass
+        copied.append(picture)
+    return copied
+
+
+def _native_right_limit(
+    brand_shapes: list[Any], design: dict[str, Any], *, default_margin: float = 0.65
+) -> float:
+    canvas = design["canvas"]
+    width = float(canvas["width_inches"])
+    height = float(canvas["height_inches"])
+    area = width * height
+    right = width - default_margin
+    for shape in brand_shapes:
+        area_ratio = shape.width / 914400 * (shape.height / 914400) / area
+        left = shape.left / 914400
+        if 0.04 <= area_ratio <= 0.4 and left > width * 0.55:
+            right = min(right, left - 0.28)
+    return max(width * 0.62, right)
+
+
+def _native_panel(
+    slide: Any,
+    box: tuple[float, float, float, float],
+    tokens: dict[str, Any],
+    *,
+    alternate: bool = False,
+) -> Any:
+    x, y, w, h = box
+    panel = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE,
+        Inches(x),
+        Inches(y),
+        Inches(w),
+        Inches(h),
+    )
+    panel.name = "BrandDeck Native Panel"
+    panel.fill.solid()
+    panel.fill.fore_color.rgb = _rgb(
+        tokens["surface_alt"] if alternate else tokens["surface"]
+    )
+    panel.line.color.rgb = _rgb(tokens["accent"])
+    panel.line.width = Pt(0.8)
+    return panel
+
+
+def _native_card_content(
+    slide: Any,
+    item: str,
+    number: int,
+    box: tuple[float, float, float, float],
+    tokens: dict[str, Any],
+    *,
+    alternate: bool = False,
+) -> None:
+    x, y, w, h = box
+    _native_panel(slide, box, tokens, alternate=alternate)
+    accent = slide.shapes.add_shape(
+        MSO_SHAPE.RECTANGLE,
+        Inches(x),
+        Inches(y),
+        Inches(0.07),
+        Inches(h),
+    )
+    accent.name = "BrandDeck Native Accent"
+    accent.fill.solid()
+    accent.fill.fore_color.rgb = _rgb(tokens["accent"])
+    accent.line.fill.background()
+    _add_textbox(
+        slide,
+        f"{number:02d}",
+        (x + 0.22, y + 0.18, max(0.5, w - 0.44), 0.34),
+        font_name=tokens["heading_font"],
+        font_size=13,
+        color=tokens["accent"],
+        bold=True,
+        min_font_size=12,
+    ).name = "BrandDeck Native Number"
+    _add_textbox(
+        slide,
+        item,
+        (x + 0.22, y + 0.72, max(0.6, w - 0.44), max(0.55, h - 0.94)),
+        font_name=tokens["font"],
+        font_size=tokens["body_size"],
+        color=tokens["heading"],
+        min_font_size=15,
+        vertical_anchor=MSO_ANCHOR.MIDDLE,
+    ).name = "BrandDeck Native Card Text"
+
+
+def _native_cards(
+    slide: Any,
+    items: list[str],
+    zone: tuple[float, float, float, float],
+    tokens: dict[str, Any],
+) -> None:
+    x, y, w, h = zone
+    items = items[:4]
+    if not items:
+        return
+    columns = len(items) if len(items) <= 3 else 2
+    rows = math.ceil(len(items) / columns)
+    gap = 0.2
+    card_w = (w - gap * (columns - 1)) / columns
+    card_h = (h - gap * (rows - 1)) / rows
+    for index, item in enumerate(items):
+        col = index % columns
+        row = index // columns
+        _native_card_content(
+            slide,
+            item,
+            index + 1,
+            (
+                x + col * (card_w + gap),
+                y + row * (card_h + gap),
+                card_w,
+                card_h,
+            ),
+            tokens,
+            alternate=index % 2 == 1,
+        )
+
+
+def _native_list(
+    slide: Any,
+    items: list[str],
+    zone: tuple[float, float, float, float],
+    tokens: dict[str, Any],
+) -> None:
+    x, y, w, h = zone
+    items = items[:5]
+    if not items:
+        return
+    gap = 0.13
+    row_h = (h - gap * (len(items) - 1)) / len(items)
+    for index, item in enumerate(items):
+        row_y = y + index * (row_h + gap)
+        _native_panel(
+            slide,
+            (x, row_y, w, row_h),
+            tokens,
+            alternate=index % 2 == 1,
+        )
+        badge = slide.shapes.add_shape(
+            MSO_SHAPE.OVAL,
+            Inches(x + 0.22),
+            Inches(row_y + row_h / 2 - 0.19),
+            Inches(0.38),
+            Inches(0.38),
+        )
+        badge.name = "BrandDeck Native Badge"
+        badge.fill.solid()
+        badge.fill.fore_color.rgb = _rgb(tokens["accent"])
+        badge.line.fill.background()
+        _add_textbox(
+            slide,
+            str(index + 1),
+            (x + 0.22, row_y + row_h / 2 - 0.16, 0.38, 0.28),
+            font_name=tokens["heading_font"],
+            font_size=12,
+            color=tokens["background"],
+            bold=True,
+            align=PP_ALIGN.CENTER,
+            min_font_size=11,
+        ).name = "BrandDeck Native Badge Text"
+        _add_textbox(
+            slide,
+            item,
+            (x + 0.82, row_y + 0.13, w - 1.05, row_h - 0.26),
+            font_name=tokens["font"],
+            font_size=tokens["body_size"],
+            color=tokens["heading"],
+            min_font_size=15,
+            vertical_anchor=MSO_ANCHOR.MIDDLE,
+        ).name = "BrandDeck Native List Text"
+
+
+def _native_split(
+    slide: Any,
+    items: list[str],
+    visual: dict[str, Any] | None,
+    zone: tuple[float, float, float, float],
+    design: dict[str, Any],
+    tokens: dict[str, Any],
+) -> None:
+    left, right = _split_zone(zone, 0.43)
+    if items:
+        _native_card_content(
+            slide,
+            items[0],
+            1,
+            left,
+            tokens,
+            alternate=True,
+        )
+    if visual:
+        _add_visual(slide, visual, right, design)
+    else:
+        _native_list(slide, items[1:] or items[:1], right, tokens)
+
+
+def _native_slide(
+    slide: Any,
+    slide_spec: dict[str, Any],
+    design: dict[str, Any],
+    brand_source: Any | None,
+    repeated_image_hashes: set[str],
+    *,
+    slide_number: int,
+    slide_count: int,
+) -> str:
+    tokens = _native_tokens(design)
+    brand_shapes = _copy_brand_canvas(
+        slide, brand_source, repeated_image_hashes, design
+    )
+    canvas = design["canvas"]
+    width = float(canvas["width_inches"])
+    right = _native_right_limit(brand_shapes, design)
+    left = 0.62
+    role = str(slide_spec.get("role", "content"))
+    pattern_id = str(slide_spec.get("pattern_id", "native-cards"))
+    title = str(slide_spec.get("title", ""))
+    subtitle = str(slide_spec.get("subtitle", ""))
+
+    if role in {"cover", "section"}:
+        marker = slide.shapes.add_shape(
+            MSO_SHAPE.RECTANGLE,
+            Inches(left),
+            Inches(1.46),
+            Inches(0.72),
+            Inches(0.07),
+        )
+        marker.name = "BrandDeck Native Accent"
+        marker.fill.solid()
+        marker.fill.fore_color.rgb = _rgb(tokens["accent"])
+        marker.line.fill.background()
+        _add_textbox(
+            slide,
+            title,
+            (left, 1.78, max(5.0, right - left), 2.35),
+            font_name=tokens["heading_font"],
+            font_size=tokens["cover_size"],
+            color=tokens["heading"],
+            bold=True,
+            min_font_size=34,
+        ).name = "BrandDeck Native Cover Title"
+        if subtitle:
+            _add_textbox(
+                slide,
+                subtitle,
+                (left, 5.35, min(6.6, max(3.0, right - left)), 0.7),
+                font_name=tokens["font"],
+                font_size=max(16, tokens["body_size"]),
+                color=tokens["accent"],
+                min_font_size=15,
+            ).name = "BrandDeck Native Cover Subtitle"
+        mode = "native-cover"
+    elif role == "closing":
+        marker = slide.shapes.add_shape(
+            MSO_SHAPE.RECTANGLE,
+            Inches(left),
+            Inches(2.0),
+            Inches(0.72),
+            Inches(0.07),
+        )
+        marker.name = "BrandDeck Native Accent"
+        marker.fill.solid()
+        marker.fill.fore_color.rgb = _rgb(tokens["accent"])
+        marker.line.fill.background()
+        _add_textbox(
+            slide,
+            title,
+            (left, 2.34, max(5.0, right - left), 1.35),
+            font_name=tokens["heading_font"],
+            font_size=tokens["cover_size"],
+            color=tokens["heading"],
+            bold=True,
+            min_font_size=36,
+        ).name = "BrandDeck Native Closing Title"
+        if subtitle:
+            _add_textbox(
+                slide,
+                subtitle,
+                (left, 4.15, min(6.0, max(3.0, right - left)), 0.55),
+                font_name=tokens["font"],
+                font_size=tokens["body_size"],
+                color=tokens["accent"],
+                min_font_size=16,
+            ).name = "BrandDeck Native Closing Subtitle"
+        mode = "native-closing"
+    else:
+        title_width = max(4.6, right - left)
+        _add_textbox(
+            slide,
+            title,
+            (left, 0.52, title_width, 0.72),
+            font_name=tokens["heading_font"],
+            font_size=tokens["title_size"],
+            color=tokens["heading"],
+            bold=True,
+            min_font_size=28,
+        ).name = "BrandDeck Native Title"
+        marker = slide.shapes.add_shape(
+            MSO_SHAPE.RECTANGLE,
+            Inches(left),
+            Inches(1.38),
+            Inches(0.72),
+            Inches(0.06),
+        )
+        marker.name = "BrandDeck Native Accent"
+        marker.fill.solid()
+        marker.fill.fore_color.rgb = _rgb(tokens["accent"])
+        marker.line.fill.background()
+        items = ([str(slide_spec.get("body"))] if slide_spec.get("body") else []) + [
+            str(item) for item in slide_spec.get("bullets", []) if str(item).strip()
+        ]
+        zone = (left, 1.78, max(4.8, right - left), 4.62)
+        visual = slide_spec.get("visual")
+        if pattern_id == "native-list":
+            _native_list(slide, items, zone, tokens)
+            mode = "native-list"
+        elif pattern_id == "native-split" or visual:
+            _native_split(slide, items, visual, zone, design, tokens)
+            mode = "native-split"
+        else:
+            _native_cards(slide, items, zone, tokens)
+            mode = "native-cards"
+        _add_textbox(
+            slide,
+            f"{slide_number:02d} / {slide_count:02d}",
+            (width - 1.25, 6.9, 0.72, 0.25),
+            font_name=tokens["font"],
+            font_size=9,
+            color=tokens["accent"],
+            align=PP_ALIGN.RIGHT,
+            min_font_size=9,
+        ).name = "BrandDeck Native Footer"
+
+    notes = slide_spec.get("speaker_notes")
+    if notes:
+        try:
+            slide.notes_slide.notes_text_frame.text = notes
+        except (AttributeError, NotImplementedError):
+            pass
+    return mode
+
+
 def _remove_unmatched_content_images(
     slide: Any,
     slide_spec: dict[str, Any],
@@ -896,16 +1384,48 @@ def compose_presentation(
         for image_hash, count in image_hash_counts.items()
         if count >= recurring_threshold
     }
+    pdf_shape_count = sum(
+        str(shape.name).lower().startswith("pdf ")
+        for source_slide in source_slides
+        for shape in source_slide.shapes
+    )
+    total_shape_count = sum(len(source_slide.shapes) for source_slide in source_slides)
+    fragmented_source = bool(
+        design_system.get("source_model", {}).get("fragmented")
+    ) or (pdf_shape_count >= 10 and pdf_shape_count / max(1, total_shape_count) >= 0.25)
+    brand_source = _select_brand_source(source_slides, repeated_image_hashes)
+    blank_layout = min(layouts, key=lambda item: len(item.placeholders))
     original_slide_ids = list(prs.slides._sldIdLst)
     catalog = read_json(template_dir / "pattern_catalog.json")
     patterns = {item["id"]: item for item in catalog.get("patterns", [])}
 
     selected_patterns: list[str] = []
-    for generated_index, slide_spec in enumerate(plan.get("slides", [])):
+    selected_source_patterns: list[str] = []
+    slide_specs = plan.get("slides", [])
+    for generated_index, slide_spec in enumerate(slide_specs):
         layout_index = int(slide_spec.get("layout_index", 0))
         if layout_index < 0 or layout_index >= len(layouts):
             layout_index = 0
         pattern = patterns.get(str(slide_spec.get("pattern_id")), {})
+        selected_source_patterns.append(str(slide_spec.get("pattern_id", "unassigned")))
+        use_native_grid = (
+            fragmented_source or pattern.get("source_kind") == "native_grid"
+        )
+        if use_native_grid:
+            slide = prs.slides.add_slide(blank_layout)
+            for shape in list(slide.shapes):
+                slide.shapes._spTree.remove(shape.element)
+            mode = _native_slide(
+                slide,
+                slide_spec,
+                design_system,
+                brand_source,
+                repeated_image_hashes,
+                slide_number=generated_index + 1,
+                slide_count=len(slide_specs),
+            )
+            selected_patterns.append(mode)
+            continue
         example_indices = [
             int(value)
             for value in pattern.get("example_slide_indices", [])
@@ -924,16 +1444,16 @@ def compose_presentation(
     _remove_slide_ids(prs, original_slide_ids)
 
     prs.core_properties.title = str(plan.get("title", "Generated presentation"))
-    prs.core_properties.subject = (
-        "Generated by BrandDeck AI from an arbitrary PPTX template"
-    )
-    prs.core_properties.keywords = "BrandDeck AI, template-adaptive, generated"
+    prs.core_properties.subject = "Template-adaptive presentation"
+    prs.core_properties.keywords = "BrandDeck, template-adaptive, presentation"
     output_path.parent.mkdir(parents=True, exist_ok=True)
     prs.save(output_path)
     result = {
         "output": str(output_path.resolve()),
         "slide_count": len(prs.slides),
         "patterns_used": selected_patterns,
+        "source_patterns": selected_source_patterns,
+        "composition_mode": "native_grid" if fragmented_source else "template_layout",
     }
     write_json(output_path.with_suffix(".manifest.json"), result)
     return result

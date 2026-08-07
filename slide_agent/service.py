@@ -9,6 +9,7 @@ from .composer import compose_presentation, outline_markdown
 from .config import InferenceSettings
 from .llm import InferenceClient
 from .planner import assign_patterns, load_content, plan_deck
+from .powerpoint import inspect_powerpoint_render
 from .qa import compact_plan, inspect_presentation
 from .utils import find_latest, read_json, resolve_workspace, unique_dir, write_json
 
@@ -153,6 +154,20 @@ def generate_deck(
             expected_slide_count=len(current_plan["slides"]),
             report_path=run_dir / "qa_report.json",
         )
+        render_qa = inspect_powerpoint_render(
+            output_path,
+            run_dir / f"powerpoint-render-{attempt + 1}",
+            expected_slide_count=len(current_plan["slides"]),
+        )
+        qa["powerpoint_render"] = render_qa
+        if render_qa["status"] != "skipped":
+            qa["issues"].extend(render_qa["issues"])
+            qa["score"] = min(qa["score"], int(render_qa["score"] or 0))
+            if render_qa["status"] == "failed":
+                qa["status"] = "failed"
+            elif render_qa["status"] == "warning" and qa["status"] == "passed":
+                qa["status"] = "warning"
+        write_json(run_dir / "qa_report.json", qa)
         attempt_record: dict[str, Any] = {
             "attempt": attempt + 1,
             "qa_status": qa["status"],
