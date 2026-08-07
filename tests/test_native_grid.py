@@ -5,10 +5,12 @@ from pathlib import Path
 from PIL import Image
 from pptx import Presentation
 from pptx.dml.color import RGBColor
-from pptx.enum.shapes import MSO_SHAPE
+from pptx.enum.shapes import MSO_SHAPE, MSO_SHAPE_TYPE
+from pptx.oxml.ns import qn
 from pptx.util import Inches, Pt
 
 from slide_agent.analyzer import analyze_template
+from slide_agent.composer import _set_picture_background
 from slide_agent.service import generate_deck
 from slide_agent.utils import read_json
 
@@ -28,11 +30,14 @@ CONTENT = """# Native rebuild
 def _fragmented_template(path: Path) -> None:
     prs = Presentation()
     logo = path.with_suffix(".png")
+    canvas = path.with_suffix(".background.png")
     Image.new("RGB", (80, 30), "#00D3E3").save(logo)
+    Image.new("RGB", (1600, 900), "#070C18").save(canvas)
     for slide_index in range(4):
         slide = prs.slides.add_slide(prs.slide_layouts[6])
         slide.background.fill.solid()
         slide.background.fill.fore_color.rgb = RGBColor(7, 12, 24)
+        slide.shapes.add_picture(str(canvas), 0, 0, prs.slide_width, prs.slide_height)
         slide.shapes.add_picture(
             str(logo), Inches(11.7), Inches(6.8), Inches(0.8), Inches(0.3)
         )
@@ -90,4 +95,41 @@ def test_fragmented_pdf_source_is_rebuilt_as_native_grid(tmp_path: Path):
     assert all(
         any(shape.name.startswith("BrandDeck Native") for shape in slide.shapes)
         for slide in generated.slides
+    )
+    for slide in generated.slides:
+        background = slide.element.cSld.find(qn("p:bg"))
+        assert background is not None
+        assert background.find(".//" + qn("a:blipFill")) is not None
+        assert not any(
+            shape.shape_type == MSO_SHAPE_TYPE.PICTURE
+            and shape.width >= generated.slide_width * 0.8
+            and shape.height >= generated.slide_height * 0.8
+            for shape in slide.shapes
+        )
+
+
+def test_flattened_reference_extracts_cover_and_content_backgrounds(tmp_path: Path):
+    template = tmp_path / "flattened-reference.pptx"
+    workspace = tmp_path / "workspace"
+    dark = tmp_path / "dark.png"
+    light = tmp_path / "light.png"
+    Image.new("RGB", (1600, 900), "#091624").save(dark)
+    Image.new("RGB", (1600, 900), "#DCE6F2").save(light)
+    prs = Presentation()
+    for index in range(5):
+        slide = prs.slides.add_slide(prs.slide_layouts[6])
+        _set_picture_background(slide, (dark if index == 0 else light).read_bytes())
+    prs.save(template)
+
+    analyzed = analyze_template(template, workspace=workspace)
+    design = read_json(analyzed / "design_system.json")
+    catalog = read_json(analyzed / "pattern_catalog.json")
+
+    assert design["source_model"]["fragmented"] is False
+    assert design["source_model"]["flattened"] is True
+    assert design["source_model"]["composition_mode"] == "native_grid"
+    assert design["brand"]["cover_background"] == "091624"
+    assert design["brand"]["content_background"] == "DCE6F2"
+    assert any(
+        pattern.get("source_kind") == "native_grid" for pattern in catalog["patterns"]
     )

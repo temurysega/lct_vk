@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import colorsys
 import hashlib
 import importlib.util
 import io
@@ -23,7 +24,7 @@ from .utils import (
     write_json,
 )
 
-ANALYSIS_SCHEMA_VERSION = "1.0"
+ANALYSIS_SCHEMA_VERSION = "1.1"
 
 
 def _load_extractor():
@@ -64,13 +65,25 @@ def _normal_color(value: Any) -> str | None:
 def _observed_colors(context: dict[str, Any]) -> list[dict[str, Any]]:
     counts: Counter[str] = Counter()
     for key, value in _walk(context):
-        if key not in {"color", "background_color", "fill", "line_color"}:
+        if key not in {
+            "color",
+            "background_color",
+            "fill",
+            "line_color",
+            "edge_color",
+        }:
             continue
         if isinstance(value, dict):
             value = value.get("color")
         color = _normal_color(value)
         if color:
             counts[color] += 1
+    for image in context.get("images_manifest", []):
+        for item in image.get("dominant_colors", []):
+            color = _normal_color(item.get("hex"))
+            ratio = item.get("ratio", 0)
+            if color:
+                counts[color] += max(1, round(float(ratio) * 10))
     for value in context.get("theme", {}).get("color_scheme", {}).values():
         color = _normal_color(value)
         if color:
@@ -94,19 +107,6 @@ def _font_samples(context: dict[str, Any]) -> list[tuple[str, float, str, bool]]
     return samples
 
 
-def _text_color_samples(context: dict[str, Any]) -> list[tuple[str, float]]:
-    samples: list[tuple[str, float]] = []
-    for slide in context.get("slides", []):
-        for element in slide.get("text_elements", []):
-            for paragraph in element.get("paragraphs", []):
-                font = paragraph.get("font", {})
-                color = _normal_color(font.get("color"))
-                size = font.get("size_pt")
-                if color and isinstance(size, (int, float)):
-                    samples.append((color, float(size)))
-    return samples
-
-
 def _mode(values: Iterable[str], fallback: str) -> str:
     counts = Counter(value for value in values if value)
     return counts.most_common(1)[0][0] if counts else fallback
@@ -125,11 +125,55 @@ def _source_model(context: dict[str, Any]) -> dict[str, Any]:
     ]
     ratio = len(pdf_shapes) / max(1, len(shapes))
     fragmented = len(pdf_shapes) >= 10 and ratio >= 0.25
+    slides = context.get("slides", [])
+    width = float(context.get("presentation", {}).get("slide_width_inches", 13.333))
+    height = float(context.get("presentation", {}).get("slide_height_inches", 7.5))
+    flattened_slides = 0
+    for slide in slides:
+        image_background = slide.get("background", {}).get("type") == "image"
+        full_slide_picture = any(
+            float(image.get("width") or 0) >= width * 0.92
+            and float(image.get("height") or 0) >= height * 0.92
+            for image in slide.get("images", [])
+        )
+        sparse_text = len(slide.get("text_elements", [])) <= 1
+        if (image_background or full_slide_picture) and sparse_text:
+            flattened_slides += 1
+    flattened_ratio = flattened_slides / max(1, len(slides))
+    flattened = len(slides) >= 2 and flattened_ratio >= 0.6
+    native_grid = fragmented or flattened
     return {
         "fragmented": fragmented,
+        "flattened": flattened,
         "pdf_shape_ratio": round(ratio, 3),
-        "composition_mode": "native_grid" if fragmented else "template_layout",
+        "flattened_slide_ratio": round(flattened_ratio, 3),
+        "composition_mode": "native_grid" if native_grid else "template_layout",
     }
+
+
+def _contrast_text(background: str) -> str:
+    color = _normal_color(background) or "FFFFFF"
+    channels = [int(color[offset : offset + 2], 16) / 255 for offset in (0, 2, 4)]
+    luminance = 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2]
+    return "FFFFFF" if luminance < 0.48 else "10243A"
+
+
+def _accent_candidate(observed: list[dict[str, Any]], excluded: set[str]) -> str | None:
+    candidates: list[tuple[float, str]] = []
+    for index, item in enumerate(observed):
+        color = _normal_color(item.get("hex"))
+        if not color or color in excluded:
+            continue
+        red, green, blue = (
+            int(color[offset : offset + 2], 16) / 255 for offset in (0, 2, 4)
+        )
+        _, saturation, value = colorsys.rgb_to_hsv(red, green, blue)
+        if saturation < 0.32 or value < 0.28:
+            continue
+        blue_bias = max(0.0, blue - (red + green) / 2)
+        score = saturation * 2 + blue_bias + min(value, 0.85) - index * 0.015
+        candidates.append((score, color))
+    return max(candidates, default=(0.0, ""))[1] or None
 
 
 def build_design_system(context: dict[str, Any]) -> dict[str, Any]:
@@ -137,8 +181,7 @@ def build_design_system(context: dict[str, Any]) -> dict[str, Any]:
     theme = context.get("theme", {})
     fonts_summary = context.get("fonts_summary", {})
     samples = _font_samples(context)
-    color_samples = _text_color_samples(context)
-
+    source_model = _source_model(context)
     title_sizes = [size for _, size, role, _ in samples if "title" in role]
     body_sizes = [size for _, size, role, _ in samples if "title" not in role]
     all_sizes = [size for _, size, _, _ in samples]
@@ -154,6 +197,8 @@ def build_design_system(context: dict[str, Any]) -> dict[str, Any]:
         or theme_fonts.get("majorFont")
         or "Arial"
     )
+    if source_model["flattened"] and not samples:
+        primary_font = "Arial"
     heading_font_counts = Counter(
         name
         for name, size, role, bold in samples
@@ -194,36 +239,64 @@ def build_design_system(context: dict[str, Any]) -> dict[str, Any]:
         for ph in placeholders
     ]
     positive_rights = [value for value in rights if value > 0]
-    background = _mode(
-        (
-            _normal_color(slide.get("effective_background", {}).get("color")) or ""
-            for slide in context.get("slides", [])
-        ),
-        "FFFFFF",
-    )
+    slides = context.get("slides", [])
+    slide_backgrounds = [
+        _normal_color(slide.get("effective_background", {}).get("color")) or ""
+        for slide in slides
+    ]
+    cover_background = slide_backgrounds[0] if slide_backgrounds else "FFFFFF"
+    content_background = _mode(slide_backgrounds[1:], cover_background)
+    background = content_background
     content_title_sizes = [size for size in all_sizes if 28 <= size <= 56]
     readable_body_sizes = [size for size in body_sizes if 14 <= size <= 24]
     content_title_size = min(40.0, max(30.0, median(content_title_sizes, 34.0)))
     body_size = min(20.0, max(16.0, median(readable_body_sizes, 18.0)))
-    heading_color = _mode(
-        (color for color, size in color_samples if size >= 28),
-        "FFFFFF" if background != "FFFFFF" else "111827",
+
+    def colors_for(slide_subset: list[dict[str, Any]], *, heading: bool) -> list[str]:
+        result: list[str] = []
+        for slide in slide_subset:
+            for element in slide.get("text_elements", []):
+                for paragraph in element.get("paragraphs", []):
+                    font = paragraph.get("font", {})
+                    color = _normal_color(font.get("color"))
+                    size = font.get("size_pt")
+                    if not color or not isinstance(size, (int, float)):
+                        continue
+                    if (heading and size >= 28) or (not heading and 12 <= size < 28):
+                        result.append(color)
+        return result
+
+    content_slides = slides[1:] or slides
+    cover_slides = slides[:1]
+    content_heading = _mode(
+        colors_for(content_slides, heading=True), _contrast_text(content_background)
     )
-    body_color = _mode(
-        (color for color, size in color_samples if 12 <= size < 28),
+    content_body = _mode(colors_for(content_slides, heading=False), content_heading)
+    cover_heading = _mode(
+        colors_for(cover_slides, heading=True), _contrast_text(cover_background)
+    )
+    cover_body = _mode(colors_for(cover_slides, heading=False), cover_heading)
+    heading_color = content_heading
+    body_color = content_body
+    excluded = {
+        background,
+        cover_background,
         heading_color,
-    )
-    excluded = {background, heading_color, body_color, "000000", "FFFFFF"}
+        body_color,
+        cover_heading,
+        cover_body,
+        "000000",
+        "FFFFFF",
+    }
     accent_color = (
         body_color
         if body_color not in {background, heading_color}
-        else next(
+        else _accent_candidate(observed, excluded)
+        or next(
             (item["hex"] for item in observed if item["hex"] not in excluded),
             body_color,
         )
     )
-    source_model = _source_model(context)
-
     return {
         "schema_version": ANALYSIS_SCHEMA_VERSION,
         "canvas": {
@@ -253,6 +326,12 @@ def build_design_system(context: dict[str, Any]) -> dict[str, Any]:
             "heading": heading_color,
             "body": body_color,
             "accent": accent_color,
+            "cover_background": cover_background,
+            "cover_heading": cover_heading,
+            "cover_body": cover_body,
+            "content_background": content_background,
+            "content_heading": content_heading,
+            "content_body": content_body,
         },
         "source_model": source_model,
         "spacing": {
@@ -684,7 +763,7 @@ def build_pattern_catalog(context: dict[str, Any]) -> dict[str, Any]:
 
     patterns.extend(_slide_exemplar_patterns(context))
 
-    if _source_model(context)["fragmented"]:
+    if _source_model(context)["composition_mode"] == "native_grid":
         native_patterns = [
             ("native-cover", ["cover"], "hero", 120, 0, 0),
             (
@@ -881,7 +960,10 @@ def analyze_template(
     manifest_path = output_dir / "manifest.json"
     if not force and manifest_path.exists():
         manifest = read_json(manifest_path)
-        if manifest.get("source_sha256") == digest:
+        if (
+            manifest.get("source_sha256") == digest
+            and manifest.get("schema_version") == ANALYSIS_SCHEMA_VERSION
+        ):
             return output_dir
 
     output_dir.mkdir(parents=True, exist_ok=True)

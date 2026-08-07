@@ -166,25 +166,26 @@ python -m pytest
 
 ### Проверка на VK Tech
 
-Публичные референсы VK Tech загружаются по исходным ссылкам и локально
-преобразуются в редактируемые PPTX-фикстуры:
+Основной acceptance-набор собирается из публичной синей презентации VK Tech.
+Исходные изображения не включаются в git и не переносятся в результат: они
+используются только для извлечения цветовых ролей и визуальных правил.
 
 ```powershell
 python -m pip install -e ".[dev,pdf-reference]"
-python .\examples\fetch_vk_tech_references.py
+python .\examples\fetch_vk_tech_references.py --only vk-tech-blue-corporate
 
-branddeck --workspace .\external-fixtures\vk-tech\workspace run `
-  --template .\external-fixtures\vk-tech\vk-tech-private-cloud-2025.pptx `
+branddeck --workspace .\external-fixtures\vk-tech\blue-workspace run `
+  --template .\external-fixtures\vk-tech\vk-tech-blue-corporate.pptx `
   --content .\examples\vk_tech_case_content.md `
   --slides 10 --offline `
-  --output .\external-fixtures\vk-tech\generated-private-cloud-native.pptx
+  --output .\external-fixtures\vk-tech\generated-vk-tech-blue-native.pptx
 ```
 
-Корпоративный 28-слайдовый материал VK Cloud / VK Tech используется для основной
-приёмки бренда. 12-слайдовый материал конференции «Цифровое образование. XXI век»
-не считается корпоративным VK Tech-шаблоном и используется только как независимый
-stress-test адаптивности. Оба результата прошли structural QA и настоящий
-PowerPoint render-check с оценкой 100/100 с первой попытки.
+Результат воспроизводит тёмно-синюю обложку, светло-голубые контентные слайды,
+белые карточки и синий акцент исходного набора. Все композиции заново собираются
+нативными объектами; полноэкранных selectable pictures в слайдах нет. Тёмный
+спикерский материал VK Cloud / VK Tech и оформление конференции «Цифровое
+образование. XXI век» используются только как дополнительные stress-tests.
 Источники, хэши, второй прогон и ограничения проверки приведены в
 [отчёте VK Tech](docs/vk-tech-validation.md).
 

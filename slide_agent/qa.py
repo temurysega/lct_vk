@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any
 
 from pptx import Presentation
+from pptx.enum.shapes import MSO_SHAPE_TYPE
 
 from .utils import write_json
 
@@ -102,9 +103,9 @@ def inspect_presentation(
     )
     explicit_fonts: set[str] = set()
     slide_reports: list[dict[str, Any]] = []
-    expects_native_grid = bool(
-        (design_system or {}).get("source_model", {}).get("fragmented")
-    )
+    expects_native_grid = (design_system or {}).get("source_model", {}).get(
+        "composition_mode"
+    ) == "native_grid"
     for slide_index, slide in enumerate(prs.slides, 1):
         slide_issues: list[dict[str, Any]] = []
         text_count = 0
@@ -122,6 +123,22 @@ def inspect_presentation(
             x, y, w, h = map(
                 _inches, (shape.left, shape.top, shape.width, shape.height)
             )
+            selectable_background = (
+                shape.shape_type == MSO_SHAPE_TYPE.PICTURE
+                and w >= slide_width * 0.8
+                and h >= slide_height * 0.8
+            )
+            if expects_native_grid and (
+                str(shape.name) == "BrandDeck Background Asset" or selectable_background
+            ):
+                slide_issues.append(
+                    {
+                        "severity": "error",
+                        "code": "selectable_background",
+                        "shape": shape.name,
+                        "message": "A full-slide raster must be stored as a slide background",
+                    }
+                )
             if (
                 x < -0.02
                 or y < -0.02

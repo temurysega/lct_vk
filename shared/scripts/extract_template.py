@@ -850,6 +850,65 @@ def _get_image_from_rel(part, r_embed: str) -> Optional[Any]:
     return None
 
 
+def _image_color_profile(blob: bytes) -> Dict[str, Any]:
+    """Return a small palette and an edge-derived background color."""
+    try:
+        with Image.open(io.BytesIO(blob)) as source:
+            image = source.convert("RGB")
+            image.thumbnail((96, 54))
+            width, height = image.size
+            quantized = image.quantize(colors=8)
+            palette = quantized.getpalette() or []
+            color_counts = sorted(
+                quantized.getcolors(maxcolors=256) or [], reverse=True
+            )
+            total = max(1, width * height)
+            dominant_colors = []
+            for count, color_index in color_counts[:6]:
+                offset = color_index * 3
+                rgb = palette[offset : offset + 3]
+                if len(rgb) != 3:
+                    continue
+                dominant_colors.append(
+                    {
+                        "hex": "{:02X}{:02X}{:02X}".format(*rgb),
+                        "ratio": round(count / total, 4),
+                    }
+                )
+
+            border = max(1, round(min(width, height) * 0.08))
+            edge_pixels = []
+            for y in range(height):
+                for x in range(width):
+                    if (
+                        x < border
+                        or x >= width - border
+                        or y < border
+                        or y >= height - border
+                    ):
+                        edge_pixels.append(image.getpixel((x, y)))
+            edge_image = Image.new("RGB", (max(1, len(edge_pixels)), 1))
+            edge_image.putdata(edge_pixels or [(255, 255, 255)])
+            edge_quantized = edge_image.quantize(colors=6)
+            edge_palette = edge_quantized.getpalette() or []
+            edge_counts = sorted(
+                edge_quantized.getcolors(maxcolors=256) or [], reverse=True
+            )
+            if edge_counts:
+                _, edge_index = edge_counts[0]
+                offset = edge_index * 3
+                edge_rgb = edge_palette[offset : offset + 3]
+                edge_color = "{:02X}{:02X}{:02X}".format(*edge_rgb)
+            else:
+                edge_color = dominant_colors[0]["hex"] if dominant_colors else None
+            return {
+                "edge_color": edge_color,
+                "dominant_colors": dominant_colors,
+            }
+    except Exception:
+        return {}
+
+
 def _extract_image_from_shape(shape, part, prefix: str, seen_blobs: set,
                                offset_left: int = 0, offset_top: int = 0) -> Optional[Dict]:
     """Try to extract an image from a shape."""
@@ -868,6 +927,7 @@ def _extract_image_from_shape(shape, part, prefix: str, seen_blobs: set,
         img_name = f"{prefix}_{shape.name}.{ext}".replace(" ", "_")
 
         img_entry: Dict[str, Any] = {"name": img_name, **pos}
+        img_entry.update(_image_color_profile(blob))
 
         if blob_hash not in seen_blobs:
             seen_blobs.add(blob_hash)
@@ -897,6 +957,7 @@ def _extract_image_from_shape(shape, part, prefix: str, seen_blobs: set,
             img_name = f"{prefix}_{shape.name}.{ext}".replace(" ", "_")
 
             img_entry = {"name": img_name, **pos}
+            img_entry.update(_image_color_profile(blob))
             if blob_hash not in seen_blobs:
                 seen_blobs.add(blob_hash)
                 with Image.open(io.BytesIO(blob)) as img_obj:
@@ -1336,15 +1397,18 @@ def _extract_background(bg_element, part, theme_colors: Dict[str, str], seen_blo
                         seen_blobs.add(blob_hash)
                         with Image.open(io.BytesIO(blob)) as img:
                             w_px, h_px = img.size
-                        images.append({
+                        image_entry = {
                             "name": img_name,
                             "media_type": image_part.content_type,
                             "base64_data": base64.b64encode(blob).decode("utf-8"),
                             "width_px": w_px,
                             "height_px": h_px,
-                        })
+                        }
+                        image_entry.update(_image_color_profile(blob))
+                        images.append(image_entry)
 
                     bg_info = {"type": "image", "image_ref": img_name}
+                    bg_info.update(_image_color_profile(blob))
                     return bg_info, images
 
         solid_fill = bg_element.find(".//" + qn("a:solidFill"))
@@ -1440,6 +1504,16 @@ def _compute_effective_background(
     def _bg_color(bg: Dict[str, Any]) -> Optional[str]:
         if bg.get("type") == "solid" and bg.get("color"):
             return bg["color"]
+        if bg.get("type") == "image" and bg.get("edge_color"):
+            return bg["edge_color"]
+        return None
+
+    def _covering_image(data: Dict[str, Any]) -> Optional[str]:
+        for image in data.get("images", []):
+            w = image.get("width") or 0
+            h = image.get("height") or 0
+            if w >= min_cover_w and h >= min_cover_h and image.get("edge_color"):
+                return image["edge_color"]
         return None
 
     def _covering_color(data: Dict[str, Any]) -> Optional[str]:
@@ -1459,6 +1533,10 @@ def _compute_effective_background(
     slide_cover = _covering_color(slide_info)
     if slide_cover:
         return {"color": slide_cover, "source": "slide_shape"}
+
+    slide_image = _covering_image(slide_info)
+    if slide_image:
+        return {"color": slide_image, "source": "slide_image"}
 
     layout_cover = _covering_color(layout) if layout else None
     if layout_cover:
@@ -1665,6 +1743,10 @@ def extract_template_context(pptx_path: str, output_dir: str) -> None:
         if "width_px" in img:
             entry["width_px"] = img["width_px"]
             entry["height_px"] = img["height_px"]
+        if img.get("edge_color"):
+            entry["edge_color"] = img["edge_color"]
+        if img.get("dominant_colors"):
+            entry["dominant_colors"] = img["dominant_colors"]
         name = img["name"]
         if name.startswith("master"):
             entry["source"] = "master"

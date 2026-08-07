@@ -7,12 +7,15 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from PIL import Image
 from pptx import Presentation
 from pptx.chart.data import CategoryChartData, ChartData
 from pptx.dml.color import RGBColor
 from pptx.enum.chart import XL_CHART_TYPE, XL_LEGEND_POSITION
 from pptx.enum.shapes import MSO_SHAPE, MSO_SHAPE_TYPE, PP_PLACEHOLDER
 from pptx.enum.text import MSO_ANCHOR, MSO_AUTO_SIZE, PP_ALIGN
+from pptx.oxml.ns import qn
+from pptx.oxml.xmlchemy import OxmlElement
 from pptx.util import Inches, Pt
 
 from .utils import read_json, write_json
@@ -99,18 +102,27 @@ def _luminance(value: str) -> float:
     return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2]
 
 
-def _native_tokens(design: dict[str, Any]) -> dict[str, Any]:
+def _native_tokens(design: dict[str, Any], role: str = "content") -> dict[str, Any]:
     brand = design.get("brand", {})
     colors = _theme_colors(design)
-    background = _hex(brand.get("background"), "0B1220")
+    cover_role = role in {"cover", "section", "closing"}
+    prefix = "cover" if cover_role else "content"
+    background = _hex(
+        brand.get(f"{prefix}_background", brand.get("background")), "0B1220"
+    )
     dark = _luminance(background) < 0.35
     heading = _hex(
-        brand.get("heading"), colors.get("lt1") if dark else colors.get("dk1")
+        brand.get(f"{prefix}_heading", brand.get("heading")),
+        colors.get("lt1") if dark else colors.get("dk1"),
     )
-    body = _hex(brand.get("body"), heading)
+    body = _hex(brand.get(f"{prefix}_body", brand.get("body")), heading)
     accent = _hex(brand.get("accent"), colors.get("accent1"))
-    surface = _mix_color(background, "FFFFFF" if dark else "000000", 0.1)
-    surface_alt = _mix_color(background, accent, 0.16)
+    surface = (
+        _mix_color(background, "FFFFFF", 0.1)
+        if dark
+        else ("FFFFFF" if background != "FFFFFF" else "F4F8FD")
+    )
+    surface_alt = _mix_color(background, accent, 0.1 if dark else 0.07)
     typography = design.get("typography", {})
     return {
         "background": background,
@@ -119,6 +131,8 @@ def _native_tokens(design: dict[str, Any]) -> dict[str, Any]:
         "accent": accent,
         "surface": surface,
         "surface_alt": surface_alt,
+        "dark": dark,
+        "accent_text": "FFFFFF" if _luminance(accent) < 0.52 else "10243A",
         "font": typography.get("primary_font", "Arial"),
         "heading_font": typography.get(
             "heading_font", typography.get("primary_font", "Arial")
@@ -818,7 +832,9 @@ def _select_brand_source(
 ) -> Any | None:
     if not source_slides:
         return None
-    candidates = source_slides[1:-1] if len(source_slides) > 2 else source_slides
+    start = max(1, len(source_slides) // 3)
+    candidates = source_slides[start:-1] if len(source_slides) > 2 else source_slides
+    candidates = candidates or source_slides
 
     def score(slide: Any) -> tuple[int, float]:
         count = 0
@@ -840,8 +856,8 @@ def _copy_brand_canvas(
     source: Any | None,
     repeated_image_hashes: set[str],
     design: dict[str, Any],
+    tokens: dict[str, Any],
 ) -> list[Any]:
-    tokens = _native_tokens(design)
     fill = slide.background.fill
     fill.solid()
     fill.fore_color.rgb = _rgb(tokens["background"])
@@ -851,7 +867,8 @@ def _copy_brand_canvas(
     canvas_area = max(
         0.1, float(canvas["width_inches"]) * float(canvas["height_inches"])
     )
-    copied: list[Any] = []
+    background_candidates: list[tuple[float, Any]] = []
+    brand_candidates: list[Any] = []
     for source_shape in source.shapes:
         if source_shape.shape_type != MSO_SHAPE_TYPE.PICTURE:
             continue
@@ -861,8 +878,22 @@ def _copy_brand_canvas(
         area_ratio = (
             source_shape.width / 914400 * (source_shape.height / 914400) / canvas_area
         )
-        if 0.4 < area_ratio < 0.45:
-            continue
+        width_ratio = source_shape.width / 914400 / float(canvas["width_inches"])
+        height_ratio = source_shape.height / 914400 / float(canvas["height_inches"])
+        if area_ratio >= 0.72 and width_ratio >= 0.84 and height_ratio >= 0.84:
+            background_candidates.append((area_ratio, source_shape))
+        elif area_ratio <= 0.08:
+            brand_candidates.append(source_shape)
+
+    if background_candidates:
+        _, background_shape = max(background_candidates, key=lambda item: item[0])
+        try:
+            _set_picture_background(slide, background_shape.image.blob)
+        except (AttributeError, ValueError):
+            pass
+
+    copied: list[Any] = []
+    for source_shape in brand_candidates:
         try:
             picture = slide.shapes.add_picture(
                 io.BytesIO(source_shape.image.blob),
@@ -873,11 +904,7 @@ def _copy_brand_canvas(
             )
         except (AttributeError, ValueError):
             continue
-        picture.name = (
-            "BrandDeck Background Asset"
-            if area_ratio >= 0.45
-            else "BrandDeck Brand Asset"
-        )
+        picture.name = "BrandDeck Brand Asset"
         for crop_name in ("crop_left", "crop_right", "crop_top", "crop_bottom"):
             try:
                 setattr(picture, crop_name, getattr(source_shape, crop_name))
@@ -885,6 +912,36 @@ def _copy_brand_canvas(
                 pass
         copied.append(picture)
     return copied
+
+
+def _set_picture_background(slide: Any, blob: bytes) -> None:
+    """Store a raster as the OOXML slide background, not as a selectable shape."""
+    with Image.open(io.BytesIO(blob)) as source:
+        converted = source.convert("RGB")
+        payload = io.BytesIO()
+        converted.save(payload, format="PNG")
+    payload.seek(0)
+    _, relationship_id = slide.part.get_or_add_image_part(payload)
+    common_slide_data = slide.element.cSld
+    existing = common_slide_data.find(qn("p:bg"))
+    if existing is not None:
+        common_slide_data.remove(existing)
+
+    background = OxmlElement("p:bg")
+    properties = OxmlElement("p:bgPr")
+    blip_fill = OxmlElement("a:blipFill")
+    blip_fill.set("dpi", "0")
+    blip_fill.set("rotWithShape", "1")
+    blip = OxmlElement("a:blip")
+    blip.set(qn("r:embed"), relationship_id)
+    stretch = OxmlElement("a:stretch")
+    stretch.append(OxmlElement("a:fillRect"))
+    blip_fill.append(blip)
+    blip_fill.append(stretch)
+    properties.append(blip_fill)
+    properties.append(OxmlElement("a:effectLst"))
+    background.append(properties)
+    common_slide_data.insert(0, background)
 
 
 def _native_right_limit(
@@ -924,7 +981,11 @@ def _native_panel(
         tokens["surface_alt"] if alternate else tokens["surface"]
     )
     panel.line.color.rgb = _rgb(tokens["accent"])
-    panel.line.width = Pt(0.8)
+    panel.line.width = Pt(1.15 if not tokens["dark"] else 0.8)
+    try:
+        panel.adjustments[0] = 0.08
+    except (IndexError, ValueError):
+        pass
     return panel
 
 
@@ -940,35 +1001,40 @@ def _native_card_content(
     x, y, w, h = box
     _native_panel(slide, box, tokens, alternate=alternate)
     accent = slide.shapes.add_shape(
-        MSO_SHAPE.RECTANGLE,
-        Inches(x),
-        Inches(y),
-        Inches(0.07),
-        Inches(h),
+        MSO_SHAPE.ROUNDED_RECTANGLE,
+        Inches(x + 0.22),
+        Inches(y + 0.2),
+        Inches(0.46),
+        Inches(0.46),
     )
     accent.name = "BrandDeck Native Accent"
     accent.fill.solid()
     accent.fill.fore_color.rgb = _rgb(tokens["accent"])
     accent.line.fill.background()
+    try:
+        accent.adjustments[0] = 0.18
+    except (IndexError, ValueError):
+        pass
     _add_textbox(
         slide,
         f"{number:02d}",
-        (x + 0.22, y + 0.18, max(0.5, w - 0.44), 0.34),
+        (x + 0.22, y + 0.29, 0.46, 0.22),
         font_name=tokens["heading_font"],
-        font_size=13,
-        color=tokens["accent"],
+        font_size=11,
+        color=tokens["accent_text"],
         bold=True,
-        min_font_size=12,
+        align=PP_ALIGN.CENTER,
+        min_font_size=10,
     ).name = "BrandDeck Native Number"
     _add_textbox(
         slide,
         item,
-        (x + 0.22, y + 0.72, max(0.6, w - 0.44), max(0.55, h - 0.94)),
+        (x + 0.22, y + 0.88, max(0.6, w - 0.44), max(0.55, h - 1.08)),
         font_name=tokens["font"],
         font_size=tokens["body_size"],
         color=tokens["heading"],
         min_font_size=15,
-        vertical_anchor=MSO_ANCHOR.MIDDLE,
+        vertical_anchor=MSO_ANCHOR.TOP,
     ).name = "BrandDeck Native Card Text"
 
 
@@ -986,7 +1052,9 @@ def _native_cards(
     rows = math.ceil(len(items) / columns)
     gap = 0.2
     card_w = (w - gap * (columns - 1)) / columns
-    card_h = (h - gap * (rows - 1)) / rows
+    available_h = min(h, 2.55 if rows == 1 else 4.15)
+    card_h = (available_h - gap * (rows - 1)) / rows
+    start_y = y + max(0.0, (h - available_h) * 0.38)
     for index, item in enumerate(items):
         col = index % columns
         row = index // columns
@@ -996,7 +1064,7 @@ def _native_cards(
             index + 1,
             (
                 x + col * (card_w + gap),
-                y + row * (card_h + gap),
+                start_y + row * (card_h + gap),
                 card_w,
                 card_h,
             ),
@@ -1042,7 +1110,7 @@ def _native_list(
             (x + 0.22, row_y + row_h / 2 - 0.16, 0.38, 0.28),
             font_name=tokens["heading_font"],
             font_size=12,
-            color=tokens["background"],
+            color=tokens["accent_text"],
             bold=True,
             align=PP_ALIGN.CENTER,
             min_font_size=11,
@@ -1083,6 +1151,35 @@ def _native_split(
         _native_list(slide, items[1:] or items[:1], right, tokens)
 
 
+def _native_cover_motif(slide: Any, width: float, tokens: dict[str, Any]) -> None:
+    """Add an editable accent motif that keeps the cover visually asymmetric."""
+    specs = [
+        (width - 3.8, 1.58, 2.45, 3.4, -8, 0.28),
+        (width - 3.42, 1.38, 2.45, 3.4, 4, 0.48),
+        (width - 3.0, 1.78, 2.12, 2.95, 12, 0.72),
+    ]
+    for index, (x, y, w, h, rotation, ratio) in enumerate(specs, 1):
+        tile = slide.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            Inches(x),
+            Inches(y),
+            Inches(w),
+            Inches(h),
+        )
+        tile.name = f"BrandDeck Native Cover Motif {index}"
+        tile.rotation = rotation
+        tile.fill.solid()
+        tile.fill.fore_color.rgb = _rgb(
+            _mix_color(tokens["background"], tokens["accent"], ratio)
+        )
+        tile.line.color.rgb = _rgb(tokens["accent"])
+        tile.line.width = Pt(1.1)
+        try:
+            tile.adjustments[0] = 0.12
+        except (IndexError, ValueError):
+            pass
+
+
 def _native_slide(
     slide: Any,
     slide_spec: dict[str, Any],
@@ -1093,20 +1190,21 @@ def _native_slide(
     slide_number: int,
     slide_count: int,
 ) -> str:
-    tokens = _native_tokens(design)
+    role = str(slide_spec.get("role", "content"))
+    tokens = _native_tokens(design, role)
     brand_shapes = _copy_brand_canvas(
-        slide, brand_source, repeated_image_hashes, design
+        slide, brand_source, repeated_image_hashes, design, tokens
     )
     canvas = design["canvas"]
     width = float(canvas["width_inches"])
     right = _native_right_limit(brand_shapes, design)
     left = 0.62
-    role = str(slide_spec.get("role", "content"))
     pattern_id = str(slide_spec.get("pattern_id", "native-cards"))
     title = str(slide_spec.get("title", ""))
     subtitle = str(slide_spec.get("subtitle", ""))
 
     if role in {"cover", "section"}:
+        _native_cover_motif(slide, width, tokens)
         marker = slide.shapes.add_shape(
             MSO_SHAPE.RECTANGLE,
             Inches(left),
@@ -1121,7 +1219,7 @@ def _native_slide(
         _add_textbox(
             slide,
             title,
-            (left, 1.78, max(5.0, right - left), 2.35),
+            (left, 1.78, min(7.2, max(5.0, right - left)), 2.35),
             font_name=tokens["heading_font"],
             font_size=tokens["cover_size"],
             color=tokens["heading"],
@@ -1390,10 +1488,18 @@ def compose_presentation(
         for shape in source_slide.shapes
     )
     total_shape_count = sum(len(source_slide.shapes) for source_slide in source_slides)
-    fragmented_source = bool(
-        design_system.get("source_model", {}).get("fragmented")
-    ) or (pdf_shape_count >= 10 and pdf_shape_count / max(1, total_shape_count) >= 0.25)
+    source_model = design_system.get("source_model", {})
+    native_grid_source = (
+        source_model.get("composition_mode") == "native_grid"
+        or bool(source_model.get("fragmented"))
+        or (
+            pdf_shape_count >= 10
+            and pdf_shape_count / max(1, total_shape_count) >= 0.25
+        )
+    )
     brand_source = _select_brand_source(source_slides, repeated_image_hashes)
+    cover_brand_source = source_slides[0] if source_slides else brand_source
+    closing_brand_source = source_slides[-1] if source_slides else brand_source
     blank_layout = min(layouts, key=lambda item: len(item.placeholders))
     original_slide_ids = list(prs.slides._sldIdLst)
     catalog = read_json(template_dir / "pattern_catalog.json")
@@ -1409,17 +1515,25 @@ def compose_presentation(
         pattern = patterns.get(str(slide_spec.get("pattern_id")), {})
         selected_source_patterns.append(str(slide_spec.get("pattern_id", "unassigned")))
         use_native_grid = (
-            fragmented_source or pattern.get("source_kind") == "native_grid"
+            native_grid_source or pattern.get("source_kind") == "native_grid"
         )
         if use_native_grid:
             slide = prs.slides.add_slide(blank_layout)
             for shape in list(slide.shapes):
                 slide.shapes._spTree.remove(shape.element)
+            role = str(slide_spec.get("role", "content"))
+            role_brand_source = (
+                cover_brand_source
+                if role in {"cover", "section"}
+                else closing_brand_source
+                if role == "closing"
+                else brand_source
+            )
             mode = _native_slide(
                 slide,
                 slide_spec,
                 design_system,
-                brand_source,
+                role_brand_source,
                 repeated_image_hashes,
                 slide_number=generated_index + 1,
                 slide_count=len(slide_specs),
@@ -1453,7 +1567,7 @@ def compose_presentation(
         "slide_count": len(prs.slides),
         "patterns_used": selected_patterns,
         "source_patterns": selected_source_patterns,
-        "composition_mode": "native_grid" if fragmented_source else "template_layout",
+        "composition_mode": "native_grid" if native_grid_source else "template_layout",
     }
     write_json(output_path.with_suffix(".manifest.json"), result)
     return result
