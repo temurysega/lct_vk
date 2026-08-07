@@ -1,0 +1,18 @@
+# Node
+node_modules/
+
+# Output files
+slide-workspace/
+demo-assets/
+external-fixtures/
+.env
+.pytest_cache/
+__pycache__/
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/settings.json

@@ -1,0 +1,6 @@
+python-pptx>=1.0.0
+Pillow>=10.0.0
+fastapi>=0.115
+python-multipart>=0.0.9
+uvicorn>=0.30
+
