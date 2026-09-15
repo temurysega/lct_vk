@@ -1,0 +1,89 @@
+from copy import deepcopy
+
+import pytest
+from pptx import Presentation
+from pptx.util import Inches
+
+from slide_agent.coverage import coverage_report
+from slide_agent.planner import _fallback_plan, normalize_plan
+from slide_agent.qa import compact_plan
+
+
+def test_last_sections_and_first_section_body_survive_small_slide_count():
+    source = "# Проект\nВводный факт 40%.\n" + "\n".join(
+        f"## Раздел {i}\nПодтвержденный факт {i}." for i in range(12)
+    )
+    plan = normalize_plan(_fallback_plan(source, 5), source_text=source, slide_count=5)
+    assert len(plan["slides"]) == 5
+    report = coverage_report(source, plan)
+    assert report["missing_from_plan"] == []
+    assert any("Раздел 11" in slide["title"] for slide in plan["slides"])
+
+
+def test_normalization_does_not_cut_long_text_or_sixth_bullet():
+    text = "Подтвержденный факт " * 100
+    plan = {
+        "slides": [
+            {"title": "Начало"},
+            {
+                "title": "Данные",
+                "body": text,
+                "bullets": [f"Факт {i}" for i in range(8)],
+            },
+            {"title": "Конец"},
+        ]
+    }
+    normalized = normalize_plan(plan, source_text=text, slide_count=3)
+    assert normalized["slides"][1]["body"] == text.strip()
+    assert len(normalized["slides"][1]["bullets"]) == 8
+
+
+def test_retry_preserves_chart_arrays_and_every_fact():
+    plan = {
+        "slides": [
+            {
+                "body": "Факт " * 200,
+                "bullets": list(map(str, range(9))),
+                "visual": {
+                    "type": "bar_chart",
+                    "categories": list(map(str, range(10))),
+                    "series": [{"values": list(range(10))}],
+                },
+            }
+        ]
+    }
+    original = deepcopy(plan)
+    retry = compact_plan(plan)
+    assert retry == original
+    retry["slides"][0]["visual"]["categories"].clear()
+    assert plan == original
+
+
+def test_pptx_coverage_detects_missing_fact_even_if_it_is_in_plan(tmp_path):
+    source = "# Проект\nБюджет 40 млн рублей.\nСрок 4 недели."
+    plan = _fallback_plan(source, 3)
+    prs = Presentation()
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    slide.shapes.add_textbox(
+        Inches(1), Inches(1), Inches(8), Inches(2)
+    ).text = "Проект\nБюджет 40 млн рублей."
+    output = tmp_path / "deck.pptx"
+    prs.save(output)
+    report = coverage_report(source, plan, output)
+    assert not report["missing_from_plan"]
+    assert report["missing_from_pptx"]
+    assert report["status"] == "needs_review"
+
+
+def test_paraphrase_and_speaker_notes_are_not_claimed_as_verified():
+    source = "Срок 4 недели."
+    report = coverage_report(
+        source, {"slides": [{"body": "Завершим за месяц.", "speaker_notes": source}]}
+    )
+    assert report["status"] == "needs_review"
+    assert report["semantic_verification"] == "not_performed"
+
+
+def test_too_little_content_does_not_create_empty_slides():
+    with pytest.raises(ValueError, match="fewer slides"):
+        _fallback_plan("Один факт.", 10)

@@ -1,0 +1,13 @@
+{
+  "renderer": "PowerPoint macOS / AppleScript",
+  "pages": 10,
+  "source_sha256": "a70d189c7711bfbad0567301da932dc04dc2ccb05a7d4cb86cc2134f9e2344b2",
+  "source_unchanged": true,
+  "seconds": 1.818,
+  "text_outside_canvas": [],
+  "visual_acceptance": "needs_improvement",
+  "review": "Contact sheets reviewed; targeted overflow/title collisions resolved",
+  "remaining_issues": [
+    "Source photographs/QR and empty dark areas need semantic review"
+  ]
+}

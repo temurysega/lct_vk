@@ -119,7 +119,7 @@ def _fallback_plan(text: str, slide_count: int | None) -> dict[str, Any]:
     content_slots = desired - 2
     material: list[tuple[str, list[str]]] = []
     for index, (heading, lines) in enumerate(sections):
-        if index == 0 and heading == first_title and len(sections) > 1:
+        if index == 0 and heading == first_title and len(sections) > 1 and not lines:
             continue
         bullets = []
         for line in lines:
@@ -127,6 +127,22 @@ def _fallback_plan(text: str, slide_count: int | None) -> dict[str, Any]:
         material.append((heading, bullets))
     if not material:
         material = [("", _sentences(text))]
+
+    # Merge adjacent sections instead of dropping the tail of the document.
+    while len(material) > content_slots:
+        index = min(
+            range(len(material) - 1),
+            key=lambda i: sum(
+                len(item) for _, items in material[i : i + 2] for item in items
+            ),
+        )
+        first, second = material[index : index + 2]
+        material[index : index + 2] = [
+            (
+                " / ".join(heading for heading in (first[0], second[0]) if heading),
+                first[1] + second[1],
+            )
+        ]
 
     while len(material) < content_slots:
         split_at = max(range(len(material)), key=lambda idx: len(material[idx][1]))
@@ -139,9 +155,16 @@ def _fallback_plan(text: str, slide_count: int | None) -> dict[str, Any]:
             (heading, bullets[midpoint:]),
         ]
 
+    if len(material) < content_slots:
+        if slide_count is not None:
+            raise ValueError(
+                "Not enough source material for the requested slide count; request fewer slides"
+            )
+        desired = len(material) + 2
+
     slides: list[dict[str, Any]] = [
         {
-            "title": first_title[:80],
+            "title": first_title,
             "role": "cover",
             "subtitle": "Автоматически создано по исходным материалам"
             if russian
@@ -154,26 +177,14 @@ def _fallback_plan(text: str, slide_count: int | None) -> dict[str, Any]:
     ]
     for index, (heading, bullets) in enumerate(material[:content_slots], 1):
         default_title = f"Раздел {index}" if russian else f"Section {index}"
-        slide_bullets = [item[:110] for item in bullets[:5]]
+        slide_bullets = list(bullets)
         slides.append(
             {
-                "title": (heading or default_title)[:80],
+                "title": heading or default_title,
                 "role": "content",
                 "subtitle": "",
                 "body": "",
                 "bullets": slide_bullets,
-                "visual": None,
-                "speaker_notes": "",
-            }
-        )
-    while len(slides) < desired - 1:
-        slides.append(
-            {
-                "title": "Ключевые выводы" if russian else "Key takeaways",
-                "role": "content",
-                "subtitle": "",
-                "body": "",
-                "bullets": [],
                 "visual": None,
                 "speaker_notes": "",
             }
@@ -226,19 +237,19 @@ def normalize_plan(
     for raw in raw_slides:
         if not isinstance(raw, dict):
             continue
-        title = str(raw.get("title") or "Untitled").strip()[:80]
+        title = str(raw.get("title") or "Untitled").strip()
         bullets = raw.get("bullets") if isinstance(raw.get("bullets"), list) else []
-        bullets = [str(item).strip()[:110] for item in bullets if str(item).strip()][:5]
+        bullets = [str(item).strip() for item in bullets if str(item).strip()]
         role = str(raw.get("role", "content")).lower()
         slides.append(
             {
                 "title": title,
                 "role": role if role in allowed_roles else "content",
-                "subtitle": str(raw.get("subtitle") or "").strip()[:180],
-                "body": str(raw.get("body") or "").strip()[:700],
+                "subtitle": str(raw.get("subtitle") or "").strip(),
+                "body": str(raw.get("body") or "").strip(),
                 "bullets": bullets,
                 "visual": _sanitize_visual(raw.get("visual")),
-                "speaker_notes": str(raw.get("speaker_notes") or "").strip()[:1000],
+                "speaker_notes": str(raw.get("speaker_notes") or "").strip(),
             }
         )
 
@@ -246,22 +257,10 @@ def normalize_plan(
         return _fallback_plan(source_text, slide_count)
     slides[0]["role"] = "cover"
     slides[-1]["role"] = "closing"
-    if slide_count:
-        if len(slides) > slide_count:
-            slides = slides[: max(1, slide_count - 1)] + [slides[-1]]
-        while len(slides) < slide_count:
-            slides.insert(
-                -1,
-                {
-                    "title": "Key takeaways",
-                    "role": "content",
-                    "subtitle": "",
-                    "body": "",
-                    "bullets": [],
-                    "visual": None,
-                    "speaker_notes": "",
-                },
-            )
+    if slide_count and len(slides) != slide_count:
+        rebuilt = _fallback_plan(source_text, slide_count)
+        rebuilt["replanned_reason"] = "slide_count_mismatch"
+        return rebuilt
     return {
         "language": str(
             plan.get("language") or ("ru" if _detect_russian(source_text) else "en")
@@ -318,6 +317,8 @@ def plan_deck(
         ):
             planner_mode = "fallback"
     normalized = normalize_plan(plan, source_text=content, slide_count=slide_count)
+    if normalized.get("replanned_reason"):
+        planner_mode = "fallback"
     normalized["planner"] = {"mode": planner_mode}
     return normalized
 
@@ -412,6 +413,12 @@ def _score_pattern(
         else:
             score -= min(10.0, (ratio - 1) * 7)
             risks.append(f"текст/ёмкость: {ratio:.1f}×")
+        if capacity.get("usable_body_zones") == 0:
+            score -= 25
+            risks.append("нет полноценной текстовой зоны")
+        if ratio < 0.15 and float(capacity.get("body_area_ratio", 0)) > 0.3:
+            score -= 6
+            risks.append("слишком большая текстовая область для объёма содержания")
 
     bullet_capacity = max(
         1,
@@ -436,7 +443,10 @@ def _score_pattern(
         score += 3.0 if capacity.get("supports_image") else -5.0
     elif not requirements["has_visual"]:
         content_image_area = float(capacity.get("content_image_area_ratio", 0) or 0)
-        score -= content_image_area * 3.0
+        image_slot_area = float(capacity.get("image_slot_area_ratio", 0) or 0)
+        score -= content_image_area * 20.0 + image_slot_area * 24.0
+        if image_slot_area > 0.1:
+            risks.append("слот изображения останется пустым")
         if content_image_area >= 0.35:
             risks.append("крупное исходное изображение не связано с новым текстом")
     if requirements["has_visual"] and capacity.get("body_zones", 0) >= 1:
@@ -458,7 +468,7 @@ def _score_pattern(
         score += 4.0
         reasons.append("чистая нативная сетка без PDF-фрагментов")
     score += min(len(pattern.get("example_slide_indices", [])), 2) * 0.2
-    reuse_penalty = 2.0 if pattern.get("source_kind") == "native_grid" else 0.02
+    reuse_penalty = 0.5
     score -= reuse_count * reuse_penalty
     if avoided:
         score -= 50.0

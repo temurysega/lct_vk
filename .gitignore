@@ -1,4 +1,5 @@
 # Node
+.venv/
 node_modules/
 
 # Output files

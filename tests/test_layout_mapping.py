@@ -64,3 +64,18 @@ def test_capacity_mapping_explains_selection_and_honors_qa_avoidance():
     assign_patterns(plan, catalog, avoid_by_slide=avoidance)
     assert plan["slides"][0]["pattern_id"] != first
     assert feedback[0]["pattern_id"] == first
+
+
+def test_text_prefers_usable_layout_without_empty_image_slot():
+    plain = _pattern("plain", "bullet_list")
+    photo = _pattern("photo", "bullet_list")
+    photo["capacity"]["image_slot_area_ratio"] = 0.5
+    tiny = _pattern("tiny", "bullet_list")
+    tiny["capacity"]["usable_body_zones"] = 0
+    plan = {
+        "slides": [
+            {"title": "Вывод", "role": "content", "bullets": ["Факт A", "Факт B"]}
+        ]
+    }
+    assign_patterns(plan, {"patterns": [tiny, photo, plain]})
+    assert plan["slides"][0]["pattern_id"] == "plain"

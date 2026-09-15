@@ -1,0 +1,221 @@
+{
+  "method": "literal_source_units_v1",
+  "semantic_verification": "not_performed",
+  "source_sha256": "206385f9a2d68ffb0b4bb1b943c930cd26f5b9bd1ccefbfb2289698d55aba8f3",
+  "status": "literal_coverage_complete",
+  "units": [
+    {
+      "source_id": "s0001",
+      "text": "Пилот сервиса поддержки сотрудников",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0002",
+      "text": "Назначение",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0003",
+      "text": "Это синтетический материал для технических проверок.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0004",
+      "text": "Он не является официальным контент-пакетом VK и не описывает реальные результаты компании.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0005",
+      "text": "Проблема",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0006",
+      "text": "Сотрудники ищут инструкции в нескольких источниках.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0007",
+      "text": "Ответы на повторяющиеся вопросы отвлекают специалистов поддержки.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0008",
+      "text": "Пользователи",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0009",
+      "text": "Сотруднику нужен понятный ответ со ссылкой на инструкцию.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0010",
+      "text": "Специалисту поддержки нужна история обращения.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0011",
+      "text": "Руководителю нужна сводка результатов пилота.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0012",
+      "text": "Предлагаемое решение",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0013",
+      "text": "Единая форма обращения принимает вопрос сотрудника.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0014",
+      "text": "Сервис ищет подходящие инструкции.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0015",
+      "text": "Если подтвержденного ответа нет, обращение передается специалисту.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0016",
+      "text": "Границы пилота",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0017",
+      "text": "Пилот длится 4 недели и охватывает 2 подразделения.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0018",
+      "text": "В нем участвуют 40 сотрудников.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0019",
+      "text": "Обработка кадровых решений в пилот не входит.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0020",
+      "text": "План работ",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0021",
+      "text": "В первую неделю команда собирает инструкции.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0022",
+      "text": "Во вторую неделю проверяет поиск.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0023",
+      "text": "В третью неделю проводит пилот.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0024",
+      "text": "В четвертую неделю анализирует обратную связь.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0025",
+      "text": "Критерии оценки",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0026",
+      "text": "Команда измеряет время ответа и число обращений, потребовавших специалиста.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0027",
+      "text": "Целевые значения согласуются до запуска.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0028",
+      "text": "Фактические результаты пока отсутствуют.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0029",
+      "text": "Риски",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0030",
+      "text": "Инструкции могут устареть.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0031",
+      "text": "Для каждого документа назначается ответственный.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0032",
+      "text": "Неподтвержденные ответы передаются специалисту вместе с контекстом обращения.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0033",
+      "text": "Решение по итогам",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0034",
+      "text": "После пилота команда готовит отчет и предложение о дальнейшем использовании.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0035",
+      "text": "Решение принимается по измеренным результатам и обратной связи сотрудников.",
+      "in_plan": true,
+      "in_pptx": true
+    }
+  ],
+  "missing_from_plan": [],
+  "missing_from_pptx": [],
+  "note": "Unmatched paraphrases are not proof of omission; speaker notes do not count as slide content."
+}

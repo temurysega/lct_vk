@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import math
 import zipfile
 from pathlib import Path
 from typing import Any
@@ -8,6 +7,11 @@ from typing import Any
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE
 
+from .typography import (
+    ESTIMATED_GLYPH_WIDTH_EM,
+    effective_font_size,
+    estimated_line_count,
+)
 from .utils import write_json
 
 
@@ -23,20 +27,21 @@ def _shape_font_size(shape: Any, default: float) -> float:
         for run in paragraph.runs:
             if run.font.size:
                 sizes.append(run.font.size.pt)
-    return min(sizes) if sizes else default
+    return min(sizes) if sizes else float(effective_font_size(shape, default))
 
 
 def _overflow_ratio(shape: Any, default_size: float) -> float:
     text = getattr(shape, "text", "").strip()
     if not text:
         return 0.0
-    width = max(0.1, _inches(shape.width))
-    height = max(0.1, _inches(shape.height))
+    frame = shape.text_frame
+    width = max(0.01, _inches(shape.width - frame.margin_left - frame.margin_right))
+    height = max(0.01, _inches(shape.height - frame.margin_top - frame.margin_bottom))
     font_size = max(6.0, _shape_font_size(shape, default_size))
-    chars_per_line = max(7, int(width * 72 / (font_size * 0.52)))
+    chars_per_line = max(1, int(width * 72 / (font_size * ESTIMATED_GLYPH_WIDTH_EM)))
     lines = 0
     for logical_line in text.splitlines() or [text]:
-        lines += max(1, math.ceil(len(logical_line) / chars_per_line))
+        lines += estimated_line_count(logical_line, chars_per_line)
     required_height = lines * font_size * 1.22 / 72 + 0.08
     return required_height / height
 
@@ -309,31 +314,7 @@ def inspect_presentation(
 
 
 def compact_plan(plan: dict[str, Any]) -> dict[str, Any]:
-    """Deterministically reduce density before a QA retry."""
+    """Preserve content during remapping; shortening requires a semantic editor."""
+    import copy
 
-    def truncate(value: Any, limit: int) -> str:
-        text = str(value)
-        if len(text) <= limit:
-            return text
-        shortened = text[: max(1, limit - 1)].rsplit(" ", 1)[0].rstrip(" ,;:-")
-        return f"{shortened or text[: max(1, limit - 1)]}…"
-
-    compacted = {**plan, "slides": []}
-    for slide in plan.get("slides", []):
-        new_slide = dict(slide)
-        new_slide["body"] = truncate(new_slide.get("body", ""), 420)
-        new_slide["bullets"] = [
-            truncate(item, 88) for item in new_slide.get("bullets", [])[:4]
-        ]
-        visual = new_slide.get("visual")
-        if isinstance(visual, dict):
-            visual = dict(visual)
-            if isinstance(visual.get("items"), list):
-                visual["items"] = visual["items"][:4]
-            if isinstance(visual.get("categories"), list):
-                visual["categories"] = visual["categories"][:8]
-            if isinstance(visual.get("rows"), list):
-                visual["rows"] = visual["rows"][:7]
-            new_slide["visual"] = visual
-        compacted["slides"].append(new_slide)
-    return compacted
+    return copy.deepcopy(plan)

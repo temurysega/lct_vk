@@ -1,0 +1,72 @@
+{
+  "status": "passed",
+  "score": 100,
+  "output": "slide-workspace/baseline/20260915T192819603274Z/template-3.pptx",
+  "file_size_bytes": 18074219,
+  "slide_count": 10,
+  "canvas": {
+    "width_inches": 13.333333333333334,
+    "height_inches": 7.5
+  },
+  "explicit_fonts": [],
+  "issues": [],
+  "slides": [
+    {
+      "slide": 1,
+      "shape_count": 2,
+      "text_shape_count": 2
+    },
+    {
+      "slide": 2,
+      "shape_count": 2,
+      "text_shape_count": 2
+    },
+    {
+      "slide": 3,
+      "shape_count": 2,
+      "text_shape_count": 2
+    },
+    {
+      "slide": 4,
+      "shape_count": 4,
+      "text_shape_count": 2
+    },
+    {
+      "slide": 5,
+      "shape_count": 2,
+      "text_shape_count": 2
+    },
+    {
+      "slide": 6,
+      "shape_count": 2,
+      "text_shape_count": 2
+    },
+    {
+      "slide": 7,
+      "shape_count": 3,
+      "text_shape_count": 2
+    },
+    {
+      "slide": 8,
+      "shape_count": 4,
+      "text_shape_count": 2
+    },
+    {
+      "slide": 9,
+      "shape_count": 2,
+      "text_shape_count": 2
+    },
+    {
+      "slide": 10,
+      "shape_count": 3,
+      "text_shape_count": 2
+    }
+  ],
+  "powerpoint_render": {
+    "status": "skipped",
+    "score": null,
+    "renderer": "powerpoint_com",
+    "issues": [],
+    "previews": []
+  }
+}

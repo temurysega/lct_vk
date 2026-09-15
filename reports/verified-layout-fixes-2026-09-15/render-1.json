@@ -1,0 +1,13 @@
+{
+  "renderer": "PowerPoint macOS / AppleScript",
+  "pages": 10,
+  "source_sha256": "17750369de29a484ffd8c161a1cc3ae3144c132f9ccc990e95b6c1b2e5c0d475",
+  "source_unchanged": true,
+  "seconds": 2.952,
+  "text_outside_canvas": [],
+  "visual_acceptance": "needs_improvement",
+  "review": "Contact sheets reviewed; targeted overflow/title collisions resolved",
+  "remaining_issues": [
+    "Empty decorative panels and low content density remain"
+  ]
+}

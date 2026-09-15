@@ -24,7 +24,7 @@ from .utils import (
     write_json,
 )
 
-ANALYSIS_SCHEMA_VERSION = "1.2"
+ANALYSIS_SCHEMA_VERSION = "1.3"
 
 
 def _load_extractor():
@@ -242,9 +242,7 @@ def _header_navigation_rule(
         if _normal_color(item.get("line", {}).get("color"))
     ]
     left = min(float(item["left"]) for item in representative)
-    right = max(
-        float(item["left"]) + float(item["width"]) for item in representative
-    )
+    right = max(float(item["left"]) + float(item["width"]) for item in representative)
     ordered = sorted(representative, key=lambda item: float(item["left"]))
     gaps = [
         float(ordered[index]["left"])
@@ -455,9 +453,7 @@ def build_design_system(context: dict[str, Any]) -> dict[str, Any]:
     closing_heading = _mode(
         colors_for(closing_slides, heading=True), _contrast_text(closing_background)
     )
-    closing_body = _mode(
-        colors_for(closing_slides, heading=False), closing_heading
-    )
+    closing_body = _mode(colors_for(closing_slides, heading=False), closing_heading)
     heading_color = content_heading
     body_color = content_body
     excluded = {
@@ -682,12 +678,21 @@ def _capacity_profile(
     canvas_width: float,
     canvas_height: float,
 ) -> dict[str, Any]:
-    body_zones = [zone for zone in zones if zone.get("type") != "title"]
+    body_zones = [
+        zone
+        for zone in zones
+        if any(
+            token in str(zone.get("type", "")).lower()
+            for token in ("body", "object", "content", "text")
+        )
+        and "title" not in str(zone.get("type", "")).lower()
+    ]
+    usable = [zone for zone in body_zones if float(zone.get("h") or 0) >= 0.65]
     source_texts = [_element_text(element) for element in text_elements]
     bullet_count = sum(
         text.lstrip().startswith(("•", "-", "–", "—")) for text in source_texts
     )
-    body_capacity = sum(_zone_capacity(zone) for zone in body_zones)
+    body_capacity = sum(_zone_capacity(zone) for zone in usable)
     canvas_area = max(0.1, canvas_width * canvas_height)
     image_ratios = [
         (
@@ -707,6 +712,21 @@ def _capacity_profile(
             default=80,
         ),
         "body_chars": max(80, body_capacity),
+        "usable_body_zones": len(usable),
+        "body_area_ratio": round(
+            sum(float(z.get("w") or 0) * float(z.get("h") or 0) for z in usable)
+            / canvas_area,
+            3,
+        ),
+        "image_slot_area_ratio": round(
+            sum(
+                float(z.get("w") or 0) * float(z.get("h") or 0)
+                for z in zones
+                if "picture" in str(z.get("type", ""))
+            )
+            / canvas_area,
+            3,
+        ),
         "body_zones": max(1, len(body_zones)),
         "bullets_per_zone": min(8, max(2, bullet_count or len(body_zones) + 1)),
         "source_bullet_count": bullet_count,
@@ -920,9 +940,8 @@ def build_pattern_catalog(context: dict[str, Any]) -> dict[str, Any]:
                 for slide in examples[:3]
                 for element in slide.get("text_elements", [])
             ],
-            images=[
-                image for slide in examples[:3] for image in slide.get("images", [])
-            ],
+            images=list(layout.get("images", []))
+            + [image for slide in examples[:3] for image in slide.get("images", [])],
             shapes=[
                 shape for slide in examples[:3] for shape in slide.get("shapes", [])
             ],

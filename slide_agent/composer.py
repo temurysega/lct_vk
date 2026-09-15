@@ -18,6 +18,11 @@ from pptx.oxml.ns import qn
 from pptx.oxml.xmlchemy import OxmlElement
 from pptx.util import Inches, Pt
 
+from .typography import (
+    ESTIMATED_GLYPH_WIDTH_EM,
+    effective_font_size,
+    estimated_line_count,
+)
 from .utils import read_json, write_json
 
 TITLE_TYPES = {PP_PLACEHOLDER.TITLE, PP_PLACEHOLDER.CENTER_TITLE}
@@ -333,19 +338,29 @@ def _set_text_frame(
 ) -> None:
     existing_style = _shape_text_style(shape)
     font_name = font_name or existing_style.get("font_name")
-    font_size = font_size or existing_style.get("font_size")
+    font_size = (
+        font_size or existing_style.get("font_size") or effective_font_size(shape)
+    )
     color = color or existing_style.get("color")
     alignment = existing_style.get("alignment")
     inherited_bold = existing_style.get("bold")
     if font_size and paragraphs:
-        width = max(0.1, shape.width / 914400 - 0.08)
-        height = max(0.1, shape.height / 914400 - 0.04)
+        frame = shape.text_frame
+        width = max(
+            0.01, (shape.width - frame.margin_left - frame.margin_right) / 914400
+        )
+        height = max(
+            0.01, (shape.height - frame.margin_top - frame.margin_bottom) / 914400
+        )
         fitted_size = float(font_size)
         while fitted_size > min_font_size:
-            chars_per_line = max(6, int(width * 72 / (fitted_size * 0.52)))
+            chars_per_line = max(
+                1, int(width * 72 / (fitted_size * ESTIMATED_GLYPH_WIDTH_EM))
+            )
             line_count = sum(
-                max(1, math.ceil(len(str(text)) / chars_per_line))
-                for text in paragraphs
+                estimated_line_count(str(text), chars_per_line)
+                for paragraph_text in paragraphs
+                for text in str(paragraph_text).split("\n")
             )
             paragraph_gap = max(0, len(paragraphs) - 1) * fitted_size * 0.12 / 72
             required_height = (
@@ -457,6 +472,51 @@ def _split_zone(
     return (x, y, left_w, h), (x + left_w + gap, y, max(1.0, w - left_w - gap), h)
 
 
+def _distribute_paragraphs(
+    shapes: list[Any], paragraphs: list[str], default_size: float
+) -> list[list[str]]:
+    """Partition consecutive paragraphs by available space, retaining their order.
+
+    Minimize the worst estimated occupancy across slots. Empty assignments are
+    allowed: a caption-sized placeholder need not receive body text. This is a
+    layout estimate; the finished deck still needs structural and rendered QA.
+    """
+
+    def occupancy(shape: Any, texts: list[str]) -> float:
+        if not texts:
+            return 0.0
+        frame = shape.text_frame
+        width = max(
+            0.01, (shape.width - frame.margin_left - frame.margin_right) / 914400
+        )
+        height = max(
+            0.01, (shape.height - frame.margin_top - frame.margin_bottom) / 914400
+        )
+        size = float(effective_font_size(shape, default_size))
+        chars = max(1, int(width * 72 / (size * ESTIMATED_GLYPH_WIDTH_EM)))
+        lines = sum(
+            estimated_line_count(line, chars)
+            for text in texts
+            for line in text.split("\n")
+        )
+        return (lines * size * 1.22 + max(0, len(texts) - 1) * size * 0.12) / (
+            72 * height
+        )
+
+    # state: number of assigned paragraphs -> (worst occupancy, partitions)
+    states: dict[int, tuple[float, list[list[str]]]] = {0: (0.0, [])}
+    for shape in shapes:
+        following: dict[int, tuple[float, list[list[str]]]] = {}
+        for assigned, (score, groups) in states.items():
+            for end in range(assigned, len(paragraphs) + 1):
+                group = paragraphs[assigned:end]
+                candidate = max(score, occupancy(shape, group))
+                if end not in following or candidate < following[end][0]:
+                    following[end] = (candidate, groups + [group])
+        states = following
+    return states[len(paragraphs)][1]
+
+
 def _add_body_text(
     slide: Any,
     slide_spec: dict[str, Any],
@@ -496,7 +556,7 @@ def _add_body_text(
         )
         source_style = _shape_text_style(style_source)
         left = min(shape.left for shape in preferred) / 914400
-        top = min(shape.top for shape in preferred) / 914400
+        top = max(min(shape.top for shape in preferred) / 914400, zone[1])
         right = max(shape.left + shape.width for shape in preferred) / 914400
         bottom = max(shape.top + shape.height for shape in preferred) / 914400
         source_zone = (left, top, right - left, bottom - top)
@@ -529,16 +589,21 @@ def _add_body_text(
         return visual_zone
 
     if len(body_shapes) >= 2:
-        text_parts = list(bullets)
-        midpoint = max(1, math.ceil(len(text_parts) / 2))
-        groups = [text_parts[:midpoint], text_parts[midpoint:]]
-        if body:
-            groups[0].insert(0, body)
-        for shape, paragraphs in zip(body_shapes[:2], groups):
+        text_shapes = list(body_shapes)
+        visual_zone = zone
+        if visual:
+            # Reserve a separate slot; never draw a chart over assigned text.
+            visual_shape = max(
+                text_shapes, key=lambda shape: shape.width * shape.height
+            )
+            text_shapes.remove(visual_shape)
+            visual_zone = _zone_from_shape(visual_shape)
+            _set_text_frame(visual_shape, [])
+        paragraphs = ([body] if body else []) + list(bullets)
+        groups = _distribute_paragraphs(text_shapes, paragraphs, size)
+        for shape, paragraphs in zip(text_shapes, groups):
             _set_text_frame(shape, paragraphs, bullets=bool(bullets))
-        for shape in body_shapes[2:]:
-            _set_text_frame(shape, [])
-        return _zone_from_shape(body_shapes[1]) if visual else zone
+        return visual_zone
 
     if body_shapes:
         body_zone = _zone_from_shape(body_shapes[0])
@@ -1202,12 +1267,13 @@ def _native_navigation(
     if not rule.get("detected"):
         return False
     count = max(3, int(rule.get("count", 5)))
-    labels = [_short_navigation_label(value, f"{index + 1:02d}") for index, value in enumerate(titles)]
+    labels = [
+        _short_navigation_label(value, f"{index + 1:02d}")
+        for index, value in enumerate(titles)
+    ]
     while len(labels) < count:
         labels.append(f"{len(labels) + 1:02d}")
-    window_start = min(
-        max(0, active_index - count + 1), max(0, len(labels) - count)
-    )
+    window_start = min(max(0, active_index - count + 1), max(0, len(labels) - count))
     labels = labels[window_start : window_start + count]
     active_local = max(0, min(count - 1, active_index - window_start))
 
@@ -1238,9 +1304,7 @@ def _native_navigation(
         pill.name = f"BrandDeck Native Navigation {index + 1}"
         pill.fill.solid()
         pill.fill.fore_color.rgb = _rgb(fill_color)
-        pill.line.color.rgb = _rgb(
-            _hex(rule.get("border_color"), tokens["body"])
-        )
+        pill.line.color.rgb = _rgb(_hex(rule.get("border_color"), tokens["body"]))
         pill.line.width = Pt(0.45)
         try:
             pill.adjustments[0] = 0.5
@@ -1273,7 +1337,9 @@ def _native_closing_panel(
         return False
     width = float(design["canvas"]["width_inches"])
     height = float(design["canvas"]["height_inches"])
-    panel_width = min(width * 0.62, max(width * 0.24, width * float(rule.get("width_ratio", 0.38))))
+    panel_width = min(
+        width * 0.62, max(width * 0.24, width * float(rule.get("width_ratio", 0.38)))
+    )
     side = str(rule.get("side", "left"))
     panel_x = 0.0 if side == "left" else width - panel_width
     panel = slide.shapes.add_shape(
@@ -1285,9 +1351,7 @@ def _native_closing_panel(
     )
     panel.name = "BrandDeck Native Closing Panel"
     panel.fill.solid()
-    panel.fill.fore_color.rgb = _rgb(
-        _hex(rule.get("background"), tokens["heading"])
-    )
+    panel.fill.fore_color.rgb = _rgb(_hex(rule.get("background"), tokens["heading"]))
     panel.line.fill.background()
     try:
         panel.adjustments[0] = 0.08
@@ -1534,6 +1598,32 @@ def _remove_unmatched_content_images(
             slide.shapes._spTree.remove(shape.element)
 
 
+def _constrain_title_width(slide: Any, title: Any) -> None:
+    """Keep a title to the left of intersecting template artwork.
+
+    Inspect inherited pictures too: a layout picture may cover slide text even
+    though it is absent from slide.shapes. Full backgrounds do not start inside
+    the title and therefore do not narrow it.
+    """
+    right = title.left + title.width
+    for layer in (slide, slide.slide_layout, slide.slide_layout.slide_master):
+        for shape in layer.shapes:
+            if shape.shape_type != MSO_SHAPE_TYPE.PICTURE:
+                continue
+            if (
+                title.left < shape.left < right
+                and shape.top < title.top + title.height
+                and shape.top + shape.height > title.top
+            ):
+                right = min(right, shape.left - Inches(0.15))
+    if right - title.left >= Inches(1.5):
+        # Setting one dimension of an inherited placeholder can zero the others
+        # in python-pptx; materialize the complete geometry first.
+        left, top, height = title.left, title.top, title.height
+        title.left, title.top = left, top
+        title.width, title.height = right - left, height
+
+
 def _fill_slide(
     slide: Any,
     slide_spec: dict[str, Any],
@@ -1550,6 +1640,19 @@ def _fill_slide(
     titles, subtitles, bodies = _infer_text_groups(
         slide, titles, subtitles, bodies, float(design["canvas"]["height_inches"])
     )
+    if (
+        not subtitles
+        and slide_spec.get("subtitle")
+        and slide_spec.get("role") in {"cover", "closing", "section"}
+        and titles
+    ):
+        # Some corporate covers encode the subtitle as BODY, not SUBTITLE.
+        title_bottom = max(shape.top + shape.height for shape in titles)
+        candidates = [shape for shape in bodies if shape.top >= title_bottom]
+        if candidates:
+            subtitle_shape = min(candidates, key=lambda shape: (shape.top, shape.left))
+            subtitles = [subtitle_shape]
+            bodies = [shape for shape in bodies if shape is not subtitle_shape]
     if not slide_spec.get("subtitle") and slide_spec.get("role") == "content":
         bodies = subtitles + bodies
         subtitles = []
@@ -1567,6 +1670,7 @@ def _fill_slide(
     subtitle = slide_spec.get("subtitle", "")
 
     if titles:
+        _constrain_title_width(slide, titles[0])
         _set_text_frame(titles[0], [title])
     else:
         margin = float(design["spacing"].get("typical_left_margin_inches", 0.6))
@@ -1594,7 +1698,7 @@ def _fill_slide(
             align=PP_ALIGN.CENTER,
         ).name = "BrandDeck Subtitle"
 
-    zone = _content_zone(slide, design, titles)
+    zone = _content_zone(slide, design, titles + subtitles)
     visual_zone = _add_body_text(slide, slide_spec, bodies, zone, design)
     _add_visual(slide, slide_spec.get("visual"), visual_zone, design)
 
@@ -1731,7 +1835,7 @@ def compose_presentation(
             for value in pattern.get("example_slide_indices", [])
             if isinstance(value, int) and 1 <= value <= len(source_slides)
         ]
-        if example_indices:
+        if example_indices and pattern.get("source_kind") == "slide_exemplar":
             source_index = example_indices[generated_index % len(example_indices)] - 1
             slide = _clone_slide(prs, source_slides[source_index])
         else:

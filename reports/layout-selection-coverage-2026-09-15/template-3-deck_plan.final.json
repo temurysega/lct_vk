@@ -1,0 +1,362 @@
+{
+  "language": "ru",
+  "title": "Пилот сервиса поддержки сотрудников",
+  "slides": [
+    {
+      "title": "Пилот сервиса поддержки сотрудников",
+      "role": "cover",
+      "subtitle": "Автоматически создано по исходным материалам",
+      "body": "",
+      "bullets": [],
+      "visual": null,
+      "speaker_notes": "",
+      "pattern_id": "slide-1",
+      "layout_index": 0,
+      "master_index": 0,
+      "pattern_selection": {
+        "score": 17.7,
+        "layout_pattern": "hero",
+        "why_fit": "роль cover поддерживается; риторический паттерн hero; проверенный exemplar-слайд",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "layout-22",
+            "score": 10.64
+          },
+          {
+            "pattern_id": "layout-7",
+            "score": 10.64
+          },
+          {
+            "pattern_id": "layout-3",
+            "score": 10.62
+          }
+        ]
+      }
+    },
+    {
+      "title": "Назначение / Проблема",
+      "role": "content",
+      "subtitle": "",
+      "body": "",
+      "bullets": [
+        "Это синтетический материал для технических проверок.",
+        "Он не является официальным контент-пакетом VK и не описывает реальные результаты компании.",
+        "Сотрудники ищут инструкции в нескольких источниках.",
+        "Ответы на повторяющиеся вопросы отвлекают специалистов поддержки."
+      ],
+      "visual": null,
+      "speaker_notes": "",
+      "pattern_id": "slide-24",
+      "layout_index": 11,
+      "master_index": 0,
+      "pattern_selection": {
+        "score": 17.55,
+        "layout_pattern": "two_column",
+        "why_fit": "роль content поддерживается; текст помещается по геометрической ёмкости; проверенный exemplar-слайд",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "slide-7",
+            "score": 17.45
+          },
+          {
+            "pattern_id": "slide-8",
+            "score": 17.35
+          },
+          {
+            "pattern_id": "slide-18",
+            "score": 17.25
+          }
+        ]
+      }
+    },
+    {
+      "title": "Пользователи",
+      "role": "content",
+      "subtitle": "",
+      "body": "",
+      "bullets": [
+        "Сотруднику нужен понятный ответ со ссылкой на инструкцию.",
+        "Специалисту поддержки нужна история обращения.",
+        "Руководителю нужна сводка результатов пилота."
+      ],
+      "visual": null,
+      "speaker_notes": "",
+      "pattern_id": "slide-18",
+      "layout_index": 9,
+      "master_index": 0,
+      "pattern_selection": {
+        "score": 17.25,
+        "layout_pattern": "two_column",
+        "why_fit": "роль content поддерживается; текст помещается по геометрической ёмкости; проверенный exemplar-слайд",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "slide-21",
+            "score": 17.25
+          },
+          {
+            "pattern_id": "slide-44",
+            "score": 17.2
+          },
+          {
+            "pattern_id": "slide-17",
+            "score": 17.15
+          }
+        ]
+      }
+    },
+    {
+      "title": "Предлагаемое решение",
+      "role": "content",
+      "subtitle": "",
+      "body": "",
+      "bullets": [
+        "Единая форма обращения принимает вопрос сотрудника.",
+        "Сервис ищет подходящие инструкции.",
+        "Если подтвержденного ответа нет, обращение передается специалисту."
+      ],
+      "visual": null,
+      "speaker_notes": "",
+      "pattern_id": "slide-21",
+      "layout_index": 5,
+      "master_index": 0,
+      "pattern_selection": {
+        "score": 17.25,
+        "layout_pattern": "two_column",
+        "why_fit": "роль content поддерживается; текст помещается по геометрической ёмкости; проверенный exemplar-слайд",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "slide-44",
+            "score": 17.2
+          },
+          {
+            "pattern_id": "slide-17",
+            "score": 17.15
+          },
+          {
+            "pattern_id": "slide-22",
+            "score": 17.15
+          }
+        ]
+      }
+    },
+    {
+      "title": "Границы пилота",
+      "role": "content",
+      "subtitle": "",
+      "body": "",
+      "bullets": [
+        "Пилот длится 4 недели и охватывает 2 подразделения.",
+        "В нем участвуют 40 сотрудников.",
+        "Обработка кадровых решений в пилот не входит."
+      ],
+      "visual": null,
+      "speaker_notes": "",
+      "pattern_id": "slide-44",
+      "layout_index": 5,
+      "master_index": 0,
+      "pattern_selection": {
+        "score": 17.2,
+        "layout_pattern": "two_column",
+        "why_fit": "роль content поддерживается; текст помещается по геометрической ёмкости; проверенный exemplar-слайд",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "slide-17",
+            "score": 17.15
+          },
+          {
+            "pattern_id": "slide-22",
+            "score": 17.15
+          },
+          {
+            "pattern_id": "slide-28",
+            "score": 16.95
+          }
+        ]
+      }
+    },
+    {
+      "title": "План работ",
+      "role": "content",
+      "subtitle": "",
+      "body": "",
+      "bullets": [
+        "В первую неделю команда собирает инструкции.",
+        "Во вторую неделю проверяет поиск.",
+        "В третью неделю проводит пилот.",
+        "В четвертую неделю анализирует обратную связь."
+      ],
+      "visual": null,
+      "speaker_notes": "",
+      "pattern_id": "slide-17",
+      "layout_index": 5,
+      "master_index": 0,
+      "pattern_selection": {
+        "score": 17.15,
+        "layout_pattern": "two_column",
+        "why_fit": "роль content поддерживается; текст помещается по геометрической ёмкости; проверенный exemplar-слайд",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "slide-22",
+            "score": 17.15
+          },
+          {
+            "pattern_id": "slide-28",
+            "score": 16.95
+          },
+          {
+            "pattern_id": "slide-18",
+            "score": 16.75
+          }
+        ]
+      }
+    },
+    {
+      "title": "Критерии оценки",
+      "role": "content",
+      "subtitle": "",
+      "body": "",
+      "bullets": [
+        "Команда измеряет время ответа и число обращений, потребовавших специалиста.",
+        "Целевые значения согласуются до запуска.",
+        "Фактические результаты пока отсутствуют."
+      ],
+      "visual": null,
+      "speaker_notes": "",
+      "pattern_id": "slide-22",
+      "layout_index": 5,
+      "master_index": 0,
+      "pattern_selection": {
+        "score": 17.15,
+        "layout_pattern": "two_column",
+        "why_fit": "роль content поддерживается; текст помещается по геометрической ёмкости; проверенный exemplar-слайд",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "slide-28",
+            "score": 16.95
+          },
+          {
+            "pattern_id": "slide-18",
+            "score": 16.75
+          },
+          {
+            "pattern_id": "slide-21",
+            "score": 16.75
+          }
+        ]
+      }
+    },
+    {
+      "title": "Риски",
+      "role": "content",
+      "subtitle": "",
+      "body": "",
+      "bullets": [
+        "Инструкции могут устареть.",
+        "Для каждого документа назначается ответственный.",
+        "Неподтвержденные ответы передаются специалисту вместе с контекстом обращения."
+      ],
+      "visual": null,
+      "speaker_notes": "",
+      "pattern_id": "slide-28",
+      "layout_index": 5,
+      "master_index": 0,
+      "pattern_selection": {
+        "score": 16.95,
+        "layout_pattern": "two_column",
+        "why_fit": "роль content поддерживается; текст помещается по геометрической ёмкости; проверенный exemplar-слайд",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "slide-18",
+            "score": 16.75
+          },
+          {
+            "pattern_id": "slide-21",
+            "score": 16.75
+          },
+          {
+            "pattern_id": "slide-44",
+            "score": 16.7
+          }
+        ]
+      }
+    },
+    {
+      "title": "Решение по итогам",
+      "role": "content",
+      "subtitle": "",
+      "body": "",
+      "bullets": [
+        "После пилота команда готовит отчет и предложение о дальнейшем использовании.",
+        "Решение принимается по измеренным результатам и обратной связи сотрудников."
+      ],
+      "visual": null,
+      "speaker_notes": "",
+      "pattern_id": "layout-8",
+      "layout_index": 8,
+      "master_index": 0,
+      "pattern_selection": {
+        "score": 18.0,
+        "layout_pattern": "content",
+        "why_fit": "роль content поддерживается; текст помещается по геометрической ёмкости",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "slide-18",
+            "score": 16.75
+          },
+          {
+            "pattern_id": "slide-21",
+            "score": 16.75
+          },
+          {
+            "pattern_id": "slide-44",
+            "score": 16.7
+          }
+        ]
+      }
+    },
+    {
+      "title": "Спасибо",
+      "role": "closing",
+      "subtitle": "Вопросы?",
+      "body": "",
+      "bullets": [],
+      "visual": null,
+      "speaker_notes": "",
+      "pattern_id": "slide-52",
+      "layout_index": 17,
+      "master_index": 0,
+      "pattern_selection": {
+        "score": 17.7,
+        "layout_pattern": "closing",
+        "why_fit": "роль closing поддерживается; риторический паттерн closing; проверенный exemplar-слайд",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "slide-55",
+            "score": 17.7
+          },
+          {
+            "pattern_id": "slide-10",
+            "score": 2.7
+          },
+          {
+            "pattern_id": "slide-11",
+            "score": 2.7
+          }
+        ]
+      }
+    }
+  ],
+  "planner": {
+    "mode": "offline"
+  }
+}

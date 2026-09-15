@@ -7,6 +7,7 @@ from typing import Any
 from .analyzer import analyze_template
 from .composer import compose_presentation, outline_markdown
 from .config import InferenceSettings
+from .coverage import coverage_report
 from .llm import InferenceClient
 from .planner import assign_patterns, load_content, plan_deck
 from .powerpoint import inspect_powerpoint_render
@@ -162,6 +163,20 @@ def generate_deck(
             expected_slide_count=len(current_plan["slides"]),
         )
         qa["powerpoint_render"] = render_qa
+        coverage = coverage_report(source_text, current_plan, output_path)
+        write_json(run_dir / "coverage_report.json", coverage)
+        qa["content_coverage"] = coverage["status"]
+        if coverage["status"] == "needs_review":
+            qa["issues"].append(
+                {
+                    "severity": "warning",
+                    "code": "content_coverage_unverified",
+                    "message": "Some source units were not matched in the plan/PPTX; see coverage_report.json",
+                }
+            )
+            if qa["status"] == "passed":
+                qa["status"] = "warning"
+            qa["score"] = min(qa["score"], 96)
         if render_qa["status"] != "skipped":
             qa["issues"].extend(render_qa["issues"])
             qa["score"] = min(qa["score"], int(render_qa["score"] or 0))
@@ -192,6 +207,7 @@ def generate_deck(
         write_json(run_dir / f"deck_plan.retry-{attempt + 1}.json", current_plan)
 
     template_manifest = read_json(template_dir / "manifest.json")
+    write_json(run_dir / "deck_plan.final.json", current_plan)
     planner_mode = plan.get("planner", {}).get("mode", "unknown")
     manifest = {
         **compose_result,
@@ -205,6 +221,7 @@ def generate_deck(
         or bool(template_manifest.get("ai_enhanced")),
         "planner_mode": planner_mode,
         "qa": qa,
+        "content_coverage": coverage,
         "attempts": attempts,
     }
     write_json(run_dir / "manifest.json", manifest)
