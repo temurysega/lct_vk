@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+import copy
+import hashlib
+import json
+import time
 from collections.abc import Callable
 from pathlib import Path
 from typing import Any
@@ -8,9 +12,11 @@ from .analyzer import analyze_template
 from .composer import compose_presentation, outline_markdown
 from .config import InferenceSettings
 from .coverage import coverage_report
+from .exporter import export_presentation
 from .llm import InferenceClient
 from .planner import assign_patterns, load_content, plan_deck
 from .powerpoint import inspect_powerpoint_render
+from .prompt_config import prompt_manifest
 from .qa import compact_plan, inspect_presentation
 from .utils import find_latest, read_json, resolve_workspace, unique_dir, write_json
 
@@ -99,11 +105,13 @@ def generate_deck(
     offline: bool = False,
     qa_retries: int = 1,
     progress: Callable[[str, int], None] | None = None,
+    export_formats: tuple[str, ...] = (),
 ) -> dict[str, Any]:
     def report(stage: str, percent: int) -> None:
         if progress:
             progress(stage, percent)
 
+    started = time.perf_counter()
     workspace_path = resolve_workspace(workspace)
     if slide_count is not None and not 3 <= slide_count <= 100:
         raise ValueError("Slide count must be between 3 and 100")
@@ -130,6 +138,44 @@ def generate_deck(
         client=client,
     )
     plan = assign_patterns(plan, catalog)
+    return _generate_from_plan(
+        plan=plan,
+        template_dir=template_dir,
+        source_text=source_text,
+        source_label=source_label,
+        workspace_path=workspace_path,
+        requested_output=requested_output,
+        client=client,
+        qa_retries=qa_retries,
+        progress=progress,
+        export_formats=export_formats,
+        started=started,
+    )
+
+
+def _generate_from_plan(
+    *,
+    plan: dict[str, Any],
+    template_dir: Path,
+    source_text: str,
+    source_label: str,
+    workspace_path: Path,
+    requested_output: Path | None = None,
+    client: InferenceClient | None = None,
+    qa_retries: int = 0,
+    progress: Callable[[str, int], None] | None = None,
+    export_formats: tuple[str, ...] = (),
+    started: float | None = None,
+    revision: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    started = started if started is not None else time.perf_counter()
+    design = read_json(template_dir / "design_system.json")
+    catalog = read_json(template_dir / "pattern_catalog.json")
+
+    def report(stage: str, percent: int) -> None:
+        if progress:
+            progress(stage, percent)
+
     report("layout_mapping", 55)
     run_dir = unique_dir(
         workspace_path / "presentations", plan.get("title", "presentation")
@@ -203,10 +249,26 @@ def generate_deck(
             current_plan,
             catalog,
             avoid_by_slide=avoided_patterns,
+            layout_strategy=plan.get("variant", {}).get("id", "balanced"),
         )
         write_json(run_dir / f"deck_plan.retry-{attempt + 1}.json", current_plan)
 
     template_manifest = read_json(template_dir / "manifest.json")
+    report("export", 94)
+    exports = export_presentation(
+        output_path,
+        run_dir / "exports",
+        formats=export_formats,
+        expected_slide_count=len(current_plan["slides"]),
+    )
+    from .audit import enrich_audit
+
+    qa = enrich_audit(output_path, qa, current_plan)
+    qa["contextual_audit"] = {
+        "status": "not_run",
+        "reason": "A semantic/VLM audit has not been performed",
+    }
+    write_json(run_dir / "qa_report.json", qa)
     write_json(run_dir / "deck_plan.final.json", current_plan)
     planner_mode = plan.get("planner", {}).get("mode", "unknown")
     manifest = {
@@ -223,9 +285,17 @@ def generate_deck(
         "qa": qa,
         "content_coverage": coverage,
         "attempts": attempts,
+        "exports": exports,
+        "status": "failed"
+        if qa["status"] == "failed" or exports["status"] == "failed"
+        else "completed",
+        "elapsed_seconds": round(time.perf_counter() - started, 3),
+        "workflow": prompt_manifest(),
+        "variant": plan.get("variant"),
+        "revision": revision,
     }
     write_json(run_dir / "manifest.json", manifest)
-    report("completed", 100)
+    report(manifest["status"], 100)
     return manifest
 
 
@@ -237,14 +307,164 @@ def run_pipeline(
     output: str | Path | None = None,
     slide_count: int | None = None,
     offline: bool = False,
+    export_formats: tuple[str, ...] = (),
 ) -> dict[str, Any]:
-    client = configured_client(offline=offline)
-    template_dir = analyze_template(template_path, workspace=workspace, client=client)
     return generate_deck(
-        template=template_dir,
+        template=template_path,
         content=content,
         workspace=workspace,
         output=output,
         slide_count=slide_count,
         offline=offline,
+        export_formats=export_formats,
+    )
+
+
+VARIANTS = {
+    "balanced": "Сбалансированный",
+    "columns": "Несколько блоков",
+    "focus": "Единый акцент",
+}
+
+
+def generate_variants(
+    *,
+    template: str | Path,
+    content: str | Path,
+    workspace: str | Path | None = None,
+    slide_count: int | None = 10,
+    offline: bool = False,
+    export_formats: tuple[str, ...] = ("pdf", "html"),
+    progress: Callable[[str, int], None] | None = None,
+) -> dict[str, Any]:
+    started = time.perf_counter()
+    if slide_count is not None and not 3 <= slide_count <= 100:
+        raise ValueError("Slide count must be between 3 and 100")
+    workspace_path = resolve_workspace(workspace)
+    client = configured_client(offline=offline)
+    if progress:
+        progress("template_analysis", 5)
+    template_dir = resolve_template(template, workspace_path, client=client)
+    source, label = load_content(content)
+    if not source.strip() or len(source) > 1_000_000:
+        raise ValueError("Content must contain 1 to 1,000,000 characters")
+    design = read_json(template_dir / "design_system.json")
+    catalog = read_json(template_dir / "pattern_catalog.json")
+    if progress:
+        progress("content_planning", 15)
+    base = plan_deck(
+        source,
+        pattern_catalog=catalog,
+        design_system=design,
+        slide_count=slide_count,
+        client=client,
+    )
+    fingerprint = hashlib.sha256(
+        json.dumps(base["slides"], ensure_ascii=False, sort_keys=True).encode("utf-8")
+    ).hexdigest()
+    previous: dict[int, set[str]] = {}
+    results = []
+    signatures = []
+    for index, (strategy, label_variant) in enumerate(VARIANTS.items()):
+        plan = assign_patterns(
+            copy.deepcopy(base),
+            catalog,
+            layout_strategy=strategy,
+            previous_by_slide=previous,
+        )
+        plan["variant"] = {
+            "id": strategy,
+            "label": label_variant,
+            "axis": "layout_selection",
+            "content_sha256": fingerprint,
+        }
+
+        def on_progress(
+            stage: str, percent: int, offset: int = index, variant: str = strategy
+        ) -> None:
+            if progress:
+                progress(f"{variant}:{stage}", 20 + offset * 26 + int(percent * 0.25))
+
+        result = _generate_from_plan(
+            plan=plan,
+            template_dir=template_dir,
+            source_text=source,
+            source_label=label,
+            workspace_path=workspace_path,
+            client=client,
+            export_formats=export_formats,
+            progress=on_progress,
+            qa_retries=1,
+        )
+        results.append(result)
+        final = read_json(Path(result["presentation_dir"]) / "deck_plan.final.json")
+        signatures.append(tuple(s["pattern_id"] for s in final["slides"]))
+        for n, slide in enumerate(final["slides"], 1):
+            previous.setdefault(n, set()).add(slide["pattern_id"])
+    batch_dir = unique_dir(workspace_path / "batches", base.get("title", "variants"))
+    batch = {
+        "batch_id": batch_dir.name,
+        "status": "failed"
+        if any(item["status"] == "failed" for item in results)
+        else "completed",
+        "content_sha256": fingerprint,
+        "variants": results,
+        "distinct_layout_sequences": len(set(signatures)),
+        "diversity_status": "passed" if len(set(signatures)) == 3 else "needs_review",
+        "elapsed_seconds": round(time.perf_counter() - started, 3),
+        "workflow": prompt_manifest(),
+    }
+    write_json(batch_dir / "manifest.json", batch)
+    return batch
+
+
+def repair_presentation(
+    presentation_id: str,
+    issue_ids: list[str],
+    *,
+    workspace: str | Path | None = None,
+) -> dict[str, Any]:
+    """Remap only user-selected slides and create an immutable new revision."""
+    workspace_path = resolve_workspace(workspace)
+    root = (workspace_path / "presentations").resolve()
+    directory = (root / presentation_id).resolve()
+    if directory.parent != root:
+        raise ValueError("Invalid presentation id")
+    manifest = read_json(directory / "manifest.json")
+    qa = read_json(directory / "qa_report.json")
+    indexed = {i["id"]: i for i in qa["issues"]}
+    if not issue_ids or any(i not in indexed for i in issue_ids):
+        raise ValueError("Select existing audit issues")
+    selected = [indexed[i] for i in dict.fromkeys(issue_ids)]
+    if any(not i.get("repairable") for i in selected):
+        raise ValueError(
+            "Selected issues require content review and cannot be remapped automatically"
+        )
+    plan = read_json(directory / "deck_plan.final.json")
+    source = (directory / "source-content.md").read_text(encoding="utf-8")
+    template_dir = Path(manifest["template_dir"])
+    catalog = read_json(template_dir / "pattern_catalog.json")
+    selected_slides = sorted({i["slide"] for i in selected})
+    avoidance = {n: {plan["slides"][n - 1]["pattern_id"]} for n in selected_slides}
+    remapped = assign_patterns(
+        copy.deepcopy(plan),
+        catalog,
+        avoid_by_slide=avoidance,
+        layout_strategy=(plan.get("variant") or {}).get("id", "balanced"),
+    )
+    for number in selected_slides:
+        plan["slides"][number - 1] = remapped["slides"][number - 1]
+    return _generate_from_plan(
+        plan=plan,
+        template_dir=template_dir,
+        source_text=source,
+        source_label=manifest["source"],
+        workspace_path=workspace_path,
+        export_formats=tuple(manifest.get("exports", {}).get("artifacts", {})),
+        revision={
+            "parent_id": presentation_id,
+            "selected_issue_ids": issue_ids,
+            "selected_slides": selected_slides,
+            "action": "remap_layout",
+        },
     )

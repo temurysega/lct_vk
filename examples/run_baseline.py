@@ -9,10 +9,10 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.metadata
 import json
 import platform
 import subprocess
-import sys
 import time
 from collections import Counter
 from datetime import datetime, timezone
@@ -62,7 +62,14 @@ def main() -> int:
         "runs": [],
     }
     (output / "environment.txt").write_text(
-        subprocess.check_output([sys.executable, "-m", "pip", "freeze"], text=True),
+        "\n".join(
+            sorted(
+                f"{dist.metadata['Name']}=={dist.version}"
+                for dist in importlib.metadata.distributions()
+                if dist.metadata.get("Name")
+            )
+        )
+        + "\n",
         encoding="utf-8",
     )
     for index, template in enumerate(templates, 1):

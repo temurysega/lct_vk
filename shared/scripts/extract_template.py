@@ -1651,6 +1651,7 @@ def extract_template_context(pptx_path: str, output_dir: str) -> None:
 
     # ── Slide Layouts ──
     layouts_data = []
+    layout_indices_by_part = {}
     layout_idx = 0
     for m_idx, master in enumerate(prs.slide_masters):
         resolved_tc = resolved_colors_per_master[m_idx] if m_idx < len(resolved_colors_per_master) else theme_colors
@@ -1681,6 +1682,7 @@ def extract_template_context(pptx_path: str, output_dir: str) -> None:
             l_info["images"] = [{k: v for k, v in img.items() if k != "base64_data"} for img in images]
             all_images.extend(images)
 
+            layout_indices_by_part[str(layout.part.partname)] = len(layouts_data)
             layouts_data.append(l_info)
             layout_idx += 1
 
@@ -1692,10 +1694,7 @@ def extract_template_context(pptx_path: str, output_dir: str) -> None:
         try:
             layout_name = slide.slide_layout.name
             s_info["layout_name"] = layout_name
-            for li, ld in enumerate(layouts_data):
-                if ld["name"] == layout_name:
-                    s_info["layout_index"] = li
-                    break
+            s_info["layout_index"] = layout_indices_by_part[str(slide.slide_layout.part.partname)]
         except Exception:
             s_info["layout_name"] = "Unknown"
 

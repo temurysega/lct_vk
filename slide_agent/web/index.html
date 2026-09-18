@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ru">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BrandDeck — презентации в вашем стиле</title><link rel="stylesheet" href="/assets/style.css"></head>
+<body>
+<header><a class="logo" href="/">B<span>BrandDeck</span></a><span class="header-note">От шаблона к готовой презентации</span><a href="/docs">API ↗</a></header>
+<main>
+<section class="intro"><span class="eyebrow">ВАШ КОНТЕНТ. ВАШ ФИРМЕННЫЙ СТИЛЬ.</span>
+<h1>Идеи — ваши.<br> Оформление — готово.</h1><p>Загрузите шаблон и материалы. Получите три варианта презентации,<br> сравните слайды и выберите исправления.</p></section>
+<div class="workspace">
+<aside>
+<div class="step"><span class="number">1</span><h2>Фирменный шаблон</h2></div>
+<form id="upload"><label class="drop">Выберите PPTX или PDF<input id="templateFile" type="file" accept=".pptx,.pdf" required></label><button type="submit" class="secondary">Добавить шаблон</button></form>
+<label for="template">Доступные шаблоны</label><select id="template" required><option value="">Загрузите первый шаблон</option></select>
+<div class="step"><span class="number">2</span><h2>Материалы</h2></div>
+<form id="generate">
+<label for="content">Бриф, факты и данные</label><textarea id="content" rows="9" placeholder="Название презентации, аудитория, ключевые тезисы и подтверждённые цифры…"></textarea>
+<label for="contentFile">Или файл с материалами</label><input id="contentFile" type="file" accept=".md,.txt,.csv,.json,.pptx,.pdf,.docx,.xlsx">
+<div class="options"><label>Слайдов<input id="count" type="number" min="3" max="100" value="10"></label><label class="check"><input id="offline" type="checkbox" checked> Без модели<br><small>Технический прогон</small></label></div>
+<p class="hint">Для генерации по краткому брифу снимите «Без модели» и настройте Inference API на сервере.</p>
+<button id="generateButton" type="submit">Создать 3 варианта <span>→</span></button>
+</form></aside>
+<section class="results"><div class="result-heading"><div><span class="eyebrow">РАБОЧАЯ ОБЛАСТЬ</span><h2>Варианты презентации</h2></div><span id="statusBadge">Готов к работе</span></div>
+<div id="status" role="status" aria-live="polite"></div><progress id="progress" max="100" value="0" hidden></progress>
+<div id="empty"><div class="empty-slides"><i></i><i></i><i></i></div><h3>Один стиль. Три композиции.</h3><p>Здесь появятся варианты с одинаковым содержанием<br>и разным распределением блоков.</p><div class="pills"><span>Редактируемый PPTX</span><span>PDF</span><span>HTML</span></div></div>
+<div id="history" hidden><label for="batches">Сохранённые результаты</label><select id="batches"><option value="">Выберите результат</option></select></div>
+<nav id="variants" aria-label="Варианты"></nav><div id="deck"></div>
+</section></div>
+<footer>BrandDeck · Шаблон сохраняется без изменений. Каждое исправление создаёт новую версию.</footer>
+</main><script src="/assets/app.js" defer></script></body></html>

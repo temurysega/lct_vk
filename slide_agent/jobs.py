@@ -6,7 +6,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-from .service import generate_deck
+from .service import generate_deck, generate_variants
 from .utils import read_json, resolve_workspace, write_json
 
 _LOCK = threading.Lock()
@@ -78,6 +78,8 @@ def run_generation_job(
     slide_count: int | None,
     offline: bool,
     workspace: str | Path | None = None,
+    variants: bool = False,
+    export_formats: tuple[str, ...] = (),
 ) -> None:
     try:
         update_job(
@@ -93,19 +95,33 @@ def run_generation_job(
                 workspace,
             )
 
-        result = generate_deck(
+        generator = generate_variants if variants else generate_deck
+        result = generator(
             template=template_id,
             content=content,
             workspace=workspace,
             slide_count=slide_count,
             offline=offline,
             progress=progress,
+            export_formats=export_formats,
         )
+        if variants:
+            update_job(
+                job_id,
+                {
+                    "status": result["status"],
+                    "stage": result["status"],
+                    "progress": 100,
+                    "batch": result,
+                },
+                workspace,
+            )
+            return
         update_job(
             job_id,
             {
-                "status": "completed",
-                "stage": "completed",
+                "status": result["status"],
+                "stage": result["status"],
                 "progress": 100,
                 "presentation_id": result["presentation_id"],
                 "output": result["output"],

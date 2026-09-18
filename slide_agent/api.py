@@ -3,22 +3,47 @@ from __future__ import annotations
 import shutil
 import tempfile
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, Literal
 
 from fastapi import BackgroundTasks, FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel, Field
 
 from . import __version__
 from .analyzer import analyze_template
 from .jobs import create_job, get_job, job_directory, run_generation_job
-from .service import configured_client, generate_deck, list_templates
-from .utils import resolve_workspace
+from .service import (
+    configured_client,
+    generate_deck,
+    list_templates,
+    repair_presentation,
+)
+from .utils import read_json, resolve_workspace
 
 app = FastAPI(
     title="BrandDeck AI",
     version=__version__,
     description="Template-adaptive PowerPoint analysis and generation API",
 )
+app.mount(
+    "/assets", StaticFiles(directory=Path(__file__).with_name("web")), name="assets"
+)
+
+
+@app.get("/", include_in_schema=False)
+def homepage() -> FileResponse:
+    return FileResponse(Path(__file__).with_name("web") / "index.html")
+
+
+def _presentation_dir(presentation_id: str) -> Path:
+    root = (resolve_workspace() / "presentations").resolve()
+    directory = (root / presentation_id).resolve()
+    if directory.parent != root:
+        raise HTTPException(status_code=400, detail="Invalid presentation id")
+    if not (directory / "manifest.json").is_file():
+        raise HTTPException(status_code=404, detail="Presentation not found")
+    return directory
 
 
 def _save_content_upload(file: UploadFile, directory: Path) -> Path:
@@ -44,6 +69,33 @@ def templates() -> list[dict]:
     return list_templates()
 
 
+@app.get("/v1/batches")
+def batches_endpoint() -> list[dict]:
+    root = resolve_workspace() / "batches"
+    paths = sorted(
+        root.glob("*/manifest.json"), key=lambda p: p.stat().st_mtime, reverse=True
+    )
+    return [
+        {
+            "batch_id": batch["batch_id"],
+            "status": batch["status"],
+            "template_id": batch["variants"][0]["template_id"],
+        }
+        for batch in (read_json(p) for p in paths[:20])
+    ]
+
+
+@app.get("/v1/batches/{batch_id}")
+def batch_endpoint(batch_id: str) -> dict:
+    root = (resolve_workspace() / "batches").resolve()
+    directory = (root / batch_id).resolve()
+    if directory.parent != root:
+        raise HTTPException(status_code=400, detail="Invalid batch id")
+    if not (directory / "manifest.json").is_file():
+        raise HTTPException(status_code=404, detail="Batch not found")
+    return read_json(directory / "manifest.json")
+
+
 @app.post("/v1/templates/analyze")
 def analyze_endpoint(
     file: Annotated[UploadFile, File(description="PPTX or PDF template")],
@@ -51,7 +103,9 @@ def analyze_endpoint(
     offline: Annotated[bool, Form()] = False,
 ) -> dict:
     if not file.filename or Path(file.filename).suffix.lower() not in {".pptx", ".pdf"}:
-        raise HTTPException(status_code=400, detail="A .pptx or .pdf template is required")
+        raise HTTPException(
+            status_code=400, detail="A .pptx or .pdf template is required"
+        )
     temp_dir = Path(tempfile.mkdtemp(prefix="branddeck-upload-"))
     temp_file = temp_dir / Path(file.filename).name
     try:
@@ -117,6 +171,8 @@ def create_generation_job_endpoint(
     content_file: Annotated[UploadFile | None, File()] = None,
     slide_count: Annotated[int | None, Form()] = None,
     offline: Annotated[bool, Form()] = False,
+    variants: Annotated[bool, Form()] = False,
+    export_all: Annotated[bool, Form()] = False,
 ) -> dict:
     if content_file is None and not (content and content.strip()):
         raise HTTPException(
@@ -144,6 +200,8 @@ def create_generation_job_endpoint(
         content=content_input,
         slide_count=slide_count,
         offline=offline,
+        variants=variants,
+        export_formats=("pdf", "html") if export_all else (),
     )
     return record
 
@@ -178,16 +236,50 @@ def job_download_endpoint(job_id: str) -> FileResponse:
 
 
 @app.get("/v1/presentations/{presentation_id}/download")
-def download_endpoint(presentation_id: str) -> FileResponse:
-    root = (resolve_workspace() / "presentations").resolve()
-    run_dir = (root / presentation_id).resolve()
-    if run_dir.parent != root:
-        raise HTTPException(status_code=400, detail="Invalid presentation id")
-    output = run_dir / "output.pptx"
+def download_endpoint(
+    presentation_id: str, format: Literal["pptx", "pdf", "html"] = "pptx"
+) -> FileResponse:
+    run_dir = _presentation_dir(presentation_id)
+    output = (
+        run_dir / "output.pptx"
+        if format == "pptx"
+        else run_dir / "exports" / f"output.{format}"
+    )
     if not output.is_file():
         raise HTTPException(status_code=404, detail="Presentation not found")
     return FileResponse(
         output,
-        media_type="application/vnd.openxmlformats-officedocument.presentationml.presentation",
-        filename=f"{presentation_id}.pptx",
+        media_type={
+            "pptx": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+            "pdf": "application/pdf",
+            "html": "text/html",
+        }[format],
+        filename=f"{presentation_id}.{format}",
     )
+
+
+@app.get("/v1/presentations/{presentation_id}")
+def presentation_endpoint(presentation_id: str) -> dict:
+    return read_json(_presentation_dir(presentation_id) / "manifest.json")
+
+
+@app.get("/v1/presentations/{presentation_id}/preview/{slide}")
+def preview_endpoint(presentation_id: str, slide: int) -> FileResponse:
+    directory = _presentation_dir(presentation_id)
+    target = directory / "exports" / f"slide-{slide}.png"
+    if slide < 1 or not target.is_file():
+        raise HTTPException(status_code=404, detail="Slide preview not found")
+    return FileResponse(target, media_type="image/png")
+
+
+class RepairRequest(BaseModel):
+    issue_ids: list[str] = Field(min_length=1, max_length=100)
+
+
+@app.post("/v1/presentations/{presentation_id}/repair")
+def repair_endpoint(presentation_id: str, body: RepairRequest) -> dict:
+    _presentation_dir(presentation_id)
+    try:
+        return repair_presentation(presentation_id, body.issue_ids)
+    except (FileNotFoundError, ValueError) as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc

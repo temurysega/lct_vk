@@ -24,7 +24,7 @@ from .utils import (
     write_json,
 )
 
-ANALYSIS_SCHEMA_VERSION = "1.3"
+ANALYSIS_SCHEMA_VERSION = "1.5"
 
 
 def _load_extractor():
@@ -687,7 +687,11 @@ def _capacity_profile(
         )
         and "title" not in str(zone.get("type", "")).lower()
     ]
-    usable = [zone for zone in body_zones if float(zone.get("h") or 0) >= 0.65]
+    usable = [
+        zone
+        for zone in body_zones
+        if float(zone.get("h") or 0) >= 0.65 and float(zone.get("w") or 0) >= 1.0
+    ]
     source_texts = [_element_text(element) for element in text_elements]
     bullet_count = sum(
         text.lstrip().startswith(("•", "-", "–", "—")) for text in source_texts
@@ -707,6 +711,37 @@ def _capacity_profile(
     shape_count = len(shapes)
     complexity = min(1.0, (shape_count + len(images) * 3 + len(zones)) / 80)
     return {
+        "has_title_zone": any(
+            "title" in str(z.get("type", ""))
+            and "subtitle" not in str(z.get("type", ""))
+            for z in zones
+        ),
+        "title_top_ratio": min(
+            (
+                float(z.get("y") or 0) / canvas_height
+                for z in zones
+                if "title" in str(z.get("type", ""))
+                and "subtitle" not in str(z.get("type", ""))
+            ),
+            default=0,
+        ),
+        "out_of_canvas_body_zones": sum(
+            float(z.get("x") or 0) < -0.02
+            or float(z.get("y") or 0) < -0.02
+            or float(z.get("x") or 0) + float(z.get("w") or 0) > canvas_width + 0.02
+            or float(z.get("y") or 0) + float(z.get("h") or 0) > canvas_height + 0.02
+            for z in usable
+        ),
+        "specialized_labels": sum(
+            bool(
+                re.search(
+                    r"показател|вставить|фото|имя|фамилия|qr|процент|^х+%|^x+%|^\\d+%|speaker|photo",
+                    text,
+                    re.IGNORECASE,
+                )
+            )
+            for text in source_texts
+        ),
         "title_chars": max(
             (_zone_capacity(zone) for zone in zones if zone.get("type") == "title"),
             default=80,
@@ -1110,17 +1145,13 @@ def _llm_analyze(
     catalog: dict[str, Any],
     preview_paths: list[str],
 ) -> dict[str, Any] | None:
-    system = (
-        "You are a presentation design-system analyst. Infer only reusable visual rules; "
-        "do not invent colors, fonts or layout geometry. Return JSON with keys "
-        "brand_observations (array of concise strings) and pattern_recommendations "
-        "(object mapping pattern id to a short usage recommendation). When raster previews "
-        "are attached, use them to assess hierarchy, density, rhythm and imagery style, "
-        "while exact values remain grounded in the JSON."
-    )
+    from .model_context import compact_design, compact_patterns
+    from .prompt_config import load_prompt
+
+    system = load_prompt("analyzer")
     compact = {
-        "design_system": design,
-        "patterns": catalog["patterns"],
+        "design_system": compact_design(design),
+        "patterns": compact_patterns(catalog),
     }
     try:
         images = preview_paths if client.settings.vision_enabled else []
@@ -1171,6 +1202,7 @@ def analyze_template(
         if (
             manifest.get("source_sha256") == digest
             and manifest.get("schema_version") == ANALYSIS_SCHEMA_VERSION
+            and (client is None or manifest.get("ai_enhanced"))
         ):
             return output_dir
 

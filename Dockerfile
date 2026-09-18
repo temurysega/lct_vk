@@ -6,7 +6,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 COPY . /app
-RUN pip install --no-cache-dir ".[api]"
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      libreoffice-impress fonts-dejavu-core fonts-liberation \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip install --no-cache-dir ".[api,export]"
 
 VOLUME ["/data"]
 EXPOSE 8000

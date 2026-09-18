@@ -251,6 +251,9 @@ def _shape_text_style(shape: Any) -> dict[str, Any]:
             style["alignment"] = paragraph.alignment
         for run in paragraph.runs:
             font = run.font
+            fill = font._element.find(qn("a:solidFill"))
+            if fill is not None and "color_xml" not in style:
+                style["color_xml"] = copy.deepcopy(fill)
             if font.name and "font_name" not in style:
                 style["font_name"] = font.name
             if font.size and "font_size" not in style:
@@ -337,6 +340,8 @@ def _set_text_frame(
     min_font_size: float = 9.0,
 ) -> None:
     existing_style = _shape_text_style(shape)
+    if paragraphs and not str(shape.name).startswith("BrandDeck"):
+        shape.name = f"BrandDeck Text {shape.shape_id}"
     font_name = font_name or existing_style.get("font_name")
     font_size = (
         font_size or existing_style.get("font_size") or effective_font_size(shape)
@@ -383,6 +388,9 @@ def _set_text_frame(
         )
         paragraph.text = str(text)
         paragraph.level = 0
+        paragraph.space_before = Pt(0)
+        paragraph.space_after = Pt(float(font_size or 18) * 0.15)
+        paragraph.line_spacing = 1.15
         if not bullets:
             paragraph.alignment = alignment or PP_ALIGN.LEFT
         if paragraph.runs:
@@ -393,6 +401,8 @@ def _set_text_frame(
                 font.size = Pt(font_size)
             if color:
                 font.color.rgb = _rgb(color)
+            elif existing_style.get("color_xml") is not None:
+                font._element.append(copy.deepcopy(existing_style["color_xml"]))
             if inherited_bold is not None:
                 font.bold = inherited_bold
             if bold_first and index == 0:
@@ -503,6 +513,13 @@ def _distribute_paragraphs(
             72 * height
         )
 
+    if len(paragraphs) <= len(shapes) and all(
+        occupancy(shape, [text]) <= 1.0 for shape, text in zip(shapes, paragraphs)
+    ):
+        return [
+            [paragraphs[i]] if i < len(paragraphs) else [] for i in range(len(shapes))
+        ]
+
     # state: number of assigned paragraphs -> (worst occupancy, partitions)
     states: dict[int, tuple[float, list[list[str]]]] = {0: (0.0, [])}
     for shape in shapes:
@@ -534,8 +551,25 @@ def _add_body_text(
     # Slide exemplars without native placeholders often contain many tiny
     # source-specific labels. Clear those labels and write new content into a
     # safe zone while retaining the exemplar's background and decoration.
-    if body_shapes and not any(
-        getattr(shape, "is_placeholder", False) for shape in body_shapes
+    usable_shapes = [
+        s
+        for s in body_shapes
+        if s.width >= Inches(1.0)
+        and s.height >= Inches(0.65)
+        and s.left >= 0
+        and s.top >= 0
+        and s.left + s.width <= Inches(design["canvas"]["width_inches"] + 0.02)
+        and s.top + s.height <= Inches(design["canvas"]["height_inches"] + 0.02)
+    ]
+    if len(usable_shapes) >= 2:
+        for shape in body_shapes:
+            if shape not in usable_shapes:
+                _set_text_frame(shape, [])
+        body_shapes = usable_shapes
+    if (
+        body_shapes
+        and len(usable_shapes) < 2
+        and not any(getattr(shape, "is_placeholder", False) for shape in body_shapes)
     ):
         bullet_like = [
             shape
@@ -589,7 +623,9 @@ def _add_body_text(
         return visual_zone
 
     if len(body_shapes) >= 2:
-        text_shapes = list(body_shapes)
+        text_shapes = sorted(
+            body_shapes, key=lambda s: (round(s.top / 914400, 1), s.left)
+        )
         visual_zone = zone
         if visual:
             # Reserve a separate slot; never draw a chart over assigned text.
@@ -602,7 +638,12 @@ def _add_body_text(
         paragraphs = ([body] if body else []) + list(bullets)
         groups = _distribute_paragraphs(text_shapes, paragraphs, size)
         for shape, paragraphs in zip(text_shapes, groups):
-            _set_text_frame(shape, paragraphs, bullets=bool(bullets))
+            _set_text_frame(
+                shape,
+                paragraphs,
+                bullets=bool(bullets),
+                font_size=max(size, effective_font_size(shape, size)),
+            )
         return visual_zone
 
     if body_shapes:
@@ -616,7 +657,12 @@ def _add_body_text(
         else:
             visual_zone = body_zone
         paragraphs = ([body] if body else []) + list(bullets)
-        _set_text_frame(body_shapes[0], paragraphs, bullets=bool(bullets))
+        _set_text_frame(
+            body_shapes[0],
+            paragraphs,
+            bullets=bool(bullets),
+            font_size=max(size, effective_font_size(body_shapes[0], size)),
+        )
         return visual_zone
 
     if visual:
@@ -1674,7 +1720,7 @@ def _fill_slide(
         _set_text_frame(titles[0], [title])
     else:
         margin = float(design["spacing"].get("typical_left_margin_inches", 0.6))
-        _add_textbox(
+        new_title = _add_textbox(
             slide,
             title,
             (margin, 0.45, design["canvas"]["width_inches"] - margin * 2, 0.8),
@@ -1682,7 +1728,9 @@ def _fill_slide(
             font_size=float(design["typography"].get("title_size_pt", 30)),
             color=colors.get("dk1", "1F2937"),
             bold=True,
-        ).name = "BrandDeck Title"
+        )
+        new_title.name = "BrandDeck Title"
+        titles.append(new_title)
 
     if subtitles:
         _set_text_frame(subtitles[0], [subtitle])

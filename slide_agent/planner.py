@@ -9,21 +9,10 @@ from typing import Any
 from pptx import Presentation
 
 from .llm import InferenceClient, InferenceError
+from .model_context import compact_patterns
+from .prompt_config import load_prompt
 
-PLANNER_SYSTEM = """You are an expert presentation content architect.
-Turn the supplied source into a concise, evidence-faithful slide deck.
-Return one JSON object with: language, title, slides.
-Each slide must have: title, role, subtitle, body, bullets, visual, speaker_notes.
-Allowed roles: cover, section, content, two_column, comparison, data, image, closing.
-visual is null or an object. Supported visual types:
-- metric_cards: {type, items:[{label,value}]}
-- bar_chart: {type, categories:[...], series:[{name,values:[numbers]}]}
-- pie_chart: {type, categories:[...], values:[numbers]}
-- table: {type, headers:[...], rows:[[...]]}
-- timeline: {type, items:[{label,detail}]}
-Use only facts and numbers present in the source. Do not invent evidence.
-Keep titles under 80 characters, at most 5 bullets per slide, and at most 110 characters per bullet.
-The first slide must be cover and the final slide closing. Return JSON only."""
+PLANNER_SYSTEM = load_prompt("planner")
 
 
 def load_content(value: str | Path) -> tuple[str, str]:
@@ -282,15 +271,7 @@ def plan_deck(
         plan = _fallback_plan(content, slide_count)
         planner_mode = "offline"
     else:
-        available = [
-            {
-                "id": item["id"],
-                "name": item["name"],
-                "roles": item["roles"],
-                "capacity": item["capacity"],
-            }
-            for item in pattern_catalog.get("patterns", [])
-        ]
+        available = compact_patterns(pattern_catalog)
         user = json.dumps(
             {
                 "requested_slide_count": slide_count,
@@ -406,6 +387,18 @@ def _score_pattern(
 
     body_capacity = max(1, int(capacity.get("body_chars", 500) or 500))
     if requirements["body_chars"]:
+        if capacity.get("has_title_zone") is False:
+            score -= 12
+            risks.append("нет отдельной зоны заголовка")
+        if float(capacity.get("title_top_ratio", 0)) > 0.28:
+            score -= 12
+            risks.append("центральный заголовок оставляет мало места для текста")
+        score -= int(capacity.get("out_of_canvas_body_zones", 0)) * 12
+        if not requirements["has_visual"]:
+            score -= min(16, int(capacity.get("specialized_labels", 0)) * 3)
+            if 0.25 <= float(capacity.get("body_area_ratio", 0)) <= 0.7:
+                score += 4
+                reasons.append("полноценная область для чтения")
         ratio = requirements["body_chars"] / body_capacity
         if ratio <= 1:
             score += 3.0
@@ -416,9 +409,6 @@ def _score_pattern(
         if capacity.get("usable_body_zones") == 0:
             score -= 25
             risks.append("нет полноценной текстовой зоны")
-        if ratio < 0.15 and float(capacity.get("body_area_ratio", 0)) > 0.3:
-            score -= 6
-            risks.append("слишком большая текстовая область для объёма содержания")
 
     bullet_capacity = max(
         1,
@@ -426,6 +416,10 @@ def _score_pattern(
         * int(capacity.get("bullets_per_zone", 4) or 4),
     )
     if requirements["bullet_count"]:
+        usable_zones = int(capacity.get("usable_body_zones", 1))
+        if usable_zones > requirements["bullet_count"]:
+            score -= (usable_zones - requirements["bullet_count"]) * 4
+            risks.append("часть текстовых блоков останется пустой")
         if requirements["bullet_count"] <= bullet_capacity:
             score += 2.0
         else:
@@ -481,7 +475,11 @@ def assign_patterns(
     pattern_catalog: dict[str, Any],
     *,
     avoid_by_slide: dict[int, set[str]] | None = None,
+    layout_strategy: str = "balanced",
+    previous_by_slide: dict[int, set[str]] | None = None,
 ) -> dict[str, Any]:
+    if layout_strategy not in {"balanced", "columns", "focus"}:
+        raise ValueError("Unknown layout strategy")
     patterns = pattern_catalog.get("patterns", [])
     if not patterns:
         raise ValueError("Template has no usable slide layouts")
@@ -496,6 +494,16 @@ def assign_patterns(
                 reuse_count=usage.get(pattern["id"], 0),
                 avoided=pattern["id"] in (avoid_by_slide or {}).get(slide_index, set()),
             )
+            if requirements["body_chars"]:
+                zones = int(pattern.get("capacity", {}).get("usable_body_zones", 1))
+                if layout_strategy == "columns" and 2 <= zones <= 4:
+                    score += 4
+                    reasons.append("вариант с несколькими текстовыми блоками")
+                elif layout_strategy == "focus" and zones == 1:
+                    score += 6
+                    reasons.append("вариант с единым текстовым блоком")
+                if pattern["id"] in (previous_by_slide or {}).get(slide_index, set()):
+                    score -= 3
             scored.append((score, pattern, reasons, risks))
         scored.sort(key=lambda item: (-item[0], item[1]["id"]))
         selected_score, selected, reasons, risks = scored[0]

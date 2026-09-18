@@ -1,0 +1,8 @@
+{
+  "templates": "../данные",
+  "content": "examples/baseline_content.md",
+  "workspace": "slide-workspace/dataset",
+  "slide_count": 10,
+  "offline": true,
+  "export_formats": ["pdf", "html"]
+}

@@ -16,6 +16,14 @@ def powerpoint_render_enabled() -> bool:
         return False
     if os.name != "nt" or shutil.which("powershell") is None:
         return False
+    if configured == "auto":
+        import winreg
+
+        try:
+            with winreg.OpenKey(winreg.HKEY_CLASSES_ROOT, "PowerPoint.Application"):
+                pass
+        except OSError:
+            return False
     return configured in {"auto", "1", "true", "yes", "on"}
 
 

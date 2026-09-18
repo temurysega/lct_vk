@@ -9,8 +9,15 @@ from pathlib import Path
 from typing import Any
 
 from .analyzer import analyze_template
+from .exporter import find_libreoffice
 from .qa import inspect_presentation
-from .service import configured_client, generate_deck, list_templates, run_pipeline
+from .service import (
+    configured_client,
+    generate_deck,
+    generate_variants,
+    list_templates,
+    run_pipeline,
+)
 from .utils import read_json, resolve_workspace
 
 
@@ -73,6 +80,21 @@ def _parser() -> argparse.ArgumentParser:
     run.add_argument("--slides", type=int, help="Requested number of slides")
     run.add_argument("--offline", action="store_true")
 
+    variants = sub.add_parser(
+        "variants", help="Generate three layouts with identical content"
+    )
+    variants.add_argument("--template", required=True)
+    variants.add_argument("--content", required=True)
+    variants.add_argument("--slides", type=int, default=10)
+    variants.add_argument("--offline", action="store_true")
+    for command in (run, generate, variants):
+        command.add_argument(
+            "--export",
+            choices=("pptx", "all"),
+            default="pptx",
+            help="Also export PDF and HTML using LibreOffice",
+        )
+
     inspect = sub.add_parser("inspect", help="Run structural QA on a generated PPTX")
     inspect.add_argument("presentation", help="Path to .pptx")
     inspect.add_argument(
@@ -96,6 +118,8 @@ def _doctor() -> dict[str, Any]:
         "python_pptx": bool(importlib.util.find_spec("pptx")),
         "pillow": bool(importlib.util.find_spec("PIL")),
         "fastapi": bool(importlib.util.find_spec("fastapi")),
+        "libreoffice": find_libreoffice(),
+        "pdf_renderer": bool(importlib.util.find_spec("fitz")),
         "uvicorn": bool(importlib.util.find_spec("uvicorn")),
         "inference_configured": client is not None,
         "inference_model": os.getenv("INFERENCE_MODEL", ""),
@@ -119,29 +143,42 @@ def main(argv: list[str] | None = None) -> int:
             manifest["path"] = str(output.resolve())
             _print(manifest, args.json)
         elif args.command == "generate":
-            _print(
-                generate_deck(
-                    template=args.template,
-                    content=args.content,
-                    workspace=workspace,
-                    output=args.output,
-                    slide_count=args.slides,
-                    offline=args.offline,
-                    qa_retries=args.qa_retries,
-                ),
-                args.json,
+            result = generate_deck(
+                template=args.template,
+                content=args.content,
+                workspace=workspace,
+                output=args.output,
+                slide_count=args.slides,
+                offline=args.offline,
+                qa_retries=args.qa_retries,
+                export_formats=("pdf", "html") if args.export == "all" else (),
             )
+            _print(result, args.json)
+            return int(result["status"] == "failed")
         elif args.command == "run":
-            _print(
-                run_pipeline(
-                    template_path=args.template,
-                    content=args.content,
-                    workspace=workspace,
-                    output=args.output,
-                    slide_count=args.slides,
-                    offline=args.offline,
-                ),
-                args.json,
+            result = run_pipeline(
+                template_path=args.template,
+                content=args.content,
+                workspace=workspace,
+                output=args.output,
+                slide_count=args.slides,
+                offline=args.offline,
+                export_formats=("pdf", "html") if args.export == "all" else (),
+            )
+            _print(result, args.json)
+            return int(result["status"] == "failed")
+        elif args.command == "variants":
+            result = generate_variants(
+                template=args.template,
+                content=args.content,
+                workspace=workspace,
+                slide_count=args.slides,
+                offline=args.offline,
+                export_formats=("pdf", "html") if args.export == "all" else (),
+            )
+            _print(result, args.json)
+            return int(
+                result["status"] == "failed" or result["diversity_status"] != "passed"
             )
         elif args.command == "inspect":
             design = None
@@ -160,6 +197,8 @@ def main(argv: list[str] | None = None) -> int:
         elif args.command == "doctor":
             _print(_doctor(), True)
         elif args.command == "serve":
+            if workspace:
+                os.environ["BRANDDECK_WORKSPACE"] = str(resolve_workspace(workspace))
             try:
                 import uvicorn
             except ImportError as exc:

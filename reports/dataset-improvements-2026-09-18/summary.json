@@ -1,0 +1,202 @@
+{
+  "date": "2026-09-18",
+  "mode": "offline",
+  "content": "examples/baseline_content.md",
+  "content_sha256": "43dd056bca6d8aed58cbf934adba668bc36c5126eeefd3900a61d7d48c2bb3e0",
+  "content_kind": "synthetic",
+  "runs": [
+    {
+      "template": "VK Tech шаблон.pptx",
+      "source_sha256": "cbbe3aa6a21d23cebc4d1383b93dd07a9cea460d683de1903567b616c839485d",
+      "source_unchanged": true,
+      "status": "completed",
+      "seconds": 32.066,
+      "distinct_layout_sequences": 3,
+      "variants": [
+        {
+          "variant": "balanced",
+          "slide_count": 10,
+          "status": "completed",
+          "structural_qa": "passed",
+          "issue_counts": {
+            "error": 0,
+            "warning": 0,
+            "info": 0
+          },
+          "literal_content_coverage": "literal_coverage_complete",
+          "exports": "passed",
+          "seconds": 9.152
+        },
+        {
+          "variant": "columns",
+          "slide_count": 10,
+          "status": "completed",
+          "structural_qa": "passed",
+          "issue_counts": {
+            "error": 0,
+            "warning": 0,
+            "info": 0
+          },
+          "literal_content_coverage": "literal_coverage_complete",
+          "exports": "passed",
+          "seconds": 8.336
+        },
+        {
+          "variant": "focus",
+          "slide_count": 10,
+          "status": "completed",
+          "structural_qa": "passed",
+          "issue_counts": {
+            "error": 0,
+            "warning": 0,
+            "info": 0
+          },
+          "literal_content_coverage": "literal_coverage_complete",
+          "exports": "passed",
+          "seconds": 8.795
+        }
+      ]
+    },
+    {
+      "template": "VK_WorkSpace_Клиентская_конференция_Шаблон_03.pptx",
+      "source_sha256": "1b8883114486c69dff706e9c4fd9382727c4506c2cfa3ec34f86987f1e852f2f",
+      "source_unchanged": true,
+      "status": "completed",
+      "seconds": 22.751,
+      "distinct_layout_sequences": 3,
+      "variants": [
+        {
+          "variant": "balanced",
+          "slide_count": 10,
+          "status": "completed",
+          "structural_qa": "passed",
+          "issue_counts": {
+            "error": 0,
+            "warning": 0,
+            "info": 0
+          },
+          "literal_content_coverage": "literal_coverage_complete",
+          "exports": "passed",
+          "seconds": 7.483
+        },
+        {
+          "variant": "columns",
+          "slide_count": 10,
+          "status": "completed",
+          "structural_qa": "passed",
+          "issue_counts": {
+            "error": 0,
+            "warning": 0,
+            "info": 0
+          },
+          "literal_content_coverage": "literal_coverage_complete",
+          "exports": "passed",
+          "seconds": 6.222
+        },
+        {
+          "variant": "focus",
+          "slide_count": 10,
+          "status": "completed",
+          "structural_qa": "passed",
+          "issue_counts": {
+            "error": 0,
+            "warning": 0,
+            "info": 1
+          },
+          "literal_content_coverage": "literal_coverage_complete",
+          "exports": "passed",
+          "seconds": 6.314
+        }
+      ]
+    },
+    {
+      "template": "Шаблон презентации VK Education.pptx",
+      "source_sha256": "9ef2323ed5f49f464aee5ae7065f1f57bb92c8be3a635be507d59819e285cfe0",
+      "source_unchanged": true,
+      "status": "completed",
+      "seconds": 20.913,
+      "distinct_layout_sequences": 3,
+      "variants": [
+        {
+          "variant": "balanced",
+          "slide_count": 10,
+          "status": "completed",
+          "structural_qa": "passed",
+          "issue_counts": {
+            "error": 0,
+            "warning": 0,
+            "info": 0
+          },
+          "literal_content_coverage": "literal_coverage_complete",
+          "exports": "passed",
+          "seconds": 6.184
+        },
+        {
+          "variant": "columns",
+          "slide_count": 10,
+          "status": "completed",
+          "structural_qa": "passed",
+          "issue_counts": {
+            "error": 0,
+            "warning": 0,
+            "info": 1
+          },
+          "literal_content_coverage": "literal_coverage_complete",
+          "exports": "passed",
+          "seconds": 6.228
+        },
+        {
+          "variant": "focus",
+          "slide_count": 10,
+          "status": "completed",
+          "structural_qa": "passed",
+          "issue_counts": {
+            "error": 0,
+            "warning": 0,
+            "info": 0
+          },
+          "literal_content_coverage": "literal_coverage_complete",
+          "exports": "passed",
+          "seconds": 5.998
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "pytest_passed": 42,
+    "pytest_warnings": 1,
+    "ruff": "passed",
+    "compileall": "passed",
+    "node_check": "passed",
+    "git_diff_check": "passed"
+  },
+  "environment": {
+    "python": "3.11.9",
+    "packages": {
+      "python-pptx": "1.0.2",
+      "PyMuPDF": "1.28.2",
+      "fastapi": "0.141.1",
+      "pytest": "9.0.3"
+    }
+  },
+  "browser": {
+    "browser": "153.0.8010.50",
+    "viewport": [
+      1440,
+      1100
+    ],
+    "mobile_width": 390,
+    "templates": 3,
+    "variants": 3,
+    "slides_per_variant": 10,
+    "download_bytes": {
+      "pptx": 18114600,
+      "pdf": 401858,
+      "html": 890279
+    },
+    "page_errors": [],
+    "generation_via_ui": "passed",
+    "history_refresh": "passed",
+    "mobile_horizontal_overflow": false
+  }
+}
