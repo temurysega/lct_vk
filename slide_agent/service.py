@@ -137,7 +137,7 @@ def generate_deck(
         slide_count=slide_count,
         client=client,
     )
-    plan = assign_patterns(plan, catalog)
+    plan = assign_patterns(plan, catalog, client=client)
     return _generate_from_plan(
         plan=plan,
         template_dir=template_dir,
@@ -271,6 +271,10 @@ def _generate_from_plan(
     write_json(run_dir / "qa_report.json", qa)
     write_json(run_dir / "deck_plan.final.json", current_plan)
     planner_mode = plan.get("planner", {}).get("mode", "unknown")
+    selector_modes = [
+        s.get("pattern_selection", {}).get("selector", {}).get("mode", "heuristic")
+        for s in current_plan["slides"]
+    ]
     manifest = {
         **compose_result,
         "presentation_id": run_dir.name,
@@ -280,8 +284,9 @@ def _generate_from_plan(
         "source": source_label,
         "inference_configured": client is not None,
         "inference_used": planner_mode == "inference"
-        or bool(template_manifest.get("ai_enhanced")),
+        or bool(template_manifest.get("ai_enhanced")) or "adapter" in selector_modes,
         "planner_mode": planner_mode,
+        "layout_selection": {mode: selector_modes.count(mode) for mode in ("adapter", "heuristic", "fallback")},
         "qa": qa,
         "content_coverage": coverage,
         "attempts": attempts,
@@ -371,6 +376,7 @@ def generate_variants(
             catalog,
             layout_strategy=strategy,
             previous_by_slide=previous,
+            client=client,
         )
         plan["variant"] = {
             "id": strategy,

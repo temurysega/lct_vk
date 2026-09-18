@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "task": "layout_candidate_selection",
+  "label_kind": "weak_observed_exemplar_not_human_preference",
+  "note": "Permutations are augmentation, not independent examples. No proof of slide quality.",
+  "train_rows": 297,
+  "train_unique_groups": 88,
+  "validation_rows": 27,
+  "validation_template": "VK_WorkSpace_Клиентская_конференция_Шаблон_03.pptx",
+  "validation_duplicate_groups_removed": 2,
+  "source_slides_with_text": 128,
+  "sources": [
+    {
+      "name": "VK Tech шаблон.pptx",
+      "sha256": "cbbe3aa6a21d23cebc4d1383b93dd07a9cea460d683de1903567b616c839485d"
+    },
+    {
+      "name": "VK_WorkSpace_Клиентская_конференция_Шаблон_03.pptx",
+      "sha256": "1b8883114486c69dff706e9c4fd9382727c4506c2cfa3ec34f86987f1e852f2f"
+    },
+    {
+      "name": "Шаблон презентации VK Education.pptx",
+      "sha256": "9ef2323ed5f49f464aee5ae7065f1f57bb92c8be3a635be507d59819e285cfe0"
+    }
+  ],
+  "layout_prompt_sha256": "9b42cfe84dce4c553c5fb38527599d8090651a08f36b57b07e3da62aaabd5e3c",
+  "package_files_verified": 8,
+  "source_templates_unchanged": true,
+  "a100_training_executed": false,
+  "gpu_weights_exist": false
+}

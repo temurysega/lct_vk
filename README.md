@@ -298,6 +298,14 @@ pictures в слайдах нет. Публичный синий набор и �
 
 ## Конфигурация Inference API
 
+Для аккаунта с A100 **без GitHub** есть отдельный
+[notebook обучения через Google Drive](examples/BrandDeck_A100_Training_Drive.ipynb).
+`python -m training.prepare_drive` собирает `../gdrive/lct`: три шаблона, JSONL,
+скрипт QLoRA и notebook. Загрузите папку в «Мой диск/lct» и откройте notebook
+через загрузку файла в Colab. [Порядок запуска и расположение весов](training/DRIVE_README.md).
+Обучается экспериментальный выбор макетов; базовая модель планирования текста
+остаётся отдельной. Реальный GPU-прогон пока не выполнен.
+
 Если доступна только A100 в Colab, откройте [готовый notebook](examples/BrandDeck_A100_Inference.ipynb).
 Он запускает Qwen2.5-VL-7B-Instruct и выдаёт адрес для `INFERENCE_BASE_URL`.
 OpenRouter не обязателен. GPU-запуск ещё не проверен; notebook содержит проверку
@@ -308,6 +316,7 @@ OpenRouter не обязателен. GPU-запуск ещё не провер�
 | `INFERENCE_BASE_URL` | Base URL, например `https://host/v1`, либо полный URL `/chat/completions` |
 | `INFERENCE_API_KEY` | Bearer token; может быть пустым для локального endpoint |
 | `INFERENCE_MODEL` | Идентификатор модели |
+| `INFERENCE_LAYOUT_MODEL` | Необязательный LoRA выбора макетов, например `lct-layout`; пустое значение оставляет эвристики |
 | `INFERENCE_TIMEOUT` | Таймаут запроса, по умолчанию 120 секунд |
 | `INFERENCE_MAX_RETRIES` | Число сетевых попыток, по умолчанию 3 |
 | `INFERENCE_VISION` | `1` включает multimodal-анализ PNG-превью, `0` оставляет только JSON |

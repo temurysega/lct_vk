@@ -8,6 +8,7 @@ from typing import Any
 
 from pptx import Presentation
 
+from .layout_selector import select_with_adapter
 from .llm import InferenceClient, InferenceError
 from .model_context import compact_patterns
 from .prompt_config import load_prompt
@@ -477,6 +478,7 @@ def assign_patterns(
     avoid_by_slide: dict[int, set[str]] | None = None,
     layout_strategy: str = "balanced",
     previous_by_slide: dict[int, set[str]] | None = None,
+    client: InferenceClient | None = None,
 ) -> dict[str, Any]:
     if layout_strategy not in {"balanced", "columns", "focus"}:
         raise ValueError("Unknown layout strategy")
@@ -506,11 +508,15 @@ def assign_patterns(
                     score -= 3
             scored.append((score, pattern, reasons, risks))
         scored.sort(key=lambda item: (-item[0], item[1]["id"]))
-        selected_score, selected, reasons, risks = scored[0]
+        selected_id, selection_model = select_with_adapter(slide, requirements, scored, client)
+        selected_score, selected, reasons, risks = next(
+            (item for item in scored if item[1]["id"] == selected_id), scored[0]
+        )
         slide["pattern_id"] = selected["id"]
         slide["layout_index"] = selected["layout_index"]
         slide["master_index"] = selected["master_index"]
         slide["pattern_selection"] = {
+            "selector": selection_model,
             "score": round(selected_score, 2),
             "layout_pattern": selected.get("capacity", {}).get(
                 "rhetorical_pattern", "content"
@@ -519,7 +525,7 @@ def assign_patterns(
             "risk": "; ".join(risks[:3]) or "низкий",
             "alternatives": [
                 {"pattern_id": item[1]["id"], "score": round(item[0], 2)}
-                for item in scored[1:4]
+                for item in [s for s in scored if s[1]["id"] != selected["id"]][:3]
             ],
         }
         usage[selected["id"]] = usage.get(selected["id"], 0) + 1
