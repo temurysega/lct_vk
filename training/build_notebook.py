@@ -4,6 +4,46 @@ import json
 from pathlib import Path
 from textwrap import dedent
 
+ENVIRONMENT_SETUP = (
+    dedent("""
+    from pathlib import Path
+    import os, subprocess, sys, uuid
+
+    def run_visible(command):
+        # Colab does not always display inherited subprocess stdout/stderr.
+        with subprocess.Popen(command, stdout=subprocess.PIPE,
+                              stderr=subprocess.STDOUT, text=True, encoding='utf-8',
+                              errors='replace', bufsize=1) as process:
+            for line in process.stdout:
+                print(line, end='', flush=True)
+            if process.wait():
+                raise subprocess.CalledProcessError(process.returncode, command)
+
+    def ensure_python312(destination):
+        destination = Path(destination)
+        executable = 'Scripts/python.exe' if os.name == 'nt' else 'bin/python'
+        python = destination / executable
+        healthy = False
+        if python.is_file():
+            probe = subprocess.run([str(python), '-c',
+                'import sys, pip; assert sys.version_info[:2] == (3, 12)'],
+                capture_output=True, text=True)
+            healthy = probe.returncode == 0
+        if not healthy:
+            run_visible([sys.executable, '-m', 'pip', 'install', '--quiet', 'uv'])
+            # Preserve failed environments; never overlay another Python version.
+            if destination.exists():
+                destination = destination.with_name(destination.name + '-' + uuid.uuid4().hex[:8])
+            run_visible([sys.executable, '-m', 'uv', 'venv', '--python', '3.12',
+                         '--seed', str(destination)])
+            python = destination / executable
+        run_visible([str(python), '-c',
+            'import sys, pip; assert sys.version_info[:2] == (3, 12); print(sys.version)'])
+        return destination, str(python)
+""").strip()
+    + "\n\n"
+)
+
 
 def notebook() -> dict:
     cells = []
@@ -26,7 +66,9 @@ def notebook() -> dict:
 
         GitHub и привязка аккаунта не нужны. Загрузите подготовленную папку **lct**
         в «Мой диск» аккаунта с A100. Откройте этот файл через **Файл → Загрузить блокнот**.
-        Выберите GPU A100 и запускайте ячейки по порядку до раздела «Остановка».
+        Выберите GPU A100. Для обучения и скачивания весов достаточно разделов 1–4.
+        Разделы 5–7 нужны только для подключения GPU как сервера к приложению.
+        Ячейку «Остановка» запускайте после работы; не используйте «Выполнить все».
 
         Обучаем **LoRA выбора макетов** для Qwen2.5-7B-Instruct. Содержание презентации
         планирует базовая модель, вёрстку выполняет приложение на компьютере.
@@ -78,46 +120,62 @@ def notebook() -> dict:
         ## 2. Отдельное окружение обучения
         Установка занимает время и скачивает библиотеки. Модель будет скачана автоматически
         в локальный диск Colab. Веса адаптера и отчёты сохраняются на Drive.
+        Окружение использует Python 3.12 через uv независимо от версии Python ядра Colab.
+        uv устанавливает pip без системного ensurepip; это обходит сбой `python -m venv`.
+        Неполное окружение после ошибки не считается готовым. Вывод установки показан
+        прямо в ячейке, включая причину ошибки. Перезапускать ядро не требуется.
     """,
     )
     add(
         "code",
-        """
-        TRAIN_ENV = Path('/content/lct-train-venv')
-        if not (TRAIN_ENV / 'bin/python').exists():
-            subprocess.run([sys.executable, '-m', 'venv', str(TRAIN_ENV)], check=True)
-        TRAIN_PY = str(TRAIN_ENV / 'bin/python')
-        subprocess.run([TRAIN_PY, '-m', 'pip', 'install', '-r', str(ROOT / 'scripts/requirements-a100.txt')], check=True)
+        ENVIRONMENT_SETUP
+        + dedent("""
+        TRAIN_ENV, TRAIN_PY = ensure_python312(globals().get('TRAIN_ENV', '/content/lct-train-py312'))
+        run_visible([TRAIN_PY, '-m', 'pip', 'install', '-r', str(ROOT / 'scripts/requirements-a100.txt')])
         os.environ['HF_HOME'] = '/content/lct-model-cache'
         os.environ['TOKENIZERS_PARALLELISM'] = 'false'
         MODEL = 'Qwen/Qwen2.5-7B-Instruct'
         revision_code = 'from huggingface_hub import model_info; print(model_info(' + repr(MODEL) + ').sha)'
         REVISION = subprocess.check_output([TRAIN_PY, '-c', revision_code], text=True).strip()
         print('Версия базовой модели:', REVISION)
-    """,
+        print('При продолжении скрипт использует исходную версию базы из run.json.')
+    """),
     )
     add(
         "markdown",
         """
         ## 3. Обучить и сравнить
-        Запускайте эту ячейку только для нового обучения. Каждое выполнение создаёт
-        отдельный каталог запуска, существующие веса не перезаписываются.
+        `RESUME = 'auto'` продолжает последний запуск после обрыва Colab. Если он
+        завершён, повторного обучения не будет. `RESUME = 'none'` начинает новый
+        эксперимент; для конкретного запуска укажите его имя из `lct/runs/`.
+        При продолжении оставьте прежние EPOCHS и MAX_LENGTH: EPOCHS — общее число
+        эпох, а не число дополнительных. После сброса среды выполните разделы 1–3.
         Loss считается только по ответу assistant. Длинные примеры вызывают ошибку,
         а не обрезаются молча. Длительность на вашей A100 ещё не измерена.
 
-        После каждой эпохи на Drive копируется адаптер. Это резервная копия весов,
-        не полное состояние оптимизатора для точного продолжения обучения.
+        Полный чекпоинт сохраняется после первого шага оптимизатора, каждых
+        SAVE_STEPS шагов и в конце каждой эпохи. Он включает веса, оптимизатор,
+        scheduler, RNG и состояние Trainer. На Drive остаются две последние
+        проверенные копии с SHA-256 и маркером COMPLETE.json. Незаконченная копия
+        не используется; восстановление идёт из последней целой. При жёстком
+        обрыве теряется работа после последнего сохранённого чекпоинта.
+        Предусмотрите несколько ГБ свободного места на Drive для состояний обучения.
     """,
     )
     add(
         "code",
         """
         EPOCHS = 2
+        MAX_LENGTH = 3072
+        SAVE_STEPS = 10
+        RESUME = 'auto'  # 'none' — новый запуск; или имя каталога из lct/runs/
         LOCAL_SCRIPTS = Path('/content/lct-scripts')
         shutil.copytree(ROOT / 'scripts', LOCAL_SCRIPTS, dirs_exist_ok=True)
-        subprocess.run([TRAIN_PY, str(LOCAL_SCRIPTS / 'train_layout.py'),
+        subprocess.run([TRAIN_PY, '-u', str(LOCAL_SCRIPTS / 'train_layout.py'),
             '--drive-root', str(ROOT), '--revision', REVISION,
-            '--epochs', str(EPOCHS), '--max-length', '3072'], check=True)
+            '--epochs', str(EPOCHS), '--max-length', str(MAX_LENGTH),
+            '--save-steps', str(SAVE_STEPS), '--keep-checkpoints', '2',
+            '--resume', RESUME], check=True)
     """,
     )
     add(
@@ -152,6 +210,32 @@ def notebook() -> dict:
     )
     add(
         "markdown",
+        r"""
+        ### Скачать результат и перенести в проект
+        Архив содержит весь адаптер, токенизатор, точную версию базы, метрики,
+        manifest датасета и контрольные суммы. Полные чекпоинты оптимизатора
+        остаются отдельно в `lct/runs/<run_id>/checkpoints/` для продолжения.
+
+        Скачайте архив ячейкой ниже (либо через интерфейс Drive) и распакуйте его
+        в `lct_vk/models/lct-layout/` на компьютере. Корень этой папки должен
+        содержать `adapter_model.safetensors`, `adapter_config.json` и `training_run.json`.
+        Для разных экспериментов используйте отдельные папки.
+
+        Само копирование файлов не включает модель в приложении. Приложение
+        обращается к inference API: разделы 5–7 поднимают его на A100 с вашими
+        весами. Для отдельного GPU-сервера команда загрузки приведена в README.md.
+        Для текущей задачи можно закончить здесь — обучение и перенос уже готовы.
+    """,
+    )
+    add(
+        "code",
+        """
+        from google.colab import files
+        files.download(str(ADAPTER_DRIVE.with_suffix('.zip')))
+    """,
+    )
+    add(
+        "markdown",
         """
         ## 5. Загрузить сохранённые веса и поднять API
         Обучение выполнялось в отдельном процессе, поэтому GPU освобождается после
@@ -162,15 +246,13 @@ def notebook() -> dict:
     )
     add(
         "code",
-        """
+        ENVIRONMENT_SETUP
+        + dedent("""
         import getpass
         if 'server' in globals() and server.poll() is None:
             raise RuntimeError('Сначала выполните ячейку остановки сервера')
-        SERVE_ENV = Path('/content/lct-serve-venv')
-        if not (SERVE_ENV / 'bin/python').exists():
-            subprocess.run([sys.executable, '-m', 'venv', str(SERVE_ENV)], check=True)
-        SERVE_PY = str(SERVE_ENV / 'bin/python')
-        subprocess.run([SERVE_PY, '-m', 'pip', 'install', 'vllm'], check=True)
+        SERVE_ENV, SERVE_PY = ensure_python312(globals().get('SERVE_ENV', '/content/lct-serve-py312'))
+        run_visible([SERVE_PY, '-m', 'pip', 'install', 'vllm'])
         (RUN_DIR / 'serving-requirements.freeze.txt').write_text(
             subprocess.check_output([SERVE_PY, '-m', 'pip', 'freeze'], text=True))
         ADAPTER_LOCAL = Path('/content/lct-adapters') / run['run_id']
@@ -187,7 +269,7 @@ def notebook() -> dict:
             '--lora-modules', 'lct-layout=' + str(ADAPTER_LOCAL)],
             env=serve_env, stdout=server_log, stderr=subprocess.STDOUT)
         print('Сервер загружает базовую модель и сохранённый адаптер. PID:', server.pid)
-    """,
+    """),
     )
     add(
         "code",
@@ -280,7 +362,7 @@ def notebook() -> dict:
         Скопируйте адрес из предыдущей ячейки и свой ключ. Установка GitHub в Colab не нужна.
 
         ```powershell
-        Set-Location 'C:\Users\Serg\Desktop\лцт\lct_vk'
+        Set-Location 'ПУТЬ-К-ПРОЕКТУ\lct_vk'
         $env:INFERENCE_BASE_URL='https://АДРЕС-ТУННЕЛЯ/v1'
         $env:INFERENCE_MODEL='Qwen/Qwen2.5-7B-Instruct'
         $env:INFERENCE_API_KEY='ВАШ-КЛЮЧ'

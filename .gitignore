@@ -6,6 +6,7 @@ node_modules/
 slide-workspace/
 demo-assets/
 external-fixtures/
+models/
 .env
 .pytest_cache/
 __pycache__/

@@ -15,6 +15,7 @@ from typing import Any
 
 from .llm import InferenceClient, InferenceError
 from .renderer import render_context_previews
+from .resources import serialized_on_cpu
 from .utils import (
     PROJECT_ROOT,
     copy_file,
@@ -1148,6 +1149,8 @@ def _llm_analyze(
     from .model_context import compact_design, compact_patterns
     from .prompt_config import load_prompt
 
+    if client.settings.backend == "llamacpp":
+        return None  # Exact OOXML analysis suffices in the small CPU profile.
     system = load_prompt("analyzer")
     compact = {
         "design_system": compact_design(design),
@@ -1178,6 +1181,7 @@ def _llm_analyze(
         return None
 
 
+@serialized_on_cpu
 def analyze_template(
     template_path: str | Path,
     *,
@@ -1202,7 +1206,11 @@ def analyze_template(
         if (
             manifest.get("source_sha256") == digest
             and manifest.get("schema_version") == ANALYSIS_SCHEMA_VERSION
-            and (client is None or manifest.get("ai_enhanced"))
+            and (
+                client is None
+                or manifest.get("ai_enhanced")
+                or client.settings.backend == "llamacpp"
+            )
         ):
             return output_dir
 

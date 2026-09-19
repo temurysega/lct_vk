@@ -272,25 +272,33 @@ def plan_deck(
         plan = _fallback_plan(content, slide_count)
         planner_mode = "offline"
     else:
-        available = compact_patterns(pattern_catalog)
-        user = json.dumps(
-            {
-                "requested_slide_count": slide_count,
-                "available_template_patterns": available,
-                "design_tone": {
-                    "font": design_system.get("typography", {}).get("primary_font"),
-                    "palette": design_system.get("colors", {}).get("theme", []),
-                },
-                "source": content,
-            },
-            ensure_ascii=False,
-        )
+        cpu = client.settings.backend == "llamacpp"
+        payload = {
+            "requested_slide_count": slide_count,
+            "source": content,
+        }
+        if not cpu:
+            payload.update(
+                {
+                    "available_template_patterns": compact_patterns(pattern_catalog),
+                    "design_tone": {
+                        "font": design_system.get("typography", {}).get("primary_font"),
+                        "palette": design_system.get("colors", {}).get("theme", []),
+                    },
+                }
+            )
+        user = json.dumps(payload, ensure_ascii=False)
         try:
-            plan = client.chat_json(system=PLANNER_SYSTEM, user=user, max_tokens=6000)
+            plan = client.chat_json(
+                system=load_prompt("planner-cpu") if cpu else PLANNER_SYSTEM,
+                user=user,
+                max_tokens=2048 if cpu else 6000,
+            )
             planner_mode = "inference"
-        except InferenceError:
+        except InferenceError as exc:
             plan = _fallback_plan(content, slide_count)
             planner_mode = "fallback"
+            plan["inference_error"] = str(exc)[:400]
     if planner_mode == "inference":
         raw_slides = plan.get("slides") if isinstance(plan, dict) else None
         if (
@@ -302,6 +310,8 @@ def plan_deck(
     if normalized.get("replanned_reason"):
         planner_mode = "fallback"
     normalized["planner"] = {"mode": planner_mode}
+    if plan.get("inference_error"):
+        normalized["planner"]["reason"] = plan["inference_error"]
     return normalized
 
 
@@ -508,7 +518,9 @@ def assign_patterns(
                     score -= 3
             scored.append((score, pattern, reasons, risks))
         scored.sort(key=lambda item: (-item[0], item[1]["id"]))
-        selected_id, selection_model = select_with_adapter(slide, requirements, scored, client)
+        selected_id, selection_model = select_with_adapter(
+            slide, requirements, scored, client
+        )
         selected_score, selected, reasons, risks = next(
             (item for item in scored if item[1]["id"] == selected_id), scored[0]
         )

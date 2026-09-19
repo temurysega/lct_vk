@@ -7,6 +7,11 @@ import json
 import tempfile
 from pathlib import Path
 
+if __package__:
+    from .checkpoints import complete_checkpoints, drive_callback, restore_checkpoint
+else:
+    from checkpoints import complete_checkpoints, drive_callback, restore_checkpoint
+
 
 def main():
     import torch
@@ -20,7 +25,9 @@ def main():
         Qwen2Config,
         Qwen2ForCausalLM,
         Trainer,
+        TrainerCallback,
         TrainingArguments,
+        set_seed,
     )
 
     torch.set_num_threads(2)
@@ -67,6 +74,7 @@ def main():
                 ],
             ),
         )
+        model.save_pretrained(scratch / "initial-adapter")
         rows = [
             {
                 "input_ids": [3, 4, 5, 2],
@@ -75,25 +83,32 @@ def main():
             },
             {"input_ids": [3, 6, 2], "attention_mask": [1] * 3, "labels": [-100, 6, 2]},
         ]
-        trainer = Trainer(
-            model=model,
-            processing_class=tokenizer,
-            train_dataset=rows,
-            data_collator=DataCollatorForSeq2Seq(
-                tokenizer=tokenizer, label_pad_token_id=-100
-            ),
-            args=TrainingArguments(
-                output_dir=str(scratch / "run"),
-                use_cpu=True,
-                max_steps=2,
-                per_device_train_batch_size=2,
-                learning_rate=0.01,
-                report_to="none",
-                save_strategy="no",
-                disable_tqdm=True,
-                dataloader_pin_memory=False,
-            ),
-        )
+
+        def make_trainer(current_model, output, callbacks=()):
+            return Trainer(
+                model=current_model,
+                processing_class=tokenizer,
+                train_dataset=rows,
+                data_collator=DataCollatorForSeq2Seq(
+                    tokenizer=tokenizer, label_pad_token_id=-100
+                ),
+                args=TrainingArguments(
+                    output_dir=str(output),
+                    use_cpu=True,
+                    max_steps=4,
+                    per_device_train_batch_size=2,
+                    learning_rate=0.01,
+                    report_to="none",
+                    save_strategy="steps",
+                    save_steps=2,
+                    save_total_limit=2,
+                    disable_tqdm=True,
+                    dataloader_pin_memory=False,
+                ),
+                callbacks=list(callbacks),
+            )
+
+        trainer = make_trainer(model, scratch / "uninterrupted")
         result = trainer.train()
         assert any(
             p.detach().abs().sum().item() > 0
@@ -112,12 +127,66 @@ def main():
         with torch.no_grad():
             actual = restored(input_ids=ids).logits
         assert torch.allclose(expected, actual, atol=1e-6)
+
+        class SimulatedDisconnect(RuntimeError):
+            pass
+
+        class DisconnectAfterSave(TrainerCallback):
+            def on_save(self, args, state, control, **kwargs):
+                if state.global_step == 2:
+                    raise SimulatedDisconnect("Pretend the Colab runtime was lost")
+
+        def initial_model():
+            set_seed(42)
+            return PeftModel.from_pretrained(
+                AutoModelForCausalLM.from_pretrained(scratch / "base"),
+                scratch / "initial-adapter",
+                is_trainable=True,
+            )
+
+        spec = {"model": "tiny-random", "max_steps": 4, "seed": 42}
+        drive_run = scratch / "simulated-drive/run"
+        interrupted = make_trainer(
+            initial_model(),
+            scratch / "old-session",
+            [
+                drive_callback(drive_run, spec),
+                DisconnectAfterSave(),
+            ],
+        )
+        try:
+            interrupted.train()
+        except SimulatedDisconnect:
+            pass
+        else:
+            raise AssertionError("The interrupted training must stop at step 2")
+        snapshot, info = complete_checkpoints(drive_run)[0]
+        assert info["global_step"] == 2
+        local_checkpoint = restore_checkpoint(snapshot, scratch / "new-session", spec)
+        resumed_model = initial_model()
+        resumed = make_trainer(
+            resumed_model, scratch / "resumed", [drive_callback(drive_run, spec)]
+        )
+        resumed.train(resume_from_checkpoint=str(local_checkpoint))
+        assert resumed.state.global_step == trainer.state.global_step == 4
+        expected_parameters = dict(model.named_parameters())
+        for name, parameter in resumed_model.named_parameters():
+            if parameter.requires_grad:
+                assert torch.allclose(
+                    parameter, expected_parameters[name], atol=1e-6
+                ), name
+        assert resumed.lr_scheduler.state_dict() == trainer.lr_scheduler.state_dict()
+        assert all(int(s["step"]) == 4 for s in resumed.optimizer.state.values())
+        assert [m["global_step"] for _, m in complete_checkpoints(drive_run)] == [4, 3]
         report = {
             "kind": "tiny_random_cpu_model_only",
-            "steps": 2,
+            "steps": 4,
             "loss": result.training_loss,
             "lora_weights_changed": True,
             "save_reload_logits_match": True,
+            "interrupted_at_step": 2,
+            "full_checkpoint_resume_matches_uninterrupted": True,
+            "optimizer_and_scheduler_restored": True,
             "cuda_quantization_tested": False,
             "real_7b_training_run": False,
         }

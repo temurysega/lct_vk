@@ -1,0 +1,16 @@
+.git
+.venv
+.env
+.env.*
+__pycache__
+**/__pycache__
+.pytest_cache
+.ruff_cache
+*.egg-info
+node_modules
+slide-workspace
+external-fixtures
+demo-assets
+models
+reports
+tests

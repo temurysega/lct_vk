@@ -1,0 +1,75 @@
+services:
+  model:
+    build:
+      context: .
+      dockerfile: deploy/cpu/Dockerfile.llama
+    restart: unless-stopped
+    mem_limit: 2304m
+    cpus: 4
+    volumes:
+      - ./models/cpu:/models:ro
+    command:
+      - --model
+      - /models/base-q4_k_m.gguf
+      - --lora
+      - /models/layout-lora-f16.gguf
+      - --lora-init-without-apply
+      - --alias
+      - lct-cpu
+      - --host
+      - 0.0.0.0
+      - --port
+      - '8080'
+      - --ctx-size
+      - '4096'
+      - --parallel
+      - '1'
+      - --threads
+      - '4'
+      - --threads-batch
+      - '4'
+      - --batch-size
+      - '256'
+      - --ubatch-size
+      - '64'
+      - --n-gpu-layers
+      - '0'
+      - --no-context-shift
+      - --cache-ram
+      - '0'
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8080/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 120s
+  branddeck:
+    build: .
+    restart: unless-stopped
+    mem_limit: 1152m
+    cpus: 2
+    depends_on:
+      model:
+        condition: service_healthy
+    env_file:
+      - ./models/cpu/deployment.env
+    environment:
+      INFERENCE_BASE_URL: http://model:8080/v1
+      INFERENCE_API_KEY: ''
+      INFERENCE_MODEL: lct-cpu
+      INFERENCE_BACKEND: llamacpp
+      INFERENCE_LORA_ID: '0'
+      INFERENCE_CONTEXT_TOKENS: '4096'
+      INFERENCE_MAX_OUTPUT_TOKENS: '2048'
+      INFERENCE_TIMEOUT: '240'
+      INFERENCE_MAX_RETRIES: '1'
+      INFERENCE_VISION: '0'
+      BRANDDECK_CPU_MODE: '1'
+      BRANDDECK_WORKSPACE: /data
+      BRANDDECK_POWERPOINT_QA: '0'
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+    ports:
+      - "${BRANDDECK_BIND:-127.0.0.1}:8000:8000"
+    volumes:
+      - ./slide-workspace:/data

@@ -18,6 +18,7 @@ from .planner import assign_patterns, load_content, plan_deck
 from .powerpoint import inspect_powerpoint_render
 from .prompt_config import prompt_manifest
 from .qa import compact_plan, inspect_presentation
+from .resources import serialized_on_cpu
 from .utils import find_latest, read_json, resolve_workspace, unique_dir, write_json
 
 
@@ -95,6 +96,7 @@ def list_templates(workspace: str | Path | None = None) -> list[dict[str, Any]]:
     return result
 
 
+@serialized_on_cpu
 def generate_deck(
     *,
     template: str | Path | None,
@@ -284,9 +286,13 @@ def _generate_from_plan(
         "source": source_label,
         "inference_configured": client is not None,
         "inference_used": planner_mode == "inference"
-        or bool(template_manifest.get("ai_enhanced")) or "adapter" in selector_modes,
+        or bool(template_manifest.get("ai_enhanced"))
+        or "adapter" in selector_modes,
         "planner_mode": planner_mode,
-        "layout_selection": {mode: selector_modes.count(mode) for mode in ("adapter", "heuristic", "fallback")},
+        "layout_selection": {
+            mode: selector_modes.count(mode)
+            for mode in ("adapter", "heuristic", "fallback")
+        },
         "qa": qa,
         "content_coverage": coverage,
         "attempts": attempts,
@@ -332,6 +338,7 @@ VARIANTS = {
 }
 
 
+@serialized_on_cpu
 def generate_variants(
     *,
     template: str | Path,
@@ -424,6 +431,7 @@ def generate_variants(
     return batch
 
 
+@serialized_on_cpu
 def repair_presentation(
     presentation_id: str,
     issue_ids: list[str],

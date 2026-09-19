@@ -3,6 +3,8 @@ from __future__ import annotations
 import ast
 import copy
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -11,7 +13,7 @@ from slide_agent.config import InferenceSettings
 from slide_agent.layout_selector import select_with_adapter, selection_payload
 from slide_agent.llm import InferenceClient
 from slide_agent.planner import _slide_requirements, assign_patterns
-from training.build_notebook import notebook
+from training.build_notebook import ENVIRONMENT_SETUP, notebook
 from training.data_utils import check_split, encode_record, load_records
 from training.prepare_drive import make_record, split_records
 
@@ -170,3 +172,17 @@ def test_drive_notebook_is_standalone_and_cells_parse():
             ast.parse(source)
             assert "git clone" not in source
             assert not cell["outputs"] and cell["execution_count"] is None
+
+
+def test_notebook_subprocess_error_displays_underlying_cause(capsys):
+    namespace = {}
+    exec(ENVIRONMENT_SETUP, namespace)  # noqa: S102 - execute our notebook helper
+    with pytest.raises(subprocess.CalledProcessError):
+        namespace["run_visible"](
+            [
+                sys.executable,
+                "-c",
+                "import sys; print('missing environment component', file=sys.stderr); sys.exit(1)",
+            ]
+        )
+    assert "missing environment component" in capsys.readouterr().out

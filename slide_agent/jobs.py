@@ -6,6 +6,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from .resources import serialized_on_cpu
 from .service import generate_deck, generate_variants
 from .utils import read_json, resolve_workspace, write_json
 
@@ -70,6 +71,7 @@ def get_job(job_id: str, workspace: str | Path | None = None) -> dict[str, Any]:
     return read_json(path)
 
 
+@serialized_on_cpu
 def run_generation_job(
     job_id: str,
     *,

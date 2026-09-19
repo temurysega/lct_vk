@@ -62,6 +62,11 @@ def select_with_adapter(
     model = os.getenv("INFERENCE_LAYOUT_MODEL", "").strip()
     if client is None or not model:
         return None, {"mode": "heuristic"}
+    if client.settings.backend == "llamacpp" and client.settings.lora_id is None:
+        return None, {
+            "mode": "fallback",
+            "reason": "INFERENCE_LORA_ID is not configured",
+        }
     # Only consider candidates close to the deterministic winner. QA repair does
     # not call this model, and low-ranking candidates stay outside this window.
     pool = [item[1] for item in scored[:6] if item[0] >= scored[0][0] - 6]
@@ -75,9 +80,15 @@ def select_with_adapter(
     selector = InferenceClient(
         replace(
             client.settings,
-            model=model,
+            model=client.settings.model
+            if client.settings.backend == "llamacpp"
+            else model,
+            lora_scale=1.0,
             max_retries=1,
-            timeout_seconds=min(client.settings.timeout_seconds, 15),
+            timeout_seconds=min(
+                client.settings.timeout_seconds,
+                120 if client.settings.backend == "llamacpp" else 15,
+            ),
         )
     )
     try:

@@ -15,6 +15,7 @@ from slide_agent.planner import _score_pattern, _slide_requirements
 from slide_agent.prompt_config import load_prompt
 from slide_agent.service import resolve_template
 from slide_agent.utils import read_json, write_json
+from training.build_notebook import notebook
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -156,8 +157,12 @@ def split_records(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--templates", type=Path, default=ROOT.parent / "данные")
-    parser.add_argument("--output", type=Path, default=ROOT.parent / "gdrive/lct")
+    default_templates = ROOT.parent / "task+data" / "Датасет"
+    if not default_templates.is_dir():
+        default_templates = ROOT.parent / "данные"
+    parser.add_argument("--templates", type=Path, default=default_templates)
+    parser.add_argument("--output", type=Path)
+    parser.add_argument("--profile", choices=("gpu", "cpu"), default="gpu")
     parser.add_argument(
         "--validation-template",
         default="VK_WorkSpace_Клиентская_конференция_Шаблон_03.pptx",
@@ -170,7 +175,10 @@ def main() -> None:
         parser.error(
             "Need three template families including the chosen validation template"
         )
-    output = args.output.resolve()
+    output = (
+        args.output
+        or ROOT.parent / "gdrive" / ("lct_cpu" if args.profile == "cpu" else "lct")
+    ).resolve()
     output.mkdir(parents=True, exist_ok=True)
     rows = [
         row
@@ -193,17 +201,59 @@ def main() -> None:
     for p in templates:
         shutil.copy2(p, output / "templates" / p.name)
     (output / "scripts").mkdir(exist_ok=True)
-    for name in ("train_layout.py", "data_utils.py", "requirements-a100.txt"):
+    for name in (
+        "train_layout.py",
+        "data_utils.py",
+        "checkpoints.py",
+        "requirements-a100.txt",
+    ):
         shutil.copy2(ROOT / "training" / name, output / "scripts" / name)
-    shutil.copy2(
-        ROOT / "examples/BrandDeck_A100_Training_Drive.ipynb",
-        output / "BrandDeck_A100_Training_Drive.ipynb",
+    builder = notebook
+    notebook_name = "BrandDeck_A100_Training_Drive.ipynb"
+    readme = "DRIVE_README.md"
+    if args.profile == "cpu":
+        from training.build_cpu_notebook import notebook as cpu_notebook
+
+        builder = cpu_notebook
+        notebook_name = "BrandDeck_CPU_Training_Export.ipynb"
+        readme = "CPU_README.md"
+        for name in ("check_gguf.py", "export_cpu.py", "cpu_profile.json"):
+            shutil.copy2(ROOT / "training" / name, output / "scripts" / name)
+        write_json(
+            output / "data/planner_smoke.json",
+            {
+                "expected_slides": 3,
+                "request": {
+                    "model": "lct-cpu",
+                    "temperature": 0,
+                    "max_tokens": 1024,
+                    "response_format": {"type": "json_object"},
+                    "messages": [
+                        {"role": "system", "content": load_prompt("planner-cpu")},
+                        {
+                            "role": "user",
+                            "content": json.dumps(
+                                {
+                                    "requested_slide_count": 3,
+                                    "source": "Проект Сфера. Команда автоматизирует подготовку презентаций. За квартал создано 120 презентаций. Следующий этап — пилот в двух отделах.",
+                                },
+                                ensure_ascii=False,
+                            ),
+                        },
+                    ],
+                },
+            },
+        )
+    # Package current cells even when the separate notebook build was not run.
+    (output / notebook_name).write_text(
+        json.dumps(builder(), ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
-    shutil.copy2(ROOT / "training/DRIVE_README.md", output / "README.md")
+    shutil.copy2(ROOT / "training" / readme, output / "README.md")
     (output / "weights").mkdir(exist_ok=True)
     (output / "runs").mkdir(exist_ok=True)
     manifest = {
         "schema_version": 1,
+        "profile": args.profile,
         "task": "layout_candidate_selection",
         "label_kind": "weak_observed_exemplar_not_human_preference",
         "note": "Permutations are augmentation, not independent examples. No proof of slide quality.",

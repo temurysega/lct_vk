@@ -34,6 +34,42 @@ class InferenceClient:
             return url
         return f"{url}/chat/completions"
 
+    def _llama_output_budget(self, messages, requested: int, headers: dict) -> int:
+        """Count the real chat tokens; never truncate source material to fit RAM."""
+        root = self._endpoint().removesuffix("/v1/chat/completions")
+
+        def post(path, body):
+            request = urllib.request.Request(
+                root + path,
+                data=json.dumps(body, ensure_ascii=False).encode("utf-8"),
+                headers=headers,
+                method="POST",
+            )
+            try:
+                with urllib.request.urlopen(
+                    request, timeout=self.settings.timeout_seconds
+                ) as response:
+                    return json.load(response)
+            except (OSError, ValueError) as exc:
+                raise InferenceError(f"CPU context check failed: {exc}") from exc
+
+        try:
+            prompt = post("/apply-template", {"messages": messages})["prompt"]
+            tokens = post(
+                "/tokenize",
+                {"content": prompt, "add_special": False, "parse_special": True},
+            )["tokens"]
+        except (KeyError, TypeError) as exc:
+            raise InferenceError(
+                "CPU server returned invalid tokenization metadata"
+            ) from exc
+        available = self.settings.context_tokens - len(tokens) - 32
+        if available < min(requested, 128):
+            raise InferenceError(
+                f"CPU context exceeded: {len(tokens)} prompt tokens, {self.settings.context_tokens} total limit"
+            )
+        return min(requested, available)
+
     def chat(
         self,
         *,
@@ -78,6 +114,19 @@ class InferenceClient:
         headers = {"Content-Type": "application/json"}
         if self.settings.api_key:
             headers["Authorization"] = f"Bearer {self.settings.api_key}"
+        if self.settings.max_output_tokens > 0:
+            payload["max_tokens"] = min(
+                payload["max_tokens"], self.settings.max_output_tokens
+            )
+        if self.settings.backend == "llamacpp":
+            if self.settings.lora_id is not None:
+                payload["lora"] = [
+                    {"id": self.settings.lora_id, "scale": self.settings.lora_scale}
+                ]
+            if self.settings.context_tokens > 0:
+                payload["max_tokens"] = self._llama_output_budget(
+                    payload["messages"], payload["max_tokens"], headers
+                )
 
         last_error: Exception | None = None
         for attempt in range(self.settings.max_retries):
@@ -92,6 +141,10 @@ class InferenceClient:
                     request, timeout=self.settings.timeout_seconds
                 ) as response:
                     body = json.loads(response.read().decode("utf-8"))
+                if body["choices"][0].get("finish_reason") == "length":
+                    raise InferenceError(
+                        "Model output exceeded the token budget; response is incomplete"
+                    )
                 content = body["choices"][0]["message"]["content"]
                 if isinstance(content, list):
                     content = "".join(

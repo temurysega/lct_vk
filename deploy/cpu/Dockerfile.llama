@@ -1,0 +1,21 @@
+FROM ubuntu:24.04 AS builder
+ARG LLAMA_CPP_REVISION=1af554f8fc78ba029665a47b839484d9763e2a75
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git ca-certificates cmake build-essential libcurl4-openssl-dev \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /src
+RUN git init && git remote add origin https://github.com/ggml-org/llama.cpp.git \
+    && git fetch --depth 1 origin "$LLAMA_CPP_REVISION" && git checkout --detach FETCH_HEAD
+# Dispatch CPU backends at runtime, including older Intel CPUs; no CUDA dependency.
+RUN cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DGGML_CUDA=OFF \
+    -DGGML_NATIVE=OFF -DGGML_BACKEND_DL=ON -DGGML_CPU_ALL_VARIANTS=ON \
+    -DLLAMA_BUILD_TESTS=OFF -DLLAMA_BUILD_EXAMPLES=OFF \
+    && cmake --build build --target llama-server --parallel 1
+
+FROM ubuntu:24.04
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgomp1 libcurl4 ca-certificates curl && rm -rf /var/lib/apt/lists/*
+COPY --from=builder /src/build/bin/ /app/
+ENV LD_LIBRARY_PATH=/app
+WORKDIR /app
+ENTRYPOINT ["/app/llama-server"]
