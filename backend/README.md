@@ -6,11 +6,19 @@ FastAPI: `backend.main:app`. Старый импорт `slide_agent.api:app` и 
 
 ```bash
 python -m pip install -e ".[api,dev]"
+npm ci --prefix frontend
+npm run build --prefix frontend
 python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
 ```
 
 При запуске автоматически создаются SQLite-база и пользовательские каталоги
 в `BRANDDECK_WORKSPACE` (по умолчанию `slide-workspace/`).
+
+Маршруты `/` и `/studio` отдают React SPA из `frontend/dist/index.html`,
+а `/assets` — только собранные ресурсы. Исходники frontend не публикуются.
+Если сборки нет, страница возвращает HTTP 503 с командой сборки; API и CLI
+продолжают работать. Для разработки UI запустите `npm run dev --prefix frontend`:
+Vite проксирует API на порт 8000 без изменения Origin.
 
 ## Аккаунты
 

@@ -8,6 +8,8 @@ __pycache__
 .ruff_cache
 *.egg-info
 node_modules
+**/node_modules
+frontend/dist
 slide-workspace
 external-fixtures
 demo-assets

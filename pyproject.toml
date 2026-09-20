@@ -27,10 +27,11 @@ branddeck = "slide_agent.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["slide_agent*", "backend*", "frontend*"]
+namespaces = false
 
 [tool.setuptools.package-data]
 slide_agent = ["prompts/*.txt"]
-frontend = ["*.html", "*.css", "*.js", "*.svg", "images/*.jpg", "fonts/*.woff2", "fonts/*.txt"]
+frontend = ["dist/*.html", "dist/assets/*", "dist/assets/fonts/*", "dist/assets/images/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import hashlib
+import re
 from pathlib import Path
 
 import pytest
@@ -242,11 +243,30 @@ def test_large_template_context_is_bounded():
     assert len(json.dumps(design)) < 1000
 
 
+def test_web_without_build_keeps_api_available(tmp_path, monkeypatch):
+    import backend.main as backend_main
+
+    monkeypatch.setattr(backend_main, "WEB_ROOT", tmp_path / "missing-dist")
+    monkeypatch.setenv("BRANDDECK_WORKSPACE", str(tmp_path / "workspace"))
+    with TestClient(app) as client:
+        for route in ("/", "/studio"):
+            response = client.get(route)
+            assert response.status_code == 503
+            assert "npm run build" in response.json()["detail"]
+        assert client.get("/health").status_code == 200
+
+
 def test_web_and_variant_job(template, tmp_path, monkeypatch):
     monkeypatch.setenv("BRANDDECK_WORKSPACE", str(tmp_path / "w"))
     with TestClient(app) as client:
-        assert client.get("/").status_code == 200
-        assert client.get("/assets/app.js").status_code == 200
+        homepage = client.get("/")
+        assert homepage.status_code == 200
+        assert '<div id="root"></div>' in homepage.text
+        entry = re.search(r'src="(/assets/[^" ]+\.js)"', homepage.text)
+        assert entry is not None, "Build React first: npm run build --prefix frontend"
+        assert client.get(entry.group(1)).status_code == 200
+        assert client.get("/studio").text == homepage.text
+        assert client.get("/assets/src/main.tsx").status_code == 404
         assert (
             client.post(
                 "/api/auth/register",

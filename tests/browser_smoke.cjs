@@ -4,7 +4,10 @@ const { randomUUID } = require("node:crypto");
 const { mkdtempSync } = require("node:fs");
 const { tmpdir } = require("node:os");
 const { join } = require("node:path");
-const { chromium } = require(process.env.PREDEL_PLAYWRIGHT || "playwright");
+const { chromium } = require(
+  process.env.PREDEL_PLAYWRIGHT ||
+    require.resolve("playwright", { paths: [join(__dirname, "../frontend")] }),
+);
 
 const base = process.env.PREDEL_BASE_URL || "http://127.0.0.1:8000";
 const template = process.env.PREDEL_TEST_TEMPLATE;

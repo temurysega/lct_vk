@@ -1,0 +1,30 @@
+{
+  "name": "predel-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "preview": "vite preview --host 127.0.0.1",
+    "test:layout": "node ../tests/browser_layout.cjs",
+    "test:browser": "node ../tests/browser_smoke.cjs"
+  },
+  "dependencies": {
+    "lucide-react": "^0.468.0",
+    "motion": "13.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "axe-core": "^4.13.0",
+    "playwright": "^1.63.0",
+    "typescript": "7.0.2",
+    "vite": "8.3.0"
+  }
+}

@@ -26,25 +26,35 @@ from slide_agent.service import (
 )
 from slide_agent.utils import read_json, resolve_workspace
 
-WEB_ROOT = Path(frontend.__file__).parent
+WEB_ROOT = Path(frontend.__file__).parent / "dist"
 
 app = FastAPI(
     title="predel",
     version=__version__,
     description="Template-adaptive PowerPoint analysis and generation API",
 )
-app.mount("/assets", StaticFiles(directory=WEB_ROOT), name="assets")
+app.mount(
+    "/assets",
+    StaticFiles(directory=WEB_ROOT / "assets", check_dir=False),
+    name="assets",
+)
 install_auth(app)
 
 
 @app.get("/", include_in_schema=False)
 def homepage() -> FileResponse:
-    return FileResponse(WEB_ROOT / "index.html")
+    entry = WEB_ROOT / "index.html"
+    if not entry.is_file():
+        raise HTTPException(
+            status_code=503,
+            detail="Frontend is not built. Run: npm ci --prefix frontend && npm run build --prefix frontend",
+        )
+    return FileResponse(entry, headers={"Cache-Control": "no-cache"})
 
 
 @app.get("/studio", include_in_schema=False)
 def studio() -> FileResponse:
-    return FileResponse(WEB_ROOT / "studio.html")
+    return homepage()
 
 
 def _presentation_dir(presentation_id: str) -> Path:

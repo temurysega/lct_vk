@@ -4,7 +4,7 @@
 адаптивный интерфейс; регистрация требует только имя пользователя, пароль и
 должность. Email не нужен. Материалы и результаты изолированы по аккаунтам.
 
-`frontend/` — HTML/CSS/JS и локальные ресурсы; `backend/` — FastAPI и аккаунты;
+`frontend/` — React + TypeScript + Vite; `backend/` — FastAPI и аккаунты;
 `slide_agent/` — движок презентаций; `training/` — обучение модели.
 Подробнее: [frontend](frontend/README.md), [backend](backend/README.md).
 
@@ -12,12 +12,16 @@
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -e ".[api,dev]"
+npm ci --prefix frontend
+npm run build --prefix frontend
 python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
 ```
 
 Откройте `http://127.0.0.1:8000`. Модель подключается существующими переменными
 `INFERENCE_*`; без них доступна сборка по полным готовым материалам.
-Обучение и формат чекпоинтов не изменены.
+Обучение и формат чекпоинтов не изменены. Для сборки интерфейса нужен Node.js
+22.12+ (либо 20.19+); при запуске готовой сборки Node.js не требуется.
+Docker собирает интерфейс автоматически отдельным этапом.
 
 Open-source сервис, который анализирует произвольный `.pptx`- или `.pdf`-шаблон и создаёт новую презентацию в его стиле. Система извлекает дизайн-токены и паттерны, планирует структуру через OpenAI-compatible Inference API, выбирает подходящий реальный layout для каждого смыслового блока, собирает PowerPoint и запускает автоматический QA.
 
@@ -59,7 +63,7 @@ Open-source сервис, который анализирует произвол
 
 ### Локальная установка
 
-Требования: Python 3.10+.
+Требования: Python 3.10+. Для сборки веб-интерфейса дополнительно Node.js 22.12+.
 
 ```powershell
 python -m pip install -e ".[api]"
@@ -72,6 +76,8 @@ branddeck --json doctor
 
 ```powershell
 python -m pip install -e ".[api,export]"
+npm ci --prefix frontend
+npm run build --prefix frontend
 python -m slide_agent serve
 ```
 
