@@ -1,6 +1,8 @@
 # Node
 .venv/
 node_modules/
+build/
+dist/
 
 # Output files
 slide-workspace/
@@ -8,6 +10,7 @@ demo-assets/
 external-fixtures/
 models/
 .env
+cookies.txt
 .pytest_cache/
 __pycache__/
 *.egg-info/

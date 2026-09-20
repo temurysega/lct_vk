@@ -3,9 +3,7 @@ from pathlib import Path
 from fastapi.testclient import TestClient
 
 from examples.create_demo_assets import create_template
-from slide_agent.analyzer import analyze_template
 from slide_agent.api import app
-from slide_agent.utils import read_json
 
 
 def test_async_job_accepts_document_upload(tmp_path: Path, monkeypatch):
@@ -13,8 +11,6 @@ def test_async_job_accepts_document_upload(tmp_path: Path, monkeypatch):
     monkeypatch.setenv("BRANDDECK_WORKSPACE", str(workspace))
     template = tmp_path / "brand.pptx"
     create_template(template, "clean-blue")
-    analyzed = analyze_template(template, workspace=workspace)
-    template_id = read_json(analyzed / "manifest.json")["template_id"]
 
     content = """# BrandDeck
 ## Проблема
@@ -25,6 +21,23 @@ def test_async_job_accepts_document_upload(tmp_path: Path, monkeypatch):
 - Редактируемая презентация создаётся за минуты.
 """
     with TestClient(app) as client:
+        registration = client.post(
+            "/api/auth/register",
+            json={
+                "username": "designer",
+                "password": "test-password-123",
+                "position": "Дизайнер",
+            },
+        )
+        assert registration.status_code == 201
+        with template.open("rb") as source:
+            analyzed = client.post(
+                "/v1/templates/analyze",
+                files={"file": ("brand.pptx", source)},
+                data={"offline": "true"},
+            )
+        assert analyzed.status_code == 200
+        template_id = analyzed.json()["template_id"]
         response = client.post(
             "/v1/presentations/jobs",
             data={
@@ -45,3 +58,44 @@ def test_async_job_accepts_document_upload(tmp_path: Path, monkeypatch):
         download = client.get(f"/v1/jobs/{job_id}/download")
         assert download.status_code == 200
         assert download.content.startswith(b"PK")
+        # Work persists under the account, including background job output.
+        assert (
+            workspace
+            / "users"
+            / registration.json()["id"]
+            / "jobs"
+            / job_id
+            / "job.json"
+        ).is_file()
+        with TestClient(app) as stranger:
+            assert (
+                stranger.post(
+                    "/api/auth/register",
+                    json={
+                        "username": "another",
+                        "password": "test-password-123",
+                        "position": "Менеджер",
+                    },
+                ).status_code
+                == 201
+            )
+            assert stranger.get("/v1/templates").json() == []
+            assert stranger.get(f"/v1/jobs/{job_id}").status_code == 404
+            assert stranger.get(f"/v1/jobs/{job_id}/download").status_code == 404
+            assert (
+                stranger.get(
+                    f"/v1/presentations/{job['presentation_id']}/download"
+                ).status_code
+                == 404
+            )
+            assert (
+                stranger.post(
+                    "/v1/presentations/jobs",
+                    data={
+                        "template_id": analyzed.json()["path"],
+                        "content": content,
+                        "offline": "true",
+                    },
+                ).status_code
+                == 404
+            )

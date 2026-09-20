@@ -1,4 +1,23 @@
-# BrandDeck AI
+# predel
+
+Веб-сервис презентаций на движке BrandDeck AI. Главная и студия получили новый
+адаптивный интерфейс; регистрация требует только имя пользователя, пароль и
+должность. Email не нужен. Материалы и результаты изолированы по аккаунтам.
+
+`frontend/` — HTML/CSS/JS и локальные ресурсы; `backend/` — FastAPI и аккаунты;
+`slide_agent/` — движок презентаций; `training/` — обучение модели.
+Подробнее: [frontend](frontend/README.md), [backend](backend/README.md).
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e ".[api,dev]"
+python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
+```
+
+Откройте `http://127.0.0.1:8000`. Модель подключается существующими переменными
+`INFERENCE_*`; без них доступна сборка по полным готовым материалам.
+Обучение и формат чекпоинтов не изменены.
 
 Open-source сервис, который анализирует произвольный `.pptx`- или `.pdf`-шаблон и создаёт новую презентацию в его стиле. Система извлекает дизайн-токены и паттерны, планирует структуру через OpenAI-compatible Inference API, выбирает подходящий реальный layout для каждого смыслового блока, собирает PowerPoint и запускает автоматический QA.
 
@@ -80,7 +99,8 @@ python examples/run_dataset.py --config examples/demo.json
 Официальный контент-пакет организаторов нужно указать в `content`.
 Результаты: `slide-workspace/dataset/index.html`, `dataset_report.json`, а также
 PPTX/PDF/HTML, изображения и отчёты каждой презентации. Для просмотра тех же
-шаблонов в веб-интерфейсе запустите `python -m slide_agent --workspace slide-workspace/dataset serve`.
+шаблонов в веб-интерфейсе загрузите их в свой аккаунт: CLI-workspace и личные
+каталоги пользователей разделены.
 
 PDF и HTML строятся из реального рендера PPTX через LibreOffice. Сам PPTX содержит
 редактируемые объекты. HTML — автономный просмотр с SVG-страницами, а не редактор.
@@ -146,32 +166,40 @@ branddeck serve --host 0.0.0.0 --port 8000
 
 Swagger UI: `http://localhost:8000/docs`.
 
+Все `/v1/*` требуют сессию. Сначала зарегистрируйтесь или войдите и сохраните cookie:
+
 ```bash
-curl -F "file=@brand.pptx" -F "name=corporate" \
+curl -c cookies.txt -H 'Content-Type: application/json' \
+  -d '{"username":"designer","password":"replace-with-a-strong-password","position":"Дизайнер"}' \
+  http://localhost:8000/api/auth/register
+```
+
+```bash
+curl -b cookies.txt -F "file=@brand.pptx" -F "name=corporate" \
   http://localhost:8000/v1/templates/analyze
 
-curl -F "template_id=corporate-<hash>" \
+curl -b cookies.txt -F "template_id=corporate-<hash>" \
   -F "content=Создай отчёт о результатах квартала..." \
   -F "slide_count=8" \
   http://localhost:8000/v1/presentations/generate
 
-curl -o result.pptx \
+curl -b cookies.txt -o result.pptx \
   http://localhost:8000/v1/presentations/<presentation-id>/download
 ```
 
 Для долгой генерации и загрузки документа:
 
 ```bash
-curl -F "template_id=corporate-<hash>" \
+curl -b cookies.txt -F "template_id=corporate-<hash>" \
   -F "content_file=@content.md" \
   -F "slide_count=8" \
   http://localhost:8000/v1/presentations/jobs
 
-curl http://localhost:8000/v1/jobs/<job-id>
-curl -o result.pptx http://localhost:8000/v1/jobs/<job-id>/download
+curl -b cookies.txt http://localhost:8000/v1/jobs/<job-id>
+curl -b cookies.txt -o result.pptx http://localhost:8000/v1/jobs/<job-id>/download
 ```
 
-Асинхронные записи сохраняются в `slide-workspace/jobs/`. Текущая реализация
+Асинхронные записи API сохраняются в `slide-workspace/users/<user-id>/jobs/`. Текущая реализация
 исполняет задачи в процессе API; для горизонтального масштабирования потребуется
 внешняя очередь.
 

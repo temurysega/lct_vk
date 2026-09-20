@@ -5,12 +5,16 @@ import os
 import re
 import shutil
 import tempfile
+from contextvars import ContextVar
 from datetime import datetime
 from pathlib import Path
 from typing import Any
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_WORKSPACE = PROJECT_ROOT / "slide-workspace"
+request_workspace: ContextVar[Path | None] = ContextVar(
+    "request_workspace", default=None
+)
 
 _CYRILLIC_TO_LATIN = str.maketrans(
     {
@@ -97,7 +101,7 @@ def copy_file(source: Path, target: Path) -> None:
 
 
 def resolve_workspace(value: str | Path | None = None) -> Path:
-    configured = value or os.getenv("BRANDDECK_WORKSPACE")
+    configured = value or request_workspace.get() or os.getenv("BRANDDECK_WORKSPACE")
     return Path(configured).expanduser().resolve() if configured else DEFAULT_WORKSPACE
 
 

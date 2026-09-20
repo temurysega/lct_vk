@@ -247,6 +247,17 @@ def test_web_and_variant_job(template, tmp_path, monkeypatch):
     with TestClient(app) as client:
         assert client.get("/").status_code == 200
         assert client.get("/assets/app.js").status_code == 200
+        assert (
+            client.post(
+                "/api/auth/register",
+                json={
+                    "username": "designer",
+                    "password": "test-password-123",
+                    "position": "Дизайнер",
+                },
+            ).status_code
+            == 201
+        )
         with template.open("rb") as file:
             response = client.post(
                 "/v1/templates/analyze",
