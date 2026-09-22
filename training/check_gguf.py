@@ -51,6 +51,9 @@ def evaluate(url: str, rows: list[dict], scale: float | None) -> dict:
             choice, valid = None, False
         predictions.append(
             {
+                "design_family": row.get("provenance", {}).get(
+                    "design_family", "legacy"
+                ),
                 "expected": expected,
                 "choice": choice,
                 "valid": valid,
@@ -60,12 +63,28 @@ def evaluate(url: str, rows: list[dict], scale: float | None) -> dict:
                 "timings": response.get("timings"),
             }
         )
+    families = sorted({p["design_family"] for p in predictions})
+    by_family = {
+        family: {
+            "examples": sum(p["design_family"] == family for p in predictions),
+            "weak_label_accuracy": sum(
+                p["correct"] for p in predictions if p["design_family"] == family
+            )
+            / sum(p["design_family"] == family for p in predictions),
+        }
+        for family in families
+    }
     return {
         "examples": len(rows),
         "valid_json_rate": sum(p["valid"] for p in predictions) / len(rows),
         "weak_label_accuracy": sum(p["correct"] for p in predictions) / len(rows),
         "elapsed_seconds": round(time.perf_counter() - started, 2),
         "predictions": predictions,
+        "by_design_family": by_family,
+        "macro_family_accuracy": sum(
+            v["weak_label_accuracy"] for v in by_family.values()
+        )
+        / len(by_family),
     }
 
 

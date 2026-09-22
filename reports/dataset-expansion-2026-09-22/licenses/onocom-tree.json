@@ -1,0 +1,47 @@
+{
+  "sha": "2352e3fe338cd13b9a34cac9e824b2c4040c1c7a",
+  "url": "https://api.github.com/repos/onocom/powerpoint-template/git/trees/2352e3fe338cd13b9a34cac9e824b2c4040c1c7a",
+  "tree": [
+    {
+      "path": "LICENSE",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "67bf55902ae0588d7dee3cc8f2cfeee7e24ac5b1",
+      "size": 1068,
+      "url": "https://api.github.com/repos/onocom/powerpoint-template/git/blobs/67bf55902ae0588d7dee3cc8f2cfeee7e24ac5b1"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "35550fbf6369d112308e1612d87e2b751b81285f",
+      "size": 48,
+      "url": "https://api.github.com/repos/onocom/powerpoint-template/git/blobs/35550fbf6369d112308e1612d87e2b751b81285f"
+    },
+    {
+      "path": "powerpoint-template-sample.pdf",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5ba75d9c1f16cd408215fed3355ab85bf12d8752",
+      "size": 604989,
+      "url": "https://api.github.com/repos/onocom/powerpoint-template/git/blobs/5ba75d9c1f16cd408215fed3355ab85bf12d8752"
+    },
+    {
+      "path": "powerpoint-template-sample.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b4a24bc6c78a473d0f67df5f320b55a4536c3c1f",
+      "size": 144803,
+      "url": "https://api.github.com/repos/onocom/powerpoint-template/git/blobs/b4a24bc6c78a473d0f67df5f320b55a4536c3c1f"
+    },
+    {
+      "path": "powerpoint-template.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f8f91f8122a2e78ba0fdd9e2a05eea9b29dba7ba",
+      "size": 38227,
+      "url": "https://api.github.com/repos/onocom/powerpoint-template/git/blobs/f8f91f8122a2e78ba0fdd9e2a05eea9b29dba7ba"
+    }
+  ],
+  "truncated": false
+}

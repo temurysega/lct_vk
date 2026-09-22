@@ -1,0 +1,62 @@
+{
+  "sha": "0f18f3f1fe2d76413c45b0106e7585d64beb920d",
+  "url": "https://api.github.com/repos/lrkrol/powerpoint/git/trees/0f18f3f1fe2d76413c45b0106e7585d64beb920d",
+  "tree": [
+    {
+      "path": ".gitattributes",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dfe0770424b2a19faf507a501ebfc23be8f54e7b",
+      "size": 66,
+      "url": "https://api.github.com/repos/lrkrol/powerpoint/git/blobs/dfe0770424b2a19faf507a501ebfc23be8f54e7b"
+    },
+    {
+      "path": "docs",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "180213b041f4eb66295698735aacef83e0e96840",
+      "url": "https://api.github.com/repos/lrkrol/powerpoint/git/trees/180213b041f4eb66295698735aacef83e0e96840"
+    },
+    {
+      "path": "docs/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "903c5873edfdebe0f33446f5ff8ba224fc4de4d6",
+      "size": 1098,
+      "url": "https://api.github.com/repos/lrkrol/powerpoint/git/blobs/903c5873edfdebe0f33446f5ff8ba224fc4de4d6"
+    },
+    {
+      "path": "docs/lrk-slides-velis-sample.pdf",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "33053e7c53a29138e05fcab7327b18f04580a367",
+      "size": 278427,
+      "url": "https://api.github.com/repos/lrkrol/powerpoint/git/blobs/33053e7c53a29138e05fcab7327b18f04580a367"
+    },
+    {
+      "path": "docs/lrk-slides-velis-sample.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "74eac7f3ba485f9c10b6f9a630d814db2129c2cb",
+      "size": 315851,
+      "url": "https://api.github.com/repos/lrkrol/powerpoint/git/blobs/74eac7f3ba485f9c10b6f9a630d814db2129c2cb"
+    },
+    {
+      "path": "docs/lrk-slides-velis-thumbs.png",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b387cbd6e49a36f7232865823f8a9c601dae6fdd",
+      "size": 77157,
+      "url": "https://api.github.com/repos/lrkrol/powerpoint/git/blobs/b387cbd6e49a36f7232865823f8a9c601dae6fdd"
+    },
+    {
+      "path": "lrk-slides-velis.potx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ed6765d10713254dc339c6131291de79409e90b5",
+      "size": 106463,
+      "url": "https://api.github.com/repos/lrkrol/powerpoint/git/blobs/ed6765d10713254dc339c6131291de79409e90b5"
+    }
+  ],
+  "truncated": false
+}

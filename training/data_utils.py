@@ -24,12 +24,23 @@ def load_records(path: Path) -> list[dict]:
     return records
 
 
-def check_split(train: list[dict], validation: list[dict]) -> None:
-    for field in ("group", "template_sha256"):
-        left = {r["provenance"][field] for r in train}
-        right = {r["provenance"][field] for r in validation}
-        if left & right:
-            raise ValueError(f"Train/validation leakage in {field}")
+def check_split(train: list[dict], validation: list[dict], test=None) -> None:
+    """Check all pairs; a partially populated family identifier fails closed."""
+    parts = {"train": train, "validation": validation}
+    if test is not None:
+        parts["test"] = test
+    fields = ["group", "template_sha256"]
+    if any("design_family" in r["provenance"] for rows in parts.values() for r in rows):
+        fields.append("design_family")
+    for field in fields:
+        seen = set()
+        for name, rows in parts.items():
+            values = {r["provenance"].get(field) for r in rows}
+            if None in values or "" in values:
+                raise ValueError(f"Missing {field} in {name}")
+            if seen & values:
+                raise ValueError(f"Split leakage in {field}: {name}")
+            seen.update(values)
 
 
 def encode_record(tokenizer, row: dict, max_length: int) -> dict:

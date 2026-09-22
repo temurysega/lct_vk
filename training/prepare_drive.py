@@ -125,7 +125,17 @@ def make_record(row: dict, permutation: int) -> dict:
             {"role": "assistant", "content": json.dumps({"choice": choice})},
         ],
         "provenance": {
-            k: row[k] for k in ("template", "template_sha256", "source_slide", "group")
+            k: row[k]
+            for k in (
+                "template",
+                "template_sha256",
+                "source_slide",
+                "group",
+                "design_family",
+                "source_url",
+                "license_url",
+            )
+            if k in row
         },
         "label_kind": "weak_observed_exemplar_not_human_preference",
         "heuristic_choice": heuristic_choice,

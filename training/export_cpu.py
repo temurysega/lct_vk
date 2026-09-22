@@ -72,6 +72,14 @@ def main():
     if not adapter.is_relative_to(root):
         raise ValueError("Adapter must be inside this Drive bundle")
     run = validate_adapter(adapter, profile)
+    manifest_path = root / "data/manifest.json"
+    if run.get("dataset_sha256") != file_hash(manifest_path):
+        raise ValueError("Export dataset does not match the completed training run")
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    for relative, expected in manifest["files"].items():
+        path = (root / relative).resolve()
+        if not path.is_relative_to(root) or file_hash(path) != expected:
+            raise ValueError(f"Package checksum mismatch: {relative}")
     local = args.local_root.resolve() / run["run_id"]
     local.mkdir(parents=True, exist_ok=True)
     from huggingface_hub import snapshot_download
@@ -149,6 +157,24 @@ def main():
         raise ValueError(
             "CPU export did not pass memory/planner checks; see the local cpu_report.json"
         )
+    # The deployment decision above is frozen using validation only. Test is
+    # evaluated afterwards and never changes adapter enablement or parameters.
+    if (root / "data/test.jsonl").exists():
+        test_report = check(
+            binaries / ("llama-server" + suffix),
+            quantized,
+            lora,
+            root / "data/test.jsonl",
+            root / "data/planner_smoke.json",
+            portable / "test_report.json",
+        )
+        test_report.pop("enable_layout_adapter", None)
+        test_report["selection_split"] = "validation"
+        test_report["frozen_enable_layout_adapter"] = report["enable_layout_adapter"]
+        test_report["purpose"] = (
+            "Final held-out design systems; do not tune on this report"
+        )
+        atomic_json(portable / "test_report.json", test_report)
     for name in (
         "training_run.json",
         "metrics.json",
@@ -157,7 +183,11 @@ def main():
     ):
         shutil.copy2(adapter / name, portable / name)
     shutil.copy2(root / "scripts/cpu_profile.json", portable / "cpu_profile.json")
-    shutil.copy2(root / "README.md", portable / "README.md")
+    deployment_readme = root / "CPU_README.md"
+    shutil.copy2(
+        deployment_readme if deployment_readme.exists() else root / "README.md",
+        portable / "README.md",
+    )
     shutil.copy2(llama / "LICENSE", portable / "LICENSE.llama.cpp")
     if (base / "LICENSE").exists():
         shutil.copy2(base / "LICENSE", portable / "LICENSE.model")

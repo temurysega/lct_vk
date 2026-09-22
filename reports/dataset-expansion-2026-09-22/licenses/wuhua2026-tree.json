@@ -1,0 +1,2985 @@
+{
+  "sha": "f0e14a5621764c605d0c5027bfab172ef1d1eb0f",
+  "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/f0e14a5621764c605d0c5027bfab172ef1d1eb0f",
+  "tree": [
+    {
+      "path": ".gitattributes",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bb7343ab9826acc8115c3cda0269d16bac61ffa7",
+      "size": 254,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/bb7343ab9826acc8115c3cda0269d16bac61ffa7"
+    },
+    {
+      "path": ".github",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "81dcc4bd62c430ad876397ecfdebf8aa401baf5e",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/81dcc4bd62c430ad876397ecfdebf8aa401baf5e"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "eb92abfed3910ba14eec5cd4d5a4d1f8d467ebd8",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/eb92abfed3910ba14eec5cd4d5a4d1f8d467ebd8"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dce4d3b10b194792b74818fec4285a0a688bde70",
+      "size": 705,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/dce4d3b10b194792b74818fec4285a0a688bde70"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "323b09f8f1afe25979a673122ae66611895f8d87",
+      "size": 749,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/323b09f8f1afe25979a673122ae66611895f8d87"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d62919b7f55672931cfb51f0de415cf651bcd270",
+      "size": 916,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/d62919b7f55672931cfb51f0de415cf651bcd270"
+    },
+    {
+      "path": ".github/workflows",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8b83701cea1246cdaafba134645d28ac679ad964",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/8b83701cea1246cdaafba134645d28ac679ad964"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f638f64799c60a98d35f50a4bf9b376f0ef3a4c0",
+      "size": 2464,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/f638f64799c60a98d35f50a4bf9b376f0ef3a4c0"
+    },
+    {
+      "path": ".gitignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f06b419d4f4841fccc3a38e17627d0fc78989f24",
+      "size": 597,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/f06b419d4f4841fccc3a38e17627d0fc78989f24"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3bbbdd7517c773f7ec67185983eedbd68649f825",
+      "size": 2132,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/3bbbdd7517c773f7ec67185983eedbd68649f825"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5c8a1b7da04810eef1067fbcdcf8f2e3a8c6ec55",
+      "size": 2448,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/5c8a1b7da04810eef1067fbcdcf8f2e3a8c6ec55"
+    },
+    {
+      "path": "LICENSE",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "14fac913ccf80234b1848540089a3bbcb6e5283d",
+      "size": 1056,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/14fac913ccf80234b1848540089a3bbcb6e5283d"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fd818ca98f74864d805213f70e4477dcb5297b98",
+      "size": 13183,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/fd818ca98f74864d805213f70e4477dcb5297b98"
+    },
+    {
+      "path": "examples",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "90e2c66068e1df820c6192329dd0c39de61407d2",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/90e2c66068e1df820c6192329dd0c39de61407d2"
+    },
+    {
+      "path": "examples/batch_generate.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4cc116d0b17ffd9f84d24cb53544b24c3da6b03b",
+      "size": 1142,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/4cc116d0b17ffd9f84d24cb53544b24c3da6b03b"
+    },
+    {
+      "path": "examples/custom_colors.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9d1f4fe5dca734679f45dcd3193172b6e81d7081",
+      "size": 7052,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/9d1f4fe5dca734679f45dcd3193172b6e81d7081"
+    },
+    {
+      "path": "examples/quick_start.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d4b576e2a3792f4613b0a2677ff79dfff7f1ee74",
+      "size": 7169,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/d4b576e2a3792f4613b0a2677ff79dfff7f1ee74"
+    },
+    {
+      "path": "js",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "529886c5a02dcdb7550dae93cb96a84da957dd96",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/529886c5a02dcdb7550dae93cb96a84da957dd96"
+    },
+    {
+      "path": "js/examples",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "7aa7521d2a876ee0aa232ec8a298557dbb530e67",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/7aa7521d2a876ee0aa232ec8a298557dbb530e67"
+    },
+    {
+      "path": "js/examples/quick-start.ts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dac584ddb5a1d5994b59e8b549f5853fd32af2be",
+      "size": 5821,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/dac584ddb5a1d5994b59e8b549f5853fd32af2be"
+    },
+    {
+      "path": "js/package-lock.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9d6faa339c2a85f4977d0ba9d8720ec53a1bb83e",
+      "size": 15257,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/9d6faa339c2a85f4977d0ba9d8720ec53a1bb83e"
+    },
+    {
+      "path": "js/package.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "07c13810bef81e90b6eb68cce3f24f89480a0269",
+      "size": 741,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/07c13810bef81e90b6eb68cce3f24f89480a0269"
+    },
+    {
+      "path": "js/src",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9ed92c6f6f0f9b64bff6108ea3d4934bee83cb80",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/9ed92c6f6f0f9b64bff6108ea3d4934bee83cb80"
+    },
+    {
+      "path": "js/src/base.ts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6dd4bdf5a4e01c5c555bdd21fc2ec3885d783817",
+      "size": 5919,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/6dd4bdf5a4e01c5c555bdd21fc2ec3885d783817"
+    },
+    {
+      "path": "js/src/generators",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b8dcacbff444fa0669a98ba3d91ddcc3808effba",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/b8dcacbff444fa0669a98ba3d91ddcc3808effba"
+    },
+    {
+      "path": "js/src/generators/chart.ts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fdde5c987a62b6426b2acacbf835a5a8dd44a7b8",
+      "size": 13721,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/fdde5c987a62b6426b2acacbf835a5a8dd44a7b8"
+    },
+    {
+      "path": "js/src/generators/complete.ts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "69c43c394d43168d7ccda5a9892d477a32b8f29a",
+      "size": 28501,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/69c43c394d43168d7ccda5a9892d477a32b8f29a"
+    },
+    {
+      "path": "js/src/generators/content.ts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "18f23d563af0edac86608950b8094b7dca67acc5",
+      "size": 14187,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/18f23d563af0edac86608950b8094b7dca67acc5"
+    },
+    {
+      "path": "js/src/generators/cover.ts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a03766697b34f570ffee498a64191c7c015007b2",
+      "size": 16226,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a03766697b34f570ffee498a64191c7c015007b2"
+    },
+    {
+      "path": "js/src/generators/directory.ts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "537890055e3fb9a596a9bcd708786dbbd2634355",
+      "size": 17661,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/537890055e3fb9a596a9bcd708786dbbd2634355"
+    },
+    {
+      "path": "js/src/generators/ending.ts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "99b1764c16a36fecbea16fde95f3a001efb0594d",
+      "size": 11911,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/99b1764c16a36fecbea16fde95f3a001efb0594d"
+    },
+    {
+      "path": "js/src/generators/team.ts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "acda79ea04ee355539c89dc545caaad7e5ea483d",
+      "size": 12236,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/acda79ea04ee355539c89dc545caaad7e5ea483d"
+    },
+    {
+      "path": "js/src/generators/timeline.ts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b95043a52234ef88dff4dfdebfe3ff3f9a8b7335",
+      "size": 14391,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/b95043a52234ef88dff4dfdebfe3ff3f9a8b7335"
+    },
+    {
+      "path": "js/src/index.ts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "06ef902f7bbc4d57cdf2fea054a642d2ec7816be",
+      "size": 1954,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/06ef902f7bbc4d57cdf2fea054a642d2ec7816be"
+    },
+    {
+      "path": "js/src/themes",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "25ec3f5b5258baf66930c715b7ecc065288befc3",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/25ec3f5b5258baf66930c715b7ecc065288befc3"
+    },
+    {
+      "path": "js/src/themes/index.ts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "36543b51a806b35a7cced315f4f7c78b7e4545eb",
+      "size": 2567,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/36543b51a806b35a7cced315f4f7c78b7e4545eb"
+    },
+    {
+      "path": "js/src/utils.ts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5f07027dae7803e44a7887cc9864edbbfb585e01",
+      "size": 7738,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/5f07027dae7803e44a7887cc9864edbbfb585e01"
+    },
+    {
+      "path": "js/tsconfig.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1030b8b135965bfaff4b0acdf2ce56db942e0715",
+      "size": 498,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/1030b8b135965bfaff4b0acdf2ce56db942e0715"
+    },
+    {
+      "path": "ppt-generator",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c58aac9a030fb2c2f4b7ba301e5f3d489b3784a0",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/c58aac9a030fb2c2f4b7ba301e5f3d489b3784a0"
+    },
+    {
+      "path": "ppt-generator/SKILL.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a89fe29eb5077305d79d5f267c511696dbf093bf",
+      "size": 7131,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a89fe29eb5077305d79d5f267c511696dbf093bf"
+    },
+    {
+      "path": "ppt-generator/scripts",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9abe186f71da838bddf9e7e22708170ece642886",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/9abe186f71da838bddf9e7e22708170ece642886"
+    },
+    {
+      "path": "ppt-generator/scripts/setup.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2b7122b15317a81c91b2fd7070ea07a83ba410f9",
+      "size": 1681,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/2b7122b15317a81c91b2fd7070ea07a83ba410f9"
+    },
+    {
+      "path": "pyproject.toml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "79944593b851ef1a312e4d951a2bcd903bb64983",
+      "size": 1328,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/79944593b851ef1a312e4d951a2bcd903bb64983"
+    },
+    {
+      "path": "pytest.ini",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b9c31b2b597a0ee481dbace951f239976eb5780e",
+      "size": 115,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/b9c31b2b597a0ee481dbace951f239976eb5780e"
+    },
+    {
+      "path": "python",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "abd2abf97e4921540c7dcb9d1e4073026093ca45",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/abd2abf97e4921540c7dcb9d1e4073026093ca45"
+    },
+    {
+      "path": "python/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0970714ebc232f332ff8716d867c9b8c735fb74c",
+      "size": 4217,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/0970714ebc232f332ff8716d867c9b8c735fb74c"
+    },
+    {
+      "path": "python/animation.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ecce0aa36d3683ba03869119774542ca4c557729",
+      "size": 8773,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/ecce0aa36d3683ba03869119774542ca4c557729"
+    },
+    {
+      "path": "python/base.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f4a13955b9bd36d28c3a0025eb2a19ceef03d9d5",
+      "size": 4790,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/f4a13955b9bd36d28c3a0025eb2a19ceef03d9d5"
+    },
+    {
+      "path": "python/generators_chart",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b5a20476ed8d2e12f7455d0bdfce153abbafd837",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/b5a20476ed8d2e12f7455d0bdfce153abbafd837"
+    },
+    {
+      "path": "python/generators_chart/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "77408fa1d83a5c0eb1d71f8b7be6ee33c7049c3a",
+      "size": 355,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/77408fa1d83a5c0eb1d71f8b7be6ee33c7049c3a"
+    },
+    {
+      "path": "python/generators_chart/animated_chart.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a09add1633a317e7df93ab0d77cc8a98ca4772a8",
+      "size": 7826,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a09add1633a317e7df93ab0d77cc8a98ca4772a8"
+    },
+    {
+      "path": "python/generators_chart/bar_chart.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "afbe9486ff524111388d78551e5d209d55fe9777",
+      "size": 6610,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/afbe9486ff524111388d78551e5d209d55fe9777"
+    },
+    {
+      "path": "python/generators_chart/line_chart.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3f67fc609eba0300d7c9eb2aef3c20f20f49dd1c",
+      "size": 8836,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/3f67fc609eba0300d7c9eb2aef3c20f20f49dd1c"
+    },
+    {
+      "path": "python/generators_chart/pie_chart.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "62a500f916b040448bf206211170308f09a6ada3",
+      "size": 7865,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/62a500f916b040448bf206211170308f09a6ada3"
+    },
+    {
+      "path": "python/generators_complete",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2240ec8699f773dcf418567a23f0716466831b59",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/2240ec8699f773dcf418567a23f0716466831b59"
+    },
+    {
+      "path": "python/generators_complete/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "427683a7225f4179ca6d1c537d47e531dc813986",
+      "size": 875,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/427683a7225f4179ca6d1c537d47e531dc813986"
+    },
+    {
+      "path": "python/generators_complete/annual_report.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "feb26d91334b2420f99fa75ef59caa64ed8a6d3e",
+      "size": 29223,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/feb26d91334b2420f99fa75ef59caa64ed8a6d3e"
+    },
+    {
+      "path": "python/generators_complete/business_plan.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ef395696592cb3c6463409710120ccd59b661b7e",
+      "size": 34040,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/ef395696592cb3c6463409710120ccd59b661b7e"
+    },
+    {
+      "path": "python/generators_complete/career_planning.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a035d144dfe999e8ebbb96b23025cfe553b9bc92",
+      "size": 28900,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a035d144dfe999e8ebbb96b23025cfe553b9bc92"
+    },
+    {
+      "path": "python/generators_complete/education_course.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c7941feb7b19b168a5adf3fb022fe8dafa172fa7",
+      "size": 29305,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/c7941feb7b19b168a5adf3fb022fe8dafa172fa7"
+    },
+    {
+      "path": "python/generators_complete/product_launch.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "863e6015d56db01d0416fc6709d2ba7a3ff6b726",
+      "size": 35000,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/863e6015d56db01d0416fc6709d2ba7a3ff6b726"
+    },
+    {
+      "path": "python/generators_complete/technology_theme.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5bc752b59d3c0948ac4414ab61ba709abc08b589",
+      "size": 27757,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/5bc752b59d3c0948ac4414ab61ba709abc08b589"
+    },
+    {
+      "path": "python/generators_content",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "bf126387b7c3ee1b38d18f2ca4a56d4e0ae5997f",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/bf126387b7c3ee1b38d18f2ca4a56d4e0ae5997f"
+    },
+    {
+      "path": "python/generators_content/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a130e1b36667cbe3fc223acfdbdc8ca53793e2f9",
+      "size": 560,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a130e1b36667cbe3fc223acfdbdc8ca53793e2f9"
+    },
+    {
+      "path": "python/generators_content/comparison.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b5bcfc47daa532901ed10374b191ed3dc7156c3b",
+      "size": 7514,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/b5bcfc47daa532901ed10374b191ed3dc7156c3b"
+    },
+    {
+      "path": "python/generators_content/four_grid.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7065f7a8a5dcca5b71208e9e609b5ac182abe3a3",
+      "size": 6020,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/7065f7a8a5dcca5b71208e9e609b5ac182abe3a3"
+    },
+    {
+      "path": "python/generators_content/full_image_overlay.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f29a674e630107f7d2c357a73a6c3c045822ab0e",
+      "size": 6584,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/f29a674e630107f7d2c357a73a6c3c045822ab0e"
+    },
+    {
+      "path": "python/generators_content/text_image_layout.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9dc56e9fb007bb456da477fdea9033fadc2435e3",
+      "size": 7436,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/9dc56e9fb007bb456da477fdea9033fadc2435e3"
+    },
+    {
+      "path": "python/generators_content/three_column.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3060686ac050d2e8e8418a26dfa8d54552462b0e",
+      "size": 5696,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/3060686ac050d2e8e8418a26dfa8d54552462b0e"
+    },
+    {
+      "path": "python/generators_cover",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4b16646460f51507d7488a3017eced16b7de34eb",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/4b16646460f51507d7488a3017eced16b7de34eb"
+    },
+    {
+      "path": "python/generators_cover/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "481de4b187094f6213fb4e337fd15517c51ea0f9",
+      "size": 1233,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/481de4b187094f6213fb4e337fd15517c51ea0f9"
+    },
+    {
+      "path": "python/generators_cover/circle_ring.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f900101582e35dd4733ae288b2cd069458f1c1c0",
+      "size": 6423,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/f900101582e35dd4733ae288b2cd069458f1c1c0"
+    },
+    {
+      "path": "python/generators_cover/diamond_reveal.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "17ca01a544267f5ea5abd068fd0ce080d6daf366",
+      "size": 8678,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/17ca01a544267f5ea5abd068fd0ce080d6daf366"
+    },
+    {
+      "path": "python/generators_cover/geometric_rotation.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7d14169c24d5d7a74e0debf7c19da25ebc05d6f4",
+      "size": 5652,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/7d14169c24d5d7a74e0debf7c19da25ebc05d6f4"
+    },
+    {
+      "path": "python/generators_cover/hollow_mask.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bf8cc6d4a027ea94bc7416ad21412b204eec362d",
+      "size": 5249,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/bf8cc6d4a027ea94bc7416ad21412b204eec362d"
+    },
+    {
+      "path": "python/generators_cover/layered_depth.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8527326a89e0eddde1f2ea8e5e4895d1b119bb86",
+      "size": 5533,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/8527326a89e0eddde1f2ea8e5e4895d1b119bb86"
+    },
+    {
+      "path": "python/generators_cover/minimalist_gradient.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "32cf4c1828cd1d49dba0b332ff9a3288dec5541d",
+      "size": 4336,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/32cf4c1828cd1d49dba0b332ff9a3288dec5541d"
+    },
+    {
+      "path": "python/generators_cover/split_screen.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7624581baa2d12efee935115a119539c50b43974",
+      "size": 5016,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/7624581baa2d12efee935115a119539c50b43974"
+    },
+    {
+      "path": "python/generators_cover/train_mist.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0a112bda4528d577dbfd4b463b23569cbdb86bc3",
+      "size": 8337,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/0a112bda4528d577dbfd4b463b23569cbdb86bc3"
+    },
+    {
+      "path": "python/generators_directory",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "059fd7c2d50fe547b48cd6b6d3b5387f1ddfc3d0",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/059fd7c2d50fe547b48cd6b6d3b5387f1ddfc3d0"
+    },
+    {
+      "path": "python/generators_directory/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "78d4487e8df5cec943b1c47f67cd2d84b9046336",
+      "size": 642,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/78d4487e8df5cec943b1c47f67cd2d84b9046336"
+    },
+    {
+      "path": "python/generators_directory/card_grid.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1e68547867a5ec722bb06c18e93c9cbe5b8e3591",
+      "size": 5631,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/1e68547867a5ec722bb06c18e93c9cbe5b8e3591"
+    },
+    {
+      "path": "python/generators_directory/circular_ring.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a55c9172d7dd067f95b23c5dc825a72372419879",
+      "size": 5560,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a55c9172d7dd067f95b23c5dc825a72372419879"
+    },
+    {
+      "path": "python/generators_directory/diamond_animated.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "84ced0a46b49346ca4b0f97acc5b0578e06a4a91",
+      "size": 5408,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/84ced0a46b49346ca4b0f97acc5b0578e06a4a91"
+    },
+    {
+      "path": "python/generators_directory/hexagon.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "43396a453b0c50fcd5f85863eaccd1889fad1b8b",
+      "size": 4836,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/43396a453b0c50fcd5f85863eaccd1889fad1b8b"
+    },
+    {
+      "path": "python/generators_directory/sidebar.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "55b907d39bd9bcc3e7af59108912b79cfd66f560",
+      "size": 5740,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/55b907d39bd9bcc3e7af59108912b79cfd66f560"
+    },
+    {
+      "path": "python/generators_directory/timeline_style.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "66d7260c459357fb093a40b6e2ff369a13c8d1a9",
+      "size": 6098,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/66d7260c459357fb093a40b6e2ff369a13c8d1a9"
+    },
+    {
+      "path": "python/generators_ending",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "43967134a2aacf63bd0afb84062196d99aed2ff5",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/43967134a2aacf63bd0afb84062196d99aed2ff5"
+    },
+    {
+      "path": "python/generators_ending/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e24bf91c0afc667c025f9e37f52c5d79fe564d42",
+      "size": 321,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e24bf91c0afc667c025f9e37f52c5d79fe564d42"
+    },
+    {
+      "path": "python/generators_ending/contact.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e9d3f9f77cc8dc4e388546a2881b30ad487e107d",
+      "size": 8471,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e9d3f9f77cc8dc4e388546a2881b30ad487e107d"
+    },
+    {
+      "path": "python/generators_ending/qr_code.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "645eea8f561954ff23b49f155b992cb90a11e543",
+      "size": 7275,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/645eea8f561954ff23b49f155b992cb90a11e543"
+    },
+    {
+      "path": "python/generators_ending/thank_you.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a446cb8f7431b672fff88b51280f3830a82b4654",
+      "size": 6792,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a446cb8f7431b672fff88b51280f3830a82b4654"
+    },
+    {
+      "path": "python/generators_team",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "91e682321d7e788cc2c9e51d5281d5db361e6921",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/91e682321d7e788cc2c9e51d5281d5db361e6921"
+    },
+    {
+      "path": "python/generators_team/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e390b0f7938c01784c2aa9fa1aacea9c4a3ac5e2",
+      "size": 323,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e390b0f7938c01784c2aa9fa1aacea9c4a3ac5e2"
+    },
+    {
+      "path": "python/generators_team/org_chart.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8f527fbcd4a7d1a07fa468f71745adc8242f74f4",
+      "size": 10419,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/8f527fbcd4a7d1a07fa468f71745adc8242f74f4"
+    },
+    {
+      "path": "python/generators_team/person_card.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1c9881022470fda9739042ee90a783133502dd69",
+      "size": 7968,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/1c9881022470fda9739042ee90a783133502dd69"
+    },
+    {
+      "path": "python/generators_team/team_grid.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3d7ab6dc2a77c92360471af0f5635b50660a2eb3",
+      "size": 7765,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/3d7ab6dc2a77c92360471af0f5635b50660a2eb3"
+    },
+    {
+      "path": "python/generators_timeline",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b7c5ed9183fd136a92b6f2dd96609eef6b0b9268",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/b7c5ed9183fd136a92b6f2dd96609eef6b0b9268"
+    },
+    {
+      "path": "python/generators_timeline/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "db6c9f4fad8457eb2f62ad26aa118db11c9037d8",
+      "size": 407,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/db6c9f4fad8457eb2f62ad26aa118db11c9037d8"
+    },
+    {
+      "path": "python/generators_timeline/dual_wave.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4b0a301cbee53b8d3d10a0631409023e9bcd19f7",
+      "size": 10202,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/4b0a301cbee53b8d3d10a0631409023e9bcd19f7"
+    },
+    {
+      "path": "python/generators_timeline/horizontal.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5832c20ace450b239befafae70931ec95e01e12f",
+      "size": 6098,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/5832c20ace450b239befafae70931ec95e01e12f"
+    },
+    {
+      "path": "python/generators_timeline/spiral.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7a6b2757bd41d3e911f277fd9911363311027e74",
+      "size": 6693,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/7a6b2757bd41d3e911f277fd9911363311027e74"
+    },
+    {
+      "path": "python/generators_timeline/vertical.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4862831ea58339e00f91a520adc22ddb70fdceab",
+      "size": 5668,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/4862831ea58339e00f91a520adc22ddb70fdceab"
+    },
+    {
+      "path": "python/utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0007dfa82035886108dbde20df3decbb87eba9eb",
+      "size": 3503,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/0007dfa82035886108dbde20df3decbb87eba9eb"
+    },
+    {
+      "path": "requirements.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "218249ca2786d1c1e7fc35c52ee5c71b66cc4ef0",
+      "size": 46,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/218249ca2786d1c1e7fc35c52ee5c71b66cc4ef0"
+    },
+    {
+      "path": "scripts",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "39ef5cf89174b9daf0d577e512c2d4a34bcdc239",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/39ef5cf89174b9daf0d577e512c2d4a34bcdc239"
+    },
+    {
+      "path": "scripts/check_parity.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b1428f5efaa216571b2583a84ebcef32da658f04",
+      "size": 7243,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/b1428f5efaa216571b2583a84ebcef32da658f04"
+    },
+    {
+      "path": "scripts/generate_all.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a7890952b1cd1fd352cd0906441d8592695424a1",
+      "size": 29551,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a7890952b1cd1fd352cd0906441d8592695424a1"
+    },
+    {
+      "path": "scripts/generate_decks.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e41152b1e04ca9f35c61fbb5760fc43f1d90269e",
+      "size": 3215,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e41152b1e04ca9f35c61fbb5760fc43f1d90269e"
+    },
+    {
+      "path": "scripts/verify_templates.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bf3ab1fefa70eb40b440a302ef9545cb10ffb373",
+      "size": 3571,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/bf3ab1fefa70eb40b440a302ef9545cb10ffb373"
+    },
+    {
+      "path": "templates",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "555d62f31db194cf8dcf0d4d44c445906d135fe2",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/555d62f31db194cf8dcf0d4d44c445906d135fe2"
+    },
+    {
+      "path": "templates/animated",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "97247851b1d2960f9645038ae53f0796b0a46636",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/97247851b1d2960f9645038ae53f0796b0a46636"
+    },
+    {
+      "path": "templates/animated/chart",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9b72dfcce57cebd2ec7a07088357a6b0b57d0e2f",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/9b72dfcce57cebd2ec7a07088357a6b0b57d0e2f"
+    },
+    {
+      "path": "templates/animated/chart/animated_bar_chart_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "af0e8460d87bfd3b80b453a567f57f113e473e64",
+      "size": 30012,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/af0e8460d87bfd3b80b453a567f57f113e473e64"
+    },
+    {
+      "path": "templates/animated/chart/animated_bar_chart_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "95e095c584d9ea13fd3cfc7f4a09c391e76e29a6",
+      "size": 30012,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/95e095c584d9ea13fd3cfc7f4a09c391e76e29a6"
+    },
+    {
+      "path": "templates/animated/chart/animated_bar_chart_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3f9dd7bbd3ae35ad9f7e3adac7968c7adbd9a4e7",
+      "size": 30012,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/3f9dd7bbd3ae35ad9f7e3adac7968c7adbd9a4e7"
+    },
+    {
+      "path": "templates/animated/chart/animated_bar_chart_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "95e095c584d9ea13fd3cfc7f4a09c391e76e29a6",
+      "size": 30012,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/95e095c584d9ea13fd3cfc7f4a09c391e76e29a6"
+    },
+    {
+      "path": "templates/animated/chart/animated_bar_chart_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3f9dd7bbd3ae35ad9f7e3adac7968c7adbd9a4e7",
+      "size": 30012,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/3f9dd7bbd3ae35ad9f7e3adac7968c7adbd9a4e7"
+    },
+    {
+      "path": "templates/animated/chart/animated_bar_chart_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "95e095c584d9ea13fd3cfc7f4a09c391e76e29a6",
+      "size": 30012,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/95e095c584d9ea13fd3cfc7f4a09c391e76e29a6"
+    },
+    {
+      "path": "templates/animated/chart/animated_bar_chart_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3f9dd7bbd3ae35ad9f7e3adac7968c7adbd9a4e7",
+      "size": 30012,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/3f9dd7bbd3ae35ad9f7e3adac7968c7adbd9a4e7"
+    },
+    {
+      "path": "templates/animated/cover",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a59a5fda7c7ec63cf72f71387df7e11ee2f36e74",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/a59a5fda7c7ec63cf72f71387df7e11ee2f36e74"
+    },
+    {
+      "path": "templates/animated/cover/circle_ring_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "19e023df550e4b3d596db7affeecab49fd1eea5d",
+      "size": 29809,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/19e023df550e4b3d596db7affeecab49fd1eea5d"
+    },
+    {
+      "path": "templates/animated/cover/circle_ring_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "17a7bb504500fe47b8d500b1e9f1a0e2f92e0379",
+      "size": 29814,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/17a7bb504500fe47b8d500b1e9f1a0e2f92e0379"
+    },
+    {
+      "path": "templates/animated/cover/circle_ring_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f06463f39beee2bff5bebc84e2c49d0f624201e2",
+      "size": 29813,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/f06463f39beee2bff5bebc84e2c49d0f624201e2"
+    },
+    {
+      "path": "templates/animated/cover/circle_ring_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "495443f2fd84b18d63c1e6fc7f6210fda6ff3cc8",
+      "size": 29806,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/495443f2fd84b18d63c1e6fc7f6210fda6ff3cc8"
+    },
+    {
+      "path": "templates/animated/cover/circle_ring_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4ea27e35c734026f3fcec06b14708053e9efab4b",
+      "size": 29810,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/4ea27e35c734026f3fcec06b14708053e9efab4b"
+    },
+    {
+      "path": "templates/animated/cover/circle_ring_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a81b666ea74020fbcc181b5ea02873aebd3b91f1",
+      "size": 29814,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a81b666ea74020fbcc181b5ea02873aebd3b91f1"
+    },
+    {
+      "path": "templates/animated/cover/circle_ring_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7865d79aad00d85e4a05a69f06d9712832fad10f",
+      "size": 29814,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/7865d79aad00d85e4a05a69f06d9712832fad10f"
+    },
+    {
+      "path": "templates/animated/cover/diamond_reveal_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e9b4b28285f837e03881709c13cb4a4ffe1c694d",
+      "size": 30286,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e9b4b28285f837e03881709c13cb4a4ffe1c694d"
+    },
+    {
+      "path": "templates/animated/cover/diamond_reveal_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1254d1f8281e2ff99e32f89707e291c7bf1a6e1d",
+      "size": 30285,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/1254d1f8281e2ff99e32f89707e291c7bf1a6e1d"
+    },
+    {
+      "path": "templates/animated/cover/diamond_reveal_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c328c282c37f9b4abdc46e4d460c3fe4d224106a",
+      "size": 30286,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/c328c282c37f9b4abdc46e4d460c3fe4d224106a"
+    },
+    {
+      "path": "templates/animated/cover/diamond_reveal_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6b00b2ace0c89fca94243aa11e78a69e8eb647bc",
+      "size": 30283,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/6b00b2ace0c89fca94243aa11e78a69e8eb647bc"
+    },
+    {
+      "path": "templates/animated/cover/diamond_reveal_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "200d6a3821ffc306d3d943114478e0695386846e",
+      "size": 30287,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/200d6a3821ffc306d3d943114478e0695386846e"
+    },
+    {
+      "path": "templates/animated/cover/diamond_reveal_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a6ef42dd9795fe43d0ca0e13bee51a1fec49fad1",
+      "size": 30287,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a6ef42dd9795fe43d0ca0e13bee51a1fec49fad1"
+    },
+    {
+      "path": "templates/animated/cover/diamond_reveal_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bca3143b50272d5a50e7fbaf4e4f7afa3ed14351",
+      "size": 30287,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/bca3143b50272d5a50e7fbaf4e4f7afa3ed14351"
+    },
+    {
+      "path": "templates/animated/cover/geometric_rotation_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9c014e2493ca536726ed170cab57a1e71293d20d",
+      "size": 29381,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/9c014e2493ca536726ed170cab57a1e71293d20d"
+    },
+    {
+      "path": "templates/animated/cover/geometric_rotation_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c70b0e217a2cf6a69f1d0f33d89d6868a77a4aa7",
+      "size": 29382,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/c70b0e217a2cf6a69f1d0f33d89d6868a77a4aa7"
+    },
+    {
+      "path": "templates/animated/cover/geometric_rotation_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "43bbe45df2fd720d354fe855b375d12ff3e87b0c",
+      "size": 29384,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/43bbe45df2fd720d354fe855b375d12ff3e87b0c"
+    },
+    {
+      "path": "templates/animated/cover/geometric_rotation_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b73093dfe9c79630cee49fa2620861efa7f728b3",
+      "size": 29375,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/b73093dfe9c79630cee49fa2620861efa7f728b3"
+    },
+    {
+      "path": "templates/animated/cover/geometric_rotation_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8f84b912d33e39c0807a22ece113b4cb71786a49",
+      "size": 29383,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/8f84b912d33e39c0807a22ece113b4cb71786a49"
+    },
+    {
+      "path": "templates/animated/cover/geometric_rotation_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "beb3a0d667f38a065e77d376f22061a771062749",
+      "size": 29385,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/beb3a0d667f38a065e77d376f22061a771062749"
+    },
+    {
+      "path": "templates/animated/cover/geometric_rotation_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "00dadfe47609fdb42443ce19a538d9e8c4cc78ec",
+      "size": 29381,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/00dadfe47609fdb42443ce19a538d9e8c4cc78ec"
+    },
+    {
+      "path": "templates/animated/cover/train_mist_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "17004445f9fafb707077d57c663f33a981738ada",
+      "size": 30041,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/17004445f9fafb707077d57c663f33a981738ada"
+    },
+    {
+      "path": "templates/animated/cover/train_mist_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c06f0cb888ff7ec9798088b01b94ab15a3bea76e",
+      "size": 30045,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/c06f0cb888ff7ec9798088b01b94ab15a3bea76e"
+    },
+    {
+      "path": "templates/animated/cover/train_mist_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "65bfd49e2a39744a53fa0c4f031a876c5a59b8f2",
+      "size": 30044,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/65bfd49e2a39744a53fa0c4f031a876c5a59b8f2"
+    },
+    {
+      "path": "templates/animated/cover/train_mist_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8919a00c33412d94bd2667394706b05db779acfb",
+      "size": 30032,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/8919a00c33412d94bd2667394706b05db779acfb"
+    },
+    {
+      "path": "templates/animated/cover/train_mist_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "746efe3853053faee68f4bb3034930e68fdaceeb",
+      "size": 30038,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/746efe3853053faee68f4bb3034930e68fdaceeb"
+    },
+    {
+      "path": "templates/animated/cover/train_mist_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2a7ed888c9deaf800472d65920dad138f7485f8e",
+      "size": 30044,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/2a7ed888c9deaf800472d65920dad138f7485f8e"
+    },
+    {
+      "path": "templates/animated/cover/train_mist_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4ee6b7c6332a5dee3debb0153236e2ea665af0ac",
+      "size": 30045,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/4ee6b7c6332a5dee3debb0153236e2ea665af0ac"
+    },
+    {
+      "path": "templates/animated/directory",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "54724ef64ec3abb03cc2642c651e36fe525d7323",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/54724ef64ec3abb03cc2642c651e36fe525d7323"
+    },
+    {
+      "path": "templates/animated/directory/circular_ring_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2ed5c6e891fc09e04d6438485472a47ffd0cfcc8",
+      "size": 29724,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/2ed5c6e891fc09e04d6438485472a47ffd0cfcc8"
+    },
+    {
+      "path": "templates/animated/directory/circular_ring_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2ed5c6e891fc09e04d6438485472a47ffd0cfcc8",
+      "size": 29724,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/2ed5c6e891fc09e04d6438485472a47ffd0cfcc8"
+    },
+    {
+      "path": "templates/animated/directory/circular_ring_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1f16442cbeb654e0d55816223a42418b7cd7ecf2",
+      "size": 29724,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/1f16442cbeb654e0d55816223a42418b7cd7ecf2"
+    },
+    {
+      "path": "templates/animated/directory/circular_ring_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1f16442cbeb654e0d55816223a42418b7cd7ecf2",
+      "size": 29724,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/1f16442cbeb654e0d55816223a42418b7cd7ecf2"
+    },
+    {
+      "path": "templates/animated/directory/circular_ring_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1f16442cbeb654e0d55816223a42418b7cd7ecf2",
+      "size": 29724,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/1f16442cbeb654e0d55816223a42418b7cd7ecf2"
+    },
+    {
+      "path": "templates/animated/directory/circular_ring_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2ed5c6e891fc09e04d6438485472a47ffd0cfcc8",
+      "size": 29724,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/2ed5c6e891fc09e04d6438485472a47ffd0cfcc8"
+    },
+    {
+      "path": "templates/animated/directory/circular_ring_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5be57c6589d95c51747ac90836629d1ce7e117e0",
+      "size": 29724,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/5be57c6589d95c51747ac90836629d1ce7e117e0"
+    },
+    {
+      "path": "templates/animated/directory/diamond_animated_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8d5256a8d21df2acc1ccf00ac67283b2df4e31dc",
+      "size": 29513,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/8d5256a8d21df2acc1ccf00ac67283b2df4e31dc"
+    },
+    {
+      "path": "templates/animated/directory/diamond_animated_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8d5256a8d21df2acc1ccf00ac67283b2df4e31dc",
+      "size": 29513,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/8d5256a8d21df2acc1ccf00ac67283b2df4e31dc"
+    },
+    {
+      "path": "templates/animated/directory/diamond_animated_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e2eca80c416bec5f0635498509eb32eb856563d6",
+      "size": 29513,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e2eca80c416bec5f0635498509eb32eb856563d6"
+    },
+    {
+      "path": "templates/animated/directory/diamond_animated_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e2eca80c416bec5f0635498509eb32eb856563d6",
+      "size": 29513,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e2eca80c416bec5f0635498509eb32eb856563d6"
+    },
+    {
+      "path": "templates/animated/directory/diamond_animated_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e2eca80c416bec5f0635498509eb32eb856563d6",
+      "size": 29513,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e2eca80c416bec5f0635498509eb32eb856563d6"
+    },
+    {
+      "path": "templates/animated/directory/diamond_animated_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8d5256a8d21df2acc1ccf00ac67283b2df4e31dc",
+      "size": 29513,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/8d5256a8d21df2acc1ccf00ac67283b2df4e31dc"
+    },
+    {
+      "path": "templates/animated/directory/diamond_animated_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "85f9f9daae25c10c4dd40041dbea31ed6392e13f",
+      "size": 29513,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/85f9f9daae25c10c4dd40041dbea31ed6392e13f"
+    },
+    {
+      "path": "templates/animated/directory/hexagon_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "278a8cf0ec2a50e94bc7a2a57a9b64f7e1822f3b",
+      "size": 29113,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/278a8cf0ec2a50e94bc7a2a57a9b64f7e1822f3b"
+    },
+    {
+      "path": "templates/animated/directory/hexagon_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "278a8cf0ec2a50e94bc7a2a57a9b64f7e1822f3b",
+      "size": 29113,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/278a8cf0ec2a50e94bc7a2a57a9b64f7e1822f3b"
+    },
+    {
+      "path": "templates/animated/directory/hexagon_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fcf6f5ecb0cc2e67f4c6d8f7d833c04108ecd4f6",
+      "size": 29113,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/fcf6f5ecb0cc2e67f4c6d8f7d833c04108ecd4f6"
+    },
+    {
+      "path": "templates/animated/directory/hexagon_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fcf6f5ecb0cc2e67f4c6d8f7d833c04108ecd4f6",
+      "size": 29113,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/fcf6f5ecb0cc2e67f4c6d8f7d833c04108ecd4f6"
+    },
+    {
+      "path": "templates/animated/directory/hexagon_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fcf6f5ecb0cc2e67f4c6d8f7d833c04108ecd4f6",
+      "size": 29113,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/fcf6f5ecb0cc2e67f4c6d8f7d833c04108ecd4f6"
+    },
+    {
+      "path": "templates/animated/directory/hexagon_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "278a8cf0ec2a50e94bc7a2a57a9b64f7e1822f3b",
+      "size": 29113,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/278a8cf0ec2a50e94bc7a2a57a9b64f7e1822f3b"
+    },
+    {
+      "path": "templates/animated/directory/hexagon_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6ffe2735f56d2586eaed6cb1e86869aff2109fe2",
+      "size": 29113,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/6ffe2735f56d2586eaed6cb1e86869aff2109fe2"
+    },
+    {
+      "path": "templates/animated/timeline",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "14c4eb600658375fb2b2198f97ac662aa53c6ad6",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/14c4eb600658375fb2b2198f97ac662aa53c6ad6"
+    },
+    {
+      "path": "templates/animated/timeline/dual_wave_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e99fa9dbc559b89aef61d479a6069ff6f23a5f09",
+      "size": 31045,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e99fa9dbc559b89aef61d479a6069ff6f23a5f09"
+    },
+    {
+      "path": "templates/animated/timeline/dual_wave_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e99fa9dbc559b89aef61d479a6069ff6f23a5f09",
+      "size": 31045,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e99fa9dbc559b89aef61d479a6069ff6f23a5f09"
+    },
+    {
+      "path": "templates/animated/timeline/dual_wave_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a195e23d783176c7511be51351509dd9871b8484",
+      "size": 31045,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a195e23d783176c7511be51351509dd9871b8484"
+    },
+    {
+      "path": "templates/animated/timeline/dual_wave_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a195e23d783176c7511be51351509dd9871b8484",
+      "size": 31045,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a195e23d783176c7511be51351509dd9871b8484"
+    },
+    {
+      "path": "templates/animated/timeline/dual_wave_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a195e23d783176c7511be51351509dd9871b8484",
+      "size": 31045,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a195e23d783176c7511be51351509dd9871b8484"
+    },
+    {
+      "path": "templates/animated/timeline/dual_wave_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e99fa9dbc559b89aef61d479a6069ff6f23a5f09",
+      "size": 31045,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e99fa9dbc559b89aef61d479a6069ff6f23a5f09"
+    },
+    {
+      "path": "templates/animated/timeline/dual_wave_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c42665a8c12c75c9e07307ab7804b4fa8c52b14d",
+      "size": 31045,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/c42665a8c12c75c9e07307ab7804b4fa8c52b14d"
+    },
+    {
+      "path": "templates/animated/timeline/spiral_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "913d895a0ce448712e062ff8b82aa5d17945833d",
+      "size": 29393,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/913d895a0ce448712e062ff8b82aa5d17945833d"
+    },
+    {
+      "path": "templates/animated/timeline/spiral_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "913d895a0ce448712e062ff8b82aa5d17945833d",
+      "size": 29393,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/913d895a0ce448712e062ff8b82aa5d17945833d"
+    },
+    {
+      "path": "templates/animated/timeline/spiral_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dc6026cd1448c5177e26bee49606ae6d2dfe2407",
+      "size": 29393,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/dc6026cd1448c5177e26bee49606ae6d2dfe2407"
+    },
+    {
+      "path": "templates/animated/timeline/spiral_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dc6026cd1448c5177e26bee49606ae6d2dfe2407",
+      "size": 29393,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/dc6026cd1448c5177e26bee49606ae6d2dfe2407"
+    },
+    {
+      "path": "templates/animated/timeline/spiral_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dc6026cd1448c5177e26bee49606ae6d2dfe2407",
+      "size": 29393,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/dc6026cd1448c5177e26bee49606ae6d2dfe2407"
+    },
+    {
+      "path": "templates/animated/timeline/spiral_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "913d895a0ce448712e062ff8b82aa5d17945833d",
+      "size": 29393,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/913d895a0ce448712e062ff8b82aa5d17945833d"
+    },
+    {
+      "path": "templates/animated/timeline/spiral_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8de2e1d0722a3a3bfa5a4c5e430571ba6bbc9aee",
+      "size": 29393,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/8de2e1d0722a3a3bfa5a4c5e430571ba6bbc9aee"
+    },
+    {
+      "path": "templates/complete",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f0a9d98810b685de3ad4552bf5380f0a86cf2b87",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/f0a9d98810b685de3ad4552bf5380f0a86cf2b87"
+    },
+    {
+      "path": "templates/complete/annual_report.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2bc981d921f6729e4259a46fb08aca1ef7e535e9",
+      "size": 61311,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/2bc981d921f6729e4259a46fb08aca1ef7e535e9"
+    },
+    {
+      "path": "templates/complete/business_plan.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5cf497f5093da85d99b5d7784f84b91f854ff127",
+      "size": 57429,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/5cf497f5093da85d99b5d7784f84b91f854ff127"
+    },
+    {
+      "path": "templates/complete/career_planning.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3aba5bc37684bb3990ea1d71eb701a8cc90f8748",
+      "size": 53375,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/3aba5bc37684bb3990ea1d71eb701a8cc90f8748"
+    },
+    {
+      "path": "templates/complete/education_course.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9d94a904fb80d700536b233cbe38fa24c9314185",
+      "size": 57198,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/9d94a904fb80d700536b233cbe38fa24c9314185"
+    },
+    {
+      "path": "templates/complete/product_launch.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fa7ef82c66850be5fc9223d506eb964b933f2a87",
+      "size": 59689,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/fa7ef82c66850be5fc9223d506eb964b933f2a87"
+    },
+    {
+      "path": "templates/complete/technology_theme.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a2ae37619f65cb585ea01554472b27cadb5172c3",
+      "size": 53905,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a2ae37619f65cb585ea01554472b27cadb5172c3"
+    },
+    {
+      "path": "templates/static",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e3e3be4e2ced32fa4e0b39a35860a4400e83d14e",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/e3e3be4e2ced32fa4e0b39a35860a4400e83d14e"
+    },
+    {
+      "path": "templates/static/chart",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "0534856df99ab720bc275d07a86874146621e0ec",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/0534856df99ab720bc275d07a86874146621e0ec"
+    },
+    {
+      "path": "templates/static/chart/bar_chart_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d4e141f3c14584d906a8328af9bfc29d9ef24a0e",
+      "size": 29513,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/d4e141f3c14584d906a8328af9bfc29d9ef24a0e"
+    },
+    {
+      "path": "templates/static/chart/bar_chart_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e9388d79d567d943966486e80b64b1568bd35f2c",
+      "size": 29513,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e9388d79d567d943966486e80b64b1568bd35f2c"
+    },
+    {
+      "path": "templates/static/chart/bar_chart_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f2cc058f787455d37a05a83b0c829498b5ec8d46",
+      "size": 29513,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/f2cc058f787455d37a05a83b0c829498b5ec8d46"
+    },
+    {
+      "path": "templates/static/chart/bar_chart_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e9388d79d567d943966486e80b64b1568bd35f2c",
+      "size": 29513,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e9388d79d567d943966486e80b64b1568bd35f2c"
+    },
+    {
+      "path": "templates/static/chart/bar_chart_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f2cc058f787455d37a05a83b0c829498b5ec8d46",
+      "size": 29513,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/f2cc058f787455d37a05a83b0c829498b5ec8d46"
+    },
+    {
+      "path": "templates/static/chart/bar_chart_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d4e141f3c14584d906a8328af9bfc29d9ef24a0e",
+      "size": 29513,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/d4e141f3c14584d906a8328af9bfc29d9ef24a0e"
+    },
+    {
+      "path": "templates/static/chart/bar_chart_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f2cc058f787455d37a05a83b0c829498b5ec8d46",
+      "size": 29513,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/f2cc058f787455d37a05a83b0c829498b5ec8d46"
+    },
+    {
+      "path": "templates/static/chart/line_chart_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "01e8dcd001204dd8c44a79740e5a8efd565869e3",
+      "size": 29889,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/01e8dcd001204dd8c44a79740e5a8efd565869e3"
+    },
+    {
+      "path": "templates/static/chart/line_chart_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7155dc4c93302b83ca252fc85d02252dd058b104",
+      "size": 29889,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/7155dc4c93302b83ca252fc85d02252dd058b104"
+    },
+    {
+      "path": "templates/static/chart/line_chart_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a820227a7d99d175ff7fe9d8664d9c3043b5c2ba",
+      "size": 29889,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a820227a7d99d175ff7fe9d8664d9c3043b5c2ba"
+    },
+    {
+      "path": "templates/static/chart/line_chart_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7155dc4c93302b83ca252fc85d02252dd058b104",
+      "size": 29889,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/7155dc4c93302b83ca252fc85d02252dd058b104"
+    },
+    {
+      "path": "templates/static/chart/line_chart_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a820227a7d99d175ff7fe9d8664d9c3043b5c2ba",
+      "size": 29889,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a820227a7d99d175ff7fe9d8664d9c3043b5c2ba"
+    },
+    {
+      "path": "templates/static/chart/line_chart_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "87aba593be76e26a26c79b4f4da1a5d870e76b3d",
+      "size": 29889,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/87aba593be76e26a26c79b4f4da1a5d870e76b3d"
+    },
+    {
+      "path": "templates/static/chart/line_chart_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a820227a7d99d175ff7fe9d8664d9c3043b5c2ba",
+      "size": 29889,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a820227a7d99d175ff7fe9d8664d9c3043b5c2ba"
+    },
+    {
+      "path": "templates/static/chart/pie_chart_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e75b92330a09fa8ad04e4a766c436a03af09e05d",
+      "size": 29441,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e75b92330a09fa8ad04e4a766c436a03af09e05d"
+    },
+    {
+      "path": "templates/static/chart/pie_chart_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b3074a9e768e7e077d80e0fe1b429e476d4a50d6",
+      "size": 29441,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/b3074a9e768e7e077d80e0fe1b429e476d4a50d6"
+    },
+    {
+      "path": "templates/static/chart/pie_chart_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cfd4ef351d61ca8fbdf08781c06a518527a3c6a9",
+      "size": 29441,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/cfd4ef351d61ca8fbdf08781c06a518527a3c6a9"
+    },
+    {
+      "path": "templates/static/chart/pie_chart_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b3074a9e768e7e077d80e0fe1b429e476d4a50d6",
+      "size": 29441,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/b3074a9e768e7e077d80e0fe1b429e476d4a50d6"
+    },
+    {
+      "path": "templates/static/chart/pie_chart_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cfd4ef351d61ca8fbdf08781c06a518527a3c6a9",
+      "size": 29441,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/cfd4ef351d61ca8fbdf08781c06a518527a3c6a9"
+    },
+    {
+      "path": "templates/static/chart/pie_chart_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e75b92330a09fa8ad04e4a766c436a03af09e05d",
+      "size": 29441,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e75b92330a09fa8ad04e4a766c436a03af09e05d"
+    },
+    {
+      "path": "templates/static/chart/pie_chart_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cfd4ef351d61ca8fbdf08781c06a518527a3c6a9",
+      "size": 29441,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/cfd4ef351d61ca8fbdf08781c06a518527a3c6a9"
+    },
+    {
+      "path": "templates/static/content",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e4688fb95703b1ac9bef8764a55306dcf6f740b2",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/e4688fb95703b1ac9bef8764a55306dcf6f740b2"
+    },
+    {
+      "path": "templates/static/content/comparison_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d9bbb7e58f351530b999378cbc7b7e01d9318476",
+      "size": 29407,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/d9bbb7e58f351530b999378cbc7b7e01d9318476"
+    },
+    {
+      "path": "templates/static/content/comparison_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "121d64c4270eebf14f28b30fc09d5b1ef95a5c69",
+      "size": 29408,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/121d64c4270eebf14f28b30fc09d5b1ef95a5c69"
+    },
+    {
+      "path": "templates/static/content/comparison_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "872c277893722ef751949512e7c9f4df029b4dd6",
+      "size": 29409,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/872c277893722ef751949512e7c9f4df029b4dd6"
+    },
+    {
+      "path": "templates/static/content/comparison_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "56eb1822696104c582e8909718558cacc0cce398",
+      "size": 29399,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/56eb1822696104c582e8909718558cacc0cce398"
+    },
+    {
+      "path": "templates/static/content/comparison_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3814f121b9213a7c00150724d3293c937cc44e5e",
+      "size": 29406,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/3814f121b9213a7c00150724d3293c937cc44e5e"
+    },
+    {
+      "path": "templates/static/content/comparison_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dee8023b3d14f524964ff3ec129e362715ace0cc",
+      "size": 29408,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/dee8023b3d14f524964ff3ec129e362715ace0cc"
+    },
+    {
+      "path": "templates/static/content/comparison_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fa429b505efb2d0b4322c4db44888630cae4b776",
+      "size": 29409,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/fa429b505efb2d0b4322c4db44888630cae4b776"
+    },
+    {
+      "path": "templates/static/content/four_grid_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ed6884521d585fbd38451c26442931f96c3cf685",
+      "size": 29604,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/ed6884521d585fbd38451c26442931f96c3cf685"
+    },
+    {
+      "path": "templates/static/content/four_grid_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8a8f8046ae72d416cf3884f5c9ce97ce42bae090",
+      "size": 29608,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/8a8f8046ae72d416cf3884f5c9ce97ce42bae090"
+    },
+    {
+      "path": "templates/static/content/four_grid_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dfc38c637c3a1091e7e2732ca946acc7640b7829",
+      "size": 29607,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/dfc38c637c3a1091e7e2732ca946acc7640b7829"
+    },
+    {
+      "path": "templates/static/content/four_grid_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a98c056f69ca78f36a5c6b382bb927ae62697698",
+      "size": 29601,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a98c056f69ca78f36a5c6b382bb927ae62697698"
+    },
+    {
+      "path": "templates/static/content/four_grid_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "222da889d6f89b823301470ad305a3d06bbd3a26",
+      "size": 29605,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/222da889d6f89b823301470ad305a3d06bbd3a26"
+    },
+    {
+      "path": "templates/static/content/four_grid_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c1c4658be940f270cc6814d542dd2ea8218a53c4",
+      "size": 29607,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/c1c4658be940f270cc6814d542dd2ea8218a53c4"
+    },
+    {
+      "path": "templates/static/content/four_grid_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "86bb127ac3b2fa9d20d71c4df0b23ad58b641307",
+      "size": 29609,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/86bb127ac3b2fa9d20d71c4df0b23ad58b641307"
+    },
+    {
+      "path": "templates/static/content/full_image_overlay_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "97d4f0ab615bb8061e0c4d0cfdd42ac3d6c5b17f",
+      "size": 30727,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/97d4f0ab615bb8061e0c4d0cfdd42ac3d6c5b17f"
+    },
+    {
+      "path": "templates/static/content/full_image_overlay_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0cdcee19b0f7449c88b5b3f24d2b9cea4e39fc6e",
+      "size": 30731,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/0cdcee19b0f7449c88b5b3f24d2b9cea4e39fc6e"
+    },
+    {
+      "path": "templates/static/content/full_image_overlay_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d50d7d4db142081d16b2b48f650d68eeebc5a64d",
+      "size": 30731,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/d50d7d4db142081d16b2b48f650d68eeebc5a64d"
+    },
+    {
+      "path": "templates/static/content/full_image_overlay_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "626e447f0862151caef3bc2fce371eacaa717241",
+      "size": 30720,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/626e447f0862151caef3bc2fce371eacaa717241"
+    },
+    {
+      "path": "templates/static/content/full_image_overlay_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3fdd64be0f691eec1623c33b8dbea046e7825a9b",
+      "size": 30733,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/3fdd64be0f691eec1623c33b8dbea046e7825a9b"
+    },
+    {
+      "path": "templates/static/content/full_image_overlay_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8e13d9b4487fbf48449546c47678e1d55a9316e4",
+      "size": 30731,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/8e13d9b4487fbf48449546c47678e1d55a9316e4"
+    },
+    {
+      "path": "templates/static/content/full_image_overlay_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "552acc517f784c8138fb6f485a0dd626129121ac",
+      "size": 30728,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/552acc517f784c8138fb6f485a0dd626129121ac"
+    },
+    {
+      "path": "templates/static/content/text_image_layout_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "108f43b4b48367987034c0410ab69bef229e1bcb",
+      "size": 30657,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/108f43b4b48367987034c0410ab69bef229e1bcb"
+    },
+    {
+      "path": "templates/static/content/text_image_layout_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "88c28338bb203567eb4dbd08a1abe834d7d685d6",
+      "size": 30659,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/88c28338bb203567eb4dbd08a1abe834d7d685d6"
+    },
+    {
+      "path": "templates/static/content/text_image_layout_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a506c78b856f688117e6bb4613a773b2c91b8d0d",
+      "size": 30655,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a506c78b856f688117e6bb4613a773b2c91b8d0d"
+    },
+    {
+      "path": "templates/static/content/text_image_layout_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e587c1a39961b5da27b2d56faceb3391b6cfc7fd",
+      "size": 30655,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e587c1a39961b5da27b2d56faceb3391b6cfc7fd"
+    },
+    {
+      "path": "templates/static/content/text_image_layout_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b94d4c168c52b1365a827284b0f015840c9b5446",
+      "size": 30658,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/b94d4c168c52b1365a827284b0f015840c9b5446"
+    },
+    {
+      "path": "templates/static/content/text_image_layout_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fd3ed8f06d7ce4e1b9d88fb68100fc087fa0eda1",
+      "size": 30660,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/fd3ed8f06d7ce4e1b9d88fb68100fc087fa0eda1"
+    },
+    {
+      "path": "templates/static/content/text_image_layout_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "60ef6e1172cbdf5f922a879162c26568fdfee81b",
+      "size": 30658,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/60ef6e1172cbdf5f922a879162c26568fdfee81b"
+    },
+    {
+      "path": "templates/static/content/three_column_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ad7a0e21f1f0e7759abdb4c1f4a55724715d74fa",
+      "size": 29461,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/ad7a0e21f1f0e7759abdb4c1f4a55724715d74fa"
+    },
+    {
+      "path": "templates/static/content/three_column_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "58e0aa754802ea8fc04e2c629a53ec23d2ca3cb8",
+      "size": 29466,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/58e0aa754802ea8fc04e2c629a53ec23d2ca3cb8"
+    },
+    {
+      "path": "templates/static/content/three_column_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bd0a08442e3b03eba8546ed4a08b2beab1206b3b",
+      "size": 29466,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/bd0a08442e3b03eba8546ed4a08b2beab1206b3b"
+    },
+    {
+      "path": "templates/static/content/three_column_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ca2c5fb80bfe0ee7a3a5a210790ec77ee17b36a3",
+      "size": 29457,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/ca2c5fb80bfe0ee7a3a5a210790ec77ee17b36a3"
+    },
+    {
+      "path": "templates/static/content/three_column_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b830e1102ce58a8010e49e6a0ecc93c74cd277df",
+      "size": 29464,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/b830e1102ce58a8010e49e6a0ecc93c74cd277df"
+    },
+    {
+      "path": "templates/static/content/three_column_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3d66e2cde28cc7613c4f10cc2a7cc3dd58786923",
+      "size": 29466,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/3d66e2cde28cc7613c4f10cc2a7cc3dd58786923"
+    },
+    {
+      "path": "templates/static/content/three_column_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "525ff3295c63f903fe2bca55edf03251b774183b",
+      "size": 29465,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/525ff3295c63f903fe2bca55edf03251b774183b"
+    },
+    {
+      "path": "templates/static/cover",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f5317f5dea3ca86f3c3f5820f2190e03f776bcee",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/f5317f5dea3ca86f3c3f5820f2190e03f776bcee"
+    },
+    {
+      "path": "templates/static/cover/hollow_mask_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ebf7574ad0e8317ea765dc3883ff3b59cb676edc",
+      "size": 28899,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/ebf7574ad0e8317ea765dc3883ff3b59cb676edc"
+    },
+    {
+      "path": "templates/static/cover/hollow_mask_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cfa9ac89b4bb3458bf76de4e34a381cd9669b57c",
+      "size": 28902,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/cfa9ac89b4bb3458bf76de4e34a381cd9669b57c"
+    },
+    {
+      "path": "templates/static/cover/hollow_mask_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a89012ae86f52c93faacf3c25f6ed6a9ad5139cb",
+      "size": 28903,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a89012ae86f52c93faacf3c25f6ed6a9ad5139cb"
+    },
+    {
+      "path": "templates/static/cover/hollow_mask_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1013ba5cbf890e7dbc9216594ee85c41d75e0260",
+      "size": 28891,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/1013ba5cbf890e7dbc9216594ee85c41d75e0260"
+    },
+    {
+      "path": "templates/static/cover/hollow_mask_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2e3663bc179058636915b368266a2848d0069daa",
+      "size": 28902,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/2e3663bc179058636915b368266a2848d0069daa"
+    },
+    {
+      "path": "templates/static/cover/hollow_mask_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f8158b54944655eadced97a3901a679d46cecc89",
+      "size": 28905,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/f8158b54944655eadced97a3901a679d46cecc89"
+    },
+    {
+      "path": "templates/static/cover/hollow_mask_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "91224463138ced02bd7673d9695a1d397a9dbc7b",
+      "size": 28902,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/91224463138ced02bd7673d9695a1d397a9dbc7b"
+    },
+    {
+      "path": "templates/static/cover/layered_depth_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a1b958b3e9a24e113efb2cd7c97fb331e1835ac6",
+      "size": 28909,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a1b958b3e9a24e113efb2cd7c97fb331e1835ac6"
+    },
+    {
+      "path": "templates/static/cover/layered_depth_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e2878b15563b402375c4dabddf98eb3d13f19963",
+      "size": 28911,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e2878b15563b402375c4dabddf98eb3d13f19963"
+    },
+    {
+      "path": "templates/static/cover/layered_depth_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a7632b8885a7c5d841a310aa38d26b0720531a9a",
+      "size": 28912,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a7632b8885a7c5d841a310aa38d26b0720531a9a"
+    },
+    {
+      "path": "templates/static/cover/layered_depth_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d4e9f0cecd20b4ce07afe460b24583738648aa04",
+      "size": 28900,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/d4e9f0cecd20b4ce07afe460b24583738648aa04"
+    },
+    {
+      "path": "templates/static/cover/layered_depth_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dcbfbc49ab567fd20fedd48ee92de73636a9a4e1",
+      "size": 28910,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/dcbfbc49ab567fd20fedd48ee92de73636a9a4e1"
+    },
+    {
+      "path": "templates/static/cover/layered_depth_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5d52b1db058153c28fdd953bcc79583e8cefb044",
+      "size": 28913,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/5d52b1db058153c28fdd953bcc79583e8cefb044"
+    },
+    {
+      "path": "templates/static/cover/layered_depth_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8ddcfc96e61107a5d97a6aec230baa25727fd49d",
+      "size": 28910,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/8ddcfc96e61107a5d97a6aec230baa25727fd49d"
+    },
+    {
+      "path": "templates/static/cover/minimalist_gradient_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f5b7fdb431ddf5de218d2b01994e9c36a5424bef",
+      "size": 28728,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/f5b7fdb431ddf5de218d2b01994e9c36a5424bef"
+    },
+    {
+      "path": "templates/static/cover/minimalist_gradient_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1a1c224ac7b22fc4c2e23670939767039f0c6b4b",
+      "size": 28730,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/1a1c224ac7b22fc4c2e23670939767039f0c6b4b"
+    },
+    {
+      "path": "templates/static/cover/minimalist_gradient_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e33e0aa7a13095ba5eefc7d0d4e86817ab2ccb82",
+      "size": 28732,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e33e0aa7a13095ba5eefc7d0d4e86817ab2ccb82"
+    },
+    {
+      "path": "templates/static/cover/minimalist_gradient_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "baae5063e96e7deb3504257d20e4d2c228a59c6e",
+      "size": 28724,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/baae5063e96e7deb3504257d20e4d2c228a59c6e"
+    },
+    {
+      "path": "templates/static/cover/minimalist_gradient_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "804a15e2bdf191c2655c6cfc18f909ac4b87c3ff",
+      "size": 28729,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/804a15e2bdf191c2655c6cfc18f909ac4b87c3ff"
+    },
+    {
+      "path": "templates/static/cover/minimalist_gradient_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "01700e352cd41a4410a5a5eb6c0bb91356ed8f4d",
+      "size": 28737,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/01700e352cd41a4410a5a5eb6c0bb91356ed8f4d"
+    },
+    {
+      "path": "templates/static/cover/minimalist_gradient_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ef5b85b77970e4019b103131387e38ee2dbcc7b4",
+      "size": 28730,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/ef5b85b77970e4019b103131387e38ee2dbcc7b4"
+    },
+    {
+      "path": "templates/static/cover/split_screen_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "73df59733db2b51e978b34ce0c27f050c23141e1",
+      "size": 28789,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/73df59733db2b51e978b34ce0c27f050c23141e1"
+    },
+    {
+      "path": "templates/static/cover/split_screen_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8b910e06ac1fd0f73734bdeb097b1b6ec24fb72e",
+      "size": 28791,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/8b910e06ac1fd0f73734bdeb097b1b6ec24fb72e"
+    },
+    {
+      "path": "templates/static/cover/split_screen_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d58b576d0cf2f1458a54c3c6a186bae265f1eb1a",
+      "size": 28791,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/d58b576d0cf2f1458a54c3c6a186bae265f1eb1a"
+    },
+    {
+      "path": "templates/static/cover/split_screen_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6dcd28e440e4da19a869e3bf68326d282c01f211",
+      "size": 28782,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/6dcd28e440e4da19a869e3bf68326d282c01f211"
+    },
+    {
+      "path": "templates/static/cover/split_screen_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b0c385dc5780c7a126ca97c623eaaf9e600f088e",
+      "size": 28790,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/b0c385dc5780c7a126ca97c623eaaf9e600f088e"
+    },
+    {
+      "path": "templates/static/cover/split_screen_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ef4191a8a73177b7aea63a6a0b70558b71ad5024",
+      "size": 28792,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/ef4191a8a73177b7aea63a6a0b70558b71ad5024"
+    },
+    {
+      "path": "templates/static/cover/split_screen_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8e175dfc9a49e3afdb5723b70897d76386b78627",
+      "size": 28792,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/8e175dfc9a49e3afdb5723b70897d76386b78627"
+    },
+    {
+      "path": "templates/static/directory",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "7fb23cf5fdd3e5cf98dfbdd3acd468ef3514cda6",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/7fb23cf5fdd3e5cf98dfbdd3acd468ef3514cda6"
+    },
+    {
+      "path": "templates/static/directory/card_grid_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a5deb67a3ffdc988a939f257620145afd6db6e99",
+      "size": 29760,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a5deb67a3ffdc988a939f257620145afd6db6e99"
+    },
+    {
+      "path": "templates/static/directory/card_grid_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a5deb67a3ffdc988a939f257620145afd6db6e99",
+      "size": 29760,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a5deb67a3ffdc988a939f257620145afd6db6e99"
+    },
+    {
+      "path": "templates/static/directory/card_grid_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5ab9f72cd6461b51466d893c629b9126602ab763",
+      "size": 29760,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/5ab9f72cd6461b51466d893c629b9126602ab763"
+    },
+    {
+      "path": "templates/static/directory/card_grid_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5ab9f72cd6461b51466d893c629b9126602ab763",
+      "size": 29760,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/5ab9f72cd6461b51466d893c629b9126602ab763"
+    },
+    {
+      "path": "templates/static/directory/card_grid_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5ab9f72cd6461b51466d893c629b9126602ab763",
+      "size": 29760,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/5ab9f72cd6461b51466d893c629b9126602ab763"
+    },
+    {
+      "path": "templates/static/directory/card_grid_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a5deb67a3ffdc988a939f257620145afd6db6e99",
+      "size": 29760,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a5deb67a3ffdc988a939f257620145afd6db6e99"
+    },
+    {
+      "path": "templates/static/directory/card_grid_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "339410f7e450986fb9a1c79ff0c36e06306c399e",
+      "size": 29760,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/339410f7e450986fb9a1c79ff0c36e06306c399e"
+    },
+    {
+      "path": "templates/static/directory/sidebar_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7f0c1d44dd844656e22b425ff5b59e48f084c9ae",
+      "size": 29287,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/7f0c1d44dd844656e22b425ff5b59e48f084c9ae"
+    },
+    {
+      "path": "templates/static/directory/sidebar_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7f0c1d44dd844656e22b425ff5b59e48f084c9ae",
+      "size": 29287,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/7f0c1d44dd844656e22b425ff5b59e48f084c9ae"
+    },
+    {
+      "path": "templates/static/directory/sidebar_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "97d8fb8be979be73f0391e1b70fd75f7a606cfdf",
+      "size": 29287,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/97d8fb8be979be73f0391e1b70fd75f7a606cfdf"
+    },
+    {
+      "path": "templates/static/directory/sidebar_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "97d8fb8be979be73f0391e1b70fd75f7a606cfdf",
+      "size": 29287,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/97d8fb8be979be73f0391e1b70fd75f7a606cfdf"
+    },
+    {
+      "path": "templates/static/directory/sidebar_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "97d8fb8be979be73f0391e1b70fd75f7a606cfdf",
+      "size": 29287,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/97d8fb8be979be73f0391e1b70fd75f7a606cfdf"
+    },
+    {
+      "path": "templates/static/directory/sidebar_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7f0c1d44dd844656e22b425ff5b59e48f084c9ae",
+      "size": 29287,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/7f0c1d44dd844656e22b425ff5b59e48f084c9ae"
+    },
+    {
+      "path": "templates/static/directory/sidebar_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b300970551cc0c8e7606965c7e4cc4f4cf19c06a",
+      "size": 29287,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/b300970551cc0c8e7606965c7e4cc4f4cf19c06a"
+    },
+    {
+      "path": "templates/static/directory/timeline_style_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d129a6e88045dbeb0d65d14a6077e5fdf7a3def5",
+      "size": 29681,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/d129a6e88045dbeb0d65d14a6077e5fdf7a3def5"
+    },
+    {
+      "path": "templates/static/directory/timeline_style_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "904a959eb14675ac9004351bf2b169bea4afb45f",
+      "size": 29681,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/904a959eb14675ac9004351bf2b169bea4afb45f"
+    },
+    {
+      "path": "templates/static/directory/timeline_style_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f02152e2e1ae320d00a27b6ed41873ed3699ba7d",
+      "size": 29681,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/f02152e2e1ae320d00a27b6ed41873ed3699ba7d"
+    },
+    {
+      "path": "templates/static/directory/timeline_style_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "904a959eb14675ac9004351bf2b169bea4afb45f",
+      "size": 29681,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/904a959eb14675ac9004351bf2b169bea4afb45f"
+    },
+    {
+      "path": "templates/static/directory/timeline_style_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f02152e2e1ae320d00a27b6ed41873ed3699ba7d",
+      "size": 29681,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/f02152e2e1ae320d00a27b6ed41873ed3699ba7d"
+    },
+    {
+      "path": "templates/static/directory/timeline_style_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d129a6e88045dbeb0d65d14a6077e5fdf7a3def5",
+      "size": 29681,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/d129a6e88045dbeb0d65d14a6077e5fdf7a3def5"
+    },
+    {
+      "path": "templates/static/directory/timeline_style_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f02152e2e1ae320d00a27b6ed41873ed3699ba7d",
+      "size": 29681,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/f02152e2e1ae320d00a27b6ed41873ed3699ba7d"
+    },
+    {
+      "path": "templates/static/ending",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c8eea980f2f1b06fecd6a28d1b056abab274ccbd",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/c8eea980f2f1b06fecd6a28d1b056abab274ccbd"
+    },
+    {
+      "path": "templates/static/ending/contact_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1370bef9e670758384bf2a87bfcf8858036f5cf2",
+      "size": 30027,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/1370bef9e670758384bf2a87bfcf8858036f5cf2"
+    },
+    {
+      "path": "templates/static/ending/contact_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8779586d2aa357c5cf4037c4fcce1dba02ac1aac",
+      "size": 30031,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/8779586d2aa357c5cf4037c4fcce1dba02ac1aac"
+    },
+    {
+      "path": "templates/static/ending/contact_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "964b3e3da0077108664b4f60b78a2e5ea43d8327",
+      "size": 30029,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/964b3e3da0077108664b4f60b78a2e5ea43d8327"
+    },
+    {
+      "path": "templates/static/ending/contact_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6b602c4c51e828997b47f5b663d9e5d0dc313c6b",
+      "size": 30017,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/6b602c4c51e828997b47f5b663d9e5d0dc313c6b"
+    },
+    {
+      "path": "templates/static/ending/contact_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dcfadd0d27638bb816cc3dab69e392f331b44fe9",
+      "size": 30030,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/dcfadd0d27638bb816cc3dab69e392f331b44fe9"
+    },
+    {
+      "path": "templates/static/ending/contact_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "52d4b9d01585bf43619a02e4c1e4b2f829612e70",
+      "size": 30032,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/52d4b9d01585bf43619a02e4c1e4b2f829612e70"
+    },
+    {
+      "path": "templates/static/ending/contact_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5a92fbc1641a3b81b02dcc23f1a710b4c9b7f32c",
+      "size": 30023,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/5a92fbc1641a3b81b02dcc23f1a710b4c9b7f32c"
+    },
+    {
+      "path": "templates/static/ending/qr_code_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "516a90f141f37fa4d44a7d8be236240d7e2d167e",
+      "size": 29614,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/516a90f141f37fa4d44a7d8be236240d7e2d167e"
+    },
+    {
+      "path": "templates/static/ending/qr_code_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8883d345d224b0e814b72ae29928c02b4dffd663",
+      "size": 29619,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/8883d345d224b0e814b72ae29928c02b4dffd663"
+    },
+    {
+      "path": "templates/static/ending/qr_code_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7e09f1203f57c9b726a9459a2dd618a76c9c7f66",
+      "size": 29619,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/7e09f1203f57c9b726a9459a2dd618a76c9c7f66"
+    },
+    {
+      "path": "templates/static/ending/qr_code_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "30f74fbe23055dd7982880c752f97a187ab39651",
+      "size": 29610,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/30f74fbe23055dd7982880c752f97a187ab39651"
+    },
+    {
+      "path": "templates/static/ending/qr_code_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bf56bd1fedd41bf786e21cd8eec37e19d7238e42",
+      "size": 29617,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/bf56bd1fedd41bf786e21cd8eec37e19d7238e42"
+    },
+    {
+      "path": "templates/static/ending/qr_code_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e01d980b598a97ef36d07cb7c5f10186a7617917",
+      "size": 29621,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e01d980b598a97ef36d07cb7c5f10186a7617917"
+    },
+    {
+      "path": "templates/static/ending/qr_code_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7deff52fbe8f23ab34ba8fcb47ff07ee8fee8ad2",
+      "size": 29619,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/7deff52fbe8f23ab34ba8fcb47ff07ee8fee8ad2"
+    },
+    {
+      "path": "templates/static/ending/thank_you_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "be6cbdf185834ab437a8e984b058a858958685ff",
+      "size": 29487,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/be6cbdf185834ab437a8e984b058a858958685ff"
+    },
+    {
+      "path": "templates/static/ending/thank_you_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "111d8a1f240e4d3cf55db1de9e13e2fe831fa187",
+      "size": 29488,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/111d8a1f240e4d3cf55db1de9e13e2fe831fa187"
+    },
+    {
+      "path": "templates/static/ending/thank_you_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3ae2e02110c8e4de856df7d1e44aa270214c3f56",
+      "size": 29488,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/3ae2e02110c8e4de856df7d1e44aa270214c3f56"
+    },
+    {
+      "path": "templates/static/ending/thank_you_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5b6b5f07bde9676828a1cf325fafdcd2b1dfd47f",
+      "size": 29478,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/5b6b5f07bde9676828a1cf325fafdcd2b1dfd47f"
+    },
+    {
+      "path": "templates/static/ending/thank_you_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5048226e23026dc112805de007858bbdbbe6ed49",
+      "size": 29488,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/5048226e23026dc112805de007858bbdbbe6ed49"
+    },
+    {
+      "path": "templates/static/ending/thank_you_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "837bb2bb0762b69f121dab97ec8e2b358cb228f3",
+      "size": 29489,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/837bb2bb0762b69f121dab97ec8e2b358cb228f3"
+    },
+    {
+      "path": "templates/static/ending/thank_you_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "09930020110d91430f7cc27c8bd16f3deb41b471",
+      "size": 29487,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/09930020110d91430f7cc27c8bd16f3deb41b471"
+    },
+    {
+      "path": "templates/static/team",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "99a509639f9be9a0d659514115cafdeded0983d9",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/99a509639f9be9a0d659514115cafdeded0983d9"
+    },
+    {
+      "path": "templates/static/team/org_chart_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e12a0a5aca99d96a17091755e32c451e5cae44d9",
+      "size": 30575,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e12a0a5aca99d96a17091755e32c451e5cae44d9"
+    },
+    {
+      "path": "templates/static/team/org_chart_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e1541b346af7dd12b7a50c5830d78d936e313627",
+      "size": 30578,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e1541b346af7dd12b7a50c5830d78d936e313627"
+    },
+    {
+      "path": "templates/static/team/org_chart_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7a1c22b14e2db578ae669456e6387367ac86bc86",
+      "size": 30577,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/7a1c22b14e2db578ae669456e6387367ac86bc86"
+    },
+    {
+      "path": "templates/static/team/org_chart_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d8f5783f682a28331722114fec30cbddb0bd341f",
+      "size": 30570,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/d8f5783f682a28331722114fec30cbddb0bd341f"
+    },
+    {
+      "path": "templates/static/team/org_chart_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "99ddd40f2e0549ddd7049b8fd8e652ec6219a223",
+      "size": 30577,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/99ddd40f2e0549ddd7049b8fd8e652ec6219a223"
+    },
+    {
+      "path": "templates/static/team/org_chart_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2fd63286558dac71d1f7d7bef102bff1cb13259e",
+      "size": 30579,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/2fd63286558dac71d1f7d7bef102bff1cb13259e"
+    },
+    {
+      "path": "templates/static/team/org_chart_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "77c1f0d7162e03a3987ab803fa4996a179623bc9",
+      "size": 30576,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/77c1f0d7162e03a3987ab803fa4996a179623bc9"
+    },
+    {
+      "path": "templates/static/team/person_card_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1e9420990b4bbb66469b4de64c22d24b3b500fd6",
+      "size": 29640,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/1e9420990b4bbb66469b4de64c22d24b3b500fd6"
+    },
+    {
+      "path": "templates/static/team/person_card_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9f2d31322e522c88adfd80d67d34cfb57e4dc981",
+      "size": 29647,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/9f2d31322e522c88adfd80d67d34cfb57e4dc981"
+    },
+    {
+      "path": "templates/static/team/person_card_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0ab68921bc0e3ad16894f47933c82261ab0a5fc4",
+      "size": 29643,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/0ab68921bc0e3ad16894f47933c82261ab0a5fc4"
+    },
+    {
+      "path": "templates/static/team/person_card_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b13861f066d904280dc47b59b2081288f76a700b",
+      "size": 29636,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/b13861f066d904280dc47b59b2081288f76a700b"
+    },
+    {
+      "path": "templates/static/team/person_card_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dc60ddf5d3e2d2ab67340ef1c3093f2768a5cc78",
+      "size": 29643,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/dc60ddf5d3e2d2ab67340ef1c3093f2768a5cc78"
+    },
+    {
+      "path": "templates/static/team/person_card_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "626f282d3be7c955d2a2970e0be100ee237395d3",
+      "size": 29644,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/626f282d3be7c955d2a2970e0be100ee237395d3"
+    },
+    {
+      "path": "templates/static/team/person_card_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d8fc1596f912888f134e504fbf4e58c2d5171249",
+      "size": 29644,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/d8fc1596f912888f134e504fbf4e58c2d5171249"
+    },
+    {
+      "path": "templates/static/team/team_grid_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d31d45a34d2742abc70df7f57f380a7581e1212b",
+      "size": 30318,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/d31d45a34d2742abc70df7f57f380a7581e1212b"
+    },
+    {
+      "path": "templates/static/team/team_grid_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e7e34f4c4712838853b1a7a3689fe0d27e08cb70",
+      "size": 30321,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e7e34f4c4712838853b1a7a3689fe0d27e08cb70"
+    },
+    {
+      "path": "templates/static/team/team_grid_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a3ca6a7d8355da23d3785cbcdc4883ad9a400f91",
+      "size": 30320,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a3ca6a7d8355da23d3785cbcdc4883ad9a400f91"
+    },
+    {
+      "path": "templates/static/team/team_grid_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0a5f025c718bb6fdd7bcf7923612a9813999ebf7",
+      "size": 30312,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/0a5f025c718bb6fdd7bcf7923612a9813999ebf7"
+    },
+    {
+      "path": "templates/static/team/team_grid_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e88ba54b8c13419630e7f01d9287914e78bb447c",
+      "size": 30318,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e88ba54b8c13419630e7f01d9287914e78bb447c"
+    },
+    {
+      "path": "templates/static/team/team_grid_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a0a9d3fb06047f0ef52062bbd92cf9820b185361",
+      "size": 30320,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a0a9d3fb06047f0ef52062bbd92cf9820b185361"
+    },
+    {
+      "path": "templates/static/team/team_grid_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7070b6c45ec0ab9f4449a2edfa57819abfd44f04",
+      "size": 30318,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/7070b6c45ec0ab9f4449a2edfa57819abfd44f04"
+    },
+    {
+      "path": "templates/static/timeline",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "afde08a5ea03c5bda213b3f965a819e50dc656f0",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/afde08a5ea03c5bda213b3f965a819e50dc656f0"
+    },
+    {
+      "path": "templates/static/timeline/horizontal_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "20b85c9a9b097b945bffde3c3f9836f3e7283691",
+      "size": 29467,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/20b85c9a9b097b945bffde3c3f9836f3e7283691"
+    },
+    {
+      "path": "templates/static/timeline/horizontal_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "20b85c9a9b097b945bffde3c3f9836f3e7283691",
+      "size": 29467,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/20b85c9a9b097b945bffde3c3f9836f3e7283691"
+    },
+    {
+      "path": "templates/static/timeline/horizontal_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "44c5cb5504653136b52d2231285a15f1391c9ab6",
+      "size": 29467,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/44c5cb5504653136b52d2231285a15f1391c9ab6"
+    },
+    {
+      "path": "templates/static/timeline/horizontal_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "44c5cb5504653136b52d2231285a15f1391c9ab6",
+      "size": 29467,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/44c5cb5504653136b52d2231285a15f1391c9ab6"
+    },
+    {
+      "path": "templates/static/timeline/horizontal_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "44c5cb5504653136b52d2231285a15f1391c9ab6",
+      "size": 29467,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/44c5cb5504653136b52d2231285a15f1391c9ab6"
+    },
+    {
+      "path": "templates/static/timeline/horizontal_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "20b85c9a9b097b945bffde3c3f9836f3e7283691",
+      "size": 29467,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/20b85c9a9b097b945bffde3c3f9836f3e7283691"
+    },
+    {
+      "path": "templates/static/timeline/horizontal_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "eb2ad28682ae482412033ac6a90287af0283e87f",
+      "size": 29467,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/eb2ad28682ae482412033ac6a90287af0283e87f"
+    },
+    {
+      "path": "templates/static/timeline/vertical_blue_technology.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "86ad91649df494f085576b27130a05e6c32451bf",
+      "size": 29448,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/86ad91649df494f085576b27130a05e6c32451bf"
+    },
+    {
+      "path": "templates/static/timeline/vertical_dark_gold.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "86ad91649df494f085576b27130a05e6c32451bf",
+      "size": 29448,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/86ad91649df494f085576b27130a05e6c32451bf"
+    },
+    {
+      "path": "templates/static/timeline/vertical_green_nature.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1216f6fb32be8ccb1887a1a463116c9255878ba6",
+      "size": 29448,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/1216f6fb32be8ccb1887a1a463116c9255878ba6"
+    },
+    {
+      "path": "templates/static/timeline/vertical_minimalist_bw.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1216f6fb32be8ccb1887a1a463116c9255878ba6",
+      "size": 29448,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/1216f6fb32be8ccb1887a1a463116c9255878ba6"
+    },
+    {
+      "path": "templates/static/timeline/vertical_ocean_blue.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1216f6fb32be8ccb1887a1a463116c9255878ba6",
+      "size": 29448,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/1216f6fb32be8ccb1887a1a463116c9255878ba6"
+    },
+    {
+      "path": "templates/static/timeline/vertical_purple_gradient.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "86ad91649df494f085576b27130a05e6c32451bf",
+      "size": 29448,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/86ad91649df494f085576b27130a05e6c32451bf"
+    },
+    {
+      "path": "templates/static/timeline/vertical_red_business.pptx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2df94a1d9e5a1462ec0be7d1fb404dd9716f3aa4",
+      "size": 29448,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/2df94a1d9e5a1462ec0be7d1fb404dd9716f3aa4"
+    },
+    {
+      "path": "tests",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8ff0318470d741c13d00cc15a523f0f121cb2cb0",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/8ff0318470d741c13d00cc15a523f0f121cb2cb0"
+    },
+    {
+      "path": "tests/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "tests/test_api_contract.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "826dfbd687b07cfe8ba255e4c9a61035a18ec3aa",
+      "size": 5862,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/826dfbd687b07cfe8ba255e4c9a61035a18ec3aa"
+    },
+    {
+      "path": "tests/test_base.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ea55afbdffa83454bcdfca6fa2ef90656f608418",
+      "size": 3290,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/ea55afbdffa83454bcdfca6fa2ef90656f608418"
+    },
+    {
+      "path": "tests/test_complete_decks.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7c9b515a2bc850da56ff18beddbe8f0ad300f241",
+      "size": 2269,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/7c9b515a2bc850da56ff18beddbe8f0ad300f241"
+    },
+    {
+      "path": "tests/test_generators.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d154c455ec89cb55e2b5ba1280d4494b619fa7fc",
+      "size": 3645,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/d154c455ec89cb55e2b5ba1280d4494b619fa7fc"
+    },
+    {
+      "path": "themes",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "42291a60e98fbc2d536b1dfc74caf3ce056768b9",
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/trees/42291a60e98fbc2d536b1dfc74caf3ce056768b9"
+    },
+    {
+      "path": "themes/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "39224804ebb771ea971f8654c62727ef4dc02c39",
+      "size": 1453,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/39224804ebb771ea971f8654c62727ef4dc02c39"
+    },
+    {
+      "path": "themes/blue_technology.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f677fc05e2ee60f8c2f3f24c470ead1a0ae8d208",
+      "size": 409,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/f677fc05e2ee60f8c2f3f24c470ead1a0ae8d208"
+    },
+    {
+      "path": "themes/dark_gold.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d1d1dd94f08e40359624e049c6bc62c53d2904a4",
+      "size": 406,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/d1d1dd94f08e40359624e049c6bc62c53d2904a4"
+    },
+    {
+      "path": "themes/green_nature.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "afc71e64c626184818aa1fe0525dd4386a23b013",
+      "size": 403,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/afc71e64c626184818aa1fe0525dd4386a23b013"
+    },
+    {
+      "path": "themes/minimalist_bw.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a9884e8d8924e618efc08a602a64e337e3261389",
+      "size": 398,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/a9884e8d8924e618efc08a602a64e337e3261389"
+    },
+    {
+      "path": "themes/ocean_blue.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "77dc2c8cf87f32dd54afc865f955bfbb0ebd0082",
+      "size": 399,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/77dc2c8cf87f32dd54afc865f955bfbb0ebd0082"
+    },
+    {
+      "path": "themes/purple_gradient.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2ae1d5bd92b8839fadd0a995906baaf7797ca7df",
+      "size": 413,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/2ae1d5bd92b8839fadd0a995906baaf7797ca7df"
+    },
+    {
+      "path": "themes/red_business.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "49ea072f52aee269da65b285a16ebaea8a393c6d",
+      "size": 408,
+      "url": "https://api.github.com/repos/wuhua2026/ppt-templates/git/blobs/49ea072f52aee269da65b285a16ebaea8a393c6d"
+    }
+  ],
+  "truncated": false
+}

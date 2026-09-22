@@ -138,7 +138,12 @@ def main() -> None:
     shutil.copytree(root / "data", local_data, dirs_exist_ok=True)
     train = load_records(local_data / "train.jsonl")
     validation = load_records(local_data / "validation.jsonl")
-    check_split(train, validation)
+    test = (
+        load_records(local_data / "test.jsonl")
+        if (local_data / "test.jsonl").exists()
+        else None
+    )
+    check_split(train, validation, test)
 
     previous = find_run(root, args.resume)
     if previous:
@@ -146,6 +151,13 @@ def main() -> None:
         if metadata["base_model"] != args.model:
             raise ValueError(
                 "This run belongs to another base model; use a separate Drive folder or --resume none"
+            )
+        if (
+            metadata.get("dataset_sha256")
+            != hashlib.sha256((root / "data/manifest.json").read_bytes()).hexdigest()
+        ):
+            raise ValueError(
+                "Dataset changed; use a separate Drive folder or --resume none"
             )
         if metadata["status"] == "completed":
             adapter = root / metadata["adapter_dir"]
