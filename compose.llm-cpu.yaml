@@ -1,0 +1,58 @@
+# CPU-only server: Qwen3.5-9B (Q4_K_M GGUF) in llama.cpp + BrandDeck.
+# Needs about 8 GB of RAM for the model. Download the pinned weights into
+# models/gpu/ (checked against deploy/llama/qwen3.5-9b.json), then start:
+#   python3 deploy/llama/setup_local.py --no-server
+#   docker compose -f compose.llm-cpu.yaml up -d --build
+services:
+  model:
+    build:
+      context: .
+      dockerfile: deploy/cpu/Dockerfile.llama
+    restart: unless-stopped
+    mem_limit: 9g
+    volumes:
+      - ./models/gpu:/models:ro
+    command:
+      - --model
+      - /models/Qwen3.5-9B-Q4_K_M.gguf
+      - --alias
+      - qwen3.5-9b
+      - --host
+      - 0.0.0.0
+      - --port
+      - '8080'
+      - --ctx-size
+      - '16384'
+      - --parallel
+      - '4'
+      - --n-gpu-layers
+      - '0'
+      - --jinja
+      - --no-ui
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8080/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 40
+      start_period: 120s
+  branddeck:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      model:
+        condition: service_healthy
+    environment:
+      INFERENCE_BASE_URL: http://model:8080/v1
+      INFERENCE_API_KEY: ''
+      INFERENCE_MODEL: qwen3.5-9b
+      INFERENCE_VISION: '0'
+      INFERENCE_PARALLEL: '4'
+      INFERENCE_TIMEOUT: '600'
+      INFERENCE_MAX_RETRIES: '2'
+      INFERENCE_EXTRA_BODY: '{"chat_template_kwargs": {"enable_thinking": false}, "top_p": 0.8, "top_k": 20}'
+      BRANDDECK_WORKSPACE: /data
+      BRANDDECK_POWERPOINT_QA: '0'
+    ports:
+      - "${BRANDDECK_BIND:-127.0.0.1}:8000:8000"
+    volumes:
+      - ./slide-workspace:/data

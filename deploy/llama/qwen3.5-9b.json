@@ -1,0 +1,46 @@
+{
+  "model": "Qwen/Qwen3.5-9B",
+  "model_revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+  "license": "apache-2.0",
+  "parameters": 9653104368,
+  "gguf_repo": "unsloth/Qwen3.5-9B-GGUF",
+  "gguf_revision": "3885219b6810b007914f3a7950a8d1b469d598a5",
+  "gguf_file": "Qwen3.5-9B-Q4_K_M.gguf",
+  "gguf_bytes": 5680522464,
+  "gguf_sha256": "03b74727a860a56338e042c4420bb3f04b2fec5734175f4cb9fa853daf52b7e8",
+  "download_url": "https://huggingface.co/unsloth/Qwen3.5-9B-GGUF/resolve/3885219b6810b007914f3a7950a8d1b469d598a5/Qwen3.5-9B-Q4_K_M.gguf",
+  "model_path": "models/gpu/Qwen3.5-9B-Q4_K_M.gguf",
+  "llama_cpp_release": "b11053",
+  "llama_cpp_revision": "1af554f8fc78ba029665a47b839484d9763e2a75",
+  "llama_cpp_windows": {
+    "gpu": {
+      "bin": "external-fixtures/llama-cuda/bin",
+      "assets": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11053/llama-b11053-bin-win-cuda-12.4-x64.zip",
+          "bytes": 254212504,
+          "sha256": "49960992f16638f8eeea2df3dc3229207976da42a05f7505c59b6c1263476613"
+        },
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11053/cudart-llama-bin-win-cuda-12.4-x64.zip",
+          "bytes": 391443627,
+          "sha256": "8c79a9b226de4b3cacfd1f83d24f962d0773be79f1e7b75c6af4ded7e32ae1d6"
+        }
+      ]
+    },
+    "cpu": {
+      "bin": "external-fixtures/llama-cpu/bin",
+      "assets": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11053/llama-b11053-bin-win-cpu-x64.zip",
+          "bytes": 18453883,
+          "sha256": "a73abd4fd618b8145bbe7a9e9ca2dad880f05eb589a5942f921b1f39bd2d87dc"
+        }
+      ]
+    }
+  },
+  "served_alias": "qwen3.5-9b",
+  "context_tokens": 16384,
+  "parallel_slots": 4,
+  "thinking": "disabled per request: INFERENCE_EXTRA_BODY={\"chat_template_kwargs\":{\"enable_thinking\":false}}"
+}
