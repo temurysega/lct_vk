@@ -7,7 +7,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from backend.main import app
-from slide_agent.utils import resolve_workspace
+from slide_agent.utils import request_workspace, resolve_workspace
 
 ACCOUNT = {
     "username": "Designer",
@@ -21,6 +21,26 @@ def client(tmp_path, monkeypatch):
     monkeypatch.setenv("BRANDDECK_WORKSPACE", str(tmp_path))
     with TestClient(app) as value:
         yield value
+
+
+def test_session_survives_inherited_user_workspace(client, tmp_path, monkeypatch):
+    user = client.post("/api/auth/register", json=ACCOUNT).json()
+    user_workspace = tmp_path / "users" / user["id"]
+    monkeypatch.setattr(
+        "backend.main.list_templates",
+        lambda: [{"workspace": str(resolve_workspace())}],
+    )
+    token = request_workspace.set(user_workspace)
+    try:
+        assert client.get("/api/auth/me").json() == user
+        response = client.get("/v1/templates")
+        assert response.status_code == 200
+        assert response.json() == [{"workspace": str(user_workspace)}]
+        assert not (user_workspace / "accounts.sqlite3").exists()
+        assert client.post("/api/auth/logout").status_code == 204
+        assert client.get("/api/auth/me").status_code == 401
+    finally:
+        request_workspace.reset(token)
 
 
 def test_account_session_login_logout_and_hashes(client, tmp_path):

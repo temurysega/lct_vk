@@ -108,18 +108,23 @@ def _draw_image(
         ),
         None,
     )
-    if source is None:
-        draw = ImageDraw.Draw(canvas)
-        draw.rectangle(bounds, fill="#DDE7F2", outline="#6B7280", width=2)
-        draw.line((bounds[0], bounds[1], bounds[2], bounds[3]), fill="#6B7280")
-        draw.line((bounds[0], bounds[3], bounds[2], bounds[1]), fill="#6B7280")
-        return
-    with Image.open(source) as original:
-        rendered = original.convert("RGBA")
-        rendered.thumbnail((width, height), Image.Resampling.LANCZOS)
-        left = bounds[0] + (width - rendered.width) // 2
-        top = bounds[1] + (height - rendered.height) // 2
-        canvas.paste(rendered, (left, top), rendered)
+    if source is not None:
+        try:
+            with Image.open(source) as original:
+                rendered = original.convert("RGBA")
+                rendered.thumbnail((width, height), Image.Resampling.LANCZOS)
+                left = bounds[0] + (width - rendered.width) // 2
+                top = bounds[1] + (height - rendered.height) // 2
+                canvas.paste(rendered, (left, top), rendered)
+            return
+        except OSError:
+            # Native EMF/WMF can be valid Office assets without a Pillow decoder.
+            # This is a schematic preview; the original asset stays in the PPTX.
+            pass
+    draw = ImageDraw.Draw(canvas)
+    draw.rectangle(bounds, fill="#DDE7F2", outline="#6B7280", width=2)
+    draw.line((bounds[0], bounds[1], bounds[2], bounds[3]), fill="#6B7280")
+    draw.line((bounds[0], bounds[3], bounds[2], bounds[1]), fill="#6B7280")
 
 
 def render_context_previews(

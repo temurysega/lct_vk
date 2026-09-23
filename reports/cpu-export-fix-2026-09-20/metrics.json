@@ -1,0 +1,27 @@
+{
+  "baseline": {
+    "examples": 27,
+    "valid_json_rate": 1.0,
+    "weak_label_accuracy": 0.14814814814814814
+  },
+  "adapted": {
+    "examples": 27,
+    "valid_json_rate": 1.0,
+    "weak_label_accuracy": 0.4074074074074074
+  },
+  "heuristic_weak_label_accuracy": 0.2962962962962963,
+  "train_metrics": {
+    "train_runtime": 446.2129,
+    "train_samples_per_second": 1.331,
+    "train_steps_per_second": 0.17,
+    "total_flos": 4584266927548416.0,
+    "train_loss": 0.15952213025517076,
+    "epoch": 2.0
+  },
+  "recommended_for_visual_trial": true,
+  "note": "Proxy labels, small held-out template. This is not a visual quality evaluation.",
+  "paired_baseline_to_adapted": {
+    "improved": 7,
+    "regressed": 0
+  }
+}

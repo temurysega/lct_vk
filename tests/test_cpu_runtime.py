@@ -12,10 +12,54 @@ from slide_agent.layout_selector import select_with_adapter
 from slide_agent.llm import InferenceClient, InferenceError
 from slide_agent.planner import plan_deck
 from training.build_cpu_notebook import notebook
+from training.check_gguf import disable_layout_adapter
 from training.checkpoints import file_hash
 from training.export_cpu import validate_adapter
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+@pytest.mark.parametrize("initial_scale", [0.0, 1.0])
+def test_cpu_check_explicitly_disables_loaded_adapter(monkeypatch, initial_scale):
+    state = [{"id": 0, "scale": initial_scale}]
+    calls = []
+
+    def respond(request, **kwargs):
+        if isinstance(request, str):
+            assert request.endswith("/lora-adapters")
+            calls.append("GET")
+            return io.BytesIO(json.dumps(state).encode())
+        assert request.full_url.endswith("/lora-adapters")
+        assert request.method == "POST"
+        payload = json.loads(request.data)
+        assert payload == [{"id": 0, "scale": 0.0}]
+        calls.append("POST")
+        state[:] = payload
+        return io.BytesIO(b'{"success": true}')
+
+    monkeypatch.setattr("urllib.request.urlopen", respond)
+    disable_layout_adapter("http://local")
+    assert calls == ["GET", "POST", "GET"]
+    assert state[0]["scale"] == 0
+
+
+@pytest.mark.parametrize("state", [[], [{"id": 1, "scale": 0}], {"error": "missing"}])
+def test_cpu_check_rejects_missing_adapter(monkeypatch, state):
+    monkeypatch.setattr(
+        "urllib.request.urlopen",
+        lambda *a, **kw: io.BytesIO(json.dumps(state).encode()),
+    )
+    with pytest.raises(ValueError, match="Expected exactly one"):
+        disable_layout_adapter("http://local")
+
+
+def test_cpu_check_rejects_unconfirmed_disable(monkeypatch):
+    monkeypatch.setattr(
+        "urllib.request.urlopen",
+        lambda *a, **kw: io.BytesIO(b'[{"id":0,"scale":1}]'),
+    )
+    with pytest.raises(ValueError, match="did not confirm disabled"):
+        disable_layout_adapter("http://local")
 
 
 def test_cpu_transport_counts_context_and_isolates_adapter(monkeypatch):

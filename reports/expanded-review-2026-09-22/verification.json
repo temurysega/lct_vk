@@ -1,0 +1,13 @@
+{
+  "repair_checks": "passed",
+  "initial_scales_tested": [
+    0,
+    1
+  ],
+  "invalid_adapter_states_rejected": 4,
+  "unconfirmed_disable_rejected": true,
+  "patch_idempotent": true,
+  "family_metrics_and_final_test_preserved": true,
+  "original_manifest_and_all_file_hashes_preserved": true,
+  "real_trained_weights_CPU_inference": "not run: weights only on user Colab/Drive"
+}

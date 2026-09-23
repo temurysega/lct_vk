@@ -16,6 +16,7 @@ from slide_agent.prompt_config import load_prompt
 from slide_agent.service import resolve_template
 from slide_agent.utils import read_json, write_json
 from training.build_notebook import notebook
+from training.curation import repeated_marginal_text, select_content
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -24,32 +25,29 @@ def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def extract_examples(template: Path, cache: Path) -> list[dict]:
+def extract_examples(
+    template: Path, cache: Path, accepted_slides: set[int] | None = None
+) -> list[dict]:
     directory = resolve_template(template, cache, client=None)
     context = read_json(directory / "context.json")
     catalog = read_json(directory / "pattern_catalog.json")["patterns"]
+    if accepted_slides is not None:
+        catalog = [
+            p
+            for p in catalog
+            if not p["id"].startswith("slide-")
+            or int(p["id"].split("-")[1]) in accepted_slides
+        ]
     by_id = {p["id"]: p for p in catalog}
+    repeated = repeated_marginal_text(context)
+    height = context["presentation"]["slide_height_inches"]
     rows = []
     for slide in context["slides"]:
-        elements = [
-            e
-            for e in slide.get("text_elements", [])
-            if any(p.get("text", "").strip() for p in e.get("paragraphs", []))
-        ]
-        if not elements:
+        if accepted_slides is not None and slide["index"] not in accepted_slides:
             continue
-        title = next(
-            (e for e in elements if "TITLE" in e.get("placeholder_type", "")),
-            elements[0],
-        )
-        title_text = " ".join(p.get("text", "") for p in title.get("paragraphs", []))
-        bullets = [
-            p["text"].strip()
-            for e in elements
-            if e is not title
-            for p in e.get("paragraphs", [])
-            if p.get("text", "").strip()
-        ]
+        title_text, bullets = select_content(slide, height, repeated)
+        if not title_text:
+            continue
         positive = by_id.get(f"slide-{slide['index']}")
         if positive is None:
             continue
@@ -174,6 +172,14 @@ def main() -> None:
     parser.add_argument("--output", type=Path)
     parser.add_argument("--profile", choices=("gpu", "cpu"), default="gpu")
     parser.add_argument(
+        "--split-config",
+        type=Path,
+        help="Curated family splits with source attribution",
+    )
+    parser.add_argument(
+        "--drive-folder-name", help="Separate Colab folder for this dataset"
+    )
+    parser.add_argument(
         "--validation-template",
         default="VK_WorkSpace_Клиентская_конференция_Шаблон_03.pptx",
     )
@@ -195,12 +201,32 @@ def main() -> None:
         for p in templates
         for row in extract_examples(p, ROOT / "slide-workspace/training-preparation")
     ]
-    train, validation, dropped = split_records(rows, args.validation_template)
+    extended_stats = None
+    test = []
+    if args.split_config:
+        from transformers import AutoTokenizer
+
+        from training.extended_data import build_splits
+
+        config = read_json(args.split_config)
+        profile = read_json(ROOT / "training/cpu_profile.json")
+        tokenizer = AutoTokenizer.from_pretrained(
+            profile["base_model"], revision=profile["base_revision"]
+        )
+        splits, extended_stats = build_splits(rows, config, tokenizer)
+        train, validation, test = (splits[k] for k in ("train", "validation", "test"))
+        dropped = extended_stats["rejected_examples"].get("duplicate_content", 0)
+    else:
+        train, validation, dropped = split_records(rows, args.validation_template)
     if len(train) < 12 or len(validation) < 3:
         raise ValueError(
             "Too few examples after grouped split; review templates before training"
         )
-    for name, records in (("train", train), ("validation", validation)):
+    for name, records in (
+        ("train", train),
+        ("validation", validation),
+        *(([("test", test)]) if test else []),
+    ):
         path = output / "data" / f"{name}.jsonl"
         path.parent.mkdir(exist_ok=True)
         path.write_text(
@@ -255,8 +281,17 @@ def main() -> None:
             },
         )
     # Package current cells even when the separate notebook build was not run.
+    document = builder()
+    if args.drive_folder_name:
+        if not re.fullmatch(r"[A-Za-z0-9_-]+", args.drive_folder_name):
+            raise ValueError("Drive folder name must be a simple name")
+        for cell in document["cells"]:
+            cell["source"] = [
+                line.replace("lct_cpu", args.drive_folder_name)
+                for line in cell["source"]
+            ]
     (output / notebook_name).write_text(
-        json.dumps(builder(), ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     shutil.copy2(ROOT / "training" / readme, output / "README.md")
     (output / "weights").mkdir(exist_ok=True)
@@ -270,7 +305,7 @@ def main() -> None:
         "train_rows": len(train),
         "train_unique_groups": len({r["provenance"]["group"] for r in train}),
         "validation_rows": len(validation),
-        "validation_template": args.validation_template,
+        "validation_template": args.validation_template if not extended_stats else None,
         "validation_duplicate_groups_removed": dropped,
         "source_slides_with_text": len(rows),
         "sources": [{"name": p.name, "sha256": digest(p)} for p in templates],
@@ -285,6 +320,13 @@ def main() -> None:
             load_prompt("layout").encode()
         ).hexdigest(),
     }
+    if extended_stats:
+        manifest["extended_dataset"] = extended_stats
+        manifest["test_rows"] = len(test)
+        write_json(output / "data/split_config.json", config)
+        manifest["files"]["data/split_config.json"] = digest(
+            output / "data/split_config.json"
+        )
     write_json(output / "data/manifest.json", manifest)
     print(
         json.dumps(

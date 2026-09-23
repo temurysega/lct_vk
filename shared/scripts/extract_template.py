@@ -909,6 +909,13 @@ def _image_color_profile(blob: bytes) -> Dict[str, Any]:
         return {}
 
 
+def _image_asset_name(prefix: str, shape, extension: str) -> str:
+    # Shape names are arbitrary document text, not portable filesystem names.
+    suffix = "".join(c for c in extension.lower() if c.isascii() and (c.isalnum() or c == "-")) or "bin"
+    identity = hashlib.sha256(str(shape.name).encode("utf-8")).hexdigest()[:10]
+    return f"{prefix}_{shape.shape_id}_{identity}.{suffix}"
+
+
 def _extract_image_from_shape(shape, part, prefix: str, seen_blobs: set,
                                offset_left: int = 0, offset_top: int = 0) -> Optional[Dict]:
     """Try to extract an image from a shape."""
@@ -924,7 +931,7 @@ def _extract_image_from_shape(shape, part, prefix: str, seen_blobs: set,
         blob = image.blob
         blob_hash = hashlib.md5(blob[:512]).hexdigest()
         ext = image.ext if image.ext else "png"
-        img_name = f"{prefix}_{shape.name}.{ext}".replace(" ", "_")
+        img_name = _image_asset_name(prefix, shape, ext)
 
         img_entry: Dict[str, Any] = {"name": img_name, **pos}
         img_entry.update(_image_color_profile(blob))
@@ -954,7 +961,7 @@ def _extract_image_from_shape(shape, part, prefix: str, seen_blobs: set,
                 continue
             blob_hash = hashlib.md5(blob[:512]).hexdigest()
             ext = ct.split("/")[-1].replace("jpeg", "jpg")
-            img_name = f"{prefix}_{shape.name}.{ext}".replace(" ", "_")
+            img_name = _image_asset_name(prefix, shape, ext)
 
             img_entry = {"name": img_name, **pos}
             img_entry.update(_image_color_profile(blob))
@@ -977,7 +984,7 @@ def _extract_image_from_shape(shape, part, prefix: str, seen_blobs: set,
         if image_part is not None:
             blob = image_part.blob
             blob_hash = hashlib.md5(blob[:512]).hexdigest()
-            img_name = f"{prefix}_{shape.name}.svg".replace(" ", "_")
+            img_name = _image_asset_name(prefix, shape, "svg")
 
             img_entry = {"name": img_name, **pos, "is_svg": True, "media_type": "image/svg+xml"}
             if blob_hash not in seen_blobs:

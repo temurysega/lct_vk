@@ -17,16 +17,22 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, field_validator
 from starlette.concurrency import run_in_threadpool
 
-from slide_agent.utils import request_workspace, resolve_workspace
+from slide_agent.utils import DEFAULT_WORKSPACE, request_workspace, resolve_workspace
 
 COOKIE = "predel_session"
 SESSION_AGE = 7 * 24 * 3600
 router = APIRouter(prefix="/api/auth", tags=["Accounts"])
 
 
+def account_workspace():
+    # Authentication always uses the application root, even when a server task
+    # inherits the previous request's user workspace through its ContextVar.
+    return resolve_workspace(os.getenv("BRANDDECK_WORKSPACE") or DEFAULT_WORKSPACE)
+
+
 @contextmanager
 def database():
-    root = resolve_workspace()
+    root = account_workspace()
     root.mkdir(parents=True, exist_ok=True)
     path = root / "accounts.sqlite3"
     with closing(sqlite3.connect(path, timeout=15)) as db, db:
@@ -225,7 +231,7 @@ class AccountMiddleware:
                     scope, receive, send
                 )
             scope.setdefault("state", {})["user"] = user
-            token = request_workspace.set(resolve_workspace() / "users" / user["id"])
+            token = request_workspace.set(account_workspace() / "users" / user["id"])
         try:
 
             async def safe_send(message):

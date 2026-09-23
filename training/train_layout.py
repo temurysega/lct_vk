@@ -78,6 +78,8 @@ def evaluate_choices(model, tokenizer, rows: list[dict]) -> dict:
         results.append(
             {
                 "group": row["provenance"]["group"],
+                "design_family": row["provenance"].get("design_family", "legacy"),
+                "language": row["provenance"].get("language", "unknown"),
                 "expected": expected,
                 "choice": choice,
                 "valid": valid,
@@ -85,7 +87,19 @@ def evaluate_choices(model, tokenizer, rows: list[dict]) -> dict:
                 "raw": text,
             }
         )
+    breakdown = {}
+    for field in ("design_family", "language"):
+        breakdown["by_" + field] = {
+            value: {
+                "examples": len(selected),
+                "weak_label_accuracy": sum(p["correct"] for p in selected)
+                / len(selected),
+            }
+            for value in sorted({p[field] for p in results})
+            if (selected := [p for p in results if p[field] == value])
+        }
     return {
+        **breakdown,
         "examples": len(results),
         "valid_json_rate": sum(r["valid"] for r in results) / len(results),
         "weak_label_accuracy": sum(r["correct"] for r in results) / len(results),

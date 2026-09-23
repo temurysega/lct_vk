@@ -11,9 +11,8 @@ services:
     command:
       - --model
       - /models/base-q4_k_m.gguf
-      - --lora
-      - /models/layout-lora-f16.gguf
-      - --lora-init-without-apply
+      - --lora-scaled
+      - /models/layout-lora-f16.gguf:0
       - --alias
       - lct-cpu
       - --host

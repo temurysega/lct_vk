@@ -21,3 +21,6 @@ Thumbs.db
 
 # Editor
 .vscode/settings.json
+
+# Heavy renders of third-party decks stay local
+reports/expanded-review-2026-09-22/previews/

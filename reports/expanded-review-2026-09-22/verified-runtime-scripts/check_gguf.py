@@ -13,7 +13,7 @@ import urllib.request
 from pathlib import Path
 
 
-def post_json(url: str, payload: dict | list[dict], timeout: int = 240) -> dict:
+def post_json(url: str, payload: dict, timeout: int = 240) -> dict:
     request = urllib.request.Request(
         url,
         data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
@@ -25,30 +25,17 @@ def post_json(url: str, payload: dict | list[dict], timeout: int = 240) -> dict:
 
 
 def disable_layout_adapter(url: str) -> None:
-    # In pinned llama.cpp b11053 the init flag skips applying the adapter, but
-    # GET /lora-adapters still reads its original scale from server parameters.
-    # Explicitly reset that global default; per-request scales remain separate.
     with urllib.request.urlopen(url + "/lora-adapters", timeout=30) as response:
         loaded = json.load(response)
-    if (
-        not isinstance(loaded, list)
-        or len(loaded) != 1
-        or not isinstance(loaded[0], dict)
-        or loaded[0].get("id") != 0
-    ):
-        raise ValueError(
-            f"Expected exactly one loaded layout adapter with id=0: {loaded!r}"
-        )
+    if (not isinstance(loaded, list) or len(loaded) != 1
+            or not isinstance(loaded[0], dict) or loaded[0].get("id") != 0):
+        raise ValueError(f"Expected exactly one loaded layout adapter with id=0: {loaded!r}")
     post_json(url + "/lora-adapters", [{"id": 0, "scale": 0.0}], timeout=30)
     with urllib.request.urlopen(url + "/lora-adapters", timeout=30) as response:
         loaded = json.load(response)
-    if (
-        not isinstance(loaded, list)
-        or len(loaded) != 1
-        or not isinstance(loaded[0], dict)
-        or loaded[0].get("id") != 0
-        or loaded[0].get("scale") != 0
-    ):
+    if (not isinstance(loaded, list) or len(loaded) != 1
+            or not isinstance(loaded[0], dict) or loaded[0].get("id") != 0
+            or loaded[0].get("scale") != 0):
         raise ValueError(f"Layout adapter did not confirm disabled default: {loaded!r}")
 
 
@@ -79,11 +66,9 @@ def evaluate(url: str, rows: list[dict], scale: float | None) -> dict:
             choice, valid = None, False
         predictions.append(
             {
-                "group": row.get("provenance", {}).get("group"),
                 "design_family": row.get("provenance", {}).get(
                     "design_family", "legacy"
                 ),
-                "language": row.get("provenance", {}).get("language", "unknown"),
                 "expected": expected,
                 "choice": choice,
                 "valid": valid,
@@ -93,20 +78,18 @@ def evaluate(url: str, rows: list[dict], scale: float | None) -> dict:
                 "timings": response.get("timings"),
             }
         )
-    breakdown = {}
-    for field in ("design_family", "language"):
-        breakdown["by_" + field] = {
-            value: {
-                "examples": len(selected),
-                "weak_label_accuracy": sum(p["correct"] for p in selected)
-                / len(selected),
-            }
-            for value in sorted({p[field] for p in predictions})
-            if (selected := [p for p in predictions if p[field] == value])
+    families = sorted({p["design_family"] for p in predictions})
+    by_family = {
+        family: {
+            "examples": sum(p["design_family"] == family for p in predictions),
+            "weak_label_accuracy": sum(
+                p["correct"] for p in predictions if p["design_family"] == family
+            )
+            / sum(p["design_family"] == family for p in predictions),
         }
-    by_family = breakdown["by_design_family"]
+        for family in families
+    }
     return {
-        **breakdown,
         "examples": len(rows),
         "valid_json_rate": sum(p["valid"] for p in predictions) / len(rows),
         "weak_label_accuracy": sum(p["correct"] for p in predictions) / len(rows),
@@ -173,7 +156,7 @@ def check(
         "0",
     ]
     if adapter is not None:
-        command += ["--lora-scaled", str(adapter.resolve()) + ":0"]
+        command += ["--lora", str(adapter.resolve()), "--lora-init-without-apply"]
     stopped = threading.Event()
     peak = [0]
     with output.with_suffix(".server.log").open("w", encoding="utf-8") as log:
