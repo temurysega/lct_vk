@@ -1,0 +1,259 @@
+{
+  "server": "http://127.0.0.1:8093/v1",
+  "strategy": "balanced",
+  "qa_retries": 0,
+  "runs": [
+    {
+      "template": "VK Tech шаблон.pptx",
+      "arms": {
+        "heuristic": {
+          "presentation_dir": "slide-workspace/adapter-ab-2026-09-23/presentations/pilot-servisa-podderzhki-sotrudnikov-20260923-103620",
+          "qa": "passed",
+          "qa_score": 100,
+          "issues": [],
+          "exports": "passed",
+          "selection_seconds": 0.0,
+          "elapsed_seconds": 21.346,
+          "patterns": [
+            "slide-1",
+            "slide-28",
+            "slide-46",
+            "layout-7",
+            "layout-27",
+            "slide-14",
+            "slide-9",
+            "layout-27",
+            "layout-27",
+            "slide-4"
+          ],
+          "selector_modes": [
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic"
+          ],
+          "adapter_calls": 0,
+          "fallback_reasons": []
+        },
+        "adapter": {
+          "presentation_dir": "slide-workspace/adapter-ab-2026-09-23/presentations/pilot-servisa-podderzhki-sotrudnikov-20260923-103744",
+          "qa": "passed",
+          "qa_score": 100,
+          "issues": [],
+          "exports": "passed",
+          "selection_seconds": 62.55,
+          "elapsed_seconds": 18.494,
+          "patterns": [
+            "layout-20",
+            "layout-9",
+            "slide-34",
+            "layout-27",
+            "layout-27",
+            "layout-27",
+            "layout-7",
+            "layout-27",
+            "layout-27",
+            "layout-4"
+          ],
+          "selector_modes": [
+            "adapter",
+            "adapter",
+            "adapter",
+            "adapter",
+            "adapter",
+            "adapter",
+            "adapter",
+            "adapter",
+            "adapter",
+            "adapter"
+          ],
+          "adapter_calls": 10,
+          "fallback_reasons": []
+        }
+      },
+      "changed_slides": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        10
+      ]
+    },
+    {
+      "template": "VK_WorkSpace_Клиентская_конференция_Шаблон_03.pptx",
+      "arms": {
+        "heuristic": {
+          "presentation_dir": "slide-workspace/adapter-ab-2026-09-23/presentations/pilot-servisa-podderzhki-sotrudnikov-20260923-103806",
+          "qa": "passed",
+          "qa_score": 100,
+          "issues": [],
+          "exports": "passed",
+          "selection_seconds": 0.0,
+          "elapsed_seconds": 12.621,
+          "patterns": [
+            "slide-1",
+            "slide-25",
+            "slide-24",
+            "slide-18",
+            "slide-15",
+            "slide-6",
+            "slide-18",
+            "slide-10",
+            "slide-18",
+            "slide-29"
+          ],
+          "selector_modes": [
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic"
+          ],
+          "adapter_calls": 0,
+          "fallback_reasons": []
+        },
+        "adapter": {
+          "presentation_dir": "slide-workspace/adapter-ab-2026-09-23/presentations/pilot-servisa-podderzhki-sotrudnikov-20260923-103919",
+          "qa": "passed",
+          "qa_score": 100,
+          "issues": [],
+          "exports": "passed",
+          "selection_seconds": 59.93,
+          "elapsed_seconds": 11.308,
+          "patterns": [
+            "layout-14",
+            "slide-16",
+            "slide-24",
+            "slide-17",
+            "slide-15",
+            "slide-18",
+            "slide-18",
+            "slide-15",
+            "slide-5",
+            "slide-29"
+          ],
+          "selector_modes": [
+            "adapter",
+            "adapter",
+            "adapter",
+            "adapter",
+            "adapter",
+            "adapter",
+            "adapter",
+            "adapter",
+            "adapter",
+            "heuristic"
+          ],
+          "adapter_calls": 9,
+          "fallback_reasons": []
+        }
+      },
+      "changed_slides": [
+        1,
+        2,
+        4,
+        6,
+        8,
+        9
+      ]
+    },
+    {
+      "template": "Шаблон презентации VK Education.pptx",
+      "arms": {
+        "heuristic": {
+          "presentation_dir": "slide-workspace/adapter-ab-2026-09-23/presentations/pilot-servisa-podderzhki-sotrudnikov-20260923-103934",
+          "qa": "passed",
+          "qa_score": 100,
+          "issues": [],
+          "exports": "passed",
+          "selection_seconds": 0.0,
+          "elapsed_seconds": 12.586,
+          "patterns": [
+            "slide-1",
+            "layout-4",
+            "slide-48",
+            "slide-24",
+            "slide-24",
+            "slide-7",
+            "slide-24",
+            "slide-24",
+            "layout-8",
+            "slide-52"
+          ],
+          "selector_modes": [
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic",
+            "heuristic"
+          ],
+          "adapter_calls": 0,
+          "fallback_reasons": []
+        },
+        "adapter": {
+          "presentation_dir": "slide-workspace/adapter-ab-2026-09-23/presentations/pilot-servisa-podderzhki-sotrudnikov-20260923-104034",
+          "qa": "passed",
+          "qa_score": 100,
+          "issues": [],
+          "exports": "passed",
+          "selection_seconds": 47.27,
+          "elapsed_seconds": 11.966,
+          "patterns": [
+            "slide-1",
+            "slide-17",
+            "layout-25",
+            "layout-23",
+            "layout-8",
+            "layout-23",
+            "layout-23",
+            "slide-7",
+            "layout-23",
+            "slide-52"
+          ],
+          "selector_modes": [
+            "heuristic",
+            "adapter",
+            "adapter",
+            "adapter",
+            "adapter",
+            "adapter",
+            "adapter",
+            "adapter",
+            "adapter",
+            "adapter"
+          ],
+          "adapter_calls": 9,
+          "fallback_reasons": []
+        }
+      },
+      "changed_slides": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    }
+  ]
+}
