@@ -32,6 +32,9 @@ Open-source сервис, который анализирует произвол
 - Анализ masters, layouts, placeholders, геометрии, шрифтов, цветов, фонов, таблиц и изображений.
 - Формирование `design_system.json` и `pattern_catalog.json`, пригодных для повторного использования.
 - Контент-планирование через любой OpenAI-compatible `/chat/completions` endpoint.
+- Генерация по краткому брифу и назначению (фича, продукт, проект, инициатива):
+  модель сначала строит структуру колоды, затем пишет каждый слайд. Ответы
+  ограничены JSON-схемой, число слайдов совпадает с запрошенным.
 - Детерминированный локальный planner для работы без API и CI-тестов.
 - Семантический выбор паттерна под cover, section, content, comparison, data, image и closing.
 - Ёмкостный layout mapping по геометрии текста, числу слотов, данным и изображениям с `why_fit`, рисками и альтернативами в `deck_plan.json`.
@@ -51,6 +54,41 @@ Open-source сервис, который анализирует произвол
 - Асинхронные persistent jobs с загрузкой контентного файла, стадиями, прогрессом и отдельным download endpoint.
 
 ## Быстрый старт
+
+### Презентация по краткому брифу (Qwen3.5-9B, GPU или CPU)
+
+Модель — [Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) (Apache 2.0, 9,7B)
+в GGUF Q4_K_M, 5,7 ГБ. Один и тот же файл весов работает на видеокарте с 8 ГБ
+и на сервере без GPU (нужно около 8 ГБ RAM). Файл, ревизия и SHA-256 закреплены
+в [deploy/llama/qwen3.5-9b.json](deploy/llama/qwen3.5-9b.json). Сервер модели —
+llama.cpp b11053: CUDA- или CPU-сборка для Windows, Docker-образ собирается из той
+же ревизии. Веса в git не хранятся (файл 5,7 ГБ больше лимита GitHub даже для LFS):
+`deploy/llama/setup_local.py` скачивает модель в `models/gpu/` и сервер в
+`external-fixtures/`, докачивает после обрыва и сверяет SHA-256 каждого файла.
+
+```powershell
+# Один раз: веса и llama.cpp (--device cpu без видеокарты)
+python deploy/llama/setup_local.py
+# Windows, видеокарта (или -Device cpu -Threads 8 без неё)
+powershell -File deploy/llama/start-llama.ps1
+# Три шаблона × три варианта по брифу; параметры модели — в самом конфиге
+python examples/run_dataset.py --config examples/brief_demo.json
+```
+
+Одна колода из CLI и сервер без GPU:
+
+```powershell
+branddeck generate --template brand.pptx --content examples/brief_feature.md `
+  --slides 12 --mode brief --purpose feature --export all
+docker compose -f compose.llm-cpu.yaml up -d --build
+```
+
+`--mode auto` (по умолчанию) включает режим брифа для текста до 1500 знаков
+без разделов, если модель подключена; `source` раскладывает готовый материал,
+`brief` требует модель. В студии назначение выбирается в поле «Назначение».
+Модель использует только факты брифа: числа, которых нет в брифе, аудит
+помечает как `number_not_in_source`. Результаты прогона:
+[reports/brief-llm-2026-09-23](reports/brief-llm-2026-09-23/README.md).
 
 ### VPS 4 ГБ без GPU
 
@@ -398,6 +436,8 @@ OpenRouter не обязателен. GPU-запуск ещё не провер�
 | `INFERENCE_TIMEOUT` | Таймаут запроса, по умолчанию 120 секунд |
 | `INFERENCE_MAX_RETRIES` | Число сетевых попыток, по умолчанию 3 |
 | `INFERENCE_VISION` | `1` включает multimodal-анализ PNG-превью, `0` оставляет только JSON |
+| `INFERENCE_PARALLEL` | Сколько слайдов брифа писать одновременно; равно `--parallel` сервера llama.cpp (по умолчанию 1) |
+| `INFERENCE_EXTRA_BODY` | JSON-объект, добавляемый в каждый запрос, например `{"chat_template_kwargs": {"enable_thinking": false}}` для Qwen3.5 |
 | `BRANDDECK_WORKSPACE` | Альтернативная папка артефактов |
 | `BRANDDECK_POWERPOINT_QA` | `auto` по умолчанию; `1` требует PowerPoint render-check в Windows, `0` отключает его |
 | `IMAGE_BASE_URL`, `IMAGE_MODEL`, `IMAGE_API_KEY` | Необязательный OpenAI-совместимый `/images/generations`; без них картинки не генерируются |

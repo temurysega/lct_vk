@@ -1,0 +1,19 @@
+{
+  "templates": "../task+data/Датасет",
+  "content": "examples/brief_feature.md",
+  "workspace": "slide-workspace/brief-qwen3.5-9b",
+  "slide_count": 12,
+  "offline": false,
+  "mode": "brief",
+  "purpose": "feature",
+  "export_formats": ["pdf", "html"],
+  "inference": {
+    "INFERENCE_BASE_URL": "http://127.0.0.1:8080/v1",
+    "INFERENCE_MODEL": "qwen3.5-9b",
+    "INFERENCE_VISION": "0",
+    "INFERENCE_PARALLEL": "4",
+    "INFERENCE_TIMEOUT": "600",
+    "INFERENCE_MAX_RETRIES": "2",
+    "INFERENCE_EXTRA_BODY": "{\"chat_template_kwargs\": {\"enable_thinking\": false}, \"top_p\": 0.8, \"top_k\": 20}"
+  }
+}

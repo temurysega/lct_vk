@@ -1,0 +1,25 @@
+{
+  "hardware": "Intel Core i9-10920X, 12 cores, 16 GB RAM, no GPU offload (-ngl 0)",
+  "deck": {
+    "slides": 12,
+    "elapsed_seconds": 722.116,
+    "qa": "passed",
+    "qa_score": 100,
+    "brief_timings_seconds": {
+      "outline": 288.17,
+      "slides": 263.23
+    },
+    "threads": 12,
+    "parallel_slots": 4
+  },
+  "llama_bench": {
+    "threads_4": {
+      "pp512": 25.19,
+      "tg128": 5.77
+    },
+    "threads_12": {
+      "pp512": 54.12,
+      "tg128": 6.64
+    }
+  }
+}

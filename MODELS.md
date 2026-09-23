@@ -1,5 +1,33 @@
 # Модели и инференс
 
+## Планирование по брифу: Qwen3.5-9B
+
+| Поле | Значение |
+|---|---|
+| Модель | [Qwen/Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B), ревизия `c2022362` |
+| Лицензия, размер | Apache 2.0, 9 653 104 368 параметров (лимит ТЗ — 35B) |
+| Веса | [unsloth/Qwen3.5-9B-GGUF](https://huggingface.co/unsloth/Qwen3.5-9B-GGUF), `Qwen3.5-9B-Q4_K_M.gguf`, ревизия `3885219b`, 5,68 ГБ |
+| Сервер | llama.cpp b11053 (`1af554f8`), `--ctx-size 16384 --parallel 4 --jinja` |
+| Режим мышления | выключен запросом: `INFERENCE_EXTRA_BODY={"chat_template_kwargs":{"enable_thinking":false}}` |
+| Требования | GPU 8 ГБ (`--n-gpu-layers 99`) или CPU и ~8 ГБ RAM (`--n-gpu-layers 0`) |
+
+Все параметры и SHA-256 — в [deploy/llama/qwen3.5-9b.json](deploy/llama/qwen3.5-9b.json);
+`python deploy/llama/setup_local.py` скачивает и проверяет веса и сервер llama.cpp.
+Модель строит структуру колоды и пишет текст слайдов (`slide_agent/brief.py`).
+Ответы ограничены JSON-схемой, поэтому модель не может вернуть другое число
+слайдов или неизвестный тип схемы. Для топ-10 ТЗ требует инференс VK с
+Qwen3.8-27B: клиент совместим с любым OpenAI-совместимым сервером (vLLM
+поддерживает те же `response_format` и `chat_template_kwargs`), меняются только
+`INFERENCE_BASE_URL` и `INFERENCE_MODEL`.
+
+Замеры: на RTX 2070 SUPER структура и текст 12 слайдов занимают 33–38 с,
+колода с экспортом — около 1–1,5 минуты. На CPU (i9-10920X, 12 ядер) та же
+колода — 722 с, генерация 5,8–6,6 токена/с на 4–12 потоках: для лимита ТЗ в
+5 минут на процессоре 9B недостаточно. Подробно —
+[reports/brief-llm-2026-09-23](reports/brief-llm-2026-09-23/README.md).
+
+## Прежние эксперименты
+
 Для **дообучения на другом Google-аккаунте без GitHub** подготовлен отдельный
 [Drive notebook](examples/BrandDeck_A100_Training_Drive.ipynb).
 Комплект для загрузки создаётся командой `python -m training.prepare_drive`;

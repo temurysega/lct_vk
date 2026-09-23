@@ -1,0 +1,546 @@
+{
+  "config": {
+    "templates": "../task+data/Датасет",
+    "content": "examples/brief_feature.md",
+    "workspace": "slide-workspace/brief-qwen3.5-9b",
+    "slide_count": 12,
+    "offline": false,
+    "mode": "brief",
+    "purpose": "feature",
+    "export_formats": [
+      "pdf",
+      "html"
+    ],
+    "inference": {
+      "INFERENCE_BASE_URL": "http://127.0.0.1:8080/v1",
+      "INFERENCE_MODEL": "qwen3.5-9b",
+      "INFERENCE_VISION": "0",
+      "INFERENCE_PARALLEL": "4",
+      "INFERENCE_TIMEOUT": "600",
+      "INFERENCE_MAX_RETRIES": "2",
+      "INFERENCE_EXTRA_BODY": "{\"chat_template_kwargs\": {\"enable_thinking\": false}, \"top_p\": 0.8, \"top_k\": 20}"
+    }
+  },
+  "content_sha256": "e1984f727ae7cbb48b275666a9d59ffbafdb6b8b5cab0d829ac9794219d78444",
+  "model": {
+    "model": "Qwen/Qwen3.5-9B",
+    "model_revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "license": "apache-2.0",
+    "parameters": 9653104368,
+    "gguf_repo": "unsloth/Qwen3.5-9B-GGUF",
+    "gguf_revision": "3885219b6810b007914f3a7950a8d1b469d598a5",
+    "gguf_file": "Qwen3.5-9B-Q4_K_M.gguf",
+    "gguf_bytes": 5680522464,
+    "gguf_sha256": "03b74727a860a56338e042c4420bb3f04b2fec5734175f4cb9fa853daf52b7e8",
+    "download_url": "https://huggingface.co/unsloth/Qwen3.5-9B-GGUF/resolve/3885219b6810b007914f3a7950a8d1b469d598a5/Qwen3.5-9B-Q4_K_M.gguf",
+    "llama_cpp_release": "b11053",
+    "llama_cpp_revision": "1af554f8fc78ba029665a47b839484d9763e2a75",
+    "served_alias": "qwen3.5-9b",
+    "context_tokens": 16384,
+    "parallel_slots": 4,
+    "thinking": "disabled per request: INFERENCE_EXTRA_BODY={\"chat_template_kwargs\":{\"enable_thinking\":false}}"
+  },
+  "runs": [
+    {
+      "template": "VK Tech шаблон.pptx",
+      "source_sha256": "cbbe3aa6a21d23cebc4d1383b93dd07a9cea460d683de1903567b616c839485d",
+      "source_unchanged": true,
+      "elapsed_seconds_three_variants": 108.6,
+      "planner": {
+        "mode": "inference",
+        "input": "brief"
+      },
+      "brief": {
+        "purpose": "feature",
+        "slide_count": 12,
+        "timings_seconds": {
+          "outline": 14.36,
+          "slides": 18.09
+        },
+        "outline_problems": [],
+        "slide_failures": [],
+        "outline": [
+          {
+            "title": "Ускорение работы сотрудников с регламентами",
+            "role": "cover",
+            "goal": "Представить инициативу по внедрению ИИ-помощника для поддержки сотрудников.",
+            "visual": "none"
+          },
+          {
+            "title": "Поиск инструкции занимает до 30 минут",
+            "role": "content",
+            "goal": "Показать, что текущее время поиска документации критически замедляет работу.",
+            "visual": "none"
+          },
+          {
+            "title": "Треть обращений — повторяющиеся вопросы",
+            "role": "content",
+            "goal": "Обозначить нагрузку на поддержку из-за рутинных запросов.",
+            "visual": "none"
+          },
+          {
+            "title": "Влияние на все подразделения компании",
+            "role": "content",
+            "goal": "Указать, что проблема актуальна для всех сотрудников, использующих регламенты.",
+            "visual": "none"
+          },
+          {
+            "title": "ИИ-помощник отвечает на вопросы по регламентам",
+            "role": "content",
+            "goal": "Объяснить основную идею функции: автоматический ответ с ссылкой на источник.",
+            "visual": "none"
+          },
+          {
+            "title": "Отправка вопроса специалисту при отсутствии ответа",
+            "role": "content",
+            "goal": "Описать сценарий эскалации, когда ИИ не может подтвердить ответ.",
+            "visual": "none"
+          },
+          {
+            "title": "Работа внутри контура компании без утечки данных",
+            "role": "content",
+            "goal": "Подчеркнуть безопасность модели с открытыми весами и локальную обработку.",
+            "visual": "none"
+          },
+          {
+            "title": "Пилот охватывает 2 подразделения и 150 сотрудников",
+            "role": "content",
+            "goal": "Определить границы первого релиза и количество участников теста.",
+            "visual": "none"
+          },
+          {
+            "title": "Длительность пилота составит 6 недель",
+            "role": "content",
+            "goal": "Указать временные рамки проведения эксперимента.",
+            "visual": "none"
+          },
+          {
+            "title": "Снижение времени поиска и доля закрытых обращений",
+            "role": "content",
+            "goal": "Определить метрики успеха пилота для оценки эффективности.",
+            "visual": "none"
+          },
+          {
+            "title": "Необходимо выделить команду из 3 человек",
+            "role": "content",
+            "goal": "Запросить необходимые ресурсы для реализации проекта.",
+            "visual": "none"
+          },
+          {
+            "title": "Одобрить пилот и выделить команду",
+            "role": "closing",
+            "goal": "Получить финальное решение о запуске проекта и утверждении бюджета.",
+            "visual": "none"
+          }
+        ]
+      },
+      "diversity_status": "passed",
+      "status": "completed",
+      "variants": [
+        {
+          "id": "balanced",
+          "status": "completed",
+          "qa_status": "passed",
+          "qa_score": 100,
+          "slides": 12,
+          "compose_export_seconds": 18.985,
+          "exports": "passed",
+          "patterns": [
+            "slide-1",
+            "layout-27",
+            "layout-27",
+            "layout-27",
+            "layout-27",
+            "slide-14",
+            "layout-27",
+            "slide-14",
+            "slide-14",
+            "slide-14",
+            "layout-27",
+            "layout-7"
+          ]
+        },
+        {
+          "id": "columns",
+          "status": "completed",
+          "qa_status": "passed",
+          "qa_score": 100,
+          "slides": 12,
+          "compose_export_seconds": 15.868,
+          "exports": "passed",
+          "patterns": [
+            "slide-1",
+            "slide-14",
+            "slide-14",
+            "slide-24",
+            "slide-14",
+            "layout-27",
+            "slide-24",
+            "layout-27",
+            "slide-19",
+            "layout-27",
+            "slide-14",
+            "layout-27"
+          ]
+        },
+        {
+          "id": "focus",
+          "status": "completed",
+          "qa_status": "passed",
+          "qa_score": 100,
+          "slides": 12,
+          "compose_export_seconds": 16.419,
+          "exports": "passed",
+          "patterns": [
+            "slide-1",
+            "layout-7",
+            "slide-9",
+            "layout-27",
+            "layout-7",
+            "slide-9",
+            "layout-27",
+            "layout-7",
+            "layout-27",
+            "slide-9",
+            "layout-29",
+            "slide-9"
+          ]
+        }
+      ]
+    },
+    {
+      "template": "VK_WorkSpace_Клиентская_конференция_Шаблон_03.pptx",
+      "source_sha256": "1b8883114486c69dff706e9c4fd9382727c4506c2cfa3ec34f86987f1e852f2f",
+      "source_unchanged": true,
+      "elapsed_seconds_three_variants": 98.7,
+      "planner": {
+        "mode": "inference",
+        "input": "brief"
+      },
+      "brief": {
+        "purpose": "feature",
+        "slide_count": 12,
+        "timings_seconds": {
+          "outline": 14.69,
+          "slides": 21.61
+        },
+        "outline_problems": [],
+        "slide_failures": [],
+        "outline": [
+          {
+            "title": "Ускорение работы сотрудников за счет ИИ",
+            "role": "cover",
+            "goal": "Представить инициативу по внедрению ИИ-помощника для поддержки сотрудников.",
+            "visual": "none"
+          },
+          {
+            "title": "Поиск инструкции занимает до 30 минут",
+            "role": "content",
+            "goal": "Показать, что сотрудники тратят слишком много времени на поиск регламентов.",
+            "visual": "none"
+          },
+          {
+            "title": "Треть обращений в поддержку повторяются",
+            "role": "content",
+            "goal": "Обозначить проблему перегрузки поддержки однотипными вопросами.",
+            "visual": "none"
+          },
+          {
+            "title": "Влияет на продуктивность и нагрузку на специалистов",
+            "role": "content",
+            "goal": "Объяснить, почему текущая ситуация важна для бизнеса.",
+            "visual": "none"
+          },
+          {
+            "title": "ИИ-помощник отвечает на вопросы по регламентам",
+            "role": "content",
+            "goal": "Описать суть фичи: автоматический ответ с ссылкой на документ.",
+            "visual": "none"
+          },
+          {
+            "title": "Модель с открытыми весами работает внутри контура",
+            "role": "content",
+            "goal": "Подчеркнуть безопасность данных: документы не покидают компанию.",
+            "visual": "none"
+          },
+          {
+            "title": "Сложные вопросы передаются специалисту с контекстом",
+            "role": "content",
+            "goal": "Описать логику работы при отсутствии подтвержденного ответа.",
+            "visual": "none"
+          },
+          {
+            "title": "Пилот охватит 2 подразделения и 150 сотрудников",
+            "role": "content",
+            "goal": "Определить границы первого релиза и количество участников.",
+            "visual": "icon_grid"
+          },
+          {
+            "title": "Срок пилота составит 6 недель",
+            "role": "content",
+            "goal": "Указать временные рамки проведения эксперимента.",
+            "visual": "process"
+          },
+          {
+            "title": "Снизим время поиска ответа и долю обращений к специалистам",
+            "role": "content",
+            "goal": "Определить ключевые метрики успеха пилота.",
+            "visual": "pyramid"
+          },
+          {
+            "title": "Требуется команда из 3 человек для реализации",
+            "role": "content",
+            "goal": "Запросить необходимые ресурсы для запуска проекта.",
+            "visual": "hierarchy"
+          },
+          {
+            "title": "Одобрить пилот и выделить команду из 3 человек",
+            "role": "closing",
+            "goal": "Получить финальное решение о запуске инициативы.",
+            "visual": "none"
+          }
+        ]
+      },
+      "diversity_status": "passed",
+      "status": "completed",
+      "variants": [
+        {
+          "id": "balanced",
+          "status": "completed",
+          "qa_status": "passed",
+          "qa_score": 100,
+          "slides": 12,
+          "compose_export_seconds": 17.728,
+          "exports": "passed",
+          "patterns": [
+            "slide-1",
+            "slide-15",
+            "slide-10",
+            "slide-5",
+            "slide-6",
+            "slide-15",
+            "slide-10",
+            "slide-18",
+            "slide-18",
+            "slide-18",
+            "slide-18",
+            "slide-5"
+          ]
+        },
+        {
+          "id": "columns",
+          "status": "completed",
+          "qa_status": "passed",
+          "qa_score": 100,
+          "slides": 12,
+          "compose_export_seconds": 14.719,
+          "exports": "passed",
+          "patterns": [
+            "slide-1",
+            "slide-10",
+            "slide-15",
+            "slide-6",
+            "slide-5",
+            "slide-10",
+            "slide-15",
+            "slide-18",
+            "slide-6",
+            "slide-6",
+            "slide-18",
+            "slide-15"
+          ]
+        },
+        {
+          "id": "focus",
+          "status": "completed",
+          "qa_status": "passed",
+          "qa_score": 100,
+          "slides": 12,
+          "compose_export_seconds": 15.759,
+          "exports": "passed",
+          "patterns": [
+            "slide-1",
+            "slide-5",
+            "slide-6",
+            "slide-15",
+            "slide-10",
+            "slide-5",
+            "slide-6",
+            "slide-19",
+            "slide-19",
+            "slide-19",
+            "slide-18",
+            "slide-10"
+          ]
+        }
+      ]
+    },
+    {
+      "template": "Шаблон презентации VK Education.pptx",
+      "source_sha256": "9ef2323ed5f49f464aee5ae7065f1f57bb92c8be3a635be507d59819e285cfe0",
+      "source_unchanged": true,
+      "elapsed_seconds_three_variants": 100.1,
+      "planner": {
+        "mode": "inference",
+        "input": "brief"
+      },
+      "brief": {
+        "purpose": "feature",
+        "slide_count": 12,
+        "timings_seconds": {
+          "outline": 15.46,
+          "slides": 22.72
+        },
+        "outline_problems": [],
+        "slide_failures": [],
+        "outline": [
+          {
+            "title": "Сокращение времени поиска инструкций и нагрузка на поддержку",
+            "role": "cover",
+            "goal": "Ознакомить аудиторию с целью презентации по внедрению ИИ-помощника",
+            "visual": "none"
+          },
+          {
+            "title": "Сотрудники тратят до 30 минут на поиск нужной инструкции",
+            "role": "content",
+            "goal": "Показать проблему текущего времени поиска регламентов и её влияние на эффективность",
+            "visual": "none"
+          },
+          {
+            "title": "Треть обращений в поддержку — повторяющиеся вопросы по инструкциям",
+            "role": "content",
+            "goal": "Обосновать необходимость решения через статистику нагрузки на службу поддержки",
+            "visual": "none"
+          },
+          {
+            "title": "ИИ-помощник отвечает на вопросы по регламентам и даёт ссылку на документ-источник",
+            "role": "content",
+            "goal": "Представить суть фичи как единое решение для сотрудников",
+            "visual": "none"
+          },
+          {
+            "title": "Процесс: запрос сотрудника, ответ ИИ или перенаправление специалисту",
+            "role": "content",
+            "goal": "Объяснить логику работы модели с открытыми весами внутри контура компании",
+            "visual": "process"
+          },
+          {
+            "title": "Документы не покидают внутренний контур компании при обработке запросов",
+            "role": "content",
+            "goal": "Подчеркнуть безопасность данных при использовании модели с открытыми весами",
+            "visual": "none"
+          },
+          {
+            "title": "Время поиска ответа и доля обращений, закрытых без специалиста",
+            "role": "content",
+            "goal": "Определить ключевые метрики успеха пилота для оценки эффективности",
+            "visual": "none"
+          },
+          {
+            "title": "Пилот запустится в двух подразделениях с 150 сотрудниками в течение 6 недель",
+            "role": "content",
+            "goal": "Описать границы и сроки первого этапа внедрения",
+            "visual": "none"
+          },
+          {
+            "title": "Матрица рисков: утечка данных и точность ответов",
+            "role": "content",
+            "goal": "Описать основные риски пилота и способы их минимизации",
+            "visual": "matrix"
+          },
+          {
+            "title": "План: подготовка данных, настройка модели и запуск пилота",
+            "role": "content",
+            "goal": "Представить этапы реализации проекта до завершения пилота",
+            "visual": "process"
+          },
+          {
+            "title": "Одобрить пилот и выделить команду из 3 человек",
+            "role": "content",
+            "goal": "Получить финальное решение о старте проекта и ресурсах",
+            "visual": "none"
+          },
+          {
+            "title": "Следующий шаг: утверждение бюджета и состава команды",
+            "role": "closing",
+            "goal": "Подтвердить действия после принятия решения о пилоте",
+            "visual": "none"
+          }
+        ]
+      },
+      "diversity_status": "passed",
+      "status": "completed",
+      "variants": [
+        {
+          "id": "balanced",
+          "status": "completed",
+          "qa_status": "passed",
+          "qa_score": 100,
+          "slides": 12,
+          "compose_export_seconds": 14.081,
+          "exports": "passed",
+          "patterns": [
+            "slide-1",
+            "slide-24",
+            "slide-24",
+            "slide-7",
+            "slide-7",
+            "slide-24",
+            "slide-7",
+            "slide-24",
+            "slide-7",
+            "slide-24",
+            "slide-24",
+            "layout-24"
+          ]
+        },
+        {
+          "id": "columns",
+          "status": "completed",
+          "qa_status": "passed",
+          "qa_score": 100,
+          "slides": 12,
+          "compose_export_seconds": 13.845,
+          "exports": "passed",
+          "patterns": [
+            "slide-1",
+            "slide-7",
+            "slide-24",
+            "slide-24",
+            "slide-24",
+            "slide-24",
+            "slide-24",
+            "slide-7",
+            "slide-24",
+            "slide-7",
+            "slide-28",
+            "slide-24"
+          ]
+        },
+        {
+          "id": "focus",
+          "status": "completed",
+          "qa_status": "passed",
+          "qa_score": 100,
+          "slides": 12,
+          "compose_export_seconds": 13.092,
+          "exports": "passed",
+          "patterns": [
+            "slide-1",
+            "layout-8",
+            "layout-23",
+            "layout-8",
+            "layout-23",
+            "layout-8",
+            "layout-23",
+            "layout-8",
+            "layout-23",
+            "layout-23",
+            "layout-8",
+            "layout-8"
+          ]
+        }
+      ]
+    }
+  ]
+}
