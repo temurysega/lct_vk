@@ -230,7 +230,7 @@ export function useStudio(user: User) {
       );
     });
   }
-  async function generate(file: File | null) {
+  async function generate(file: File | null, images: File[] = []) {
     if (!templateId) {
       notify("Сначала добавьте фирменный шаблон.", true);
       return;
@@ -250,6 +250,13 @@ export function useStudio(user: User) {
         notify((error as Error).message, true);
         return;
       }
+    try {
+      if (images.length > 20) throw new Error("Можно добавить не больше 20 изображений.");
+      images.forEach((image) => validateFile(image, ["png", "jpg", "jpeg", "webp"], 15));
+    } catch (error) {
+      notify((error as Error).message, true);
+      return;
+    }
     await action("generate", async (signal) => {
       setProgress(0);
       notify("Создаём три варианта…");
@@ -261,6 +268,7 @@ export function useStudio(user: User) {
       body.append("variants", "true");
       body.append("export_all", "true");
       if (file) body.append("content_file", file);
+      images.forEach((image) => body.append("image_files", image));
       const job = await api<Job>("/v1/presentations/jobs", {
         method: "POST",
         body,

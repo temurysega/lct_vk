@@ -46,6 +46,38 @@ def _overflow_ratio(shape: Any, default_size: float) -> float:
     return required_height / height
 
 
+def _inspected_shapes(shapes: Any) -> list[tuple[Any, bool]]:
+    """Top-level shapes plus the children of generated (BrandDeck) groups.
+
+    Template groups are left as authored; generated diagrams are groups, and
+    their text must pass the same overflow and overlap checks as plain text.
+    """
+    result: list[tuple[Any, bool]] = []
+
+    def visit(collection: Any, nested: bool) -> None:
+        for shape in collection:
+            result.append((shape, nested))
+            if shape.shape_type == MSO_SHAPE_TYPE.GROUP and str(shape.name).startswith(
+                "BrandDeck"
+            ):
+                visit(shape.shapes, True)
+
+    visit(shapes, False)
+    return result
+
+
+def _picture_distortion(shape: Any) -> float:
+    try:
+        pixel_w, pixel_h = shape.image.size
+    except (AttributeError, ValueError, KeyError, TypeError):
+        return 0.0
+    visible_w = pixel_w * (1 - (shape.crop_left or 0) - (shape.crop_right or 0))
+    visible_h = pixel_h * (1 - (shape.crop_top or 0) - (shape.crop_bottom or 0))
+    if min(visible_w, visible_h, shape.width or 0, shape.height or 0) <= 0:
+        return 0.0
+    return abs((visible_w / visible_h) / (shape.width / shape.height) - 1)
+
+
 def inspect_presentation(
     output_path: str | Path,
     *,
@@ -115,7 +147,42 @@ def inspect_presentation(
         slide_issues: list[dict[str, Any]] = []
         text_count = 0
         text_shapes: list[Any] = []
-        for shape in slide.shapes:
+        for shape, nested in _inspected_shapes(slide.shapes):
+            if shape.shape_type == MSO_SHAPE_TYPE.PICTURE:
+                distortion = _picture_distortion(shape)
+                if distortion > 0.04:
+                    generated_picture = str(shape.name).startswith("BrandDeck")
+                    slide_issues.append(
+                        {
+                            "severity": "warning" if generated_picture else "info",
+                            "code": "image_distorted",
+                            "shape": shape.name,
+                            "ratio": round(distortion, 3),
+                            "message": "Picture aspect ratio is distorted by more than 4%",
+                        }
+                    )
+            if nested:
+                # Group bounds are checked once at top level; children only
+                # contribute text checks.
+                if getattr(shape, "has_text_frame", False) and shape.text.strip():
+                    text_count += 1
+                    text_shapes.append(shape)
+                    ratio = _overflow_ratio(shape, default_body)
+                    if ratio > 1.45:
+                        slide_issues.append(
+                            {
+                                "severity": "error" if ratio > 2.0 else "warning",
+                                "code": "text_overflow_risk",
+                                "shape": shape.name,
+                                "ratio": round(ratio, 2),
+                                "message": "Estimated text height exceeds the available box",
+                            }
+                        )
+                    for paragraph in shape.text_frame.paragraphs:
+                        for run in paragraph.runs:
+                            if run.font.name:
+                                explicit_fonts.add(run.font.name)
+                continue
             if expects_native_grid and str(shape.name).lower().startswith("pdf "):
                 slide_issues.append(
                     {

@@ -82,6 +82,7 @@ def run_generation_job(
     workspace: str | Path | None = None,
     variants: bool = False,
     export_formats: tuple[str, ...] = (),
+    images: list[str | Path] | None = None,
 ) -> None:
     try:
         update_job(
@@ -106,6 +107,7 @@ def run_generation_job(
             offline=offline,
             progress=progress,
             export_formats=export_formats,
+            images=images,
         )
         if variants:
             update_job(

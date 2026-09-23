@@ -34,7 +34,12 @@ export function DeckResult({
       <div className="deck-toolbar">
         <div>
           <strong>{deck.slide_count} слайдов</strong>
-          <span>Редактируемый результат</span>
+          <span>
+            Редактируемый результат
+            {deck.visuals
+              ? ` · схем: ${deck.visuals.diagrams} · пиктограмм: ${deck.visuals.pictograms} · изображений: ${deck.visuals.images}`
+              : ""}
+          </span>
         </div>
         <div className="downloads">
           {formats.map((format) => (

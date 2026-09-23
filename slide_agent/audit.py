@@ -10,6 +10,8 @@ from typing import Any
 
 from pptx import Presentation
 
+from .qa import _inspected_shapes
+
 REPAIRABLE = {
     "text_overflow_risk",
     "text_overlap",
@@ -27,7 +29,7 @@ def enrich_audit(
     seen: dict[str, int] = {}
     for number, slide in enumerate(prs.slides, 1):
         texts = []
-        for shape in slide.shapes:
+        for shape, _ in _inspected_shapes(slide.shapes):
             if getattr(shape, "has_text_frame", False):
                 text = shape.text.strip()
                 if text:
@@ -93,7 +95,7 @@ def enrich_audit(
         bounds = []
         if isinstance(number, int) and 1 <= number <= len(prs.slides):
             names = str(issue.get("shape", "")).split(" / ")
-            for shape in prs.slides[number - 1].shapes:
+            for shape, _ in _inspected_shapes(prs.slides[number - 1].shapes):
                 if shape.name in names:
                     bounds.append(
                         {

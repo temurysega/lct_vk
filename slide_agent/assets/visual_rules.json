@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "description": "Deterministic rules the offline planner uses to turn a slide's statements into a native diagram. Keywords are lowercase stems matched as word prefixes in the section heading; sequence markers are matched in the first words of each statement.",
+  "heading_keywords": {
+    "process": ["план", "этап", "шаг", "процесс", "порядок", "последовательн", "дорожн", "внедрени", "как работает", "как это работает", "алгоритм", "roadmap", "process", "steps", "phases", "how it works", "workflow", "pipeline", "rollout"],
+    "cycle": ["цикл", "итерац", "непрерывн", "жизненн", "cycle", "loop", "iteration", "continuous", "lifecycle"],
+    "hierarchy": ["структур", "оргструктур", "иерарх", "состав", "архитектур", "компонент", "organization", "structure", "hierarchy", "architecture", "components"],
+    "pyramid": ["пирамид", "уровн", "приоритет", "pyramid", "levels", "priorities", "tiers"],
+    "funnel": ["воронк", "конверси", "funnel", "conversion"],
+    "matrix": ["swot", "матриц", "квадрант", "matrix", "quadrant"]
+  },
+  "sequence_markers": ["перв", "втор", "трет", "четв", "пят", "шест", "сначала", "затем", "далее", "после", "наконец", "шаг", "этап", "first", "second", "third", "fourth", "then", "next", "after", "finally", "step", "phase"],
+  "sequence_share": 0.6,
+  "icon_grid": {
+    "max_share_of_content_slides": 0.4,
+    "min_icon_share": 0.6,
+    "max_words_per_item": 22
+  },
+  "max_words_per_diagram_item": 24
+}

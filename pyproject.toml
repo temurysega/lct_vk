@@ -30,7 +30,7 @@ include = ["slide_agent*", "backend*", "frontend*"]
 namespaces = false
 
 [tool.setuptools.package-data]
-slide_agent = ["prompts/*.txt"]
+slide_agent = ["prompts/*.txt", "assets/*.json", "assets/icons/*.json", "assets/icons/*.txt"]
 frontend = ["dist/*.html", "dist/assets/*", "dist/assets/fonts/*", "dist/assets/images/*"]
 
 [tool.pytest.ini_options]

@@ -18,12 +18,22 @@ from pptx.oxml.ns import qn
 from pptx.oxml.xmlchemy import OxmlElement
 from pptx.util import Inches, Pt
 
+from .diagrams import (
+    DIAGRAM_TYPES,
+    diagram_style,
+    render_diagram,
+    render_illustration,
+)
+from .images import crop_to_fill
+from .pictograms import add_icon, assign_icons
 from .typography import (
     ESTIMATED_GLYPH_WIDTH_EM,
     effective_font_size,
     estimated_line_count,
 )
 from .utils import read_json, write_json
+
+NATIVE_VISUALS = set(DIAGRAM_TYPES) | {"image"}
 
 TITLE_TYPES = {PP_PLACEHOLDER.TITLE, PP_PLACEHOLDER.CENTER_TITLE}
 SUBTITLE_TYPES = {PP_PLACEHOLDER.SUBTITLE}
@@ -534,6 +544,51 @@ def _distribute_paragraphs(
     return states[len(paragraphs)][1]
 
 
+def _whole_visual_zone(
+    slide: Any,
+    body_shapes: list[Any],
+    zone: tuple[float, float, float, float],
+    design: dict[str, Any],
+) -> tuple[float, float, float, float]:
+    """Give a diagram that carries all slide text the template's body area.
+
+    Source text in exemplar bodies is cleared, and emptied body placeholders
+    are removed so PowerPoint shows no prompt text under the diagram.
+    """
+    width = float(design["canvas"]["width_inches"])
+    height = float(design["canvas"]["height_inches"])
+    usable = [
+        shape
+        for shape in body_shapes
+        if shape.width >= Inches(1.0)
+        and shape.height >= Inches(0.65)
+        and shape.left >= 0
+        and shape.top >= Inches(zone[1] - 0.05)
+        and shape.left + shape.width <= Inches(width + 0.02)
+        and shape.top + shape.height <= Inches(height + 0.02)
+    ]
+    result = zone
+    if usable:
+        left = min(shape.left for shape in usable) / 914400
+        top = min(shape.top for shape in usable) / 914400
+        right = max(shape.left + shape.width for shape in usable) / 914400
+        bottom = max(shape.top + shape.height for shape in usable) / 914400
+        # A narrow caption column would cramp a diagram: then use the whole
+        # content area below the title instead of the template's text box.
+        body_area = (right - left) * (bottom - top)
+        if (
+            right - left >= 2.8
+            and bottom - top >= 1.2
+            and body_area >= 0.45 * zone[2] * zone[3]
+        ):
+            result = (left, top, right - left, bottom - top)
+    for shape in body_shapes:
+        _set_text_frame(shape, [])
+        if getattr(shape, "is_placeholder", False):
+            shape.element.getparent().remove(shape.element)
+    return result
+
+
 def _add_body_text(
     slide: Any,
     slide_spec: dict[str, Any],
@@ -547,6 +602,8 @@ def _add_body_text(
     body = slide_spec.get("body", "")
     bullets = slide_spec.get("bullets", [])
     visual = slide_spec.get("visual")
+    if visual and visual.get("type") in NATIVE_VISUALS and not body and not bullets:
+        return _whole_visual_zone(slide, body_shapes, zone, design)
 
     # Slide exemplars without native placeholders often contain many tiny
     # source-specific labels. Clear those labels and write new content into a
@@ -596,6 +653,10 @@ def _add_body_text(
         source_zone = (left, top, right - left, bottom - top)
         if source_zone[2] >= 2.8 and source_zone[3] >= 0.75:
             zone = source_zone
+        elif zone[0] < left < zone[0] + zone[2] - 2.8:
+            # Keep the exemplar's text indent: the column left of it usually
+            # holds list markers or icons that stay on the slide.
+            zone = (left, zone[1], zone[0] + zone[2] - left, zone[3])
         for shape in body_shapes:
             _set_text_frame(shape, [])
         if visual:
@@ -620,6 +681,32 @@ def _add_body_text(
                 font_size=float(source_style.get("font_size", size)),
                 color=source_style.get("color", colors.get("dk1", "1F2937")),
             )
+        return visual_zone
+
+    if len(body_shapes) >= 2 and visual and visual.get("type") in NATIVE_VISUALS:
+        # Pictures and diagrams need a coherent half of the body area; the
+        # remaining small exemplar frames would make the text unreadable.
+        paragraphs = ([body] if body else []) + list(bullets)
+        style_source = max(body_shapes, key=lambda shape: shape.width * shape.height)
+        source_style = _shape_text_style(style_source)
+        area = _whole_visual_zone(slide, body_shapes, zone, design)
+        text_zone, visual_zone = _split_zone(area)
+        text_shape = _add_textbox(
+            slide,
+            "",
+            text_zone,
+            font_name=source_style.get("font_name", font),
+            font_size=float(source_style.get("font_size", size)),
+            color=source_style.get("color", colors.get("dk1", "1F2937")),
+        )
+        text_shape.name = "BrandDeck Body"
+        _set_text_frame(
+            text_shape,
+            [f"• {item}" if bullets else item for item in paragraphs],
+            font_name=source_style.get("font_name", font),
+            font_size=max(size, float(source_style.get("font_size", size))),
+            color=source_style.get("color", colors.get("dk1", "1F2937")),
+        )
         return visual_zone
 
     if len(body_shapes) >= 2:
@@ -915,15 +1002,189 @@ def _add_timeline(
         ).name = "BrandDeck Timeline Detail"
 
 
+def _record(context: dict[str, Any] | None, record: dict[str, Any]) -> None:
+    if context is not None:
+        context.setdefault("records", []).append(
+            {"slide": context.get("slide"), **record}
+        )
+
+
+def _visual_style(
+    design: dict[str, Any], context: dict[str, Any] | None
+) -> dict[str, Any]:
+    context = context or {}
+    return diagram_style(
+        design, context.get("background"), str(context.get("role", "content"))
+    )
+
+
+def _asset_path(
+    visual: dict[str, Any], context: dict[str, Any] | None
+) -> tuple[Path | None, dict[str, Any]]:
+    meta = ((context or {}).get("assets") or {}).get(str(visual.get("asset_id") or ""))
+    if not isinstance(meta, dict):
+        return None, {}
+    path = Path(str(meta.get("path", "")))
+    if path.suffix.lower() not in {".png", ".jpg", ".jpeg"} or not path.is_file():
+        return None, meta
+    return path, meta
+
+
+def _set_picture_description(picture: Any, text: str) -> None:
+    properties = picture._element.xpath("./p:nvPicPr/p:cNvPr")
+    if properties and text:
+        properties[0].set("descr", text[:500])
+
+
+def _crop_picture(picture: Any, box_w: float, box_h: float) -> None:
+    left, top, right, bottom = crop_to_fill(picture.image.size, (box_w, box_h))
+    picture.crop_left, picture.crop_top = left, top
+    picture.crop_right, picture.crop_bottom = right, bottom
+
+
+def _add_image(
+    slide: Any,
+    visual: dict[str, Any],
+    zone: tuple[float, float, float, float],
+    design: dict[str, Any],
+    context: dict[str, Any] | None,
+    *,
+    rounded: bool = False,
+) -> dict[str, Any]:
+    """Place an asset cropped to fill ``zone``; draw an illustration otherwise."""
+    path, meta = _asset_path(visual, context)
+    if path is None:
+        record = render_illustration(
+            slide,
+            zone,
+            _visual_style(design, context),
+            text=str((context or {}).get("text", "")),
+        )
+        record["requested"] = visual.get("asset_id") or visual.get("request") or "image"
+        return record
+    x, y, w, h = zone
+    caption = str(visual.get("caption") or "").strip()
+    caption_h = 0.36 if caption and h > 1.6 else 0.0
+    picture = slide.shapes.add_picture(
+        str(path), Inches(x), Inches(y), Inches(w), Inches(h - caption_h)
+    )
+    picture.name = "BrandDeck Image"
+    _crop_picture(picture, w, h - caption_h)
+    _set_picture_description(picture, meta.get("label") or caption)
+    if rounded:
+        picture.auto_shape_type = MSO_SHAPE.ROUNDED_RECTANGLE
+    if caption_h:
+        style = _visual_style(design, context)
+        _add_textbox(
+            slide,
+            caption,
+            (x, y + h - caption_h + 0.04, w, caption_h - 0.04),
+            font_name=style["font"],
+            font_size=12,
+            color=style["text"],
+            min_font_size=10,
+        ).name = "BrandDeck Image Caption"
+    return {
+        "type": "image",
+        "asset_id": meta.get("asset_id"),
+        "source": meta.get("source"),
+        "match": visual.get("match"),
+        "placement": "zone",
+    }
+
+
+def _fill_picture_slot(
+    slide: Any,
+    slot: Any,
+    visual: dict[str, Any] | None,
+    design: dict[str, Any],
+    context: dict[str, Any] | None,
+) -> dict[str, Any]:
+    """Reuse the template's own picture position, geometry and z-order."""
+    box = _zone_from_shape(slot)
+    path, meta = _asset_path(visual or {}, context)
+    is_placeholder = bool(getattr(slot, "is_placeholder", False))
+    if path is not None and is_placeholder:
+        picture = slot.insert_picture(str(path))
+        picture.name = "BrandDeck Image"
+        _set_picture_description(picture, meta.get("label", ""))
+        return {
+            "type": "image",
+            "asset_id": meta.get("asset_id"),
+            "source": meta.get("source"),
+            "match": (visual or {}).get("match"),
+            "placement": "template_placeholder",
+        }
+    if path is not None:
+        source_geometry = slot.element.find(f"{qn('p:spPr')}/{qn('a:prstGeom')}")
+        x, y, w, h = box
+        if source_geometry is None or source_geometry.get("prst") == "rect":
+            # A rectangular bleed is invisible anyway; clip it to the canvas so
+            # the new picture stays inside the slide.
+            width = float(design["canvas"]["width_inches"])
+            height = float(design["canvas"]["height_inches"])
+            left, top = max(0.0, x), max(0.0, y)
+            x, y, w, h = left, top, min(width, x + w) - left, min(height, y + h) - top
+        picture = slide.shapes.add_picture(
+            str(path), Inches(x), Inches(y), Inches(w), Inches(h)
+        )
+        picture.name = "BrandDeck Image"
+        _crop_picture(picture, w, h)
+        _set_picture_description(picture, meta.get("label", ""))
+        target_geometry = picture._element.spPr.find(qn("a:prstGeom"))
+        if source_geometry is not None and target_geometry is not None:
+            target_geometry.addprevious(copy.deepcopy(source_geometry))
+            picture._element.spPr.remove(target_geometry)
+        slot.element.addprevious(picture._element)
+        slot.element.getparent().remove(slot.element)
+        return {
+            "type": "image",
+            "asset_id": meta.get("asset_id"),
+            "source": meta.get("source"),
+            "match": (visual or {}).get("match"),
+            "placement": "template_slot",
+        }
+    slot.element.getparent().remove(slot.element)
+    record = render_illustration(
+        slide,
+        box,
+        _visual_style(design, context),
+        text=str((context or {}).get("text", "")),
+    )
+    record["placement"] = "template_slot"
+    return record
+
+
 def _add_visual(
     slide: Any,
     visual: dict[str, Any] | None,
     zone: tuple[float, float, float, float],
     design: dict[str, Any],
+    context: dict[str, Any] | None = None,
+    *,
+    rounded: bool = False,
 ) -> None:
     if not visual:
         return
     visual_type = visual.get("type")
+    if visual_type == "image":
+        _record(
+            context, _add_image(slide, visual, zone, design, context, rounded=rounded)
+        )
+        return
+    if visual_type in DIAGRAM_TYPES:
+        try:
+            record = render_diagram(
+                slide,
+                visual,
+                zone,
+                _visual_style(design, context),
+                context=str((context or {}).get("title", "")),
+            )
+        except ValueError as exc:
+            record = {"type": visual_type, "error": str(exc)[:200]}
+        _record(context, record)
+        return
     if visual_type == "metric_cards":
         _add_metric_cards(slide, visual, zone, design)
     elif visual_type == "bar_chart":
@@ -1113,6 +1374,7 @@ def _native_card_content(
     tokens: dict[str, Any],
     *,
     alternate: bool = False,
+    icon: str | None = None,
 ) -> None:
     x, y, w, h = box
     _native_panel(slide, box, tokens, alternate=alternate)
@@ -1131,17 +1393,20 @@ def _native_card_content(
         accent.adjustments[0] = 0.18
     except (IndexError, ValueError):
         pass
-    _add_textbox(
-        slide,
-        f"{number:02d}",
-        (x + 0.22, y + 0.29, 0.46, 0.22),
-        font_name=tokens["heading_font"],
-        font_size=11,
-        color=tokens["accent_text"],
-        bold=True,
-        align=PP_ALIGN.CENTER,
-        min_font_size=10,
-    ).name = "BrandDeck Native Number"
+    if icon:
+        add_icon(slide.shapes, icon, (x + 0.3, y + 0.28, 0.3), tokens["accent_text"])
+    else:
+        _add_textbox(
+            slide,
+            f"{number:02d}",
+            (x + 0.22, y + 0.29, 0.46, 0.22),
+            font_name=tokens["heading_font"],
+            font_size=11,
+            color=tokens["accent_text"],
+            bold=True,
+            align=PP_ALIGN.CENTER,
+            min_font_size=10,
+        ).name = "BrandDeck Native Number"
     _add_textbox(
         slide,
         item,
@@ -1159,11 +1424,18 @@ def _native_cards(
     items: list[str],
     zone: tuple[float, float, float, float],
     tokens: dict[str, Any],
+    context: dict[str, Any] | None = None,
 ) -> None:
     x, y, w, h = zone
     items = items[:4]
     if not items:
         return
+    # Pictograms replace numbers only when every card has a confident match.
+    icons = assign_icons(
+        items, context=str((context or {}).get("title", "")), require_all=True
+    )
+    if all(icons):
+        _record(context, {"type": "card_icons", "icons": icons, "native": True})
     columns = len(items) if len(items) <= 3 else 2
     rows = math.ceil(len(items) / columns)
     gap = 0.2
@@ -1186,6 +1458,7 @@ def _native_cards(
             ),
             tokens,
             alternate=index % 2 == 1,
+            icon=icons[index],
         )
 
 
@@ -1250,7 +1523,11 @@ def _native_split(
     zone: tuple[float, float, float, float],
     design: dict[str, Any],
     tokens: dict[str, Any],
+    context: dict[str, Any] | None = None,
 ) -> None:
+    if visual and not items:
+        _add_visual(slide, visual, zone, design, context, rounded=True)
+        return
     left, right = _split_zone(zone, 0.43)
     if items:
         _native_card_content(
@@ -1262,7 +1539,7 @@ def _native_split(
             alternate=True,
         )
     if visual:
-        _add_visual(slide, visual, right, design)
+        _add_visual(slide, visual, right, design, context, rounded=True)
     else:
         _native_list(slide, items[1:] or items[:1], right, tokens)
 
@@ -1455,9 +1732,12 @@ def _native_slide(
     slide_count: int,
     navigation_titles: list[str] | None = None,
     navigation_index: int = 0,
+    context: dict[str, Any] | None = None,
 ) -> str:
     role = str(slide_spec.get("role", "content"))
     tokens = _native_tokens(design, role)
+    if context is not None:
+        context["background"] = tokens["background"]
     brand_shapes = _copy_brand_canvas(
         slide, brand_source, repeated_image_hashes, design, tokens
     )
@@ -1583,14 +1863,14 @@ def _native_slide(
         ]
         zone = (left, content_top, max(4.8, right - left), 6.4 - content_top)
         visual = slide_spec.get("visual")
-        if pattern_id == "native-list":
+        if pattern_id == "native-list" and not visual:
             _native_list(slide, items, zone, tokens)
             mode = "native-list"
         elif pattern_id == "native-split" or visual:
-            _native_split(slide, items, visual, zone, design, tokens)
+            _native_split(slide, items, visual, zone, design, tokens, context)
             mode = "native-split"
         else:
-            _native_cards(slide, items, zone, tokens)
+            _native_cards(slide, items, zone, tokens, context)
             mode = "native-cards"
         _add_textbox(
             slide,
@@ -1617,17 +1897,21 @@ def _remove_unmatched_content_images(
     slide_spec: dict[str, Any],
     design: dict[str, Any],
     repeated_image_hashes: set[str],
-) -> None:
-    if slide_spec.get("role") == "image":
-        return
-    visual = slide_spec.get("visual") or {}
-    if visual.get("type") == "image":
-        return
+    *,
+    keep_slot: bool = False,
+) -> Any | None:
+    """Remove source content pictures; optionally keep the largest as a slot.
+
+    Source pictures never survive into a generated slide. With ``keep_slot``
+    the largest one stays until the caller replaces it, so the new image
+    inherits the designer's position, crop frame and layer order.
+    """
     canvas_area = max(
         0.1,
         float(design["canvas"]["width_inches"])
         * float(design["canvas"]["height_inches"]),
     )
+    candidates = []
     for shape in list(slide.shapes):
         if shape.shape_type != MSO_SHAPE_TYPE.PICTURE:
             continue
@@ -1641,7 +1925,16 @@ def _remove_unmatched_content_images(
         # must not leak into a text-only generated slide. Brand assets are
         # identified by recurring across a substantial share of the template.
         if 0.0005 <= area_ratio <= 0.8 and image_hash not in repeated_image_hashes:
+            candidates.append((area_ratio, shape))
+    slot = None
+    if keep_slot:
+        usable = [item for item in candidates if item[0] >= 0.04]
+        if usable:
+            slot = max(usable, key=lambda item: item[0])[1]
+    for _, shape in candidates:
+        if shape is not slot:
             slide.shapes._spTree.remove(shape.element)
+    return slot
 
 
 def _constrain_title_width(slide: Any, title: Any) -> None:
@@ -1670,18 +1963,167 @@ def _constrain_title_width(slide: Any, title: Any) -> None:
         title.width, title.height = right - left, height
 
 
+def _zone_beside(
+    zone: tuple[float, float, float, float], slot: tuple[float, float, float, float]
+) -> tuple[float, float, float, float]:
+    """Largest part of a fallback text zone left, right, above or below a slot."""
+    x, y, w, h = zone
+    sx, sy, sw, sh = slot
+    if sx >= x + w or sx + sw <= x or sy >= y + h or sy + sh <= y:
+        return zone
+    gap = 0.2
+    options = [
+        (x, y, sx - gap - x, h),
+        (sx + sw + gap, y, x + w - sx - sw - gap, h),
+        (x, y, w, sy - gap - y),
+        (x, sy + sh + gap, w, y + h - sy - sh - gap),
+    ]
+    usable = [option for option in options if option[2] >= 1.6 and option[3] >= 0.8]
+    if not usable:
+        return zone
+    return max(usable, key=lambda option: option[2] * option[3])
+
+
+def _set_geometry(shape: Any, left: int, top: int, width: int, height: int) -> None:
+    # Setting one dimension of an inherited placeholder can zero the others
+    # in python-pptx; always write the complete geometry.
+    shape.left, shape.top, shape.width, shape.height = left, top, width, height
+
+
+def _slot_text_changes(
+    slot: Any, slide: Any, bodies: list[Any]
+) -> list[tuple[Any, tuple[int, int, int, int]]] | None:
+    """Plan how text makes room for a picture slot; ``None`` if it cannot.
+
+    Text that merely runs into a side slot (a long title box, a wide body)
+    is narrowed to end before it or to start after it. Text laid over the
+    middle of the picture means it was a backdrop, not a slot. Nothing is
+    changed here, so a rejected candidate leaves the slide untouched.
+    """
+    gap = Inches(0.2)
+    minimum = Inches(1.6)
+    candidates = list(bodies) + [
+        shape
+        for shape in slide.shapes
+        if getattr(shape, "has_text_frame", False)
+        and shape.text.strip()
+        and shape.element is not slot.element
+        and shape not in bodies
+    ]
+    slot_right = slot.left + slot.width
+    slot_bottom = slot.top + slot.height
+    changes: list[tuple[Any, tuple[int, int, int, int]]] = []
+    for shape in candidates:
+        left, top = shape.left, shape.top
+        right, bottom = left + shape.width, top + shape.height
+        overlap_w = min(right, slot_right) - max(left, slot.left)
+        overlap_h = min(bottom, slot_bottom) - max(top, slot.top)
+        if overlap_w <= 0 or overlap_h <= 0:
+            continue
+        smaller = max(1, min(shape.width * shape.height, slot.width * slot.height))
+        if overlap_w * overlap_h <= 0.05 * smaller:
+            continue
+        if slot.left - gap - left >= minimum:
+            changes.append((shape, (left, top, slot.left - gap - left, shape.height)))
+        elif right - (slot_right + gap) >= minimum and slot.left <= left:
+            changes.append(
+                (shape, (slot_right + gap, top, right - slot_right - gap, shape.height))
+            )
+        else:
+            return None
+    return changes
+
+
+def _apply_text_changes(changes: list[tuple[Any, tuple[int, int, int, int]]]) -> None:
+    for shape, geometry in changes:
+        _set_geometry(shape, *geometry)
+        if shape.text.strip():
+            # Titles already hold new text: refit it to the narrower box.
+            _set_text_frame(shape, [shape.text])
+
+
+def _empty_frames(slide: Any, design: dict[str, Any]) -> list[Any]:
+    """Text-free exemplar shapes sized like a photo frame (not panels or bars)."""
+    width = float(design["canvas"]["width_inches"])
+    height = float(design["canvas"]["height_inches"])
+    frames = []
+    for shape in slide.shapes:
+        if shape.shape_type != MSO_SHAPE_TYPE.AUTO_SHAPE or getattr(
+            shape, "is_placeholder", False
+        ):
+            continue
+        if str(shape.name).startswith("BrandDeck") or (
+            getattr(shape, "has_text_frame", False) and shape.text.strip()
+        ):
+            continue
+        x, y, w, h = _zone_from_shape(shape)
+        if x < -0.02 or y < -0.02 or x + w > width + 0.02 or y + h > height + 0.02:
+            continue
+        if 0.03 <= w * h / (width * height) <= 0.4 and 0.5 <= w / max(h, 0.01) <= 2:
+            frames.append(shape)
+    return sorted(frames, key=lambda shape: shape.width * shape.height, reverse=True)
+
+
+def _choose_picture_slot(
+    slide: Any, content_slot: Any | None, bodies: list[Any], design: dict[str, Any]
+) -> Any | None:
+    """First usable slot: the exemplar's photo, picture placeholders, frames."""
+    candidates = [content_slot] if content_slot is not None else []
+    candidates += sorted(
+        _empty_picture_placeholders(slide),
+        key=lambda shape: shape.width * shape.height,
+        reverse=True,
+    )
+    candidates += _empty_frames(slide, design)
+    chosen = None
+    for candidate in candidates:
+        changes = _slot_text_changes(candidate, slide, bodies)
+        if changes is not None:
+            _apply_text_changes(changes)
+            chosen = candidate
+            break
+    if content_slot is not None and (
+        chosen is None or chosen.element is not content_slot.element
+    ):
+        # An unused source photo must not survive into the generated slide.
+        content_slot.element.getparent().remove(content_slot.element)
+    return chosen
+
+
+def _clear_group_text(group: Any) -> None:
+    for shape in group.shapes:
+        if shape.shape_type == MSO_SHAPE_TYPE.GROUP:
+            _clear_group_text(shape)
+        elif getattr(shape, "has_text_frame", False) and shape.text.strip():
+            _set_text_frame(shape, [])
+
+
+def _empty_picture_placeholders(slide: Any) -> list[Any]:
+    return [
+        shape
+        for shape in slide.placeholders
+        if _placeholder_type(shape) == PP_PLACEHOLDER.PICTURE
+        and shape.element.tag == qn("p:sp")
+    ]
+
+
 def _fill_slide(
     slide: Any,
     slide_spec: dict[str, Any],
     design: dict[str, Any],
     repeated_image_hashes: set[str],
+    context: dict[str, Any] | None = None,
 ) -> None:
     # Example-slide charts and tables carry source-specific data. Keep the
     # surrounding style, but replace those data objects with the new plan.
     for shape in list(slide.shapes):
         if getattr(shape, "has_chart", False) or getattr(shape, "has_table", False):
             slide.shapes._spTree.remove(shape.element)
-    _remove_unmatched_content_images(slide, slide_spec, design, repeated_image_hashes)
+    visual = slide_spec.get("visual") or {}
+    wants_picture = visual.get("type") == "image" or slide_spec.get("role") == "image"
+    content_slot = _remove_unmatched_content_images(
+        slide, slide_spec, design, repeated_image_hashes, keep_slot=wants_picture
+    )
     titles, subtitles, bodies = _placeholder_groups(slide)
     titles, subtitles, bodies = _infer_text_groups(
         slide, titles, subtitles, bodies, float(design["canvas"]["height_inches"])
@@ -1710,6 +2152,9 @@ def _fill_slide(
             and shape.text.strip()
         ):
             _set_text_frame(shape, [])
+        elif shape.shape_type == MSO_SHAPE_TYPE.GROUP:
+            # Exemplar groups (chart legends, callouts) carry source text too.
+            _clear_group_text(shape)
     font = design["typography"]["primary_font"]
     colors = _theme_colors(design)
     title = slide_spec.get("title", "")
@@ -1746,9 +2191,33 @@ def _fill_slide(
             align=PP_ALIGN.CENTER,
         ).name = "BrandDeck Subtitle"
 
+    slot = (
+        _choose_picture_slot(slide, content_slot, bodies, design)
+        if wants_picture
+        else None
+    )
     zone = _content_zone(slide, design, titles + subtitles)
-    visual_zone = _add_body_text(slide, slide_spec, bodies, zone, design)
-    _add_visual(slide, slide_spec.get("visual"), visual_zone, design)
+    if slot is not None:
+        zone = _zone_beside(zone, _zone_from_shape(slot))
+    # A template picture slot keeps the full body area for text.
+    text_spec = {**slide_spec, "visual": None} if slot is not None else slide_spec
+    visual_zone = _add_body_text(slide, text_spec, bodies, zone, design)
+    if slot is not None:
+        _record(
+            context, _fill_picture_slot(slide, slot, visual or None, design, context)
+        )
+    else:
+        _add_visual(slide, slide_spec.get("visual"), visual_zone, design, context)
+    if slide_spec.get("role") not in {"cover", "closing", "section"}:
+        # A picture slot left empty looks broken; draw a native illustration.
+        for placeholder in _empty_picture_placeholders(slide):
+            changes = _slot_text_changes(placeholder, slide, [])
+            if changes is None:
+                continue  # text covers it; an empty placeholder does not render
+            _apply_text_changes(changes)
+            _record(
+                context, _fill_picture_slot(slide, placeholder, None, design, context)
+            )
 
     notes = slide_spec.get("speaker_notes")
     if notes:
@@ -1781,6 +2250,23 @@ def outline_markdown(plan: dict[str, Any]) -> str:
             lines.extend(["", f"Visual: `{slide['visual'].get('type')}`"])
         lines.append("")
     return "\n".join(lines).rstrip() + "\n"
+
+
+def _visual_summary(records: list[dict[str, Any]]) -> dict[str, Any]:
+    diagrams = [
+        r for r in records if r.get("type") in DIAGRAM_TYPES and not r.get("error")
+    ]
+    icons = sum(len(r.get("icons", [])) for r in records)
+    return {
+        "diagrams": len(diagrams),
+        "pictograms": icons
+        + sum(1 for r in records if r.get("type") == "illustration"),
+        "images": sum(1 for r in records if r.get("type") == "image"),
+        "illustrations": sum(1 for r in records if r.get("type") == "illustration"),
+        "by_type": dict(Counter(str(r.get("type")) for r in records)),
+        "slides": records,
+        "note": "Diagrams are native grouped shapes (SmartArt-style), not OOXML SmartArt parts.",
+    }
 
 
 def compose_presentation(
@@ -1842,12 +2328,31 @@ def compose_presentation(
     ]
     navigation_titles = [str(item.get("title", "")) for item in navigation_specs]
     navigation_index = 0
+    assets = plan.get("assets") if isinstance(plan.get("assets"), dict) else {}
+    visual_records: list[dict[str, Any]] = []
     for generated_index, slide_spec in enumerate(slide_specs):
         layout_index = int(slide_spec.get("layout_index", 0))
         if layout_index < 0 or layout_index >= len(layouts):
             layout_index = 0
         pattern = patterns.get(str(slide_spec.get("pattern_id")), {})
         selected_source_patterns.append(str(slide_spec.get("pattern_id", "unassigned")))
+        background = (
+            pattern.get("background")
+            if isinstance(pattern.get("background"), dict)
+            else {}
+        )
+        context = {
+            "slide": generated_index + 1,
+            "role": str(slide_spec.get("role", "content")),
+            "title": str(slide_spec.get("title", "")),
+            "text": " ".join(
+                [str(slide_spec.get("title", "")), str(slide_spec.get("body", ""))]
+                + [str(item) for item in slide_spec.get("bullets", [])]
+            ),
+            "background": background.get("color"),
+            "assets": assets,
+            "records": visual_records,
+        }
         use_native_grid = (
             native_grid_source or pattern.get("source_kind") == "native_grid"
         )
@@ -1873,6 +2378,7 @@ def compose_presentation(
                 slide_count=len(slide_specs),
                 navigation_titles=navigation_titles,
                 navigation_index=navigation_index,
+                context=context,
             )
             if role not in {"cover", "section", "closing"}:
                 navigation_index += 1
@@ -1888,7 +2394,7 @@ def compose_presentation(
             slide = _clone_slide(prs, source_slides[source_index])
         else:
             slide = prs.slides.add_slide(layouts[layout_index])
-        _fill_slide(slide, slide_spec, design_system, repeated_image_hashes)
+        _fill_slide(slide, slide_spec, design_system, repeated_image_hashes, context)
         selected_patterns.append(
             str(slide_spec.get("pattern_id", f"layout-{layout_index}"))
         )
@@ -1909,6 +2415,7 @@ def compose_presentation(
         "patterns_used": selected_patterns,
         "source_patterns": selected_source_patterns,
         "composition_mode": "native_grid" if native_grid_source else "template_layout",
+        "visuals": _visual_summary(visual_records),
     }
     write_json(output_path.with_suffix(".manifest.json"), result)
     return result

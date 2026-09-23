@@ -1,0 +1,9 @@
+{
+  "templates": "../task+data/Датасет",
+  "content": "examples/baseline_content.md",
+  "images": "examples/demo_images",
+  "workspace": "slide-workspace/visuals-2026-09-22",
+  "slide_count": 10,
+  "offline": true,
+  "export_formats": ["pdf", "html"]
+}

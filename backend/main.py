@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 import shutil
 import tempfile
 from pathlib import Path
@@ -17,6 +18,7 @@ from backend.auth import install_auth
 from slide_agent import __version__
 from slide_agent.analyzer import analyze_template
 from slide_agent.config import InferenceSettings
+from slide_agent.imagegen import ImageSettings
 from slide_agent.jobs import create_job, get_job, job_directory, run_generation_job
 from slide_agent.service import (
     configured_client,
@@ -103,6 +105,34 @@ def _copy_upload(file: UploadFile, target: Path, max_mb: int) -> None:
         raise
 
 
+IMAGE_UPLOAD_SUFFIXES = {".png", ".jpg", ".jpeg", ".webp"}
+MAX_IMAGE_UPLOADS = 20
+
+
+def _save_image_uploads(files: list[UploadFile] | None, directory: Path) -> list[Path]:
+    saved: list[Path] = []
+    uploads = [file for file in files or [] if file.filename]
+    if len(uploads) > MAX_IMAGE_UPLOADS:
+        raise HTTPException(
+            400, f"Можно добавить не больше {MAX_IMAGE_UPLOADS} изображений."
+        )
+    if uploads:
+        directory.mkdir(parents=True, exist_ok=True)
+    for index, file in enumerate(uploads, 1):
+        suffix = Path(file.filename).suffix.lower()
+        if suffix not in IMAGE_UPLOAD_SUFFIXES:
+            raise HTTPException(
+                400, "Изображения принимаются в форматах PNG, JPG и WEBP."
+            )
+        # Keep the descriptive name for matching but never trust its path;
+        # a colon on Windows would even address an alternate data stream.
+        stem = re.sub(r"[^\w\- ]+", "_", Path(file.filename).stem)[:100] or "image"
+        target = directory / f"{index:02d}-{stem}{suffix}"
+        _copy_upload(file, target, 15)
+        saved.append(target)
+    return saved
+
+
 def _save_inline_content(content: str, directory: Path) -> Path:
     # CLI accepts filesystem paths; web text must always remain literal input.
     directory.mkdir(parents=True, exist_ok=True)
@@ -118,7 +148,10 @@ def health() -> dict[str, str]:
 
 @app.get("/api/config")
 def client_config() -> dict:
-    return {"model_configured": InferenceSettings.from_env().enabled}
+    return {
+        "model_configured": InferenceSettings.from_env().enabled,
+        "image_generation_configured": ImageSettings.from_env().enabled,
+    }
 
 
 def _template_path(template_id: str) -> str:
@@ -199,6 +232,7 @@ def generate_endpoint(
     content_file: Annotated[UploadFile | None, File()] = None,
     slide_count: Annotated[int | None, Form(ge=3, le=100)] = None,
     offline: Annotated[bool, Form()] = False,
+    image_files: Annotated[list[UploadFile] | None, File()] = None,
 ) -> dict:
     temp_dir: Path | None = None
     try:
@@ -213,11 +247,13 @@ def generate_endpoint(
             raise HTTPException(
                 status_code=400, detail="Provide content text or content_file"
             )
+        images = _save_image_uploads(image_files, temp_dir / "images")
         return generate_deck(
             template=_template_path(template_id),
             content=content_input,
             slide_count=slide_count,
             offline=offline,
+            images=images,
         )
     except (FileNotFoundError, ValueError) as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
@@ -236,6 +272,7 @@ def create_generation_job_endpoint(
     offline: Annotated[bool, Form()] = False,
     variants: Annotated[bool, Form()] = False,
     export_all: Annotated[bool, Form()] = False,
+    image_files: Annotated[list[UploadFile] | None, File()] = None,
 ) -> dict:
     if content_file is None and not (content and content.strip()):
         raise HTTPException(
@@ -246,6 +283,10 @@ def create_generation_job_endpoint(
             status_code=400, detail="Slide count must be between 3 and 100"
         )
     template_path = _template_path(template_id)
+    if len([file for file in image_files or [] if file.filename]) > MAX_IMAGE_UPLOADS:
+        raise HTTPException(
+            400, f"Можно добавить не больше {MAX_IMAGE_UPLOADS} изображений."
+        )
     record = create_job(
         template_id=template_id,
         slide_count=slide_count,
@@ -261,6 +302,9 @@ def create_generation_job_endpoint(
         content_input = _save_inline_content(
             content or "", job_directory(record["job_id"]) / "source"
         )
+    images = _save_image_uploads(
+        image_files, job_directory(record["job_id"]) / "images"
+    )
     background_tasks.add_task(
         run_generation_job,
         record["job_id"],
@@ -270,6 +314,7 @@ def create_generation_job_endpoint(
         offline=offline,
         variants=variants,
         export_formats=("pdf", "html") if export_all else (),
+        images=images,
     )
     return record
 

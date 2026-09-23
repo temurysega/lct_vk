@@ -6,6 +6,7 @@ import {
   ChevronRight,
   FileSliders,
   FileText,
+  ImagePlus,
   Layers3,
   LogOut,
   Plus,
@@ -28,6 +29,7 @@ export default function Studio({
   const state = useStudio(user);
   const [templateFile, setTemplateFile] = useState<File | null>(null);
   const [contentFile, setContentFile] = useState<File | null>(null);
+  const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [dragging, setDragging] = useState(false);
   const [leaving, setLeaving] = useState(false);
   const uploadInput = useRef<HTMLInputElement>(null);
@@ -39,7 +41,7 @@ export default function Studio({
   }
   function generate(event: FormEvent) {
     event.preventDefault();
-    void state.generate(contentFile);
+    void state.generate(contentFile, imageFiles);
   }
   function dropped(file: File) {
     try {
@@ -233,8 +235,42 @@ export default function Studio({
                       <X size={12} /> Убрать файл
                     </button>
                   )}
+                  <label className="attach-file" htmlFor="imageFiles">
+                    <ImagePlus size={16} />
+                    <span>
+                      {imageFiles.length
+                        ? `Изображений: ${imageFiles.length}`
+                        : "Добавить изображения"}
+                    </span>
+                    <input
+                      id="imageFiles"
+                      type="file"
+                      multiple
+                      accept=".png,.jpg,.jpeg,.webp"
+                      onChange={(event) =>
+                        setImageFiles(Array.from(event.target.files || []))
+                      }
+                    />
+                  </label>
+                  {imageFiles.length > 0 && (
+                    <button
+                      className="remove-file"
+                      type="button"
+                      onClick={() => {
+                        setImageFiles([]);
+                        const input = document.getElementById(
+                          "imageFiles",
+                        ) as HTMLInputElement;
+                        input.value = "";
+                      }}
+                    >
+                      <X size={12} /> Убрать изображения
+                    </button>
+                  )}
                   <p className="field-hint">
                     До 50 МБ. Если прикреплён файл, содержание берётся из него.
+                    Изображения (PNG, JPG, WEBP, до 20) размещаются на слайдах
+                    по совпадению подписи или имени файла с текстом слайда.
                   </p>
                   <div className="generation-options">
                     <label htmlFor="count">

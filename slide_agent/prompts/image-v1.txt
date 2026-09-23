@@ -1,0 +1,6 @@
+Clean flat corporate illustration for a business presentation slide.
+Topic: {topic}
+Key ideas: {points}
+Use a calm composition with generous empty space and simple geometric shapes.
+Colour palette: {palette}. Plain light or brand-coloured background.
+No text, no letters, no numbers, no logos, no watermarks, no user interface screenshots, no real people's faces.

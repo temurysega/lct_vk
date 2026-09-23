@@ -8,10 +8,17 @@ from typing import Any
 
 from pptx import Presentation
 
+from .diagrams import DIAGRAM_TYPES
 from .layout_selector import select_with_adapter
 from .llm import InferenceClient, InferenceError
 from .model_context import compact_patterns
 from .prompt_config import load_prompt
+from .visual_planning import (
+    add_offline_visuals,
+    sanitize_diagram,
+    sanitize_image,
+    visual_text,
+)
 
 PLANNER_SYSTEM = load_prompt("planner")
 
@@ -190,6 +197,7 @@ def _fallback_plan(text: str, slide_count: int | None) -> dict[str, Any]:
             "speaker_notes": "",
         }
     )
+    add_offline_visuals(slides)
     return {
         "language": "ru" if russian else "en",
         "title": first_title,
@@ -197,9 +205,15 @@ def _fallback_plan(text: str, slide_count: int | None) -> dict[str, Any]:
     }
 
 
-def _sanitize_visual(value: Any) -> dict[str, Any] | None:
+def _sanitize_visual(
+    value: Any, asset_ids: set[str] | frozenset[str] = frozenset()
+) -> dict[str, Any] | None:
     if not isinstance(value, dict):
         return None
+    if value.get("type") in DIAGRAM_TYPES:
+        return sanitize_diagram(value)
+    if value.get("type") == "image":
+        return sanitize_image(value, asset_ids)
     supported = {"metric_cards", "bar_chart", "pie_chart", "table", "timeline"}
     if value.get("type") not in supported:
         return None
@@ -207,7 +221,11 @@ def _sanitize_visual(value: Any) -> dict[str, Any] | None:
 
 
 def normalize_plan(
-    plan: dict[str, Any], *, source_text: str, slide_count: int | None
+    plan: dict[str, Any],
+    *,
+    source_text: str,
+    slide_count: int | None,
+    asset_ids: set[str] | frozenset[str] = frozenset(),
 ) -> dict[str, Any]:
     raw_slides = plan.get("slides")
     if not isinstance(raw_slides, list) or not raw_slides:
@@ -238,7 +256,7 @@ def normalize_plan(
                 "subtitle": str(raw.get("subtitle") or "").strip(),
                 "body": str(raw.get("body") or "").strip(),
                 "bullets": bullets,
-                "visual": _sanitize_visual(raw.get("visual")),
+                "visual": _sanitize_visual(raw.get("visual"), asset_ids),
                 "speaker_notes": str(raw.get("speaker_notes") or "").strip(),
             }
         )
@@ -267,7 +285,9 @@ def plan_deck(
     design_system: dict[str, Any],
     slide_count: int | None = None,
     client: InferenceClient | None = None,
+    image_catalog: list[dict[str, str]] | None = None,
 ) -> dict[str, Any]:
+    asset_ids = {str(item["id"]) for item in image_catalog or []}
     if client is None:
         plan = _fallback_plan(content, slide_count)
         planner_mode = "offline"
@@ -287,6 +307,8 @@ def plan_deck(
                     },
                 }
             )
+            if image_catalog:
+                payload["available_images"] = image_catalog[:20]
         user = json.dumps(payload, ensure_ascii=False)
         try:
             plan = client.chat_json(
@@ -306,7 +328,9 @@ def plan_deck(
             or sum(isinstance(item, dict) for item in raw_slides) < 2
         ):
             planner_mode = "fallback"
-    normalized = normalize_plan(plan, source_text=content, slide_count=slide_count)
+    normalized = normalize_plan(
+        plan, source_text=content, slide_count=slide_count, asset_ids=asset_ids
+    )
     if normalized.get("replanned_reason"):
         planner_mode = "fallback"
     normalized["planner"] = {"mode": planner_mode}
@@ -316,9 +340,17 @@ def plan_deck(
 
 
 def _slide_requirements(slide: dict[str, Any]) -> dict[str, Any]:
+    # The keys and value domains are the layout adapter's training contract:
+    # diagrams are described as the list of statements they carry.
     visual = slide.get("visual") or {}
-    body_chars = len(str(slide.get("body", ""))) + sum(
-        len(str(item)) for item in slide.get("bullets", [])
+    diagram_text = visual_text(visual)
+    body_chars = (
+        len(str(slide.get("body", "")))
+        + sum(len(str(item)) for item in slide.get("bullets", []))
+        + sum(len(text) for text in diagram_text)
+    )
+    bullet_count = len(slide.get("bullets", [])) or len(
+        visual.get("items", []) if diagram_text else []
     )
     role = str(slide.get("role", "content"))
     if role in {"comparison", "two_column"}:
@@ -330,7 +362,7 @@ def _slide_requirements(slide: dict[str, Any]) -> dict[str, Any]:
         "metric_cards",
     }:
         rhetorical_pattern = "data"
-    elif len(slide.get("bullets", [])) >= 2:
+    elif bullet_count >= 2:
         rhetorical_pattern = "bullet_list"
     elif role in {"cover", "closing", "section"}:
         rhetorical_pattern = "hero" if role == "cover" else role
@@ -340,9 +372,9 @@ def _slide_requirements(slide: dict[str, Any]) -> dict[str, Any]:
         "role": role,
         "title_chars": len(str(slide.get("title", ""))),
         "body_chars": body_chars,
-        "bullet_count": len(slide.get("bullets", [])),
+        "bullet_count": bullet_count,
         "needs_data": rhetorical_pattern == "data",
-        "needs_image": role == "image",
+        "needs_image": role == "image" or visual.get("type") == "image",
         "rhetorical_pattern": rhetorical_pattern,
         "has_visual": bool(visual),
     }
@@ -445,8 +477,21 @@ def _score_pattern(
             score -= 4.0
             risks.append("нет нативной структуры для данных")
     if requirements["needs_image"]:
-        score += 3.0 if capacity.get("supports_image") else -5.0
-    elif not requirements["has_visual"]:
+        # Only picture placeholders and exemplar photos can be replaced;
+        # pictures baked into a layout would stay next to the new image.
+        slot_area = float(capacity.get("image_slot_area_ratio", 0) or 0)
+        content_image_area = float(capacity.get("content_image_area_ratio", 0) or 0)
+        if slot_area >= 0.03 or (
+            pattern.get("source_kind") == "slide_exemplar"
+            and content_image_area >= 0.04
+        ):
+            score += 5.0
+            reasons.append("заменяемый слот изображения")
+        elif content_image_area:
+            score -= content_image_area * 20.0
+            risks.append("изображения макета останутся рядом с новым")
+    else:
+        # Charts and diagrams do not fill picture slots either.
         content_image_area = float(capacity.get("content_image_area_ratio", 0) or 0)
         image_slot_area = float(capacity.get("image_slot_area_ratio", 0) or 0)
         score -= content_image_area * 20.0 + image_slot_area * 24.0
@@ -498,6 +543,7 @@ def assign_patterns(
     usage: dict[str, int] = {}
     for slide_index, slide in enumerate(plan.get("slides", []), 1):
         requirements = _slide_requirements(slide)
+        diagram = (slide.get("visual") or {}).get("type") in DIAGRAM_TYPES
         scored: list[tuple[float, dict[str, Any], list[str], list[str]]] = []
         for pattern in patterns:
             score, reasons, risks = _score_pattern(
@@ -506,6 +552,17 @@ def assign_patterns(
                 reuse_count=usage.get(pattern["id"], 0),
                 avoided=pattern["id"] in (avoid_by_slide or {}).get(slide_index, set()),
             )
+            if diagram:
+                # Kept outside ``requirements``: that dict is the adapter's
+                # contract. Diagrams need one calm, large content area.
+                capacity = pattern.get("capacity", {})
+                area = float(capacity.get("body_area_ratio", 0) or 0)
+                score += min(area, 0.45) * 24 - 5
+                score -= float(capacity.get("complexity", 0) or 0) * 4
+                if area >= 0.25:
+                    reasons.append("крупная зона для схемы")
+                else:
+                    risks.append("схема займёт общую зону контента")
             if requirements["body_chars"]:
                 zones = int(pattern.get("capacity", {}).get("usable_body_zones", 1))
                 if layout_strategy == "columns" and 2 <= zones <= 4:

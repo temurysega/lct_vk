@@ -1,0 +1,628 @@
+{
+  "date": "2026-09-22",
+  "mode": "offline",
+  "content_kind": "synthetic",
+  "content_sha256": "43dd056bca6d8aed58cbf934adba668bc36c5126eeefd3900a61d7d48c2bb3e0",
+  "images": [
+    "IMG_2041.png",
+    "специалист поддержки отвечает сотруднику.png"
+  ],
+  "config": "reports/visuals-2026-09-22/demo.json",
+  "runs": [
+    {
+      "template": "VK Tech шаблон.pptx",
+      "status": "completed",
+      "diversity": "passed",
+      "source_sha256": "cbbe3aa6a21d23cebc4d1383b93dd07a9cea460d683de1903567b616c839485d",
+      "source_unchanged": true,
+      "seconds": 53.855,
+      "variants": [
+        {
+          "variant": "balanced",
+          "slides": 10,
+          "seconds": 15.432,
+          "qa": "passed",
+          "qa_score": 100,
+          "issues": [],
+          "exports": "passed",
+          "diagrams": 3,
+          "pictograms": 6,
+          "images": 2,
+          "illustrations": 0,
+          "visual_slides": [
+            {
+              "slide": 2,
+              "type": "image",
+              "placement": "zone"
+            },
+            {
+              "slide": 3,
+              "type": "image",
+              "placement": "zone"
+            },
+            {
+              "slide": 4,
+              "type": "icon_grid",
+              "icons": [
+                "headset",
+                "search",
+                "circle-check"
+              ],
+              "columns": 2
+            },
+            {
+              "slide": 6,
+              "type": "process",
+              "orientation": "horizontal"
+            },
+            {
+              "slide": 7,
+              "type": "icon_grid",
+              "icons": [
+                "users",
+                "target",
+                "trophy"
+              ],
+              "columns": 2
+            }
+          ],
+          "image_placements": [
+            {
+              "asset_id": "a2d28971872f082a",
+              "slide": 3,
+              "match": "lexical",
+              "score": 2.12
+            },
+            {
+              "asset_id": "01e47123cb0fe8be",
+              "slide": 2,
+              "match": "order",
+              "score": 0.0
+            }
+          ],
+          "contextual_audit": "not_run"
+        },
+        {
+          "variant": "columns",
+          "slides": 10,
+          "seconds": 14.484,
+          "qa": "passed",
+          "qa_score": 100,
+          "issues": [],
+          "exports": "passed",
+          "diagrams": 3,
+          "pictograms": 6,
+          "images": 2,
+          "illustrations": 0,
+          "visual_slides": [
+            {
+              "slide": 2,
+              "type": "image",
+              "placement": "zone"
+            },
+            {
+              "slide": 3,
+              "type": "image",
+              "placement": "zone"
+            },
+            {
+              "slide": 4,
+              "type": "icon_grid",
+              "icons": [
+                "headset",
+                "search",
+                "circle-check"
+              ],
+              "columns": 3
+            },
+            {
+              "slide": 6,
+              "type": "process",
+              "orientation": "horizontal"
+            },
+            {
+              "slide": 7,
+              "type": "icon_grid",
+              "icons": [
+                "users",
+                "target",
+                "trophy"
+              ],
+              "columns": 2
+            }
+          ],
+          "image_placements": [
+            {
+              "asset_id": "a2d28971872f082a",
+              "slide": 3,
+              "match": "lexical",
+              "score": 2.12
+            },
+            {
+              "asset_id": "01e47123cb0fe8be",
+              "slide": 2,
+              "match": "order",
+              "score": 0.0
+            }
+          ],
+          "contextual_audit": "not_run"
+        },
+        {
+          "variant": "focus",
+          "slides": 10,
+          "seconds": 15.819,
+          "qa": "passed",
+          "qa_score": 100,
+          "issues": [],
+          "exports": "passed",
+          "diagrams": 3,
+          "pictograms": 6,
+          "images": 2,
+          "illustrations": 0,
+          "visual_slides": [
+            {
+              "slide": 2,
+              "type": "image",
+              "placement": "zone"
+            },
+            {
+              "slide": 3,
+              "type": "image",
+              "placement": "zone"
+            },
+            {
+              "slide": 4,
+              "type": "icon_grid",
+              "icons": [
+                "headset",
+                "search",
+                "circle-check"
+              ],
+              "columns": 2
+            },
+            {
+              "slide": 6,
+              "type": "process",
+              "orientation": "vertical"
+            },
+            {
+              "slide": 7,
+              "type": "icon_grid",
+              "icons": [
+                "users",
+                "target",
+                "trophy"
+              ],
+              "columns": 2
+            }
+          ],
+          "image_placements": [
+            {
+              "asset_id": "a2d28971872f082a",
+              "slide": 3,
+              "match": "lexical",
+              "score": 2.12
+            },
+            {
+              "asset_id": "01e47123cb0fe8be",
+              "slide": 2,
+              "match": "order",
+              "score": 0.0
+            }
+          ],
+          "contextual_audit": "not_run"
+        }
+      ]
+    },
+    {
+      "template": "VK_WorkSpace_Клиентская_конференция_Шаблон_03.pptx",
+      "status": "completed",
+      "diversity": "passed",
+      "source_sha256": "1b8883114486c69dff706e9c4fd9382727c4506c2cfa3ec34f86987f1e852f2f",
+      "source_unchanged": true,
+      "seconds": 43.969,
+      "variants": [
+        {
+          "variant": "balanced",
+          "slides": 10,
+          "seconds": 13.821,
+          "qa": "passed",
+          "qa_score": 100,
+          "issues": [],
+          "exports": "passed",
+          "diagrams": 3,
+          "pictograms": 6,
+          "images": 2,
+          "illustrations": 0,
+          "visual_slides": [
+            {
+              "slide": 2,
+              "type": "image",
+              "placement": "template_slot"
+            },
+            {
+              "slide": 3,
+              "type": "image",
+              "placement": "zone"
+            },
+            {
+              "slide": 4,
+              "type": "icon_grid",
+              "icons": [
+                "headset",
+                "search",
+                "circle-check"
+              ],
+              "columns": 3
+            },
+            {
+              "slide": 6,
+              "type": "process",
+              "orientation": "horizontal"
+            },
+            {
+              "slide": 7,
+              "type": "icon_grid",
+              "icons": [
+                "users",
+                "target",
+                "trophy"
+              ],
+              "columns": 3
+            }
+          ],
+          "image_placements": [
+            {
+              "asset_id": "a2d28971872f082a",
+              "slide": 3,
+              "match": "lexical",
+              "score": 2.12
+            },
+            {
+              "asset_id": "01e47123cb0fe8be",
+              "slide": 2,
+              "match": "order",
+              "score": 0.0
+            }
+          ],
+          "contextual_audit": "not_run"
+        },
+        {
+          "variant": "columns",
+          "slides": 10,
+          "seconds": 11.537,
+          "qa": "passed",
+          "qa_score": 100,
+          "issues": [],
+          "exports": "passed",
+          "diagrams": 3,
+          "pictograms": 6,
+          "images": 2,
+          "illustrations": 0,
+          "visual_slides": [
+            {
+              "slide": 2,
+              "type": "image",
+              "placement": "zone"
+            },
+            {
+              "slide": 3,
+              "type": "image",
+              "placement": "zone"
+            },
+            {
+              "slide": 4,
+              "type": "icon_grid",
+              "icons": [
+                "headset",
+                "search",
+                "circle-check"
+              ],
+              "columns": 2
+            },
+            {
+              "slide": 6,
+              "type": "process",
+              "orientation": "horizontal"
+            },
+            {
+              "slide": 7,
+              "type": "icon_grid",
+              "icons": [
+                "users",
+                "target",
+                "trophy"
+              ],
+              "columns": 2
+            }
+          ],
+          "image_placements": [
+            {
+              "asset_id": "a2d28971872f082a",
+              "slide": 3,
+              "match": "lexical",
+              "score": 2.12
+            },
+            {
+              "asset_id": "01e47123cb0fe8be",
+              "slide": 2,
+              "match": "order",
+              "score": 0.0
+            }
+          ],
+          "contextual_audit": "not_run"
+        },
+        {
+          "variant": "focus",
+          "slides": 10,
+          "seconds": 13.918,
+          "qa": "passed",
+          "qa_score": 100,
+          "issues": [],
+          "exports": "passed",
+          "diagrams": 3,
+          "pictograms": 6,
+          "images": 2,
+          "illustrations": 0,
+          "visual_slides": [
+            {
+              "slide": 2,
+              "type": "image",
+              "placement": "template_slot"
+            },
+            {
+              "slide": 3,
+              "type": "image",
+              "placement": "template_slot"
+            },
+            {
+              "slide": 4,
+              "type": "icon_grid",
+              "icons": [
+                "headset",
+                "search",
+                "circle-check"
+              ],
+              "columns": 2
+            },
+            {
+              "slide": 6,
+              "type": "process",
+              "orientation": "horizontal"
+            },
+            {
+              "slide": 7,
+              "type": "icon_grid",
+              "icons": [
+                "users",
+                "target",
+                "trophy"
+              ],
+              "columns": 2
+            }
+          ],
+          "image_placements": [
+            {
+              "asset_id": "a2d28971872f082a",
+              "slide": 3,
+              "match": "lexical",
+              "score": 2.12
+            },
+            {
+              "asset_id": "01e47123cb0fe8be",
+              "slide": 2,
+              "match": "order",
+              "score": 0.0
+            }
+          ],
+          "contextual_audit": "not_run"
+        }
+      ]
+    },
+    {
+      "template": "Шаблон презентации VK Education.pptx",
+      "status": "completed",
+      "diversity": "passed",
+      "source_sha256": "9ef2323ed5f49f464aee5ae7065f1f57bb92c8be3a635be507d59819e285cfe0",
+      "source_unchanged": true,
+      "seconds": 39.233,
+      "variants": [
+        {
+          "variant": "balanced",
+          "slides": 10,
+          "seconds": 11.747,
+          "qa": "passed",
+          "qa_score": 100,
+          "issues": [],
+          "exports": "passed",
+          "diagrams": 3,
+          "pictograms": 6,
+          "images": 2,
+          "illustrations": 0,
+          "visual_slides": [
+            {
+              "slide": 2,
+              "type": "image",
+              "placement": "template_placeholder"
+            },
+            {
+              "slide": 3,
+              "type": "image",
+              "placement": "template_slot"
+            },
+            {
+              "slide": 4,
+              "type": "icon_grid",
+              "icons": [
+                "headset",
+                "search",
+                "circle-check"
+              ],
+              "columns": 3
+            },
+            {
+              "slide": 6,
+              "type": "process",
+              "orientation": "horizontal"
+            },
+            {
+              "slide": 7,
+              "type": "icon_grid",
+              "icons": [
+                "users",
+                "target",
+                "trophy"
+              ],
+              "columns": 3
+            }
+          ],
+          "image_placements": [
+            {
+              "asset_id": "a2d28971872f082a",
+              "slide": 3,
+              "match": "lexical",
+              "score": 2.12
+            },
+            {
+              "asset_id": "01e47123cb0fe8be",
+              "slide": 2,
+              "match": "order",
+              "score": 0.0
+            }
+          ],
+          "contextual_audit": "not_run"
+        },
+        {
+          "variant": "columns",
+          "slides": 10,
+          "seconds": 11.918,
+          "qa": "passed",
+          "qa_score": 100,
+          "issues": [],
+          "exports": "passed",
+          "diagrams": 3,
+          "pictograms": 6,
+          "images": 2,
+          "illustrations": 0,
+          "visual_slides": [
+            {
+              "slide": 2,
+              "type": "image",
+              "placement": "zone"
+            },
+            {
+              "slide": 3,
+              "type": "image",
+              "placement": "template_slot"
+            },
+            {
+              "slide": 4,
+              "type": "icon_grid",
+              "icons": [
+                "headset",
+                "search",
+                "circle-check"
+              ],
+              "columns": 3
+            },
+            {
+              "slide": 6,
+              "type": "process",
+              "orientation": "horizontal"
+            },
+            {
+              "slide": 7,
+              "type": "icon_grid",
+              "icons": [
+                "users",
+                "target",
+                "trophy"
+              ],
+              "columns": 3
+            }
+          ],
+          "image_placements": [
+            {
+              "asset_id": "a2d28971872f082a",
+              "slide": 3,
+              "match": "lexical",
+              "score": 2.12
+            },
+            {
+              "asset_id": "01e47123cb0fe8be",
+              "slide": 2,
+              "match": "order",
+              "score": 0.0
+            }
+          ],
+          "contextual_audit": "not_run"
+        },
+        {
+          "variant": "focus",
+          "slides": 10,
+          "seconds": 11.949,
+          "qa": "passed",
+          "qa_score": 100,
+          "issues": [],
+          "exports": "passed",
+          "diagrams": 3,
+          "pictograms": 6,
+          "images": 2,
+          "illustrations": 0,
+          "visual_slides": [
+            {
+              "slide": 2,
+              "type": "image",
+              "placement": "template_placeholder"
+            },
+            {
+              "slide": 3,
+              "type": "image",
+              "placement": "template_placeholder"
+            },
+            {
+              "slide": 4,
+              "type": "icon_grid",
+              "icons": [
+                "headset",
+                "search",
+                "circle-check"
+              ],
+              "columns": 3
+            },
+            {
+              "slide": 6,
+              "type": "process",
+              "orientation": "horizontal"
+            },
+            {
+              "slide": 7,
+              "type": "icon_grid",
+              "icons": [
+                "users",
+                "target",
+                "trophy"
+              ],
+              "columns": 3
+            }
+          ],
+          "image_placements": [
+            {
+              "asset_id": "a2d28971872f082a",
+              "slide": 3,
+              "match": "lexical",
+              "score": 2.12
+            },
+            {
+              "asset_id": "01e47123cb0fe8be",
+              "slide": 2,
+              "match": "order",
+              "score": 0.0
+            }
+          ],
+          "contextual_audit": "not_run"
+        }
+      ]
+    }
+  ]
+}

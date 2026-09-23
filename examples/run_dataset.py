@@ -29,6 +29,15 @@ def main() -> int:
         ).hexdigest(),
         "runs": [],
     }
+    images = []
+    if config.get("images"):
+        # Optional folder of pictures placed on matching slides of every deck.
+        images = sorted(
+            path
+            for path in (root / config["images"]).iterdir()
+            if path.suffix.lower() in {".png", ".jpg", ".jpeg", ".webp"}
+        )
+    report["images"] = [path.name for path in images]
     for template in templates:
         digest = hashlib.sha256(template.read_bytes()).hexdigest()
         try:
@@ -39,6 +48,7 @@ def main() -> int:
                 slide_count=config.get("slide_count", 10),
                 offline=config.get("offline", True),
                 export_formats=tuple(config.get("export_formats", ["pdf", "html"])),
+                images=images,
             )
             run = {"template": template.name, "source_sha256": digest, "batch": batch}
         except Exception as exc:  # noqa: BLE001 - keep results of the other templates
@@ -76,9 +86,12 @@ def main() -> int:
                 if preview.exists()
                 else ""
             )
+            visuals = deck.get("visuals") or {}
             cards.append(
                 f"<article><h3>{label}</h3>{img}<p>{anchor}</p><p>QA: {deck['qa']['status']}; "
-                f"{deck['slide_count']} слайдов; {deck['elapsed_seconds']} с.</p></article>"
+                f"{deck['slide_count']} слайдов; {deck['elapsed_seconds']} с.; "
+                f"схем {visuals.get('diagrams', 0)}, пиктограмм {visuals.get('pictograms', 0)}, "
+                f"изображений {visuals.get('images', 0)}.</p></article>"
             )
     (workspace / "index.html").write_text(
         '<!doctype html><html lang="ru"><meta charset="utf-8">'

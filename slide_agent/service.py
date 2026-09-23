@@ -13,6 +13,8 @@ from .composer import compose_presentation, outline_markdown
 from .config import InferenceSettings
 from .coverage import coverage_report
 from .exporter import export_presentation
+from .imagegen import generate_images
+from .images import ImageLibrary, attach_images, collect_content_images
 from .llm import InferenceClient
 from .planner import assign_patterns, load_content, plan_deck
 from .powerpoint import inspect_powerpoint_render
@@ -46,6 +48,31 @@ def _qa_pattern_feedback(
             }
         )
     return avoidance, feedback
+
+
+def _collect_images(
+    content: str | Path,
+    source_text: str,
+    images: list[str | Path] | tuple[str | Path, ...] | None,
+    workspace_path: Path,
+) -> tuple[str, ImageLibrary]:
+    """Gather document pictures and uploads once per request (all variants)."""
+    library = ImageLibrary(workspace_path / "assets" / "images")
+    source_text = collect_content_images(content, source_text, library)
+    for item in images or ():
+        library.add_path(item, source="upload")
+    return source_text, library
+
+
+def _place_images(
+    plan: dict[str, Any],
+    library: ImageLibrary,
+    design: dict[str, Any],
+    *,
+    offline: bool,
+) -> None:
+    attach_images(plan, library)
+    generate_images(plan, design, library, offline=offline)
 
 
 def configured_client(*, offline: bool = False) -> InferenceClient | None:
@@ -108,6 +135,7 @@ def generate_deck(
     qa_retries: int = 1,
     progress: Callable[[str, int], None] | None = None,
     export_formats: tuple[str, ...] = (),
+    images: list[str | Path] | tuple[str | Path, ...] | None = None,
 ) -> dict[str, Any]:
     def report(stage: str, percent: int) -> None:
         if progress:
@@ -130,6 +158,7 @@ def generate_deck(
         raise ValueError("Content is empty")
     if len(source_text) > 1_000_000:
         raise ValueError("Content exceeds the 1,000,000 character safety limit")
+    source_text, library = _collect_images(content, source_text, images, workspace_path)
 
     report("content_planning", 35)
     plan = plan_deck(
@@ -138,7 +167,9 @@ def generate_deck(
         design_system=design,
         slide_count=slide_count,
         client=client,
+        image_catalog=library.catalog(),
     )
+    _place_images(plan, library, design, offline=offline)
     plan = assign_patterns(plan, catalog, client=client)
     return _generate_from_plan(
         plan=plan,
@@ -304,6 +335,8 @@ def _generate_from_plan(
         "workflow": prompt_manifest(),
         "variant": plan.get("variant"),
         "revision": revision,
+        "images": plan.get("image_matching"),
+        "image_generation": plan.get("image_generation"),
     }
     write_json(run_dir / "manifest.json", manifest)
     report(manifest["status"], 100)
@@ -319,6 +352,7 @@ def run_pipeline(
     slide_count: int | None = None,
     offline: bool = False,
     export_formats: tuple[str, ...] = (),
+    images: list[str | Path] | tuple[str | Path, ...] | None = None,
 ) -> dict[str, Any]:
     return generate_deck(
         template=template_path,
@@ -328,6 +362,7 @@ def run_pipeline(
         slide_count=slide_count,
         offline=offline,
         export_formats=export_formats,
+        images=images,
     )
 
 
@@ -348,6 +383,7 @@ def generate_variants(
     offline: bool = False,
     export_formats: tuple[str, ...] = ("pdf", "html"),
     progress: Callable[[str, int], None] | None = None,
+    images: list[str | Path] | tuple[str | Path, ...] | None = None,
 ) -> dict[str, Any]:
     started = time.perf_counter()
     if slide_count is not None and not 3 <= slide_count <= 100:
@@ -362,6 +398,7 @@ def generate_variants(
         raise ValueError("Content must contain 1 to 1,000,000 characters")
     design = read_json(template_dir / "design_system.json")
     catalog = read_json(template_dir / "pattern_catalog.json")
+    source, library = _collect_images(content, source, images, workspace_path)
     if progress:
         progress("content_planning", 15)
     base = plan_deck(
@@ -370,7 +407,10 @@ def generate_variants(
         design_system=design,
         slide_count=slide_count,
         client=client,
+        image_catalog=library.catalog(),
     )
+    # Images are matched and generated once, so all variants share content.
+    _place_images(base, library, design, offline=offline)
     fingerprint = hashlib.sha256(
         json.dumps(base["slides"], ensure_ascii=False, sort_keys=True).encode("utf-8")
     ).hexdigest()

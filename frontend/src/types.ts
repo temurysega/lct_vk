@@ -27,6 +27,12 @@ export interface Deck {
   slide_count: number;
   planner_mode?: string;
   variant?: { label: string; id: string };
+  visuals?: {
+    diagrams: number;
+    pictograms: number;
+    images: number;
+    illustrations: number;
+  };
   qa: {
     status: string;
     issues: Issue[];

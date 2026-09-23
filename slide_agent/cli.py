@@ -10,6 +10,8 @@ from typing import Any
 
 from .analyzer import analyze_template
 from .exporter import find_libreoffice
+from .imagegen import ImageSettings
+from .pictograms import icon_manifest
 from .qa import inspect_presentation
 from .service import (
     configured_client,
@@ -89,6 +91,12 @@ def _parser() -> argparse.ArgumentParser:
     variants.add_argument("--offline", action="store_true")
     for command in (run, generate, variants):
         command.add_argument(
+            "--images",
+            nargs="+",
+            default=[],
+            help="Pictures (PNG/JPG/WEBP) or folders to place on matching slides",
+        )
+        command.add_argument(
             "--export",
             choices=("pptx", "all"),
             default="pptx",
@@ -111,6 +119,25 @@ def _parser() -> argparse.ArgumentParser:
     return parser
 
 
+def _image_paths(values: list[str]) -> list[Path]:
+    from .images import IMAGE_SUFFIXES
+
+    paths: list[Path] = []
+    for value in values:
+        candidate = Path(value).expanduser()
+        if candidate.is_dir():
+            paths.extend(
+                sorted(
+                    p for p in candidate.iterdir() if p.suffix.lower() in IMAGE_SUFFIXES
+                )
+            )
+        elif candidate.is_file():
+            paths.append(candidate)
+        else:
+            raise FileNotFoundError(f"Image not found: {value}")
+    return paths
+
+
 def _doctor() -> dict[str, Any]:
     client = configured_client()
     return {
@@ -123,6 +150,8 @@ def _doctor() -> dict[str, Any]:
         "uvicorn": bool(importlib.util.find_spec("uvicorn")),
         "inference_configured": client is not None,
         "inference_model": os.getenv("INFERENCE_MODEL", ""),
+        "image_generation_configured": ImageSettings.from_env().enabled,
+        "pictograms": icon_manifest(),
         "workspace": str(resolve_workspace()),
     }
 
@@ -152,6 +181,7 @@ def main(argv: list[str] | None = None) -> int:
                 offline=args.offline,
                 qa_retries=args.qa_retries,
                 export_formats=("pdf", "html") if args.export == "all" else (),
+                images=_image_paths(args.images),
             )
             _print(result, args.json)
             return int(result["status"] == "failed")
@@ -164,6 +194,7 @@ def main(argv: list[str] | None = None) -> int:
                 slide_count=args.slides,
                 offline=args.offline,
                 export_formats=("pdf", "html") if args.export == "all" else (),
+                images=_image_paths(args.images),
             )
             _print(result, args.json)
             return int(result["status"] == "failed")
@@ -175,6 +206,7 @@ def main(argv: list[str] | None = None) -> int:
                 slide_count=args.slides,
                 offline=args.offline,
                 export_formats=("pdf", "html") if args.export == "all" else (),
+                images=_image_paths(args.images),
             )
             _print(result, args.json)
             return int(
