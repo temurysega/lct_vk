@@ -52,6 +52,7 @@ export function useStudio(user: User) {
   const [templateId, setTemplateId] = useState("");
   const [modelConfigured, setModelConfigured] = useState<boolean | null>(null);
   const [offline, setOffline] = useState(true);
+  const [purpose, setPurpose] = useState("");
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [batchId, setBatchId] = useState("");
   const [decks, setDecks] = useState<Deck[]>([]);
@@ -265,6 +266,7 @@ export function useStudio(user: User) {
       body.append("content", content.trim());
       body.append("slide_count", String(count));
       body.append("offline", String(offline));
+      if (purpose && !offline) body.append("purpose", purpose);
       body.append("variants", "true");
       body.append("export_all", "true");
       if (file) body.append("content_file", file);
@@ -322,6 +324,8 @@ export function useStudio(user: User) {
     modelConfigured,
     offline,
     setOffline,
+    purpose,
+    setPurpose,
     history,
     batchId,
     decks,

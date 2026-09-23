@@ -79,6 +79,7 @@ class InferenceClient:
         json_mode: bool = False,
         max_tokens: int = 5000,
         image_paths: list[str] | None = None,
+        schema: dict[str, Any] | None = None,
     ) -> str:
         if not self.settings.enabled:
             raise InferenceError(
@@ -108,8 +109,25 @@ class InferenceClient:
             "temperature": temperature,
             "max_tokens": max_tokens,
         }
-        if json_mode:
+        if schema is not None:
+            # Grammar-constrained decoding (llama.cpp, vLLM): valid JSON with
+            # the exact shape, e.g. the requested number of slides.
+            payload["response_format"] = {
+                "type": "json_schema",
+                "json_schema": {"name": "response", "schema": schema, "strict": True},
+            }
+        elif json_mode:
             payload["response_format"] = {"type": "json_object"}
+        if self.settings.extra_body:
+            try:
+                extra = json.loads(self.settings.extra_body)
+            except ValueError as exc:
+                raise InferenceError(
+                    "INFERENCE_EXTRA_BODY must be a JSON object"
+                ) from exc
+            if not isinstance(extra, dict):
+                raise InferenceError("INFERENCE_EXTRA_BODY must be a JSON object")
+            payload.update(extra)
 
         headers = {"Content-Type": "application/json"}
         if self.settings.api_key:
@@ -191,25 +209,29 @@ class InferenceClient:
         user: str,
         max_tokens: int = 5000,
         image_paths: list[str] | None = None,
+        schema: dict[str, Any] | None = None,
+        temperature: float = 0.2,
     ) -> dict[str, Any]:
-        try:
-            raw = self.chat(
-                system=system,
-                user=user,
-                json_mode=True,
-                max_tokens=max_tokens,
-                image_paths=image_paths,
-            )
-        except InferenceError as exc:
-            if "rejected the request (400)" not in str(exc):
-                raise
-            raw = self.chat(
-                system=system,
-                user=user,
-                json_mode=False,
-                max_tokens=max_tokens,
-                image_paths=image_paths,
-            )
+        # Strongest supported constraint first: JSON schema, JSON mode, plain text.
+        attempts = [{"schema": schema}] if schema is not None else []
+        attempts += [{"json_mode": True}, {"json_mode": False}]
+        raw = ""
+        for index, options in enumerate(attempts):
+            try:
+                raw = self.chat(
+                    system=system,
+                    user=user,
+                    max_tokens=max_tokens,
+                    image_paths=image_paths,
+                    temperature=temperature,
+                    **options,
+                )
+                break
+            except InferenceError as exc:
+                if "rejected the request (400)" not in str(exc) or index + 1 == len(
+                    attempts
+                ):
+                    raise
         try:
             parsed = json.loads(strip_code_fence(raw))
         except json.JSONDecodeError as exc:

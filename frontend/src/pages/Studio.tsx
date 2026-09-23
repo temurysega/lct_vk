@@ -58,7 +58,7 @@ export default function Studio({
         ? "Модель пока не подключена. Добавьте готовый текст — доступна сборка без модели."
         : state.offline
           ? "Без модели: распределяем готовые материалы по слайдам."
-          : "Модель спланирует содержание по вашим материалам.";
+          : "Модель спланирует содержание. Короткий бриф до 1500 знаков она развернёт в структуру и текст слайдов.";
   return (
     <div className="studio-page">
       <a className="skip-link" href="#workspace">
@@ -272,6 +272,19 @@ export default function Studio({
                     Изображения (PNG, JPG, WEBP, до 20) размещаются на слайдах
                     по совпадению подписи или имени файла с текстом слайда.
                   </p>
+                  <label htmlFor="purpose">Назначение презентации</label>
+                  <select
+                    id="purpose"
+                    value={state.purpose}
+                    disabled={state.offline}
+                    onChange={(event) => state.setPurpose(event.target.value)}
+                  >
+                    <option value="">Определить по тексту</option>
+                    <option value="feature">Фича</option>
+                    <option value="product">Продукт</option>
+                    <option value="project">Проект</option>
+                    <option value="initiative">Инициатива</option>
+                  </select>
                   <div className="generation-options">
                     <label htmlFor="count">
                       Слайдов

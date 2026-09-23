@@ -17,6 +17,8 @@ class InferenceSettings:
     max_output_tokens: int = 0
     lora_id: int | None = None
     lora_scale: float = 0.0
+    parallel_requests: int = 1
+    extra_body: str = ""
 
     @property
     def enabled(self) -> bool:
@@ -38,4 +40,6 @@ class InferenceSettings:
             lora_id=int(os.environ["INFERENCE_LORA_ID"])
             if os.getenv("INFERENCE_LORA_ID")
             else None,
+            parallel_requests=max(1, int(os.getenv("INFERENCE_PARALLEL", "1"))),
+            extra_body=os.getenv("INFERENCE_EXTRA_BODY", "").strip(),
         )

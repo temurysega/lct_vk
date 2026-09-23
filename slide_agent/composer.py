@@ -452,6 +452,14 @@ def _add_textbox(
     return shape
 
 
+def _zones_intersect(
+    first: tuple[float, float, float, float], second: tuple[float, float, float, float]
+) -> bool:
+    x1, y1, w1, h1 = first
+    x2, y2, w2, h2 = second
+    return min(x1 + w1, x2 + w2) > max(x1, x2) and min(y1 + h1, y2 + h2) > max(y1, y2)
+
+
 def _zone_from_shape(shape: Any) -> tuple[float, float, float, float]:
     return (
         shape.left / 914400,
@@ -2181,15 +2189,28 @@ def _fill_slide(
         _set_text_frame(subtitles[0], [subtitle])
     elif subtitle and slide_spec.get("role") in {"cover", "closing", "section"}:
         canvas = design["canvas"]
-        _add_textbox(
-            slide,
-            subtitle,
-            (0.8, canvas["height_inches"] * 0.64, canvas["width_inches"] - 1.6, 0.65),
-            font_name=font,
-            font_size=float(design["typography"].get("body_size_pt", 18)),
-            color=colors.get("dk1", "1F2937"),
-            align=PP_ALIGN.CENTER,
-        ).name = "BrandDeck Subtitle"
+        box = (0.8, canvas["height_inches"] * 0.64, canvas["width_inches"] - 1.6, 0.65)
+        align = PP_ALIGN.CENTER
+        # A closing slide with next steps may reuse a content layout: its text
+        # zones stay free, so the subtitle moves under the title or is dropped.
+        occupied = (
+            [_zone_from_shape(shape) for shape in bodies]
+            if slide_spec.get("bullets") or slide_spec.get("body")
+            else []
+        )
+        if any(_zones_intersect(box, zone) for zone in occupied):
+            x, y, w, h = _zone_from_shape(titles[0])
+            box, align = (x, y + h + 0.05, w, 0.5), PP_ALIGN.LEFT
+        if not any(_zones_intersect(box, zone) for zone in occupied):
+            _add_textbox(
+                slide,
+                subtitle,
+                box,
+                font_name=font,
+                font_size=float(design["typography"].get("body_size_pt", 18)),
+                color=colors.get("dk1", "1F2937"),
+                align=align,
+            ).name = "BrandDeck Subtitle"
 
     slot = (
         _choose_picture_slot(slide, content_slot, bodies, design)

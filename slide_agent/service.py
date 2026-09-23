@@ -136,6 +136,8 @@ def generate_deck(
     progress: Callable[[str, int], None] | None = None,
     export_formats: tuple[str, ...] = (),
     images: list[str | Path] | tuple[str | Path, ...] | None = None,
+    mode: str = "auto",
+    purpose: str | None = None,
 ) -> dict[str, Any]:
     def report(stage: str, percent: int) -> None:
         if progress:
@@ -168,6 +170,8 @@ def generate_deck(
         slide_count=slide_count,
         client=client,
         image_catalog=library.catalog(),
+        mode=mode,
+        purpose=purpose,
     )
     _place_images(plan, library, design, offline=offline)
     plan = assign_patterns(plan, catalog, client=client)
@@ -245,7 +249,23 @@ def _generate_from_plan(
         coverage = coverage_report(source_text, current_plan, output_path)
         write_json(run_dir / "coverage_report.json", coverage)
         qa["content_coverage"] = coverage["status"]
-        if coverage["status"] == "needs_review":
+        for item in coverage["unsupported_numbers"]:
+            qa["issues"].append(
+                {
+                    "severity": "warning",
+                    "code": "number_not_in_source",
+                    "slide": item["slide"],
+                    "message": "Числа нет в исходных материалах: "
+                    + ", ".join(item["numbers"]),
+                }
+            )
+            if qa["status"] == "passed":
+                qa["status"] = "warning"
+            qa["score"] = min(qa["score"], 96)
+        # A brief is expanded by design, so its sentences are not expected
+        # verbatim on slides; invented numbers are still flagged above.
+        brief_input = current_plan.get("planner", {}).get("input") == "brief"
+        if coverage["status"] == "needs_review" and not brief_input:
             qa["issues"].append(
                 {
                     "severity": "warning",
@@ -353,6 +373,8 @@ def run_pipeline(
     offline: bool = False,
     export_formats: tuple[str, ...] = (),
     images: list[str | Path] | tuple[str | Path, ...] | None = None,
+    mode: str = "auto",
+    purpose: str | None = None,
 ) -> dict[str, Any]:
     return generate_deck(
         template=template_path,
@@ -363,6 +385,8 @@ def run_pipeline(
         offline=offline,
         export_formats=export_formats,
         images=images,
+        mode=mode,
+        purpose=purpose,
     )
 
 
@@ -384,6 +408,8 @@ def generate_variants(
     export_formats: tuple[str, ...] = ("pdf", "html"),
     progress: Callable[[str, int], None] | None = None,
     images: list[str | Path] | tuple[str | Path, ...] | None = None,
+    mode: str = "auto",
+    purpose: str | None = None,
 ) -> dict[str, Any]:
     started = time.perf_counter()
     if slide_count is not None and not 3 <= slide_count <= 100:
@@ -408,6 +434,8 @@ def generate_variants(
         slide_count=slide_count,
         client=client,
         image_catalog=library.catalog(),
+        mode=mode,
+        purpose=purpose,
     )
     # Images are matched and generated once, so all variants share content.
     _place_images(base, library, design, offline=offline)

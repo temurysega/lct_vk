@@ -8,6 +8,7 @@ from typing import Any
 
 from pptx import Presentation
 
+from .brief import plan_from_brief, use_brief_mode
 from .diagrams import DIAGRAM_TYPES
 from .layout_selector import select_with_adapter
 from .llm import InferenceClient, InferenceError
@@ -286,9 +287,23 @@ def plan_deck(
     slide_count: int | None = None,
     client: InferenceClient | None = None,
     image_catalog: list[dict[str, str]] | None = None,
+    mode: str = "auto",
+    purpose: str | None = None,
 ) -> dict[str, Any]:
     asset_ids = {str(item["id"]) for item in image_catalog or []}
-    if client is None:
+    brief_mode = use_brief_mode(content, mode, client)
+    if brief_mode:
+        assert client is not None
+        try:
+            plan = plan_from_brief(
+                content, client=client, slide_count=slide_count, purpose=purpose
+            )
+        except InferenceError as exc:
+            # Expanding a brief is the model's job; a deterministic fallback
+            # would only produce a few near-empty slides.
+            raise ValueError(f"Could not build a deck from the brief: {exc}") from exc
+        planner_mode = "inference"
+    elif client is None:
         plan = _fallback_plan(content, slide_count)
         planner_mode = "offline"
     else:
@@ -333,10 +348,40 @@ def plan_deck(
     )
     if normalized.get("replanned_reason"):
         planner_mode = "fallback"
-    normalized["planner"] = {"mode": planner_mode}
+    normalized["planner"] = {
+        "mode": planner_mode,
+        "input": "brief" if brief_mode else "source",
+    }
+    if brief_mode:
+        normalized["brief"] = plan["brief"]
     if plan.get("inference_error"):
         normalized["planner"]["reason"] = plan["inference_error"]
     return normalized
+
+
+def _data_text(visual: dict[str, Any]) -> list[str]:
+    """Text of cards, tables, timelines and charts.
+
+    Counting it lets capacity scoring reject layouts without a usable zone,
+    which would otherwise squeeze the visual into a decorative label.
+    """
+    kind = visual.get("type")
+    if kind in {"metric_cards", "timeline"}:
+        return [
+            str(item.get(key))
+            for item in visual.get("items", [])
+            if isinstance(item, dict)
+            for key in ("label", "value", "detail")
+            if item.get(key)
+        ]
+    if kind == "table":
+        cells = list(visual.get("headers", []))
+        for row in visual.get("rows", []):
+            cells.extend(row if isinstance(row, list) else [])
+        return [str(cell) for cell in cells]
+    if kind in {"bar_chart", "pie_chart"}:
+        return [str(item) for item in visual.get("categories", [])]
+    return []
 
 
 def _slide_requirements(slide: dict[str, Any]) -> dict[str, Any]:
@@ -348,6 +393,7 @@ def _slide_requirements(slide: dict[str, Any]) -> dict[str, Any]:
         len(str(slide.get("body", "")))
         + sum(len(str(item)) for item in slide.get("bullets", []))
         + sum(len(text) for text in diagram_text)
+        + sum(len(text) for text in _data_text(visual))
     )
     bullet_count = len(slide.get("bullets", [])) or len(
         visual.get("items", []) if diagram_text else []

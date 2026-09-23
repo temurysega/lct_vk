@@ -233,6 +233,8 @@ def generate_endpoint(
     slide_count: Annotated[int | None, Form(ge=3, le=100)] = None,
     offline: Annotated[bool, Form()] = False,
     image_files: Annotated[list[UploadFile] | None, File()] = None,
+    mode: Annotated[str, Form(pattern="^(auto|source|brief)$")] = "auto",
+    purpose: Annotated[str | None, Form(max_length=40)] = None,
 ) -> dict:
     temp_dir: Path | None = None
     try:
@@ -254,6 +256,8 @@ def generate_endpoint(
             slide_count=slide_count,
             offline=offline,
             images=images,
+            mode=mode,
+            purpose=purpose or None,
         )
     except (FileNotFoundError, ValueError) as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
@@ -273,6 +277,8 @@ def create_generation_job_endpoint(
     variants: Annotated[bool, Form()] = False,
     export_all: Annotated[bool, Form()] = False,
     image_files: Annotated[list[UploadFile] | None, File()] = None,
+    mode: Annotated[str, Form(pattern="^(auto|source|brief)$")] = "auto",
+    purpose: Annotated[str | None, Form(max_length=40)] = None,
 ) -> dict:
     if content_file is None and not (content and content.strip()):
         raise HTTPException(
@@ -315,6 +321,8 @@ def create_generation_job_endpoint(
         variants=variants,
         export_formats=("pdf", "html") if export_all else (),
         images=images,
+        mode=mode,
+        purpose=purpose or None,
     )
     return record
 

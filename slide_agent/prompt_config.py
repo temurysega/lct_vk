@@ -3,7 +3,7 @@ from __future__ import annotations
 import hashlib
 from pathlib import Path
 
-PROMPT_VERSION = "1.3.0"
+PROMPT_VERSION = "1.4.0"
 PROMPT_ROOT = Path(__file__).with_name("prompts")
 # Older versions stay in the repository so earlier manifests remain reproducible.
 PROMPT_FILES = {
@@ -12,6 +12,8 @@ PROMPT_FILES = {
     "analyzer": "analyzer-v1.txt",
     "layout": "layout-v1.txt",
     "image": "image-v1.txt",
+    "brief-outline": "brief-outline-v1.txt",
+    "brief-slide": "brief-slide-v1.txt",
 }
 
 

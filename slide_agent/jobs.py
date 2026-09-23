@@ -83,6 +83,8 @@ def run_generation_job(
     variants: bool = False,
     export_formats: tuple[str, ...] = (),
     images: list[str | Path] | None = None,
+    mode: str = "auto",
+    purpose: str | None = None,
 ) -> None:
     try:
         update_job(
@@ -108,6 +110,8 @@ def run_generation_job(
             progress=progress,
             export_formats=export_formats,
             images=images,
+            mode=mode,
+            purpose=purpose,
         )
         if variants:
             update_job(

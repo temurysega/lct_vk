@@ -23,6 +23,62 @@ def _contains(text: str, unit: str) -> bool:
     )
 
 
+_NUMBER = re.compile(
+    r"(?<![\w.,])\d{1,3}(?:[ \u00a0\u202f]\d{3})+(?:[.,]\d+)?|\d+(?:[.,]\d+)?"
+)
+
+
+def _numbers(text: str) -> set[str]:
+    found = set()
+    for match in _NUMBER.finditer(text):
+        value = re.sub(r"[ \u00a0\u202f]", "", match.group()).replace(",", ".")
+        found.add(value.rstrip("0").rstrip(".") if "." in value else value)
+    return found
+
+
+def _strings(value) -> list[str]:
+    if isinstance(value, str):
+        return [value]
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        return [str(value)]
+    if isinstance(value, dict):
+        return [
+            text
+            for key, item in value.items()
+            if key != "asset_id"
+            for text in _strings(item)
+        ]
+    if isinstance(value, list):
+        return [text for item in value for text in _strings(item)]
+    return []
+
+
+def unsupported_numbers(source: str, plan: dict) -> list[dict]:
+    """Visible numbers of the plan that the source never states.
+
+    Integers below 10 are skipped: they usually count the slide's own items.
+    Speaker notes are not visible and are not checked.
+    """
+    known = _numbers(source)
+    result = []
+    for number, slide in enumerate(plan.get("slides", []), 1):
+        texts = [
+            slide.get("title", ""),
+            slide.get("subtitle", ""),
+            slide.get("body", ""),
+            *slide.get("bullets", []),
+            *_strings(slide.get("visual") or {}),
+        ]
+        missing = sorted(
+            value
+            for value in _numbers("\n".join(texts)) - known
+            if "." in value or float(value) >= 10
+        )
+        if missing:
+            result.append({"slide": number, "numbers": missing})
+    return result
+
+
 def coverage_report(source: str, plan: dict, output: Path | None = None) -> dict:
     units = []
     for heading, lines in _sections(source):
@@ -91,5 +147,6 @@ def coverage_report(source: str, plan: dict, output: Path | None = None) -> dict
         "units": rows,
         "missing_from_plan": missing_plan,
         "missing_from_pptx": missing_pptx,
+        "unsupported_numbers": unsupported_numbers(source, plan),
         "note": "Unmatched paraphrases are not proof of omission; speaker notes do not count as slide content.",
     }

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "description": "Narrative beats for generating a deck from a short brief. The outline model follows the order, merges beats the brief does not support and never invents facts to fill a beat. Labels are guidance for the model, not slide titles.",
+  "auto_brief_max_chars": 1500,
+  "purposes": {
+    "feature": {
+      "label": "Фича",
+      "beats": [
+        "problem: what users struggle with today and why it matters",
+        "users: who is affected and in which scenario",
+        "solution: what the feature does, in one idea",
+        "how_it_works: user flow or main steps",
+        "value: what changes for users and the business",
+        "scope: what is in and out of the first release",
+        "success_metrics: how the result will be measured",
+        "plan: delivery steps and timing",
+        "risks: main risks and how they are handled",
+        "ask: decision or resources requested"
+      ]
+    },
+    "product": {
+      "label": "Продукт",
+      "beats": [
+        "market_problem: the customer problem and its cost",
+        "audience: target segments and their needs",
+        "product: what the product is and its core promise",
+        "capabilities: key capabilities",
+        "differentiation: why it is better than current alternatives",
+        "business_model: how it creates revenue or savings",
+        "traction_or_validation: evidence or planned validation",
+        "roadmap: next stages",
+        "risks: main risks and mitigations",
+        "ask: decision or resources requested"
+      ]
+    },
+    "project": {
+      "label": "Проект",
+      "beats": [
+        "context: why the project exists",
+        "goals: measurable goals",
+        "scope: deliverables and boundaries",
+        "approach: how the work is organised",
+        "team: roles and responsibilities",
+        "timeline: stages and milestones",
+        "status_or_results: current status or expected results",
+        "budget_resources: resources and constraints",
+        "risks: main risks and mitigations",
+        "next_steps: decisions and next steps"
+      ]
+    },
+    "initiative": {
+      "label": "Инициатива",
+      "beats": [
+        "problem: what is not working now",
+        "cause: why it happens",
+        "proposal: the proposed change",
+        "benefits: who benefits and how",
+        "alternatives: options considered and why this one",
+        "implementation: how it would be introduced",
+        "costs: resources and constraints",
+        "success_criteria: how success is judged",
+        "risks: main risks and mitigations",
+        "ask: decision requested"
+      ]
+    }
+  }
+}

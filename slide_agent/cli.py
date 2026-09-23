@@ -102,6 +102,17 @@ def _parser() -> argparse.ArgumentParser:
             default="pptx",
             help="Also export PDF and HTML using LibreOffice",
         )
+        command.add_argument(
+            "--mode",
+            choices=("auto", "source", "brief"),
+            default="auto",
+            help="brief: expand a short brief with the model; source: lay out full material",
+        )
+        command.add_argument(
+            "--purpose",
+            choices=("feature", "product", "project", "initiative"),
+            help="Purpose of the deck for brief mode (detected from the brief if omitted)",
+        )
 
     inspect = sub.add_parser("inspect", help="Run structural QA on a generated PPTX")
     inspect.add_argument("presentation", help="Path to .pptx")
@@ -182,6 +193,8 @@ def main(argv: list[str] | None = None) -> int:
                 qa_retries=args.qa_retries,
                 export_formats=("pdf", "html") if args.export == "all" else (),
                 images=_image_paths(args.images),
+                mode=args.mode,
+                purpose=args.purpose,
             )
             _print(result, args.json)
             return int(result["status"] == "failed")
@@ -195,6 +208,8 @@ def main(argv: list[str] | None = None) -> int:
                 offline=args.offline,
                 export_formats=("pdf", "html") if args.export == "all" else (),
                 images=_image_paths(args.images),
+                mode=args.mode,
+                purpose=args.purpose,
             )
             _print(result, args.json)
             return int(result["status"] == "failed")
@@ -207,6 +222,8 @@ def main(argv: list[str] | None = None) -> int:
                 offline=args.offline,
                 export_formats=("pdf", "html") if args.export == "all" else (),
                 images=_image_paths(args.images),
+                mode=args.mode,
+                purpose=args.purpose,
             )
             _print(result, args.json)
             return int(
