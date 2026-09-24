@@ -45,7 +45,7 @@ def _strings(value) -> list[str]:
         return [
             text
             for key, item in value.items()
-            if key != "asset_id"
+            if key not in {"asset_id", "match", "match_score", "origin", "score"}
             for text in _strings(item)
         ]
     if isinstance(value, list):

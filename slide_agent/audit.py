@@ -18,6 +18,10 @@ REPAIRABLE = {
     "out_of_bounds",
     "native_text_too_small",
     "placeholder_text",
+    # Another layout removes the colliding or emptied exemplar block.
+    "template_overlap",
+    "emptied_template_block",
+    "empty_photo_frame",
 }
 
 

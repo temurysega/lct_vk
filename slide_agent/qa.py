@@ -7,6 +7,17 @@ from typing import Any
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE
 
+from .layout_geometry import (
+    box,
+    collides,
+    has_text,
+    hosts,
+    is_generated,
+    is_opaque,
+    is_photo_frame,
+    is_structural,
+    is_visible_box,
+)
 from .typography import (
     ESTIMATED_GLYPH_WIDTH_EM,
     effective_font_size,
@@ -66,6 +77,107 @@ def _inspected_shapes(shapes: Any) -> list[tuple[Any, bool]]:
     return result
 
 
+def _geometry(shape: Any) -> tuple[Any, ...]:
+    return (shape.left, shape.top, shape.width, shape.height)
+
+
+def _template_reference(
+    template_path: str | Path | None,
+) -> tuple[set[tuple[Any, ...]], set[tuple[Any, ...]]]:
+    """Geometry of every template shape and of those holding sample text.
+
+    Filled template blocks are renamed by the composer but keep their
+    geometry, so geometry identifies template-origin shapes in the output.
+    """
+    if not template_path or not Path(template_path).exists():
+        return set(), set()
+    try:
+        template = Presentation(template_path)
+    except Exception:  # noqa: BLE001 - the template reference is optional
+        return set(), set()
+    shapes = [shape for slide in template.slides for shape in slide.shapes]
+    return (
+        {_geometry(shape) for shape in shapes},
+        {(str(shape.name), *_geometry(shape)) for shape in shapes if has_text(shape)},
+    )
+
+
+def _template_layer_issues(
+    slide: Any,
+    canvas: tuple[float, float],
+    template_shapes: set[tuple[Any, ...]],
+    sample_keys: set[tuple[Any, ...]],
+) -> list[dict[str, Any]]:
+    """Visible template shapes that collide with, or lost, the new content.
+
+    Hosting cards, full-width bands and backgrounds are expected around new
+    content. A smaller template shape is a defect when new content covers
+    part of it, when its sample text was erased and it stayed as an empty
+    block, or when it is an avatar circle without a photo.
+    """
+    shapes = list(slide.shapes)
+    content = [
+        (shape, box(shape))
+        for shape in shapes
+        if is_generated(shape)
+        and (has_text(shape) or is_opaque(shape))
+    ]
+    issues: list[dict[str, Any]] = []
+    for shape in shapes:
+        if is_generated(shape) or has_text(shape) or not is_visible_box(shape):
+            continue
+        zone = box(shape)
+        if is_structural(zone, canvas) or any(
+            hosts(zone, other) for _, other in content
+        ):
+            continue
+        bounds = dict(zip("xywh", (round(value, 3) for value in zone)))
+        covered = [
+            item.name
+            for item, other in content
+            if collides(
+                shape,
+                zone,
+                item,
+                other,
+                item.is_placeholder or _geometry(item) in template_shapes,
+            )
+        ]
+        if covered:
+            issues.append(
+                {
+                    "severity": "warning",
+                    "code": "template_overlap",
+                    "shape": f"{shape.name} / {covered[0]}",
+                    "bounds": [bounds],
+                    "message": "Новый контент перекрывает элемент шаблона",
+                }
+            )
+        elif shape.shape_type == MSO_SHAPE_TYPE.LINE:
+            continue
+        elif (str(shape.name), *_geometry(shape)) in sample_keys:
+            issues.append(
+                {
+                    "severity": "warning",
+                    "code": "emptied_template_block",
+                    "shape": shape.name,
+                    "bounds": [bounds],
+                    "message": "Блок шаблона остался пустым после удаления образца текста",
+                }
+            )
+        elif is_photo_frame(shape, zone, content):
+            issues.append(
+                {
+                    "severity": "warning",
+                    "code": "empty_photo_frame",
+                    "shape": shape.name,
+                    "bounds": [bounds],
+                    "message": "Пустая рамка под фото рядом с подписью",
+                }
+            )
+    return issues
+
+
 def _picture_distortion(shape: Any) -> float:
     try:
         pixel_w, pixel_h = shape.image.size
@@ -84,6 +196,7 @@ def inspect_presentation(
     design_system: dict[str, Any] | None = None,
     expected_slide_count: int | None = None,
     report_path: str | Path | None = None,
+    template_path: str | Path | None = None,
 ) -> dict[str, Any]:
     path = Path(output_path).resolve()
     issues: list[dict[str, Any]] = []
@@ -143,6 +256,7 @@ def inspect_presentation(
     expects_native_grid = (design_system or {}).get("source_model", {}).get(
         "composition_mode"
     ) == "native_grid"
+    template_shapes, sample_keys = _template_reference(template_path)
     for slide_index, slide in enumerate(prs.slides, 1):
         slide_issues: list[dict[str, Any]] = []
         text_count = 0
@@ -307,6 +421,11 @@ def inspect_presentation(
                             "message": "Visible text boxes overlap",
                         }
                     )
+        slide_issues.extend(
+            _template_layer_issues(
+                slide, (slide_width, slide_height), template_shapes, sample_keys
+            )
+        )
         if text_count == 0:
             slide_issues.append(
                 {

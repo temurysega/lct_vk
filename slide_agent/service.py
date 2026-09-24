@@ -20,6 +20,11 @@ from .planner import assign_patterns, load_content, plan_deck
 from .powerpoint import inspect_powerpoint_render
 from .prompt_config import prompt_manifest
 from .qa import compact_plan, inspect_presentation
+from .render_audit import (
+    inspect_rendered_contrast,
+    inspect_rendered_fill,
+    repair_rendered_contrast,
+)
 from .resources import serialized_on_cpu
 from .utils import find_latest, read_json, resolve_workspace, unique_dir, write_json
 
@@ -239,6 +244,7 @@ def _generate_from_plan(
             design_system=design,
             expected_slide_count=len(current_plan["slides"]),
             report_path=run_dir / "qa_report.json",
+            template_path=template_dir / "original.pptx",
         )
         render_qa = inspect_powerpoint_render(
             output_path,
@@ -317,6 +323,46 @@ def _generate_from_plan(
     from .audit import enrich_audit
 
     qa = enrich_audit(output_path, qa, current_plan)
+    if exports["status"] == "passed":
+        rendered_pdf = run_dir / "exports" / "output.pdf"
+        theme = design.get("colors", {}).get("theme", [])
+        text_roles = {"dk1", "lt1", "dk2", "lt2"}
+        palette = [c.get("hex", "") for c in theme if c.get("role") in text_roles]
+        accents = [c.get("hex", "") for c in theme if c.get("role") not in text_roles]
+        repairs = []
+        for _ in range(3):
+            visual_audit = inspect_rendered_contrast(rendered_pdf, output_path)
+            next_repairs = repair_rendered_contrast(
+                output_path, visual_audit["issues"], palette, accents
+            )
+            if not next_repairs:
+                break
+            repairs.extend(next_repairs)
+            exports = export_presentation(
+                output_path,
+                run_dir / "exports",
+                formats=export_formats,
+                expected_slide_count=len(current_plan["slides"]),
+            )
+            if exports["status"] != "passed":
+                break
+        if exports["status"] == "passed":
+            visual_audit = inspect_rendered_contrast(rendered_pdf, output_path)
+        visual_audit["repairs"] = repairs
+        qa["rendered_visual_audit"] = visual_audit
+        rendered_issues = list(visual_audit["issues"])
+        if exports["status"] == "passed":
+            fill_audit = inspect_rendered_fill(
+                rendered_pdf,
+                output_path,
+                [str(s.get("role", "content")) for s in current_plan["slides"]],
+            )
+            qa["rendered_fill_audit"] = fill_audit
+            rendered_issues.extend(fill_audit["issues"])
+        qa["issues"].extend(rendered_issues)
+        if rendered_issues and qa["status"] == "passed":
+            qa["status"] = "warning"
+        qa["score"] = max(0, qa["score"] - 4 * len(rendered_issues))
     qa["contextual_audit"] = {
         "status": "not_run",
         "reason": "A semantic/VLM audit has not been performed",

@@ -513,6 +513,8 @@ def _icon_grid(shapes, items, zone, style, context, record) -> None:
     count = len(items)
     gap = min(0.24, max(0.12, w * 0.02))
     columns = _grid_columns(count, w, h, gap)
+    if count <= 4 and w >= 6 and max(len(item["plain"]) for item in items) > 48:
+        columns = min(columns, 2)
     rows = math.ceil(count / columns)
     card_w = (w - gap * (columns - 1)) / columns
     available_h = (h - gap * (rows - 1)) / rows

@@ -1,5 +1,6 @@
 from pptx import Presentation
 from pptx.dml.color import RGBColor
+from pptx.oxml.ns import qn
 from pptx.util import Inches, Pt
 
 from slide_agent.composer import (
@@ -210,3 +211,21 @@ def test_exemplar_body_zone_does_not_extend_above_reserved_title():
     generated = next(s for s in slide.shapes if s.name == "BrandDeck Body")
     assert generated.top >= Inches(2)
     assert "Новый факт" in generated.text
+
+
+def test_every_paragraph_keeps_the_exemplar_bullet_and_indent():
+    prs = Presentation()
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    shape = slide.shapes.add_textbox(Inches(1), Inches(1), Inches(5), Inches(3))
+    properties = shape.text_frame.paragraphs[0]._p.get_or_add_pPr()
+    properties.set("marL", "255588")
+    properties.set("indent", "-255588")
+    properties.append(properties.makeelement(qn("a:buChar"), {"char": "•"}))
+    shape.text_frame.paragraphs[0].text = "Образец"
+
+    _set_text_frame(shape, ["Первый тезис.", "Второй тезис.", "Третий тезис."])
+
+    for paragraph in shape.text_frame.paragraphs:
+        pPr = paragraph._p.pPr
+        assert pPr.find(qn("a:buChar")) is not None
+        assert (pPr.get("marL"), pPr.get("indent")) == ("255588", "-255588")

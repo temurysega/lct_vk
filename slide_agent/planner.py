@@ -77,7 +77,9 @@ def _sentences(text: str) -> list[str]:
     cleaned = re.sub(r"\s+", " ", text).strip()
     if not cleaned:
         return []
-    parts = re.split(r"(?<=[.!?])\s+|\s*[;•]\s*", cleaned)
+    # A semicolon separates list items only when a new statement follows;
+    # "…специалисту; ссылку можно проверить" is one sentence.
+    parts = re.split(r"(?<=[.!?])\s+|\s*•\s*|\s*;\s*(?=[A-ZА-ЯЁ0-9])", cleaned)
     return [part.strip(" -\t") for part in parts if part.strip(" -\t")]
 
 
@@ -164,9 +166,9 @@ def _fallback_plan(text: str, slide_count: int | None) -> dict[str, Any]:
         {
             "title": first_title,
             "role": "cover",
-            "subtitle": "Автоматически создано по исходным материалам"
-            if russian
-            else "Generated from the supplied source",
+            # Service captions ("generated automatically") are slide noise
+            # (Appendix 1, question 7); the template's subtitle stays empty.
+            "subtitle": "",
             "body": "",
             "bullets": [],
             "visual": None,
@@ -533,9 +535,13 @@ def _score_pattern(
         ):
             score += 5.0
             reasons.append("заменяемый слот изображения")
-        elif content_image_area:
-            score -= content_image_area * 20.0
-            risks.append("изображения макета останутся рядом с новым")
+        else:
+            # Without a slot the picture competes with exemplar decoration
+            # for the text zone; any slotted layout of the template is better.
+            score -= 6.0 + content_image_area * 20.0
+            risks.append("нет слота изображения")
+            if content_image_area:
+                risks.append("изображения макета останутся рядом с новым")
     else:
         # Charts and diagrams do not fill picture slots either.
         content_image_area = float(capacity.get("content_image_area_ratio", 0) or 0)

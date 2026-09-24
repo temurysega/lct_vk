@@ -25,6 +25,17 @@ from .diagrams import (
     render_illustration,
 )
 from .images import crop_to_fill
+from .layout_geometry import (
+    box,
+    collides,
+    gap,
+    has_text,
+    hosts,
+    is_generated,
+    is_opaque,
+    is_photo_frame,
+    is_structural,
+)
 from .pictograms import add_icon, assign_icons
 from .typography import (
     ESTIMATED_GLYPH_WIDTH_EM,
@@ -34,6 +45,14 @@ from .typography import (
 from .utils import read_json, write_json
 
 NATIVE_VISUALS = set(DIAGRAM_TYPES) | {"image"}
+# Exemplar shapes that can be scaffolding; pictures are kept.
+LEFTOVER_TYPES = {
+    MSO_SHAPE_TYPE.AUTO_SHAPE,
+    MSO_SHAPE_TYPE.GROUP,
+    MSO_SHAPE_TYPE.FREEFORM,
+    MSO_SHAPE_TYPE.TEXT_BOX,
+    MSO_SHAPE_TYPE.LINE,
+}
 
 TITLE_TYPES = {PP_PLACEHOLDER.TITLE, PP_PLACEHOLDER.CENTER_TITLE}
 SUBTITLE_TYPES = {PP_PLACEHOLDER.SUBTITLE}
@@ -392,10 +411,18 @@ def _set_text_frame(
     text_frame.vertical_anchor = MSO_ANCHOR.TOP
     if not paragraphs:
         return
+    # clear() keeps the exemplar's first paragraph properties (bullet, hanging
+    # indent); new paragraphs repeat them instead of falling back to the
+    # layout's list level, which drops the marker and shifts the indent.
+    first_properties = text_frame.paragraphs[0]._p.pPr
     for index, text in enumerate(paragraphs):
         paragraph = (
             text_frame.paragraphs[0] if index == 0 else text_frame.add_paragraph()
         )
+        if index and first_properties is not None:
+            if paragraph._p.pPr is not None:
+                paragraph._p.remove(paragraph._p.pPr)
+            paragraph._p.insert(0, copy.deepcopy(first_properties))
         paragraph.text = str(text)
         paragraph.level = 0
         paragraph.space_before = Pt(0)
@@ -1540,7 +1567,7 @@ def _native_split(
     if items:
         _native_card_content(
             slide,
-            items[0],
+            "\n".join(f"• {item}" for item in items) if visual else items[0],
             1,
             left,
             tokens,
@@ -1845,6 +1872,18 @@ def _native_slide(
         marker_top = 1.56 if has_navigation else 1.38
         content_top = 1.88 if has_navigation else 1.78
         title_width = max(4.6, right - left)
+        if (slide_spec.get("visual") or {}).get("type") == "image":
+            title_backing = slide.shapes.add_shape(
+                MSO_SHAPE.RECTANGLE,
+                Inches(left - 0.12),
+                Inches(title_top - 0.08),
+                Inches(min(width - left, title_width + 0.24)),
+                Inches(0.88),
+            )
+            title_backing.name = "BrandDeck Native Title Backing"
+            title_backing.fill.solid()
+            title_backing.fill.fore_color.rgb = _rgb(tokens["background"])
+            title_backing.line.fill.background()
         _add_textbox(
             slide,
             title,
@@ -1880,16 +1919,17 @@ def _native_slide(
         else:
             _native_cards(slide, items, zone, tokens, context)
             mode = "native-cards"
-        _add_textbox(
-            slide,
-            f"{slide_number:02d} / {slide_count:02d}",
-            (width - 1.25, 6.9, 0.72, 0.25),
-            font_name=tokens["font"],
-            font_size=9,
-            color=tokens["accent"],
-            align=PP_ALIGN.RIGHT,
-            min_font_size=9,
-        ).name = "BrandDeck Native Footer"
+        if (slide_spec.get("visual") or {}).get("type") != "image":
+            _add_textbox(
+                slide,
+                f"{slide_number:02d} / {slide_count:02d}",
+                (width - 1.25, 6.9, 0.72, 0.25),
+                font_name=tokens["font"],
+                font_size=9,
+                color=tokens["accent"],
+                align=PP_ALIGN.RIGHT,
+                min_font_size=9,
+            ).name = "BrandDeck Native Footer"
 
     notes = slide_spec.get("speaker_notes")
     if notes:
@@ -2115,6 +2155,72 @@ def _empty_picture_placeholders(slide: Any) -> list[Any]:
     ]
 
 
+def _remove_exemplar_leftovers(
+    slide: Any, design: dict[str, Any], original: set[Any], had_text: set[Any]
+) -> list[dict[str, str]]:
+    """Remove exemplar scaffolding the new content does not use.
+
+    A cloned exemplar keeps its cards, labels, icons and photo frames after
+    the sample text is erased. Left in place they turn into empty cards,
+    icons without captions, frames without photos and shapes under the new
+    text (Appendix 1: overlaps, empty blocks). A shape goes when its text
+    was erased, when it is attached to such a shape (icon, dot, card), when
+    it lies under new content, or when it is an empty photo frame; a line
+    goes only when it crosses new content. Bands, panels, anything hosting
+    new content and pictures are kept.
+    """
+    canvas = (
+        float(design["canvas"]["width_inches"]),
+        float(design["canvas"]["height_inches"]),
+    )
+    shapes = list(slide.shapes)
+    content = [
+        (shape, box(shape))
+        for shape in shapes
+        if has_text(shape)
+        or (is_generated(shape) and is_opaque(shape))
+    ]
+    erased = [
+        box(shape)
+        for shape in shapes
+        if shape.element in had_text and not has_text(shape)
+    ]
+    removed: list[dict[str, str]] = []
+    for shape in shapes:
+        if (
+            is_generated(shape)
+            or shape.is_placeholder
+            or shape.shape_type not in LEFTOVER_TYPES
+            or has_text(shape)
+        ):
+            continue
+        zone = box(shape)
+        if is_structural(zone, canvas) or any(
+            hosts(zone, other) for _, other in content
+        ):
+            continue
+        reason = None
+        if shape.shape_type == MSO_SHAPE_TYPE.LINE:
+            # Dividers next to content are design; only crossing lines go.
+            if any(collides(shape, zone, item, other, False) for item, other in content):
+                reason = "under_content"
+        elif shape.element in had_text:
+            reason = "erased_sample"
+        elif any(gap(zone, other) <= 0.3 for other in erased):
+            reason = "attached_to_erased"
+        elif any(
+            collides(shape, zone, item, other, item.element in original)
+            for item, other in content
+        ):
+            reason = "under_content"
+        elif is_photo_frame(shape, zone, content):
+            reason = "empty_photo_frame"
+        if reason:
+            removed.append({"shape": str(shape.name), "reason": reason})
+            shape.element.getparent().remove(shape.element)
+    return removed
+
+
 def _fill_slide(
     slide: Any,
     slide_spec: dict[str, Any],
@@ -2122,6 +2228,8 @@ def _fill_slide(
     repeated_image_hashes: set[str],
     context: dict[str, Any] | None = None,
 ) -> None:
+    original = {shape.element for shape in slide.shapes}
+    had_text = {shape.element for shape in slide.shapes if has_text(shape)}
     # Example-slide charts and tables carry source-specific data. Keep the
     # surrounding style, but replace those data objects with the new plan.
     for shape in list(slide.shapes):
@@ -2239,6 +2347,11 @@ def _fill_slide(
             _record(
                 context, _fill_picture_slot(slide, placeholder, None, design, context)
             )
+    removed = _remove_exemplar_leftovers(slide, design, original, had_text)
+    if removed and context is not None:
+        context.setdefault("cleanup", []).append(
+            {"slide": context.get("slide"), "removed": removed}
+        )
 
     notes = slide_spec.get("speaker_notes")
     if notes:
@@ -2351,6 +2464,7 @@ def compose_presentation(
     navigation_index = 0
     assets = plan.get("assets") if isinstance(plan.get("assets"), dict) else {}
     visual_records: list[dict[str, Any]] = []
+    cleanup_records: list[dict[str, Any]] = []
     for generated_index, slide_spec in enumerate(slide_specs):
         layout_index = int(slide_spec.get("layout_index", 0))
         if layout_index < 0 or layout_index >= len(layouts):
@@ -2373,6 +2487,7 @@ def compose_presentation(
             "background": background.get("color"),
             "assets": assets,
             "records": visual_records,
+            "cleanup": cleanup_records,
         }
         use_native_grid = (
             native_grid_source or pattern.get("source_kind") == "native_grid"
@@ -2437,6 +2552,7 @@ def compose_presentation(
         "source_patterns": selected_source_patterns,
         "composition_mode": "native_grid" if native_grid_source else "template_layout",
         "visuals": _visual_summary(visual_records),
+        "exemplar_cleanup": cleanup_records,
     }
     write_json(output_path.with_suffix(".manifest.json"), result)
     return result

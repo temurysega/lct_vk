@@ -4,8 +4,8 @@ import pytest
 from pptx import Presentation
 from pptx.util import Inches
 
-from slide_agent.coverage import coverage_report
-from slide_agent.planner import _fallback_plan, normalize_plan
+from slide_agent.coverage import coverage_report, unsupported_numbers
+from slide_agent.planner import _fallback_plan, _sentences, normalize_plan
 from slide_agent.qa import compact_plan
 
 
@@ -84,6 +84,36 @@ def test_paraphrase_and_speaker_notes_are_not_claimed_as_verified():
     assert report["semantic_verification"] == "not_performed"
 
 
+def test_image_match_score_is_not_treated_as_slide_claim():
+    plan = {
+        "slides": [
+            {
+                "title": "Сотрудники",
+                "visual": {
+                    "type": "image",
+                    "asset_id": "abc123",
+                    "match": "lexical",
+                    "match_score": 4.54,
+                },
+            }
+        ]
+    }
+    assert unsupported_numbers("Сотрудники используют помощника.", plan) == []
+
+
 def test_too_little_content_does_not_create_empty_slides():
     with pytest.raises(ValueError, match="fewer slides"):
         _fallback_plan("Один факт.", 10)
+
+
+def test_semicolon_splits_only_before_a_new_statement():
+    assert _sentences("Вопрос передаётся специалисту; ссылку можно проверить.") == [
+        "Вопрос передаётся специалисту; ссылку можно проверить."
+    ]
+    assert _sentences("Первый пункт; Второй пункт") == ["Первый пункт", "Второй пункт"]
+
+
+def test_offline_cover_has_no_service_caption():
+    source = "# Пилот\n\n## Проблема\nПоиск занимает время.\n\n## Решение\nПомощник отвечает."
+    cover = _fallback_plan(source, 4)["slides"][0]
+    assert cover["role"] == "cover" and cover["subtitle"] == ""

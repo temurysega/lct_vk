@@ -79,3 +79,28 @@ def test_text_prefers_usable_layout_without_empty_image_slot():
     }
     assign_patterns(plan, {"patterns": [tiny, photo, plain]})
     assert plan["slides"][0]["pattern_id"] == "plain"
+
+
+def _image_slide():
+    return {
+        "title": "Сотрудник и специалист",
+        "role": "content",
+        "bullets": ["Ответ со ссылкой", "Контекст вопроса", "Передача без повтора"],
+        "visual": {"type": "image", "asset_id": "a1"},
+    }
+
+
+def test_image_slide_prefers_template_slot_over_extra_columns():
+    columns = _pattern("columns", "bullet_list")
+    columns["capacity"]["usable_body_zones"] = 3
+    photo = _pattern("photo", "bullet_list")
+    photo["capacity"]["image_slot_area_ratio"] = 0.3
+    plan = {"slides": [_image_slide()]}
+    assign_patterns(plan, {"patterns": [columns, photo]}, layout_strategy="columns")
+    assert plan["slides"][0]["pattern_id"] == "photo"
+
+
+def test_image_slide_without_slot_reports_the_risk():
+    plan = {"slides": [_image_slide()]}
+    assign_patterns(plan, {"patterns": [_pattern("plain", "bullet_list")]})
+    assert "нет слота изображения" in plan["slides"][0]["pattern_selection"]["risk"]

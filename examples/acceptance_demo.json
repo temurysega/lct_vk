@@ -1,0 +1,10 @@
+{
+  "templates": "../task+data/Датасет",
+  "content": "examples/acceptance_content.md",
+  "images": "examples/acceptance_images",
+  "workspace": "slide-workspace/acceptance-final-2026-09-24",
+  "slide_count": 10,
+  "offline": true,
+  "mode": "source",
+  "export_formats": ["pdf", "html"]
+}
