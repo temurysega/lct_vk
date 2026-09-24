@@ -55,6 +55,29 @@ def _qa_pattern_feedback(
     return avoidance, feedback
 
 
+def _hint_cards_for_underfilled(
+    plan: dict[str, Any], qa: dict[str, Any]
+) -> list[int]:
+    """Mark rendered-underfilled slides whose statements can become cards."""
+    hinted = []
+    for issue in qa.get("issues", []):
+        number = issue.get("slide")
+        if issue.get("code") != "slide_underfilled" or not isinstance(number, int):
+            continue
+        slide = plan["slides"][number - 1]
+        bullets = [str(item) for item in slide.get("bullets", []) if str(item).strip()]
+        if (
+            slide.get("role", "content") == "content"
+            and not slide.get("visual")
+            and not slide.get("body")
+            and 2 <= len(bullets) <= 6
+            and slide.get("layout_hint") != "cards"
+        ):
+            slide["layout_hint"] = "cards"
+            hinted.append(number)
+    return hinted
+
+
 def _collect_images(
     content: str | Path,
     source_text: str,
@@ -228,141 +251,159 @@ def _generate_from_plan(
 
     output_path = requested_output or run_dir / "output.pptx"
     attempts: list[dict[str, Any]] = []
+    cards_for_underfilled: list[int] = []
     current_plan = plan
     avoided_patterns: dict[int, set[str]] = {}
-    for attempt in range(max(0, qa_retries) + 1):
-        report("composition", 65 + min(attempt, 2) * 5)
-        compose_result = compose_presentation(
-            template_dir=template_dir,
-            plan=current_plan,
-            output_path=output_path,
-            design_system=design,
-        )
-        report("quality_assurance", 82 + min(attempt, 2) * 5)
-        qa = inspect_presentation(
-            output_path,
-            design_system=design,
-            expected_slide_count=len(current_plan["slides"]),
-            report_path=run_dir / "qa_report.json",
-            template_path=template_dir / "original.pptx",
-        )
-        render_qa = inspect_powerpoint_render(
-            output_path,
-            run_dir / f"powerpoint-render-{attempt + 1}",
-            expected_slide_count=len(current_plan["slides"]),
-        )
-        qa["powerpoint_render"] = render_qa
-        coverage = coverage_report(source_text, current_plan, output_path)
-        write_json(run_dir / "coverage_report.json", coverage)
-        qa["content_coverage"] = coverage["status"]
-        for item in coverage["unsupported_numbers"]:
-            qa["issues"].append(
-                {
-                    "severity": "warning",
-                    "code": "number_not_in_source",
-                    "slide": item["slide"],
-                    "message": "Числа нет в исходных материалах: "
-                    + ", ".join(item["numbers"]),
-                }
+    for render_pass in range(2):
+        for attempt in range(max(0, qa_retries) + 1):
+            report("composition", 65 + min(attempt, 2) * 5)
+            compose_result = compose_presentation(
+                template_dir=template_dir,
+                plan=current_plan,
+                output_path=output_path,
+                design_system=design,
             )
-            if qa["status"] == "passed":
-                qa["status"] = "warning"
-            qa["score"] = min(qa["score"], 96)
-        # A brief is expanded by design, so its sentences are not expected
-        # verbatim on slides; invented numbers are still flagged above.
-        brief_input = current_plan.get("planner", {}).get("input") == "brief"
-        if coverage["status"] == "needs_review" and not brief_input:
-            qa["issues"].append(
-                {
-                    "severity": "warning",
-                    "code": "content_coverage_unverified",
-                    "message": "Some source units were not matched in the plan/PPTX; see coverage_report.json",
-                }
-            )
-            if qa["status"] == "passed":
-                qa["status"] = "warning"
-            qa["score"] = min(qa["score"], 96)
-        if render_qa["status"] != "skipped":
-            qa["issues"].extend(render_qa["issues"])
-            qa["score"] = min(qa["score"], int(render_qa["score"] or 0))
-            if render_qa["status"] == "failed":
-                qa["status"] = "failed"
-            elif render_qa["status"] == "warning" and qa["status"] == "passed":
-                qa["status"] = "warning"
-        write_json(run_dir / "qa_report.json", qa)
-        attempt_record: dict[str, Any] = {
-            "attempt": attempt + 1,
-            "qa_status": qa["status"],
-            "qa_score": qa["score"],
-        }
-        attempts.append(attempt_record)
-        needs_retry = qa["status"] == "failed" or qa["score"] < 92
-        if not needs_retry or attempt >= qa_retries:
-            break
-        new_avoidance, feedback = _qa_pattern_feedback(current_plan, qa)
-        for slide_number, pattern_ids in new_avoidance.items():
-            avoided_patterns.setdefault(slide_number, set()).update(pattern_ids)
-        attempt_record["feedback"] = feedback
-        current_plan = compact_plan(current_plan)
-        current_plan = assign_patterns(
-            current_plan,
-            catalog,
-            avoid_by_slide=avoided_patterns,
-            layout_strategy=plan.get("variant", {}).get("id", "balanced"),
-        )
-        write_json(run_dir / f"deck_plan.retry-{attempt + 1}.json", current_plan)
-
-    template_manifest = read_json(template_dir / "manifest.json")
-    report("export", 94)
-    exports = export_presentation(
-        output_path,
-        run_dir / "exports",
-        formats=export_formats,
-        expected_slide_count=len(current_plan["slides"]),
-    )
-    from .audit import enrich_audit
-
-    qa = enrich_audit(output_path, qa, current_plan)
-    if exports["status"] == "passed":
-        rendered_pdf = run_dir / "exports" / "output.pdf"
-        theme = design.get("colors", {}).get("theme", [])
-        text_roles = {"dk1", "lt1", "dk2", "lt2"}
-        palette = [c.get("hex", "") for c in theme if c.get("role") in text_roles]
-        accents = [c.get("hex", "") for c in theme if c.get("role") not in text_roles]
-        repairs = []
-        for _ in range(3):
-            visual_audit = inspect_rendered_contrast(rendered_pdf, output_path)
-            next_repairs = repair_rendered_contrast(
-                output_path, visual_audit["issues"], palette, accents
-            )
-            if not next_repairs:
-                break
-            repairs.extend(next_repairs)
-            exports = export_presentation(
+            report("quality_assurance", 82 + min(attempt, 2) * 5)
+            qa = inspect_presentation(
                 output_path,
-                run_dir / "exports",
-                formats=export_formats,
+                design_system=design,
+                expected_slide_count=len(current_plan["slides"]),
+                report_path=run_dir / "qa_report.json",
+                template_path=template_dir / "original.pptx",
+            )
+            render_qa = inspect_powerpoint_render(
+                output_path,
+                run_dir / f"powerpoint-render-{attempt + 1}",
                 expected_slide_count=len(current_plan["slides"]),
             )
-            if exports["status"] != "passed":
+            qa["powerpoint_render"] = render_qa
+            coverage = coverage_report(source_text, current_plan, output_path)
+            write_json(run_dir / "coverage_report.json", coverage)
+            qa["content_coverage"] = coverage["status"]
+            for item in coverage["unsupported_numbers"]:
+                qa["issues"].append(
+                    {
+                        "severity": "warning",
+                        "code": "number_not_in_source",
+                        "slide": item["slide"],
+                        "message": "Числа нет в исходных материалах: "
+                        + ", ".join(item["numbers"]),
+                    }
+                )
+                if qa["status"] == "passed":
+                    qa["status"] = "warning"
+                qa["score"] = min(qa["score"], 96)
+            # A brief is expanded by design, so its sentences are not expected
+            # verbatim on slides; invented numbers are still flagged above.
+            brief_input = current_plan.get("planner", {}).get("input") == "brief"
+            if coverage["status"] == "needs_review" and not brief_input:
+                qa["issues"].append(
+                    {
+                        "severity": "warning",
+                        "code": "content_coverage_unverified",
+                        "message": "Some source units were not matched in the plan/PPTX; see coverage_report.json",
+                    }
+                )
+                if qa["status"] == "passed":
+                    qa["status"] = "warning"
+                qa["score"] = min(qa["score"], 96)
+            if render_qa["status"] != "skipped":
+                qa["issues"].extend(render_qa["issues"])
+                qa["score"] = min(qa["score"], int(render_qa["score"] or 0))
+                if render_qa["status"] == "failed":
+                    qa["status"] = "failed"
+                elif render_qa["status"] == "warning" and qa["status"] == "passed":
+                    qa["status"] = "warning"
+            write_json(run_dir / "qa_report.json", qa)
+            attempt_record: dict[str, Any] = {
+                "attempt": attempt + 1,
+                "render_pass": render_pass + 1,
+                "qa_status": qa["status"],
+                "qa_score": qa["score"],
+            }
+            attempts.append(attempt_record)
+            needs_retry = qa["status"] == "failed" or qa["score"] < 92
+            if not needs_retry or attempt >= qa_retries:
                 break
-        if exports["status"] == "passed":
-            visual_audit = inspect_rendered_contrast(rendered_pdf, output_path)
-        visual_audit["repairs"] = repairs
-        qa["rendered_visual_audit"] = visual_audit
-        rendered_issues = list(visual_audit["issues"])
-        if exports["status"] == "passed":
-            fill_audit = inspect_rendered_fill(
-                rendered_pdf,
-                output_path,
-                [str(s.get("role", "content")) for s in current_plan["slides"]],
+            new_avoidance, feedback = _qa_pattern_feedback(current_plan, qa)
+            for slide_number, pattern_ids in new_avoidance.items():
+                avoided_patterns.setdefault(slide_number, set()).update(pattern_ids)
+            attempt_record["feedback"] = feedback
+            current_plan = compact_plan(current_plan)
+            remapped = assign_patterns(
+                copy.deepcopy(current_plan),
+                catalog,
+                avoid_by_slide=avoided_patterns,
+                layout_strategy=plan.get("variant", {}).get("id", "balanced"),
             )
-            qa["rendered_fill_audit"] = fill_audit
-            rendered_issues.extend(fill_audit["issues"])
-        qa["issues"].extend(rendered_issues)
-        if rendered_issues and qa["status"] == "passed":
-            qa["status"] = "warning"
-        qa["score"] = max(0, qa["score"] - 4 * len(rendered_issues))
+            # Only flagged slides change layout: remapping the whole deck would
+            # drop the variant's distinct choices and can repeat another variant.
+            for slide_number in avoided_patterns:
+                current_plan["slides"][slide_number - 1] = remapped["slides"][
+                    slide_number - 1
+                ]
+            write_json(run_dir / f"deck_plan.retry-{attempt + 1}.json", current_plan)
+
+        template_manifest = read_json(template_dir / "manifest.json")
+        report("export", 94)
+        exports = export_presentation(
+            output_path,
+            run_dir / "exports",
+            formats=export_formats,
+            expected_slide_count=len(current_plan["slides"]),
+        )
+        from .audit import enrich_audit
+
+        qa = enrich_audit(output_path, qa, current_plan)
+        if exports["status"] == "passed":
+            rendered_pdf = run_dir / "exports" / "output.pdf"
+            theme = design.get("colors", {}).get("theme", [])
+            text_roles = {"dk1", "lt1", "dk2", "lt2"}
+            palette = [c.get("hex", "") for c in theme if c.get("role") in text_roles]
+            accents = [c.get("hex", "") for c in theme if c.get("role") not in text_roles]
+            repairs = []
+            for _ in range(3):
+                visual_audit = inspect_rendered_contrast(rendered_pdf, output_path)
+                next_repairs = repair_rendered_contrast(
+                    output_path, visual_audit["issues"], palette, accents
+                )
+                if not next_repairs:
+                    break
+                repairs.extend(next_repairs)
+                exports = export_presentation(
+                    output_path,
+                    run_dir / "exports",
+                    formats=export_formats,
+                    expected_slide_count=len(current_plan["slides"]),
+                )
+                if exports["status"] != "passed":
+                    break
+            if exports["status"] == "passed":
+                visual_audit = inspect_rendered_contrast(rendered_pdf, output_path)
+            visual_audit["repairs"] = repairs
+            qa["rendered_visual_audit"] = visual_audit
+            rendered_issues = list(visual_audit["issues"])
+            if exports["status"] == "passed":
+                fill_audit = inspect_rendered_fill(
+                    rendered_pdf,
+                    output_path,
+                    [str(s.get("role", "content")) for s in current_plan["slides"]],
+                )
+                qa["rendered_fill_audit"] = fill_audit
+                rendered_issues.extend(fill_audit["issues"])
+            qa["issues"].extend(rendered_issues)
+            if rendered_issues and qa["status"] == "passed":
+                qa["status"] = "warning"
+            qa["score"] = max(0, qa["score"] - 4 * len(rendered_issues))
+
+        # The rendered fill decides: slides still below a quarter get their
+        # statements as cards once, and the whole deck is audited again.
+        if render_pass:
+            break
+        cards_for_underfilled = _hint_cards_for_underfilled(current_plan, qa)
+        if not cards_for_underfilled:
+            break
+        write_json(run_dir / "deck_plan.cards.json", current_plan)
     qa["contextual_audit"] = {
         "status": "not_run",
         "reason": "A semantic/VLM audit has not been performed",
@@ -393,6 +434,7 @@ def _generate_from_plan(
         "qa": qa,
         "content_coverage": coverage,
         "attempts": attempts,
+        "cards_for_underfilled_slides": cards_for_underfilled,
         "exports": exports,
         "status": "failed"
         if qa["status"] == "failed" or exports["status"] == "failed"

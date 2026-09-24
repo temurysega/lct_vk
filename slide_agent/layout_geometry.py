@@ -72,6 +72,27 @@ def is_structural(value: Box, canvas: tuple[float, float]) -> bool:
     )
 
 
+def is_framing(
+    shape: Any,
+    zone: Box,
+    canvas: tuple[float, float],
+    content: list[tuple[Any, Box]],
+    held_sample: bool,
+) -> bool:
+    """Bands, panels and cards that frame new content rather than compete.
+
+    A large shape frames the slide unless it held sample text: then it was
+    exemplar content (a chart drawn with shapes, a quote panel). A card frames
+    the new content it lies under; a group is never such a card, because new
+    content is drawn over a group, not inside it.
+    """
+    if is_structural(zone, canvas) and not held_sample:
+        return True
+    return shape.shape_type != MSO_SHAPE_TYPE.GROUP and any(
+        hosts(zone, other) for _, other in content
+    )
+
+
 def hosts(container: Box, content: Box) -> bool:
     """A card behind text: it covers most of the content box."""
     return intersection(container, content) >= 0.8 * max(area(content), 1e-6)

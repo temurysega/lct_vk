@@ -540,6 +540,24 @@ def _icon_grid(shapes, items, zone, style, context, record) -> None:
         icons.append(hint or automatic)
     record["icons"] = [icon or "circle-dot" for icon in icons]
     record["icon_matches"] = sum(bool(icon) for icon in icons)
+    # Cards share one size: the largest at which every card's text fits, so
+    # a longer statement does not print smaller than its neighbours.
+    if horizontal:
+        box_w, box_h = card_w - diameter - pad * 2.6, card_h - pad * 1.2
+    else:
+        box_w = card_w - pad * 1.4
+        box_h = card_h - pad * 1.5 - diameter - pad * 0.7
+    size = min(
+        _fit(
+            _paragraphs(item),
+            max(0.1, box_w - 0.08),
+            max(0.1, box_h - 0.04),
+            size,
+            11.0,
+            style.get("scale"),
+        )
+        for item in items
+    )
     for index, item in enumerate(items):
         column, row = index % columns, index // columns
         cx, cy = x + column * (card_w + gap), top + row * (card_h + gap)

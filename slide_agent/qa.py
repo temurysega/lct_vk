@@ -11,11 +11,10 @@ from .layout_geometry import (
     box,
     collides,
     has_text,
-    hosts,
+    is_framing,
     is_generated,
     is_opaque,
     is_photo_frame,
-    is_structural,
     is_visible_box,
 )
 from .typography import (
@@ -127,9 +126,8 @@ def _template_layer_issues(
         if is_generated(shape) or has_text(shape) or not is_visible_box(shape):
             continue
         zone = box(shape)
-        if is_structural(zone, canvas) or any(
-            hosts(zone, other) for _, other in content
-        ):
+        sample = (str(shape.name), *_geometry(shape)) in sample_keys
+        if is_framing(shape, zone, canvas, content, sample):
             continue
         bounds = dict(zip("xywh", (round(value, 3) for value in zone)))
         covered = [
@@ -155,7 +153,7 @@ def _template_layer_issues(
             )
         elif shape.shape_type == MSO_SHAPE_TYPE.LINE:
             continue
-        elif (str(shape.name), *_geometry(shape)) in sample_keys:
+        elif sample:
             issues.append(
                 {
                     "severity": "warning",

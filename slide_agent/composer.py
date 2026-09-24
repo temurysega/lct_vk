@@ -20,21 +20,24 @@ from pptx.util import Inches, Pt
 
 from .diagrams import (
     DIAGRAM_TYPES,
+    ITEM_LIMITS,
     diagram_style,
     render_diagram,
     render_illustration,
 )
 from .images import crop_to_fill
 from .layout_geometry import (
+    area,
     box,
     collides,
     gap,
     has_text,
-    hosts,
+    intersection,
+    is_framing,
     is_generated,
     is_opaque,
     is_photo_frame,
-    is_structural,
+    is_visible_box,
 )
 from .pictograms import add_icon, assign_icons
 from .typography import (
@@ -592,13 +595,23 @@ def _whole_visual_zone(
     """
     width = float(design["canvas"]["width_inches"])
     height = float(design["canvas"]["height_inches"])
+    titles = [
+        _zone_from_shape(shape)
+        for shape in slide.placeholders
+        if _placeholder_type(shape) in TITLE_TYPES
+    ]
     usable = [
         shape
         for shape in body_shapes
         if shape.width >= Inches(1.0)
         and shape.height >= Inches(0.65)
         and shape.left >= 0
-        and shape.top >= Inches(zone[1] - 0.05)
+        # A column beside the title (title left, list right) starts at the
+        # title's height; only a body under the title must start below it.
+        and (
+            shape.top >= Inches(zone[1] - 0.05)
+            or not any(_zones_intersect(_zone_from_shape(shape), t) for t in titles)
+        )
         and shape.left + shape.width <= Inches(width + 0.02)
         and shape.top + shape.height <= Inches(height + 0.02)
     ]
@@ -616,6 +629,9 @@ def _whole_visual_zone(
             and bottom - top >= 1.2
             and body_area >= 0.45 * zone[2] * zone[3]
         ):
+            # A short strip of exemplar labels keeps the template's content
+            # width but extends down to the bottom of the content area.
+            bottom = max(bottom, zone[1] + zone[3]) if bottom - top < zone[3] * 0.5 else bottom
             result = (left, top, right - left, bottom - top)
     for shape in body_shapes:
         _set_text_frame(shape, [])
@@ -1218,6 +1234,9 @@ def _add_visual(
             )
         except ValueError as exc:
             record = {"type": visual_type, "error": str(exc)[:200]}
+        for key in ("origin", "estimated_fill"):
+            if key in visual:
+                record[key] = visual[key]
         _record(context, record)
         return
     if visual_type == "metric_cards":
@@ -2155,8 +2174,73 @@ def _empty_picture_placeholders(slide: Any) -> list[Any]:
     ]
 
 
+def _text_area(texts: list[str], size_pt: float) -> float:
+    """Rough area (sq. inches) of set text, with ragged line ends and spacing."""
+    glyph = size_pt * ESTIMATED_GLYPH_WIDTH_EM / 72
+    line = size_pt * 1.22 / 72
+    return sum(len(text) for text in texts) * glyph * line * 1.6
+
+
+def _sparse_statement_cards(
+    slide_spec: dict[str, Any],
+    titles: list[Any],
+    bodies: list[Any],
+    design: dict[str, Any],
+) -> dict[str, Any] | None:
+    """Card grid for a few short statements that would leave the slide empty.
+
+    Appendix 1 treats a slide filled below a quarter as a defect, and text
+    alone cannot fill a large zone: 150–250 characters at the template body
+    size cover 10–20 % of a slide. When the template gives these statements
+    no visible cards, they become a native card grid in the same zone. The
+    estimate is slightly generous (0.28) because the rendered audit, not this
+    estimate, decides the final verdict.
+    """
+    bullets = [str(item) for item in slide_spec.get("bullets", []) if str(item).strip()]
+    minimum, maximum = ITEM_LIMITS["icon_grid"]
+    if (
+        slide_spec.get("role", "content") != "content"
+        or slide_spec.get("visual")
+        or slide_spec.get("body")
+        or not minimum <= len(bullets) <= maximum
+        or any(len(item.split()) > 22 for item in bullets)
+        or (
+            slide_spec.get("layout_hint") != "cards"
+            and any(is_visible_box(shape) for shape in bodies)
+        )
+    ):
+        return None
+    if slide_spec.get("layout_hint") == "cards":
+        # The rendered audit measured this slide below a quarter.
+        return {"type": "icon_grid", "items": bullets, "origin": "rendered_fill"}
+    body_size = float(design["typography"].get("body_size_pt", 18))
+    if bodies:
+        body_size = max(body_size, float(effective_font_size(bodies[0], body_size)))
+    title_size = max((_largest_font(shape) for shape in titles), default=0.0)
+    canvas = float(design["canvas"]["width_inches"]) * float(
+        design["canvas"]["height_inches"]
+    )
+    estimate = (
+        _text_area(bullets, body_size)
+        + _text_area([shape.text for shape in titles], title_size or body_size * 1.6)
+    ) / canvas
+    if estimate >= 0.28:
+        return None
+    return {
+        "type": "icon_grid",
+        "items": bullets,
+        "origin": "sparse_text",
+        "estimated_fill": round(estimate, 3),
+    }
+
+
 def _remove_exemplar_leftovers(
-    slide: Any, design: dict[str, Any], original: set[Any], had_text: set[Any]
+    slide: Any,
+    design: dict[str, Any],
+    original: set[Any],
+    had_text: set[Any],
+    *,
+    diagram_only: bool = False,
 ) -> list[dict[str, str]]:
     """Remove exemplar scaffolding the new content does not use.
 
@@ -2166,8 +2250,11 @@ def _remove_exemplar_leftovers(
     text (Appendix 1: overlaps, empty blocks). A shape goes when its text
     was erased, when it is attached to such a shape (icon, dot, card), when
     it lies under new content, or when it is an empty photo frame; a line
-    goes only when it crosses new content. Bands, panels, anything hosting
-    new content and pictures are kept.
+    goes only when it crosses new content. When a generated diagram carries
+    all of the slide's text, exemplar decoration beside it (bars of a chart
+    drawn with shapes, markers of a replaced list) belongs to the removed
+    content and goes too. Bands, panels, anything hosting new content and
+    pictures are kept.
     """
     canvas = (
         float(design["canvas"]["width_inches"]),
@@ -2185,6 +2272,13 @@ def _remove_exemplar_leftovers(
         for shape in shapes
         if shape.element in had_text and not has_text(shape)
     ]
+    diagrams = [
+        box(shape)
+        for shape in shapes
+        if diagram_only and str(shape.name).startswith("BrandDeck Diagram")
+    ]
+    # The diagram's horizontal band across the whole slide.
+    bands = [(0.0, y, canvas[0], h) for _, y, _, h in diagrams]
     removed: list[dict[str, str]] = []
     for shape in shapes:
         if (
@@ -2195,15 +2289,15 @@ def _remove_exemplar_leftovers(
         ):
             continue
         zone = box(shape)
-        if is_structural(zone, canvas) or any(
-            hosts(zone, other) for _, other in content
-        ):
+        if is_framing(shape, zone, canvas, content, shape.element in had_text):
             continue
         reason = None
         if shape.shape_type == MSO_SHAPE_TYPE.LINE:
             # Dividers next to content are design; only crossing lines go.
             if any(collides(shape, zone, item, other, False) for item, other in content):
                 reason = "under_content"
+            elif any(intersection(zone, band) > 0 for band in bands):
+                reason = "beside_diagram"  # an axis of a shape-drawn chart
         elif shape.element in had_text:
             reason = "erased_sample"
         elif any(gap(zone, other) <= 0.3 for other in erased):
@@ -2215,6 +2309,10 @@ def _remove_exemplar_leftovers(
             reason = "under_content"
         elif is_photo_frame(shape, zone, content):
             reason = "empty_photo_frame"
+        elif any(
+            intersection(zone, band) >= 0.5 * max(area(zone), 1e-6) for band in bands
+        ):
+            reason = "beside_diagram"
         if reason:
             removed.append({"shape": str(shape.name), "reason": reason})
             shape.element.getparent().remove(shape.element)
@@ -2328,6 +2426,10 @@ def _fill_slide(
     zone = _content_zone(slide, design, titles + subtitles)
     if slot is not None:
         zone = _zone_beside(zone, _zone_from_shape(slot))
+    else:
+        cards = _sparse_statement_cards(slide_spec, titles, bodies, design)
+        if cards:
+            slide_spec = {**slide_spec, "bullets": [], "visual": cards}
     # A template picture slot keeps the full body area for text.
     text_spec = {**slide_spec, "visual": None} if slot is not None else slide_spec
     visual_zone = _add_body_text(slide, text_spec, bodies, zone, design)
@@ -2347,7 +2449,17 @@ def _fill_slide(
             _record(
                 context, _fill_picture_slot(slide, placeholder, None, design, context)
             )
-    removed = _remove_exemplar_leftovers(slide, design, original, had_text)
+    final_visual = slide_spec.get("visual") or {}
+    removed = _remove_exemplar_leftovers(
+        slide,
+        design,
+        original,
+        had_text,
+        diagram_only=slot is None
+        and final_visual.get("type") in DIAGRAM_TYPES
+        and not slide_spec.get("bullets")
+        and not slide_spec.get("body"),
+    )
     if removed and context is not None:
         context.setdefault("cleanup", []).append(
             {"slide": context.get("slide"), "removed": removed}

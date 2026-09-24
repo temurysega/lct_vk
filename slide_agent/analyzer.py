@@ -13,6 +13,7 @@ from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 from typing import Any
 
+from .layout_geometry import intersection
 from .llm import InferenceClient, InferenceError
 from .renderer import render_context_previews
 from .resources import serialized_on_cpu
@@ -25,7 +26,7 @@ from .utils import (
     write_json,
 )
 
-ANALYSIS_SCHEMA_VERSION = "1.5"
+ANALYSIS_SCHEMA_VERSION = "1.6"
 
 
 def _load_extractor():
@@ -644,6 +645,47 @@ def _zone_capacity(zone: dict[str, Any], default_size: float = 18.0) -> int:
     return max(12, round(chars_per_line * lines))
 
 
+def _backdrop_area_ratio(
+    layout: dict[str, Any],
+    zones: list[dict[str, Any]],
+    canvas_width: float,
+    canvas_height: float,
+    images: list[dict[str, Any]] = (),
+) -> float:
+    """Share of the slide taken by a solid layout block reserved for an object.
+
+    Layouts such as "title + object" or "1 photo" paint a large colour block
+    under a picture or object. With a picture or text placeholder (or an
+    exemplar photo) over it the block is a slot or a text panel; without one
+    it stays an empty field on a generated text slide.
+    """
+    canvas = max(0.1, canvas_width * canvas_height)
+    frames = [
+        tuple(float(zone.get(key) or 0) for key in ("x", "y", "w", "h"))
+        for zone in zones
+        if "title" not in str(zone.get("type", ""))
+    ] + [
+        tuple(float(image.get(key) or 0) for key in ("left", "top", "width", "height"))
+        for image in images
+    ]
+    total = 0.0
+    for shape in layout.get("shapes", []):
+        if "PLACEHOLDER" in str(shape.get("type", "")).upper():
+            continue
+        if str(shape.get("fill", {}).get("type", "")) not in {"solid", "gradient"}:
+            continue
+        box = tuple(
+            float(shape.get(key) or 0) for key in ("left", "top", "width", "height")
+        )
+        area = box[2] * box[3]
+        if not 0.12 <= area / canvas <= 0.7:
+            continue
+        if sum(intersection(box, frame) for frame in frames) >= 0.3 * area:
+            continue
+        total += area / canvas
+    return round(min(1.0, total), 3)
+
+
 def _rhetorical_pattern(
     roles: list[str], zones: list[dict[str, Any]], bullet_count: int
 ) -> str:
@@ -908,6 +950,9 @@ def _slide_exemplar_patterns(context: dict[str, Any]) -> list[dict[str, Any]]:
             canvas_height=height,
         )
         capacity["body_zones"] = body_count
+        capacity["backdrop_area_ratio"] = _backdrop_area_ratio(
+            layout, zones, width, height, slide.get("images", [])
+        )
         patterns.append(
             {
                 "id": f"slide-{int(slide.get('index', position))}",
@@ -985,6 +1030,9 @@ def build_pattern_catalog(context: dict[str, Any]) -> dict[str, Any]:
             canvas_height=canvas_height,
         )
         capacity["body_zones"] = max(1, len(body_zones))
+        capacity["backdrop_area_ratio"] = _backdrop_area_ratio(
+            layout, placeholders, canvas_width, canvas_height
+        )
         capacity["supports_image"] = capacity["supports_image"] or any(
             "picture" in ph["type"] for ph in placeholders
         )

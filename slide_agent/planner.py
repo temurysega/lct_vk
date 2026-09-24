@@ -551,6 +551,12 @@ def _score_pattern(
             risks.append("слот изображения останется пустым")
         if content_image_area >= 0.35:
             risks.append("крупное исходное изображение не связано с новым текстом")
+    backdrop = float(capacity.get("backdrop_area_ratio", 0) or 0)
+    if backdrop and role not in {"cover", "closing", "section"}:
+        # A colour block reserved for an object stays empty on a generated
+        # content slide: nothing in the plan is placed there.
+        score -= backdrop * 24.0
+        risks.append("пустая область макета под объект")
     if requirements["has_visual"] and capacity.get("body_zones", 0) >= 1:
         score += 1.0
 

@@ -1,5 +1,7 @@
+import pytest
 from pptx import Presentation
 from pptx.dml.color import RGBColor
+from pptx.enum.shapes import MSO_SHAPE
 from pptx.oxml.ns import qn
 from pptx.util import Inches, Pt
 
@@ -8,6 +10,8 @@ from slide_agent.composer import (
     _constrain_title_width,
     _fill_slide,
     _set_text_frame,
+    _sparse_statement_cards,
+    _whole_visual_zone,
 )
 from slide_agent.typography import effective_font_size, estimated_line_count
 
@@ -229,3 +233,69 @@ def test_every_paragraph_keeps_the_exemplar_bullet_and_indent():
         pPr = paragraph._p.pPr
         assert pPr.find(qn("a:buChar")) is not None
         assert (pPr.get("marL"), pPr.get("indent")) == ("255588", "-255588")
+
+
+def test_few_short_statements_in_a_large_empty_zone_become_cards():
+    prs = Presentation()
+    slide = prs.slides.add_slide(prs.slide_layouts[1])
+    _fill_slide(
+        slide,
+        {
+            "role": "content",
+            "title": "Границы пилота",
+            "subtitle": "",
+            "body": "",
+            "bullets": ["Два подразделения.", "Шесть недель.", "Ответы и передача."],
+        },
+        _design(),
+        set(),
+    )
+    grids = [shape for shape in slide.shapes if shape.name == "BrandDeck Diagram icon_grid"]
+    assert len(grids) == 1
+    texts = [child.text for child in grids[0].shapes if child.has_text_frame]
+    assert {"Два подразделения.", "Шесть недель.", "Ответы и передача."} <= set(texts)
+    assert not any(
+        shape.is_placeholder and shape.text.strip() == "Шесть недель." for shape in slide.shapes
+    )
+
+
+def test_cards_are_not_forced_on_template_cards_or_dense_text():
+    prs = Presentation()
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    card = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE, Inches(1), Inches(2), Inches(8), Inches(4)
+    )
+    card.fill.solid()
+    card.fill.fore_color.rgb = RGBColor(0xEE, 0xF2, 0xFF)
+    short = {"role": "content", "bullets": ["Первый факт.", "Второй факт."]}
+    dense = {"role": "content", "bullets": ["Слово " * 20] * 6}
+
+    assert _sparse_statement_cards(short, [], [card], _design()) is None
+    assert _sparse_statement_cards(dense, [], [], _design()) is None
+    assert _sparse_statement_cards({**short, "role": "closing"}, [], [], _design()) is None
+    cards = _sparse_statement_cards(short, [], [], _design())
+    assert cards["type"] == "icon_grid" and cards["origin"] == "sparse_text"
+    assert cards["estimated_fill"] < 0.28
+
+
+def test_rendered_fill_hint_turns_statements_into_cards():
+    prs = Presentation()
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    card = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE, Inches(1), Inches(2), Inches(8), Inches(4)
+    )
+    card.fill.solid()
+    card.fill.fore_color.rgb = RGBColor(0xEE, 0xF2, 0xFF)
+    dense = {"role": "content", "bullets": ["Слово " * 20] * 3, "layout_hint": "cards"}
+    cards = _sparse_statement_cards(dense, [], [card], _design())
+    assert cards["type"] == "icon_grid" and cards["origin"] == "rendered_fill"
+
+
+def test_short_strip_of_exemplar_labels_extends_to_the_content_area():
+    prs = Presentation()
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    left = slide.shapes.add_textbox(Inches(0.3), Inches(1.9), Inches(4.4), Inches(1.8))
+    right = slide.shapes.add_textbox(Inches(4.8), Inches(1.9), Inches(5.0), Inches(1.8))
+    # Typical margins of a template with right-side art leave a narrow zone.
+    zone = _whole_visual_zone(slide, [left, right], (1.1, 1.5, 5.0, 5.5), _design())
+    assert zone == pytest.approx((0.3, 1.9, 9.5, 5.1))

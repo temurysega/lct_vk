@@ -175,3 +175,67 @@ def test_rendered_fill_flags_sparse_content_slides(tmp_path: Path):
     assert [item["slide"] for item in report["slides"]] == [2, 3]
     assert [(i["slide"], i["code"]) for i in report["issues"]] == [(2, "slide_underfilled")]
     assert report["issues"][0]["repairable"] is True
+
+
+def test_diagram_slide_drops_the_exemplar_chart_beside_it():
+    prs = _deck()
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    chart = slide.shapes.add_group_shape()
+    chart.name = "Shape chart"
+    bar = chart.shapes.add_shape(
+        MSO_SHAPE.RECTANGLE, Inches(3), Inches(3), Inches(5), Inches(0.3)
+    )
+    label = chart.shapes.add_textbox(Inches(0.6), Inches(2.8), Inches(1.2), Inches(0.6))
+    label.text_frame.text = "Этап"
+    bar.fill.solid()
+    loose_bar = _rect(slide, "Loose bar", (9.5, 5.5, 3.0, 0.3))
+    accent = _rect(slide, "Title accent", (11.5, 0.3, 1.0, 0.4))
+    original = {shape.element for shape in slide.shapes}
+    had_text = {chart.element}
+
+    label.text_frame.text = ""
+    diagram = slide.shapes.add_group_shape()
+    diagram.name = "BrandDeck Diagram icon_grid"
+    diagram.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.7), Inches(1.8), Inches(6.0), Inches(4.9)
+    ).text_frame.text = "Новый тезис"
+
+    removed = {
+        item["shape"]: item["reason"]
+        for item in _remove_exemplar_leftovers(
+            slide, DESIGN, original, had_text, diagram_only=True
+        )
+    }
+    assert removed == {"Shape chart": "erased_sample", "Loose bar": "beside_diagram"}
+    kept = {shape.name for shape in slide.shapes}
+    assert accent.name in kept and loose_bar.name not in kept
+
+
+def test_audit_reports_an_emptied_chart_under_new_content(tmp_path: Path):
+    template = tmp_path / "template.pptx"
+    prs = _deck()
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    chart = slide.shapes.add_group_shape()
+    chart.name = "Shape chart"
+    chart.shapes.add_shape(
+        MSO_SHAPE.RECTANGLE, Inches(0.6), Inches(2.0), Inches(12), Inches(4.4)
+    ).fill.solid()
+    chart.shapes.add_textbox(Inches(1), Inches(2.2), Inches(2), Inches(0.4)).text_frame.text = "Этап"
+    prs.save(template)
+
+    output = Presentation(template)
+    group = output.slides[0].shapes[0]
+    for child in group.shapes:
+        if child.has_text_frame:
+            child.text_frame.text = ""
+    diagram = output.slides[0].shapes.add_group_shape()
+    diagram.name = "BrandDeck Diagram icon_grid"
+    diagram.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.7), Inches(1.8), Inches(6.0), Inches(4.9)
+    ).text_frame.text = "Новый тезис"
+    output.save(tmp_path / "output.pptx")
+
+    report = inspect_presentation(tmp_path / "output.pptx", template_path=template)
+    assert ("template_overlap", "Shape chart") in {
+        (issue["code"], issue["shape"].split(" / ")[0]) for issue in report["issues"]
+    }

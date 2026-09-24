@@ -1,5 +1,6 @@
+from slide_agent.analyzer import _backdrop_area_ratio
 from slide_agent.planner import assign_patterns
-from slide_agent.service import _qa_pattern_feedback
+from slide_agent.service import _hint_cards_for_underfilled, _qa_pattern_feedback
 
 
 def _pattern(pattern_id: str, rhetorical: str, *, roles=None):
@@ -104,3 +105,49 @@ def test_image_slide_without_slot_reports_the_risk():
     plan = {"slides": [_image_slide()]}
     assign_patterns(plan, {"patterns": [_pattern("plain", "bullet_list")]})
     assert "нет слота изображения" in plan["slides"][0]["pattern_selection"]["risk"]
+
+
+def test_text_slide_avoids_layout_with_empty_object_block():
+    plain = _pattern("plain", "bullet_list")
+    backdrop = _pattern("backdrop", "bullet_list")
+    backdrop["capacity"]["backdrop_area_ratio"] = 0.5
+    plan = {"slides": [{"title": "Итог", "role": "content", "bullets": ["A", "B"]}]}
+    assign_patterns(plan, {"patterns": [backdrop, plain]}, layout_strategy="focus")
+    assert plan["slides"][0]["pattern_id"] == "plain"
+
+
+def test_object_block_counts_only_when_nothing_covers_it():
+    layout = {
+        "shapes": [
+            {"type": "RECTANGLE", "fill": {"type": "solid"}, "left": 6.67, "top": 0,
+             "width": 6.67, "height": 7.5},
+            {"type": "RECTANGLE", "fill": {"type": "inherit"}, "left": 0, "top": 0,
+             "width": 6.0, "height": 7.5},
+        ]
+    }
+    body = {"type": "body", "x": 0.7, "y": 2.2, "w": 5.9, "h": 4.5}
+    picture = {"type": "picture", "x": 6.67, "y": 0, "w": 6.67, "h": 7.5}
+    photo = {"left": 6.7, "top": 0.2, "width": 6.5, "height": 7.0}
+    assert _backdrop_area_ratio(layout, [body], 13.333, 7.5) == 0.5
+    assert _backdrop_area_ratio(layout, [body, picture], 13.333, 7.5) == 0
+    assert _backdrop_area_ratio(layout, [body], 13.333, 7.5, [photo]) == 0
+
+
+def test_rendered_underfilled_statements_are_marked_for_cards():
+    plan = {
+        "slides": [
+            {"role": "cover", "title": "Пилот"},
+            {"role": "content", "title": "Итог", "bullets": ["A.", "B.", "C."]},
+            {"role": "content", "title": "Схема", "bullets": [], "visual": {"type": "process"}},
+            {"role": "content", "title": "Один", "bullets": ["Только один тезис."]},
+        ]
+    }
+    qa = {
+        "issues": [
+            {"code": "slide_underfilled", "slide": number} for number in (2, 3, 4)
+        ]
+        + [{"code": "text_overlap", "slide": 1}]
+    }
+    assert _hint_cards_for_underfilled(plan, qa) == [2]
+    assert plan["slides"][1]["layout_hint"] == "cards"
+    assert _hint_cards_for_underfilled(plan, qa) == []  # only once per slide
