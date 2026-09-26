@@ -165,5 +165,28 @@ def test_underfilled_table_slide_is_marked_to_fill_its_zone():
     }
     qa = {"issues": [{"code": "slide_underfilled", "slide": 1}]}
     assert _hint_cards_for_underfilled(plan, qa) == [1]
+    # A sparse table is already stretched over its zone, so the zone is small.
     assert plan["slides"][0]["visual"]["fill_zone"] is True
+    assert plan["slides"][0]["remap_underfilled"] is True
     assert _hint_cards_for_underfilled(plan, qa) == []
+
+
+def test_underfilled_cards_drawn_by_the_composer_get_another_layout():
+    plan = {"slides": [{"role": "content", "title": "Итог", "bullets": ["A.", "B.", "C."]}]}
+    qa = {"issues": [{"code": "slide_underfilled", "slide": 1}]}
+    assert _hint_cards_for_underfilled(plan, qa, {1}) == [1]
+    assert plan["slides"][0]["layout_hint"] == "cards"
+    assert plan["slides"][0]["remap_underfilled"] is True
+
+
+def test_underfilled_data_diagram_gets_another_layout_but_a_photo_comparison_does_not():
+    plan = {
+        "slides": [
+            {"role": "data", "title": "Срок", "visual": {"type": "process", "items": []}},
+            {"role": "comparison", "title": "Контур", "bullets": ["A."],
+             "visual": {"type": "image", "asset_id": "a1"}},
+        ]
+    }
+    qa = {"issues": [{"code": "slide_underfilled", "slide": number} for number in (1, 2)]}
+    assert _hint_cards_for_underfilled(plan, qa) == [1]
+    assert plan["slides"][0]["remap_underfilled"] is True

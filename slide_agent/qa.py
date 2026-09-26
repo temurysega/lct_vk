@@ -7,10 +7,12 @@ from typing import Any
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE
 
+from .decor_audit import decoration_overlap_issues
 from .layout_geometry import (
     box,
     collides,
     has_text,
+    hosts,
     is_framing,
     is_generated,
     is_opaque,
@@ -128,9 +130,27 @@ def _template_layer_issues(
     ]
     issues: list[dict[str, Any]] = []
     for shape in shapes:
-        if is_generated(shape) or has_text(shape) or not is_visible_box(shape):
+        if has_text(shape) or not is_visible_box(shape):
             continue
         zone = box(shape)
+        if is_generated(shape):
+            # A template text block renamed on filling, then left empty.
+            if (
+                shape.shape_type == MSO_SHAPE_TYPE.AUTO_SHAPE
+                and _geometry(shape) in template_shapes
+                and getattr(shape, "has_text_frame", False)
+                and not any(hosts(zone, other) for _, other in content)
+            ):
+                issues.append(
+                    {
+                        "severity": "warning",
+                        "code": "emptied_template_block",
+                        "shape": shape.name,
+                        "bounds": [dict(zip("xywh", (round(v, 3) for v in zone)))],
+                        "message": "Блок шаблона остался пустым после удаления образца текста",
+                    }
+                )
+            continue
         sample = (str(shape.name), *_geometry(shape)) in sample_keys
         if is_framing(shape, zone, canvas, content, sample):
             continue
@@ -168,14 +188,16 @@ def _template_layer_issues(
                     "message": "Блок шаблона остался пустым после удаления образца текста",
                 }
             )
-        elif is_photo_frame(shape, zone, content):
+        elif is_photo_frame(
+            shape, zone, content, [box(other) for other in shapes if other is not shape]
+        ):
             issues.append(
                 {
                     "severity": "warning",
                     "code": "empty_photo_frame",
                     "shape": shape.name,
                     "bounds": [bounds],
-                    "message": "Пустая рамка под фото рядом с подписью",
+                    "message": "Пустая рамка под фото или иконку рядом с подписью",
                 }
             )
     return issues
@@ -427,6 +449,15 @@ def inspect_presentation(
         slide_issues.extend(
             _template_layer_issues(
                 slide, (slide_width, slide_height), template_shapes, sample_keys
+            )
+        )
+        slide_issues.extend(
+            decoration_overlap_issues(
+                slide,
+                (slide_width, slide_height),
+                design_system,
+                default_body,
+                template_shapes,
             )
         )
         slide_issues.extend(

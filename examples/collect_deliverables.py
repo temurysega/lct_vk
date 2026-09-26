@@ -2,7 +2,7 @@
 
 Usage:
     python examples/collect_deliverables.py \
-        --report slide-workspace/final-2026-09-26c/dataset_report.json \
+        --report slide-workspace/final-2026-09-26j/dataset_report.json \
         --out deliverables
 """
 

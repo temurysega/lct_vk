@@ -9,11 +9,12 @@ from pathlib import Path
 from typing import Any
 
 from .analyzer import analyze_template
+from .audit import REPAIRABLE
 from .brief import revise_flagged_slides
 from .composer import compose_presentation, outline_markdown
 from .config import InferenceSettings
 from .contextual_audit import review_content
-from .coverage import coverage_report
+from .coverage import coverage_report, unsupported_numbers, visible_texts
 from .exporter import export_presentation
 from .imagegen import generate_images
 from .images import ImageLibrary, attach_images, collect_content_images
@@ -58,8 +59,53 @@ def _qa_pattern_feedback(
     return avoidance, feedback
 
 
-def _hint_cards_for_underfilled(plan: dict[str, Any], qa: dict[str, Any]) -> list[int]:
-    """Mark rendered-underfilled slides whose statements can become cards."""
+def _number_findings(source: str, plan: dict[str, Any]) -> list[dict[str, Any]]:
+    """Numbers the model added to a brief, as findings for the one rewrite.
+
+    The same deterministic check marks them after composition; catching them
+    in the plan lets the rewrite replace "33%" by the brief's "a third".
+    """
+    findings = []
+    for item in unsupported_numbers(source, plan):
+        texts = visible_texts(plan["slides"][item["slide"] - 1])
+        for number in item["numbers"]:
+            quote = next((text for text in texts if number in text.replace(",", ".")), "")
+            if quote:
+                findings.append(
+                    {
+                        "slide": item["slide"],
+                        "code": "unsupported_claim",
+                        "quote": quote,
+                        "reason": f"The number {number} is not in the brief: keep the "
+                        "brief's own wording or numbers.",
+                    }
+                )
+    return findings
+
+
+def _rewrite_audit(
+    source: str, plan: dict[str, Any], review: dict[str, Any]
+) -> dict[str, Any]:
+    """Findings for the one rewrite of a brief plan.
+
+    The editorial audit's findings count only when it has reviewed the plan;
+    numbers missing from the brief are a deterministic finding either way.
+    """
+    issues = list(review.get("issues") or []) if review.get("status") == "reviewed" else []
+    issues.extend(_number_findings(source, plan))
+    return {"status": "reviewed" if issues else review.get("status"), "issues": issues}
+
+
+def _hint_cards_for_underfilled(
+    plan: dict[str, Any], qa: dict[str, Any], drawn_cards: set[int] = frozenset()
+) -> list[int]:
+    """Mark rendered-underfilled slides for cards or for another layout.
+
+    Statements become cards in the same zone. When the composer already drew
+    them as cards, or a table or card grid (stretched over its zone when
+    sparse) still leaves the slide empty, the zone itself is too small and
+    another layout of the template is tried once.
+    """
     hinted = []
     for issue in qa.get("issues", []):
         number = issue.get("slide")
@@ -77,15 +123,17 @@ def _hint_cards_for_underfilled(plan: dict[str, Any], qa: dict[str, Any]) -> lis
             and 2 <= len(bullets) <= 6
         ):
             slide["layout_hint"] = "cards"
+            if number in drawn_cards:
+                slide["remap_underfilled"] = True
             hinted.append(number)
         elif visual.get("type") in {"table", "icon_grid"}:
-            if not visual.get("fill_zone"):
-                # Rows and cards sized to their text left the zone empty.
-                visual["fill_zone"] = True
-                hinted.append(number)
-        elif slide.get("role", "content") == "content":
-            # A picture or diagram placed in a cramped exemplar zone: another
-            # layout of the template is tried once.
+            visual["fill_zone"] = True
+            slide["remap_underfilled"] = True
+            hinted.append(number)
+        elif slide.get("role", "content") in {"content", "data"}:
+            # A diagram or chart placed in a cramped exemplar zone. Picture
+            # slots of image and comparison slides keep their layout: another
+            # one rarely gives the picture more room.
             slide["remap_underfilled"] = True
             hinted.append(number)
     return hinted
@@ -269,7 +317,10 @@ def _generate_from_plan(
     current_plan = plan
     avoided_patterns: dict[int, set[str]] = {}
     for render_pass in range(2):
-        for attempt in range(max(0, qa_retries) + 1):
+        best: tuple[int, dict[str, Any]] | None = None
+        restoring = False
+        # One extra round rebuilds the best attempt when the last retry was worse.
+        for attempt in range(max(0, qa_retries) + 2):
             report("composition", 65 + min(attempt, 2) * 5)
             compose_result = compose_presentation(
                 template_dir=template_dir,
@@ -336,12 +387,24 @@ def _generate_from_plan(
                 "qa_score": qa["score"],
             }
             attempts.append(attempt_record)
+            if restoring:
+                attempt_record["restored_best"] = True
+                break
+            if best is None or qa["score"] > best[0]:
+                best = (qa["score"], copy.deepcopy(current_plan))
+            # Any defect another layout can fix is worth a retry: retries only
+            # recompose and re-inspect, the export comes after them.
             needs_retry = qa["status"] == "failed" or qa["score"] < 92 or any(
-                issue.get("code") in {"out_of_bounds", "template_overlap", "image_distorted"}
+                issue.get("code") in REPAIRABLE | {"image_distorted"}
                 and issue.get("severity") in {"error", "warning"}
                 for issue in qa["issues"]
             )
-            if not needs_retry or attempt >= qa_retries:
+            if not needs_retry:
+                break
+            if attempt >= qa_retries:
+                if best[0] > qa["score"]:
+                    current_plan, restoring = best[1], True
+                    continue
                 break
             new_avoidance, feedback = _qa_pattern_feedback(current_plan, qa)
             for slide_number, pattern_ids in new_avoidance.items():
@@ -420,7 +483,12 @@ def _generate_from_plan(
         # statements as cards once, and the whole deck is audited again.
         if render_pass:
             break
-        cards_for_underfilled = _hint_cards_for_underfilled(current_plan, qa)
+        drawn_cards = {
+            record["slide"]
+            for record in compose_result.get("visuals", {}).get("slides", [])
+            if record.get("origin") in {"sparse_text", "rendered_fill"}
+        }
+        cards_for_underfilled = _hint_cards_for_underfilled(current_plan, qa, drawn_cards)
         if not cards_for_underfilled:
             break
         remap = [
@@ -641,14 +709,15 @@ def generate_variants(
         # A brief is expanded by the model: slides with unsupported or
         # repeated statements are rewritten once, then reviewed again.
         first_review = base["contextual_audit"]
+        findings = _rewrite_audit(source, base, first_review)
         revised = revise_flagged_slides(
-            base, brief=source, client=client, audit=first_review
+            base, brief=source, client=client, audit=findings
         )
         if revised:
             base["contextual_audit"] = review_content(source, base, client)
             base["contextual_audit"]["revision"] = {
                 "revised_slides": revised,
-                "issues_before": len(first_review.get("issues") or []),
+                "issues_before": len(findings["issues"]),
             }
     fingerprint = hashlib.sha256(
         json.dumps(base["slides"], ensure_ascii=False, sort_keys=True).encode("utf-8")
@@ -686,7 +755,7 @@ def generate_variants(
             client=client,
             export_formats=export_formats,
             progress=on_progress,
-            qa_retries=1,
+            qa_retries=2,
         )
         results.append(result)
         final = read_json(Path(result["presentation_dir"]) / "deck_plan.final.json")
@@ -708,7 +777,7 @@ def generate_variants(
             workspace_path=workspace_path,
             client=client,
             export_formats=export_formats,
-            qa_retries=1,
+            qa_retries=2,
         )
         revised_visual = inspect_visual_diversity(
             [revised if index == target_index else item for index, item in enumerate(results)],

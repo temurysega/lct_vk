@@ -199,6 +199,19 @@ def test_cleanup_removes_scaffolding_and_keeps_design():
     assert icon.name not in kept and avatar.name not in kept
 
 
+def test_empty_icon_tile_goes_and_a_tile_with_its_icon_stays():
+    prs = _deck()
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    empty = _rect(slide, "Tile", (0.3, 1.45, 0.62, 0.62))
+    _text(slide, "BrandDeck Text 1", (1.1, 1.6, 2.2, 0.3), "Документы внутри")
+    full = _rect(slide, "Tile 2", (0.3, 3.0, 0.62, 0.62))
+    icon = _rect(slide, "Icon", (0.45, 3.15, 0.32, 0.32), kind=MSO_SHAPE.OVAL)
+    _text(slide, "BrandDeck Text 2", (1.1, 3.15, 2.2, 0.3), "Данные не уходят")
+    original = {empty.element, full.element, icon.element}
+    removed = _remove_exemplar_leftovers(slide, DESIGN, original, set())
+    assert removed == [{"shape": "Tile", "reason": "empty_photo_frame"}]
+
+
 def _template(path: Path) -> None:
     prs = _deck()
     slide = prs.slides.add_slide(prs.slide_layouts[6])
@@ -345,3 +358,31 @@ def test_audit_reports_an_emptied_chart_under_new_content(tmp_path: Path):
     assert ("template_overlap", "Shape chart") in {
         (issue["code"], issue["shape"].split(" / ")[0]) for issue in report["issues"]
     }
+
+
+def test_an_emptied_text_slot_of_the_sample_goes():
+    prs = _deck()
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    slot = _rect(slide, "Sample card", (0.5, 1.8, 3.5, 2.0), text="Образец")
+    filled = _rect(slide, "Sample card 2", (4.3, 1.8, 3.5, 2.0), text="Образец")
+    original = had_text = {slot.element, filled.element}
+    # The composer renamed both slots; the plan had text for one of them.
+    slot.text_frame.text, slot.name = "", "BrandDeck Text 5"
+    filled.text_frame.text, filled.name = "Новый текст", "BrandDeck Text 6"
+    removed = _remove_exemplar_leftovers(slide, DESIGN, original, had_text)
+    assert removed == [{"shape": "BrandDeck Text 5", "reason": "erased_sample"}]
+
+
+def test_audit_reports_an_emptied_renamed_slot(tmp_path: Path):
+    template = tmp_path / "template.pptx"
+    _template(template)
+    prs = Presentation(template)
+    card = next(shape for shape in prs.slides[0].shapes if shape.name == "Card")
+    card.text_frame.text, card.name = "", "BrandDeck Text 7"
+    output = tmp_path / "output.pptx"
+    prs.save(output)
+    found = {
+        (issue["code"], issue["shape"])
+        for issue in inspect_presentation(output, template_path=template)["issues"]
+    }
+    assert ("emptied_template_block", "BrandDeck Text 7") in found

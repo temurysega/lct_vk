@@ -183,18 +183,35 @@ def is_visible_box(shape: Any) -> bool:
     return styled_fill or styled_line
 
 
-def is_photo_frame(shape: Any, zone: Box, content: list[tuple[Any, Box]]) -> bool:
-    """An empty avatar circle left of a caption: a frame for a speaker photo."""
+FRAME_GEOMETRIES = {"ellipse", "roundRect"}
+
+
+def is_photo_frame(
+    shape: Any,
+    zone: Box,
+    content: list[tuple[Any, Box]],
+    occupants: list[Box] = (),
+) -> bool:
+    """An empty avatar circle or icon tile left of a caption.
+
+    The speaker photo or the icon it framed is gone: nothing else is centred
+    inside it and its own fill is not a picture.
+    """
     if shape.shape_type != MSO_SHAPE_TYPE.AUTO_SHAPE:
         return False
     properties = shape.element.find(qn("p:spPr"))
     geometry = properties.find(qn("a:prstGeom")) if properties is not None else None
-    if geometry is None or geometry.get("prst") != "ellipse":
+    if geometry is None or geometry.get("prst") not in FRAME_GEOMETRIES:
         return False
     if properties.find(qn("a:blipFill")) is not None:
         return False  # a real photo
     x, y, w, h = zone
     if not (0.5 <= min(w, h) and max(w, h) <= 1.6 and 0.8 <= w / max(h, 0.01) <= 1.25):
+        return False
+    if any(
+        x <= ox + ow / 2 <= x + w and y <= oy + oh / 2 <= y + h
+        for ox, oy, ow, oh in occupants
+    ):
         return False
     middle = y + h / 2
     return any(

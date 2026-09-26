@@ -1,6 +1,7 @@
 """Contextual suggestions are limited to quotes that occur on the slide."""
 
 from slide_agent.contextual_audit import MAX_SOURCE_CHARS, review_content
+from slide_agent.service import _number_findings, _rewrite_audit
 
 
 class FakeClient:
@@ -151,3 +152,35 @@ def test_repeat_needs_shared_wording_with_a_neighbour(monkeypatch):
     }
     report = review_content("Пилот, команда из трёх человек.", plan, RepeatClient())
     assert [(i["slide"], i["code"]) for i in report["issues"]] == [(3, "repeated_message")]
+
+
+def test_numbers_missing_from_the_brief_join_the_rewrite():
+    brief = "Треть обращений повторяется. Пилот: 150 сотрудников."
+    plan = {
+        "slides": [
+            {"title": "Пилот", "bullets": ["150 сотрудников в пилоте."]},
+            {"title": "Повторы", "bullets": ["33% запросов — повторы.", "Нагрузка растёт."]},
+        ]
+    }
+    assert _number_findings(brief, plan) == [
+        {
+            "slide": 2,
+            "code": "unsupported_claim",
+            "quote": "33% запросов — повторы.",
+            "reason": "The number 33 is not in the brief: keep the brief's own wording or numbers.",
+        }
+    ]
+
+
+def test_the_rewrite_takes_audit_findings_and_numbers_missing_from_the_brief():
+    brief = "Треть обращений повторяется."
+    plan = {"slides": [{"title": "Повторы", "bullets": ["33% запросов — повторы."]}]}
+    review = {"status": "reviewed", "issues": [{"slide": 1, "code": "repeated_message"}]}
+    audit = _rewrite_audit(brief, plan, review)
+    # revise_flagged_slides rewrites only a reviewed audit.
+    assert audit["status"] == "reviewed"
+    assert [issue["code"] for issue in audit["issues"]] == ["repeated_message", "unsupported_claim"]
+    # Without the model's review the numbers still go to the rewrite.
+    audit = _rewrite_audit(brief, plan, {"status": "not_run"})
+    assert audit["status"] == "reviewed" and len(audit["issues"]) == 1
+    assert _rewrite_audit("33%", plan, {"status": "not_run"}) == {"status": "not_run", "issues": []}

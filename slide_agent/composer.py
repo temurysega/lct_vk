@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import io
 import math
+import textwrap
 from collections import Counter
 from contextvars import ContextVar
 from pathlib import Path
@@ -19,6 +20,7 @@ from pptx.oxml.ns import qn
 from pptx.oxml.xmlchemy import OxmlElement
 from pptx.util import Inches, Pt
 
+from .decor_audit import layout_art_boxes
 from .diagrams import (
     DIAGRAM_TYPES,
     ITEM_LIMITS,
@@ -54,6 +56,10 @@ NATIVE_VISUALS = set(DIAGRAM_TYPES) | {"image", "table"}
 # A table or card grid below this share of the slide is stretched over its
 # zone: the slide would otherwise stay under a quarter filled.
 FILL_SHARE = 0.27
+# Statements whose wrapped text would cover less of the slide become cards.
+SPARSE_FILL = 0.26
+# Average width of a rendered Cyrillic or Latin glyph at body sizes.
+RENDERED_GLYPH_WIDTH_EM = 0.55
 # Exemplar shapes that can be scaffolding; pictures are kept.
 LEFTOVER_TYPES = {
     MSO_SHAPE_TYPE.AUTO_SHAPE,
@@ -2179,6 +2185,36 @@ def _expand_small_image_zone(
     return candidate
 
 
+def _clear_layout_art(
+    zone: tuple[float, float, float, float],
+    art: list[tuple[float, float, float, float]],
+    *,
+    pad: float = 0.1,
+    keep: float = 0.8,
+) -> tuple[float, float, float, float]:
+    """Pull a drawn visual off the layout's logos and ornaments.
+
+    The zone gives up the side facing each piece of art; when that costs
+    more than a fifth of it, the zone stays and the audit reports the
+    overlap, so the slide gets another layout instead of a cramped visual.
+    """
+    original = zone
+    for left, top, width, height in art:
+        if intersection(zone, (left, top, width, height)) <= 0:
+            continue
+        x, y, w, h = zone
+        options = [
+            (x, y, w, top - pad - y),
+            (x, top + height + pad, w, y + h - top - height - pad),
+            (x, y, left - pad - x, h),
+            (left + width + pad, y, x + w - left - width - pad, h),
+        ]
+        zone = max(options, key=area)
+        if min(zone[2], zone[3]) <= 0 or area(zone) < keep * area(original):
+            return original
+    return zone
+
+
 def _set_geometry(shape: Any, left: int, top: int, width: int, height: int) -> None:
     # Setting one dimension of an inherited placeholder can zero the others
     # in python-pptx; always write the complete geometry.
@@ -2315,11 +2351,16 @@ def _empty_picture_placeholders(slide: Any) -> list[Any]:
     ]
 
 
-def _text_area(texts: list[str], size_pt: float) -> float:
-    """Rough area (sq. inches) of set text, with ragged line ends and spacing."""
-    glyph = size_pt * ESTIMATED_GLYPH_WIDTH_EM / 72
-    line = size_pt * 1.22 / 72
-    return sum(len(text) for text in texts) * glyph * line * 1.6
+def _text_block_area(texts: list[str], size_pt: float, width: float) -> float:
+    """Area of the rectangle wrapped text occupies, as the rendered audit measures it."""
+    glyph = size_pt * RENDERED_GLYPH_WIDTH_EM / 72
+    per_line = max(1, int(width / glyph))
+    lines, widest = 0, 0
+    for text in texts:
+        wrapped = textwrap.wrap(str(text), per_line, break_on_hyphens=False) or [""]
+        lines += len(wrapped)
+        widest = max(widest, max(len(line) for line in wrapped))
+    return min(width, widest * glyph) * lines * size_pt * 1.25 / 72
 
 
 def _sparse_statement_cards(
@@ -2334,8 +2375,9 @@ def _sparse_statement_cards(
     alone cannot fill a large zone: 150–250 characters at the template body
     size cover 10–20 % of a slide. When the template gives these statements
     no visible cards, they become a native card grid in the same zone. The
-    estimate is slightly generous (0.28) because the rendered audit, not this
-    estimate, decides the final verdict.
+    estimate wraps the text in its box and measures the rectangle it takes,
+    like the rendered audit; its threshold sits a little above a quarter,
+    and the rendered audit, not this estimate, decides the final verdict.
     """
     bullets = [str(item) for item in slide_spec.get("bullets", []) if str(item).strip()]
     minimum, maximum = ITEM_LIMITS["icon_grid"]
@@ -2358,14 +2400,20 @@ def _sparse_statement_cards(
     if bodies:
         body_size = max(body_size, float(effective_font_size(bodies[0], body_size)))
     title_size = max((_largest_font(shape) for shape in titles), default=0.0)
-    canvas = float(design["canvas"]["width_inches"]) * float(
-        design["canvas"]["height_inches"]
-    )
+    canvas_w = float(design["canvas"]["width_inches"])
+    canvas = canvas_w * float(design["canvas"]["height_inches"])
+
+    def inner(shapes: list[Any]) -> float:
+        # Text frames keep 0.1 inch margins on each side.
+        return max(0.5, box(shapes[0])[2] - 0.2) if shapes else canvas_w * 0.8
+
     estimate = (
-        _text_area(bullets, body_size)
-        + _text_area([shape.text for shape in titles], title_size or body_size * 1.6)
+        _text_block_area(bullets, body_size, inner(bodies))
+        + _text_block_area(
+            [shape.text for shape in titles], title_size or body_size * 1.6, inner(titles)
+        )
     ) / canvas
-    if estimate >= 0.28:
+    if estimate >= SPARSE_FILL:
         return None
     return {
         "type": "icon_grid",
@@ -2390,7 +2438,7 @@ def _remove_exemplar_leftovers(
     icons without captions, frames without photos and shapes under the new
     text (Appendix 1: overlaps, empty blocks). A shape goes when its text
     was erased, when it is attached to such a shape (icon, dot, card), when
-    it lies under new content, or when it is an empty photo frame; a line
+    it lies under new content, or when it is an empty photo or icon frame; a line
     goes only when it crosses new content. When a generated diagram carries
     all of the slide's text, exemplar decoration beside it (bars of a chart
     drawn with shapes, markers of a replaced list) belongs to the removed
@@ -2421,8 +2469,11 @@ def _remove_exemplar_leftovers(
     bands = [(0.0, y, canvas[0], h) for _, y, _, h in diagrams]
     removed: list[dict[str, str]] = []
     for shape in shapes:
+        # A template text slot the plan left empty keeps its new name but is
+        # still an erased sample.
+        emptied_slot = is_generated(shape) and shape.element in had_text
         if (
-            is_generated(shape)
+            (is_generated(shape) and not emptied_slot)
             or shape.is_placeholder
             or shape.shape_type not in LEFTOVER_TYPES
             or has_text(shape)
@@ -2449,14 +2500,24 @@ def _remove_exemplar_leftovers(
             for item, other in content
         ):
             reason = "under_content"
-        elif is_photo_frame(shape, zone, content):
-            reason = "empty_photo_frame"
         elif any(
             intersection(zone, band) >= 0.5 * max(area(zone), 1e-6) for band in bands
         ):
             reason = "beside_diagram"
         if reason:
             removed.append({"shape": str(shape.name), "reason": reason})
+            shape.element.getparent().remove(shape.element)
+    # Frames are judged last: the photo or icon they held may have gone above.
+    remaining = list(slide.shapes)
+    for shape in remaining:
+        if is_generated(shape) or shape.is_placeholder or has_text(shape):
+            continue
+        zone = box(shape)
+        occupants = [box(other) for other in remaining if other is not shape]
+        if not is_framing(shape, zone, canvas, content, False) and is_photo_frame(
+            shape, zone, content, occupants
+        ):
+            removed.append({"shape": str(shape.name), "reason": "empty_photo_frame"})
             shape.element.getparent().remove(shape.element)
     return removed
 
@@ -2602,6 +2663,8 @@ def _fill_slide(
     else:
         if visual.get("type") == "image":
             visual_zone = _expand_small_image_zone(slide, visual_zone, design)
+        elif slide_spec.get("visual") and visual_zone:
+            visual_zone = _clear_layout_art(visual_zone, layout_art_boxes(slide, design))
         _add_visual(slide, slide_spec.get("visual"), visual_zone, design, context)
     if slide_spec.get("role") not in {"cover", "closing", "section"}:
         # A picture slot left empty looks broken; draw a native illustration.

@@ -53,6 +53,20 @@ def _strings(value) -> list[str]:
     return []
 
 
+def visible_texts(slide: dict) -> list[str]:
+    """Texts a slide shows; speaker notes are not visible."""
+    return [
+        str(text)
+        for text in (
+            slide.get("title", ""),
+            slide.get("subtitle", ""),
+            slide.get("body", ""),
+            *slide.get("bullets", []),
+            *_strings(slide.get("visual") or {}),
+        )
+    ]
+
+
 def unsupported_numbers(source: str, plan: dict) -> list[dict]:
     """Visible numbers of the plan that the source never states.
 
@@ -62,13 +76,7 @@ def unsupported_numbers(source: str, plan: dict) -> list[dict]:
     known = _numbers(source)
     result = []
     for number, slide in enumerate(plan.get("slides", []), 1):
-        texts = [
-            slide.get("title", ""),
-            slide.get("subtitle", ""),
-            slide.get("body", ""),
-            *slide.get("bullets", []),
-            *_strings(slide.get("visual") or {}),
-        ]
+        texts = visible_texts(slide)
         missing = sorted(
             value
             for value in _numbers("\n".join(texts)) - known
