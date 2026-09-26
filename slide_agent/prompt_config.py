@@ -8,9 +8,7 @@ PROMPT_ROOT = Path(__file__).with_name("prompts")
 # Older versions stay in the repository so earlier manifests remain reproducible.
 PROMPT_FILES = {
     "planner": "planner-v3.txt",
-    "planner-cpu": "planner-cpu-v2.txt",
     "analyzer": "analyzer-v1.txt",
-    "layout": "layout-v1.txt",
     "image": "image-v1.txt",
     "brief-outline": "brief-outline-v1.txt",
     "brief-slide": "brief-slide-v3.txt",

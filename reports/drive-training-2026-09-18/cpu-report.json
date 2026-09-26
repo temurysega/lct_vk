@@ -1,9 +1,0 @@
-{
-  "kind": "tiny_random_cpu_model_only",
-  "steps": 2,
-  "loss": 3.4268391132354736,
-  "lora_weights_changed": true,
-  "save_reload_logits_match": true,
-  "cuda_quantization_tested": false,
-  "real_7b_training_run": false
-}

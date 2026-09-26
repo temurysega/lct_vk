@@ -12,11 +12,7 @@ class InferenceSettings:
     timeout_seconds: int = 120
     max_retries: int = 3
     vision_enabled: bool = True
-    backend: str = "openai"
-    context_tokens: int = 0
     max_output_tokens: int = 0
-    lora_id: int | None = None
-    lora_scale: float = 0.0
     parallel_requests: int = 1
     extra_body: str = ""
 
@@ -34,12 +30,7 @@ class InferenceSettings:
             max_retries=int(os.getenv("INFERENCE_MAX_RETRIES", "3")),
             vision_enabled=os.getenv("INFERENCE_VISION", "1").strip().lower()
             not in {"0", "false", "off", "no"},
-            backend=os.getenv("INFERENCE_BACKEND", "openai"),
-            context_tokens=int(os.getenv("INFERENCE_CONTEXT_TOKENS", "0")),
             max_output_tokens=int(os.getenv("INFERENCE_MAX_OUTPUT_TOKENS", "0")),
-            lora_id=int(os.environ["INFERENCE_LORA_ID"])
-            if os.getenv("INFERENCE_LORA_ID")
-            else None,
             parallel_requests=max(1, int(os.getenv("INFERENCE_PARALLEL", "1"))),
             extra_body=os.getenv("INFERENCE_EXTRA_BODY", "").strip(),
         )

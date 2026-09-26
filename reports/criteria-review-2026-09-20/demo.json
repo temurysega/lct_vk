@@ -1,8 +1,0 @@
-{
-  "templates": "../task+data/Датасет",
-  "content": "examples/baseline_content.md",
-  "workspace": "slide-workspace/criteria-review-2026-09-20",
-  "slide_count": 10,
-  "offline": true,
-  "export_formats": ["pdf", "html"]
-}

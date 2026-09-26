@@ -91,9 +91,7 @@ def use_brief_mode(content: str, mode: str, client: InferenceClient | None) -> b
                 "INFERENCE_MODEL, or provide full source material"
             )
         return True
-    if client is None or getattr(client.settings, "backend", "") == "llamacpp":
-        # The 4 GB CPU profile (1.5B model) is too weak to expand a brief;
-        # it keeps laying out the material unless brief mode is explicit.
+    if client is None:
         return False
     headings = len(re.findall(r"^#{1,6}\s", content, re.MULTILINE))
     limit = int(purpose_config().get("auto_brief_max_chars", 1500))

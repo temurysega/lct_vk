@@ -114,7 +114,7 @@ def test_model_visuals_are_allow_listed_and_bounded():
     assert visuals[5] is None
 
 
-def test_layout_adapter_contract_is_unchanged():
+def test_slide_requirements_describe_every_kind_of_slide():
     plain = {"title": "T", "role": "content", "bullets": ["a", "b"], "visual": None}
     diagram = {
         "title": "T",

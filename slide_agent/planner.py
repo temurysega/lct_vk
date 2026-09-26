@@ -10,7 +10,6 @@ from pptx import Presentation
 
 from .brief import plan_from_brief, use_brief_mode
 from .diagrams import DIAGRAM_TYPES
-from .layout_selector import select_with_adapter
 from .llm import InferenceClient, InferenceError
 from .model_context import compact_patterns
 from .prompt_config import load_prompt
@@ -313,29 +312,23 @@ def plan_deck(
         plan = _fallback_plan(content, slide_count)
         planner_mode = "offline"
     else:
-        cpu = client.settings.backend == "llamacpp"
         payload = {
             "requested_slide_count": slide_count,
             "source": content,
+            "available_template_patterns": compact_patterns(pattern_catalog),
+            "design_tone": {
+                "font": design_system.get("typography", {}).get("primary_font"),
+                "palette": design_system.get("colors", {}).get("theme", []),
+            },
         }
-        if not cpu:
-            payload.update(
-                {
-                    "available_template_patterns": compact_patterns(pattern_catalog),
-                    "design_tone": {
-                        "font": design_system.get("typography", {}).get("primary_font"),
-                        "palette": design_system.get("colors", {}).get("theme", []),
-                    },
-                }
-            )
-            if image_catalog:
-                payload["available_images"] = image_catalog[:20]
+        if image_catalog:
+            payload["available_images"] = image_catalog[:20]
         user = json.dumps(payload, ensure_ascii=False)
         # A wrong slide count discards the whole plan in normalize_plan, so the
         # full model gets it as a grammar constraint, not only as a request.
         schema = (
             None
-            if cpu or not slide_count
+            if not slide_count
             else {
                 "type": "object",
                 "properties": {
@@ -353,9 +346,9 @@ def plan_deck(
         )
         try:
             plan = client.chat_json(
-                system=load_prompt("planner-cpu") if cpu else PLANNER_SYSTEM,
+                system=PLANNER_SYSTEM,
                 user=user,
-                max_tokens=2048 if cpu else 6000,
+                max_tokens=6000,
                 schema=schema,
             )
             planner_mode = "inference"
@@ -412,8 +405,7 @@ def _data_text(visual: dict[str, Any]) -> list[str]:
 
 
 def _slide_requirements(slide: dict[str, Any]) -> dict[str, Any]:
-    # The keys and value domains are the layout adapter's training contract:
-    # diagrams are described as the list of statements they carry.
+    # Diagrams are described as the list of statements they carry.
     visual = slide.get("visual") or {}
     diagram_text = visual_text(visual)
     body_chars = (
@@ -619,7 +611,6 @@ def assign_patterns(
     avoid_by_slide: dict[int, set[str]] | None = None,
     layout_strategy: str = "balanced",
     previous_by_slide: dict[int, set[str]] | None = None,
-    client: InferenceClient | None = None,
 ) -> dict[str, Any]:
     if layout_strategy not in {"balanced", "columns", "focus"}:
         raise ValueError("Unknown layout strategy")
@@ -639,8 +630,7 @@ def assign_patterns(
                 avoided=pattern["id"] in (avoid_by_slide or {}).get(slide_index, set()),
             )
             if diagram:
-                # Kept outside ``requirements``: that dict is the adapter's
-                # contract. Diagrams need one calm, large content area.
+                # Diagrams need one calm, large content area.
                 capacity = pattern.get("capacity", {})
                 area = float(capacity.get("body_area_ratio", 0) or 0)
                 score += min(area, 0.45) * 24 - 5
@@ -661,17 +651,12 @@ def assign_patterns(
                     score -= 3
             scored.append((score, pattern, reasons, risks))
         scored.sort(key=lambda item: (-item[0], item[1]["id"]))
-        selected_id, selection_model = select_with_adapter(
-            slide, requirements, scored, client
-        )
-        selected_score, selected, reasons, risks = next(
-            (item for item in scored if item[1]["id"] == selected_id), scored[0]
-        )
+        selected_score, selected, reasons, risks = scored[0]
         slide["pattern_id"] = selected["id"]
         slide["layout_index"] = selected["layout_index"]
         slide["master_index"] = selected["master_index"]
         slide["pattern_selection"] = {
-            "selector": selection_model,
+            "selector": {"mode": "heuristic"},
             "score": round(selected_score, 2),
             "layout_pattern": selected.get("capacity", {}).get(
                 "rhetorical_pattern", "content"

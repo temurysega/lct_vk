@@ -1,10 +1,13 @@
+import io
 import json
 import threading
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
+import pytest
+
 from slide_agent.api import health
 from slide_agent.config import InferenceSettings
-from slide_agent.llm import InferenceClient
+from slide_agent.llm import InferenceClient, InferenceError
 
 
 class _Handler(BaseHTTPRequestHandler):
@@ -44,3 +47,18 @@ def test_openai_compatible_client():
 
 def test_api_health():
     assert health()["status"] == "ok"
+
+
+def test_incomplete_model_output_is_rejected(monkeypatch):
+    body = {
+        "choices": [
+            {"finish_reason": "length", "message": {"content": '{"slides": []}'}}
+        ]
+    }
+    monkeypatch.setattr(
+        "urllib.request.urlopen", lambda *a, **kw: io.BytesIO(json.dumps(body).encode())
+    )
+    with pytest.raises(InferenceError, match="incomplete"):
+        InferenceClient(InferenceSettings("http://local/v1", "", "base")).chat(
+            system="s", user="u"
+        )

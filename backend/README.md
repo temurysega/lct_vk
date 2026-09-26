@@ -2,7 +2,7 @@
 
 FastAPI: `backend.main:app`. Старый импорт `slide_agent.api:app` и команда
 `branddeck serve` сохранены для совместимости. Движок презентаций остаётся в
-`slide_agent/`; обучение — в `training/`.
+`slide_agent/`.
 
 ```bash
 python -m pip install -e ".[api,dev]"

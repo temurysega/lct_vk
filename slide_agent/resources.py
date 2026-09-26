@@ -1,4 +1,4 @@
-"""Serialize expensive work in the single-process 4 GB CPU deployment."""
+"""Run expensive jobs one at a time on a small single-process server (4 GB VPS)."""
 
 import os
 import threading
