@@ -14,6 +14,17 @@ from slide_agent.service import generate_variants
 from slide_agent.utils import read_json, write_json
 
 
+def source_digest(root: Path) -> str:
+    """Fingerprint the implementation and prompts used during a long run."""
+    digest = hashlib.sha256()
+    paths = sorted((root / "slide_agent").rglob("*.py"))
+    paths += sorted((root / "slide_agent" / "prompts").glob("*.txt"))
+    for path in paths:
+        digest.update(path.relative_to(root).as_posix().encode("utf-8"))
+        digest.update(path.read_bytes())
+    return digest.hexdigest()
+
+
 def main() -> int:
     root = Path(__file__).resolve().parents[1]
     parser = argparse.ArgumentParser(description=__doc__)
@@ -32,6 +43,7 @@ def main() -> int:
         parser.error("No PPTX templates found in the configured directory")
     report = {
         "config": config,
+        "source_digest_before": source_digest(root),
         "content_sha256": hashlib.sha256(
             (root / config["content"]).read_bytes()
         ).hexdigest(),
@@ -115,6 +127,7 @@ def main() -> int:
             visuals = deck.get("visuals") or {}
             cards.append(
                 f"<article><h3>{label}</h3>{img}<p>{anchor}</p><p>QA: {deck['qa']['status']}; "
+                f"текстовый смысловой аудит: {deck['qa'].get('contextual_audit', {}).get('status', 'not_run')}; "
                 f"{deck['slide_count']} слайдов; {deck['elapsed_seconds']} с.; "
                 f"схем {visuals.get('diagrams', 0)}, пиктограмм {visuals.get('pictograms', 0)}, "
                 f"изображений {visuals.get('images', 0)}.</p></article>"
@@ -128,16 +141,37 @@ def main() -> int:
         f"<p>Материал: {html.escape(config['content'])}; режим "
         f"{html.escape(str(config.get('mode', 'auto')))}; модель "
         f"{html.escape(os.getenv('INFERENCE_MODEL') or 'нет')}. "
-        "Семантический аудит не проводился.</p>" + "\n".join(cards) + "</html>",
+        "Проверка смысла моделью носит рекомендательный характер; визуальные вопросы требуют ручной оценки.</p>"
+        + "\n".join(cards)
+        + "</html>",
         encoding="utf-8",
     )
+    report["source_digest_after"] = source_digest(root)
+    report["source_unchanged_during_run"] = (
+        report["source_digest_before"] == report["source_digest_after"]
+    )
+    write_json(workspace / "dataset_report.json", report)
     print(f"Report: {workspace / 'index.html'}")
+    strict = bool(config.get("strict_qa"))
+    min_images = int(config.get("min_images_placed", 0))
+    max_seconds = float(config.get("max_seconds_per_template", 0))
     return int(
+        not report["source_unchanged_during_run"]
+        or any(
+            max_seconds and r["elapsed_seconds"] > max_seconds
+            for r in report["runs"]
+        )
+        or
         any(
             r.get("error")
             or not r["source_unchanged"]
             or r["batch"]["status"] == "failed"
             or r["batch"]["diversity_status"] != "passed"
+            or any(
+                (strict and deck["qa"]["status"] != "passed")
+                or deck.get("images", {}).get("placed", 0) < min_images
+                for deck in r["batch"]["variants"]
+            )
             for r in report["runs"]
         )
     )

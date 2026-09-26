@@ -4,14 +4,19 @@ const { mkdtempSync } = require("node:fs");
 const { tmpdir } = require("node:os");
 const { join } = require("node:path");
 const deps = [join(__dirname, "../frontend")];
-const { chromium } = require(require.resolve("playwright", { paths: deps }));
+const browsers = require(require.resolve("playwright", { paths: deps }));
+const browserType = process.env.PREDEL_BROWSER_TYPE || "chromium";
+assert.ok(["chromium", "firefox", "webkit"].includes(browserType));
 const axe = require.resolve("axe-core/axe.min.js", { paths: deps });
 const base = process.env.PREDEL_BASE_URL || "http://127.0.0.1:8000";
 const screenshots = mkdtempSync(join(tmpdir(), "predel-layout-"));
 
 (async () => {
-  const browser = await chromium.launch({
-    channel: process.env.PREDEL_BROWSER_CHANNEL || undefined,
+  const browser = await browsers[browserType].launch({
+    channel:
+      browserType === "chromium"
+        ? process.env.PREDEL_BROWSER_CHANNEL || undefined
+        : undefined,
     headless: true,
   });
   try {
@@ -95,6 +100,8 @@ const screenshots = mkdtempSync(join(tmpdir(), "predel-layout-"));
     console.log(
       JSON.stringify({
         result: "passed",
+        browser: browserType,
+        channel: process.env.PREDEL_BROWSER_CHANNEL || "bundled",
         screenshots,
         widths: [1440, 1366, 768, 390, 375, 320],
         axe: "no WCAG A/AA violations in checked states",

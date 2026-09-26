@@ -1,0 +1,233 @@
+{
+  "source_full_gpu_report": "C:\\Users\\alsutem\\Desktop\\лцт вк запулить с репо\\lct_vk\\slide-workspace\\brief-fix-2026-09-25\\full_gpu_report.json",
+  "source_unchanged_during_full_run": true,
+  "content_sha256": "d499379d23e6a0b8ce3d00559e5205307b5e4a012b7a520b3823f51c5aa4fff9",
+  "variants": [
+    {
+      "id": "balanced",
+      "qa_score": 100,
+      "qa_status": "passed",
+      "issue_codes": [],
+      "images_placed": 2,
+      "presentation_dir": "C:\\Users\\alsutem\\Desktop\\лцт вк запулить с репо\\lct_vk\\slide-workspace\\brief-fix-2026-09-25\\presentations\\ii-pomoschnik-vo-vnutrennem-portale-20260925-011028",
+      "origin": "full_gpu_run"
+    },
+    {
+      "id": "columns",
+      "qa_score": 100,
+      "qa_status": "passed",
+      "issue_codes": [],
+      "images_placed": 2,
+      "presentation_dir": "C:\\Users\\alsutem\\Desktop\\лцт вк запулить с репо\\lct_vk\\slide-workspace\\brief-fix-2026-09-25\\presentations\\ii-pomoschnik-vo-vnutrennem-portale-20260925-011103",
+      "origin": "full_gpu_run"
+    },
+    {
+      "id": "focus",
+      "qa_score": 100,
+      "qa_status": "passed",
+      "issue_codes": [],
+      "images_placed": 2,
+      "presentation_dir": "C:\\Users\\alsutem\\Desktop\\лцт вк запулить с репо\\lct_vk\\slide-workspace\\qa-fix-focus-2026-09-25\\presentations\\ii-pomoschnik-vo-vnutrennem-portale-20260925-011355",
+      "origin": "recomposed_same_llm_plan_after_strip_cleanup"
+    }
+  ],
+  "visual_diversity": {
+    "status": "passed",
+    "method": "rendered_pixel_difference_v1",
+    "pixel_delta": 24,
+    "slide_changed_fraction": 0.02,
+    "eligible_slides": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "required_changed_slides_per_pair": 2,
+    "pairs": [
+      {
+        "variants": [
+          "balanced",
+          "columns"
+        ],
+        "status": "passed",
+        "changed_slides": [
+          3,
+          4,
+          5,
+          7,
+          10,
+          11
+        ],
+        "missing_previews": [],
+        "slides": [
+          {
+            "slide": 2,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 3,
+            "changed_fraction": 0.998
+          },
+          {
+            "slide": 4,
+            "changed_fraction": 0.0938
+          },
+          {
+            "slide": 5,
+            "changed_fraction": 0.9983
+          },
+          {
+            "slide": 6,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 7,
+            "changed_fraction": 0.9985
+          },
+          {
+            "slide": 8,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 9,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 10,
+            "changed_fraction": 0.9686
+          },
+          {
+            "slide": 11,
+            "changed_fraction": 0.9979
+          }
+        ]
+      },
+      {
+        "variants": [
+          "balanced",
+          "focus"
+        ],
+        "status": "passed",
+        "changed_slides": [
+          2,
+          3,
+          4,
+          7,
+          8,
+          9,
+          11
+        ],
+        "missing_previews": [],
+        "slides": [
+          {
+            "slide": 2,
+            "changed_fraction": 0.2647
+          },
+          {
+            "slide": 3,
+            "changed_fraction": 0.9789
+          },
+          {
+            "slide": 4,
+            "changed_fraction": 0.1399
+          },
+          {
+            "slide": 5,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 6,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 7,
+            "changed_fraction": 0.9831
+          },
+          {
+            "slide": 8,
+            "changed_fraction": 0.9823
+          },
+          {
+            "slide": 9,
+            "changed_fraction": 0.986
+          },
+          {
+            "slide": 10,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 11,
+            "changed_fraction": 0.983
+          }
+        ]
+      },
+      {
+        "variants": [
+          "columns",
+          "focus"
+        ],
+        "status": "passed",
+        "changed_slides": [
+          2,
+          3,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "missing_previews": [],
+        "slides": [
+          {
+            "slide": 2,
+            "changed_fraction": 0.2647
+          },
+          {
+            "slide": 3,
+            "changed_fraction": 0.1458
+          },
+          {
+            "slide": 4,
+            "changed_fraction": 0.146
+          },
+          {
+            "slide": 5,
+            "changed_fraction": 0.9983
+          },
+          {
+            "slide": 6,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 7,
+            "changed_fraction": 0.1284
+          },
+          {
+            "slide": 8,
+            "changed_fraction": 0.9823
+          },
+          {
+            "slide": 9,
+            "changed_fraction": 0.986
+          },
+          {
+            "slide": 10,
+            "changed_fraction": 0.9686
+          },
+          {
+            "slide": 11,
+            "changed_fraction": 0.1308
+          }
+        ]
+      }
+    ]
+  }
+}

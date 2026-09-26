@@ -21,7 +21,9 @@ from pptx.util import Inches, Pt
 from .diagrams import (
     DIAGRAM_TYPES,
     ITEM_LIMITS,
+    contrast,
     diagram_style,
+    on_fill,
     render_diagram,
     render_illustration,
 )
@@ -47,7 +49,7 @@ from .typography import (
 )
 from .utils import read_json, write_json
 
-NATIVE_VISUALS = set(DIAGRAM_TYPES) | {"image"}
+NATIVE_VISUALS = set(DIAGRAM_TYPES) | {"image", "table"}
 # Exemplar shapes that can be scaffolding; pictures are kept.
 LEFTOVER_TYPES = {
     MSO_SHAPE_TYPE.AUTO_SHAPE,
@@ -631,7 +633,11 @@ def _whole_visual_zone(
         ):
             # A short strip of exemplar labels keeps the template's content
             # width but extends down to the bottom of the content area.
-            bottom = max(bottom, zone[1] + zone[3]) if bottom - top < zone[3] * 0.5 else bottom
+            bottom = (
+                max(bottom, zone[1] + zone[3])
+                if bottom - top < zone[3] * 0.5
+                else bottom
+            )
             result = (left, top, right - left, bottom - top)
     for shape in body_shapes:
         _set_text_frame(shape, [])
@@ -970,6 +976,18 @@ def _add_table(
     table_shape.name = "BrandDeck Table"
     table = table_shape.table
     colors = _theme_colors(design)
+    background = _hex(design.get("brand", {}).get("background"), "FFFFFF")
+    body_fill = (
+        _mix_color(background, "FFFFFF", 0.1)
+        if _luminance(background) < 0.35
+        else _hex(colors.get("lt2"), "F3F4F6")
+    )
+    header_fill, header_text = on_fill(colors.get("accent1", "4472C4"))
+    body_text = max(("FFFFFF", "111111"), key=lambda color: contrast(color, body_fill))
+    if contrast(body_text, body_fill) < 4.5:
+        body_fill, body_text = background, max(
+            ("FFFFFF", "111111"), key=lambda color: contrast(color, background)
+        )
     font = design["typography"]["primary_font"]
     values = [headers] + rows
     for row_index, row in enumerate(values):
@@ -979,10 +997,7 @@ def _add_table(
             cell.margin_left = Inches(0.06)
             cell.margin_right = Inches(0.06)
             cell.fill.solid()
-            cell.fill.fore_color.rgb = _rgb(
-                colors.get("accent1") if row_index == 0 else colors.get("lt2"),
-                "4472C4" if row_index == 0 else "F3F4F6",
-            )
+            cell.fill.fore_color.rgb = _rgb(header_fill if row_index == 0 else body_fill)
             for paragraph in cell.text_frame.paragraphs:
                 paragraph.alignment = PP_ALIGN.LEFT
                 for run in paragraph.runs:
@@ -991,10 +1006,7 @@ def _add_table(
                         max(9, design["typography"].get("body_size_pt", 16) * 0.68)
                     )
                     run.font.bold = row_index == 0
-                    run.font.color.rgb = _rgb(
-                        colors.get("lt1") if row_index == 0 else colors.get("dk1"),
-                        "FFFFFF" if row_index == 0 else "1F2937",
-                    )
+                    run.font.color.rgb = _rgb(header_text if row_index == 0 else body_text)
 
 
 def _add_timeline(
@@ -1980,7 +1992,11 @@ def _remove_unmatched_content_images(
     )
     candidates = []
     for shape in list(slide.shapes):
-        if shape.shape_type != MSO_SHAPE_TYPE.PICTURE:
+        # Filled picture placeholders are reported as PLACEHOLDER by
+        # python-pptx, although the underlying OOXML element is p:pic.  They
+        # can carry source-specific QR codes and photos just like ordinary
+        # pictures, so they must pass through the same cleanup.
+        if shape.element.tag != qn("p:pic"):
             continue
         area_ratio = shape.width / 914400 * (shape.height / 914400) / canvas_area
         try:
@@ -1991,7 +2007,20 @@ def _remove_unmatched_content_images(
         # picture is source content (logos, screenshots, icons, diagrams) and
         # must not leak into a text-only generated slide. Brand assets are
         # identified by recurring across a substantial share of the template.
-        if 0.0005 <= area_ratio <= 0.8 and image_hash not in repeated_image_hashes:
+        thin_strip = min(shape.width, shape.height) < Inches(0.04) and max(
+            shape.width, shape.height
+        ) > Inches(0.5)
+        interior_fragment = (
+            area_ratio < 0.02
+            and shape.top >= Inches(0.7)
+            and shape.top + shape.height
+            <= Inches(float(design["canvas"]["height_inches"]) - 0.35)
+        )
+        if (
+            (0.0005 <= area_ratio <= 0.8 and image_hash not in repeated_image_hashes)
+            or interior_fragment
+            or (keep_slot and thin_strip)
+        ):
             candidates.append((area_ratio, shape))
     slot = None
     if keep_slot:
@@ -2051,10 +2080,48 @@ def _zone_beside(
     return max(usable, key=lambda option: option[2] * option[3])
 
 
+def _expand_small_image_zone(
+    slide: Any,
+    zone: tuple[float, float, float, float],
+    design: dict[str, Any],
+) -> tuple[float, float, float, float]:
+    """Use free space beside text when an exemplar offers a tiny photo zone."""
+    x, y, w, h = zone
+    canvas = design["canvas"]
+    canvas_w = float(canvas["width_inches"])
+    canvas_h = float(canvas["height_inches"])
+    if w * h >= canvas_w * canvas_h * 0.13 or x + w >= canvas_w - 0.9:
+        return zone
+    candidate_w = canvas_w - 0.35 - x
+    candidate_h = min(canvas_h - 0.45 - y, max(h, candidate_w / 1.65))
+    if candidate_w <= w or candidate_h <= h:
+        return zone
+    candidate = (x, y, candidate_w, candidate_h)
+    for shape in slide.shapes:
+        if not has_text(shape):
+            continue
+        if intersection(box(shape), candidate) > 0.02:
+            return zone
+    return candidate
+
+
 def _set_geometry(shape: Any, left: int, top: int, width: int, height: int) -> None:
     # Setting one dimension of an inherited placeholder can zero the others
     # in python-pptx; always write the complete geometry.
     shape.left, shape.top, shape.width, shape.height = left, top, width, height
+
+
+def _contain_generated_text(slide: Any, width: int, height: int) -> None:
+    """Keep generated text frames within the canvas after template fitting."""
+    for shape in slide.shapes:
+        if shape.name != "BrandDeck Body" or not shape.has_text_frame:
+            continue
+        if shape.left + shape.width > width:
+            shape.left = max(0, width - shape.width)
+        if shape.top + shape.height > height:
+            shape.top = max(0, height - shape.height)
+        shape.left = max(shape.left, 0)
+        shape.top = max(shape.top, 0)
 
 
 def _slot_text_changes(
@@ -2264,8 +2331,7 @@ def _remove_exemplar_leftovers(
     content = [
         (shape, box(shape))
         for shape in shapes
-        if has_text(shape)
-        or (is_generated(shape) and is_opaque(shape))
+        if has_text(shape) or (is_generated(shape) and is_opaque(shape))
     ]
     erased = [
         box(shape)
@@ -2294,7 +2360,9 @@ def _remove_exemplar_leftovers(
         reason = None
         if shape.shape_type == MSO_SHAPE_TYPE.LINE:
             # Dividers next to content are design; only crossing lines go.
-            if any(collides(shape, zone, item, other, False) for item, other in content):
+            if any(
+                collides(shape, zone, item, other, False) for item, other in content
+            ):
                 reason = "under_content"
             elif any(intersection(zone, band) > 0 for band in bands):
                 reason = "beside_diagram"  # an axis of a shape-drawn chart
@@ -2392,6 +2460,12 @@ def _fill_slide(
         titles.append(new_title)
 
     if subtitles:
+        if slide_spec.get("role") in {"cover", "closing"} and subtitle:
+            # Corporate exemplars often provide a one-line caption frame that
+            # is too short for an expanded brief. Give its real text enough
+            # height before fitting instead of shrinking it to illegibility.
+            subtitle_shape = subtitles[0]
+            subtitle_shape.height = max(subtitle_shape.height, Inches(0.55))
         _set_text_frame(subtitles[0], [subtitle])
     elif subtitle and slide_spec.get("role") in {"cover", "closing", "section"}:
         canvas = design["canvas"]
@@ -2438,6 +2512,8 @@ def _fill_slide(
             context, _fill_picture_slot(slide, slot, visual or None, design, context)
         )
     else:
+        if visual.get("type") == "image":
+            visual_zone = _expand_small_image_zone(slide, visual_zone, design)
         _add_visual(slide, slide_spec.get("visual"), visual_zone, design, context)
     if slide_spec.get("role") not in {"cover", "closing", "section"}:
         # A picture slot left empty looks broken; draw a native illustration.
@@ -2643,6 +2719,7 @@ def compose_presentation(
         else:
             slide = prs.slides.add_slide(layouts[layout_index])
         _fill_slide(slide, slide_spec, design_system, repeated_image_hashes, context)
+        _contain_generated_text(slide, prs.slide_width, prs.slide_height)
         selected_patterns.append(
             str(slide_spec.get("pattern_id", f"layout-{layout_index}"))
         )

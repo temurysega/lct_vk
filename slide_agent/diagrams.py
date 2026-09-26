@@ -528,7 +528,9 @@ def _icon_grid(shapes, items, zone, style, context, record) -> None:
         wanted = max(1.1, needed + pad * 1.2, diameter + pad * 2)
     else:
         wanted = max(1.7, pad * 2.2 + diameter + needed)
-    card_h = min(available_h, wanted)
+    # Give the content cards a little breathing room; two-column grids with
+    # long copy otherwise leave a narrow, visually empty band around them.
+    card_h = min(available_h, wanted + 0.12)
     top = _block_top(y, h, card_h * rows + gap * (rows - 1))
     record["columns"] = columns
     hints = [
@@ -626,33 +628,23 @@ def _icon_grid(shapes, items, zone, style, context, record) -> None:
 def _process(shapes, items, zone, style, context, record) -> None:
     x, y, w, h = zone
     count = len(items)
-    if w / max(0.1, h) >= 1.5 and count <= 5:
-        arrow_h = min(0.62, max(0.42, h * 0.19))
+    if w >= 8.5 and w / max(0.1, h) >= 1.5 and count <= 5:
+        arrow_h = min(0.9, max(0.62, h * 0.22))
         depth = arrow_h * 0.36
         joint = 0.05
         arrow_w = (w + (count - 1) * (depth - joint)) / count
         column_w = w / count
         fills = tint_series(style, count, spread=0.3)
         record["orientation"] = "horizontal"
-        labels, details = [], []
-        for index, item in enumerate(items):
-            label = (
-                item["head"]
-                if item["head"] and len(item["head"]) <= 28
-                else f"{index + 1:02d}"
-            )
-            detail = dict(item)
-            if label == item["head"]:
-                detail = {"head": "", "tail": item["tail"].lstrip(), "inline": False}
-            labels.append(label)
-            details.append(detail)
+        labels = [f"{index + 1:02d}" for index in range(count)]
+        details = items
         size = style["size"]
         needed = max(
             text_height(_paragraphs(detail), column_w - 0.22, size)
             for detail in details
         )
-        detail_h = min(h - arrow_h - 0.2, needed + 0.1)
-        top = _block_top(y, h, arrow_h + 0.2 + detail_h)
+        detail_h = min(h - arrow_h - 0.16, max(1.05, needed + 0.18))
+        top = _block_top(y, h, arrow_h + 0.12 + detail_h)
         for index, item in enumerate(items):
             ax = x + index * (arrow_w - depth + joint)
             kind = MSO_SHAPE.PENTAGON if index == 0 else MSO_SHAPE.CHEVRON
@@ -684,15 +676,35 @@ def _process(shapes, items, zone, style, context, record) -> None:
                 bold=True,
                 margins=(inner if index else 0.1, 0.02, inner, 0.02),
             )
+            card_x = x + index * column_w + 0.04
+            card_y = top + arrow_h + 0.12
+            _box(
+                shapes,
+                MSO_SHAPE.ROUNDED_RECTANGLE,
+                card_x,
+                card_y,
+                column_w - 0.08,
+                detail_h,
+                style["surface"],
+                f"BrandDeck Diagram Detail Card {index + 1}",
+                radius=0.12,
+            )
             box = _text_box(
                 shapes,
-                x + index * column_w + 0.05,
-                top + arrow_h + 0.2,
-                column_w - 0.14,
-                detail_h,
+                card_x + 0.08,
+                card_y + 0.08,
+                column_w - 0.24,
+                detail_h - 0.16,
                 f"BrandDeck Diagram Text {index + 1}",
             )
-            _write(box, details[index], style, color=style["text"], size=size)
+            _write(
+                box,
+                details[index],
+                style,
+                color=style["surface_text"],
+                size=size,
+                anchor=MSO_ANCHOR.MIDDLE,
+            )
         return
     record["orientation"] = "vertical"
     row_h = h / count
@@ -721,6 +733,17 @@ def _process(shapes, items, zone, style, context, record) -> None:
             number=index + 1,
             name=f"BrandDeck Diagram Step {index + 1}",
         )
+        _box(
+            shapes,
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            x + diameter + 0.12,
+            y + row_h * index + 0.03,
+            w - diameter - 0.12,
+            row_h - 0.06,
+            style["surface"],
+            f"BrandDeck Diagram Detail Card {index + 1}",
+            radius=0.12,
+        )
         box = _text_box(
             shapes,
             x + diameter + 0.22,
@@ -733,7 +756,7 @@ def _process(shapes, items, zone, style, context, record) -> None:
             box,
             item,
             style,
-            color=style["text"],
+            color=style["surface_text"],
             size=style["size"],
             anchor=MSO_ANCHOR.MIDDLE,
         )
@@ -925,7 +948,9 @@ def _hierarchy(shapes, items, zone, style, context, record, root: str) -> None:
 def _stacked(shapes, items, zone, style, context, record, *, funnel: bool) -> None:
     x, y, w, h = zone
     count = len(items)
-    used = min(h, count * 1.3)
+    # Two-level pyramids and funnels otherwise occupy a narrow strip in a
+    # full-size content zone and fail the rendered quarter-slide fill check.
+    used = min(h, max(count * 1.3, 3.2 if count == 2 else 0))
     y, h = _block_top(y, h, used), used
     region_w = min(w * 0.44, h * (1.5 if funnel else 1.25))
     cx = x + region_w / 2

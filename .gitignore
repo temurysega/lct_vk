@@ -24,3 +24,6 @@ Thumbs.db
 
 # Heavy renders of third-party decks stay local
 reports/expanded-review-2026-09-22/previews/
+
+# Local pytest temp roots
+.pytest_tmp*/

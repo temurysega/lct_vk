@@ -24,6 +24,7 @@ from pathlib import Path
 from typing import Any
 
 from .diagrams import ITEM_LIMITS
+from .images import stems
 from .llm import InferenceClient, InferenceError
 from .prompt_config import load_prompt
 
@@ -99,12 +100,56 @@ def use_brief_mode(content: str, mode: str, client: InferenceClient | None) -> b
     return len(content.strip()) <= limit and headings < 3
 
 
-def _brief_visuals(brief: str) -> list[str]:
+def _brief_visuals(
+    brief: str, image_catalog: list[dict[str, str]] | None = None
+) -> list[str]:
     # Only visuals the diagram engine sizes and contrast-checks itself. The
     # legacy timeline and metric cards follow the layout zone and came out
     # tiny or on top of template decoration in the 3-template run, so dated
     # stages go to process and key numbers to icon_grid labels.
-    return ["none", *DIAGRAM_VISUALS, "table"]
+    return ["none", *DIAGRAM_VISUALS, "table", *(["image"] if image_catalog else [])]
+
+
+def _assign_outline_images(
+    slides: list[dict[str, Any]], image_catalog: list[dict[str, str]]
+) -> list[dict[str, Any]]:
+    """Reserve relevant interior slides before the model writes their text.
+
+    A picture replaces an outline visual only when its label or surrounding
+    document text overlaps the slide's message. The slide writer then produces
+    bullets for that picture instead of diagram items that would be lost.
+    """
+    pairs: list[tuple[float, str, int]] = []
+    for asset in image_catalog:
+        asset_id = str(asset.get("id", ""))
+        terms = stems(f"{asset.get('label', '')} {asset.get('context', '')}")
+        if not asset_id or not terms:
+            continue
+        for index, slide in enumerate(slides[1:-1], 1):
+            title = stems(slide["title"])
+            goal = stems(slide["goal"])
+            overlap = terms & (title | goal)
+            if not overlap:
+                continue
+            score = 2 * len(terms & title) + len(terms & (goal - title))
+            # Prefer the message over a generic mention in a long goal.
+            pairs.append((float(score), asset_id, index))
+    used_assets: set[str] = set()
+    used_slides: set[int] = set()
+    for _score, asset_id, index in sorted(
+        pairs, key=lambda pair: (-pair[0], pair[1], pair[2])
+    ):
+        if asset_id in used_assets or index in used_slides:
+            continue
+        slides[index]["visual"] = "image"
+        slides[index]["asset_id"] = asset_id
+        used_assets.add(asset_id)
+        used_slides.add(index)
+    # An unmatched image choice has no asset and must remain a text slide.
+    for slide in slides:
+        if slide["visual"] == "image" and not slide.get("asset_id"):
+            slide["visual"] = "none"
+    return slides
 
 
 def _text(limit: int) -> dict[str, Any]:
@@ -342,7 +387,11 @@ def _slide_payload(
 ) -> dict[str, Any]:
     raw = content.get("bullets") if isinstance(content.get("bullets"), list) else []
     bullets = [str(item).strip() for item in raw if str(item).strip()]
-    visual = _usable_visual(content.get("visual"), outline_slide["visual"])
+    visual = (
+        {"type": "image", "asset_id": outline_slide["asset_id"]}
+        if outline_slide.get("asset_id")
+        else _usable_visual(content.get("visual"), outline_slide["visual"])
+    )
     if outline_slide["role"] not in {"cover", "closing"} and not visual and not bullets:
         # Never leave a content slide with its title only.
         bullets = _visual_bullets(content.get("visual"))[:5] or [outline_slide["goal"]]
@@ -363,13 +412,14 @@ def plan_from_brief(
     client: InferenceClient,
     slide_count: int | None = None,
     purpose: str | None = None,
+    image_catalog: list[dict[str, str]] | None = None,
 ) -> dict[str, Any]:
     config = purpose_config()["purposes"]
     purpose = purpose or detect_purpose(brief)
     if purpose not in config:
         raise ValueError(f"Unknown purpose: {purpose}; use one of {', '.join(config)}")
     count = slide_count or DEFAULT_SLIDE_COUNT
-    visuals = _brief_visuals(brief)
+    visuals = _brief_visuals(brief, image_catalog)
 
     started = time.perf_counter()
     request: dict[str, Any] = {
@@ -379,6 +429,8 @@ def plan_from_brief(
         "requested_slide_count": count,
         "visual_types": visuals,
     }
+    if image_catalog:
+        request["available_images"] = image_catalog[:20]
     problems: list[str] = []
     for _ in range(2):
         outline_raw = client.chat_json(
@@ -393,6 +445,8 @@ def plan_from_brief(
         if not problems:
             break
         request["fix_previous_outline"] = problems
+    if image_catalog:
+        outline = _assign_outline_images(outline, image_catalog)
     outline_seconds = time.perf_counter() - started
     deck_title = str(outline_raw.get("title") or outline[0]["title"]).strip()
     titles = [slide["title"] for slide in outline]

@@ -11,6 +11,7 @@ from typing import Any
 from .analyzer import analyze_template
 from .composer import compose_presentation, outline_markdown
 from .config import InferenceSettings
+from .contextual_audit import review_content
 from .coverage import coverage_report
 from .exporter import export_presentation
 from .imagegen import generate_images
@@ -27,6 +28,7 @@ from .render_audit import (
 )
 from .resources import serialized_on_cpu
 from .utils import find_latest, read_json, resolve_workspace, unique_dir, write_json
+from .visual_diversity import inspect_visual_diversity
 
 
 def _qa_pattern_feedback(
@@ -55,9 +57,7 @@ def _qa_pattern_feedback(
     return avoidance, feedback
 
 
-def _hint_cards_for_underfilled(
-    plan: dict[str, Any], qa: dict[str, Any]
-) -> list[int]:
+def _hint_cards_for_underfilled(plan: dict[str, Any], qa: dict[str, Any]) -> list[int]:
     """Mark rendered-underfilled slides whose statements can become cards."""
     hinted = []
     for issue in qa.get("issues", []):
@@ -202,6 +202,7 @@ def generate_deck(
         purpose=purpose,
     )
     _place_images(plan, library, design, offline=offline)
+    plan["contextual_audit"] = review_content(source_text, plan, client)
     plan = assign_patterns(plan, catalog, client=client)
     return _generate_from_plan(
         plan=plan,
@@ -322,7 +323,11 @@ def _generate_from_plan(
                 "qa_score": qa["score"],
             }
             attempts.append(attempt_record)
-            needs_retry = qa["status"] == "failed" or qa["score"] < 92
+            needs_retry = qa["status"] == "failed" or qa["score"] < 92 or any(
+                issue.get("code") in {"out_of_bounds", "template_overlap", "image_distorted"}
+                and issue.get("severity") in {"error", "warning"}
+                for issue in qa["issues"]
+            )
             if not needs_retry or attempt >= qa_retries:
                 break
             new_avoidance, feedback = _qa_pattern_feedback(current_plan, qa)
@@ -360,7 +365,9 @@ def _generate_from_plan(
             theme = design.get("colors", {}).get("theme", [])
             text_roles = {"dk1", "lt1", "dk2", "lt2"}
             palette = [c.get("hex", "") for c in theme if c.get("role") in text_roles]
-            accents = [c.get("hex", "") for c in theme if c.get("role") not in text_roles]
+            accents = [
+                c.get("hex", "") for c in theme if c.get("role") not in text_roles
+            ]
             repairs = []
             for _ in range(3):
                 visual_audit = inspect_rendered_contrast(rendered_pdf, output_path)
@@ -404,10 +411,31 @@ def _generate_from_plan(
         if not cards_for_underfilled:
             break
         write_json(run_dir / "deck_plan.cards.json", current_plan)
-    qa["contextual_audit"] = {
+    qa["structural_score"] = qa["score"]
+    contextual = current_plan.get("contextual_audit") or {
         "status": "not_run",
-        "reason": "A semantic/VLM audit has not been performed",
+        "reason": "A contextual audit has not been performed",
     }
+    qa["contextual_audit"] = contextual
+    if contextual.get("status") == "reviewed":
+        for item in contextual.get("issues") or []:
+            identity = json.dumps(
+                [item["slide"], item["code"], item["quote"]], ensure_ascii=False
+            )
+            qa["issues"].append(
+                {
+                    "id": hashlib.sha256(identity.encode("utf-8")).hexdigest()[:16],
+                    "severity": "suggestion",
+                    "check_type": "contextual",
+                    "code": item["code"],
+                    "slide": item["slide"],
+                    "message": f"{item['reason']} — «{item['quote']}»",
+                    "bounds": [],
+                    "repairable": False,
+                }
+            )
+        # Model feedback is useful for an editor, but is not deterministic
+        # evidence of a defect. Keep the measurable QA score independent.
     write_json(run_dir / "qa_report.json", qa)
     write_json(run_dir / "deck_plan.final.json", current_plan)
     planner_mode = plan.get("planner", {}).get("mode", "unknown")
@@ -485,6 +513,56 @@ VARIANTS = {
 }
 
 
+def _diversity_hybrid_plan(
+    results: list[dict[str, Any]], visual: dict[str, Any]
+) -> tuple[int, dict[str, Any], dict[str, Any]] | None:
+    """Use a third template layout when two rendered variants look alike."""
+    if visual.get("status") == "passed" or len(results) != 3:
+        return None
+    ids = [item["variant"]["id"] for item in results]
+    pairs = visual.get("pairs") or []
+    required = int(visual.get("required_changed_slides_per_pair", 2))
+
+    def changed(first: str, second: str) -> set[int]:
+        for pair in pairs:
+            if set(pair.get("variants") or []) == {first, second}:
+                return set(pair.get("changed_slides") or [])
+        return set()
+
+    for pair in pairs:
+        if pair.get("status") == "passed":
+            continue
+        primary, target = pair["variants"]
+        donor = next((item for item in ids if item not in {primary, target}), None)
+        if donor is None:
+            continue
+        target_donor = changed(target, donor)
+        candidates = sorted(changed(primary, donor) & target_donor)
+        if len(candidates) < required or len(target_donor) - required < required:
+            continue
+        target_index, donor_index = ids.index(target), ids.index(donor)
+        target_plan = read_json(
+            Path(results[target_index]["presentation_dir"]) / "deck_plan.final.json"
+        )
+        donor_plan = read_json(
+            Path(results[donor_index]["presentation_dir"]) / "deck_plan.final.json"
+        )
+        selected = candidates[:required]
+        for number in selected:
+            destination = target_plan["slides"][number - 1]
+            reference = donor_plan["slides"][number - 1]
+            for field in ("pattern_id", "layout_index", "master_index", "pattern_selection"):
+                if field in reference:
+                    destination[field] = copy.deepcopy(reference[field])
+        return target_index, target_plan, {
+            "source_variant": donor,
+            "target_variant": target,
+            "slides": selected,
+            "reason": "rendered variants had fewer visibly changed slides than required",
+        }
+    return None
+
+
 @serialized_on_cpu
 def generate_variants(
     *,
@@ -527,6 +605,7 @@ def generate_variants(
     )
     # Images are matched and generated once, so all variants share content.
     _place_images(base, library, design, offline=offline)
+    base["contextual_audit"] = review_content(source, base, client)
     fingerprint = hashlib.sha256(
         json.dumps(base["slides"], ensure_ascii=False, sort_keys=True).encode("utf-8")
     ).hexdigest()
@@ -571,6 +650,36 @@ def generate_variants(
         for n, slide in enumerate(final["slides"], 1):
             previous.setdefault(n, set()).add(slide["pattern_id"])
     batch_dir = unique_dir(workspace_path / "batches", base.get("title", "variants"))
+    visual_diversity = inspect_visual_diversity(
+        results, [str(slide.get("role", "content")) for slide in base["slides"]]
+    )
+    diversity_repair = _diversity_hybrid_plan(results, visual_diversity)
+    if diversity_repair:
+        target_index, hybrid_plan, repair_record = diversity_repair
+        revised = _generate_from_plan(
+            plan=hybrid_plan,
+            template_dir=template_dir,
+            source_text=source,
+            source_label=label,
+            workspace_path=workspace_path,
+            client=client,
+            export_formats=export_formats,
+            qa_retries=1,
+        )
+        revised_visual = inspect_visual_diversity(
+            [revised if index == target_index else item for index, item in enumerate(results)],
+            [str(slide.get("role", "content")) for slide in base["slides"]],
+        )
+        if revised["qa"]["status"] == "passed" and revised_visual["status"] == "passed":
+            revised["diversity_repair"] = repair_record
+            results[target_index] = revised
+            signatures[target_index] = tuple(
+                item["pattern_id"]
+                for item in read_json(
+                    Path(revised["presentation_dir"]) / "deck_plan.final.json"
+                )["slides"]
+            )
+            visual_diversity = revised_visual
     batch = {
         "batch_id": batch_dir.name,
         "status": "failed"
@@ -579,7 +688,10 @@ def generate_variants(
         "content_sha256": fingerprint,
         "variants": results,
         "distinct_layout_sequences": len(set(signatures)),
-        "diversity_status": "passed" if len(set(signatures)) == 3 else "needs_review",
+        "visual_diversity": visual_diversity,
+        "diversity_status": "passed"
+        if len(set(signatures)) == 3 and visual_diversity["status"] == "passed"
+        else "needs_review",
         "elapsed_seconds": round(time.perf_counter() - started, 3),
         "workflow": prompt_manifest(),
     }

@@ -116,6 +116,8 @@ def test_adapter_choice_updates_real_layout_and_rejects_unknown(monkeypatch):
     def choose(self, **kwargs):
         calls.append(self.settings.model)
         payload = json.loads(kwargs["user"])
+        labels = [c["label"] for c in payload["candidates"]]
+        assert kwargs["schema"]["properties"]["choice"]["enum"] == labels
         # Select the candidate with the largest body capacity, independent of label order.
         target = max(payload["candidates"], key=lambda c: c["capacity"]["body_chars"])
         return {"choice": target["label"]}

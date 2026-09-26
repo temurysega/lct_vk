@@ -27,6 +27,45 @@ Open-source сервис, который анализирует произвол
 
 В основе лежит [anyideaz/pptx-skills](https://github.com/anyideaz/pptx-skills). Исходные парсер OOXML, промпты и совместимый PPTXGenJS-раннер сохранены; поверх них добавлен автономный Python-сервис, которому не нужны внешние ИИ-агенты или Node.js.
 
+## Результаты
+
+Финальный прогон 25.09.2026: краткий бриф [`examples/brief_feature.md`](examples/brief_feature.md)
+и две картинки → Qwen3.5-9B Q4_K_M (llama.cpp) на RTX 2070 SUPER 8 ГБ → три
+предоставленных шаблона VK × три варианта с экспортом PPTX/PDF/HTML. Конфиг —
+[`examples/brief_demo.json`](examples/brief_demo.json). Хэш исходников движка и
+промптов во время прогона (`8c91ce…`) совпадает с кодом этой версии.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/charts/time-dark.png">
+  <img alt="Время полного сценария на шаблон: VK Tech 192 с, VK WorkSpace 188 с, VK Education 159 с при лимите ТЗ 300 с; из них LLM 36–44 с" src="docs/charts/time-light.png">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/charts/qa-dark.png">
+  <img alt="Структурный QA девяти колод: до исправлений 88–100, после — 100 у восьми колод и 96 у VK Education focus" src="docs/charts/qa-light.png">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/charts/fill-dark.png">
+  <img alt="Заполненность каждого контентного слайда девяти колод: все значения от 26 до 67 процентов, внутри нормы 25–75 процентов" src="docs/charts/fill-light.png">
+</picture>
+
+| Шаблон | Весь сценарий, с | LLM, с | QA до → после (balanced / columns / focus) | Картинки | Мин. заполненность |
+|---|---:|---:|---|---|---:|
+| VK Tech | 192 | 44 | 92 → 100 / 92 → 100 / 92 → 100 | 2 из 2 / 2 из 2 / 2 из 2 | 26 % |
+| VK WorkSpace | 188 | 43 | 100 → 100 / 100 → 100 / 88 → 100 | 2 из 2 / 2 из 2 / 2 из 2 | 27 % |
+| VK Education | 159 | 36 | 96 → 100 / 92 → 100 / 88 → 96 | 2 из 2 / 2 из 2 / 2 из 2 | 29 % |
+
+- «До» — тот же бриф на коммите `238612e`, но без картинок; модель
+  недетерминирована, поэтому это не чистый A/B. Подробности —
+  [отчёт о GPU-прогоне](reports/benchmark-2026-09-25/README.md).
+- У VK Education focus осталось одно предупреждение `text_overflow_risk` (QA 96).
+- Текстовый смысловой аудит нашёл по 10–14 замечаний `unsupported_claim` и
+  `repeated_message` на колоду. Это подсказки редактору, в балл QA они не входят и
+  требуют просмотра перед показом.
+- Контент синтетический, не официальный контент-пакет организаторов. Графики и
+  таблицу пересобирает `python examples/readme_charts.py`.
+
 ## Что уже работает
 
 - Анализ masters, layouts, placeholders, геометрии, шрифтов, цветов, фонов, таблиц и изображений.
@@ -139,7 +178,7 @@ python -m slide_agent serve
 CLI для одного шаблона и всех форматов:
 
 ```powershell
-python -m slide_agent variants --template "..\данные\VK Tech шаблон.pptx" --content examples/baseline_content.md --slides 10 --offline --export all
+python -m slide_agent variants --template "..\task+data\Датасет\VK Tech шаблон.pptx" --content examples/acceptance_content.md --images examples/acceptance_images --slides 10 --offline --export all
 ```
 
 Изображения для слайдов: `--images папка_или_файлы` (PNG, JPG, WEBP). Картинка
@@ -155,7 +194,8 @@ python examples/run_dataset.py --config examples/demo.json
 ```
 
 Пути в конфиге задаются относительно корня репозитория. По умолчанию используются
-файлы из `../данные` и **синтетический** контент из `examples/baseline_content.md`.
+три предоставленных PPTX из `../task+data/Датасет`, два изображения и **синтетический**
+контент из `examples/acceptance_content.md`.
 Официальный контент-пакет организаторов нужно указать в `content`.
 Результаты: `slide-workspace/dataset/index.html`, `dataset_report.json`, а также
 PPTX/PDF/HTML, изображения и отчёты каждой презентации. Для просмотра тех же
@@ -171,10 +211,19 @@ PDF и HTML строятся из реального рендера PPTX чер�
 Ось вариантов — **выбор макетов**: `balanced` выбирает по соответствию содержанию,
 `columns` предпочитает несколько текстовых блоков, `focus` — один крупный блок.
 Повторение макетов между вариантами мягко штрафуется; текст не переписывается.
-При недостатке разных макетов отчёт содержит `diversity_status=needs_review`.
+Если два варианта почти одинаковы на готовом рендере, сервис один раз пересобирает
+часть слайдов одного варианта с другими паттернами того же шаблона и повторяет
+пиксельную проверку. Если различия всё ещё малы, отчёт содержит
+`diversity_status=needs_review`. Сравнение учитывает изменённые пиксели на
+содержательных слайдах.
 Разные последовательности макетов сами по себе не доказывают визуальное качество.
+Для прогона с локальной Qwen3.5-9B используйте `examples/brief_demo.json`: там
+зафиксированы три шаблона, краткий бриф, изображения, параметры инференса,
+текстовый смысловой аудит и ограничения приёмки по QA, изображениям и времени.
+Текстовый аудит предлагает замечания для редактора; он не проверяет рендеры как VLM.
 
 Документация сдачи: [ARCHITECTURE](ARCHITECTURE.md), [MODELS](MODELS.md), [AUDIT](AUDIT.md).
+Проверка браузеров и её ограничения: [отчёт 25.09.2026](reports/browser-2026-09-25/README.md).
 
 Настройте Inference API (названия переменных не привязаны к конкретному провайдеру):
 
@@ -420,11 +469,12 @@ pictures в слайдах нет. Публичный синий набор и �
 Полные чекпоинты сохраняются на Drive; `RESUME='auto'` продолжает прерванный запуск.
 Итоговый `adapter.zip` содержит веса, токенизатор и сведения для переноса в проект.
 Обучается экспериментальный выбор макетов; базовая модель планирования текста
-остаётся отдельной. Реальный GPU-прогон пока не выполнен.
+остаётся отдельной. Этот учебный notebook на GPU не запускался; локальная
+Qwen3.5-9B на RTX 2070 SUPER проверена отдельно.
 
 Если доступна только A100 в Colab, откройте [готовый notebook](examples/BrandDeck_A100_Inference.ipynb).
 Он запускает Qwen2.5-VL-7B-Instruct и выдаёт адрес для `INFERENCE_BASE_URL`.
-OpenRouter не обязателен. GPU-запуск ещё не проверен; notebook содержит проверку
+OpenRouter не обязателен. GPU-запуск именно этого notebook ещё не проверен; он содержит проверку
 загрузки модели, ответа API и обязательности ключа. См. [MODELS](MODELS.md).
 
 | Переменная | Назначение |

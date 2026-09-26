@@ -18,6 +18,7 @@ export interface Issue {
   id: string;
   slide?: number;
   severity: string;
+  check_type?: string;
   message: string;
   repairable?: boolean;
   bounds?: { x: number; y: number; w: number; h: number }[];
@@ -36,6 +37,7 @@ export interface Deck {
   qa: {
     status: string;
     issues: Issue[];
+    contextual_audit?: { status: string; method?: string; limitations?: string };
     canvas?: { width_inches: number; height_inches: number };
   };
   exports?: {

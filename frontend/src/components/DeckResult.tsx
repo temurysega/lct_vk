@@ -22,6 +22,8 @@ export function DeckResult({
   const id = encodeURIComponent(deck.presentation_id);
   const qa = deck.qa || { status: "unknown", issues: [] };
   const issues = (qa.issues || []).filter((issue) => issue.severity !== "info");
+  const technicalIssues = issues.filter((issue) => issue.check_type !== "contextual");
+  const editorialIssues = issues.length - technicalIssues.length;
   const previews = deck.exports?.previews || [];
   const formats = [
     "pptx",
@@ -64,7 +66,7 @@ export function DeckResult({
         )}
         <div>
           <strong>
-            Проверка вёрстки:{" "}
+            Техническая проверка:{" "}
             {qa.status === "passed"
               ? "пройдена"
               : qa.status === "failed"
@@ -74,8 +76,9 @@ export function DeckResult({
                   : "нет результата"}
           </strong>
           <p>
-            Замечаний: {issues.length}. Смысловая проверка моделью не
-            проводилась.
+            Технических замечаний: {technicalIssues.length}. {qa.contextual_audit?.status === "reviewed"
+              ? `Редакторских подсказок модели: ${editorialIssues}; их нужно проверить вручную. Смысл изображений требует просмотра человеком.`
+              : "Смысловая проверка моделью не проводилась."}
             {["offline", "fallback"].includes(deck.planner_mode || "")
               ? " Содержание распределено без модели."
               : ""}

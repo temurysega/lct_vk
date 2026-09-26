@@ -177,6 +177,16 @@ def test_cpu_planner_keeps_source_without_template_payload(monkeypatch):
     assert result["planner"]["mode"] == "inference"
     assert json.loads(seen[0]["user"]) == {"source": source, "requested_slide_count": 3}
     assert seen[0]["max_tokens"] == 2048
+    assert seen[0]["schema"] is None
+    plan_deck(
+        source,
+        pattern_catalog={},
+        design_system={},
+        slide_count=3,
+        client=InferenceClient(InferenceSettings("http://local/v1", "", "full")),
+    )
+    slides = seen[1]["schema"]["properties"]["slides"]
+    assert slides["minItems"] == slides["maxItems"] == 3
 
 
 def test_cpu_notebook_matches_generator_and_parses():

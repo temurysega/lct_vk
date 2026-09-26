@@ -4,7 +4,7 @@ const { randomUUID } = require("node:crypto");
 const { mkdtempSync } = require("node:fs");
 const { tmpdir } = require("node:os");
 const { join } = require("node:path");
-const { chromium } = require(
+const browsers = require(
   process.env.PREDEL_PLAYWRIGHT ||
     require.resolve("playwright", { paths: [join(__dirname, "../frontend")] }),
 );
@@ -12,10 +12,12 @@ const { chromium } = require(
 const base = process.env.PREDEL_BASE_URL || "http://127.0.0.1:8000";
 const template = process.env.PREDEL_TEST_TEMPLATE;
 assert.ok(template, "Set PREDEL_TEST_TEMPLATE to a real PPTX fixture.");
+const browserType = process.env.PREDEL_BROWSER_TYPE || "chromium";
+assert.ok(browsers[browserType], `Unknown browser type: ${browserType}`);
 const screenshots = mkdtempSync(join(tmpdir(), "predel-browser-"));
 
 (async () => {
-  const browser = await chromium.launch({
+  const browser = await browsers[browserType].launch({
     channel: process.env.PREDEL_BROWSER_CHANNEL || undefined,
     headless: true,
   });
@@ -44,6 +46,7 @@ const screenshots = mkdtempSync(join(tmpdir(), "predel-browser-"));
     await page.locator("#authSubmit").click();
     await page.waitForURL("**/studio");
     await page.locator("#studioLock").waitFor({ state: "hidden" });
+    await page.locator("#modelNote").waitFor({ state: "visible" });
     await page.waitForFunction(
       () =>
         !document.querySelector("#modelNote").textContent.includes("Проверяем"),
@@ -120,7 +123,7 @@ const screenshots = mkdtempSync(join(tmpdir(), "predel-browser-"));
     await page.waitForURL("**/studio");
     await page.locator("#history").waitFor({ state: "visible" });
     assert.deepEqual(errors, []);
-    console.log(JSON.stringify({ result: "passed", screenshots }));
+    console.log(JSON.stringify({ result: "passed", browserType, screenshots }));
   } finally {
     await browser.close();
   }

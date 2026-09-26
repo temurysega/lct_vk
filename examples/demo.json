@@ -1,8 +1,10 @@
 {
-  "templates": "../данные",
-  "content": "examples/baseline_content.md",
+  "templates": "../task+data/Датасет",
+  "content": "examples/acceptance_content.md",
+  "images": "examples/acceptance_images",
   "workspace": "slide-workspace/dataset",
   "slide_count": 10,
   "offline": true,
+  "mode": "source",
   "export_formats": ["pdf", "html"]
 }

@@ -298,7 +298,11 @@ def plan_deck(
         assert client is not None
         try:
             plan = plan_from_brief(
-                content, client=client, slide_count=slide_count, purpose=purpose
+                content,
+                client=client,
+                slide_count=slide_count,
+                purpose=purpose,
+                image_catalog=image_catalog,
             )
         except InferenceError as exc:
             # Expanding a brief is the model's job; a deterministic fallback
@@ -327,11 +331,32 @@ def plan_deck(
             if image_catalog:
                 payload["available_images"] = image_catalog[:20]
         user = json.dumps(payload, ensure_ascii=False)
+        # A wrong slide count discards the whole plan in normalize_plan, so the
+        # full model gets it as a grammar constraint, not only as a request.
+        schema = (
+            None
+            if cpu or not slide_count
+            else {
+                "type": "object",
+                "properties": {
+                    "language": {"type": "string"},
+                    "title": {"type": "string"},
+                    "slides": {
+                        "type": "array",
+                        "items": {"type": "object"},
+                        "minItems": slide_count,
+                        "maxItems": slide_count,
+                    },
+                },
+                "required": ["language", "title", "slides"],
+            }
+        )
         try:
             plan = client.chat_json(
                 system=load_prompt("planner-cpu") if cpu else PLANNER_SYSTEM,
                 user=user,
                 max_tokens=2048 if cpu else 6000,
+                schema=schema,
             )
             planner_mode = "inference"
         except InferenceError as exc:

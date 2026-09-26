@@ -92,10 +92,18 @@ def select_with_adapter(
         )
     )
     try:
+        # The grammar limits the answer to one supplied label within 48 tokens;
+        # the trained prompt itself is unchanged.
         result = selector.chat_json(
             system=load_prompt("layout"),
             user=json.dumps(payload, ensure_ascii=False),
             max_tokens=48,
+            schema={
+                "type": "object",
+                "properties": {"choice": {"enum": list(mapping)}},
+                "required": ["choice"],
+                "additionalProperties": False,
+            },
         )
         choice = result.get("choice")
         if not isinstance(choice, str) or choice not in mapping:

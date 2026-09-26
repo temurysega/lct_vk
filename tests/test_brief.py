@@ -118,6 +118,30 @@ def test_brief_builds_exact_outline_and_content():
     assert "timeline" not in plan["brief"]["visual_types"]
 
 
+def test_brief_reserves_relevant_uploaded_picture_before_writing_slide():
+    class PictureClient(FakeClient):
+        def chat_json(self, *, system, user, schema=None, **kwargs):
+            if system == load_prompt("brief-outline"):
+                outline = _outline(json.loads(user)["requested_slide_count"])
+                outline["slides"][2].update(
+                    title="Сервер работает внутри контура",
+                    goal="Данные хранятся внутри контура компании",
+                )
+                return outline
+            return super().chat_json(system=system, user=user, schema=schema, **kwargs)
+
+    catalog = [
+        {"id": "server-room", "label": "внутренний контур серверная", "context": ""}
+    ]
+    plan = plan_from_brief(
+        BRIEF, client=PictureClient(), slide_count=6, image_catalog=catalog
+    )
+    slide = plan["slides"][2]
+    assert slide["visual"] == {"type": "image", "asset_id": "server-room"}
+    assert len(slide["bullets"]) >= 2
+    assert "image" in plan["brief"]["visual_types"]
+
+
 def test_outline_with_repeated_titles_is_requested_again():
     client = FakeClient(duplicate_first=True)
     plan = plan_from_brief(BRIEF, client=client, slide_count=8)

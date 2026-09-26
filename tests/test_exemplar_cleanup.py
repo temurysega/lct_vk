@@ -1,15 +1,25 @@
 """Exemplar leftovers: the composer removes them and the audit reports them."""
 
+import io
 from pathlib import Path
 
 import pytest
 from PIL import Image
 from pptx import Presentation
 from pptx.dml.color import RGBColor
-from pptx.enum.shapes import MSO_CONNECTOR, MSO_SHAPE
+from pptx.enum.shapes import MSO_CONNECTOR, MSO_SHAPE, MSO_SHAPE_TYPE
+from pptx.oxml.ns import qn
+from pptx.oxml.xmlchemy import OxmlElement
 from pptx.util import Inches, Pt
 
-from slide_agent.composer import _remove_exemplar_leftovers
+from slide_agent.composer import (
+    _add_table,
+    _contain_generated_text,
+    _expand_small_image_zone,
+    _remove_exemplar_leftovers,
+    _remove_unmatched_content_images,
+)
+from slide_agent.diagrams import contrast
 from slide_agent.exporter import export_presentation, find_libreoffice
 from slide_agent.qa import inspect_presentation
 from slide_agent.render_audit import inspect_rendered_fill
@@ -38,6 +48,102 @@ def _deck() -> Presentation:
     prs = Presentation()
     prs.slide_width, prs.slide_height = Inches(13.333), Inches(7.5)
     return prs
+
+
+def test_photo_slide_removes_repeated_raster_rule_strips():
+    prs = _deck()
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    stripe = io.BytesIO()
+    Image.new("RGB", (100, 2), "#B5C1D3").save(stripe, format="PNG")
+    rule = slide.shapes.add_picture(
+        io.BytesIO(stripe.getvalue()), Inches(4), Inches(2), Inches(4), Inches(0.008)
+    )
+    slide.shapes.add_picture(
+        io.BytesIO(stripe.getvalue()), Inches(4), Inches(3), Inches(4), Inches(0.008)
+    )
+    photo = io.BytesIO()
+    Image.new("RGB", (600, 400), "#345678").save(photo, format="PNG")
+    large = slide.shapes.add_picture(
+        io.BytesIO(photo.getvalue()), Inches(5), Inches(1.5), Inches(4), Inches(3)
+    )
+    slot = _remove_unmatched_content_images(
+        slide, {}, DESIGN, {rule.image.sha1}, keep_slot=True
+    )
+    assert slot.element is large.element
+    assert [shape.element for shape in slide.shapes] == [large.element]
+
+
+def test_filled_picture_placeholder_does_not_leak_source_qr():
+    prs = _deck()
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    image = io.BytesIO()
+    Image.new("RGB", (100, 100), "white").save(image, format="PNG")
+    picture = slide.shapes.add_picture(
+        io.BytesIO(image.getvalue()), Inches(0.7), Inches(0.7), Inches(1.2), Inches(1.2)
+    )
+    placeholder = OxmlElement("p:ph")
+    placeholder.set("idx", "2")
+    placeholder.set("type", "pic")
+    picture._element.xpath("./p:nvPicPr/p:nvPr")[0].append(placeholder)
+    picture = slide.shapes[0]
+    assert picture.shape_type == MSO_SHAPE_TYPE.PLACEHOLDER
+    assert picture.element.tag == qn("p:pic")
+
+    _remove_unmatched_content_images(slide, {}, DESIGN, set())
+    assert len(slide.shapes) == 0
+
+
+def test_repeated_exemplar_fragments_inside_content_are_removed():
+    prs = _deck()
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    bitmap = io.BytesIO()
+    Image.new("RGB", (20, 20), "#287AC5").save(bitmap, format="PNG")
+    content = slide.shapes.add_picture(
+        io.BytesIO(bitmap.getvalue()), Inches(3), Inches(3), Inches(0.08), Inches(0.08)
+    )
+    logo = slide.shapes.add_picture(
+        io.BytesIO(bitmap.getvalue()), Inches(0.1), Inches(6.8), Inches(0.4), Inches(0.4)
+    )
+    _remove_unmatched_content_images(slide, {}, DESIGN, {content.image.sha1})
+    assert [shape.element for shape in slide.shapes] == [logo.element]
+
+
+def test_dark_brand_table_keeps_text_readable():
+    prs = _deck()
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    design = {
+        "typography": {"primary_font": "Arial", "body_size_pt": 16},
+        "brand": {"background": "000000", "heading": "0077FF", "body": "FFFFFF", "accent": "FFFFFF"},
+        "colors": {"theme": [{"role": "lt2", "hex": "FFFFFF"}]},
+    }
+    _add_table(slide, {"headers": ["Этап"], "rows": [["Ответ"]]}, (1, 1, 4, 2), design)
+    table = slide.shapes[0].table
+    for row in range(2):
+        cell = table.cell(row, 0)
+        fill = str(cell.fill.fore_color.rgb)
+        text = str(cell.text_frame.paragraphs[0].runs[0].font.color.rgb)
+        assert contrast(fill, text) >= 4.5
+
+
+def test_generated_text_stays_on_canvas():
+    prs = _deck()
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    body = _text(slide, "BrandDeck Body", (4.1, 6.75, 2.15, 1), "Текст")
+    _contain_generated_text(slide, prs.slide_width, prs.slide_height)
+    assert body.top + body.height <= prs.slide_height
+
+
+def test_small_photo_zone_expands_only_into_free_space():
+    prs = Presentation()
+    prs.slide_width, prs.slide_height = Inches(10), Inches(5.625)
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    _text(slide, "BrandDeck Body", (0.3, 1.2, 2.5, 3.0), "Текст")
+    design = {"canvas": {"width_inches": 10, "height_inches": 5.625}}
+    small = (3.1, 1.2, 3.3, 1.8)
+    expanded = _expand_small_image_zone(slide, small, design)
+    assert expanded[2] >= 6 and expanded[3] >= 3.5
+    _text(slide, "BrandDeck Note", (7.0, 2.0, 1.0, 0.5), "Заметка")
+    assert _expand_small_image_zone(slide, small, design) == small
 
 
 def test_cleanup_removes_scaffolding_and_keeps_design():

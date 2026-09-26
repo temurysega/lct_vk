@@ -533,11 +533,18 @@ def attach_images(
 ) -> dict[str, Any]:
     """Assign each image to at most one slide; record every decision."""
     slides = plan.get("slides", [])
-    requested = {
-        str(slide["visual"]["asset_id"])
-        for slide in slides
-        if isinstance(slide.get("visual"), dict) and slide["visual"].get("asset_id")
-    }
+    requested_placements = [
+        {
+            "asset_id": str(slide["visual"]["asset_id"]),
+            "slide": index,
+            "match": "planned",
+            "score": None,
+        }
+        for index, slide in enumerate(slides, 1)
+        if isinstance(slide.get("visual"), dict)
+        and slide["visual"].get("asset_id") in library.assets
+    ]
+    requested = {item["asset_id"] for item in requested_placements}
     free = [
         asset for asset in library.assets.values() if asset.asset_id not in requested
     ]
@@ -552,7 +559,7 @@ def attach_images(
     )
     used_assets: set[str] = set()
     used_slides: set[int] = set()
-    placements = []
+    placements = list(requested_placements)
     for score, asset_id, index in pairs:
         if score < minimum_score or asset_id in used_assets or index in used_slides:
             continue
@@ -607,7 +614,7 @@ def attach_images(
     plan["assets"] = library.plan_assets()
     summary = {
         "available": len(library),
-        "placed": len(placements) + len(requested & set(library.assets)),
+        "placed": len({item["asset_id"] for item in placements}),
         "placements": placements,
         "unplaced": unplaced,
         "rejected": library.rejected,

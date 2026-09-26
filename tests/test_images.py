@@ -181,6 +181,21 @@ def test_attach_images_matches_by_text_and_places_unlabeled_uploads(tmp_path: Pa
     }
 
 
+def test_planned_brief_image_is_reported_with_its_slide(tmp_path: Path):
+    library = ImageLibrary(tmp_path / "store")
+    asset = library.add(_bytes(), source="upload", label="server room")
+    plan = {
+        "slides": [
+            {"title": "Data stays inside", "role": "content", "visual": {"type": "image", "asset_id": asset.asset_id}}
+        ]
+    }
+    summary = attach_images(plan, library)
+    assert summary["placed"] == 1
+    assert summary["placements"] == [
+        {"asset_id": asset.asset_id, "slide": 1, "match": "planned", "score": None}
+    ]
+
+
 def test_generated_deck_places_images_without_distortion(tmp_path: Path):
     template = tmp_path / "clean-blue.pptx"
     create_template(template, "clean-blue")
