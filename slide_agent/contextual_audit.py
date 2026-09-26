@@ -35,6 +35,22 @@ def _slide_text(slide: dict[str, Any]) -> str:
     return "\n".join(line for line in lines if line.strip())
 
 
+def _stems(text: str) -> set[str]:
+    """Content-word stems (first five letters of words of four or more)."""
+    return {word[:5] for word in re.findall(r"\w{4,}", text.casefold())}
+
+
+def _repeats_neighbour(texts: list[str], number: int) -> bool:
+    """A repeat needs real word overlap with the previous or next slide."""
+    own = _stems(texts[number - 1])
+    for other in (number - 2, number):
+        if 0 <= other < len(texts) and own:
+            shared = own & _stems(texts[other])
+            if len(shared) / max(1, min(len(own), len(_stems(texts[other])))) >= 0.35:
+                return True
+    return False
+
+
 def _normalized(text: str) -> str:
     return re.sub(r"\s+", " ", text.casefold()).strip()
 
@@ -54,6 +70,7 @@ def review_content(
     texts = [_slide_text(slide) for slide in slides]
     payload = {
         "source": source,
+        "language": str(plan.get("language") or "ru"),
         "slides": [
             {"number": number, "role": slide.get("role"), "text": text}
             for number, (slide, text) in enumerate(zip(slides, texts, strict=True), 1)
@@ -103,6 +120,9 @@ def review_content(
             or (code == "title_not_claim" and slides[number - 1].get("role") in {"cover", "closing", "section"})
             or not quote
             or _normalized(quote) not in _normalized(texts[number - 1])
+            # The model also calls restating the source a "repeat"; only a
+            # neighbour with shared wording confirms repetition.
+            or (code == "repeated_message" and not _repeats_neighbour(texts, number))
         ):
             continue
         key = (number, code, _normalized(quote))

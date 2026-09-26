@@ -22,6 +22,9 @@ REPAIRABLE = {
     "template_overlap",
     "emptied_template_block",
     "empty_photo_frame",
+    # Another layout gives the text a larger box or keeps it off the edge.
+    "text_too_small",
+    "margin_intrusion",
 }
 
 

@@ -302,10 +302,16 @@ def _fit(
     minimum: float,
     scale: list[float] | None = None,
 ) -> float:
-    """Largest size whose estimated wrapped height fits, mirroring QA."""
+    """Largest size whose estimated wrapped height fits, mirroring QA.
+
+    The longest word must also fit the width: otherwise the office renderer
+    breaks it mid-word ("Масштабировани / е").
+    """
     candidates = _sizes(size, minimum, scale or [])
+    longest = max((len(word) for text in paragraphs for word in text.split()), default=0)
     for candidate in candidates:
-        if text_height(paragraphs, width, candidate) <= height:
+        word_width = longest * candidate * ESTIMATED_GLYPH_WIDTH_EM / 72
+        if word_width <= width and text_height(paragraphs, width, candidate) <= height:
             return candidate
     return candidates[-1]
 
@@ -530,7 +536,12 @@ def _icon_grid(shapes, items, zone, style, context, record) -> None:
         wanted = max(1.7, pad * 2.2 + diameter + needed)
     # Give the content cards a little breathing room; two-column grids with
     # long copy otherwise leave a narrow, visually empty band around them.
+    # Cards sized to short text that would leave the slide below a quarter
+    # filled, or an underfilled render, make the cards take the zone's height.
     card_h = min(available_h, wanted + 0.12)
+    grid_area = w * (card_h * rows + gap * (rows - 1))
+    if style.get("fill_zone") or grid_area < 0.27 * style.get("canvas_area", 0):
+        card_h = available_h
     top = _block_top(y, h, card_h * rows + gap * (rows - 1))
     record["columns"] = columns
     hints = [
@@ -765,7 +776,11 @@ def _process(shapes, items, zone, style, context, record) -> None:
 def _cycle(shapes, items, zone, style, context, record) -> None:
     x, y, w, h = zone
     count = len(items)
-    side = min(h, w * 0.46)
+    # The legend needs room for its longest word at a legible size; a narrow
+    # zone gives the ring less width rather than squeezing the captions.
+    longest = max((len(word) for item in items for word in item["plain"].split()), default=8)
+    legend_need = 0.95 + longest * (style["size"] - 1) * ESTIMATED_GLYPH_WIDTH_EM / 72
+    side = max(min(1.6, h), min(h, w * 0.46, w - legend_need))
     node = min(0.72, max(0.44, side * 0.19))
     radius = side / 2 - node / 2
     cx, cy = x + side / 2, y + h / 2

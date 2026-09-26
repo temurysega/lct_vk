@@ -17,6 +17,7 @@ from .layout_geometry import (
     is_photo_frame,
     is_visible_box,
 )
+from .style_audit import inspect_style
 from .typography import (
     ESTIMATED_GLYPH_WIDTH_EM,
     effective_font_size,
@@ -82,22 +83,26 @@ def _geometry(shape: Any) -> tuple[Any, ...]:
 
 def _template_reference(
     template_path: str | Path | None,
-) -> tuple[set[tuple[Any, ...]], set[tuple[Any, ...]]]:
-    """Geometry of every template shape and of those holding sample text.
+) -> tuple[set[tuple[Any, ...]], set[tuple[Any, ...]], set[str]]:
+    """Template shape geometry, shapes holding sample text, layout names.
 
     Filled template blocks are renamed by the composer but keep their
     geometry, so geometry identifies template-origin shapes in the output.
     """
     if not template_path or not Path(template_path).exists():
-        return set(), set()
+        return set(), set(), set()
     try:
         template = Presentation(template_path)
     except Exception:  # noqa: BLE001 - the template reference is optional
-        return set(), set()
+        return set(), set(), set()
     shapes = [shape for slide in template.slides for shape in slide.shapes]
+    layouts = {
+        layout.name for master in template.slide_masters for layout in master.slide_layouts
+    }
     return (
         {_geometry(shape) for shape in shapes},
         {(str(shape.name), *_geometry(shape)) for shape in shapes if has_text(shape)},
+        layouts,
     )
 
 
@@ -254,7 +259,7 @@ def inspect_presentation(
     expects_native_grid = (design_system or {}).get("source_model", {}).get(
         "composition_mode"
     ) == "native_grid"
-    template_shapes, sample_keys = _template_reference(template_path)
+    template_shapes, sample_keys, layout_names = _template_reference(template_path)
     for slide_index, slide in enumerate(prs.slides, 1):
         slide_issues: list[dict[str, Any]] = []
         text_count = 0
@@ -422,6 +427,15 @@ def inspect_presentation(
         slide_issues.extend(
             _template_layer_issues(
                 slide, (slide_width, slide_height), template_shapes, sample_keys
+            )
+        )
+        slide_issues.extend(
+            inspect_style(
+                slide,
+                (slide_width, slide_height),
+                design_system,
+                template_shapes,
+                layout_names,
             )
         )
         if text_count == 0:

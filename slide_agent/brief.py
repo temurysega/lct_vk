@@ -406,6 +406,87 @@ def _slide_payload(
     }
 
 
+EDITORIAL_CODES = {"unsupported_claim", "repeated_message"}
+
+
+def revise_flagged_slides(
+    plan: dict[str, Any],
+    *,
+    brief: str,
+    client: InferenceClient,
+    audit: dict[str, Any],
+) -> list[int]:
+    """Rewrite, once, the slides the editorial audit flagged in a brief plan.
+
+    Each slide gets its previous text and the audit findings (exact quote and
+    reason) as feedback; a finding quoted from the title also opens the title
+    for correction. Image placements stay. Returns the revised slide numbers;
+    a failed rewrite keeps the original slide.
+    """
+    outline = (plan.get("brief") or {}).get("outline") or []
+    if audit.get("status") != "reviewed" or len(outline) != len(plan.get("slides", [])):
+        return []
+    findings: dict[int, list[dict[str, Any]]] = {}
+    for issue in audit.get("issues") or []:
+        if issue.get("code") in EDITORIAL_CODES:
+            findings.setdefault(int(issue["slide"]), []).append(issue)
+    if not findings:
+        return []
+    system = load_prompt("brief-slide")
+    titles = [str(slide.get("title", "")) for slide in plan["slides"]]
+
+    def rewrite(number: int) -> tuple[int, dict[str, Any] | None]:
+        current = plan["slides"][number - 1]
+        outline_slide = {**outline[number - 1], "title": current.get("title", "")}
+        issues = findings[number]
+        schema = slide_schema(outline_slide["role"], outline_slide["visual"])
+        if any(issue["quote"] in str(current.get("title", "")) for issue in issues):
+            schema["properties"]["title"] = _text(120)
+            schema["required"].append("title")
+        request = {
+            "brief": brief,
+            "purpose": plan["brief"].get("purpose"),
+            "deck_title": plan.get("title"),
+            "outline": titles,
+            "slide_number": number,
+            "slide": outline_slide,
+            "previous_answer": {
+                key: current.get(key) for key in ("subtitle", "bullets", "visual")
+            },
+            "fix_previous_answer": [
+                f"«{issue['quote']}»: {issue['reason']}" for issue in issues
+            ],
+        }
+        try:
+            content = client.chat_json(
+                system=system,
+                user=json.dumps(request, ensure_ascii=False),
+                schema=schema,
+                max_tokens=1200,
+                temperature=0.3,
+            )
+        except InferenceError:
+            return number, None
+        payload = _slide_payload(content, outline_slide)
+        title = str(content.get("title") or "").strip()
+        if title:
+            payload["title"] = title
+        if (current.get("visual") or {}).get("type") == "image":
+            payload["visual"] = current["visual"]
+        return number, payload
+
+    workers = max(1, client.settings.parallel_requests)
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        results = list(pool.map(rewrite, sorted(findings)))
+    revised = []
+    for number, payload in results:
+        if payload is None:
+            continue
+        plan["slides"][number - 1] = {**plan["slides"][number - 1], **payload}
+        revised.append(number)
+    return revised
+
+
 def plan_from_brief(
     brief: str,
     *,

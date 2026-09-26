@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from .analyzer import analyze_template
+from .brief import revise_flagged_slides
 from .composer import compose_presentation, outline_markdown
 from .config import InferenceSettings
 from .contextual_audit import review_content
@@ -66,14 +67,26 @@ def _hint_cards_for_underfilled(plan: dict[str, Any], qa: dict[str, Any]) -> lis
             continue
         slide = plan["slides"][number - 1]
         bullets = [str(item) for item in slide.get("bullets", []) if str(item).strip()]
+        visual = slide.get("visual") or {}
+        if slide.get("layout_hint") == "cards" or slide.get("remap_underfilled"):
+            continue  # each slide is helped once
         if (
             slide.get("role", "content") == "content"
-            and not slide.get("visual")
+            and not visual
             and not slide.get("body")
             and 2 <= len(bullets) <= 6
-            and slide.get("layout_hint") != "cards"
         ):
             slide["layout_hint"] = "cards"
+            hinted.append(number)
+        elif visual.get("type") in {"table", "icon_grid"}:
+            if not visual.get("fill_zone"):
+                # Rows and cards sized to their text left the zone empty.
+                visual["fill_zone"] = True
+                hinted.append(number)
+        elif slide.get("role", "content") == "content":
+            # A picture or diagram placed in a cramped exemplar zone: another
+            # layout of the template is tried once.
+            slide["remap_underfilled"] = True
             hinted.append(number)
     return hinted
 
@@ -410,6 +423,24 @@ def _generate_from_plan(
         cards_for_underfilled = _hint_cards_for_underfilled(current_plan, qa)
         if not cards_for_underfilled:
             break
+        remap = [
+            number
+            for number in cards_for_underfilled
+            if current_plan["slides"][number - 1].get("remap_underfilled")
+        ]
+        if remap:
+            for number in remap:
+                avoided_patterns.setdefault(number, set()).add(
+                    str(current_plan["slides"][number - 1].get("pattern_id"))
+                )
+            remapped = assign_patterns(
+                copy.deepcopy(current_plan),
+                catalog,
+                avoid_by_slide=avoided_patterns,
+                layout_strategy=plan.get("variant", {}).get("id", "balanced"),
+            )
+            for number in remap:
+                current_plan["slides"][number - 1] = remapped["slides"][number - 1]
         write_json(run_dir / "deck_plan.cards.json", current_plan)
     qa["structural_score"] = qa["score"]
     contextual = current_plan.get("contextual_audit") or {
@@ -606,6 +637,19 @@ def generate_variants(
     # Images are matched and generated once, so all variants share content.
     _place_images(base, library, design, offline=offline)
     base["contextual_audit"] = review_content(source, base, client)
+    if client is not None and base.get("planner", {}).get("input") == "brief":
+        # A brief is expanded by the model: slides with unsupported or
+        # repeated statements are rewritten once, then reviewed again.
+        first_review = base["contextual_audit"]
+        revised = revise_flagged_slides(
+            base, brief=source, client=client, audit=first_review
+        )
+        if revised:
+            base["contextual_audit"] = review_content(source, base, client)
+            base["contextual_audit"]["revision"] = {
+                "revised_slides": revised,
+                "issues_before": len(first_review.get("issues") or []),
+            }
     fingerprint = hashlib.sha256(
         json.dumps(base["slides"], ensure_ascii=False, sort_keys=True).encode("utf-8")
     ).hexdigest()

@@ -577,7 +577,10 @@ def _score_pattern(
         if content_image_area >= 0.35:
             risks.append("крупное исходное изображение не связано с новым текстом")
     backdrop = float(capacity.get("backdrop_area_ratio", 0) or 0)
-    if backdrop and role not in {"cover", "closing", "section"}:
+    carries_text = role not in {"cover", "closing", "section"} or (
+        role == "closing" and requirements["body_chars"]
+    )
+    if backdrop and carries_text:
         # A colour block reserved for an object stays empty on a generated
         # content slide: nothing in the plan is placed there.
         score -= backdrop * 24.0

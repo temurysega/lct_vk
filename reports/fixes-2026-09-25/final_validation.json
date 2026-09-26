@@ -1,5 +1,5 @@
 {
-  "source_full_gpu_report": "C:\\Users\\alsutem\\Desktop\\лцт вк запулить с репо\\lct_vk\\slide-workspace\\brief-fix-2026-09-25\\full_gpu_report.json",
+  "source_full_gpu_report": "slide-workspace/brief-fix-2026-09-25/full_gpu_report.json",
   "source_unchanged_during_full_run": true,
   "content_sha256": "d499379d23e6a0b8ce3d00559e5205307b5e4a012b7a520b3823f51c5aa4fff9",
   "variants": [
@@ -9,7 +9,7 @@
       "qa_status": "passed",
       "issue_codes": [],
       "images_placed": 2,
-      "presentation_dir": "C:\\Users\\alsutem\\Desktop\\лцт вк запулить с репо\\lct_vk\\slide-workspace\\brief-fix-2026-09-25\\presentations\\ii-pomoschnik-vo-vnutrennem-portale-20260925-011028",
+      "presentation_dir": "slide-workspace/brief-fix-2026-09-25/presentations/ii-pomoschnik-vo-vnutrennem-portale-20260925-011028",
       "origin": "full_gpu_run"
     },
     {
@@ -18,7 +18,7 @@
       "qa_status": "passed",
       "issue_codes": [],
       "images_placed": 2,
-      "presentation_dir": "C:\\Users\\alsutem\\Desktop\\лцт вк запулить с репо\\lct_vk\\slide-workspace\\brief-fix-2026-09-25\\presentations\\ii-pomoschnik-vo-vnutrennem-portale-20260925-011103",
+      "presentation_dir": "slide-workspace/brief-fix-2026-09-25/presentations/ii-pomoschnik-vo-vnutrennem-portale-20260925-011103",
       "origin": "full_gpu_run"
     },
     {
@@ -27,7 +27,7 @@
       "qa_status": "passed",
       "issue_codes": [],
       "images_placed": 2,
-      "presentation_dir": "C:\\Users\\alsutem\\Desktop\\лцт вк запулить с репо\\lct_vk\\slide-workspace\\qa-fix-focus-2026-09-25\\presentations\\ii-pomoschnik-vo-vnutrennem-portale-20260925-011355",
+      "presentation_dir": "slide-workspace/qa-fix-focus-2026-09-25/presentations/ii-pomoschnik-vo-vnutrennem-portale-20260925-011355",
       "origin": "recomposed_same_llm_plan_after_strip_cleanup"
     }
   ],

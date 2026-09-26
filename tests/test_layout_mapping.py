@@ -148,6 +148,22 @@ def test_rendered_underfilled_statements_are_marked_for_cards():
         ]
         + [{"code": "text_overlap", "slide": 1}]
     }
-    assert _hint_cards_for_underfilled(plan, qa) == [2]
+    # Slide 2 becomes cards; the process diagram (3) and the single
+    # statement (4) are sent to another layout instead.
+    assert _hint_cards_for_underfilled(plan, qa) == [2, 3, 4]
     assert plan["slides"][1]["layout_hint"] == "cards"
+    assert plan["slides"][2]["remap_underfilled"] is True
     assert _hint_cards_for_underfilled(plan, qa) == []  # only once per slide
+
+
+def test_underfilled_table_slide_is_marked_to_fill_its_zone():
+    plan = {
+        "slides": [
+            {"role": "content", "title": "Метрики",
+             "visual": {"type": "table", "headers": ["A", "B"], "rows": [["1", "2"]]}},
+        ]
+    }
+    qa = {"issues": [{"code": "slide_underfilled", "slide": 1}]}
+    assert _hint_cards_for_underfilled(plan, qa) == [1]
+    assert plan["slides"][0]["visual"]["fill_zone"] is True
+    assert _hint_cards_for_underfilled(plan, qa) == []

@@ -4,6 +4,7 @@ import copy
 import io
 import math
 from collections import Counter
+from contextvars import ContextVar
 from pathlib import Path
 from typing import Any
 
@@ -50,6 +51,9 @@ from .typography import (
 from .utils import read_json, write_json
 
 NATIVE_VISUALS = set(DIAGRAM_TYPES) | {"image", "table"}
+# A table or card grid below this share of the slide is stretched over its
+# zone: the slide would otherwise stay under a quarter filled.
+FILL_SHARE = 0.27
 # Exemplar shapes that can be scaffolding; pictures are kept.
 LEFTOVER_TYPES = {
     MSO_SHAPE_TYPE.AUTO_SHAPE,
@@ -111,10 +115,34 @@ def _theme_colors(design: dict[str, Any]) -> dict[str, str]:
     result.setdefault("lt2", "F3F4F6")
     brand = design.get("brand", {})
     if brand:
-        result["accent1"] = _hex(brand.get("accent"), result["accent1"])
+        accent = _hex(brand.get("accent"), result["accent1"])
+        # The detected brand accent is sometimes just the body ink (black or
+        # white); a grey never replaces the theme's chromatic accent.
+        if _chroma(accent) >= 40 or _chroma(result["accent1"]) < 40:
+            result["accent1"] = accent
         result["dk1"] = _hex(brand.get("body"), result["dk1"])
         result["lt1"] = _hex(brand.get("heading"), result["lt1"])
     return result
+
+
+# The template's type scale for the deck being composed (Appendix 1: sizes
+# come from the template's typographic scale).
+_TYPE_SCALE: ContextVar[tuple[float, ...]] = ContextVar("type_scale", default=())
+
+
+def _snap_size(size: float, minimum: float) -> float:
+    """Largest template size not above ``size``; ``size`` without a scale."""
+    scale = _TYPE_SCALE.get()
+    fitting = [value for value in scale if minimum <= value <= size + 0.05]
+    if fitting:
+        return max(fitting)
+    larger = [value for value in scale if minimum <= value]
+    return min(larger) if larger and min(larger) <= size * 1.25 else size
+
+
+def _chroma(value: str) -> int:
+    channels = [int(value[index : index + 2], 16) for index in (0, 2, 4)]
+    return max(channels) - min(channels)
 
 
 def _mix_color(first: str, second: str, ratio: float) -> str:
@@ -408,7 +436,7 @@ def _set_text_frame(
             if required_height <= height:
                 break
             fitted_size = max(min_font_size, fitted_size - 0.5)
-        font_size = max(min_font_size, fitted_size)
+        font_size = _snap_size(max(min_font_size, fitted_size), min_font_size)
     text_frame = shape.text_frame
     text_frame.clear()
     text_frame.word_wrap = True
@@ -916,6 +944,15 @@ def _add_bar_chart(
         chart.legend.position = XL_LEGEND_POSITION.BOTTOM
         chart.legend.include_in_layout = False
     chart.value_axis.has_major_gridlines = True
+    # Appendix 1: a chart needs its values and units, not only bar heights.
+    plot = chart.plots[0]
+    plot.has_data_labels = True
+    plot.data_labels.show_value = True
+    plot.data_labels.font.size = Pt(_snap_size(11, 9))
+    unit = str(visual.get("unit") or "").strip()
+    if unit:
+        chart.value_axis.has_title = True
+        chart.value_axis.axis_title.text_frame.text = unit[:40]
     colors = _theme_colors(design)
     palette = [colors.get("accent1"), colors.get("accent2"), colors.get("accent3")]
     for index, chart_series in enumerate(chart.series):
@@ -965,16 +1002,47 @@ def _add_table(
         return
     rows = [[str(value) for value in row[: len(headers)]] for row in rows]
     x, y, w, h = zone
+    body_size = float(design["typography"].get("body_size_pt", 16))
+    values = [headers] + rows
+    column_w = w / len(headers) - 0.12
+
+    def row_heights(size: float) -> list[float]:
+        chars = max(1, int(column_w * 72 / (size * ESTIMATED_GLYPH_WIDTH_EM)))
+        return [
+            max(estimated_line_count(value, chars) for value in row) * size * 1.3 / 72
+            + 0.16
+            for row in values
+        ]
+
+    # Rows take the height of their text instead of stretching over the
+    # zone (tall empty cells); the size steps down only when rows overflow.
+    size = max(11.0, body_size * 0.85)
+    while sum(row_heights(size)) > h and size > 9:
+        size -= 0.5
+    size = _snap_size(size, 9)
+    heights = row_heights(size)
+    canvas = design.get("canvas", {})
+    canvas_area = float(canvas.get("width_inches", 0) or 0) * float(
+        canvas.get("height_inches", 0) or 0
+    )
+    # Rows sized to a few words would leave the slide below a quarter filled
+    # (Appendix 1); then, or after such a render, the rows share the zone.
+    sparse = w * sum(heights) < FILL_SHARE * canvas_area
+    if (visual.get("fill_zone") or sparse) and sum(heights) < h:
+        extra = (h - sum(heights)) / len(heights)
+        heights = [height + extra for height in heights]
     table_shape = slide.shapes.add_table(
         len(rows) + 1,
         len(headers),
         Inches(x),
         Inches(y),
         Inches(w),
-        Inches(h),
+        Inches(min(h, sum(heights))),
     )
     table_shape.name = "BrandDeck Table"
     table = table_shape.table
+    for row, height in zip(table.rows, heights):
+        row.height = Inches(height)
     colors = _theme_colors(design)
     background = _hex(design.get("brand", {}).get("background"), "FFFFFF")
     body_fill = (
@@ -989,22 +1057,20 @@ def _add_table(
             ("FFFFFF", "111111"), key=lambda color: contrast(color, background)
         )
     font = design["typography"]["primary_font"]
-    values = [headers] + rows
     for row_index, row in enumerate(values):
         for col_index, value in enumerate(row):
             cell = table.cell(row_index, col_index)
             cell.text = value
             cell.margin_left = Inches(0.06)
             cell.margin_right = Inches(0.06)
+            cell.vertical_anchor = MSO_ANCHOR.MIDDLE
             cell.fill.solid()
             cell.fill.fore_color.rgb = _rgb(header_fill if row_index == 0 else body_fill)
             for paragraph in cell.text_frame.paragraphs:
                 paragraph.alignment = PP_ALIGN.LEFT
                 for run in paragraph.runs:
                     run.font.name = font
-                    run.font.size = Pt(
-                        max(9, design["typography"].get("body_size_pt", 16) * 0.68)
-                    )
+                    run.font.size = Pt(size)
                     run.font.bold = row_index == 0
                     run.font.color.rgb = _rgb(header_text if row_index == 0 else body_text)
 
@@ -1076,9 +1142,14 @@ def _visual_style(
     design: dict[str, Any], context: dict[str, Any] | None
 ) -> dict[str, Any]:
     context = context or {}
-    return diagram_style(
+    style = diagram_style(
         design, context.get("background"), str(context.get("role", "content"))
     )
+    canvas = design.get("canvas", {})
+    style["canvas_area"] = float(canvas.get("width_inches", 0) or 0) * float(
+        canvas.get("height_inches", 0) or 0
+    )
+    return style
 
 
 def _asset_path(
@@ -1237,11 +1308,14 @@ def _add_visual(
         return
     if visual_type in DIAGRAM_TYPES:
         try:
+            style = _visual_style(design, context)
+            if visual.get("fill_zone"):
+                style = {**style, "fill_zone": True}
             record = render_diagram(
                 slide,
                 visual,
                 zone,
-                _visual_style(design, context),
+                style,
                 context=str((context or {}).get("title", "")),
             )
         except ValueError as exc:
@@ -2417,8 +2491,16 @@ def _fill_slide(
         and titles
     ):
         # Some corporate covers encode the subtitle as BODY, not SUBTITLE.
+        # A closing slide with statements keeps a large body for them: only a
+        # caption-sized frame (or a spare body) becomes the subtitle.
         title_bottom = max(shape.top + shape.height for shape in titles)
-        candidates = [shape for shape in bodies if shape.top >= title_bottom]
+        has_statements = bool(slide_spec.get("bullets") or slide_spec.get("body"))
+        candidates = [
+            shape
+            for shape in bodies
+            if shape.top >= title_bottom
+            and (not has_statements or len(bodies) > 1 or shape.height <= Inches(1.2))
+        ]
         if candidates:
             subtitle_shape = min(candidates, key=lambda shape: (shape.top, shape.left))
             subtitles = [subtitle_shape]
@@ -2465,7 +2547,13 @@ def _fill_slide(
             # is too short for an expanded brief. Give its real text enough
             # height before fitting instead of shrinking it to illegibility.
             subtitle_shape = subtitles[0]
-            subtitle_shape.height = max(subtitle_shape.height, Inches(0.55))
+            _set_geometry(
+                subtitle_shape,
+                subtitle_shape.left,
+                subtitle_shape.top,
+                subtitle_shape.width,
+                max(subtitle_shape.height, Inches(0.55)),
+            )
         _set_text_frame(subtitles[0], [subtitle])
     elif subtitle and slide_spec.get("role") in {"cover", "closing", "section"}:
         canvas = design["canvas"]
@@ -2593,6 +2681,26 @@ def _visual_summary(records: list[dict[str, Any]]) -> dict[str, Any]:
 
 def compose_presentation(
     *,
+    template_dir: Path,
+    plan: dict[str, Any],
+    output_path: Path,
+    design_system: dict[str, Any],
+) -> dict[str, Any]:
+    scale = tuple(
+        sorted(
+            float(value)
+            for value in design_system.get("typography", {}).get("observed_sizes_pt", [])
+            if 8 <= float(value) <= 96
+        )
+    )
+    token = _TYPE_SCALE.set(scale)
+    try:
+        return _compose(template_dir, plan, output_path, design_system)
+    finally:
+        _TYPE_SCALE.reset(token)
+
+
+def _compose(
     template_dir: Path,
     plan: dict[str, Any],
     output_path: Path,

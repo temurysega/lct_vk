@@ -3,7 +3,7 @@
 Usage:
     python examples/readme_charts.py \
         --before slide-workspace/brief-qwen3.5-9b-2026-09-25/dataset_report.json \
-        --after slide-workspace/competition-2026-09-25/dataset_report.json
+        --after slide-workspace/final-2026-09-26c/dataset_report.json
 
 Each chart is written in a light and a dark variant (docs/charts/*-light.png,
 *-dark.png) so the README can switch them with <picture>. The printed table is
@@ -279,7 +279,7 @@ def main() -> int:
     parser.add_argument("--before", type=Path,
                         default=ROOT / "slide-workspace/brief-qwen3.5-9b-2026-09-25/dataset_report.json")
     parser.add_argument("--after", type=Path,
-                        default=ROOT / "slide-workspace/competition-2026-09-25/dataset_report.json")
+                        default=ROOT / "slide-workspace/final-2026-09-26c/dataset_report.json")
     parser.add_argument("--out", type=Path, default=ROOT / "docs/charts")
     args = parser.parse_args()
     before, after = load(args.before), load(args.after)
