@@ -30,7 +30,7 @@ from .diagrams import (
     render_diagram,
     render_illustration,
 )
-from .images import crop_to_fill
+from .images import crop_to_fill, crop_to_fill_salient
 from .layout_geometry import (
     area,
     box,
@@ -469,8 +469,10 @@ def _set_text_frame(
         paragraph.line_spacing = 1.15
         if not bullets:
             paragraph.alignment = alignment or PP_ALIGN.LEFT
-        if paragraph.runs:
-            font = paragraph.runs[0].font
+        # A hard line break creates a second run in python-pptx. Style every
+        # run or that line inherits the exemplar's original (often huge) size.
+        for run in paragraph.runs:
+            font = run.font
             if font_name:
                 font.name = font_name
             if font_size:
@@ -1177,7 +1179,13 @@ def _set_picture_description(picture: Any, text: str) -> None:
 
 
 def _crop_picture(picture: Any, box_w: float, box_h: float) -> None:
-    left, top, right, bottom = crop_to_fill(picture.image.size, (box_w, box_h))
+    try:
+        with Image.open(io.BytesIO(picture.image.blob)) as source:
+            left, top, right, bottom = crop_to_fill_salient(
+                source, (box_w, box_h)
+            )
+    except (AttributeError, OSError, ValueError):
+        left, top, right, bottom = crop_to_fill(picture.image.size, (box_w, box_h))
     picture.crop_left, picture.crop_top = left, top
     picture.crop_right, picture.crop_bottom = right, bottom
 
@@ -1247,6 +1255,7 @@ def _fill_picture_slot(
     if path is not None and is_placeholder:
         picture = slot.insert_picture(str(path))
         picture.name = "BrandDeck Image"
+        _crop_picture(picture, box[2], box[3])
         _set_picture_description(picture, meta.get("label", ""))
         return {
             "type": "image",
@@ -2146,8 +2155,8 @@ def _compact_centered_cover(
     title: str,
     subtitle: str,
     design: dict[str, Any],
-) -> tuple[float, float] | None:
-    """Give a long centered cover stack one line above its background art.
+) -> tuple[float, float, str] | None:
+    """Fit a long centered cover stack above its background art.
 
     Some covers have short, centered placeholders over a full-bleed image.
     Their sample title and caption fit, but a brief-length replacement wraps
@@ -2180,8 +2189,29 @@ def _compact_centered_cover(
 
     new_w = 0.76 * width
     new_x = center - new_w / 2
-    new_y = y - min(0.2, 0.035 * height)
-    title_h = max(0.50, min(0.65, 0.10 * height))
+    inner_w = new_w - 0.2
+    single_size = min(preferred_title_size, inner_w * 72 / (len(title) * 0.52))
+    if single_size >= 20 * width / 10:
+        title_text = title
+        title_size = single_size
+        new_y = y - min(0.2, 0.035 * height)
+        title_h = max(0.50, min(0.65, 0.10 * height))
+    else:
+        words = title.split()
+        if len(words) < 2:
+            return None
+        halves = [
+            (" ".join(words[:index]), " ".join(words[index:]))
+            for index in range(1, len(words))
+        ]
+        left, right = min(halves, key=lambda pair: abs(len(pair[0]) - len(pair[1])))
+        title_text = f"{left}\n{right}"
+        title_size = min(
+            preferred_title_size,
+            inner_w * 72 / (max(len(left), len(right)) * 0.52),
+        )
+        new_y = y - min(0.31, 0.055 * height)
+        title_h = max(0.82, 2 * title_size * 1.22 / 72 + 0.06)
     subtitle_y = new_y + title_h + 0.11
     subtitle_h = max(0.42, min(0.50, subtitle_shape.height / 914400 + 0.1))
     if new_x < 0.05 * width or new_x + new_w > 0.95 * width:
@@ -2202,19 +2232,15 @@ def _compact_centered_cover(
             if intersection(artwork, title_zone) or intersection(artwork, subtitle_zone):
                 return None
 
-    title_size = min(
-        preferred_title_size,
-        (new_w - 0.2) * 72 / (len(title) * 0.52),
-    )
     subtitle_size = min(
         preferred_subtitle_size,
-        (new_w - 0.2) * 72 / (len(subtitle) * 0.52),
+        inner_w * 72 / (len(subtitle) * 0.52),
     )
     if title_size < 18 * width / 10 or subtitle_size < 11 * width / 10:
         return None
     _set_geometry(title_shape, *(Inches(value) for value in title_zone))
     _set_geometry(subtitle_shape, *(Inches(value) for value in subtitle_zone))
-    return title_size, subtitle_size
+    return title_size, subtitle_size, title_text
 
 
 def _zone_beside(
@@ -2672,7 +2698,10 @@ def _fill_slide(
         _constrain_title_width(slide, titles[0])
         if cover_sizes:
             _set_text_frame(
-                titles[0], [title], font_size=cover_sizes[0], min_font_size=cover_sizes[0]
+                titles[0],
+                [cover_sizes[2]],
+                font_size=cover_sizes[0],
+                min_font_size=cover_sizes[0],
             )
         else:
             _set_text_frame(titles[0], [title])

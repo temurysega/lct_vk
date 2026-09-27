@@ -23,7 +23,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
-from .coverage import grounding_findings
+from .coverage import grounding_findings, source_backed_kpi_fallback
 from .diagrams import ITEM_LIMITS
 from .images import stems
 from .llm import InferenceClient, InferenceError
@@ -445,12 +445,11 @@ def revise_flagged_slides(
     client: InferenceClient,
     audit: dict[str, Any],
 ) -> list[int]:
-    """Rewrite, once, the slides the editorial audit flagged in a brief plan.
+    """Rewrite flagged slides, retrying once if a grounded rule still fails.
 
-    Each slide gets its previous text and the audit findings (exact quote and
-    reason) as feedback; a finding quoted from the title also opens the title
-    for correction. Image placements stay. Returns the revised slide numbers;
-    a failed rewrite keeps the original slide.
+    Each attempt gets the previous text and exact-quote findings, including
+    notes. A title finding opens the title for correction. Image placements
+    stay. An unresolved deterministic claim blocks the deck before composition.
     """
     outline = (plan.get("brief") or {}).get("outline") or []
     if audit.get("status") != "reviewed" or len(outline) != len(plan.get("slides", [])):
@@ -466,55 +465,70 @@ def revise_flagged_slides(
     system = load_prompt("brief-slide")
     titles = [str(slide.get("title", "")) for slide in plan["slides"]]
 
-    def rewrite(number: int) -> tuple[int, dict[str, Any] | None]:
-        current = plan["slides"][number - 1]
-        outline_slide = {**outline[number - 1], "title": current.get("title", "")}
+    def rewrite(number: int) -> tuple[int, dict[str, Any] | None, bool]:
+        original = plan["slides"][number - 1]
+        current = original
         issues = findings[number]
-        schema = slide_schema(outline_slide["role"], outline_slide["visual"])
-        if any(issue["quote"] in str(current.get("title", "")) for issue in issues):
-            schema["properties"]["title"] = _text(120)
-            schema["required"].append("title")
-        request = {
-            "brief": brief,
-            "purpose": plan["brief"].get("purpose"),
-            "deck_title": plan.get("title"),
-            "outline": titles,
-            "slide_number": number,
-            "slide": outline_slide,
-            "previous_answer": {
-                key: current.get(key) for key in ("subtitle", "bullets", "visual")
-            },
-            "fix_previous_answer": [
-                f"«{issue['quote']}»: {issue['reason']}" for issue in issues
-            ],
-        }
-        try:
-            content = client.chat_json(
-                system=system,
-                user=json.dumps(request, ensure_ascii=False),
-                schema=schema,
-                max_tokens=1200,
-                temperature=0.3,
-            )
-        except InferenceError:
-            return number, None
-        payload = _slide_payload(content, outline_slide)
-        title = str(content.get("title") or "").strip()
-        if title:
-            payload["title"] = title
-        if (current.get("visual") or {}).get("type") == "image":
-            payload["visual"] = current["visual"]
-        return number, payload
+        for _ in range(2):
+            outline_slide = {**outline[number - 1], "title": current.get("title", "")}
+            schema = slide_schema(outline_slide["role"], outline_slide["visual"])
+            if any(issue["quote"] in str(current.get("title", "")) for issue in issues):
+                schema["properties"]["title"] = _text(120)
+                schema["required"].append("title")
+            request = {
+                "brief": brief,
+                "purpose": plan["brief"].get("purpose"),
+                "deck_title": plan.get("title"),
+                "outline": titles,
+                "slide_number": number,
+                "slide": outline_slide,
+                "previous_answer": {
+                    key: current.get(key)
+                    for key in ("title", "subtitle", "bullets", "visual", "speaker_notes")
+                },
+                "fix_previous_answer": [
+                    f"«{issue['quote']}»: {issue['reason']}" for issue in issues
+                ],
+            }
+            try:
+                content = client.chat_json(
+                    system=system,
+                    user=json.dumps(request, ensure_ascii=False),
+                    schema=schema,
+                    max_tokens=1200,
+                    temperature=0.3,
+                )
+            except InferenceError:
+                continue
+            payload = _slide_payload(content, outline_slide)
+            title = str(content.get("title") or "").strip()
+            if title:
+                payload["title"] = title
+            if (original.get("visual") or {}).get("type") == "image":
+                payload["visual"] = original["visual"]
+            current = {**current, **payload}
+            issues = grounding_findings(brief, {"slides": [current]})
+            if not issues:
+                return number, payload, False
+        fallback = source_backed_kpi_fallback(brief, current)
+        if fallback is not None and not grounding_findings(brief, {"slides": [fallback]}):
+            return number, fallback, True
+        return number, None, False
 
     workers = max(1, client.settings.parallel_requests)
     with ThreadPoolExecutor(max_workers=workers) as pool:
         results = list(pool.map(rewrite, sorted(findings)))
     revised = []
-    for number, payload in results:
+    fallbacks = []
+    for number, payload, used_fallback in results:
         if payload is None:
             continue
         plan["slides"][number - 1] = {**plan["slides"][number - 1], **payload}
         revised.append(number)
+        if used_fallback:
+            fallbacks.append(number)
+    if fallbacks:
+        plan["brief"]["source_backed_kpi_fallbacks"] = fallbacks
     _ensure_grounded(brief, plan)
     return revised
 
@@ -545,7 +559,7 @@ def plan_from_brief(
     if image_catalog:
         request["available_images"] = image_catalog[:20]
     problems: list[str] = []
-    for _ in range(2):
+    for _ in range(3):
         outline_raw = client.chat_json(
             system=load_prompt("brief-outline"),
             user=json.dumps(request, ensure_ascii=False),
@@ -558,6 +572,11 @@ def plan_from_brief(
         if not problems:
             break
         request["fix_previous_outline"] = problems
+    if problems:
+        raise InferenceError(
+            "Outline remains invalid after three attempts: "
+            + "; ".join(problems[:3])
+        )
     if image_catalog:
         outline = _assign_outline_images(outline, image_catalog)
     outline_seconds = time.perf_counter() - started

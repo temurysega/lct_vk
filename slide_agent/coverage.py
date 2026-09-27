@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+from copy import deepcopy
 from pathlib import Path
 
 from pptx import Presentation
@@ -98,6 +99,133 @@ _DIRECTION = re.compile(
     r"\b(?P<neutral>измер\w*|отслеж\w*|контрол\w*|оцен\w*|measure\w*|track\w*)\b",
     re.IGNORECASE,
 )
+_TIME_WORDS = {
+    "один": 1, "одна": 1, "одно": 1, "одного": 1,
+    "два": 2, "две": 2, "двух": 2,
+    "три": 3, "трех": 3, "трёх": 3,
+    "четыре": 4, "четырех": 4, "четырёх": 4,
+    "пять": 5, "пяти": 5,
+    "шесть": 6, "шести": 6,
+    "семь": 7, "семи": 7,
+    "восемь": 8, "восьми": 8,
+    "девять": 9, "девяти": 9,
+    "десять": 10, "десяти": 10,
+    "одиннадцать": 11, "одиннадцати": 11,
+    "двенадцать": 12, "двенадцати": 12,
+    "one": 1, "two": 2, "three": 3, "four": 4,
+    "five": 5, "six": 6, "seven": 7, "eight": 8,
+    "nine": 9, "ten": 10, "eleven": 11, "twelve": 12,
+}
+_TIME_QUANTITY = re.compile(
+    r"(?<!\w)(?P<number>\d+|" + "|".join(_TIME_WORDS) + r")\s+"
+    r"(?P<unit>дн\w*|недел\w*|месяц\w*|год\w*|лет|days?|weeks?|months?|years?)(?!\w)",
+    re.IGNORECASE,
+)
+_DELIVERY_DEADLINE = (
+    r"(?:запуст\w*|внедр\w*|разверн\w*|launch\w*|deploy\w*|release\w*|"
+    r"(?:для|до|к)\s+(?:запуск\w*|внедрен\w*|релиз\w*)|"
+    r"запуск\w*.{0,40}(?:ожида\w*|запланир\w*|намеч\w*|долж\w*|состо\w*|произойд\w*))"
+)
+_DEADLINE_LINK = r"(?:за|в\s+течение|через|не\s+позднее|within|by|in)"
+_PILOT_EVENT = re.compile(r"\b(?:пилот\w*|pilot|trial)\b", re.IGNORECASE)
+_TEAM_DUTY = re.compile(
+    r"\b(?:команд\w*|специалист\w*|аналитик\w*|инженер\w*|"
+    r"разработчик\w*|ответственн\w*|менеджер\w*|"
+    r"team|specialist|analyst|engineer|developer|owner|manager)\b.{0,85}?"
+    r"\b(?:займ\w*|буд\w*|отвеч\w*|настро\w*|анализир\w*|"
+    r"подготов\w*|разработ\w*|провед\w*|интегрир\w*|"
+    r"подбир\w*|координир\w*|will|responsib\w*|"
+    r"configur\w*|analy[sz]\w*|develop\w*)\b",
+    re.IGNORECASE,
+)
+_DUTY_ACTION = re.compile(
+    r"\b(?:настр\w*|анализ\w*|оцени\w*|разраб\w*|внедр\w*|"
+    r"обуч\w*|подгот\w*|тестир\w*|провер\w*|монитор\w*|"
+    r"исслед\w*|созда\w*|интегр\w*|подбир\w*|коорд\w*|"
+    r"configur\w*|analy[sz]\w*|develop\w*|"
+    r"implement\w*|train\w*|test\w*|monitor\w*|prepare\w*)\b",
+    re.IGNORECASE,
+)
+_ROLE_KEYS = {
+    "team": re.compile(r"\b(?:команд\w*|team)\b", re.IGNORECASE),
+    "specialist": re.compile(r"\b(?:специалист\w*|specialist)\b", re.IGNORECASE),
+    "analyst": re.compile(r"\b(?:аналитик\w*|analyst)\b", re.IGNORECASE),
+    "engineer": re.compile(r"\b(?:инженер\w*|engineer)\b", re.IGNORECASE),
+    "developer": re.compile(r"\b(?:разработчик\w*|developer)\b", re.IGNORECASE),
+    "owner": re.compile(r"\b(?:ответственн\w*|owner)\b", re.IGNORECASE),
+    "manager": re.compile(r"\b(?:менеджер\w*|manager)\b", re.IGNORECASE),
+}
+_BROAD_ROLLOUT = re.compile(
+    r"\b(?:на\s+всю\s+(?:компани\w*|организаци\w*)|"
+    r"для\s+всех\s+сотрудник\w*|полн\w*\s+внедрен\w*|"
+    r"company[- ]wide|all\s+employees|full\s+rollout)\b",
+    re.IGNORECASE,
+)
+_SOURCE_ROLLOUT = re.compile(
+    r"\b(?:масштаб\w*|всю\s+(?:компани\w*|организаци\w*)|"
+    r"всех\s+сотрудник\w*|полн\w*\s+внедрен\w*|rollout|"
+    r"company[- ]wide|all\s+employees)\b",
+    re.IGNORECASE,
+)
+_ROLLOUT_DECISION = re.compile(
+    r"\b(?:реш\w*\s+о|рассмотр\w*|оцен\w*\s+(?:возможност\w*|"
+    r"целесообразност\w*)|приня\w*\s+решен\w*|decide\s+whether|"
+    r"consider|evaluate\s+whether)\b",
+    re.IGNORECASE,
+)
+
+
+def _time_unit(unit: str) -> str:
+    unit = unit.casefold()
+    if unit.startswith(("дн", "day")):
+        return "day"
+    if unit.startswith(("недел", "week")):
+        return "week"
+    if unit.startswith(("месяц", "month")):
+        return "month"
+    return "year"
+
+
+def _time_claims(text: str) -> list[tuple[int, str, str]]:
+    """Numeric duration and the event it describes, when the syntax is clear."""
+    claims = []
+    for match in _TIME_QUANTITY.finditer(text):
+        token = match.group("number").casefold()
+        number = int(token) if token.isdigit() else _TIME_WORDS[token]
+        before = text[max(0, match.start() - 110) : match.start()]
+        after = text[match.end() : match.end() + 65]
+        deadline_before = re.search(
+            rf"\b{_DELIVERY_DEADLINE}\b.{{0,75}}\b{_DEADLINE_LINK}\s*$",
+            before,
+            re.IGNORECASE,
+        )
+        deadline_after = re.search(
+            rf"\b{_DEADLINE_LINK}\s*$", before, re.IGNORECASE
+        ) and re.search(rf"^\W*.{{0,30}}\b{_DELIVERY_DEADLINE}\b", after, re.IGNORECASE)
+        if deadline_before or deadline_after:
+            relation = "delivery_deadline"
+        elif _PILOT_EVENT.search(before + after):
+            relation = "pilot_duration"
+        else:
+            relation = "unspecified"
+        claims.append((number, _time_unit(match.group("unit")), relation))
+    return claims
+
+
+def _duty_stems(text: str) -> set[str]:
+    return {match.group().casefold()[:5] for match in _DUTY_ACTION.finditer(text)}
+
+
+def _role_keys(text: str) -> set[str]:
+    return {key for key, pattern in _ROLE_KEYS.items() if pattern.search(text)}
+
+
+def _source_team_duties(source: str) -> list[tuple[set[str], set[str]]]:
+    return [
+        (_role_keys(sentence), _duty_stems(sentence))
+        for sentence in re.split(r"[.!?;\n]", source)
+        if _TEAM_DUTY.search(sentence)
+    ]
 
 
 def _decreases_self_service(text: str) -> bool:
@@ -113,12 +241,44 @@ def _decreases_self_service(text: str) -> bool:
     return False
 
 
+def source_backed_kpi_fallback(source: str, slide: dict) -> dict | None:
+    """Replace an inverted self-service claim with the brief's exact metric.
+
+    This is intentionally limited to plain text fields and a source that only
+    names the metric without a direction. Other claim types still need review.
+    """
+    metric = _SELF_SERVICE.search(source)
+    if metric is None or _decreases_self_service(source):
+        return None
+    prefix = source[max(0, metric.start() - 45) : metric.start()]
+    directions = list(_DIRECTION.finditer(prefix))
+    if directions and directions[-1].lastgroup == "up":
+        return None
+    label = "Показатель: " if re.search(r"[А-Яа-яЁё]", source) else "Metric: "
+    replacement = label + metric.group().strip()
+    if len(replacement) > 120:
+        return None
+    revised = deepcopy(slide)
+    changed = False
+    for key in ("title", "subtitle", "body", "speaker_notes"):
+        value = revised.get(key)
+        if isinstance(value, str) and _decreases_self_service(value):
+            revised[key] = replacement
+            changed = True
+    bullets = revised.get("bullets")
+    if isinstance(bullets, list):
+        revised["bullets"] = [
+            replacement if isinstance(item, str) and _decreases_self_service(item) else item
+            for item in bullets
+        ]
+        changed |= revised["bullets"] != bullets
+    return revised if changed else None
+
+
 def grounding_findings(source: str, plan: dict) -> list[dict]:
     """High-confidence, exact-quote findings for risky brief extrapolations.
 
-    These rules are deliberately narrow. They catch unsupported budget scope,
-    absolute security promises and reversal of a self-service success metric;
-    they do not certify the other claims in a presentation.
+    These rules are deliberately narrow. They do not certify every claim.
     """
     source_budget = bool(_BUDGET.search(source))
     source_budget_approval = any(
@@ -126,11 +286,27 @@ def grounding_findings(source: str, plan: dict) -> list[dict]:
         for part in re.split(r"[.!?\n]", source)
     )
     source_decreases_self_service = _decreases_self_service(source)
+    source_time_claims = _time_claims(source)
+    source_duties = _source_team_duties(source)
+    source_allows_rollout = bool(_SOURCE_ROLLOUT.search(source))
+    source_has_pilot = bool(_PILOT_EVENT.search(source))
+    normalized_source = _normalized(source)
     findings = []
     seen = set()
     for number, slide in enumerate(plan.get("slides", []), 1):
-        for text in visible_texts(slide):
-            if not text.strip() or _normalized(text) in _normalized(source):
+        # Notes are shipped in the PPTX even though they do not count towards
+        # visual coverage, so their factual claims need the same grounding.
+        texts = [*visible_texts(slide), str(slide.get("speaker_notes") or "")]
+        visual = slide.get("visual") or {}
+        if isinstance(visual, dict):
+            for item in visual.get("items") or []:
+                if isinstance(item, dict):
+                    label = str(item.get("label") or "").strip()
+                    detail = str(item.get("detail") or "").strip()
+                    if label and detail:
+                        texts.append(f"{label} — {detail}")
+        for text in texts:
+            if not text.strip() or _normalized(text) in normalized_source:
                 continue
             reasons = []
             if _BUDGET.search(text) and not _BUDGET_UNSPECIFIED.search(text):
@@ -142,6 +318,32 @@ def grounding_findings(source: str, plan: dict) -> list[dict]:
                 reasons.append("Абсолютная гарантия безопасности не следует из брифа; используйте его точную формулировку.")
             if _decreases_self_service(text) and not source_decreases_self_service:
                 reasons.append("Уменьшение доли обращений без специалиста меняет смысл метрики успеха.")
+            broad_scope = _BROAD_ROLLOUT.search(text)
+            if broad_scope and source_has_pilot and not source_allows_rollout:
+                before_scope = text[max(0, broad_scope.start() - 35) : broad_scope.start()]
+                negated = re.search(r"\b(?:не|not)\s+(?:\w+\s+){0,2}$", before_scope, re.IGNORECASE)
+                if not negated and not _ROLLOUT_DECISION.search(text):
+                    reasons.append("Бриф ограничен пилотом и не обещает масштабирование на всю компанию.")
+            for time_claim in _time_claims(text):
+                quantity = time_claim[:2]
+                matches = [claim for claim in source_time_claims if claim[:2] == quantity]
+                if not matches:
+                    reasons.append("Такой срок не указан в брифе; не придумывайте дату или длительность.")
+                elif (
+                    time_claim[2] != "unspecified"
+                    and all(claim[2] != "unspecified" and claim[2] != time_claim[2] for claim in matches)
+                ):
+                    reasons.append("Число есть в брифе, но относится к другому событию: длительность не равна сроку запуска.")
+            actions = _duty_stems(text)
+            if (
+                actions
+                and _TEAM_DUTY.search(text)
+                and not any(
+                    _role_keys(text) & roles and actions <= supported
+                    for roles, supported in source_duties
+                )
+            ):
+                reasons.append("Бриф не назначает команде эти обязанности; не выводите их из численности команды.")
             for reason in reasons:
                 key = (number, text, reason)
                 if key in seen:

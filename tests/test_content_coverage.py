@@ -138,6 +138,89 @@ def test_grounding_rules_keep_supported_and_neutral_wording():
     assert grounding_findings(source, plan) == []
 
 
+def test_pilot_duration_does_not_support_a_launch_deadline_or_a_new_note_date():
+    source = "Пилот: 2 подразделения, 150 сотрудников, 6 недель."
+    plan = {"slides": [
+        {"title": "Сроки", "bullets": ["Запустить проект в течение 6 недель."]},
+        {"title": "Решение", "speaker_notes": "Запуск проекта в течение двух недель."},
+    ]}
+    findings = grounding_findings(source, plan)
+    assert [(item["slide"], item["quote"]) for item in findings] == [
+        (1, "Запустить проект в течение 6 недель."),
+        (2, "Запуск проекта в течение двух недель."),
+    ]
+    assert "другому событию" in findings[0]["reason"]
+    assert "Такой срок" in findings[1]["reason"]
+    # Literal slide coverage still excludes presenter notes.
+    assert unsupported_numbers(source, plan) == []
+
+
+def test_explicit_launch_deadline_and_pilot_duration_remain_supported():
+    source = "Пилот длится 6 недель. Запуск сервиса ожидается в течение 6 недель."
+    plan = {"slides": [
+        {"title": "Пилот длится 6 недель"},
+        {"title": "Запустить продукт в течение 6 недель"},
+    ]}
+    assert grounding_findings(source, plan) == []
+
+
+def test_team_headcount_does_not_assign_duties_but_explicit_duties_do():
+    source = "Просим выделить команду из 3 человек. Вопрос уходит специалисту поддержки."
+    claim = "Специалисты займутся настройкой помощника и анализом данных."
+    findings = grounding_findings(source, {"slides": [{"bullets": [claim]}]})
+    assert [(item["slide"], item["quote"]) for item in findings] == [(1, claim)]
+    supported = "Специалисты будут заниматься настройкой помощника и анализом данных."
+    assert grounding_findings(supported, {"slides": [{"bullets": [claim]}]}) == []
+
+
+def test_visual_label_and_detail_form_one_role_assignment():
+    visual = {"type": "hierarchy", "items": [
+        {"label": "Ответственный", "detail": "Координирует работу"},
+        {"label": "Разработчик", "detail": "Интегрирует модель"},
+        {"label": "Аналитик", "detail": "Подбирает документы"},
+    ]}
+    plan = {"slides": [{"visual": visual}]}
+    source = "Просим выделить команду из 3 человек."
+    assert [issue["quote"] for issue in grounding_findings(source, plan)] == [
+        "Ответственный — Координирует работу",
+        "Разработчик — Интегрирует модель",
+        "Аналитик — Подбирает документы",
+    ]
+    supported = (
+        "Ответственный координирует работу. Разработчик интегрирует модель. "
+        "Аналитик подбирает документы."
+    )
+    assert grounding_findings(supported, plan) == []
+    # A duty of the team does not establish which role will perform it.
+    assert grounding_findings("Команда интегрирует модель.", plan)[1]["quote"] == (
+        "Разработчик — Интегрирует модель"
+    )
+
+
+def test_support_specialist_answer_is_not_treated_as_an_invented_project_role():
+    source = "Если ответа нет, вопрос уходит специалисту поддержки с контекстом."
+    plan = {"slides": [{"bullets": [
+        "Специалист поддержки отвечает на вопрос с полученным контекстом."
+    ]}]}
+    assert grounding_findings(source, plan) == []
+
+
+def test_pilot_does_not_imply_companywide_rollout():
+    source = "Пилот для 150 сотрудников длится 6 недель."
+    plan = {"slides": [
+        {"title": "Результат пилота станет основой для масштабирования на всю компанию"},
+        {"bullets": ["Данные пилота подтвердят эффективность для всех сотрудников."]},
+        {"speaker_notes": "Опыт пилота позволит перейти к полному внедрению."},
+    ]}
+    assert [item["slide"] for item in grounding_findings(source, plan)] == [1, 2, 3]
+    conditional = {"slides": [{
+        "title": "По итогам пилота решим о масштабировании на всю компанию"
+    }]}
+    assert grounding_findings(source, conditional) == []
+    explicit = "Пилот для 150 сотрудников. После пилота масштабируем на всю компанию."
+    assert grounding_findings(explicit, {"slides": [plan["slides"][0]]}) == []
+
+
 def test_too_little_content_does_not_create_empty_slides():
     with pytest.raises(ValueError, match="fewer slides"):
         _fallback_plan("Один факт.", 10)

@@ -4,6 +4,7 @@ import pytest
 
 from slide_agent.brief import revise_flagged_slides
 from slide_agent.contextual_audit import MAX_SOURCE_CHARS, review_content
+from slide_agent.coverage import grounding_findings
 from slide_agent.llm import InferenceError
 from slide_agent.service import _number_findings, _rewrite_audit
 
@@ -197,6 +198,127 @@ def test_grounding_rules_reach_rewrite_when_model_audit_is_disabled(monkeypatch)
     assert report["status"] == "reviewed"
     assert report["method"] == "deterministic_grounding_rules_v1"
     assert report["issues"][0]["code"] == "unsupported_claim"
+
+
+def test_context_audit_reads_speaker_notes(monkeypatch):
+    import json
+
+    monkeypatch.setenv("INFERENCE_CONTEXT_AUDIT", "1")
+
+    class NotesClient:
+        def __init__(self):
+            self.payload = None
+
+        def chat_json(self, *, user, **kwargs):
+            self.payload = json.loads(user)
+            return {"issues": []}
+
+    client = NotesClient()
+    plan = {"slides": [{"title": "Пилот", "speaker_notes": "Заметки для докладчика"}]}
+    assert review_content("Пилот", plan, client)["status"] == "reviewed"
+    assert "Заметки для докладчика" in client.payload["slides"][0]["text"]
+
+
+def test_rewrite_retries_inverse_kpi_and_invented_note_deadline():
+    import json
+
+    source = (
+        "Пилот длится 6 недель. Успех: доля обращений, закрытых без специалиста."
+    )
+    old = {
+        "title": "Метрики пилота",
+        "role": "content",
+        "bullets": ["Снижение доли обращений, закрытых без специалиста", "Время поиска"],
+        "speaker_notes": "Запустить проект в течение 6 недель.",
+    }
+    outline = [
+        {"title": "Пилот", "role": "cover", "goal": "", "visual": "none"},
+        {"title": "Метрики пилота", "role": "content", "goal": "метрики", "visual": "none"},
+        {"title": "Итог", "role": "closing", "goal": "", "visual": "none"},
+    ]
+    plan = {
+        "title": "Пилот",
+        "brief": {"purpose": "feature", "outline": outline},
+        "slides": [{"title": "Пилот", "role": "cover"}, old,
+                   {"title": "Итог", "role": "closing"}],
+    }
+    audit = {"status": "reviewed", "issues": [
+        {**issue, "slide": 2}
+        for issue in grounding_findings(source, {"slides": [old]})
+    ]}
+
+    class RetryClient:
+        settings = type("Settings", (), {"parallel_requests": 1})()
+
+        def __init__(self):
+            self.requests = []
+
+        def chat_json(self, *, user, **kwargs):
+            self.requests.append(json.loads(user))
+            if len(self.requests) == 1:
+                return {
+                    "subtitle": "",
+                    "bullets": old["bullets"],
+                    "speaker_notes": old["speaker_notes"],
+                }
+            return {
+                "subtitle": "",
+                "bullets": ["Измеряем долю обращений, закрытых без специалиста", "Время поиска"],
+                "speaker_notes": "Пилот длится 6 недель.",
+            }
+
+    client = RetryClient()
+    assert revise_flagged_slides(plan, brief=source, client=client, audit=audit) == [2]
+    assert len(client.requests) == 2
+    assert client.requests[0]["previous_answer"]["speaker_notes"] == old["speaker_notes"]
+    assert any("другому событию" in issue for issue in client.requests[1]["fix_previous_answer"])
+    assert plan["slides"][1]["speaker_notes"] == "Пилот длится 6 недель."
+
+
+def test_stubborn_kpi_rewrite_uses_exact_metric_from_neutral_brief():
+    source = "Успех пилота: доля обращений, закрытых без специалиста."
+    bad = "Снижение доли обращений, закрытых без специалиста"
+    plan = {
+        "title": "Пилот",
+        "brief": {"purpose": "feature", "outline": [
+            {"title": "Пилот", "role": "cover", "goal": "", "visual": "none"},
+            {"title": bad, "role": "content", "goal": "метрика", "visual": "none"},
+            {"title": "Итог", "role": "closing", "goal": "", "visual": "none"},
+        ]},
+        "slides": [
+            {"title": "Пилот", "role": "cover"},
+            {"title": bad, "role": "content", "bullets": [bad, "Время ответа"]},
+            {"title": "Итог", "role": "closing"},
+        ],
+    }
+    audit = {"status": "reviewed", "issues": [
+        {**item, "slide": 2}
+        for item in grounding_findings(source, {"slides": [plan["slides"][1]]})
+    ]}
+
+    class StubbornClient:
+        settings = type("Settings", (), {"parallel_requests": 1})()
+
+        def __init__(self):
+            self.calls = 0
+
+        def chat_json(self, **kwargs):
+            self.calls += 1
+            return {
+                "title": bad,
+                "subtitle": "",
+                "bullets": [bad, "Время ответа"],
+                "speaker_notes": "",
+            }
+
+    client = StubbornClient()
+    assert revise_flagged_slides(plan, brief=source, client=client, audit=audit) == [2]
+    assert client.calls == 2
+    assert plan["slides"][1]["title"] == (
+        "Показатель: доля обращений, закрытых без специалиста"
+    )
+    assert plan["brief"]["source_backed_kpi_fallbacks"] == [2]
+    assert grounding_findings(source, plan) == []
 
 
 def test_brief_rewrite_blocks_remaining_unsupported_budget():

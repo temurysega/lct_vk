@@ -640,3 +640,58 @@ def crop_to_fill(
     excess = 1 - image_ratio / box_ratio
     # Keep more of the upper part of tall pictures, where subjects usually are.
     return 0.0, excess * 0.35, 0.0, excess * 0.65
+
+
+def crop_to_fill_salient(
+    image: Image.Image, box: tuple[float, float]
+) -> tuple[float, float, float, float]:
+    """Shift a severe horizontal crop toward the image's detailed region.
+
+    A centered portrait slot can cut a subject near one side of a landscape
+    photo. A small grayscale sample finds the most detailed crop in the upper
+    part of the picture. The shift is capped at 12% of source width and only
+    used when it clearly improves on the centered crop.
+    """
+    left, top, right, bottom = crop_to_fill(image.size, box)
+    excess = left + right
+    if excess < 0.30 or top or bottom:
+        return left, top, right, bottom
+    sample = image.convert("L")
+    sample.thumbnail((384, 384), Image.Resampling.LANCZOS)
+    sample = sample.crop((0, 0, sample.width, max(2, round(sample.height * 0.78))))
+    width, height = sample.size
+    if width < 24 or height < 24:
+        return left, top, right, bottom
+    pixels = sample.tobytes()
+    activity = [0] * width
+    for y in range(1, height - 1):
+        row = y * width
+        for x in range(1, width - 1):
+            index = row + x
+            activity[x] += min(
+                80,
+                abs(pixels[index] - pixels[index - 1])
+                + abs(pixels[index] - pixels[index - width]),
+            )
+    prefix = [0]
+    for value in activity:
+        prefix.append(prefix[-1] + value)
+    visible = round(width * (1 - excess))
+
+    def score(position: float) -> int:
+        start = max(0, min(width - visible, round(position * width)))
+        return prefix[start + visible] - prefix[start]
+
+    centered = score(left)
+    if centered <= 0:
+        return left, top, right, bottom
+    limit = min(0.12, excess * 0.24)
+    candidates = [max(0.0, min(excess, left + limit * step / 12)) for step in range(-12, 13)]
+    best = max(
+        candidates,
+        key=lambda position: score(position)
+        - centered * 0.04 * ((position - left) / limit) ** 2,
+    )
+    if score(best) < centered * 1.07:
+        return left, top, right, bottom
+    return best, top, excess - best, bottom

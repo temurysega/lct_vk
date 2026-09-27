@@ -150,6 +150,22 @@ def test_outline_with_repeated_titles_is_requested_again():
     assert len({s["title"] for s in plan["slides"]}) == 8
 
 
+def test_outline_duplicate_remaining_after_third_attempt_blocks_deck():
+    class DuplicateClient(FakeClient):
+        def chat_json(self, *, system, user, schema=None, **kwargs):
+            if system == load_prompt("brief-outline"):
+                request = json.loads(user)
+                self.outline_requests.append(request)
+                return _outline(request["requested_slide_count"], duplicate=True)
+            return super().chat_json(system=system, user=user, schema=schema, **kwargs)
+
+    client = DuplicateClient()
+    with pytest.raises(InferenceError, match="Outline remains invalid after three attempts"):
+        plan_from_brief(BRIEF, client=client, slide_count=8)
+    assert len(client.outline_requests) == 3
+    assert all("fix_previous_outline" in request for request in client.outline_requests[1:])
+
+
 def test_failed_slide_keeps_outline_goal():
     plan = plan_from_brief(BRIEF, client=FakeClient(fail_slide=3), slide_count=6)
     assert plan["slides"][2]["bullets"] == ["Цель слайда 2"]

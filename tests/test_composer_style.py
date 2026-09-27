@@ -115,7 +115,26 @@ def test_cover_reuses_body_placeholder_below_title():
     assert not any(s.name == "BrandDeck Subtitle" for s in slide.shapes)
 
 
-def test_long_centered_cover_uses_wide_text_band_above_art():
+@pytest.mark.parametrize(
+    "heading, caption, wrapped, latest_caption_bottom",
+    [
+        (
+            "Ускорение работы сотрудников через ИИ",
+            "Инициатива по внедрению ИИ-помощника во внутренний портал",
+            False,
+            2.5,
+        ),
+        (
+            "Снижение времени поиска инструкций и нагрузки на поддержку",
+            "Внедрение ИИ-помощника для внутренних регламентов",
+            True,
+            2.8,
+        ),
+    ],
+)
+def test_long_centered_cover_uses_wide_text_band_above_art(
+    heading, caption, wrapped, latest_caption_bottom
+):
     prs = Presentation()
     slide = prs.slides.add_slide(prs.slide_layouts[1])
     title, subtitle = list(slide.placeholders)
@@ -138,8 +157,8 @@ def test_long_centered_cover_uses_wide_text_band_above_art():
         slide,
         {
             "role": "cover",
-            "title": "Ускорение работы сотрудников через ИИ",
-            "subtitle": "Инициатива по внедрению ИИ-помощника во внутренний портал",
+            "title": heading,
+            "subtitle": caption,
             "bullets": [],
             "body": "",
         },
@@ -150,9 +169,12 @@ def test_long_centered_cover_uses_wide_text_band_above_art():
     assert title.width >= Inches(7.5)
     assert title.top < Inches(1.5)
     assert subtitle.top >= title.top + title.height
-    assert subtitle.top + subtitle.height < Inches(2.5)
+    assert subtitle.top + subtitle.height < Inches(latest_caption_bottom)
     assert title.text_frame.paragraphs[0].runs[0].font.size.pt >= 23
     assert subtitle.text_frame.paragraphs[0].runs[0].font.size.pt >= 13
+    assert ("\v" in title.text) is wrapped
+    assert title.text.replace("\v", " ") == heading
+    assert all(run.font.size is not None for run in title.text_frame.paragraphs[0].runs)
 
 
 def test_replacing_exemplar_text_preserves_explicit_style():

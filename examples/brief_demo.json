@@ -2,7 +2,7 @@
   "templates": "../task+data/Датасет",
   "content": "examples/brief_feature.md",
   "images": "examples/acceptance_images",
-  "workspace": "slide-workspace/final-2026-09-27",
+  "workspace": "slide-workspace/final-2026-09-27b",
   "slide_count": 12,
   "offline": false,
   "mode": "brief",

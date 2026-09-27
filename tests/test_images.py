@@ -9,20 +9,21 @@ from typing import ClassVar
 
 import pytest
 from fastapi.testclient import TestClient
-from PIL import Image
+from PIL import Image, ImageDraw
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE, PP_PLACEHOLDER
 from pptx.util import Inches, Pt
 
 from examples.create_demo_assets import create_template
 from slide_agent.analyzer import analyze_template
-from slide_agent.composer import _fill_slide, compose_presentation
+from slide_agent.composer import _fill_picture_slot, _fill_slide, compose_presentation
 from slide_agent.imagegen import ImageSettings, generate_images
 from slide_agent.images import (
     ImageLibrary,
     attach_images,
     collect_content_images,
     crop_to_fill,
+    crop_to_fill_salient,
     extract_markdown_images,
     label_from_filename,
     normalize_image,
@@ -75,6 +76,60 @@ def test_crop_to_fill_matches_box_aspect(image, box):
     left, top, right, bottom = crop_to_fill(image, box)
     visible = image[0] * (1 - left - right) / (image[1] * (1 - top - bottom))
     assert visible == pytest.approx(box[0] / box[1])
+
+
+def test_severe_crop_follows_detail_without_distorting_image():
+    photo = Image.new("RGB", (1600, 900), "#A0A0A0")
+    draw = ImageDraw.Draw(photo)
+    for y in range(0, 650, 20):
+        for x in range(950, 1500, 20):
+            if (x + y) // 20 % 2:
+                draw.rectangle((x, y, x + 19, y + 19), fill="#202020")
+    centered = crop_to_fill(photo.size, (4, 5))
+    shifted = crop_to_fill_salient(photo, (4, 5))
+    assert centered[0] < shifted[0] <= centered[0] + 0.12
+    assert shifted[0] + shifted[2] == pytest.approx(centered[0] + centered[2])
+    assert crop_to_fill_salient(Image.new("RGB", photo.size, "white"), (4, 5)) == centered
+
+
+def test_picture_placeholder_uses_salient_crop(tmp_path: Path):
+    photo = Image.new("RGB", (1600, 900), "#A0A0A0")
+    draw = ImageDraw.Draw(photo)
+    for y in range(0, 650, 20):
+        for x in range(950, 1500, 20):
+            if (x + y) // 20 % 2:
+                draw.rectangle((x, y, x + 19, y + 19), fill="#202020")
+    path = tmp_path / "photo.png"
+    photo.save(path)
+    prs = Presentation()
+    layout = prs.slide_layouts[8]
+    layout_slot = next(
+        shape
+        for shape in layout.placeholders
+        if shape.placeholder_format.type == PP_PLACEHOLDER.PICTURE
+    )
+    layout_slot.left, layout_slot.top, layout_slot.width, layout_slot.height = (
+        Inches(6), Inches(1), Inches(3), Inches(5)
+    )
+    slide = prs.slides.add_slide(layout)
+    slot = next(
+        shape
+        for shape in slide.placeholders
+        if shape.placeholder_format.type == PP_PLACEHOLDER.PICTURE
+    )
+    result = _fill_picture_slot(
+        slide,
+        slot,
+        {"asset_id": "photo"},
+        {"canvas": {"width_inches": 10, "height_inches": 7.5}},
+        {"assets": {"photo": {"path": str(path), "label": "photo"}}},
+    )
+    picture = next(shape for shape in slide.shapes if shape.name == "BrandDeck Image")
+    assert result["placement"] == "template_placeholder"
+    assert picture.crop_left > picture.crop_right
+    visible = picture.image.size[0] * (1 - picture.crop_left - picture.crop_right)
+    visible /= picture.image.size[1] * (1 - picture.crop_top - picture.crop_bottom)
+    assert visible == pytest.approx(picture.width / picture.height)
 
 
 def test_markdown_images_stay_inside_the_content_folder(tmp_path: Path):

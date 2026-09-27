@@ -87,9 +87,45 @@ def main() -> int:
     parser.add_argument("--out", type=Path, default=ROOT / "deliverables")
     args = parser.parse_args()
     report = json.loads(args.report.read_text(encoding="utf-8"))
+    runs = report.get("runs") or []
+    if len(runs) != len(NAMES):
+        raise ValueError(f"Expected {len(NAMES)} completed template runs, found {len(runs)}")
+    for run in runs:
+        batch = run.get("batch") or {}
+        variants = batch.get("variants") or []
+        if (
+            run.get("error")
+            or batch.get("status") != "completed"
+            or batch.get("diversity_status") != "passed"
+            or len(variants) != 3
+            or not run.get("source_unchanged", False)
+        ):
+            raise ValueError(f"Template run is incomplete: {run.get('template')}")
+        for variant in variants:
+            if (
+                variant.get("status") != "completed"
+                or variant.get("qa", {}).get("status") != "passed"
+                or variant.get("exports", {}).get("status") != "passed"
+                or variant.get("images", {}).get("placed", 0) < 2
+            ):
+                raise ValueError(
+                    f"Variant is incomplete: {run.get('template')} / "
+                    f"{variant.get('variant', {}).get('id')}"
+                )
+            directory = Path(variant["presentation_dir"])
+            if not (directory / "output.pptx").is_file() or not (
+                directory / "exports" / "output.pdf"
+            ).is_file():
+                raise ValueError(f"Missing source deliverable: {directory}")
+    if (
+        report.get("source_matches_git_head_at_start") is not True
+        or report.get("source_unchanged_during_run") is not True
+        or report.get("inputs_unchanged_during_run") is not True
+    ):
+        raise ValueError("The dataset run has no stable committed source and inputs")
     args.out.mkdir(parents=True, exist_ok=True)
     rows = []
-    for run in report["runs"]:
+    for run in runs:
         stem = PureWindowsPath(run["template"]).stem
         name = NAMES.get(stem, stem)
         for variant in run["batch"]["variants"]:

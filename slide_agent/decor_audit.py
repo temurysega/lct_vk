@@ -336,6 +336,28 @@ def _layout_placed(shape: Any) -> bool:
     )
 
 
+def _is_fullscreen_backdrop(
+    shape: Any, slide: Any, canvas: tuple[float, float]
+) -> bool:
+    """Identify a full-bleed picture behind the layout's text placeholders."""
+    if shape.shape_type != MSO_SHAPE_TYPE.PICTURE:
+        return False
+    x, y, w, h = box(shape)
+    if x > 0.05 or y > 0.05 or x + w < canvas[0] - 0.05 or y + h < canvas[1] - 0.05:
+        return False
+    for source in (slide.slide_layout, slide.slide_layout.slide_master):
+        shapes = list(source.shapes)
+        for index, candidate in enumerate(shapes):
+            if candidate.element is not shape.element:
+                continue
+            first_placeholder = next(
+                (position for position, item in enumerate(shapes) if item.is_placeholder),
+                None,
+            )
+            return first_placeholder is not None and index < first_placeholder
+    return False
+
+
 def _designed(mark: Box, template: list[Box], canvas: tuple[float, float]) -> bool:
     """A block placed where the template sample had one, up to canvas clipping."""
     for x, y, w, h in template:
@@ -389,6 +411,8 @@ def decoration_overlap_issues(
     size = _grid(canvas)
     visible = _layout_visibility(slide, canvas, background)
     for decoration, from_layout in _decorations(slide, canvas):
+        if from_layout and _is_fullscreen_backdrop(decoration, slide, canvas):
+            continue
         layer, total = _ink(
             decoration, canvas, background, visible if from_layout else None
         )

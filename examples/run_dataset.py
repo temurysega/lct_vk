@@ -147,6 +147,10 @@ def main() -> int:
             f"{html.escape(str(planner.get('input', '—')))}; три варианта за "
             f"{run['elapsed_seconds']} с.</p>"
         )
+        if run.get("error"):
+            cards.append(
+                f"<p class=error>Сборка остановлена: {html.escape(run['error'])}</p>"
+            )
         for deck in run.get("batch", {}).get("variants", []):
             directory = Path(deck["presentation_dir"])
             links = {"pptx": deck["output"], **deck["exports"]["artifacts"]}
@@ -174,7 +178,7 @@ def main() -> int:
         "<title>BrandDeck — 3 × 3</title><style>body{font:16px Segoe UI,sans-serif;background:#f3f6fc;"
         "padding:32px;color:#213252}article{display:inline-block;width:30%;vertical-align:top;"
         "background:white;padding:1%;margin:0 1% 24px 0;border-radius:14px}img{width:100%}"
-        "a{color:#1768dc}p{font-size:13px}</style><h1>Три шаблона × три варианта</h1>"
+        "a{color:#1768dc}p{font-size:13px}.error{color:#ad2034;font-weight:600}</style><h1>Три шаблона × три варианта</h1>"
         f"<p>Материал: {html.escape(config['content'])}; режим "
         f"{html.escape(str(config.get('mode', 'auto')))}; модель "
         f"{html.escape(os.getenv('INFERENCE_MODEL') or 'нет')}. "

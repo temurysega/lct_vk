@@ -10,7 +10,11 @@ from pptx.enum.shapes import MSO_SHAPE
 from pptx.util import Inches, Pt
 
 from slide_agent.composer import _clear_layout_art
-from slide_agent.decor_audit import decoration_overlap_issues, layout_art_boxes
+from slide_agent.decor_audit import (
+    _is_fullscreen_backdrop,
+    decoration_overlap_issues,
+    layout_art_boxes,
+)
 
 CANVAS = (13.333, 7.5)
 DESIGN = {
@@ -87,6 +91,30 @@ def test_text_across_a_transparent_ring_picture_is_reported():
         picture.name = "Google Shape;727"
         _text(slide, (left, 3.5, 6, 0.6), "Время поиска до 30 минут на инструкцию")
         assert len(_codes(slide)) == expected, left
+
+
+def test_only_fullscreen_pictures_behind_layout_text_are_backdrops():
+    image = Image.new("RGBA", (1200, 675), (0, 0, 0, 0))
+    ImageDraw.Draw(image).rectangle((0, 250, 1199, 400), fill=(240, 0, 0, 255))
+    payload = io.BytesIO()
+    image.save(payload, format="PNG")
+    for behind in (True, False):
+        prs = _deck()
+        layout = prs.slide_layouts[1]
+        scratch = prs.slides.add_slide(layout)
+        picture = scratch.shapes.add_picture(
+            io.BytesIO(payload.getvalue()), 0, 0, prs.slide_width, prs.slide_height
+        )
+        element = copy.deepcopy(picture.element)
+        if behind:
+            layout.shapes._spTree.insert(2, element)
+        else:
+            layout.shapes._spTree.insert_element_before(element, "p:extLst")
+        slide = prs.slides.add_slide(layout)
+        layout_picture = next(
+            shape for shape in layout.shapes if shape.shape_type == picture.shape_type
+        )
+        assert _is_fullscreen_backdrop(layout_picture, slide, CANVAS) is behind
 
 
 def test_a_hidden_layout_logo_is_reported_and_the_visual_zone_steps_aside():

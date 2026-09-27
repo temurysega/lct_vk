@@ -27,12 +27,16 @@ def _slide_text(slide: dict[str, Any]) -> str:
     if isinstance(visual, dict):
         for item in visual.get("items") or []:
             if isinstance(item, dict):
-                lines.extend(str(item.get(key) or "") for key in ("label", "detail", "value"))
+                parts = [str(item.get(key) or "") for key in ("label", "detail", "value")]
+                lines.append(" — ".join(part for part in parts if part))
             else:
                 lines.append(str(item))
         lines.extend(str(item) for item in visual.get("headers") or [])
         for row in visual.get("rows") or []:
             lines.extend(str(item) for item in row)
+    notes = str(slide.get("speaker_notes") or "").strip()
+    if notes:
+        lines.append(f"Speaker notes: {notes}")
     return "\n".join(line for line in lines if line.strip())
 
 

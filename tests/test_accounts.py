@@ -158,7 +158,7 @@ def test_web_text_cannot_read_server_file(client, tmp_path, monkeypatch):
     received = []
 
     def capture(_job, **kwargs):
-        received.append(kwargs["content"].read_text())
+        received.append(kwargs["content"].read_text(encoding="utf-8"))
 
     monkeypatch.setattr("backend.main.run_generation_job", capture)
     response = client.post(
