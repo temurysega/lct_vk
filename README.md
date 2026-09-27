@@ -1,7 +1,6 @@
 # predel
 
-Веб-сервис презентаций на движке BrandDeck AI. Главная и студия получили новый
-адаптивный интерфейс; регистрация требует только имя пользователя, пароль и
+Веб-сервис презентаций. регистрация требует только имя пользователя, пароль и
 должность. Email не нужен. Материалы и результаты изолированы по аккаунтам.
 
 `frontend/` — React + TypeScript + Vite; `backend/` — FastAPI и аккаунты;
@@ -25,7 +24,7 @@ Docker собирает интерфейс автоматически отдел
 
 Open-source сервис, который анализирует произвольный `.pptx`- или `.pdf`-шаблон и создаёт новую презентацию в его стиле. Система извлекает дизайн-токены и паттерны, планирует структуру через OpenAI-compatible Inference API, выбирает подходящий реальный layout для каждого смыслового блока, собирает PowerPoint и запускает автоматический QA.
 
-В основе лежит [anyideaz/pptx-skills](https://github.com/anyideaz/pptx-skills). Исходные парсер OOXML, промпты и совместимый PPTXGenJS-раннер сохранены; поверх них добавлен автономный Python-сервис, которому не нужны внешние ИИ-агенты или Node.js.
+Исходные парсер OOXML, промпты и совместимый PPTXGenJS-раннер сохранены; поверх них добавлен автономный Python-сервис, которому не нужны внешние ИИ-агенты или Node.js.
 
 ## Результаты
 
@@ -463,7 +462,7 @@ python -m pytest
 
 ### Проверка на VK Tech
 
-Текущий основной набор — три PPTX из папки `данные`; команда прогона приведена
+Текущий основной набор три PPTX из папки `данные`; команда прогона приведена
 выше. Дополнительная проверка из предыдущей версии проекта использует публичную
 презентацию VK Tech за I квартал 2026 года на 14 страниц. Исходный PDF не включается в git и не переносится в
 результат: он используется только для извлечения цветовых ролей, сетки и
@@ -544,10 +543,5 @@ pictures в слайдах нет. Публичный синий набор и �
   `test_web_text_cannot_read_server_file` падает: одна сторона сравнения получает
   путь в неверной кодировке. Остальные тесты проходят.
 
-## English
-
-BrandDeck AI analyzes any PowerPoint template, classifies semantic versus PDF-fragmented sources, extracts a design system and reusable patterns, plans a new narrative through an OpenAI-compatible Inference API, composes editable native slides, and validates the result with structural QA and an optional real PowerPoint render loop. Run `branddeck --help` for CLI usage or `branddeck serve` for the REST API.
-
-## License
 
 MIT. See [LICENSE](LICENSE).

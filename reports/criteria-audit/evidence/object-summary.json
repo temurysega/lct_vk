@@ -1,0 +1,272 @@
+[
+  {
+    "file": "artifacts/component-edited/vk-education/component-edited.pptx",
+    "sha256": "f051276b8507ff4987fdfbba78ffc19e97c82f5737dda59bddd967dd68e42dd9",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 2,
+    "embedded_workbooks": 2
+  },
+  {
+    "file": "artifacts/component-service/vk-education/component-service.pptx",
+    "sha256": "64813fc3dbf259e29ea161dd96a3265291656ebb6302e4b8eee11555c867ffa1",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 2,
+    "embedded_workbooks": 2
+  },
+  {
+    "file": "artifacts/component-visuals/vk-education/component-visuals.pptx",
+    "sha256": "614a4cf7f9ce3919a81e221c9641e3abb7de4f0e16f7afd2eb20353ef40c9c62",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 2,
+    "embedded_workbooks": 2
+  },
+  {
+    "file": "artifacts/unseen-brutalism/balanced/unseen-brutalism-balanced.pptx",
+    "sha256": "3d6b9197e5a20e7701fe4226d82ae191b2a00f13425325b23d17575a3323c0a6",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "artifacts/unseen-brutalism/columns/unseen-brutalism-columns.pptx",
+    "sha256": "02d4698258f7b1f1263aef4956a8211194d80a9923196126efb6335b8df35f26",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "artifacts/unseen-brutalism/focus/unseen-brutalism-focus.pptx",
+    "sha256": "9eac671cd474af07e8795c2c14e0c67818bf5e765eba11893eaeab3dbf706720",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "artifacts/vk-education/balanced/vk-education-balanced.pptx",
+    "sha256": "d6ece4e301e9e125ae0671ff2fc33537d14da62bcef2512c8481298c85c64aa8",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "artifacts/vk-education/columns/vk-education-columns.pptx",
+    "sha256": "5503bffb83ffa21183d16e7de46deced03bc705902a945e392ddd306497fc697",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "artifacts/vk-education/focus/vk-education-focus.pptx",
+    "sha256": "c381df6fa12425ab1626aa9ba78a413d470d5da17e7650e41df7cb0552f9c4dc",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "artifacts/vk-tech/balanced/vk-tech-balanced.pptx",
+    "sha256": "e3568e5a4a4b195e02155481020f51418a768b8b7a7f2a65042b230dbbee1e4d",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "artifacts/vk-tech/columns/vk-tech-columns.pptx",
+    "sha256": "51ba021b14fb3bcf45a8b83dcf6ded09cf9eeb9a0c3aaf12a93095e148bbb81f",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "artifacts/vk-tech/focus/vk-tech-focus.pptx",
+    "sha256": "6570f30775738305ac09803a1813ad3aee323724f6d41113dc952da2e64abb0d",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "artifacts/vk-workspace/balanced/vk-workspace-balanced.pptx",
+    "sha256": "6c9dd87e9221a7f012221b3dcfd672a6780758d916e030948efb25f6d6612e08",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "artifacts/vk-workspace/columns/vk-workspace-columns.pptx",
+    "sha256": "15aedd08d158657f64cf59abbb705c2b0d8e5f64833b6a4057c97f5a2cb99751",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "artifacts/vk-workspace/focus/vk-workspace-focus.pptx",
+    "sha256": "e27f0bfe3cb2061c60a4c2086c3980fbce5aba3842d7949f65b3f6e6ac128645",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "with-renderer/artifacts/unseen-brutalism/balanced/unseen-brutalism-balanced.pptx",
+    "sha256": "62cb70bdc46efc0a382f152a42da9b7c660d8531114e2db80c069e7c60e18181",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "with-renderer/artifacts/unseen-brutalism/columns/unseen-brutalism-columns.pptx",
+    "sha256": "4b7e384f127eda3112c6987e9f46cf26ffdda7dcc0658b23e6409e23d150078a",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "with-renderer/artifacts/unseen-brutalism/focus/unseen-brutalism-focus.pptx",
+    "sha256": "9a1ab219974b0b082cb45ba69ff6d13eae063a78627f3e0a4b1630b03db5fffe",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "with-renderer/artifacts/vk-education/balanced/vk-education-balanced.pptx",
+    "sha256": "439cc0b7887f3ac65f889c199c01f0fb70288195fedaf812dc28a58406de959c",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "with-renderer/artifacts/vk-education/columns/vk-education-columns.pptx",
+    "sha256": "d8387c3d1927a5081b1355a8b4447d5f4671816fba39a487d53f97251abdb90d",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "with-renderer/artifacts/vk-education/focus/vk-education-focus.pptx",
+    "sha256": "42b8c11b41fb9632eda40aa51515303572430a635acda3348eeb68ddcb8854c2",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "with-renderer/artifacts/vk-tech/balanced/vk-tech-balanced.pptx",
+    "sha256": "d0a7790330d1363d30ad1116ef59b15968afb4dad1c68df1f8599ec7de2f4384",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "with-renderer/artifacts/vk-tech/columns/vk-tech-columns.pptx",
+    "sha256": "d463491382aad29a6c151a97268d251befcbc27a7db749e5a2f73982ab8de965",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "with-renderer/artifacts/vk-tech/focus/vk-tech-focus.pptx",
+    "sha256": "06d285c9bdff5a6ab34f952ec6a4e1df86d94f10a55a2d09ea07cb7a40620fee",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "with-renderer/artifacts/vk-workspace/balanced/vk-workspace-balanced.pptx",
+    "sha256": "fe97df125caec2cbc8e213db50f46f28665edf575aea834707b20848e5447777",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "with-renderer/artifacts/vk-workspace/columns/vk-workspace-columns.pptx",
+    "sha256": "dd104cf8085f0ede082ddcbc2ddacaafdb79946e4b64ac68063f528b45fa10e5",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "with-renderer/artifacts/vk-workspace/focus/vk-workspace-focus.pptx",
+    "sha256": "363359f3a400a2109832a980cdd911f9a6b4d0fef247585ce403f0af20831233",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "additional-unseen/artifacts/unseen-onocom/balanced/unseen-onocom-balanced.pptx",
+    "sha256": "f57cc2a79a6e81bef9078e8147e959e232e52ac47fc659bd1d35cf1ab801c13d",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "additional-unseen/artifacts/unseen-onocom/columns/unseen-onocom-columns.pptx",
+    "sha256": "4e1da702aef95f1c29943ab8cb456877193d941391459ca9c3cb847ca71a065c",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  },
+  {
+    "file": "additional-unseen/artifacts/unseen-onocom/focus/unseen-onocom-focus.pptx",
+    "sha256": "9832ad714da2f41296b17e686be08cba5f40c2fc0b907db2f9c95b62816507e5",
+    "zip_error": null,
+    "slide_count": 10,
+    "smartart_parts": 0,
+    "chart_parts": 0,
+    "embedded_workbooks": 0
+  }
+]

@@ -1,0 +1,270 @@
+INFO:     Started server process [1277]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8765 (Press CTRL+C to quit)
+INFO:     127.0.0.1:64614 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64623 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64630 - "GET /assets/index-Cx8y9tKb.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64634 - "GET /assets/index-DjYsSnjd.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64632 - "GET /assets/index-DjYsSnjd.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64633 - "GET /assets/index-Cx8y9tKb.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64631 - "GET /assets/fonts/manrope-cyrillic.woff2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64623 - "GET /assets/fonts/manrope-cyrillic.woff2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64623 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64631 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64630 - "GET /assets/favicon.svg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64633 - "GET /assets/favicon.svg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64634 - "GET /assets/images/predel-keychain.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64632 - "GET /assets/images/predel-keychain.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64630 - "GET /assets/fonts/manrope-latin.woff2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64634 - "GET /assets/fonts/manrope-latin.woff2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64634 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64634 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64630 - "POST /api/auth/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:64630 - "GET /assets/Studio-QGdGXJY0.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64634 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64634 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64630 - "GET /api/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64632 - "GET /v1/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64631 - "GET /v1/batches HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64634 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64634 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64634 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64634 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64634 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64634 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64634 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64634 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64631 - "POST /v1/templates/analyze HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64631 - "GET /v1/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64631 - "POST /v1/presentations/jobs HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:64631 - "GET /v1/jobs/34ec5e016f1747528cf941783ffe7419 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64631 - "GET /v1/jobs/34ec5e016f1747528cf941783ffe7419 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64631 - "GET /v1/jobs/34ec5e016f1747528cf941783ffe7419 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64631 - "GET /v1/jobs/34ec5e016f1747528cf941783ffe7419 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64631 - "GET /v1/jobs/34ec5e016f1747528cf941783ffe7419 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64631 - "GET /v1/batches HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64631 - "GET /v1/presentations/razvitie-produkta-20260927-195650/download?format=pptx HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64668 - "GET /studio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64668 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64668 - "GET /api/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64669 - "GET /v1/batches HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64631 - "GET /v1/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64631 - "GET /v1/batches/razvitie-produkta-20260927-195653 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64631 - "POST /api/auth/logout HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:64670 - "GET /v1/templates HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64631 - "POST /api/auth/login HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64631 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64669 - "GET /api/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64668 - "GET /v1/batches HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64631 - "GET /v1/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /api/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/templates HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64783 - "POST /api/auth/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:64783 - "POST /v1/templates/analyze HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:64783 - "POST /v1/templates/analyze HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:64783 - "POST /v1/templates/analyze HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:64783 - "POST /v1/templates/analyze HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "POST /v1/templates/analyze HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "POST /v1/presentations/jobs HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:64783 - "POST /v1/presentations/jobs HTTP/1.1" 422 Unprocessable Content
+INFO:     127.0.0.1:64783 - "POST /v1/presentations/jobs HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "POST /v1/presentations/generate HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:64783 - "POST /v1/presentations/jobs HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195818/download?format=pptx HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195818/download?format=pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195818/download?format=html HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195818/preview/1 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195820/download?format=pptx HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195820/download?format=pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195820/download?format=html HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195820/preview/1 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195821/download?format=pptx HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195821/download?format=pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195821/download?format=html HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195821/preview/1 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/7f7047c3343d45ada319e668a59afe76/download HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:64783 - "POST /v1/templates/analyze HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "POST /v1/presentations/jobs HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195826/download?format=pptx HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195826/download?format=pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195826/download?format=html HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195826/preview/1 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195827/download?format=pptx HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195827/download?format=pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195827/download?format=html HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195827/preview/1 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195829/download?format=pptx HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195829/download?format=pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195829/download?format=html HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195829/preview/1 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/e0d26ff73ddd4bd49469e2dce02a1bcf/download HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:64783 - "POST /v1/templates/analyze HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "POST /v1/presentations/jobs HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/8ecf3016a5bb4d8aa273453ec20378e1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/8ecf3016a5bb4d8aa273453ec20378e1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/8ecf3016a5bb4d8aa273453ec20378e1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/8ecf3016a5bb4d8aa273453ec20378e1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/8ecf3016a5bb4d8aa273453ec20378e1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/8ecf3016a5bb4d8aa273453ec20378e1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/8ecf3016a5bb4d8aa273453ec20378e1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/8ecf3016a5bb4d8aa273453ec20378e1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/8ecf3016a5bb4d8aa273453ec20378e1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/8ecf3016a5bb4d8aa273453ec20378e1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/8ecf3016a5bb4d8aa273453ec20378e1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/8ecf3016a5bb4d8aa273453ec20378e1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/8ecf3016a5bb4d8aa273453ec20378e1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/8ecf3016a5bb4d8aa273453ec20378e1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/8ecf3016a5bb4d8aa273453ec20378e1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/8ecf3016a5bb4d8aa273453ec20378e1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195835/download?format=pptx HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195835/download?format=pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195835/download?format=html HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195835/preview/1 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195836/download?format=pptx HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195836/download?format=pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195836/download?format=html HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195836/preview/1 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195837/download?format=pptx HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195837/download?format=pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195837/download?format=html HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195837/preview/1 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/8ecf3016a5bb4d8aa273453ec20378e1/download HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:64783 - "POST /v1/templates/analyze HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "POST /v1/presentations/jobs HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195840/download?format=pptx HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195840/download?format=pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195840/download?format=html HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195840/preview/1 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195842/download?format=pptx HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195842/download?format=pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195842/download?format=html HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195842/preview/1 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195843/download?format=pptx HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195843/download?format=pdf HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195843/download?format=html HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195843/preview/1 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64783 - "GET /v1/jobs/32e1aa13a7d84d67af076ec4e5152dd6/download HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:64783 - "GET /v1/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64783 - "GET /v1/batches HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65473 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65473 - "GET /assets/fonts/manrope-cyrillic.woff2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65473 - "GET /assets/index-Cx8y9tKb.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65479 - "GET /assets/index-DjYsSnjd.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65479 - "GET /assets/images/predel-keychain.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65481 - "POST /api/auth/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:65479 - "GET /assets/fonts/manrope-latin.woff2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65480 - "GET /assets/favicon.svg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65473 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65531 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65531 - "GET /assets/fonts/manrope-cyrillic.woff2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65533 - "GET /assets/index-DjYsSnjd.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65532 - "GET /assets/index-Cx8y9tKb.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65533 - "GET /assets/images/predel-keychain.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49159 - "GET /assets/fonts/manrope-latin.woff2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49160 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:49161 - "GET /assets/favicon.svg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65534 - "POST /api/auth/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:49161 - "GET /studio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49161 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49161 - "GET /assets/Studio-QGdGXJY0.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49161 - "GET /api/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49160 - "GET /v1/batches HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49159 - "GET /v1/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49644 - "POST /api/auth/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:49644 - "POST /v1/templates/analyze HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49644 - "POST /v1/presentations/jobs HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:49644 - "POST /v1/presentations/jobs HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:49644 - "POST /v1/presentations/jobs HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:49644 - "GET /v1/jobs/e1092a71c38a47dd899d1bf747588169 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49644 - "GET /v1/jobs/e1092a71c38a47dd899d1bf747588169 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49644 - "POST /v1/presentations/jobs HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:49644 - "GET /v1/jobs/234b18d871b846329bdf4b0d3d773c91 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49644 - "GET /v1/jobs/234b18d871b846329bdf4b0d3d773c91 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49644 - "GET /v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195818/download HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49644 - "POST /v1/presentations/generate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49860 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49860 - "GET /assets/fonts/manrope-cyrillic.woff2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49863 - "GET /assets/index-Cx8y9tKb.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49864 - "GET /assets/index-DjYsSnjd.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49864 - "GET /assets/images/predel-keychain.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49865 - "POST /api/auth/register HTTP/1.1" 201 Created
+INFO:     127.0.0.1:49864 - "GET /studio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49864 - "GET /assets/fonts/manrope-latin.woff2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49860 - "GET /assets/favicon.svg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49863 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49866 - "GET /assets/fonts/manrope-latin.woff2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49866 - "GET /assets/Studio-QGdGXJY0.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49866 - "GET /api/config HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49860 - "GET /v1/templates HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49863 - "GET /v1/batches HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [1277]

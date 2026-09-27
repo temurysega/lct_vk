@@ -1,0 +1,8 @@
+{
+  "method": "NSWorkspace open followed by AppleScript PDF save",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "/tmp/branddeck-criteria-audit.TZjsAv/export-opened.applescript:66:95: execution error: Получена ошибка от «Microsoft PowerPoint»: The object you are trying to access does not exist (-1728)\n",
+  "seconds": 2.249,
+  "pdf_exists": false
+}

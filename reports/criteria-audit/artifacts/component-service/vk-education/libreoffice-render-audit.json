@@ -1,0 +1,82 @@
+{
+  "renderer": "LibreOffice",
+  "stage": "External acceptance checks on saved artifact; no repairs",
+  "fill": {
+    "status": "warning",
+    "slides": [
+      {
+        "slide": 2,
+        "coverage": 0.065
+      },
+      {
+        "slide": 3,
+        "coverage": 0.061
+      },
+      {
+        "slide": 4,
+        "coverage": 0.299
+      },
+      {
+        "slide": 5,
+        "coverage": 0.343
+      },
+      {
+        "slide": 6,
+        "coverage": 0.356
+      },
+      {
+        "slide": 7,
+        "coverage": 0.218
+      },
+      {
+        "slide": 8,
+        "coverage": 0.285
+      },
+      {
+        "slide": 9,
+        "coverage": 0.306
+      }
+    ],
+    "issues": [
+      {
+        "id": "0e329e826d00260a",
+        "slide": 2,
+        "code": "slide_underfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.065,
+        "bounds": [],
+        "message": "Контент занимает 7% слайда (меньше четверти)",
+        "repairable": true
+      },
+      {
+        "id": "60e1f26014181938",
+        "slide": 3,
+        "code": "slide_underfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.061,
+        "bounds": [],
+        "message": "Контент занимает 6% слайда (меньше четверти)",
+        "repairable": true
+      },
+      {
+        "id": "30fe899dba4378b0",
+        "slide": 7,
+        "code": "slide_underfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.218,
+        "bounds": [],
+        "message": "Контент занимает 22% слайда (меньше четверти)",
+        "repairable": true
+      }
+    ]
+  },
+  "contrast": {
+    "status": "passed",
+    "checked_spans": 58,
+    "uncertain_spans": 0,
+    "issues": []
+  }
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "port": 8765,
+    "version": "existing dist",
+    "image_upload": 0,
+    "purpose_selector": 0,
+    "model_note": "Модель пока не подключена. Добавьте готовый текст — доступна сборка без модели."
+  },
+  {
+    "port": 8766,
+    "version": "fresh build from current sources",
+    "image_upload": 1,
+    "purpose_selector": 1,
+    "model_note": "Модель пока не подключена. Добавьте готовый текст — доступна сборка без модели."
+  }
+]

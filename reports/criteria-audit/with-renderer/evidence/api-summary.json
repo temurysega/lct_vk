@@ -1,0 +1,150 @@
+[
+  {
+    "template": "vk-tech",
+    "analysis_seconds": 3.427,
+    "generation_seconds": 34.63,
+    "job_status": "completed",
+    "template_id": "vk-tech-shablon-cbbe3aa6",
+    "batch_id": "pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201115",
+    "variants": [
+      {
+        "variant": "balanced",
+        "status": "completed",
+        "planner_mode": "offline",
+        "elapsed_seconds": 10.327,
+        "qa_status": "passed",
+        "qa_issues": 0,
+        "export_status": "passed"
+      },
+      {
+        "variant": "columns",
+        "status": "completed",
+        "planner_mode": "offline",
+        "elapsed_seconds": 7.557,
+        "qa_status": "passed",
+        "qa_issues": 0,
+        "export_status": "passed"
+      },
+      {
+        "variant": "focus",
+        "status": "completed",
+        "planner_mode": "offline",
+        "elapsed_seconds": 14.435,
+        "qa_status": "passed",
+        "qa_issues": 0,
+        "export_status": "passed"
+      }
+    ]
+  },
+  {
+    "template": "vk-workspace",
+    "analysis_seconds": 1.394,
+    "generation_seconds": 37.454,
+    "job_status": "completed",
+    "template_id": "vk-workspace-klientskaya-konferentsiya-shablon-03-1b888311",
+    "batch_id": "pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201154",
+    "variants": [
+      {
+        "variant": "balanced",
+        "status": "completed",
+        "planner_mode": "offline",
+        "elapsed_seconds": 11.36,
+        "qa_status": "passed",
+        "qa_issues": 0,
+        "export_status": "passed"
+      },
+      {
+        "variant": "columns",
+        "status": "completed",
+        "planner_mode": "offline",
+        "elapsed_seconds": 12.056,
+        "qa_status": "passed",
+        "qa_issues": 0,
+        "export_status": "passed"
+      },
+      {
+        "variant": "focus",
+        "status": "completed",
+        "planner_mode": "offline",
+        "elapsed_seconds": 12.014,
+        "qa_status": "passed",
+        "qa_issues": 0,
+        "export_status": "passed"
+      }
+    ]
+  },
+  {
+    "template": "vk-education",
+    "analysis_seconds": 1.051,
+    "generation_seconds": 28.139,
+    "job_status": "completed",
+    "template_id": "shablon-prezentatsii-vk-education-9ef2323e",
+    "batch_id": "pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201223",
+    "variants": [
+      {
+        "variant": "balanced",
+        "status": "completed",
+        "planner_mode": "offline",
+        "elapsed_seconds": 8.672,
+        "qa_status": "passed",
+        "qa_issues": 0,
+        "export_status": "passed"
+      },
+      {
+        "variant": "columns",
+        "status": "completed",
+        "planner_mode": "offline",
+        "elapsed_seconds": 8.617,
+        "qa_status": "passed",
+        "qa_issues": 1,
+        "export_status": "passed"
+      },
+      {
+        "variant": "focus",
+        "status": "completed",
+        "planner_mode": "offline",
+        "elapsed_seconds": 8.81,
+        "qa_status": "passed",
+        "qa_issues": 0,
+        "export_status": "passed"
+      }
+    ]
+  },
+  {
+    "template": "unseen-brutalism",
+    "analysis_seconds": 0.845,
+    "generation_seconds": 27.647,
+    "job_status": "completed",
+    "template_id": "pptmaster-brutalism-field-guide-5c41309b",
+    "batch_id": "pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201252",
+    "variants": [
+      {
+        "variant": "balanced",
+        "status": "completed",
+        "planner_mode": "offline",
+        "elapsed_seconds": 8.932,
+        "qa_status": "warning",
+        "qa_issues": 25,
+        "export_status": "passed"
+      },
+      {
+        "variant": "columns",
+        "status": "completed",
+        "planner_mode": "offline",
+        "elapsed_seconds": 8.071,
+        "qa_status": "warning",
+        "qa_issues": 26,
+        "export_status": "passed"
+      },
+      {
+        "variant": "focus",
+        "status": "completed",
+        "planner_mode": "offline",
+        "elapsed_seconds": 8.557,
+        "qa_status": "warning",
+        "qa_issues": 25,
+        "export_status": "passed"
+      }
+    ]
+  }
+]

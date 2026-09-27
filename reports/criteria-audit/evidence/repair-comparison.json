@@ -1,0 +1,18 @@
+{
+  "selected": [
+    1
+  ],
+  "changed_plan_slides": [
+    1
+  ],
+  "old_issues": 18,
+  "new_issues": 18,
+  "old_export": "failed",
+  "new_export": "skipped",
+  "old_selected_codes": [
+    "decor_overlap"
+  ],
+  "new_selected_codes": [
+    "decor_overlap"
+  ]
+}

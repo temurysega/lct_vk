@@ -1,0 +1,13 @@
+Processing /tmp/branddeck-criteria-audit.TZjsAv/clean-source
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: branddeck-ai
+  Building wheel for branddeck-ai (pyproject.toml): started
+  Building wheel for branddeck-ai (pyproject.toml): finished with status 'done'
+  Created wheel for branddeck-ai: filename=branddeck_ai-0.1.0-py3-none-any.whl size=198134 sha256=f942244b6a5d9933745e90d6d596c6c24184b726ed45ff2f4dbfc36e4ca14485
+  Stored in directory: /private/tmp/branddeck-criteria-audit.TZjsAv/pip-cache/wheels/3c/31/04/c6c0471874b4ec4a3744270663d5313ad6a5eb16f2db6a00cb
+Successfully built branddeck-ai

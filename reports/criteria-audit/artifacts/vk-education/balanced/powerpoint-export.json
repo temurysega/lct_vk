@@ -1,0 +1,9 @@
+{
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "examples/export_powerpoint_macos.applescript:712:726: execution error: Получена ошибка от «Microsoft PowerPoint»: Произошла ошибка типа -9074. (-9074)\n",
+  "seconds": 0.121,
+  "pdf_exists": false,
+  "renderer": "Microsoft PowerPoint for macOS",
+  "retry_after_closing_timed_out_audit_document": true
+}

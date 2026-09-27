@@ -1,0 +1,230 @@
+{
+  "file": "artifacts/component-service/vk-education/component-service.pptx",
+  "sha256": "64813fc3dbf259e29ea161dd96a3265291656ebb6302e4b8eee11555c867ffa1",
+  "zip_error": null,
+  "slide_count": 10,
+  "smartart_parts": 0,
+  "chart_parts": 2,
+  "embedded_workbooks": 2,
+  "slides": [
+    {
+      "slide": 1,
+      "text_objects": 1,
+      "tables": 0,
+      "charts": 0,
+      "groups": 0,
+      "pictures": 0,
+      "min_explicit_font_pt": 36.0,
+      "text": [
+        "Проверка нативных объектов"
+      ],
+      "table_cells": [],
+      "chart_values": []
+    },
+    {
+      "slide": 2,
+      "text_objects": 1,
+      "tables": 0,
+      "charts": 1,
+      "groups": 0,
+      "pictures": 0,
+      "min_explicit_font_pt": 36.0,
+      "text": [
+        "Два подразделения: 60 и 90 участников"
+      ],
+      "table_cells": [],
+      "chart_values": [
+        [
+          [
+            60.0,
+            90.0
+          ]
+        ]
+      ]
+    },
+    {
+      "slide": 3,
+      "text_objects": 1,
+      "tables": 0,
+      "charts": 1,
+      "groups": 0,
+      "pictures": 0,
+      "min_explicit_font_pt": 36.0,
+      "text": [
+        "Доля участников по подразделениям"
+      ],
+      "table_cells": [],
+      "chart_values": [
+        [
+          [
+            60.0,
+            90.0
+          ]
+        ]
+      ]
+    },
+    {
+      "slide": 4,
+      "text_objects": 1,
+      "tables": 1,
+      "charts": 0,
+      "groups": 0,
+      "pictures": 0,
+      "min_explicit_font_pt": 36.0,
+      "text": [
+        "Пилот рассчитан на шесть недель"
+      ],
+      "table_cells": [
+        [
+          [
+            "Этап",
+            "Недели",
+            "Ответственный"
+          ],
+          [
+            "Подготовка",
+            "1–2",
+            "Аналитик"
+          ],
+          [
+            "Запуск",
+            "3–4",
+            "Инженер"
+          ],
+          [
+            "Оценка",
+            "5–6",
+            "Менеджер"
+          ]
+        ]
+      ],
+      "chart_values": []
+    },
+    {
+      "slide": 5,
+      "text_objects": 9,
+      "tables": 0,
+      "charts": 0,
+      "groups": 1,
+      "pictures": 0,
+      "min_explicit_font_pt": 14.0,
+      "text": [
+        "Проверяем путь обращения",
+        "01",
+        "Задать вопрос",
+        "02",
+        "Найти регламент",
+        "03",
+        "Показать источник",
+        "04",
+        "Передать специалисту"
+      ],
+      "table_cells": [],
+      "chart_values": []
+    },
+    {
+      "slide": 6,
+      "text_objects": 13,
+      "tables": 0,
+      "charts": 0,
+      "groups": 1,
+      "pictures": 0,
+      "min_explicit_font_pt": 12.0,
+      "text": [
+        "Качество улучшаем после проверки",
+        "01",
+        "02",
+        "03",
+        "04",
+        "01",
+        "Собрать",
+        "02",
+        "Проверить",
+        "03",
+        "Запустить",
+        "04",
+        "Измерить"
+      ],
+      "table_cells": [],
+      "chart_values": []
+    },
+    {
+      "slide": 7,
+      "text_objects": 5,
+      "tables": 0,
+      "charts": 0,
+      "groups": 1,
+      "pictures": 0,
+      "min_explicit_font_pt": 16.0,
+      "text": [
+        "У каждого участника есть роль",
+        "Команда пилота",
+        "Аналитик\nГотовит материалы",
+        "Инженер\nНастраивает сервис",
+        "Менеджер\nИзмеряет результаты"
+      ],
+      "table_cells": [],
+      "chart_values": []
+    },
+    {
+      "slide": 8,
+      "text_objects": 4,
+      "tables": 0,
+      "charts": 0,
+      "groups": 1,
+      "pictures": 0,
+      "min_explicit_font_pt": 18.0,
+      "text": [
+        "Измеряем три результата",
+        "Время поиска ответа",
+        "Доля обращений без специалиста",
+        "Оценка сотрудника"
+      ],
+      "table_cells": [],
+      "chart_values": []
+    },
+    {
+      "slide": 9,
+      "text_objects": 1,
+      "tables": 1,
+      "charts": 0,
+      "groups": 0,
+      "pictures": 0,
+      "min_explicit_font_pt": 36.0,
+      "text": [
+        "Решение принимаем по итогам пилота"
+      ],
+      "table_cells": [
+        [
+          [
+            "Метрика",
+            "Статус"
+          ],
+          [
+            "Время поиска",
+            "Будет измерено"
+          ],
+          [
+            "Качество ответа",
+            "Будет проверено"
+          ]
+        ]
+      ],
+      "chart_values": []
+    },
+    {
+      "slide": 10,
+      "text_objects": 1,
+      "tables": 0,
+      "charts": 0,
+      "groups": 0,
+      "pictures": 0,
+      "min_explicit_font_pt": 36.0,
+      "text": [
+        "Объекты доступны для редактирования"
+      ],
+      "table_cells": [],
+      "chart_values": []
+    }
+  ]
+}

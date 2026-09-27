@@ -1,0 +1,55 @@
+{
+  "finished_at": "2026-09-27T21:09:08.149684+03:00",
+  "branch": "main",
+  "commit": "4330625b355f1516cf00c3e9b94437b074ca6c49",
+  "status_short": "?? reports/criteria-audit/\n",
+  "tracked_diff_empty": true,
+  "source_files": [
+    {
+      "file": "/Users/areluv/Downloads/путь в ML p.1/vk/Шаблон презентации VK Education.pptx",
+      "sha256": "9ef2323ed5f49f464aee5ae7065f1f57bb92c8be3a635be507d59819e285cfe0",
+      "unchanged": true
+    },
+    {
+      "file": "/Users/areluv/Downloads/путь в ML p.1/vk/VK_WorkSpace_Клиентская_конференция_Шаблон_03.pptx",
+      "sha256": "1b8883114486c69dff706e9c4fd9382727c4506c2cfa3ec34f86987f1e852f2f",
+      "unchanged": true
+    },
+    {
+      "file": "/Users/areluv/Downloads/путь в ML p.1/vk/4. VK Tech.pdf",
+      "sha256": "ab9c3c45798b8a318213de095179f23d63bd423cdd95dc80b38d83a128c6e9df",
+      "unchanged": true
+    },
+    {
+      "file": "/Users/areluv/Downloads/путь в ML p.1/vk/VK Tech шаблон.pptx",
+      "sha256": "cbbe3aa6a21d23cebc4d1383b93dd07a9cea460d683de1903567b616c839485d",
+      "unchanged": true
+    },
+    {
+      "file": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/external-fixtures/expansion-20260922/templates/pptmaster-brutalism_field_guide.pptx",
+      "sha256": "5c41309bddb02ddc09c3fcf0591dbf5d4f24648493bc1a72b6d45adefa6dcaa2",
+      "unchanged": true
+    },
+    {
+      "file": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/external-fixtures/expansion-20260922/templates/onocom-powerpoint-template.pptx",
+      "sha256": "4bbb072ce87a0d82ebe1c7fcf63c694bc3c131cc1b904cddc242de3b544d88df",
+      "unchanged": true
+    }
+  ],
+  "observed_dependency_versions": {
+    "python-pptx": "1.0.2",
+    "Pillow": "12.3.0",
+    "PyMuPDF": "1.28.2",
+    "pytest": "9.1.1",
+    "ruff": "0.16.7",
+    "fastapi": "0.141.1",
+    "httpx": "0.28.1",
+    "uvicorn": "0.53.0"
+  },
+  "versions_match_baseline": true,
+  "audit_servers_stopped": true,
+  "temporary_renderer_detached": true,
+  "temporary_files": "/tmp/branddeck-criteria-audit.TZjsAv",
+  "published": false,
+  "product_changed": false
+}

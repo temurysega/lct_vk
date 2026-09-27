@@ -1,0 +1,72 @@
+{
+  "status": "passed",
+  "renderer": "libreoffice",
+  "artifacts": {
+    "pdf": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/component-visuals/vk-education/libreoffice-export/output.pdf",
+    "html": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/component-visuals/vk-education/libreoffice-export/output.html"
+  },
+  "previews": [
+    {
+      "slide": 1,
+      "path": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/component-visuals/vk-education/libreoffice-export/slide-1.png",
+      "width": 960.0094604492188,
+      "height": 540.0
+    },
+    {
+      "slide": 2,
+      "path": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/component-visuals/vk-education/libreoffice-export/slide-2.png",
+      "width": 960.0094604492188,
+      "height": 540.0
+    },
+    {
+      "slide": 3,
+      "path": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/component-visuals/vk-education/libreoffice-export/slide-3.png",
+      "width": 960.0094604492188,
+      "height": 540.0
+    },
+    {
+      "slide": 4,
+      "path": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/component-visuals/vk-education/libreoffice-export/slide-4.png",
+      "width": 960.0094604492188,
+      "height": 540.0
+    },
+    {
+      "slide": 5,
+      "path": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/component-visuals/vk-education/libreoffice-export/slide-5.png",
+      "width": 960.0094604492188,
+      "height": 540.0
+    },
+    {
+      "slide": 6,
+      "path": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/component-visuals/vk-education/libreoffice-export/slide-6.png",
+      "width": 960.0094604492188,
+      "height": 540.0
+    },
+    {
+      "slide": 7,
+      "path": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/component-visuals/vk-education/libreoffice-export/slide-7.png",
+      "width": 960.0094604492188,
+      "height": 540.0
+    },
+    {
+      "slide": 8,
+      "path": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/component-visuals/vk-education/libreoffice-export/slide-8.png",
+      "width": 960.0094604492188,
+      "height": 540.0
+    },
+    {
+      "slide": 9,
+      "path": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/component-visuals/vk-education/libreoffice-export/slide-9.png",
+      "width": 960.0094604492188,
+      "height": 540.0
+    },
+    {
+      "slide": 10,
+      "path": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/component-visuals/vk-education/libreoffice-export/slide-10.png",
+      "width": 960.0094604492188,
+      "height": 540.0
+    }
+  ],
+  "issues": [],
+  "slide_count": 10
+}

@@ -1,0 +1,2 @@
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+{"decks": 30, "diversity": [{"template": "with-renderer/artifacts/vk-tech", "status": "passed"}, {"template": "with-renderer/artifacts/unseen-brutalism", "status": "needs_review"}, {"template": "with-renderer/artifacts/vk-education", "status": "passed"}, {"template": "with-renderer/artifacts/vk-workspace", "status": "passed"}, {"template": "additional-unseen/artifacts/unseen-onocom", "status": "passed"}]}

@@ -1,0 +1,2188 @@
+{
+  "output": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201235/output.pptx",
+  "slide_count": 10,
+  "patterns_used": [
+    "slide-15",
+    "slide-6",
+    "slide-9",
+    "slide-6",
+    "slide-5",
+    "slide-5",
+    "slide-6",
+    "slide-2",
+    "slide-5",
+    "slide-13"
+  ],
+  "source_patterns": [
+    "slide-15",
+    "slide-6",
+    "slide-9",
+    "slide-6",
+    "slide-5",
+    "slide-5",
+    "slide-6",
+    "slide-2",
+    "slide-5",
+    "slide-13"
+  ],
+  "composition_mode": "template_layout",
+  "visuals": {
+    "diagrams": 7,
+    "pictograms": 26,
+    "images": 1,
+    "illustrations": 0,
+    "by_type": {
+      "icon_grid": 7,
+      "image": 1
+    },
+    "slides": [
+      {
+        "slide": 2,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 1,
+        "icons": [
+          "users",
+          "file-text",
+          "headset",
+          "user"
+        ],
+        "icon_matches": 4,
+        "origin": "offline_rules"
+      },
+      {
+        "slide": 3,
+        "type": "image",
+        "asset_id": "ce1df8e504b38abe",
+        "source": "upload",
+        "match": "lexical",
+        "placement": "zone"
+      },
+      {
+        "slide": 4,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 1,
+        "icons": [
+          "building",
+          "circle-help",
+          "file-text",
+          "circle-check"
+        ],
+        "icon_matches": 4,
+        "origin": "offline_rules"
+      },
+      {
+        "slide": 5,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 1,
+        "icons": [
+          "users",
+          "life-buoy",
+          "circle-check",
+          "user"
+        ],
+        "icon_matches": 4,
+        "origin": "rendered_fill"
+      },
+      {
+        "slide": 6,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 1,
+        "icons": [
+          "brain",
+          "file-text",
+          "circle-check",
+          "user"
+        ],
+        "icon_matches": 4,
+        "origin": "offline_rules"
+      },
+      {
+        "slide": 7,
+        "type": "icon_grid",
+        "items": 3,
+        "native": true,
+        "columns": 1,
+        "icons": [
+          "rocket",
+          "hourglass",
+          "user"
+        ],
+        "icon_matches": 3,
+        "origin": "rendered_fill"
+      },
+      {
+        "slide": 8,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 1,
+        "icons": [
+          "users",
+          "chart-column",
+          "target",
+          "trophy"
+        ],
+        "icon_matches": 4,
+        "origin": "rendered_fill"
+      },
+      {
+        "slide": 9,
+        "type": "icon_grid",
+        "items": 3,
+        "native": true,
+        "columns": 1,
+        "icons": [
+          "rocket",
+          "users",
+          "chart-column"
+        ],
+        "icon_matches": 3,
+        "origin": "rendered_fill"
+      }
+    ],
+    "note": "Diagrams are native grouped shapes (SmartArt-style), not OOXML SmartArt parts."
+  },
+  "exemplar_cleanup": [
+    {
+      "slide": 1,
+      "removed": [
+        {
+          "shape": "Group 6",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 8",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 10",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 12",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 16",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 20",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 22",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 25",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 2,
+      "removed": [
+        {
+          "shape": "Line 5",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Group 8",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 10",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 12",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 23",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 27",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 30",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 33",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Group 36",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 3,
+      "removed": [
+        {
+          "shape": "Group 7",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 9",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 11",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 42",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 45",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 4,
+      "removed": [
+        {
+          "shape": "Line 5",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Group 8",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 10",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 12",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 23",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 27",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 30",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 33",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Group 36",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 5,
+      "removed": [
+        {
+          "shape": "Line 5",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Group 8",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 10",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 12",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 16",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 29",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 32",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 34",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 37",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 6,
+      "removed": [
+        {
+          "shape": "Line 5",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Group 8",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 10",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 12",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 16",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 29",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 32",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 34",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 37",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 7,
+      "removed": [
+        {
+          "shape": "Line 5",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Group 8",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 10",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 12",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 23",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 27",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 30",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 33",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Group 36",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 8,
+      "removed": [
+        {
+          "shape": "Group 7",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "!!guide-numeral",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 11",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 17",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 20",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Freeform 21",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Group 31",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 34",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 9,
+      "removed": [
+        {
+          "shape": "Line 5",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Group 8",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 10",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 12",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 16",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 29",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 32",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 34",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 37",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 10,
+      "removed": [
+        {
+          "shape": "Group 7",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 9",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 11",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 76",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 78",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 81",
+          "reason": "erased_sample"
+        }
+      ]
+    }
+  ],
+  "presentation_id": "pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201235",
+  "presentation_dir": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201235",
+  "template_id": "pptmaster-brutalism-field-guide-5c41309b",
+  "template_dir": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/templates/pptmaster-brutalism-field-guide-5c41309b",
+  "source": "brief.md",
+  "inference_configured": false,
+  "inference_used": false,
+  "planner_mode": "offline",
+  "qa": {
+    "status": "warning",
+    "score": 0,
+    "output": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201235/output.pptx",
+    "file_size_bytes": 1782681,
+    "slide_count": 10,
+    "canvas": {
+      "width_inches": 13.333333333333334,
+      "height_inches": 7.5
+    },
+    "explicit_fonts": [
+      "Consolas"
+    ],
+    "issues": [
+      {
+        "severity": "warning",
+        "code": "decor_overlap",
+        "shape": "Line 3 / BrandDeck Title",
+        "ratio": 0.14,
+        "bounds": [
+          {
+            "x": 0.5,
+            "y": 0.6667,
+            "w": 12.3333,
+            "h": 0.0104
+          },
+          {
+            "x": 3.42,
+            "y": 0.45,
+            "w": 6.49,
+            "h": 0.8
+          }
+        ],
+        "message": "Контент закрывает логотип или орнамент шаблона",
+        "slide": 1,
+        "id": "92f85816b9c9c9f4",
+        "check_type": "deterministic",
+        "repairable": true
+      },
+      {
+        "severity": "warning",
+        "code": "decor_overlap",
+        "shape": "Line 3 / BrandDeck Title",
+        "ratio": 0.07,
+        "bounds": [
+          {
+            "x": 0.5,
+            "y": 0.6667,
+            "w": 12.3333,
+            "h": 0.0104
+          },
+          {
+            "x": 3.42,
+            "y": 0.45,
+            "w": 6.49,
+            "h": 0.8
+          }
+        ],
+        "message": "Контент закрывает логотип или орнамент шаблона",
+        "slide": 2,
+        "id": "4d8821952edcce2d",
+        "check_type": "deterministic",
+        "repairable": true
+      },
+      {
+        "severity": "warning",
+        "code": "decor_overlap",
+        "shape": "Rectangle 4 / BrandDeck Diagram Card 1",
+        "ratio": 0.08,
+        "bounds": [
+          {
+            "x": 0.0,
+            "y": 1.5625,
+            "w": 13.3333,
+            "h": 0.0833
+          },
+          {
+            "x": 3.42,
+            "y": 1.4,
+            "w": 3.16,
+            "h": 1.3225
+          }
+        ],
+        "message": "Контент закрывает логотип или орнамент шаблона",
+        "slide": 2,
+        "id": "2cb7ef0c6eebd09a",
+        "check_type": "deterministic",
+        "repairable": true
+      },
+      {
+        "severity": "warning",
+        "code": "decor_overlap",
+        "shape": "Line 3 / BrandDeck Title",
+        "ratio": 0.07,
+        "bounds": [
+          {
+            "x": 0.5,
+            "y": 0.6667,
+            "w": 12.3333,
+            "h": 0.0104
+          },
+          {
+            "x": 3.42,
+            "y": 0.45,
+            "w": 6.49,
+            "h": 0.8
+          }
+        ],
+        "message": "Контент закрывает логотип или орнамент шаблона",
+        "slide": 3,
+        "id": "30fc0d718fba00b6",
+        "check_type": "deterministic",
+        "repairable": true
+      },
+      {
+        "severity": "warning",
+        "code": "decor_overlap",
+        "shape": "Rectangle 4 / BrandDeck Image",
+        "ratio": 0.02,
+        "bounds": [
+          {
+            "x": 0.0,
+            "y": 1.5625,
+            "w": 13.3333,
+            "h": 0.0833
+          },
+          {
+            "x": 4.9504,
+            "y": 1.4,
+            "w": 1.6296,
+            "h": 5.65
+          }
+        ],
+        "message": "Контент закрывает логотип или орнамент шаблона",
+        "slide": 3,
+        "id": "d05bdaf359fe3077",
+        "check_type": "deterministic",
+        "repairable": true
+      },
+      {
+        "severity": "warning",
+        "code": "decor_overlap",
+        "shape": "Line 3 / BrandDeck Title",
+        "ratio": 0.07,
+        "bounds": [
+          {
+            "x": 0.5,
+            "y": 0.6667,
+            "w": 12.3333,
+            "h": 0.0104
+          },
+          {
+            "x": 3.42,
+            "y": 0.45,
+            "w": 6.49,
+            "h": 0.8
+          }
+        ],
+        "message": "Контент закрывает логотип или орнамент шаблона",
+        "slide": 4,
+        "id": "3afeec6bc27094aa",
+        "check_type": "deterministic",
+        "repairable": true
+      },
+      {
+        "severity": "warning",
+        "code": "decor_overlap",
+        "shape": "Rectangle 4 / BrandDeck Diagram Card 1",
+        "ratio": 0.08,
+        "bounds": [
+          {
+            "x": 0.0,
+            "y": 1.5625,
+            "w": 13.3333,
+            "h": 0.0833
+          },
+          {
+            "x": 3.42,
+            "y": 1.4,
+            "w": 3.16,
+            "h": 1.3225
+          }
+        ],
+        "message": "Контент закрывает логотип или орнамент шаблона",
+        "slide": 4,
+        "id": "07eb6123e59ad2b6",
+        "check_type": "deterministic",
+        "repairable": true
+      },
+      {
+        "severity": "warning",
+        "code": "decor_overlap",
+        "shape": "Line 3 / BrandDeck Title",
+        "ratio": 0.07,
+        "bounds": [
+          {
+            "x": 0.5,
+            "y": 0.6667,
+            "w": 12.3333,
+            "h": 0.0104
+          },
+          {
+            "x": 3.42,
+            "y": 0.45,
+            "w": 6.49,
+            "h": 0.8
+          }
+        ],
+        "message": "Контент закрывает логотип или орнамент шаблона",
+        "slide": 5,
+        "id": "9dc12b97e8c90bd6",
+        "check_type": "deterministic",
+        "repairable": true
+      },
+      {
+        "severity": "warning",
+        "code": "decor_overlap",
+        "shape": "Rectangle 4 / BrandDeck Diagram Card 1",
+        "ratio": 0.08,
+        "bounds": [
+          {
+            "x": 0.0,
+            "y": 1.5625,
+            "w": 13.3333,
+            "h": 0.0833
+          },
+          {
+            "x": 3.42,
+            "y": 1.4,
+            "w": 3.16,
+            "h": 1.3225
+          }
+        ],
+        "message": "Контент закрывает логотип или орнамент шаблона",
+        "slide": 5,
+        "id": "b6d34d6ea327d133",
+        "check_type": "deterministic",
+        "repairable": true
+      },
+      {
+        "severity": "warning",
+        "code": "decor_overlap",
+        "shape": "Line 3 / BrandDeck Title",
+        "ratio": 0.08,
+        "bounds": [
+          {
+            "x": 0.5,
+            "y": 0.6667,
+            "w": 12.3333,
+            "h": 0.0104
+          },
+          {
+            "x": 3.42,
+            "y": 0.45,
+            "w": 6.49,
+            "h": 0.8
+          }
+        ],
+        "message": "Контент закрывает логотип или орнамент шаблона",
+        "slide": 6,
+        "id": "92fe89975b6a22ce",
+        "check_type": "deterministic",
+        "repairable": true
+      },
+      {
+        "severity": "warning",
+        "code": "decor_overlap",
+        "shape": "Rectangle 4 / BrandDeck Diagram Card 1",
+        "ratio": 0.08,
+        "bounds": [
+          {
+            "x": 0.0,
+            "y": 1.5625,
+            "w": 13.3333,
+            "h": 0.0833
+          },
+          {
+            "x": 3.42,
+            "y": 1.4,
+            "w": 3.16,
+            "h": 1.3225
+          }
+        ],
+        "message": "Контент закрывает логотип или орнамент шаблона",
+        "slide": 6,
+        "id": "0954906c7a0a99bd",
+        "check_type": "deterministic",
+        "repairable": true
+      },
+      {
+        "severity": "warning",
+        "code": "decor_overlap",
+        "shape": "Line 3 / BrandDeck Title",
+        "ratio": 0.07,
+        "bounds": [
+          {
+            "x": 0.5,
+            "y": 0.6667,
+            "w": 12.3333,
+            "h": 0.0104
+          },
+          {
+            "x": 3.42,
+            "y": 0.45,
+            "w": 6.49,
+            "h": 0.8
+          }
+        ],
+        "message": "Контент закрывает логотип или орнамент шаблона",
+        "slide": 7,
+        "id": "7f2f807a4c8baacc",
+        "check_type": "deterministic",
+        "repairable": true
+      },
+      {
+        "severity": "warning",
+        "code": "decor_overlap",
+        "shape": "Rectangle 4 / BrandDeck Diagram Card 1",
+        "ratio": 0.06,
+        "bounds": [
+          {
+            "x": 0.0,
+            "y": 1.5625,
+            "w": 13.3333,
+            "h": 0.0833
+          },
+          {
+            "x": 3.42,
+            "y": 1.4,
+            "w": 3.16,
+            "h": 1.8033
+          }
+        ],
+        "message": "Контент закрывает логотип или орнамент шаблона",
+        "slide": 7,
+        "id": "a2a5c82fa2f7d517",
+        "check_type": "deterministic",
+        "repairable": true
+      },
+      {
+        "severity": "warning",
+        "code": "decor_overlap",
+        "shape": "Line 3 / BrandDeck Title",
+        "ratio": 0.07,
+        "bounds": [
+          {
+            "x": 0.5,
+            "y": 0.6667,
+            "w": 12.3333,
+            "h": 0.0104
+          },
+          {
+            "x": 3.42,
+            "y": 0.45,
+            "w": 6.49,
+            "h": 0.8
+          }
+        ],
+        "message": "Контент закрывает логотип или орнамент шаблона",
+        "slide": 8,
+        "id": "92d260be33b2e60f",
+        "check_type": "deterministic",
+        "repairable": true
+      },
+      {
+        "severity": "warning",
+        "code": "decor_overlap",
+        "shape": "Rectangle 4 / BrandDeck Diagram Card 1",
+        "ratio": 0.08,
+        "bounds": [
+          {
+            "x": 0.0,
+            "y": 1.5625,
+            "w": 13.3333,
+            "h": 0.0833
+          },
+          {
+            "x": 3.42,
+            "y": 1.4,
+            "w": 3.16,
+            "h": 1.3225
+          }
+        ],
+        "message": "Контент закрывает логотип или орнамент шаблона",
+        "slide": 8,
+        "id": "336fccaf159c0625",
+        "check_type": "deterministic",
+        "repairable": true
+      },
+      {
+        "severity": "warning",
+        "code": "decor_overlap",
+        "shape": "Line 3 / BrandDeck Title",
+        "ratio": 0.14,
+        "bounds": [
+          {
+            "x": 0.5,
+            "y": 0.6667,
+            "w": 12.3333,
+            "h": 0.0104
+          },
+          {
+            "x": 3.42,
+            "y": 0.45,
+            "w": 6.49,
+            "h": 0.8
+          }
+        ],
+        "message": "Контент закрывает логотип или орнамент шаблона",
+        "slide": 9,
+        "id": "c5af2f81a5bc297e",
+        "check_type": "deterministic",
+        "repairable": true
+      },
+      {
+        "severity": "warning",
+        "code": "decor_overlap",
+        "shape": "Rectangle 4 / BrandDeck Diagram Card 1",
+        "ratio": 0.06,
+        "bounds": [
+          {
+            "x": 0.0,
+            "y": 1.5625,
+            "w": 13.3333,
+            "h": 0.0833
+          },
+          {
+            "x": 3.42,
+            "y": 1.4,
+            "w": 3.16,
+            "h": 1.8033
+          }
+        ],
+        "message": "Контент закрывает логотип или орнамент шаблона",
+        "slide": 9,
+        "id": "bb2ab282792fae0f",
+        "check_type": "deterministic",
+        "repairable": true
+      },
+      {
+        "severity": "warning",
+        "code": "decor_overlap",
+        "shape": "Line 3 / BrandDeck Title",
+        "ratio": 0.09,
+        "bounds": [
+          {
+            "x": 0.5,
+            "y": 0.6667,
+            "w": 12.3333,
+            "h": 0.0104
+          },
+          {
+            "x": 3.42,
+            "y": 0.45,
+            "w": 6.49,
+            "h": 0.8
+          }
+        ],
+        "message": "Контент закрывает логотип или орнамент шаблона",
+        "slide": 10,
+        "id": "e73e09cd61c046aa",
+        "check_type": "deterministic",
+        "repairable": true
+      },
+      {
+        "id": "0e329e826d00260a",
+        "slide": 2,
+        "code": "slide_underfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.222,
+        "bounds": [],
+        "message": "Контент занимает 22% слайда (меньше четверти)",
+        "repairable": true
+      },
+      {
+        "id": "60e1f26014181938",
+        "slide": 3,
+        "code": "slide_underfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.192,
+        "bounds": [],
+        "message": "Контент занимает 19% слайда (меньше четверти)",
+        "repairable": true
+      },
+      {
+        "id": "55ffb45390dd8f3c",
+        "slide": 4,
+        "code": "slide_underfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.221,
+        "bounds": [],
+        "message": "Контент занимает 22% слайда (меньше четверти)",
+        "repairable": true
+      },
+      {
+        "id": "bfc67155b2c4d0c5",
+        "slide": 5,
+        "code": "slide_underfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.225,
+        "bounds": [],
+        "message": "Контент занимает 22% слайда (меньше четверти)",
+        "repairable": true
+      },
+      {
+        "id": "c81b1640d0571921",
+        "slide": 6,
+        "code": "slide_underfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.219,
+        "bounds": [],
+        "message": "Контент занимает 22% слайда (меньше четверти)",
+        "repairable": true
+      },
+      {
+        "id": "30fe899dba4378b0",
+        "slide": 7,
+        "code": "slide_underfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.218,
+        "bounds": [],
+        "message": "Контент занимает 22% слайда (меньше четверти)",
+        "repairable": true
+      },
+      {
+        "id": "efbf8955dcfa0d2a",
+        "slide": 8,
+        "code": "slide_underfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.221,
+        "bounds": [],
+        "message": "Контент занимает 22% слайда (меньше четверти)",
+        "repairable": true
+      },
+      {
+        "id": "2f6a0bf465081742",
+        "slide": 9,
+        "code": "slide_underfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.226,
+        "bounds": [],
+        "message": "Контент занимает 23% слайда (меньше четверти)",
+        "repairable": true
+      }
+    ],
+    "slides": [
+      {
+        "slide": 1,
+        "shape_count": 5,
+        "text_shape_count": 1
+      },
+      {
+        "slide": 2,
+        "shape_count": 6,
+        "text_shape_count": 5
+      },
+      {
+        "slide": 3,
+        "shape_count": 7,
+        "text_shape_count": 2
+      },
+      {
+        "slide": 4,
+        "shape_count": 6,
+        "text_shape_count": 5
+      },
+      {
+        "slide": 5,
+        "shape_count": 6,
+        "text_shape_count": 5
+      },
+      {
+        "slide": 6,
+        "shape_count": 6,
+        "text_shape_count": 5
+      },
+      {
+        "slide": 7,
+        "shape_count": 6,
+        "text_shape_count": 4
+      },
+      {
+        "slide": 8,
+        "shape_count": 6,
+        "text_shape_count": 5
+      },
+      {
+        "slide": 9,
+        "shape_count": 6,
+        "text_shape_count": 4
+      },
+      {
+        "slide": 10,
+        "shape_count": 6,
+        "text_shape_count": 2
+      }
+    ],
+    "powerpoint_render": {
+      "status": "skipped",
+      "score": null,
+      "renderer": "powerpoint_com",
+      "issues": [],
+      "previews": []
+    },
+    "content_coverage": "literal_coverage_complete",
+    "schema_version": "2.0",
+    "rendered_visual_audit": {
+      "status": "passed",
+      "checked_spans": 133,
+      "uncertain_spans": 0,
+      "issues": [],
+      "repairs": []
+    },
+    "rendered_fill_audit": {
+      "status": "warning",
+      "slides": [
+        {
+          "slide": 2,
+          "coverage": 0.222
+        },
+        {
+          "slide": 3,
+          "coverage": 0.192
+        },
+        {
+          "slide": 4,
+          "coverage": 0.221
+        },
+        {
+          "slide": 5,
+          "coverage": 0.225
+        },
+        {
+          "slide": 6,
+          "coverage": 0.219
+        },
+        {
+          "slide": 7,
+          "coverage": 0.218
+        },
+        {
+          "slide": 8,
+          "coverage": 0.221
+        },
+        {
+          "slide": 9,
+          "coverage": 0.226
+        }
+      ],
+      "issues": [
+        {
+          "id": "0e329e826d00260a",
+          "slide": 2,
+          "code": "slide_underfilled",
+          "severity": "warning",
+          "check_type": "deterministic",
+          "coverage": 0.222,
+          "bounds": [],
+          "message": "Контент занимает 22% слайда (меньше четверти)",
+          "repairable": true
+        },
+        {
+          "id": "60e1f26014181938",
+          "slide": 3,
+          "code": "slide_underfilled",
+          "severity": "warning",
+          "check_type": "deterministic",
+          "coverage": 0.192,
+          "bounds": [],
+          "message": "Контент занимает 19% слайда (меньше четверти)",
+          "repairable": true
+        },
+        {
+          "id": "55ffb45390dd8f3c",
+          "slide": 4,
+          "code": "slide_underfilled",
+          "severity": "warning",
+          "check_type": "deterministic",
+          "coverage": 0.221,
+          "bounds": [],
+          "message": "Контент занимает 22% слайда (меньше четверти)",
+          "repairable": true
+        },
+        {
+          "id": "bfc67155b2c4d0c5",
+          "slide": 5,
+          "code": "slide_underfilled",
+          "severity": "warning",
+          "check_type": "deterministic",
+          "coverage": 0.225,
+          "bounds": [],
+          "message": "Контент занимает 22% слайда (меньше четверти)",
+          "repairable": true
+        },
+        {
+          "id": "c81b1640d0571921",
+          "slide": 6,
+          "code": "slide_underfilled",
+          "severity": "warning",
+          "check_type": "deterministic",
+          "coverage": 0.219,
+          "bounds": [],
+          "message": "Контент занимает 22% слайда (меньше четверти)",
+          "repairable": true
+        },
+        {
+          "id": "30fe899dba4378b0",
+          "slide": 7,
+          "code": "slide_underfilled",
+          "severity": "warning",
+          "check_type": "deterministic",
+          "coverage": 0.218,
+          "bounds": [],
+          "message": "Контент занимает 22% слайда (меньше четверти)",
+          "repairable": true
+        },
+        {
+          "id": "efbf8955dcfa0d2a",
+          "slide": 8,
+          "code": "slide_underfilled",
+          "severity": "warning",
+          "check_type": "deterministic",
+          "coverage": 0.221,
+          "bounds": [],
+          "message": "Контент занимает 22% слайда (меньше четверти)",
+          "repairable": true
+        },
+        {
+          "id": "2f6a0bf465081742",
+          "slide": 9,
+          "code": "slide_underfilled",
+          "severity": "warning",
+          "check_type": "deterministic",
+          "coverage": 0.226,
+          "bounds": [],
+          "message": "Контент занимает 23% слайда (меньше четверти)",
+          "repairable": true
+        }
+      ]
+    },
+    "structural_score": 0,
+    "contextual_audit": {
+      "status": "not_run",
+      "reason": "No configured model or audit disabled"
+    }
+  },
+  "content_coverage": {
+    "method": "literal_source_units_v1",
+    "semantic_verification": "not_performed",
+    "source_sha256": "90549b837bd647f9617199d9fbe59046f9652b3b00e0835008b8aeabda53b444",
+    "status": "literal_coverage_complete",
+    "units": [
+      {
+        "source_id": "s0001",
+        "text": "Пилот ИИ-помощника по внутренним регламентам",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0002",
+        "text": "Поиск инструкции занимает до 30 минут, треть обращений повторяется",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0003",
+        "text": "Сотрудник тратит до 30 минут на поиск нужной инструкции.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0004",
+        "text": "Регламенты находятся в нескольких источниках, и поиск отвлекает от основной работы.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0005",
+        "text": "Треть обращений в поддержку — повторяющиеся вопросы.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0006",
+        "text": "Специалисты снова тратят время на поиск одного и того же ответа.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0007",
+        "text": "Сотруднику нужен источник ответа, специалисту — контекст вопроса",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0008",
+        "text": "Сотруднику нужен понятный ответ со ссылкой на документ-источник.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0009",
+        "text": "Специалисту нужен контекст вопроса, если автоматического ответа недостаточно.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0010",
+        "text": "Передача вопроса вместе с контекстом избавляет сотрудника от повторного объяснения.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0011",
+        "text": "ИИ-помощник отвечает по регламентам и передаёт сложные вопросы специалисту",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0012",
+        "text": "ИИ-помощник работает во внутреннем портале компании.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0013",
+        "text": "Он принимает вопрос сотрудника и ищет подходящий регламент.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0014",
+        "text": "Ответ сопровождается ссылкой на документ-источник.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0015",
+        "text": "Если подтверждённого ответа нет, вопрос принимает специалист поддержки.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0016",
+        "text": "Вопрос проходит путь от портала до ответа со ссылкой или эскалации",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0017",
+        "text": "Сотрудник задаёт вопрос во внутреннем портале.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0018",
+        "text": "Помощник ищет ответ в регламентах и показывает источник.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0019",
+        "text": "При отсутствии подтверждённого ответа вопрос передаётся специалисту.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0020",
+        "text": "Специалист получает контекст исходного обращения.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0021",
+        "text": "Документы остаются внутри контура, неподтверждённый ответ проверяет специалист",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0022",
+        "text": "Модель с открытыми весами работает внутри контура компании.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0023",
+        "text": "Документы не уходят наружу при обработке запроса.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0024",
+        "text": "Инструкция может устареть или не дать подтверждённого ответа.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0025",
+        "text": "В таком случае вопрос передаётся специалисту; ссылку на источник можно проверить.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0026",
+        "text": "Пилот охватит 150 сотрудников двух подразделений за 6 недель",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0027",
+        "text": "Пилот охватывает 2 подразделения и 150 сотрудников.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0028",
+        "text": "Продолжительность пилота — 6 недель.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0029",
+        "text": "В пилоте проверяются ответы по регламентам и передача вопросов специалисту.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0030",
+        "text": "Успех измерят временем поиска и долей обращений без специалиста",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0031",
+        "text": "Команда измеряет время поиска ответа.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0032",
+        "text": "Также измеряется доля обращений, закрытых без специалиста.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0033",
+        "text": "Целевые значения согласуются до запуска.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0034",
+        "text": "Фактических результатов пилота пока нет.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0035",
+        "text": "Команда из 3 человек подготовит и проверит пилот",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0036",
+        "text": "Просим одобрить пилот и выделить команду из 3 человек.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0037",
+        "text": "Команда готовит инструкции, проверяет ответы и сопровождает запуск.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0038",
+        "text": "Дальнейшее использование решается после измерения результатов и обратной связи.",
+        "in_plan": true,
+        "in_pptx": true
+      }
+    ],
+    "missing_from_plan": [],
+    "missing_from_pptx": [],
+    "unsupported_numbers": [],
+    "note": "Unmatched paraphrases are not proof of omission; speaker notes do not count as slide content."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "render_pass": 1,
+      "qa_status": "warning",
+      "qa_score": 24,
+      "feedback": [
+        {
+          "slide": 1,
+          "pattern_id": "slide-1",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 2,
+          "pattern_id": "slide-8",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 2,
+          "pattern_id": "slide-8",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 3,
+          "pattern_id": "slide-7",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 3,
+          "pattern_id": "slide-7",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 3,
+          "pattern_id": "slide-7",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 4,
+          "pattern_id": "slide-8",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 4,
+          "pattern_id": "slide-8",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 5,
+          "pattern_id": "slide-8",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 5,
+          "pattern_id": "slide-8",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 6,
+          "pattern_id": "slide-8",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 6,
+          "pattern_id": "slide-8",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 7,
+          "pattern_id": "slide-8",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 7,
+          "pattern_id": "slide-8",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 8,
+          "pattern_id": "slide-8",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 8,
+          "pattern_id": "slide-8",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 9,
+          "pattern_id": "slide-12",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 9,
+          "pattern_id": "slide-12",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 10,
+          "pattern_id": "slide-16",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        }
+      ]
+    },
+    {
+      "attempt": 2,
+      "render_pass": 1,
+      "qa_status": "warning",
+      "qa_score": 24,
+      "feedback": [
+        {
+          "slide": 1,
+          "pattern_id": "slide-10",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 2,
+          "pattern_id": "slide-9",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 2,
+          "pattern_id": "slide-9",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 3,
+          "pattern_id": "slide-12",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 3,
+          "pattern_id": "slide-12",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 4,
+          "pattern_id": "slide-9",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 4,
+          "pattern_id": "slide-9",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 5,
+          "pattern_id": "slide-12",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 5,
+          "pattern_id": "slide-12",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 6,
+          "pattern_id": "slide-9",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 6,
+          "pattern_id": "slide-9",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 7,
+          "pattern_id": "slide-7",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 7,
+          "pattern_id": "slide-7",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 7,
+          "pattern_id": "slide-7",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 8,
+          "pattern_id": "slide-12",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 8,
+          "pattern_id": "slide-12",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 9,
+          "pattern_id": "slide-8",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 9,
+          "pattern_id": "slide-8",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 10,
+          "pattern_id": "slide-11",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        }
+      ]
+    },
+    {
+      "attempt": 3,
+      "render_pass": 1,
+      "qa_status": "warning",
+      "qa_score": 24
+    },
+    {
+      "attempt": 1,
+      "render_pass": 2,
+      "qa_status": "warning",
+      "qa_score": 24,
+      "feedback": [
+        {
+          "slide": 1,
+          "pattern_id": "slide-11",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 2,
+          "pattern_id": "slide-7",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 2,
+          "pattern_id": "slide-7",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 2,
+          "pattern_id": "slide-7",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 3,
+          "pattern_id": "slide-1",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 4,
+          "pattern_id": "slide-7",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 4,
+          "pattern_id": "slide-7",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 4,
+          "pattern_id": "slide-7",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 5,
+          "pattern_id": "slide-2",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 5,
+          "pattern_id": "slide-2",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 6,
+          "pattern_id": "slide-12",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 6,
+          "pattern_id": "slide-12",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 7,
+          "pattern_id": "slide-9",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 7,
+          "pattern_id": "slide-9",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 8,
+          "pattern_id": "slide-6",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 8,
+          "pattern_id": "slide-6",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 9,
+          "pattern_id": "slide-9",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 9,
+          "pattern_id": "slide-9",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 10,
+          "pattern_id": "slide-10",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        }
+      ]
+    },
+    {
+      "attempt": 2,
+      "render_pass": 2,
+      "qa_status": "warning",
+      "qa_score": 16,
+      "feedback": [
+        {
+          "slide": 1,
+          "pattern_id": "slide-13",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 2,
+          "pattern_id": "slide-5",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 2,
+          "pattern_id": "slide-5",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 3,
+          "pattern_id": "slide-8",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 3,
+          "pattern_id": "slide-8",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 4,
+          "pattern_id": "slide-5",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 4,
+          "pattern_id": "slide-5",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 5,
+          "pattern_id": "slide-7",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 5,
+          "pattern_id": "slide-7",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 5,
+          "pattern_id": "slide-7",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 6,
+          "pattern_id": "slide-6",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 6,
+          "pattern_id": "slide-6",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 7,
+          "pattern_id": "slide-2",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 7,
+          "pattern_id": "slide-2",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 8,
+          "pattern_id": "slide-7",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 8,
+          "pattern_id": "slide-7",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 8,
+          "pattern_id": "slide-7",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 9,
+          "pattern_id": "slide-2",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 9,
+          "pattern_id": "slide-2",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 10,
+          "pattern_id": "slide-15",
+          "code": "decor_overlap",
+          "message": "Контент закрывает логотип или орнамент шаблона"
+        },
+        {
+          "slide": 10,
+          "pattern_id": "slide-15",
+          "code": "decor_overlap",
+          "message": "Контент лежит поперёк декоративного элемента шаблона"
+        }
+      ]
+    },
+    {
+      "attempt": 3,
+      "render_pass": 2,
+      "qa_status": "warning",
+      "qa_score": 28
+    }
+  ],
+  "cards_for_underfilled_slides": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "exports": {
+    "status": "passed",
+    "renderer": "libreoffice",
+    "artifacts": {
+      "pdf": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201235/exports/output.pdf",
+      "html": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201235/exports/output.html"
+    },
+    "previews": [
+      {
+        "slide": 1,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201235/exports/slide-1.png",
+        "width": 960.0094604492188,
+        "height": 540.0
+      },
+      {
+        "slide": 2,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201235/exports/slide-2.png",
+        "width": 960.0094604492188,
+        "height": 540.0
+      },
+      {
+        "slide": 3,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201235/exports/slide-3.png",
+        "width": 960.0094604492188,
+        "height": 540.0
+      },
+      {
+        "slide": 4,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201235/exports/slide-4.png",
+        "width": 960.0094604492188,
+        "height": 540.0
+      },
+      {
+        "slide": 5,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201235/exports/slide-5.png",
+        "width": 960.0094604492188,
+        "height": 540.0
+      },
+      {
+        "slide": 6,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201235/exports/slide-6.png",
+        "width": 960.0094604492188,
+        "height": 540.0
+      },
+      {
+        "slide": 7,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201235/exports/slide-7.png",
+        "width": 960.0094604492188,
+        "height": 540.0
+      },
+      {
+        "slide": 8,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201235/exports/slide-8.png",
+        "width": 960.0094604492188,
+        "height": 540.0
+      },
+      {
+        "slide": 9,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201235/exports/slide-9.png",
+        "width": 960.0094604492188,
+        "height": 540.0
+      },
+      {
+        "slide": 10,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201235/exports/slide-10.png",
+        "width": 960.0094604492188,
+        "height": 540.0
+      }
+    ],
+    "issues": [],
+    "slide_count": 10
+  },
+  "status": "completed",
+  "elapsed_seconds": 8.071,
+  "workflow": {
+    "version": "1.7.0",
+    "files": {
+      "planner": "planner-v3.txt",
+      "analyzer": "analyzer-v1.txt",
+      "image": "image-v1.txt",
+      "brief-outline": "brief-outline-v1.txt",
+      "brief-slide": "brief-slide-v3.txt",
+      "context-audit": "context-audit-v2.txt"
+    },
+    "sha256": {
+      "planner": "f332e0e3b2857ae86342b74cb05a4ac77b02feebde170ba760403842b70d6c5d",
+      "analyzer": "d317316d81afafb12f938f497821818ff192eb76f65480b95018f392dcb3508f",
+      "image": "510c07113d1dc9af82249f868c50bf5584a75d5e6f3440378e300496658d2878",
+      "brief-outline": "8a695dc3e1c995dca4267a6d5072b48040082ef0b706415fb6ae5cc9cc6561a0",
+      "brief-slide": "56f5239c5f4f4353d55ff4af28cb3cdc1a40f35ff1c26fc83ce41123e2867944",
+      "context-audit": "c0dafd5a36d06c86465f91a42e04739c5bdf4210267c8aa32634edac68994fa5"
+    },
+    "pictograms": {
+      "package": "lucide-react",
+      "version": "0.468.0",
+      "license": "ISC",
+      "icons": 135,
+      "keywords_sha256": "8ce713fec09f1d30c82065ad0d8480152ee77fcc6593c51c010d7a568941ff71"
+    }
+  },
+  "variant": {
+    "id": "columns",
+    "label": "Несколько блоков",
+    "axis": "layout_selection",
+    "content_sha256": "681fce16c52a310ca925602db0871524bb3e0f1c1f8e67ee0bd9974f7bec719d"
+  },
+  "revision": null,
+  "images": {
+    "available": 2,
+    "placed": 1,
+    "placements": [
+      {
+        "asset_id": "ce1df8e504b38abe",
+        "slide": 3,
+        "match": "lexical",
+        "score": 3.02
+      }
+    ],
+    "unplaced": [
+      {
+        "asset_id": "42c709acf2b59b60",
+        "origin": "01-внутренний_контур_серверная.png",
+        "reason": "no matching slide"
+      }
+    ],
+    "rejected": []
+  },
+  "image_generation": {
+    "enabled": false,
+    "model": null,
+    "generated": [],
+    "errors": []
+  }
+}

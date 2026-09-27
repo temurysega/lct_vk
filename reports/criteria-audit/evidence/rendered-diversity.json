@@ -1,0 +1,833 @@
+[
+  {
+    "status": "passed",
+    "method": "rendered_pixel_difference_v1",
+    "pixel_delta": 24,
+    "slide_changed_fraction": 0.02,
+    "eligible_slides": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "required_changed_slides_per_pair": 2,
+    "pairs": [
+      {
+        "variants": [
+          "balanced",
+          "columns"
+        ],
+        "status": "passed",
+        "changed_slides": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "missing_previews": [],
+        "slides": [
+          {
+            "slide": 2,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 3,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 4,
+            "changed_fraction": 0.1599
+          },
+          {
+            "slide": 5,
+            "changed_fraction": 0.9972
+          },
+          {
+            "slide": 6,
+            "changed_fraction": 0.1648
+          },
+          {
+            "slide": 7,
+            "changed_fraction": 0.997
+          },
+          {
+            "slide": 8,
+            "changed_fraction": 0.9966
+          },
+          {
+            "slide": 9,
+            "changed_fraction": 0.9987
+          }
+        ]
+      },
+      {
+        "variants": [
+          "balanced",
+          "focus"
+        ],
+        "status": "passed",
+        "changed_slides": [
+          2,
+          3,
+          7,
+          9
+        ],
+        "missing_previews": [],
+        "slides": [
+          {
+            "slide": 2,
+            "changed_fraction": 0.1541
+          },
+          {
+            "slide": 3,
+            "changed_fraction": 0.2869
+          },
+          {
+            "slide": 4,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 5,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 6,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 7,
+            "changed_fraction": 0.9814
+          },
+          {
+            "slide": 8,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 9,
+            "changed_fraction": 0.9825
+          }
+        ]
+      },
+      {
+        "variants": [
+          "columns",
+          "focus"
+        ],
+        "status": "passed",
+        "changed_slides": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "missing_previews": [],
+        "slides": [
+          {
+            "slide": 2,
+            "changed_fraction": 0.1541
+          },
+          {
+            "slide": 3,
+            "changed_fraction": 0.2869
+          },
+          {
+            "slide": 4,
+            "changed_fraction": 0.1599
+          },
+          {
+            "slide": 5,
+            "changed_fraction": 0.9972
+          },
+          {
+            "slide": 6,
+            "changed_fraction": 0.1648
+          },
+          {
+            "slide": 7,
+            "changed_fraction": 0.1302
+          },
+          {
+            "slide": 8,
+            "changed_fraction": 0.9966
+          },
+          {
+            "slide": 9,
+            "changed_fraction": 0.1353
+          }
+        ]
+      }
+    ],
+    "template": "with-renderer/artifacts/vk-tech"
+  },
+  {
+    "status": "needs_review",
+    "method": "rendered_pixel_difference_v1",
+    "pixel_delta": 24,
+    "slide_changed_fraction": 0.02,
+    "eligible_slides": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "required_changed_slides_per_pair": 2,
+    "pairs": [
+      {
+        "variants": [
+          "balanced",
+          "columns"
+        ],
+        "status": "needs_review",
+        "changed_slides": [
+          3
+        ],
+        "missing_previews": [],
+        "slides": [
+          {
+            "slide": 2,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 3,
+            "changed_fraction": 0.0307
+          },
+          {
+            "slide": 4,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 5,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 6,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 7,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 8,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 9,
+            "changed_fraction": 0.0
+          }
+        ]
+      },
+      {
+        "variants": [
+          "balanced",
+          "focus"
+        ],
+        "status": "needs_review",
+        "changed_slides": [
+          7
+        ],
+        "missing_previews": [],
+        "slides": [
+          {
+            "slide": 2,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 3,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 4,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 5,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 6,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 7,
+            "changed_fraction": 0.0298
+          },
+          {
+            "slide": 8,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 9,
+            "changed_fraction": 0.0
+          }
+        ]
+      },
+      {
+        "variants": [
+          "columns",
+          "focus"
+        ],
+        "status": "passed",
+        "changed_slides": [
+          3,
+          7
+        ],
+        "missing_previews": [],
+        "slides": [
+          {
+            "slide": 2,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 3,
+            "changed_fraction": 0.0307
+          },
+          {
+            "slide": 4,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 5,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 6,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 7,
+            "changed_fraction": 0.0298
+          },
+          {
+            "slide": 8,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 9,
+            "changed_fraction": 0.0
+          }
+        ]
+      }
+    ],
+    "template": "with-renderer/artifacts/unseen-brutalism"
+  },
+  {
+    "status": "passed",
+    "method": "rendered_pixel_difference_v1",
+    "pixel_delta": 24,
+    "slide_changed_fraction": 0.02,
+    "eligible_slides": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "required_changed_slides_per_pair": 2,
+    "pairs": [
+      {
+        "variants": [
+          "balanced",
+          "columns"
+        ],
+        "status": "passed",
+        "changed_slides": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          8,
+          9
+        ],
+        "missing_previews": [],
+        "slides": [
+          {
+            "slide": 2,
+            "changed_fraction": 0.1027
+          },
+          {
+            "slide": 3,
+            "changed_fraction": 0.4977
+          },
+          {
+            "slide": 4,
+            "changed_fraction": 0.112
+          },
+          {
+            "slide": 5,
+            "changed_fraction": 0.0926
+          },
+          {
+            "slide": 6,
+            "changed_fraction": 0.0989
+          },
+          {
+            "slide": 7,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 8,
+            "changed_fraction": 0.0774
+          },
+          {
+            "slide": 9,
+            "changed_fraction": 0.0871
+          }
+        ]
+      },
+      {
+        "variants": [
+          "balanced",
+          "focus"
+        ],
+        "status": "passed",
+        "changed_slides": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "missing_previews": [],
+        "slides": [
+          {
+            "slide": 2,
+            "changed_fraction": 0.1026
+          },
+          {
+            "slide": 3,
+            "changed_fraction": 0.9879
+          },
+          {
+            "slide": 4,
+            "changed_fraction": 0.0284
+          },
+          {
+            "slide": 5,
+            "changed_fraction": 0.1061
+          },
+          {
+            "slide": 6,
+            "changed_fraction": 0.04
+          },
+          {
+            "slide": 7,
+            "changed_fraction": 0.0813
+          },
+          {
+            "slide": 8,
+            "changed_fraction": 0.0787
+          },
+          {
+            "slide": 9,
+            "changed_fraction": 0.0904
+          }
+        ]
+      },
+      {
+        "variants": [
+          "columns",
+          "focus"
+        ],
+        "status": "passed",
+        "changed_slides": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "missing_previews": [],
+        "slides": [
+          {
+            "slide": 2,
+            "changed_fraction": 0.0276
+          },
+          {
+            "slide": 3,
+            "changed_fraction": 0.9769
+          },
+          {
+            "slide": 4,
+            "changed_fraction": 0.1127
+          },
+          {
+            "slide": 5,
+            "changed_fraction": 0.0827
+          },
+          {
+            "slide": 6,
+            "changed_fraction": 0.1111
+          },
+          {
+            "slide": 7,
+            "changed_fraction": 0.0813
+          },
+          {
+            "slide": 8,
+            "changed_fraction": 0.0906
+          },
+          {
+            "slide": 9,
+            "changed_fraction": 0.0926
+          }
+        ]
+      }
+    ],
+    "template": "with-renderer/artifacts/vk-education"
+  },
+  {
+    "status": "passed",
+    "method": "rendered_pixel_difference_v1",
+    "pixel_delta": 24,
+    "slide_changed_fraction": 0.02,
+    "eligible_slides": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "required_changed_slides_per_pair": 2,
+    "pairs": [
+      {
+        "variants": [
+          "balanced",
+          "columns"
+        ],
+        "status": "passed",
+        "changed_slides": [
+          4,
+          5,
+          7,
+          8,
+          9
+        ],
+        "missing_previews": [],
+        "slides": [
+          {
+            "slide": 2,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 3,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 4,
+            "changed_fraction": 0.418
+          },
+          {
+            "slide": 5,
+            "changed_fraction": 0.5237
+          },
+          {
+            "slide": 6,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 7,
+            "changed_fraction": 0.6505
+          },
+          {
+            "slide": 8,
+            "changed_fraction": 0.3612
+          },
+          {
+            "slide": 9,
+            "changed_fraction": 0.5302
+          }
+        ]
+      },
+      {
+        "variants": [
+          "balanced",
+          "focus"
+        ],
+        "status": "passed",
+        "changed_slides": [
+          4,
+          5,
+          7,
+          8,
+          9
+        ],
+        "missing_previews": [],
+        "slides": [
+          {
+            "slide": 2,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 3,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 4,
+            "changed_fraction": 0.418
+          },
+          {
+            "slide": 5,
+            "changed_fraction": 0.7344
+          },
+          {
+            "slide": 6,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 7,
+            "changed_fraction": 0.3615
+          },
+          {
+            "slide": 8,
+            "changed_fraction": 0.3449
+          },
+          {
+            "slide": 9,
+            "changed_fraction": 0.7319
+          }
+        ]
+      },
+      {
+        "variants": [
+          "columns",
+          "focus"
+        ],
+        "status": "passed",
+        "changed_slides": [
+          5,
+          7,
+          8,
+          9
+        ],
+        "missing_previews": [],
+        "slides": [
+          {
+            "slide": 2,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 3,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 4,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 5,
+            "changed_fraction": 0.362
+          },
+          {
+            "slide": 6,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 7,
+            "changed_fraction": 0.3464
+          },
+          {
+            "slide": 8,
+            "changed_fraction": 0.6528
+          },
+          {
+            "slide": 9,
+            "changed_fraction": 0.3608
+          }
+        ]
+      }
+    ],
+    "template": "with-renderer/artifacts/vk-workspace"
+  },
+  {
+    "status": "passed",
+    "method": "rendered_pixel_difference_v1",
+    "pixel_delta": 24,
+    "slide_changed_fraction": 0.02,
+    "eligible_slides": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "required_changed_slides_per_pair": 2,
+    "pairs": [
+      {
+        "variants": [
+          "balanced",
+          "columns"
+        ],
+        "status": "passed",
+        "changed_slides": [
+          5,
+          7,
+          8,
+          9
+        ],
+        "missing_previews": [],
+        "slides": [
+          {
+            "slide": 2,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 3,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 4,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 5,
+            "changed_fraction": 0.1562
+          },
+          {
+            "slide": 6,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 7,
+            "changed_fraction": 0.1442
+          },
+          {
+            "slide": 8,
+            "changed_fraction": 0.092
+          },
+          {
+            "slide": 9,
+            "changed_fraction": 0.1527
+          }
+        ]
+      },
+      {
+        "variants": [
+          "balanced",
+          "focus"
+        ],
+        "status": "passed",
+        "changed_slides": [
+          5,
+          7,
+          8,
+          9
+        ],
+        "missing_previews": [],
+        "slides": [
+          {
+            "slide": 2,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 3,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 4,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 5,
+            "changed_fraction": 0.169
+          },
+          {
+            "slide": 6,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 7,
+            "changed_fraction": 0.1482
+          },
+          {
+            "slide": 8,
+            "changed_fraction": 0.1603
+          },
+          {
+            "slide": 9,
+            "changed_fraction": 0.1281
+          }
+        ]
+      },
+      {
+        "variants": [
+          "columns",
+          "focus"
+        ],
+        "status": "passed",
+        "changed_slides": [
+          5,
+          7,
+          8,
+          9
+        ],
+        "missing_previews": [],
+        "slides": [
+          {
+            "slide": 2,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 3,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 4,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 5,
+            "changed_fraction": 0.1466
+          },
+          {
+            "slide": 6,
+            "changed_fraction": 0.0
+          },
+          {
+            "slide": 7,
+            "changed_fraction": 0.0939
+          },
+          {
+            "slide": 8,
+            "changed_fraction": 0.1577
+          },
+          {
+            "slide": 9,
+            "changed_fraction": 0.1386
+          }
+        ]
+      }
+    ],
+    "template": "additional-unseen/artifacts/unseen-onocom"
+  }
+]

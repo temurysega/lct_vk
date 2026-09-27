@@ -1,0 +1,124 @@
+{
+  "output": "/private/tmp/branddeck-criteria-audit.TZjsAv/component-service/presentations/kontrol-komponentov-20260927-201517/output.pptx",
+  "slide_count": 10,
+  "patterns_used": [
+    "slide-1",
+    "slide-21",
+    "slide-22",
+    "slide-38",
+    "slide-21",
+    "slide-21",
+    "slide-21",
+    "slide-38",
+    "slide-38",
+    "slide-52"
+  ],
+  "source_patterns": [
+    "slide-1",
+    "slide-21",
+    "slide-22",
+    "slide-38",
+    "slide-21",
+    "slide-21",
+    "slide-21",
+    "slide-38",
+    "slide-38",
+    "slide-52"
+  ],
+  "composition_mode": "template_layout",
+  "visuals": {
+    "diagrams": 4,
+    "pictograms": 3,
+    "images": 0,
+    "illustrations": 0,
+    "by_type": {
+      "process": 1,
+      "cycle": 1,
+      "hierarchy": 1,
+      "icon_grid": 1
+    },
+    "slides": [
+      {
+        "slide": 5,
+        "type": "process",
+        "items": 4,
+        "native": true,
+        "orientation": "vertical"
+      },
+      {
+        "slide": 6,
+        "type": "cycle",
+        "items": 4,
+        "native": true,
+        "layout": "ring_with_legend"
+      },
+      {
+        "slide": 7,
+        "type": "hierarchy",
+        "items": 3,
+        "native": true
+      },
+      {
+        "slide": 8,
+        "type": "icon_grid",
+        "items": 3,
+        "native": true,
+        "columns": 2,
+        "icons": [
+          "clock",
+          "chart-pie",
+          "star"
+        ],
+        "icon_matches": 3
+      }
+    ],
+    "note": "Diagrams are native grouped shapes (SmartArt-style), not OOXML SmartArt parts."
+  },
+  "exemplar_cleanup": [
+    {
+      "slide": 2,
+      "removed": [
+        {
+          "shape": "Google Shape;491;p53",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 3,
+      "removed": [
+        {
+          "shape": "Google Shape;505;p54",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 5,
+      "removed": [
+        {
+          "shape": "Google Shape;491;p53",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 6,
+      "removed": [
+        {
+          "shape": "Google Shape;491;p53",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 7,
+      "removed": [
+        {
+          "shape": "Google Shape;491;p53",
+          "reason": "erased_sample"
+        }
+      ]
+    }
+  ]
+}

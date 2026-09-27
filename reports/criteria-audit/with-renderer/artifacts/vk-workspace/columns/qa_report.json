@@ -1,0 +1,181 @@
+{
+  "status": "passed",
+  "score": 100,
+  "output": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201130/output.pptx",
+  "file_size_bytes": 12869231,
+  "slide_count": 10,
+  "canvas": {
+    "width_inches": 13.333333333333334,
+    "height_inches": 7.5
+  },
+  "explicit_fonts": [
+    "Play"
+  ],
+  "issues": [],
+  "slides": [
+    {
+      "slide": 1,
+      "shape_count": 1,
+      "text_shape_count": 1
+    },
+    {
+      "slide": 2,
+      "shape_count": 2,
+      "text_shape_count": 5
+    },
+    {
+      "slide": 3,
+      "shape_count": 3,
+      "text_shape_count": 2
+    },
+    {
+      "slide": 4,
+      "shape_count": 2,
+      "text_shape_count": 5
+    },
+    {
+      "slide": 5,
+      "shape_count": 7,
+      "text_shape_count": 4
+    },
+    {
+      "slide": 6,
+      "shape_count": 2,
+      "text_shape_count": 5
+    },
+    {
+      "slide": 7,
+      "shape_count": 4,
+      "text_shape_count": 4
+    },
+    {
+      "slide": 8,
+      "shape_count": 7,
+      "text_shape_count": 4
+    },
+    {
+      "slide": 9,
+      "shape_count": 7,
+      "text_shape_count": 4
+    },
+    {
+      "slide": 10,
+      "shape_count": 2,
+      "text_shape_count": 2
+    }
+  ],
+  "powerpoint_render": {
+    "status": "skipped",
+    "score": null,
+    "renderer": "powerpoint_com",
+    "issues": [],
+    "previews": []
+  },
+  "content_coverage": "literal_coverage_complete",
+  "schema_version": "2.0",
+  "rendered_visual_audit": {
+    "status": "passed",
+    "checked_spans": 80,
+    "uncertain_spans": 0,
+    "issues": [],
+    "repairs": [
+      {
+        "slide": 5,
+        "shape": "BrandDeck Text 442",
+        "color": "#FFFFFF",
+        "issue_id": "e8524fc354e7573e"
+      },
+      {
+        "slide": 5,
+        "shape": "BrandDeck Text 446",
+        "color": "#FFFFFF",
+        "issue_id": "c1d269a34a260d3a"
+      },
+      {
+        "slide": 5,
+        "shape": "BrandDeck Text 450",
+        "color": "#FFFFFF",
+        "issue_id": "288cd959ed121933"
+      },
+      {
+        "slide": 7,
+        "shape": "BrandDeck Text 460",
+        "color": "#FFFFFF",
+        "issue_id": "a666c648a8c34019"
+      },
+      {
+        "slide": 7,
+        "shape": "BrandDeck Text 461",
+        "color": "#FFFFFF",
+        "issue_id": "2de835155a495179"
+      },
+      {
+        "slide": 7,
+        "shape": "BrandDeck Text 462",
+        "color": "#FFFFFF",
+        "issue_id": "4999fc61eb52b4cb"
+      },
+      {
+        "slide": 9,
+        "shape": "BrandDeck Text 442",
+        "color": "#FFFFFF",
+        "issue_id": "74ed1fa3abe7fba9"
+      },
+      {
+        "slide": 9,
+        "shape": "BrandDeck Text 446",
+        "color": "#FFFFFF",
+        "issue_id": "2508689708e44838"
+      },
+      {
+        "slide": 9,
+        "shape": "BrandDeck Text 450",
+        "color": "#FFFFFF",
+        "issue_id": "106ee6c834c2c146"
+      }
+    ]
+  },
+  "rendered_fill_audit": {
+    "status": "passed",
+    "slides": [
+      {
+        "slide": 2,
+        "coverage": 0.459
+      },
+      {
+        "slide": 3,
+        "coverage": 0.68
+      },
+      {
+        "slide": 4,
+        "coverage": 0.316
+      },
+      {
+        "slide": 5,
+        "coverage": 0.413
+      },
+      {
+        "slide": 6,
+        "coverage": 0.435
+      },
+      {
+        "slide": 7,
+        "coverage": 0.538
+      },
+      {
+        "slide": 8,
+        "coverage": 0.412
+      },
+      {
+        "slide": 9,
+        "coverage": 0.41
+      }
+    ],
+    "issues": []
+  },
+  "structural_score": 100,
+  "contextual_audit": {
+    "status": "not_run",
+    "reason": "No configured model or audit disabled"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "local_document_links_checked": 271,
+  "broken_links": [],
+  "json_files_checked": 365,
+  "invalid_json": [],
+  "documents": [
+    "PROBLEMS.md",
+    "REPORT.md",
+    "VALIDATION.md",
+    "ARTIFACTS.md",
+    "FIX-PLAN.md",
+    "APPENDIX-COVERAGE.md"
+  ],
+  "pptx_files": 32,
+  "acceptance_decks_with_pdf": 15,
+  "real_powerpoint_exports": 2,
+  "gallery_check": {
+    "initial_records": 4,
+    "onocom_records": 3,
+    "images_loaded": true,
+    "errors": []
+  }
+}

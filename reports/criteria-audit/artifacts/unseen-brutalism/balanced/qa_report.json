@@ -1,0 +1,532 @@
+{
+  "status": "warning",
+  "score": 28,
+  "output": "/private/tmp/branddeck-criteria-audit.TZjsAv/app-workspace/users/15d6851f2bda066bd688ae938fc90e06/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-195840/output.pptx",
+  "file_size_bytes": 3931273,
+  "slide_count": 10,
+  "canvas": {
+    "width_inches": 13.333333333333334,
+    "height_inches": 7.5
+  },
+  "explicit_fonts": [
+    "Consolas"
+  ],
+  "issues": [
+    {
+      "severity": "warning",
+      "code": "decor_overlap",
+      "shape": "Line 3 / BrandDeck Title",
+      "ratio": 0.14,
+      "bounds": [
+        {
+          "x": 0.5,
+          "y": 0.6667,
+          "w": 12.3333,
+          "h": 0.0104
+        },
+        {
+          "x": 3.42,
+          "y": 0.45,
+          "w": 6.49,
+          "h": 0.8
+        }
+      ],
+      "message": "Контент закрывает логотип или орнамент шаблона",
+      "slide": 1,
+      "id": "92f85816b9c9c9f4",
+      "check_type": "deterministic",
+      "repairable": true
+    },
+    {
+      "severity": "warning",
+      "code": "decor_overlap",
+      "shape": "Line 3 / BrandDeck Title",
+      "ratio": 0.07,
+      "bounds": [
+        {
+          "x": 0.5,
+          "y": 0.6667,
+          "w": 12.3333,
+          "h": 0.0104
+        },
+        {
+          "x": 3.42,
+          "y": 0.45,
+          "w": 6.49,
+          "h": 0.8
+        }
+      ],
+      "message": "Контент закрывает логотип или орнамент шаблона",
+      "slide": 2,
+      "id": "4d8821952edcce2d",
+      "check_type": "deterministic",
+      "repairable": true
+    },
+    {
+      "severity": "warning",
+      "code": "decor_overlap",
+      "shape": "Rectangle 4 / BrandDeck Diagram Card 1",
+      "ratio": 0.08,
+      "bounds": [
+        {
+          "x": 0.0,
+          "y": 1.5625,
+          "w": 13.3333,
+          "h": 0.0833
+        },
+        {
+          "x": 3.42,
+          "y": 1.4,
+          "w": 3.16,
+          "h": 1.3225
+        }
+      ],
+      "message": "Контент закрывает логотип или орнамент шаблона",
+      "slide": 2,
+      "id": "2cb7ef0c6eebd09a",
+      "check_type": "deterministic",
+      "repairable": true
+    },
+    {
+      "severity": "warning",
+      "code": "decor_overlap",
+      "shape": "Line 3 / BrandDeck Title",
+      "ratio": 0.07,
+      "bounds": [
+        {
+          "x": 0.5,
+          "y": 0.6667,
+          "w": 12.3333,
+          "h": 0.0104
+        },
+        {
+          "x": 3.42,
+          "y": 0.45,
+          "w": 6.49,
+          "h": 0.8
+        }
+      ],
+      "message": "Контент закрывает логотип или орнамент шаблона",
+      "slide": 3,
+      "id": "30fc0d718fba00b6",
+      "check_type": "deterministic",
+      "repairable": true
+    },
+    {
+      "severity": "warning",
+      "code": "decor_overlap",
+      "shape": "Line 3 / BrandDeck Title",
+      "ratio": 0.07,
+      "bounds": [
+        {
+          "x": 0.5,
+          "y": 0.6667,
+          "w": 12.3333,
+          "h": 0.0104
+        },
+        {
+          "x": 3.42,
+          "y": 0.45,
+          "w": 6.49,
+          "h": 0.8
+        }
+      ],
+      "message": "Контент закрывает логотип или орнамент шаблона",
+      "slide": 4,
+      "id": "5d1be10ffc49b5c5",
+      "check_type": "deterministic",
+      "repairable": true
+    },
+    {
+      "severity": "warning",
+      "code": "decor_overlap",
+      "shape": "Rectangle 4 / BrandDeck Diagram Card 1",
+      "ratio": 0.08,
+      "bounds": [
+        {
+          "x": 0.0,
+          "y": 1.5625,
+          "w": 13.3333,
+          "h": 0.0833
+        },
+        {
+          "x": 3.42,
+          "y": 1.4,
+          "w": 3.16,
+          "h": 1.3225
+        }
+      ],
+      "message": "Контент закрывает логотип или орнамент шаблона",
+      "slide": 4,
+      "id": "6e19047b3d6db5eb",
+      "check_type": "deterministic",
+      "repairable": true
+    },
+    {
+      "severity": "warning",
+      "code": "decor_overlap",
+      "shape": "Line 3 / BrandDeck Title",
+      "ratio": 0.07,
+      "bounds": [
+        {
+          "x": 0.5,
+          "y": 0.6667,
+          "w": 12.3333,
+          "h": 0.0104
+        },
+        {
+          "x": 3.42,
+          "y": 0.45,
+          "w": 6.49,
+          "h": 0.8
+        }
+      ],
+      "message": "Контент закрывает логотип или орнамент шаблона",
+      "slide": 5,
+      "id": "4443be0282ccd696",
+      "check_type": "deterministic",
+      "repairable": true
+    },
+    {
+      "severity": "warning",
+      "code": "decor_overlap",
+      "shape": "Rectangle 4 / BrandDeck Diagram Card 1",
+      "ratio": 0.08,
+      "bounds": [
+        {
+          "x": 0.0,
+          "y": 1.5625,
+          "w": 13.3333,
+          "h": 0.0833
+        },
+        {
+          "x": 3.42,
+          "y": 1.4,
+          "w": 3.16,
+          "h": 1.3225
+        }
+      ],
+      "message": "Контент закрывает логотип или орнамент шаблона",
+      "slide": 5,
+      "id": "7539a446294ccd5d",
+      "check_type": "deterministic",
+      "repairable": true
+    },
+    {
+      "severity": "warning",
+      "code": "decor_overlap",
+      "shape": "Line 3 / BrandDeck Title",
+      "ratio": 0.08,
+      "bounds": [
+        {
+          "x": 0.5,
+          "y": 0.6667,
+          "w": 12.3333,
+          "h": 0.0104
+        },
+        {
+          "x": 3.42,
+          "y": 0.45,
+          "w": 6.49,
+          "h": 0.8
+        }
+      ],
+      "message": "Контент закрывает логотип или орнамент шаблона",
+      "slide": 6,
+      "id": "1311f8adab6b094d",
+      "check_type": "deterministic",
+      "repairable": true
+    },
+    {
+      "severity": "warning",
+      "code": "decor_overlap",
+      "shape": "Rectangle 4 / BrandDeck Diagram Card 1",
+      "ratio": 0.08,
+      "bounds": [
+        {
+          "x": 0.0,
+          "y": 1.5625,
+          "w": 13.3333,
+          "h": 0.0833
+        },
+        {
+          "x": 3.42,
+          "y": 1.4,
+          "w": 3.16,
+          "h": 1.3225
+        }
+      ],
+      "message": "Контент закрывает логотип или орнамент шаблона",
+      "slide": 6,
+      "id": "9176b323eef0d0c1",
+      "check_type": "deterministic",
+      "repairable": true
+    },
+    {
+      "severity": "warning",
+      "code": "decor_overlap",
+      "shape": "Line 3 / BrandDeck Title",
+      "ratio": 0.07,
+      "bounds": [
+        {
+          "x": 0.5,
+          "y": 0.6667,
+          "w": 12.3333,
+          "h": 0.0104
+        },
+        {
+          "x": 3.42,
+          "y": 0.45,
+          "w": 6.49,
+          "h": 0.8
+        }
+      ],
+      "message": "Контент закрывает логотип или орнамент шаблона",
+      "slide": 7,
+      "id": "a9f458c7e9f8a6df",
+      "check_type": "deterministic",
+      "repairable": true
+    },
+    {
+      "severity": "warning",
+      "code": "decor_overlap",
+      "shape": "Rectangle 4 / BrandDeck Diagram Card 1",
+      "ratio": 0.06,
+      "bounds": [
+        {
+          "x": 0.0,
+          "y": 1.5625,
+          "w": 13.3333,
+          "h": 0.0833
+        },
+        {
+          "x": 3.42,
+          "y": 1.4,
+          "w": 3.16,
+          "h": 1.8033
+        }
+      ],
+      "message": "Контент закрывает логотип или орнамент шаблона",
+      "slide": 7,
+      "id": "cf6adf8497ca1394",
+      "check_type": "deterministic",
+      "repairable": true
+    },
+    {
+      "severity": "warning",
+      "code": "decor_overlap",
+      "shape": "Line 3 / BrandDeck Title",
+      "ratio": 0.07,
+      "bounds": [
+        {
+          "x": 0.5,
+          "y": 0.6667,
+          "w": 12.3333,
+          "h": 0.0104
+        },
+        {
+          "x": 3.42,
+          "y": 0.45,
+          "w": 6.49,
+          "h": 0.8
+        }
+      ],
+      "message": "Контент закрывает логотип или орнамент шаблона",
+      "slide": 8,
+      "id": "436fb4f9115312c2",
+      "check_type": "deterministic",
+      "repairable": true
+    },
+    {
+      "severity": "warning",
+      "code": "decor_overlap",
+      "shape": "Rectangle 4 / BrandDeck Diagram Card 1",
+      "ratio": 0.08,
+      "bounds": [
+        {
+          "x": 0.0,
+          "y": 1.5625,
+          "w": 13.3333,
+          "h": 0.0833
+        },
+        {
+          "x": 3.42,
+          "y": 1.4,
+          "w": 3.16,
+          "h": 1.3225
+        }
+      ],
+      "message": "Контент закрывает логотип или орнамент шаблона",
+      "slide": 8,
+      "id": "9ff154abf9864bf1",
+      "check_type": "deterministic",
+      "repairable": true
+    },
+    {
+      "severity": "warning",
+      "code": "decor_overlap",
+      "shape": "Line 3 / BrandDeck Title",
+      "ratio": 0.14,
+      "bounds": [
+        {
+          "x": 0.5,
+          "y": 0.6667,
+          "w": 12.3333,
+          "h": 0.0104
+        },
+        {
+          "x": 3.42,
+          "y": 0.45,
+          "w": 6.49,
+          "h": 0.8
+        }
+      ],
+      "message": "Контент закрывает логотип или орнамент шаблона",
+      "slide": 9,
+      "id": "45389f12e6c93d0b",
+      "check_type": "deterministic",
+      "repairable": true
+    },
+    {
+      "severity": "warning",
+      "code": "decor_overlap",
+      "shape": "Rectangle 4 / BrandDeck Diagram Card 1",
+      "ratio": 0.06,
+      "bounds": [
+        {
+          "x": 0.0,
+          "y": 1.5625,
+          "w": 13.3333,
+          "h": 0.0833
+        },
+        {
+          "x": 3.42,
+          "y": 1.4,
+          "w": 3.16,
+          "h": 1.8033
+        }
+      ],
+      "message": "Контент закрывает логотип или орнамент шаблона",
+      "slide": 9,
+      "id": "62d5581ba7a44b67",
+      "check_type": "deterministic",
+      "repairable": true
+    },
+    {
+      "severity": "warning",
+      "code": "decor_overlap",
+      "shape": "Rectangle 5 / BrandDeck Diagram Card 1",
+      "ratio": 0.03,
+      "bounds": [
+        {
+          "x": 0.0,
+          "y": 2.75,
+          "w": 13.3333,
+          "h": 0.0625
+        },
+        {
+          "x": 3.42,
+          "y": 1.4,
+          "w": 3.16,
+          "h": 1.8033
+        }
+      ],
+      "message": "Контент закрывает логотип или орнамент шаблона",
+      "slide": 9,
+      "id": "837b2850c861680e",
+      "check_type": "deterministic",
+      "repairable": true
+    },
+    {
+      "severity": "warning",
+      "code": "decor_overlap",
+      "shape": "Line 3 / BrandDeck Title",
+      "ratio": 0.09,
+      "bounds": [
+        {
+          "x": 0.5,
+          "y": 0.6667,
+          "w": 12.3333,
+          "h": 0.0104
+        },
+        {
+          "x": 3.42,
+          "y": 0.45,
+          "w": 6.49,
+          "h": 0.8
+        }
+      ],
+      "message": "Контент закрывает логотип или орнамент шаблона",
+      "slide": 10,
+      "id": "e73e09cd61c046aa",
+      "check_type": "deterministic",
+      "repairable": true
+    }
+  ],
+  "slides": [
+    {
+      "slide": 1,
+      "shape_count": 5,
+      "text_shape_count": 1
+    },
+    {
+      "slide": 2,
+      "shape_count": 6,
+      "text_shape_count": 5
+    },
+    {
+      "slide": 3,
+      "shape_count": 6,
+      "text_shape_count": 2
+    },
+    {
+      "slide": 4,
+      "shape_count": 6,
+      "text_shape_count": 5
+    },
+    {
+      "slide": 5,
+      "shape_count": 6,
+      "text_shape_count": 5
+    },
+    {
+      "slide": 6,
+      "shape_count": 6,
+      "text_shape_count": 5
+    },
+    {
+      "slide": 7,
+      "shape_count": 6,
+      "text_shape_count": 4
+    },
+    {
+      "slide": 8,
+      "shape_count": 6,
+      "text_shape_count": 5
+    },
+    {
+      "slide": 9,
+      "shape_count": 7,
+      "text_shape_count": 4
+    },
+    {
+      "slide": 10,
+      "shape_count": 6,
+      "text_shape_count": 2
+    }
+  ],
+  "powerpoint_render": {
+    "status": "skipped",
+    "score": null,
+    "renderer": "powerpoint_com",
+    "issues": [],
+    "previews": []
+  },
+  "content_coverage": "literal_coverage_complete",
+  "schema_version": "2.0",
+  "structural_score": 28,
+  "contextual_audit": {
+    "status": "not_run",
+    "reason": "No configured model or audit disabled"
+  }
+}

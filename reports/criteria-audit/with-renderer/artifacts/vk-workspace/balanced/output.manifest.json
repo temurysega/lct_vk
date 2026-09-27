@@ -1,0 +1,289 @@
+{
+  "output": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201119/output.pptx",
+  "slide_count": 10,
+  "patterns_used": [
+    "slide-1",
+    "slide-6",
+    "slide-25",
+    "slide-6",
+    "slide-15",
+    "slide-6",
+    "slide-10",
+    "slide-5",
+    "slide-15",
+    "slide-29"
+  ],
+  "source_patterns": [
+    "slide-1",
+    "slide-6",
+    "slide-25",
+    "slide-6",
+    "slide-15",
+    "slide-6",
+    "slide-10",
+    "slide-5",
+    "slide-15",
+    "slide-29"
+  ],
+  "composition_mode": "template_layout",
+  "visuals": {
+    "diagrams": 3,
+    "pictograms": 12,
+    "images": 1,
+    "illustrations": 0,
+    "by_type": {
+      "icon_grid": 3,
+      "image": 1
+    },
+    "slides": [
+      {
+        "slide": 2,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 2,
+        "icons": [
+          "users",
+          "file-text",
+          "headset",
+          "user"
+        ],
+        "icon_matches": 4,
+        "origin": "offline_rules"
+      },
+      {
+        "slide": 3,
+        "type": "image",
+        "asset_id": "ce1df8e504b38abe",
+        "source": "upload",
+        "match": "lexical",
+        "placement": "template_slot"
+      },
+      {
+        "slide": 4,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 2,
+        "icons": [
+          "building",
+          "circle-help",
+          "file-text",
+          "circle-check"
+        ],
+        "icon_matches": 4,
+        "origin": "offline_rules"
+      },
+      {
+        "slide": 6,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 2,
+        "icons": [
+          "brain",
+          "file-text",
+          "circle-check",
+          "user"
+        ],
+        "icon_matches": 4,
+        "origin": "offline_rules"
+      }
+    ],
+    "note": "Diagrams are native grouped shapes (SmartArt-style), not OOXML SmartArt parts."
+  },
+  "exemplar_cleanup": [
+    {
+      "slide": 1,
+      "removed": [
+        {
+          "shape": "Google Shape;382;p17",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "BrandDeck Text 383",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 2,
+      "removed": [
+        {
+          "shape": "Google Shape;460;p22",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;461;p22",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;462;p22",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;463;p22",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;465;p22",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;467;p22",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 3,
+      "removed": [
+        {
+          "shape": "Google Shape;813;p41",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;814;p41",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Google Shape;817;p41",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;818;p41",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Google Shape;821;p41",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;822;p41",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Google Shape;825;p41",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;826;p41",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Google Shape;829;p41",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;830;p41",
+          "reason": "attached_to_erased"
+        }
+      ]
+    },
+    {
+      "slide": 4,
+      "removed": [
+        {
+          "shape": "Google Shape;460;p22",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;461;p22",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;462;p22",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;463;p22",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;465;p22",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;467;p22",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 5,
+      "removed": [
+        {
+          "shape": "Google Shape;684;p31",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;685;p31",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 6,
+      "removed": [
+        {
+          "shape": "Google Shape;460;p22",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;461;p22",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;462;p22",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;463;p22",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;465;p22",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;467;p22",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 9,
+      "removed": [
+        {
+          "shape": "Google Shape;684;p31",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;685;p31",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 10,
+      "removed": [
+        {
+          "shape": "Google Shape;883;p45",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Google Shape;884;p45",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;885;p45",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;881;p45",
+          "reason": "empty_photo_frame"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,465 @@
+{
+  "title": "Контроль компонентов",
+  "language": "ru",
+  "slides": [
+    {
+      "title": "Проверка нативных объектов",
+      "role": "cover",
+      "subtitle": "",
+      "body": "",
+      "bullets": [],
+      "visual": null,
+      "speaker_notes": "Synthetic controlled component fixture; no model called.",
+      "pattern_id": "slide-1",
+      "layout_index": 0,
+      "master_index": 0,
+      "pattern_selection": {
+        "selector": {
+          "mode": "heuristic"
+        },
+        "score": 17.7,
+        "layout_pattern": "hero",
+        "why_fit": "роль cover поддерживается; риторический паттерн hero; проверенный exemplar-слайд",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "layout-29",
+            "score": 10.64
+          },
+          {
+            "pattern_id": "layout-7",
+            "score": 10.64
+          },
+          {
+            "pattern_id": "layout-3",
+            "score": 10.62
+          }
+        ]
+      }
+    },
+    {
+      "title": "Два подразделения: 60 и 90 участников",
+      "role": "data",
+      "subtitle": "",
+      "body": "",
+      "bullets": [],
+      "visual": {
+        "type": "bar_chart",
+        "categories": [
+          "Продажи",
+          "Поддержка"
+        ],
+        "series": [
+          {
+            "name": "Сотрудники",
+            "values": [
+              60,
+              90
+            ]
+          }
+        ],
+        "unit": "человек"
+      },
+      "speaker_notes": "Synthetic controlled component fixture; no model called.",
+      "pattern_id": "slide-21",
+      "layout_index": 5,
+      "master_index": 0,
+      "pattern_selection": {
+        "selector": {
+          "mode": "heuristic"
+        },
+        "score": 17.7,
+        "layout_pattern": "two_column",
+        "why_fit": "роль data поддерживается; текст помещается по геометрической ёмкости; есть структура для данных; проверенный exemplar-слайд",
+        "risk": "нужен data, доступен two_column",
+        "alternatives": [
+          {
+            "pattern_id": "slide-22",
+            "score": 17.7
+          },
+          {
+            "pattern_id": "slide-42",
+            "score": 17.7
+          },
+          {
+            "pattern_id": "slide-44",
+            "score": 17.7
+          }
+        ]
+      },
+      "remap_underfilled": true
+    },
+    {
+      "title": "Доля участников по подразделениям",
+      "role": "data",
+      "subtitle": "",
+      "body": "",
+      "bullets": [],
+      "visual": {
+        "type": "pie_chart",
+        "categories": [
+          "Продажи",
+          "Поддержка"
+        ],
+        "values": [
+          60,
+          90
+        ]
+      },
+      "speaker_notes": "Synthetic controlled component fixture; no model called.",
+      "pattern_id": "slide-22",
+      "layout_index": 5,
+      "master_index": 0,
+      "pattern_selection": {
+        "selector": {
+          "mode": "heuristic"
+        },
+        "score": 17.7,
+        "layout_pattern": "two_column",
+        "why_fit": "роль data поддерживается; текст помещается по геометрической ёмкости; есть структура для данных; проверенный exemplar-слайд",
+        "risk": "нужен data, доступен two_column",
+        "alternatives": [
+          {
+            "pattern_id": "slide-42",
+            "score": 17.7
+          },
+          {
+            "pattern_id": "slide-44",
+            "score": 17.7
+          },
+          {
+            "pattern_id": "slide-21",
+            "score": 17.2
+          }
+        ]
+      },
+      "remap_underfilled": true
+    },
+    {
+      "title": "Пилот рассчитан на шесть недель",
+      "role": "data",
+      "subtitle": "",
+      "body": "",
+      "bullets": [],
+      "visual": {
+        "type": "table",
+        "headers": [
+          "Этап",
+          "Недели",
+          "Ответственный"
+        ],
+        "rows": [
+          [
+            "Подготовка",
+            "1–2",
+            "Аналитик"
+          ],
+          [
+            "Запуск",
+            "3–4",
+            "Инженер"
+          ],
+          [
+            "Оценка",
+            "5–6",
+            "Менеджер"
+          ]
+        ]
+      },
+      "speaker_notes": "Synthetic controlled component fixture; no model called.",
+      "pattern_id": "slide-38",
+      "layout_index": 5,
+      "master_index": 0,
+      "pattern_selection": {
+        "selector": {
+          "mode": "heuristic"
+        },
+        "score": 24.7,
+        "layout_pattern": "data",
+        "why_fit": "роль data поддерживается; риторический паттерн data; текст помещается по геометрической ёмкости; есть структура для данных",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "slide-21",
+            "score": 17.7
+          },
+          {
+            "pattern_id": "slide-22",
+            "score": 17.7
+          },
+          {
+            "pattern_id": "slide-42",
+            "score": 17.7
+          }
+        ]
+      }
+    },
+    {
+      "title": "Проверяем путь обращения",
+      "role": "data",
+      "subtitle": "",
+      "body": "",
+      "bullets": [],
+      "visual": {
+        "type": "process",
+        "items": [
+          "Задать вопрос",
+          "Найти регламент",
+          "Показать источник",
+          "Передать специалисту"
+        ]
+      },
+      "speaker_notes": "Synthetic controlled component fixture; no model called.",
+      "pattern_id": "slide-21",
+      "layout_index": 5,
+      "master_index": 0,
+      "pattern_selection": {
+        "selector": {
+          "mode": "heuristic"
+        },
+        "score": 19.58,
+        "layout_pattern": "two_column",
+        "why_fit": "роль data поддерживается; текст помещается по геометрической ёмкости; есть структура для данных; проверенный exemplar-слайд",
+        "risk": "нужен data, доступен two_column; схема займёт общую зону контента",
+        "alternatives": [
+          {
+            "pattern_id": "slide-38",
+            "score": 18.07
+          },
+          {
+            "pattern_id": "slide-44",
+            "score": 15.95
+          },
+          {
+            "pattern_id": "slide-22",
+            "score": 15.36
+          }
+        ]
+      }
+    },
+    {
+      "title": "Качество улучшаем после проверки",
+      "role": "data",
+      "subtitle": "",
+      "body": "",
+      "bullets": [],
+      "visual": {
+        "type": "cycle",
+        "items": [
+          "Собрать",
+          "Проверить",
+          "Запустить",
+          "Измерить"
+        ]
+      },
+      "speaker_notes": "Synthetic controlled component fixture; no model called.",
+      "pattern_id": "slide-21",
+      "layout_index": 5,
+      "master_index": 0,
+      "pattern_selection": {
+        "selector": {
+          "mode": "heuristic"
+        },
+        "score": 19.08,
+        "layout_pattern": "two_column",
+        "why_fit": "роль data поддерживается; текст помещается по геометрической ёмкости; есть структура для данных; проверенный exemplar-слайд",
+        "risk": "нужен data, доступен two_column; схема займёт общую зону контента",
+        "alternatives": [
+          {
+            "pattern_id": "slide-38",
+            "score": 18.07
+          },
+          {
+            "pattern_id": "slide-44",
+            "score": 15.95
+          },
+          {
+            "pattern_id": "slide-22",
+            "score": 15.36
+          }
+        ]
+      }
+    },
+    {
+      "title": "У каждого участника есть роль",
+      "role": "data",
+      "subtitle": "",
+      "body": "",
+      "bullets": [],
+      "visual": {
+        "type": "hierarchy",
+        "root": "Команда пилота",
+        "items": [
+          {
+            "label": "Аналитик",
+            "detail": "Готовит материалы"
+          },
+          {
+            "label": "Инженер",
+            "detail": "Настраивает сервис"
+          },
+          {
+            "label": "Менеджер",
+            "detail": "Измеряет результаты"
+          }
+        ]
+      },
+      "speaker_notes": "Synthetic controlled component fixture; no model called.",
+      "pattern_id": "slide-21",
+      "layout_index": 5,
+      "master_index": 0,
+      "pattern_selection": {
+        "selector": {
+          "mode": "heuristic"
+        },
+        "score": 14.58,
+        "layout_pattern": "two_column",
+        "why_fit": "роль data поддерживается; текст помещается по геометрической ёмкости; есть структура для данных; проверенный exemplar-слайд",
+        "risk": "нужен data, доступен two_column; часть текстовых блоков останется пустой; схема займёт общую зону контента",
+        "alternatives": [
+          {
+            "pattern_id": "slide-44",
+            "score": 11.95
+          },
+          {
+            "pattern_id": "slide-22",
+            "score": 10.86
+          },
+          {
+            "pattern_id": "slide-43",
+            "score": 10.77
+          }
+        ]
+      },
+      "remap_underfilled": true
+    },
+    {
+      "title": "Измеряем три результата",
+      "role": "data",
+      "subtitle": "",
+      "body": "",
+      "bullets": [],
+      "visual": {
+        "type": "icon_grid",
+        "items": [
+          "Время поиска ответа",
+          "Доля обращений без специалиста",
+          "Оценка сотрудника"
+        ]
+      },
+      "speaker_notes": "Synthetic controlled component fixture; no model called.",
+      "pattern_id": "slide-38",
+      "layout_index": 5,
+      "master_index": 0,
+      "pattern_selection": {
+        "selector": {
+          "mode": "heuristic"
+        },
+        "score": 19.07,
+        "layout_pattern": "data",
+        "why_fit": "роль data поддерживается; риторический паттерн data; текст помещается по геометрической ёмкости; есть структура для данных",
+        "risk": "слишком много тезисов для числа слотов; схема займёт общую зону контента",
+        "alternatives": [
+          {
+            "pattern_id": "slide-21",
+            "score": 14.58
+          },
+          {
+            "pattern_id": "slide-43",
+            "score": 12.27
+          },
+          {
+            "pattern_id": "slide-44",
+            "score": 11.95
+          }
+        ]
+      }
+    },
+    {
+      "title": "Решение принимаем по итогам пилота",
+      "role": "data",
+      "subtitle": "",
+      "body": "",
+      "bullets": [],
+      "visual": {
+        "type": "table",
+        "headers": [
+          "Метрика",
+          "Статус"
+        ],
+        "rows": [
+          [
+            "Время поиска",
+            "Будет измерено"
+          ],
+          [
+            "Качество ответа",
+            "Будет проверено"
+          ]
+        ]
+      },
+      "speaker_notes": "Synthetic controlled component fixture; no model called.",
+      "pattern_id": "slide-38",
+      "layout_index": 5,
+      "master_index": 0,
+      "pattern_selection": {
+        "selector": {
+          "mode": "heuristic"
+        },
+        "score": 23.2,
+        "layout_pattern": "data",
+        "why_fit": "роль data поддерживается; риторический паттерн data; текст помещается по геометрической ёмкости; есть структура для данных",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "slide-22",
+            "score": 17.7
+          },
+          {
+            "pattern_id": "slide-42",
+            "score": 17.7
+          },
+          {
+            "pattern_id": "slide-44",
+            "score": 17.7
+          }
+        ]
+      }
+    },
+    {
+      "title": "Объекты доступны для редактирования",
+      "role": "closing",
+      "subtitle": "",
+      "body": "",
+      "bullets": [],
+      "visual": null,
+      "speaker_notes": "Synthetic controlled component fixture; no model called.",
+      "pattern_id": "slide-52",
+      "layout_index": 17,
+      "master_index": 0,
+      "pattern_selection": {
+        "selector": {
+          "mode": "heuristic"
+        },
+        "score": 17.7,
+        "layout_pattern": "closing",
+        "why_fit": "роль closing поддерживается; риторический паттерн closing; проверенный exemplar-слайд",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "slide-55",
+            "score": 17.7
+          },
+          {
+            "pattern_id": "slide-10",
+            "score": 2.7
+          },
+          {
+            "pattern_id": "slide-12",
+            "score": 2.7
+          }
+        ]
+      }
+    }
+  ]
+}

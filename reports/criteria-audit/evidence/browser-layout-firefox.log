@@ -1,0 +1,14 @@
+browserType.launch: Executable doesn't exist at /Users/areluv/Library/Caches/ms-playwright/firefox-1543/firefox/Nightly.app/Contents/MacOS/firefox
+╔════════════════════════════════════════════════════════════╗
+║ Looks like Playwright was just installed or updated.       ║
+║ Please run the following command to download new browsers: ║
+║                                                            ║
+║     npx playwright install                                 ║
+║                                                            ║
+║ <3 Playwright Team                                         ║
+╚════════════════════════════════════════════════════════════╝
+    at /Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/tests/browser_layout.cjs:15:47
+    at Object.<anonymous> (/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/tests/browser_layout.cjs:113:3) {
+  log: [],
+  name: 'Error'
+}

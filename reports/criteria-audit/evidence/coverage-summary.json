@@ -1,0 +1,110 @@
+[
+  {
+    "deck": "with-renderer/artifacts/vk-tech/balanced",
+    "units": 38,
+    "missing_from_plan": 0,
+    "missing_from_pptx": 0,
+    "unsupported_numbers": [],
+    "planner_mode": "offline",
+    "primary_font": "Play"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-tech/focus",
+    "units": 38,
+    "missing_from_plan": 0,
+    "missing_from_pptx": 0,
+    "unsupported_numbers": [],
+    "planner_mode": "offline",
+    "primary_font": "Play"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-tech/columns",
+    "units": 38,
+    "missing_from_plan": 0,
+    "missing_from_pptx": 0,
+    "unsupported_numbers": [],
+    "planner_mode": "offline",
+    "primary_font": "Play"
+  },
+  {
+    "deck": "with-renderer/artifacts/unseen-brutalism/balanced",
+    "units": 38,
+    "missing_from_plan": 0,
+    "missing_from_pptx": 0,
+    "unsupported_numbers": [],
+    "planner_mode": "offline",
+    "primary_font": "Consolas"
+  },
+  {
+    "deck": "with-renderer/artifacts/unseen-brutalism/focus",
+    "units": 38,
+    "missing_from_plan": 0,
+    "missing_from_pptx": 0,
+    "unsupported_numbers": [],
+    "planner_mode": "offline",
+    "primary_font": "Consolas"
+  },
+  {
+    "deck": "with-renderer/artifacts/unseen-brutalism/columns",
+    "units": 38,
+    "missing_from_plan": 0,
+    "missing_from_pptx": 0,
+    "unsupported_numbers": [],
+    "planner_mode": "offline",
+    "primary_font": "Consolas"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-education/balanced",
+    "units": 38,
+    "missing_from_plan": 0,
+    "missing_from_pptx": 0,
+    "unsupported_numbers": [],
+    "planner_mode": "offline",
+    "primary_font": "Play"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-education/focus",
+    "units": 38,
+    "missing_from_plan": 0,
+    "missing_from_pptx": 0,
+    "unsupported_numbers": [],
+    "planner_mode": "offline",
+    "primary_font": "Play"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-education/columns",
+    "units": 38,
+    "missing_from_plan": 0,
+    "missing_from_pptx": 0,
+    "unsupported_numbers": [],
+    "planner_mode": "offline",
+    "primary_font": "Play"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-workspace/balanced",
+    "units": 38,
+    "missing_from_plan": 0,
+    "missing_from_pptx": 0,
+    "unsupported_numbers": [],
+    "planner_mode": "offline",
+    "primary_font": "Play"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-workspace/focus",
+    "units": 38,
+    "missing_from_plan": 0,
+    "missing_from_pptx": 0,
+    "unsupported_numbers": [],
+    "planner_mode": "offline",
+    "primary_font": "Play"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-workspace/columns",
+    "units": 38,
+    "missing_from_plan": 0,
+    "missing_from_pptx": 0,
+    "unsupported_numbers": [],
+    "planner_mode": "offline",
+    "primary_font": "Play"
+  }
+]

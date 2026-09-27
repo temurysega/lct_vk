@@ -1,0 +1,212 @@
+{
+  "status": "passed",
+  "score": 100,
+  "output": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201206/output.pptx",
+  "file_size_bytes": 19865449,
+  "slide_count": 10,
+  "canvas": {
+    "width_inches": 13.333333333333334,
+    "height_inches": 7.5
+  },
+  "explicit_fonts": [
+    "Play"
+  ],
+  "issues": [
+    {
+      "severity": "info",
+      "code": "template_bleed",
+      "shape": "Google Shape;795;p60",
+      "message": "Shape bounds (20.44, 5.11, 4.71, 0.74) exceed canvas",
+      "slide": 9,
+      "id": "d9d61ee89a8625a9",
+      "check_type": "deterministic",
+      "bounds": [
+        {
+          "x": 20.4419,
+          "y": 5.112,
+          "w": 4.7073,
+          "h": 0.7417
+        }
+      ],
+      "repairable": false
+    }
+  ],
+  "slides": [
+    {
+      "slide": 1,
+      "shape_count": 2,
+      "text_shape_count": 1
+    },
+    {
+      "slide": 2,
+      "shape_count": 2,
+      "text_shape_count": 5
+    },
+    {
+      "slide": 3,
+      "shape_count": 3,
+      "text_shape_count": 2
+    },
+    {
+      "slide": 4,
+      "shape_count": 2,
+      "text_shape_count": 5
+    },
+    {
+      "slide": 5,
+      "shape_count": 5,
+      "text_shape_count": 5
+    },
+    {
+      "slide": 6,
+      "shape_count": 2,
+      "text_shape_count": 5
+    },
+    {
+      "slide": 7,
+      "shape_count": 2,
+      "text_shape_count": 4
+    },
+    {
+      "slide": 8,
+      "shape_count": 2,
+      "text_shape_count": 5
+    },
+    {
+      "slide": 9,
+      "shape_count": 3,
+      "text_shape_count": 4
+    },
+    {
+      "slide": 10,
+      "shape_count": 2,
+      "text_shape_count": 2
+    }
+  ],
+  "powerpoint_render": {
+    "status": "skipped",
+    "score": null,
+    "renderer": "powerpoint_com",
+    "issues": [],
+    "previews": []
+  },
+  "content_coverage": "literal_coverage_complete",
+  "schema_version": "2.0",
+  "rendered_visual_audit": {
+    "status": "passed",
+    "checked_spans": 78,
+    "uncertain_spans": 0,
+    "issues": [],
+    "repairs": [
+      {
+        "slide": 1,
+        "shape": "BrandDeck Text 237",
+        "color": "#000000",
+        "issue_id": "f2e43676713b52dc"
+      },
+      {
+        "slide": 2,
+        "shape": "BrandDeck Text 276",
+        "color": "#000000",
+        "issue_id": "2e05a221c613e248"
+      },
+      {
+        "slide": 3,
+        "shape": "BrandDeck Text 3",
+        "color": "#000000",
+        "issue_id": "21bb871f0adde893"
+      },
+      {
+        "slide": 4,
+        "shape": "BrandDeck Text 543",
+        "color": "#000000",
+        "issue_id": "a8e82d0632886a74"
+      },
+      {
+        "slide": 5,
+        "shape": "BrandDeck Text 276",
+        "color": "#000000",
+        "issue_id": "fbf6886bc493cb4d"
+      },
+      {
+        "slide": 6,
+        "shape": "BrandDeck Text 543",
+        "color": "#000000",
+        "issue_id": "c138755e44f6bad5"
+      },
+      {
+        "slide": 7,
+        "shape": "BrandDeck Text 543",
+        "color": "#000000",
+        "issue_id": "7d455abe977bb5a8"
+      },
+      {
+        "slide": 8,
+        "shape": "BrandDeck Text 543",
+        "color": "#000000",
+        "issue_id": "bf7b2f60709e14e5"
+      },
+      {
+        "slide": 9,
+        "shape": "BrandDeck Text 794",
+        "color": "#000000",
+        "issue_id": "4527a18befafb124"
+      },
+      {
+        "slide": 10,
+        "shape": "BrandDeck Text 1075",
+        "color": "#000000",
+        "issue_id": "ea32192167c5c31c"
+      },
+      {
+        "slide": 10,
+        "shape": "BrandDeck Text 1077",
+        "color": "#000000",
+        "issue_id": "93e44fd1896e09e8"
+      }
+    ]
+  },
+  "rendered_fill_audit": {
+    "status": "passed",
+    "slides": [
+      {
+        "slide": 2,
+        "coverage": 0.484
+      },
+      {
+        "slide": 3,
+        "coverage": 0.65
+      },
+      {
+        "slide": 4,
+        "coverage": 0.409
+      },
+      {
+        "slide": 5,
+        "coverage": 0.615
+      },
+      {
+        "slide": 6,
+        "coverage": 0.411
+      },
+      {
+        "slide": 7,
+        "coverage": 0.408
+      },
+      {
+        "slide": 8,
+        "coverage": 0.411
+      },
+      {
+        "slide": 9,
+        "coverage": 0.392
+      }
+    ],
+    "issues": []
+  },
+  "structural_score": 100,
+  "contextual_audit": {
+    "status": "not_run",
+    "reason": "No configured model or audit disabled"
+  }
+}

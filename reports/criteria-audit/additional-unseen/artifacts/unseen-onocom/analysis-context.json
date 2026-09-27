@@ -1,0 +1,961 @@
+{
+  "presentation": {
+    "slide_width_inches": 10.83,
+    "slide_height_inches": 7.5,
+    "slide_count": 2
+  },
+  "theme": {
+    "color_scheme": {
+      "dk1": "000000",
+      "lt1": "FFFFFF",
+      "dk2": "44546A",
+      "lt2": "E7E6E6",
+      "accent1": "5B9BD5",
+      "accent2": "ED7D31",
+      "accent3": "A5A5A5",
+      "accent4": "FFC000",
+      "accent5": "4472C4",
+      "accent6": "70AD47",
+      "hlink": "0563C1",
+      "folHlink": "954F72"
+    },
+    "font_scheme": {
+      "majorFont": "游ゴシック",
+      "minorFont": "游ゴシック"
+    }
+  },
+  "slide_masters": [
+    {
+      "index": 0,
+      "name": "",
+      "background": {
+        "type": "solid",
+        "color": "FFFFFF",
+        "theme_ref": "bg1"
+      },
+      "shapes": [
+        {
+          "name": "直線コネクタ 7",
+          "type": "LINE ",
+          "left": 0.248,
+          "top": 0.68,
+          "width": 10.338,
+          "height": 0.0,
+          "line": {
+            "width_pt": 1.0,
+            "color": "BFBFBF",
+            "color_theme_ref": "bg1"
+          }
+        },
+        {
+          "name": "直線コネクタ 18",
+          "type": "LINE ",
+          "left": 0.248,
+          "top": 6.843,
+          "width": 10.338,
+          "height": 0.0,
+          "line": {
+            "width_pt": 1.0,
+            "color": "BFBFBF",
+            "color_theme_ref": "bg1"
+          }
+        }
+      ],
+      "images": [],
+      "text_styles": {
+        "title_style": {
+          "level1": {
+            "alignment": "l",
+            "bullet": null,
+            "font": {
+              "size_pt": 24.0,
+              "bold": true,
+              "theme_font": "major",
+              "color": "000000",
+              "color_theme_ref": "tx1"
+            }
+          }
+        },
+        "body_style": {
+          "level1": {
+            "alignment": "l",
+            "indent_pt": -36.0,
+            "margin_left_pt": 36.0,
+            "bullet": {
+              "type": "auto_num",
+              "scheme": "arabicPeriod"
+            },
+            "font": {
+              "size_pt": 24.0,
+              "bold": true,
+              "theme_font": "minor",
+              "color": "000000",
+              "color_theme_ref": "tx1"
+            }
+          },
+          "level2": {
+            "alignment": "l",
+            "indent_pt": -36.0,
+            "margin_left_pt": 72.0,
+            "bullet": {
+              "type": "auto_num",
+              "scheme": "alphaLcPeriod"
+            },
+            "font": {
+              "size_pt": 20.0,
+              "theme_font": "minor",
+              "color": "000000",
+              "color_theme_ref": "tx1"
+            }
+          },
+          "level3": {
+            "alignment": "l",
+            "indent_pt": -27.0,
+            "margin_left_pt": 99.0,
+            "bullet": {
+              "type": "auto_num",
+              "scheme": "circleNumDbPlain"
+            },
+            "font": {
+              "size_pt": 18.0,
+              "theme_font": "minor",
+              "color": "000000",
+              "color_theme_ref": "tx1"
+            }
+          },
+          "level4": {
+            "alignment": "l",
+            "indent_pt": -27.0,
+            "margin_left_pt": 135.0,
+            "bullet": {
+              "type": "auto_num",
+              "scheme": "alphaUcParenR"
+            },
+            "font": {
+              "size_pt": 16.0,
+              "theme_font": "minor",
+              "color": "000000",
+              "color_theme_ref": "tx1"
+            }
+          },
+          "level5": {
+            "alignment": "l",
+            "indent_pt": -27.0,
+            "margin_left_pt": 171.0,
+            "bullet": {
+              "type": "auto_num",
+              "scheme": "romanLcPeriod"
+            },
+            "font": {
+              "size_pt": 16.0,
+              "theme_font": "minor",
+              "color": "000000",
+              "color_theme_ref": "tx1"
+            }
+          },
+          "level6": {
+            "alignment": "l",
+            "indent_pt": -18.0,
+            "margin_left_pt": 198.0,
+            "bullet": {
+              "type": "char",
+              "char": "•",
+              "font": "Arial"
+            },
+            "font": {
+              "size_pt": 18.0,
+              "theme_font": "minor",
+              "color": "000000",
+              "color_theme_ref": "tx1"
+            }
+          },
+          "level7": {
+            "alignment": "l",
+            "indent_pt": -18.0,
+            "margin_left_pt": 234.0,
+            "bullet": {
+              "type": "char",
+              "char": "•",
+              "font": "Arial"
+            },
+            "font": {
+              "size_pt": 18.0,
+              "theme_font": "minor",
+              "color": "000000",
+              "color_theme_ref": "tx1"
+            }
+          },
+          "level8": {
+            "alignment": "l",
+            "indent_pt": -18.0,
+            "margin_left_pt": 270.0,
+            "bullet": {
+              "type": "char",
+              "char": "•",
+              "font": "Arial"
+            },
+            "font": {
+              "size_pt": 18.0,
+              "theme_font": "minor",
+              "color": "000000",
+              "color_theme_ref": "tx1"
+            }
+          },
+          "level9": {
+            "alignment": "l",
+            "indent_pt": -18.0,
+            "margin_left_pt": 306.0,
+            "bullet": {
+              "type": "char",
+              "char": "•",
+              "font": "Arial"
+            },
+            "font": {
+              "size_pt": 18.0,
+              "theme_font": "minor",
+              "color": "000000",
+              "color_theme_ref": "tx1"
+            }
+          }
+        },
+        "other_style": {
+          "level1": {
+            "alignment": "l",
+            "margin_left_pt": 0.0,
+            "font": {
+              "size_pt": 18.0,
+              "theme_font": "minor",
+              "color": "000000",
+              "color_theme_ref": "tx1"
+            }
+          },
+          "level2": {
+            "alignment": "l",
+            "margin_left_pt": 36.0,
+            "font": {
+              "size_pt": 18.0,
+              "theme_font": "minor",
+              "color": "000000",
+              "color_theme_ref": "tx1"
+            }
+          },
+          "level3": {
+            "alignment": "l",
+            "margin_left_pt": 72.0,
+            "font": {
+              "size_pt": 18.0,
+              "theme_font": "minor",
+              "color": "000000",
+              "color_theme_ref": "tx1"
+            }
+          },
+          "level4": {
+            "alignment": "l",
+            "margin_left_pt": 108.0,
+            "font": {
+              "size_pt": 18.0,
+              "theme_font": "minor",
+              "color": "000000",
+              "color_theme_ref": "tx1"
+            }
+          },
+          "level5": {
+            "alignment": "l",
+            "margin_left_pt": 144.0,
+            "font": {
+              "size_pt": 18.0,
+              "theme_font": "minor",
+              "color": "000000",
+              "color_theme_ref": "tx1"
+            }
+          },
+          "level6": {
+            "alignment": "l",
+            "margin_left_pt": 180.0,
+            "font": {
+              "size_pt": 18.0,
+              "theme_font": "minor",
+              "color": "000000",
+              "color_theme_ref": "tx1"
+            }
+          },
+          "level7": {
+            "alignment": "l",
+            "margin_left_pt": 216.0,
+            "font": {
+              "size_pt": 18.0,
+              "theme_font": "minor",
+              "color": "000000",
+              "color_theme_ref": "tx1"
+            }
+          },
+          "level8": {
+            "alignment": "l",
+            "margin_left_pt": 252.0,
+            "font": {
+              "size_pt": 18.0,
+              "theme_font": "minor",
+              "color": "000000",
+              "color_theme_ref": "tx1"
+            }
+          },
+          "level9": {
+            "alignment": "l",
+            "margin_left_pt": 288.0,
+            "font": {
+              "size_pt": 18.0,
+              "theme_font": "minor",
+              "color": "000000",
+              "color_theme_ref": "tx1"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "slide_layouts": [
+    {
+      "index": 0,
+      "name": "タイトル スライド",
+      "master_index": 0,
+      "background": {
+        "type": "inherit"
+      },
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "CENTER_TITLE ",
+          "left": 0.248,
+          "top": 1.227,
+          "width": 10.338,
+          "height": 2.2,
+          "font": {
+            "size_pt": 40.0
+          },
+          "text_body": {
+            "vertical_align": "middle"
+          }
+        },
+        {
+          "idx": 1,
+          "type": "SUBTITLE ",
+          "left": 0.248,
+          "top": 3.555,
+          "width": 10.338,
+          "height": 0.514,
+          "font": {
+            "size_pt": 24.0
+          },
+          "text_body": {
+            "vertical_align": "middle"
+          }
+        },
+        {
+          "idx": 10,
+          "type": "PICTURE ",
+          "left": 3.622,
+          "top": 5.411,
+          "width": 3.589,
+          "height": 0.939,
+          "font": {
+            "bold": false
+          },
+          "text_body": {
+            "vertical_align": "middle"
+          }
+        }
+      ],
+      "shapes": [],
+      "images": []
+    },
+    {
+      "index": 1,
+      "name": "タイトルとコンテンツ",
+      "master_index": 0,
+      "background": {
+        "type": "inherit"
+      },
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "TITLE ",
+          "left": 0.248,
+          "top": 0.031,
+          "width": 10.338,
+          "height": 0.638,
+          "font": {}
+        },
+        {
+          "idx": 1,
+          "type": "OBJECT ",
+          "left": 0.248,
+          "top": 0.854,
+          "width": 10.338,
+          "height": 5.816,
+          "font": {
+            "size_pt": 24.0,
+            "bold": false
+          }
+        },
+        {
+          "idx": 11,
+          "type": "FOOTER ",
+          "left": 0.248,
+          "top": 6.951,
+          "width": 6.997,
+          "height": 0.399,
+          "font": {}
+        },
+        {
+          "idx": 12,
+          "type": "SLIDE_NUMBER ",
+          "left": 7.355,
+          "top": 6.951,
+          "width": 3.231,
+          "height": 0.399,
+          "font": {}
+        }
+      ],
+      "shapes": [],
+      "images": []
+    },
+    {
+      "index": 2,
+      "name": "セクション見出し",
+      "master_index": 0,
+      "background": {
+        "type": "inherit"
+      },
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "TITLE ",
+          "left": 0.248,
+          "top": 1.87,
+          "width": 10.326,
+          "height": 3.12,
+          "font": {
+            "size_pt": 40.0
+          },
+          "text_body": {
+            "vertical_align": "bottom"
+          }
+        },
+        {
+          "idx": 1,
+          "type": "BODY ",
+          "left": 0.248,
+          "top": 5.019,
+          "width": 10.326,
+          "height": 1.641,
+          "font": {
+            "size_pt": 24.0,
+            "color": "000000",
+            "color_theme_ref": "tx1"
+          }
+        },
+        {
+          "idx": 11,
+          "type": "FOOTER ",
+          "left": 0.248,
+          "top": 6.951,
+          "width": 6.997,
+          "height": 0.399,
+          "font": {}
+        },
+        {
+          "idx": 12,
+          "type": "SLIDE_NUMBER ",
+          "left": 7.355,
+          "top": 6.951,
+          "width": 3.231,
+          "height": 0.399,
+          "font": {}
+        }
+      ],
+      "shapes": [
+        {
+          "name": "直線コネクタ 6",
+          "type": "LINE ",
+          "left": 0.248,
+          "top": 6.843,
+          "width": 10.338,
+          "height": 0.0,
+          "line": {
+            "width_pt": 1.0,
+            "color": "BFBFBF",
+            "color_theme_ref": "bg1"
+          }
+        }
+      ],
+      "images": []
+    },
+    {
+      "index": 3,
+      "name": "2 つのコンテンツ",
+      "master_index": 0,
+      "background": {
+        "type": "inherit"
+      },
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "TITLE ",
+          "left": 0.248,
+          "top": 0.031,
+          "width": 10.338,
+          "height": 0.638,
+          "font": {}
+        },
+        {
+          "idx": 1,
+          "type": "OBJECT ",
+          "left": 0.248,
+          "top": 0.872,
+          "width": 5.101,
+          "height": 5.744,
+          "font": {}
+        },
+        {
+          "idx": 2,
+          "type": "OBJECT ",
+          "left": 5.484,
+          "top": 0.872,
+          "width": 5.101,
+          "height": 5.744,
+          "font": {}
+        },
+        {
+          "idx": 11,
+          "type": "FOOTER ",
+          "left": 0.248,
+          "top": 6.951,
+          "width": 6.997,
+          "height": 0.399,
+          "font": {}
+        },
+        {
+          "idx": 12,
+          "type": "SLIDE_NUMBER ",
+          "left": 7.355,
+          "top": 6.951,
+          "width": 3.231,
+          "height": 0.399,
+          "font": {}
+        }
+      ],
+      "shapes": [],
+      "images": []
+    },
+    {
+      "index": 4,
+      "name": "比較",
+      "master_index": 0,
+      "background": {
+        "type": "inherit"
+      },
+      "placeholders": [
+        {
+          "idx": 1,
+          "type": "BODY ",
+          "left": 0.248,
+          "top": 0.851,
+          "width": 5.081,
+          "height": 0.901,
+          "font": {
+            "size_pt": 20.0,
+            "bold": true
+          },
+          "text_body": {
+            "vertical_align": "bottom"
+          }
+        },
+        {
+          "idx": 2,
+          "type": "OBJECT ",
+          "left": 0.248,
+          "top": 1.935,
+          "width": 5.081,
+          "height": 4.766,
+          "font": {
+            "size_pt": 20.0
+          }
+        },
+        {
+          "idx": 3,
+          "type": "BODY ",
+          "left": 5.484,
+          "top": 0.851,
+          "width": 5.101,
+          "height": 0.901,
+          "font": {
+            "size_pt": 20.0,
+            "bold": true
+          },
+          "text_body": {
+            "vertical_align": "bottom"
+          }
+        },
+        {
+          "idx": 4,
+          "type": "OBJECT ",
+          "left": 5.484,
+          "top": 1.935,
+          "width": 5.101,
+          "height": 4.766,
+          "font": {
+            "size_pt": 20.0
+          }
+        },
+        {
+          "idx": 11,
+          "type": "FOOTER ",
+          "left": 0.248,
+          "top": 6.951,
+          "width": 6.997,
+          "height": 0.399,
+          "font": {}
+        },
+        {
+          "idx": 12,
+          "type": "SLIDE_NUMBER ",
+          "left": 7.355,
+          "top": 6.951,
+          "width": 3.231,
+          "height": 0.399,
+          "font": {}
+        },
+        {
+          "idx": 0,
+          "type": "TITLE ",
+          "left": 0.248,
+          "top": 0.031,
+          "width": 10.338,
+          "height": 0.638,
+          "font": {}
+        }
+      ],
+      "shapes": [],
+      "images": []
+    },
+    {
+      "index": 5,
+      "name": "タイトルのみ",
+      "master_index": 0,
+      "background": {
+        "type": "inherit"
+      },
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "TITLE ",
+          "left": 0.248,
+          "top": 0.031,
+          "width": 10.338,
+          "height": 0.638,
+          "font": {}
+        },
+        {
+          "idx": 11,
+          "type": "FOOTER ",
+          "left": 0.248,
+          "top": 6.951,
+          "width": 6.997,
+          "height": 0.399,
+          "font": {}
+        },
+        {
+          "idx": 12,
+          "type": "SLIDE_NUMBER ",
+          "left": 7.355,
+          "top": 6.951,
+          "width": 3.231,
+          "height": 0.399,
+          "font": {}
+        }
+      ],
+      "shapes": [],
+      "images": []
+    },
+    {
+      "index": 6,
+      "name": "タイトル付きの\nコンテンツ",
+      "master_index": 0,
+      "background": {
+        "type": "inherit"
+      },
+      "placeholders": [
+        {
+          "idx": 1,
+          "type": "OBJECT ",
+          "left": 4.606,
+          "top": 1.08,
+          "width": 5.484,
+          "height": 5.33,
+          "font": {
+            "size_pt": 24.0
+          }
+        },
+        {
+          "idx": 2,
+          "type": "BODY ",
+          "left": 0.746,
+          "top": 1.08,
+          "width": 3.494,
+          "height": 5.339,
+          "font": {
+            "size_pt": 16.0
+          }
+        },
+        {
+          "idx": 11,
+          "type": "FOOTER ",
+          "left": 0.248,
+          "top": 6.951,
+          "width": 6.997,
+          "height": 0.399,
+          "font": {}
+        },
+        {
+          "idx": 12,
+          "type": "SLIDE_NUMBER ",
+          "left": 7.355,
+          "top": 6.951,
+          "width": 3.231,
+          "height": 0.399,
+          "font": {}
+        },
+        {
+          "idx": 0,
+          "type": "TITLE ",
+          "left": 0.248,
+          "top": 0.031,
+          "width": 10.338,
+          "height": 0.638,
+          "font": {}
+        }
+      ],
+      "shapes": [],
+      "images": []
+    },
+    {
+      "index": 7,
+      "name": "タイトル付きの図",
+      "master_index": 0,
+      "background": {
+        "type": "inherit"
+      },
+      "placeholders": [
+        {
+          "idx": 1,
+          "type": "PICTURE ",
+          "left": 4.606,
+          "top": 1.08,
+          "width": 5.484,
+          "height": 5.33,
+          "font": {
+            "size_pt": 24.0
+          },
+          "text_body": {
+            "vertical_align": "top"
+          }
+        },
+        {
+          "idx": 2,
+          "type": "BODY ",
+          "left": 0.746,
+          "top": 1.08,
+          "width": 3.494,
+          "height": 5.339,
+          "font": {
+            "size_pt": 16.0
+          }
+        },
+        {
+          "idx": 11,
+          "type": "FOOTER ",
+          "left": 0.248,
+          "top": 6.951,
+          "width": 6.997,
+          "height": 0.399,
+          "font": {}
+        },
+        {
+          "idx": 12,
+          "type": "SLIDE_NUMBER ",
+          "left": 7.355,
+          "top": 6.951,
+          "width": 3.231,
+          "height": 0.399,
+          "font": {}
+        },
+        {
+          "idx": 0,
+          "type": "TITLE ",
+          "left": 0.248,
+          "top": 0.031,
+          "width": 10.338,
+          "height": 0.638,
+          "font": {}
+        }
+      ],
+      "shapes": [],
+      "images": []
+    },
+    {
+      "index": 8,
+      "name": "タイトルと\n縦書きテキスト",
+      "master_index": 0,
+      "background": {
+        "type": "inherit"
+      },
+      "placeholders": [
+        {
+          "idx": 1,
+          "type": "BODY ",
+          "left": 0.248,
+          "top": 0.854,
+          "width": 10.338,
+          "height": 5.816,
+          "font": {}
+        },
+        {
+          "idx": 11,
+          "type": "FOOTER ",
+          "left": 0.248,
+          "top": 6.951,
+          "width": 6.997,
+          "height": 0.399,
+          "font": {}
+        },
+        {
+          "idx": 12,
+          "type": "SLIDE_NUMBER ",
+          "left": 7.355,
+          "top": 6.951,
+          "width": 3.231,
+          "height": 0.399,
+          "font": {}
+        },
+        {
+          "idx": 0,
+          "type": "TITLE ",
+          "left": 0.248,
+          "top": 0.031,
+          "width": 10.338,
+          "height": 0.638,
+          "font": {}
+        }
+      ],
+      "shapes": [],
+      "images": []
+    }
+  ],
+  "slides": [
+    {
+      "index": 1,
+      "layout_name": "タイトル スライド",
+      "layout_index": 0,
+      "background": {
+        "type": "inherit"
+      },
+      "shapes": [
+        {
+          "name": "タイトル 1",
+          "type": "PLACEHOLDER ",
+          "left": 0.248,
+          "top": 1.227,
+          "width": 10.338,
+          "height": 2.2
+        },
+        {
+          "name": "サブタイトル 2",
+          "type": "PLACEHOLDER ",
+          "left": 0.248,
+          "top": 3.555,
+          "width": 10.338,
+          "height": 0.514
+        },
+        {
+          "name": "図プレースホルダー 3",
+          "type": "PLACEHOLDER ",
+          "left": 3.622,
+          "top": 5.411,
+          "width": 3.589,
+          "height": 0.939
+        }
+      ],
+      "images": [],
+      "text_elements": [],
+      "effective_background": {
+        "color": "FFFFFF",
+        "source": "master"
+      }
+    },
+    {
+      "index": 2,
+      "layout_name": "タイトルとコンテンツ",
+      "layout_index": 1,
+      "background": {
+        "type": "inherit"
+      },
+      "shapes": [
+        {
+          "name": "タイトル 1",
+          "type": "PLACEHOLDER ",
+          "left": 0.248,
+          "top": 0.031,
+          "width": 10.338,
+          "height": 0.638
+        },
+        {
+          "name": "コンテンツ プレースホルダー 2",
+          "type": "PLACEHOLDER ",
+          "left": 0.248,
+          "top": 0.854,
+          "width": 10.338,
+          "height": 5.816
+        }
+      ],
+      "images": [],
+      "text_elements": [
+        {
+          "shape_name": "フッター プレースホルダー 3",
+          "left": 0.248,
+          "top": 6.951,
+          "width": 6.997,
+          "height": 0.399,
+          "paragraphs": [
+            {
+              "text": "Copyright © SAMPLE COMPANY All Rights Reserved.",
+              "font": {}
+            }
+          ],
+          "placeholder_type": "FOOTER "
+        },
+        {
+          "shape_name": "スライド番号プレースホルダー 4",
+          "left": 7.355,
+          "top": 6.951,
+          "width": 3.231,
+          "height": 0.399,
+          "paragraphs": [
+            {
+              "text": "2"
+            }
+          ],
+          "placeholder_type": "SLIDE_NUMBER "
+        }
+      ],
+      "effective_background": {
+        "color": "FFFFFF",
+        "source": "master"
+      }
+    }
+  ],
+  "fonts_summary": {
+    "families_used": [],
+    "usage_map": {}
+  },
+  "images_manifest": []
+}

@@ -1,0 +1,1514 @@
+[
+  {
+    "old": "s c,m as l,n as u,o as d,p as f,r as p,s as m,t as h,u as g,v as _}from\"./index-DjYsSnjd.js\";var v=g(`ArrowLeft`,[[`path`,{d:`m12 19-7-7 7-7`,key:`1l729n`}],[`path`,{d",
+    "new": "s c,m as l,n as u,o as d,p as f,r as p,s as m,t as h,u as g,v as _}from\"./index-CQdtb4Xe.js\";var v=g(`ArrowLeft`,[[`path`,{d:`m12 19-7-7 7-7`,key:`1l729n`}],[`pat"
+  },
+  {
+    "old": " l,n as u,o as d,p as f,r as p,s as m,t as h,u as g,v as _}from\"./index-DjYsSnjd.js\";var v=g(`ArrowLeft`,[[`path`,{d:`m12 19-7-7 7-7`,key:`1l729n`}],[`path`,{d:",
+    "new": ",m as l,n as u,o as d,p as f,r as p,s as m,t as h,u as g,v as _}from\"./index-CQdtb4Xe.js\";var v=g(`ArrowLeft`,[[`path`,{d:`m12 19-7-7 7-7`,key:`1l729n`}],[`path`,{d:"
+  },
+  {
+    "old": "`path`,{d:`M16 13H8`,key:`t4e002`}],[`path`,{d:`M16 17H8`,key:`z1uh3a`}]]),C=g(`LogOut`,[[`path`,{d:`M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4`,key:`1uf3rs`}],[`p",
+    "new": "`path`,{d:`M16 13H8`,key:`t4e002`}],[`path`,{d:`M16 17H8`,key:`z1uh3a`}]]),C=g(`ImagePlus`,[[`path`,{d:`M16 5h6`,key:`1vod17`}],[`path`,{d:`M19 2v6`,key:`4bpg5p`}],[`path`,{d:`M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5`,key:`1ue2ih`}],[`path`,{d:`m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21`,key:`1xmnt7`}],[`circle`,{cx:`9`,cy:`9`,r:`2`,key:`af1f0g`}]]),w=g(`LogOut`,[[`path`,{d:`M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4`,key:`1uf3rs`}],[`p"
+  },
+  {
+    "old": "2 16 7`,key:`1gabdz`}],[`line`,{x1:`21`,x2:`9`,y1:`12`,y2:`12`,key:`1uyos4`}]]),w=g(`Upload`,[[`path`,{d:`M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4`,key:`ih7n3h`",
+    "new": "2 16 7`,key:`1gabdz`}],[`line`,{x1:`21`,x2:`9`,y1:`12`,y2:`12`,key:`1uyos4`}]]),T=g(`Upload`,[[`path`,{d:`M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4`,key:`ih7n3h`"
+  },
+  {
+    "old": " 3 7 8`,key:`t8dd8p`}],[`line`,{x1:`12`,x2:`12`,y1:`3`,y2:`15`,key:`widbto`}]]),T=g(`Wrench`,[[`path`,{d:`M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-",
+    "new": " 3 7 8`,key:`t8dd8p`}],[`line`,{x1:`12`,x2:`12`,y1:`3`,y2:`15`,key:`widbto`}]]),E=g(`Wrench`,[[`path`,{d:`M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-"
+  },
+  {
+    "old": "2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z`,key:`cbrjhi`}]]),E=_(e(),1),D=a();function O({deck:e,busy:t,onRepair:r}){let[i,a]=(0,E.useState)([",
+    "new": "2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z`,key:`cbrjhi`}]]),D=_(e(),1),O=a();function k({deck:e,busy:t,onRepair:r}){let[i,a]=(0,D.useState)(["
+  },
+  {
+    "old": " 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z`,key:`cbrjhi`}]]),E=_(e(),1),D=a();function O({deck:e,busy:t,onRepair:r}){let[i,a]=(0,E.useState)([]),[o,s]=(0",
+    "new": " 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z`,key:`cbrjhi`}]]),D=_(e(),1),O=a();function k({deck:e,busy:t,onRepair:r}){let[i,a]=(0,D.useState)([]),[o,s]=(0"
+  },
+  {
+    "old": ".91a6 6 0 0 1 7.94-7.94l-3.76 3.76z`,key:`cbrjhi`}]]),E=_(e(),1),D=a();function O({deck:e,busy:t,onRepair:r}){let[i,a]=(0,E.useState)([]),[o,s]=(0,E.useState)([]",
+    "new": ".91a6 6 0 0 1 7.94-7.94l-3.76 3.76z`,key:`cbrjhi`}]]),D=_(e(),1),O=a();function k({deck:e,busy:t,onRepair:r}){let[i,a]=(0,D.useState)([]),[o,s]=(0,D.useState)([]"
+  },
+  {
+    "old": "cbrjhi`}]]),E=_(e(),1),D=a();function O({deck:e,busy:t,onRepair:r}){let[i,a]=(0,E.useState)([]),[o,s]=(0,E.useState)([]),c=encodeURIComponent(e.presentation_id),",
+    "new": "cbrjhi`}]]),D=_(e(),1),O=a();function k({deck:e,busy:t,onRepair:r}){let[i,a]=(0,D.useState)([]),[o,s]=(0,D.useState)([]),c=encodeURIComponent(e.presentation_id),"
+  },
+  {
+    "old": "a();function O({deck:e,busy:t,onRepair:r}){let[i,a]=(0,E.useState)([]),[o,s]=(0,E.useState)([]),c=encodeURIComponent(e.presentation_id),l=e.qa||{status:`unknown`",
+    "new": "a();function k({deck:e,busy:t,onRepair:r}){let[i,a]=(0,D.useState)([]),[o,s]=(0,D.useState)([]),c=encodeURIComponent(e.presentation_id),l=e.qa||{status:`unknown`"
+  },
+  {
+    "old": "|{status:`unknown`,issues:[]},u=(l.issues||[]).filter(e=>e.severity!==`info`),f=e.exports?.previews||[],p=[`pptx`,...Object.keys(e.exports?.artifacts||{}).filte",
+    "new": "|{status:`unknown`,issues:[]},u=(l.issues||[]).filter(e=>e.severity!==`info`),f=u.filter(e=>e.check_type!==`contextual`),p=u.length-f.length,m=e.exports?.previews||[],h=[`pptx`,...Object.keys(e.exports?.artifacts||{}).filte"
+  },
+  {
+    "old": "s:[]},u=(l.issues||[]).filter(e=>e.severity!==`info`),f=e.exports?.previews||[],p=[`pptx`,...Object.keys(e.exports?.artifacts||{}).filter(e=>[`pdf`,`html`].inclu",
+    "new": "r(e=>e.check_type!==`contextual`),p=u.length-f.length,m=e.exports?.previews||[],h=[`pptx`,...Object.keys(e.exports?.artifacts||{}).filter(e=>[`pdf`,`html`].inclu"
+  },
+  {
+    "old": ".keys(e.exports?.artifacts||{}).filter(e=>[`pdf`,`html`].includes(e))];return(0,D.jsxs)(`div`,{className:`deck-result`,id:`deck`,children:[(0,D.jsxs)(`div`,{clas",
+    "new": ".keys(e.exports?.artifacts||{}).filter(e=>[`pdf`,`html`].includes(e))];return(0,O.jsxs)(`div`,{className:`deck-result`,id:`deck`,children:[(0,O.jsxs)(`div`,{clas"
+  },
+  {
+    "old": "des(e))];return(0,D.jsxs)(`div`,{className:`deck-result`,id:`deck`,children:[(0,D.jsxs)(`div`,{className:`deck-toolbar`,children:[(0,D.jsxs)(`div`,{children:[(0,",
+    "new": "des(e))];return(0,O.jsxs)(`div`,{className:`deck-result`,id:`deck`,children:[(0,O.jsxs)(`div`,{className:`deck-toolbar`,children:[(0,O.jsxs)(`div`,{children:[(0,"
+  },
+  {
+    "old": "lt`,id:`deck`,children:[(0,D.jsxs)(`div`,{className:`deck-toolbar`,children:[(0,D.jsxs)(`div`,{children:[(0,D.jsxs)(`strong`,{children:[e.slide_count,` слайдов`]",
+    "new": "lt`,id:`deck`,children:[(0,O.jsxs)(`div`,{className:`deck-toolbar`,children:[(0,O.jsxs)(`div`,{children:[(0,O.jsxs)(`strong`,{children:[e.slide_count,` слайдов`]"
+  },
+  {
+    "old": ".jsxs)(`div`,{className:`deck-toolbar`,children:[(0,D.jsxs)(`div`,{children:[(0,D.jsxs)(`strong`,{children:[e.slide_count,` слайдов`]}),(0,D.jsx)(`span`,{childre",
+    "new": ".jsxs)(`div`,{className:`deck-toolbar`,children:[(0,O.jsxs)(`div`,{children:[(0,O.jsxs)(`strong`,{children:[e.slide_count,` слайдов`]}),(0,O.jsxs)(`span`,{childr"
+  },
+  {
+    "old": "(`div`,{children:[(0,D.jsxs)(`strong`,{children:[e.slide_count,` слайдов`]}),(0,D.jsx)(`span`,{children:`Редактируемый результат`})]}),(0,D.jsx)(`div`,{className",
+    "new": "(`div`,{children:[(0,O.jsxs)(`strong`,{children:[e.slide_count,` слайдов`]}),(0,O.jsxs)(`span`,{children:[`Редактируемый результат`,e.visuals?` · схем: ${e.visua"
+  },
+  {
+    "old": "`,{children:[(0,D.jsxs)(`strong`,{children:[e.slide_count,` слайдов`]}),(0,D.jsx)(`span`,{children:`Редактируемый результат`})]}),(0,D.jsx)(`div`,{className:`do",
+    "new": "`,{children:[(0,O.jsxs)(`strong`,{children:[e.slide_count,` слайдов`]}),(0,O.jsxs)(`span`,{children:[`Редактируемый результат`,e.visuals?` · схем: ${e.visuals.di"
+  },
+  {
+    "old": "sxs)(`strong`,{children:[e.slide_count,` слайдов`]}),(0,D.jsx)(`span`,{children:`Редактируемый результат`})]}),(0,D.jsx)(`div`,{className:`downloads`,children:p",
+    "new": "xs)(`strong`,{children:[e.slide_count,` слайдов`]}),(0,O.jsxs)(`span`,{children:[`Редактируемый результат`,e.visuals?` · схем: ${e.visuals.diagrams} · пиктограмм"
+  },
+  {
+    "old": "e.slide_count,` слайдов`]}),(0,D.jsx)(`span`,{children:`Редактируемый результат`})]}),(0,D.jsx)(`div`,{className:`downloads`,children:p.map(e=>(0,D.jsxs)(`a`,{h",
+    "new": "slide_count,` слайдов`]}),(0,O.jsxs)(`span`,{children:[`Редактируемый результат`,e.visuals?` · схем: ${e.visuals.diagrams} · пиктограмм: ${e.visuals.pictograms} · изображений: ${e.visuals.images}`:``]})]}),(0,O.jsx)(`div`,{className:`downloads`,children:h.map(e=>(0,O.jsxs)(`a`,{h"
+  },
+  {
+    "old": "ount,` слайдов`]}),(0,D.jsx)(`span`,{children:`Редактируемый результат`})]}),(0,D.jsx)(`div`,{className:`downloads`,children:p.map(e=>(0,D.jsxs)(`a`,{href:`/v1/p",
+    "new": "ограмм: ${e.visuals.pictograms} · изображений: ${e.visuals.images}`:``]})]}),(0,O.jsx)(`div`,{className:`downloads`,children:h.map(e=>(0,O.jsxs)(`a`,{href:`/v1/p"
+  },
+  {
+    "old": ":`Редактируемый результат`})]}),(0,D.jsx)(`div`,{className:`downloads`,children:p.map(e=>(0,D.jsxs)(`a`,{href:`/v1/presentations/${c}/download?format=${e}`,downl",
+    "new": ": ${e.visuals.images}`:``]})]}),(0,O.jsx)(`div`,{className:`downloads`,children:h.map(e=>(0,O.jsxs)(`a`,{href:`/v1/presentations/${c}/download?format=${e}`,downl"
+  },
+  {
+    "old": "мый результат`})]}),(0,D.jsx)(`div`,{className:`downloads`,children:p.map(e=>(0,D.jsxs)(`a`,{href:`/v1/presentations/${c}/download?format=${e}`,download:!0,child",
+    "new": "s.images}`:``]})]}),(0,O.jsx)(`div`,{className:`downloads`,children:h.map(e=>(0,O.jsxs)(`a`,{href:`/v1/presentations/${c}/download?format=${e}`,download:!0,child"
+  },
+  {
+    "old": "a`,{href:`/v1/presentations/${c}/download?format=${e}`,download:!0,children:[(0,D.jsx)(x,{size:15}),e.toUpperCase()]},e))})]}),(0,D.jsxs)(`div`,{className:`qa-su",
+    "new": "a`,{href:`/v1/presentations/${c}/download?format=${e}`,download:!0,children:[(0,O.jsx)(x,{size:15}),e.toUpperCase()]},e))})]}),(0,O.jsxs)(`div`,{className:`qa-su"
+  },
+  {
+    "old": "{e}`,download:!0,children:[(0,D.jsx)(x,{size:15}),e.toUpperCase()]},e))})]}),(0,D.jsxs)(`div`,{className:`qa-summary ${l.status===`failed`?`has-errors`:``}`,chil",
+    "new": "{e}`,download:!0,children:[(0,O.jsx)(x,{size:15}),e.toUpperCase()]},e))})]}),(0,O.jsxs)(`div`,{className:`qa-summary ${l.status===`failed`?`has-errors`:``}`,chil"
+  },
+  {
+    "old": "ummary ${l.status===`failed`?`has-errors`:``}`,children:[l.status===`passed`?(0,D.jsx)(n,{size:20}):(0,D.jsx)(b,{size:20}),(0,D.jsxs)(`div`,{children:[(0,D.jsxs)",
+    "new": "ummary ${l.status===`failed`?`has-errors`:``}`,children:[l.status===`passed`?(0,O.jsx)(n,{size:20}):(0,O.jsx)(b,{size:20}),(0,O.jsxs)(`div`,{children:[(0,O.jsxs)"
+  },
+  {
+    "old": "iled`?`has-errors`:``}`,children:[l.status===`passed`?(0,D.jsx)(n,{size:20}):(0,D.jsx)(b,{size:20}),(0,D.jsxs)(`div`,{children:[(0,D.jsxs)(`strong`,{children:[`П",
+    "new": "iled`?`has-errors`:``}`,children:[l.status===`passed`?(0,O.jsx)(n,{size:20}):(0,O.jsx)(b,{size:20}),(0,O.jsxs)(`div`,{children:[(0,O.jsxs)(`strong`,{children:[`Т"
+  },
+  {
+    "old": ",children:[l.status===`passed`?(0,D.jsx)(n,{size:20}):(0,D.jsx)(b,{size:20}),(0,D.jsxs)(`div`,{children:[(0,D.jsxs)(`strong`,{children:[`Проверка вёрстки:`,` `,l",
+    "new": ",children:[l.status===`passed`?(0,O.jsx)(n,{size:20}):(0,O.jsx)(b,{size:20}),(0,O.jsxs)(`div`,{children:[(0,O.jsxs)(`strong`,{children:[`Техническая проверка:`,`"
+  },
+  {
+    "old": "d`?(0,D.jsx)(n,{size:20}):(0,D.jsx)(b,{size:20}),(0,D.jsxs)(`div`,{children:[(0,D.jsxs)(`strong`,{children:[`Проверка вёрстки:`,` `,l.status===`passed`?`пройдена",
+    "new": "d`?(0,O.jsx)(n,{size:20}):(0,O.jsx)(b,{size:20}),(0,O.jsxs)(`div`,{children:[(0,O.jsxs)(`strong`,{children:[`Техническая проверка:`,` `,l.status===`passed`?`прой"
+  },
+  {
+    "old": "D.jsx)(b,{size:20}),(0,D.jsxs)(`div`,{children:[(0,D.jsxs)(`strong`,{children:[`Проверка вёрстки:`,` `,l.status===`passed`?`пройдена`:l.status===`failed`?`есть о",
+    "new": "O.jsx)(b,{size:20}),(0,O.jsxs)(`div`,{children:[(0,O.jsxs)(`strong`,{children:[`Техническая проверка:`,` `,l.status===`passed`?`пройдена`:l.status===`failed`?`есть ошибки`:l"
+  },
+  {
+    "old": ",{size:20}),(0,D.jsxs)(`div`,{children:[(0,D.jsxs)(`strong`,{children:[`Проверка вёрстки:`,` `,l.status===`passed`?`пройдена`:l.status===`failed`?`есть ошибки`:l.status",
+    "new": "(0,O.jsxs)(`div`,{children:[(0,O.jsxs)(`strong`,{children:[`Техническая проверка:`,` `,l.status===`passed`?`пройдена`:l.status===`failed`?`есть ошибки`:l.status"
+  },
+  {
+    "old": "led`?`есть ошибки`:l.status===`warning`?`есть замечания`:`нет результата`]}),(0,D.jsxs)(`p`,{children:[`Замечаний: `,u.length,`. Смысловая проверка моделью не пр",
+    "new": "led`?`есть ошибки`:l.status===`warning`?`есть замечания`:`нет результата`]}),(0,O.jsxs)(`p`,{children:[`Технических замечаний: `,f.length,`. `,l.contextual_audit"
+  },
+  {
+    "old": "tus===`warning`?`есть замечания`:`нет результата`]}),(0,D.jsxs)(`p`,{children:[`Замечаний: `,u.length,`. Смысловая проверка моделью не проводилась.`,[`offline`,`",
+    "new": "tus===`warning`?`есть замечания`:`нет результата`]}),(0,O.jsxs)(`p`,{children:[`Технических замечаний: `,f.length,`. `,l.contextual_audit?.status===`reviewed`?`Редакторских "
+  },
+  {
+    "old": "g`?`есть замечания`:`нет результата`]}),(0,D.jsxs)(`p`,{children:[`Замечаний: `,u.length,`. Смысловая проверка моделью не проводилась.`,[`offline`,`fallback`].in",
+    "new": "ечания`:`нет результата`]}),(0,O.jsxs)(`p`,{children:[`Технических замечаний: `,f.length,`. `,l.contextual_audit?.status===`reviewed`?`Редакторских подсказок мод"
+  },
+  {
+    "old": "ечания`:`нет результата`]}),(0,D.jsxs)(`p`,{children:[`Замечаний: `,u.length,`. Смысловая проверка моделью не проводилась.`,[`offline`,`fallback`].includes(e.pl",
+    "new": " результата`]}),(0,O.jsxs)(`p`,{children:[`Технических замечаний: `,f.length,`. `,l.contextual_audit?.status===`reviewed`?`Редакторских подсказок модели: ${p}; их нужно проверить вручную. Смысл изображений требует просмотра человеком.`:`Смысловая проверка моделью не проводилась.`,[`offline`,`fallback`].includes(e.pl"
+  },
+  {
+    "old": "ние распределено без модели.`:``]})]})]}),(e.exports?.issues||[]).map((e,t)=>(0,D.jsxs)(`p`,{className:`export-note`,children:[(0,D.jsx)(b,{size:16}),e.code===`e",
+    "new": "ние распределено без модели.`:``]})]})]}),(e.exports?.issues||[]).map((e,t)=>(0,O.jsxs)(`p`,{className:`export-note`,children:[(0,O.jsx)(b,{size:16}),e.code===`e"
+  },
+  {
+    "old": "ts?.issues||[]).map((e,t)=>(0,D.jsxs)(`p`,{className:`export-note`,children:[(0,D.jsx)(b,{size:16}),e.code===`export_unavailable`?`PDF, HTML и предпросмотр сейча",
+    "new": "ts?.issues||[]).map((e,t)=>(0,O.jsxs)(`p`,{className:`export-note`,children:[(0,O.jsx)(b,{size:16}),e.code===`export_unavailable`?`PDF, HTML и предпросмотр сейча"
+  },
+  {
+    "old": "TML и предпросмотр сейчас недоступны. Вы можете скачать PPTX.`:e.message]},t)),!f.length&&(0,D.jsxs)(`div`,{className:`no-preview`,children:[(0,D.jsx)(d,{size:40",
+    "new": "TML и предпросмотр сейчас недоступны. Вы можете скачать PPTX.`:e.message]},t)),!m.length&&(0,O.jsxs)(`div`,{className:`no-preview`,children:[(0,O.jsx)(d,{size:40"
+  },
+  {
+    "old": "смотр сейчас недоступны. Вы можете скачать PPTX.`:e.message]},t)),!f.length&&(0,D.jsxs)(`div`,{className:`no-preview`,children:[(0,D.jsx)(d,{size:40,strokeWidth:",
+    "new": "смотр сейчас недоступны. Вы можете скачать PPTX.`:e.message]},t)),!m.length&&(0,O.jsxs)(`div`,{className:`no-preview`,children:[(0,O.jsx)(d,{size:40,strokeWidth:"
+  },
+  {
+    "old": ".message]},t)),!f.length&&(0,D.jsxs)(`div`,{className:`no-preview`,children:[(0,D.jsx)(d,{size:40,strokeWidth:1.2}),(0,D.jsx)(`h3`,{children:`Презентация собрана",
+    "new": ".message]},t)),!m.length&&(0,O.jsxs)(`div`,{className:`no-preview`,children:[(0,O.jsx)(d,{size:40,strokeWidth:1.2}),(0,O.jsx)(`h3`,{children:`Презентация собрана"
+  },
+  {
+    "old": "iv`,{className:`no-preview`,children:[(0,D.jsx)(d,{size:40,strokeWidth:1.2}),(0,D.jsx)(`h3`,{children:`Презентация собрана.`}),(0,D.jsxs)(`p`,{children:[`Для про",
+    "new": "iv`,{className:`no-preview`,children:[(0,O.jsx)(d,{size:40,strokeWidth:1.2}),(0,O.jsx)(`h3`,{children:`Презентация собрана.`}),(0,O.jsxs)(`p`,{children:[`Для про"
+  },
+  {
+    "old": "{size:40,strokeWidth:1.2}),(0,D.jsx)(`h3`,{children:`Презентация собрана.`}),(0,D.jsxs)(`p`,{children:[`Для просмотра слайдов откройте файл в PowerPoint.`,(0,D.j",
+    "new": "{size:40,strokeWidth:1.2}),(0,O.jsx)(`h3`,{children:`Презентация собрана.`}),(0,O.jsxs)(`p`,{children:[`Для просмотра слайдов откройте файл в PowerPoint.`,(0,O.j"
+  },
+  {
+    "old": "0,D.jsxs)(`p`,{children:[`Для просмотра слайдов откройте файл в PowerPoint.`,(0,D.jsx)(`br`,{}),`Здесь появится предпросмотр, когда будет доступен рендер.`]})]})",
+    "new": "0,O.jsxs)(`p`,{children:[`Для просмотра слайдов откройте файл в PowerPoint.`,(0,O.jsx)(`br`,{}),`Здесь появится предпросмотр, когда будет доступен рендер.`]})]})"
+  },
+  {
+    "old": ")(`br`,{}),`Здесь появится предпросмотр, когда будет доступен рендер.`]})]}),(0,D.jsx)(`div`,{className:f.length?`rendered-slide-list`:`compact-slide-list`,child",
+    "new": ")(`br`,{}),`Здесь появится предпросмотр, когда будет доступен рендер.`]})]}),(0,O.jsx)(`div`,{className:m.length?`rendered-slide-list`:`compact-slide-list`,child"
+  },
+  {
+    "old": "ся предпросмотр, когда будет доступен рендер.`]})]}),(0,D.jsx)(`div`,{className:f.length?`rendered-slide-list`:`compact-slide-list`,children:Array.from({length:e",
+    "new": "ся предпросмотр, когда будет доступен рендер.`]})]}),(0,O.jsx)(`div`,{className:m.length?`rendered-slide-list`:`compact-slide-list`,children:Array.from({length:e"
+  },
+  {
+    "old": "rom({length:e.slide_count},(e,t)=>t+1).map(e=>{let n=u.filter(t=>t.slide===e),r=f.some(t=>t.slide===e)&&!o.includes(e);return(0,D.jsxs)(`article`,{className:`sli",
+    "new": "rom({length:e.slide_count},(e,t)=>t+1).map(e=>{let n=u.filter(t=>t.slide===e),r=m.some(t=>t.slide===e)&&!o.includes(e);return(0,O.jsxs)(`article`,{className:`sli"
+  },
+  {
+    "old": "et n=u.filter(t=>t.slide===e),r=f.some(t=>t.slide===e)&&!o.includes(e);return(0,D.jsxs)(`article`,{className:`slide-result`,children:[(0,D.jsxs)(`div`,{className",
+    "new": "et n=u.filter(t=>t.slide===e),r=m.some(t=>t.slide===e)&&!o.includes(e);return(0,O.jsxs)(`article`,{className:`slide-result`,children:[(0,O.jsxs)(`div`,{className"
+  },
+  {
+    "old": "o.includes(e);return(0,D.jsxs)(`article`,{className:`slide-result`,children:[(0,D.jsxs)(`div`,{className:`slide-heading`,children:[(0,D.jsxs)(`span`,{children:[`",
+    "new": "o.includes(e);return(0,O.jsxs)(`article`,{className:`slide-result`,children:[(0,O.jsxs)(`div`,{className:`slide-heading`,children:[(0,O.jsxs)(`span`,{children:[`"
+  },
+  {
+    "old": "lide-result`,children:[(0,D.jsxs)(`div`,{className:`slide-heading`,children:[(0,D.jsxs)(`span`,{children:[`Слайд `,String(e).padStart(2,`0`)]}),(0,D.jsx)(`span`,",
+    "new": "lide-result`,children:[(0,O.jsxs)(`div`,{className:`slide-heading`,children:[(0,O.jsxs)(`span`,{children:[`Слайд `,String(e).padStart(2,`0`)]}),(0,O.jsx)(`span`,"
+  },
+  {
+    "old": "children:[(0,D.jsxs)(`span`,{children:[`Слайд `,String(e).padStart(2,`0`)]}),(0,D.jsx)(`span`,{children:n.length?`${n.length} замечаний`:`Нет замечаний к вёрстке",
+    "new": "children:[(0,O.jsxs)(`span`,{children:[`Слайд `,String(e).padStart(2,`0`)]}),(0,O.jsx)(`span`,{children:n.length?`${n.length} замечаний`:`Нет замечаний к вёрстке"
+  },
+  {
+    "old": "{children:n.length?`${n.length} замечаний`:`Нет замечаний к вёрстке`})]}),r&&(0,D.jsxs)(`div`,{className:`slide-view`,children:[(0,D.jsx)(`img`,{src:`/v1/present",
+    "new": "{children:n.length?`${n.length} замечаний`:`Нет замечаний к вёрстке`})]}),r&&(0,O.jsxs)(`div`,{className:`slide-view`,children:[(0,O.jsx)(`img`,{src:`/v1/present"
+  },
+  {
+    "old": "ечаний к вёрстке`})]}),r&&(0,D.jsxs)(`div`,{className:`slide-view`,children:[(0,D.jsx)(`img`,{src:`/v1/presentations/${c}/preview/${e}`,alt:`Слайд ${e}`,loading:",
+    "new": "ечаний к вёрстке`})]}),r&&(0,O.jsxs)(`div`,{className:`slide-view`,children:[(0,O.jsx)(`img`,{src:`/v1/presentations/${c}/preview/${e}`,alt:`Слайд ${e}`,loading:"
+  },
+  {
+    "old": "h_inches>0&&l.canvas.height_inches>0&&n.flatMap(e=>(e.bounds||[]).map((t,n)=>(0,D.jsx)(`span`,{className:`issue-mark`,style:{left:`${100*t.x/l.canvas.width_inche",
+    "new": "h_inches>0&&l.canvas.height_inches>0&&n.flatMap(e=>(e.bounds||[]).map((t,n)=>(0,O.jsx)(`span`,{className:`issue-mark`,style:{left:`${100*t.x/l.canvas.width_inche"
+  },
+  {
+    "old": "%`,height:`${100*t.h/l.canvas.height_inches}%`}},e.id+n)))]}),o.includes(e)&&(0,D.jsx)(`p`,{className:`export-note`,children:`Не удалось загрузить превью. Скачай",
+    "new": "%`,height:`${100*t.h/l.canvas.height_inches}%`}},e.id+n)))]}),o.includes(e)&&(0,O.jsx)(`p`,{className:`export-note`,children:`Не удалось загрузить превью. Скачай"
+  },
+  {
+    "old": "port-note`,children:`Не удалось загрузить превью. Скачайте PPTX.`}),n.map(e=>(0,D.jsxs)(`label`,{className:`audit-issue ${e.severity}`,children:[e.repairable&&(0",
+    "new": "port-note`,children:`Не удалось загрузить превью. Скачайте PPTX.`}),n.map(e=>(0,O.jsxs)(`label`,{className:`audit-issue ${e.severity}`,children:[e.repairable&&(0"
+  },
+  {
+    "old": "jsxs)(`label`,{className:`audit-issue ${e.severity}`,children:[e.repairable&&(0,D.jsx)(`input`,{type:`checkbox`,disabled:t,checked:i.includes(e.id),onChange:t=>a",
+    "new": "jsxs)(`label`,{className:`audit-issue ${e.severity}`,children:[e.repairable&&(0,O.jsx)(`input`,{type:`checkbox`,disabled:t,checked:i.includes(e.id),onChange:t=>a"
+  },
+  {
+    "old": "e.id),onChange:t=>a(n=>t.target.checked?[...n,e.id]:n.filter(t=>t!==e.id))}),(0,D.jsx)(`span`,{children:e.message})]},e.id))]},e)})}),u.filter(e=>!e.slide).map(e",
+    "new": "e.id),onChange:t=>a(n=>t.target.checked?[...n,e.id]:n.filter(t=>t!==e.id))}),(0,O.jsx)(`span`,{children:e.message})]},e.id))]},e)})}),u.filter(e=>!e.slide).map(e"
+  },
+  {
+    "old": "(`span`,{children:e.message})]},e.id))]},e)})}),u.filter(e=>!e.slide).map(e=>(0,D.jsx)(`p`,{className:`export-note`,children:e.message},e.id)),u.some(e=>e.repair",
+    "new": "(`span`,{children:e.message})]},e.id))]},e)})}),u.filter(e=>!e.slide).map(e=>(0,O.jsx)(`p`,{className:`export-note`,children:e.message},e.id)),u.some(e=>e.repair"
+  },
+  {
+    "old": "e:`export-note`,children:e.message},e.id)),u.some(e=>e.repairable&&e.slide)&&(0,D.jsxs)(`button`,{className:`button primary repair-button`,disabled:t||!i.length,",
+    "new": "e:`export-note`,children:e.message},e.id)),u.some(e=>e.repairable&&e.slide)&&(0,O.jsxs)(`button`,{className:`button primary repair-button`,disabled:t||!i.length,"
+  },
+  {
+    "old": "tton primary repair-button`,disabled:t||!i.length,onClick:()=>r(i),children:[(0,D.jsx)(T,{size:16}),`Исправить выбранные (`,i.length,`)`]})]})}var k={queued:`В о",
+    "new": "tton primary repair-button`,disabled:t||!i.length,onClick:()=>r(i),children:[(0,O.jsx)(E,{size:16}),`Исправить выбранные (`,i.length,`)`]})]})}var A={queued:`В о"
+  },
+  {
+    "old": "imary repair-button`,disabled:t||!i.length,onClick:()=>r(i),children:[(0,D.jsx)(T,{size:16}),`Исправить выбранные (`,i.length,`)`]})]})}var k={queued:`В очереди`",
+    "new": "imary repair-button`,disabled:t||!i.length,onClick:()=>r(i),children:[(0,O.jsx)(E,{size:16}),`Исправить выбранные (`,i.length,`)`]})]})}var A={queued:`В очереди`"
+  },
+  {
+    "old": "children:[(0,D.jsx)(T,{size:16}),`Исправить выбранные (`,i.length,`)`]})]})}var k={queued:`В очереди`,starting:`Начинаем работу`,template_analysis:`Изучаем шабло",
+    "new": "children:[(0,O.jsx)(E,{size:16}),`Исправить выбранные (`,i.length,`)`]})]})}var A={queued:`В очереди`,starting:`Начинаем работу`,template_analysis:`Изучаем шабло"
+  },
+  {
+    "old": "`Собираем слайды`,quality_assurance:`Проверяем вёрстку`,export:`Готовим файлы`},A=e=>e instanceof DOMException&&e.name===`AbortError`;function j(e){return new Pr",
+    "new": "`Собираем слайды`,quality_assurance:`Проверяем вёрстку`,export:`Готовим файлы`},j=e=>e instanceof DOMException&&e.name===`AbortError`;function M(e){return new Pr"
+  },
+  {
+    "old": "`Готовим файлы`},A=e=>e instanceof DOMException&&e.name===`AbortError`;function j(e){return new Promise((t,n)=>{if(e.aborted){n(new DOMException(`Aborted`,`Abort",
+    "new": "`Готовим файлы`},j=e=>e instanceof DOMException&&e.name===`AbortError`;function M(e){return new Promise((t,n)=>{if(e.aborted){n(new DOMException(`Aborted`,`Abort"
+  },
+  {
+    "old": "stener(`abort`,r),t()},1200);e.addEventListener(`abort`,r,{once:!0})})}function M(e,t,n){if(!e)throw Error(`Выберите файл.`);if(!t.includes(e.name.split(`.`).pop",
+    "new": "stener(`abort`,r),t()},1200);e.addEventListener(`abort`,r,{once:!0})})}function N(e,t,n){if(!e)throw Error(`Выберите файл.`);if(!t.includes(e.name.split(`.`).pop"
+  },
+  {
+    "old": ");if(e.size>n*1024*1024)throw Error(`Размер файла превышает ${n} МБ.`)}function N(e){let[t]=(0,E.useState)(l),[n,a]=(0,E.useState)(t.content),[s,c]=(0,E.useState",
+    "new": ");if(e.size>n*1024*1024)throw Error(`Размер файла превышает ${n} МБ.`)}function P(e){let[t]=(0,D.useState)(l),[n,a]=(0,D.useState)(t.content),[s,c]=(0,D.useState"
+  },
+  {
+    "old": "024*1024)throw Error(`Размер файла превышает ${n} МБ.`)}function N(e){let[t]=(0,E.useState)(l),[n,a]=(0,E.useState)(t.content),[s,c]=(0,E.useState)(t.count),[u,d",
+    "new": "024*1024)throw Error(`Размер файла превышает ${n} МБ.`)}function P(e){let[t]=(0,D.useState)(l),[n,a]=(0,D.useState)(t.content),[s,c]=(0,D.useState)(t.count),[u,d"
+  },
+  {
+    "old": "змер файла превышает ${n} МБ.`)}function N(e){let[t]=(0,E.useState)(l),[n,a]=(0,E.useState)(t.content),[s,c]=(0,E.useState)(t.count),[u,d]=(0,E.useState)([]),[p,",
+    "new": "змер файла превышает ${n} МБ.`)}function P(e){let[t]=(0,D.useState)(l),[n,a]=(0,D.useState)(t.content),[s,c]=(0,D.useState)(t.count),[u,d]=(0,D.useState)([]),[p,"
+  },
+  {
+    "old": "function N(e){let[t]=(0,E.useState)(l),[n,a]=(0,E.useState)(t.content),[s,c]=(0,E.useState)(t.count),[u,d]=(0,E.useState)([]),[p,m]=(0,E.useState)(``),[h,g]=(0,E",
+    "new": "function P(e){let[t]=(0,D.useState)(l),[n,a]=(0,D.useState)(t.content),[s,c]=(0,D.useState)(t.count),[u,d]=(0,D.useState)([]),[p,m]=(0,D.useState)(``),[h,g]=(0,D"
+  },
+  {
+    "old": "tate)(l),[n,a]=(0,E.useState)(t.content),[s,c]=(0,E.useState)(t.count),[u,d]=(0,E.useState)([]),[p,m]=(0,E.useState)(``),[h,g]=(0,E.useState)(null),[_,v]=(0,E.us",
+    "new": "tate)(l),[n,a]=(0,D.useState)(t.content),[s,c]=(0,D.useState)(t.count),[u,d]=(0,D.useState)([]),[p,m]=(0,D.useState)(``),[h,g]=(0,D.useState)(null),[_,v]=(0,D.us"
+  },
+  {
+    "old": "ate)(t.content),[s,c]=(0,E.useState)(t.count),[u,d]=(0,E.useState)([]),[p,m]=(0,E.useState)(``),[h,g]=(0,E.useState)(null),[_,v]=(0,E.useState)(!0),[y,b]=(0,E.us",
+    "new": "ate)(t.content),[s,c]=(0,D.useState)(t.count),[u,d]=(0,D.useState)([]),[p,m]=(0,D.useState)(``),[h,g]=(0,D.useState)(null),[_,v]=(0,D.useState)(!0),[y,b]=(0,D.us"
+  },
+  {
+    "old": "E.useState)(t.count),[u,d]=(0,E.useState)([]),[p,m]=(0,E.useState)(``),[h,g]=(0,E.useState)(null),[_,v]=(0,E.useState)(!0),[y,b]=(0,E.useState)([]),[x,S]=(0,E.us",
+    "new": "D.useState)(t.count),[u,d]=(0,D.useState)([]),[p,m]=(0,D.useState)(``),[h,g]=(0,D.useState)(null),[_,v]=(0,D.useState)(!0),[y,b]=(0,D.useState)(``),[x,S]=(0,D.us"
+  },
+  {
+    "old": "(0,E.useState)([]),[p,m]=(0,E.useState)(``),[h,g]=(0,E.useState)(null),[_,v]=(0,E.useState)(!0),[y,b]=(0,E.useState)([]),[x,S]=(0,E.useState)(``),[C,w]=(0,E.useS",
+    "new": "(0,D.useState)([]),[p,m]=(0,D.useState)(``),[h,g]=(0,D.useState)(null),[_,v]=(0,D.useState)(!0),[y,b]=(0,D.useState)(``),[x,S]=(0,D.useState)([]),[C,w]=(0,D.useS"
+  },
+  {
+    "old": "(0,E.useState)(``),[h,g]=(0,E.useState)(null),[_,v]=(0,E.useState)(!0),[y,b]=(0,E.useState)([]),[x,S]=(0,E.useState)(``),[C,w]=(0,E.useState)([]),[T,D]=(0,E.useS",
+    "new": "(0,D.useState)(``),[h,g]=(0,D.useState)(null),[_,v]=(0,D.useState)(!0),[y,b]=(0,D.useState)(``),[x,S]=(0,D.useState)([]),[C,w]=(0,D.useState)(``),[T,E]=(0,D.useState)([]),[O,k]=(0,D.useS"
+  },
+  {
+    "old": "),[h,g]=(0,E.useState)(null),[_,v]=(0,E.useState)(!0),[y,b]=(0,E.useState)([]),[x,S]=(0,E.useState)(``),[C,w]=(0,E.useState)([]),[T,D]=(0,E.useState)(0),[O,N]=(0",
+    "new": "ll),[_,v]=(0,D.useState)(!0),[y,b]=(0,D.useState)(``),[x,S]=(0,D.useState)([]),[C,w]=(0,D.useState)(``),[T,E]=(0,D.useState)([]),[O,k]=(0,D.useState)(0),[P,F]=(0"
+  },
+  {
+    "old": "[h,g]=(0,E.useState)(null),[_,v]=(0,E.useState)(!0),[y,b]=(0,E.useState)([]),[x,S]=(0,E.useState)(``),[C,w]=(0,E.useState)([]),[T,D]=(0,E.useState)(0),[O,N]=(0,E",
+    "new": "),[_,v]=(0,D.useState)(!0),[y,b]=(0,D.useState)(``),[x,S]=(0,D.useState)([]),[C,w]=(0,D.useState)(``),[T,E]=(0,D.useState)([]),[O,k]=(0,D.useState)(0),[P,F]=(0,D"
+  },
+  {
+    "old": "(0,E.useState)(null),[_,v]=(0,E.useState)(!0),[y,b]=(0,E.useState)([]),[x,S]=(0,E.useState)(``),[C,w]=(0,E.useState)([]),[T,D]=(0,E.useState)(0),[O,N]=(0,E.useSt",
+    "new": "]=(0,D.useState)(!0),[y,b]=(0,D.useState)(``),[x,S]=(0,D.useState)([]),[C,w]=(0,D.useState)(``),[T,E]=(0,D.useState)([]),[O,k]=(0,D.useState)(0),[P,F]=(0,D.useSt"
+  },
+  {
+    "old": "ll),[_,v]=(0,E.useState)(!0),[y,b]=(0,E.useState)([]),[x,S]=(0,E.useState)(``),[C,w]=(0,E.useState)([]),[T,D]=(0,E.useState)(0),[O,N]=(0,E.useState)(``),[P,F]=(0",
+    "new": "!0),[y,b]=(0,D.useState)(``),[x,S]=(0,D.useState)([]),[C,w]=(0,D.useState)(``),[T,E]=(0,D.useState)([]),[O,k]=(0,D.useState)(0),[P,F]=(0,D.useState)(``),[I,L]=(0"
+  },
+  {
+    "old": "),[_,v]=(0,E.useState)(!0),[y,b]=(0,E.useState)([]),[x,S]=(0,E.useState)(``),[C,w]=(0,E.useState)([]),[T,D]=(0,E.useState)(0),[O,N]=(0,E.useState)(``),[P,F]=(0,E",
+    "new": "),[y,b]=(0,D.useState)(``),[x,S]=(0,D.useState)([]),[C,w]=(0,D.useState)(``),[T,E]=(0,D.useState)([]),[O,k]=(0,D.useState)(0),[P,F]=(0,D.useState)(``),[I,L]=(0,D"
+  },
+  {
+    "old": "]=(0,E.useState)(!0),[y,b]=(0,E.useState)([]),[x,S]=(0,E.useState)(``),[C,w]=(0,E.useState)([]),[T,D]=(0,E.useState)(0),[O,N]=(0,E.useState)(``),[P,F]=(0,E.useSt",
+    "new": "]=(0,D.useState)(``),[x,S]=(0,D.useState)([]),[C,w]=(0,D.useState)(``),[T,E]=(0,D.useState)([]),[O,k]=(0,D.useState)(0),[P,F]=(0,D.useState)(``),[I,L]=(0,D.useSt"
+  },
+  {
+    "old": "!0),[y,b]=(0,E.useState)([]),[x,S]=(0,E.useState)(``),[C,w]=(0,E.useState)([]),[T,D]=(0,E.useState)(0),[O,N]=(0,E.useState)(``),[P,F]=(0,E.useState)(!1),[I,L]=(0",
+    "new": "``),[x,S]=(0,D.useState)([]),[C,w]=(0,D.useState)(``),[T,E]=(0,D.useState)([]),[O,k]=(0,D.useState)(0),[P,F]=(0,D.useState)(``),[I,L]=(0,D.useState)(!1),[R,z]=(0"
+  },
+  {
+    "old": "),[y,b]=(0,E.useState)([]),[x,S]=(0,E.useState)(``),[C,w]=(0,E.useState)([]),[T,D]=(0,E.useState)(0),[O,N]=(0,E.useState)(``),[P,F]=(0,E.useState)(!1),[I,L]=(0,E",
+    "new": "),[x,S]=(0,D.useState)([]),[C,w]=(0,D.useState)(``),[T,E]=(0,D.useState)([]),[O,k]=(0,D.useState)(0),[P,F]=(0,D.useState)(``),[I,L]=(0,D.useState)(!1),[R,z]=(0,D"
+  },
+  {
+    "old": "]=(0,E.useState)([]),[x,S]=(0,E.useState)(``),[C,w]=(0,E.useState)([]),[T,D]=(0,E.useState)(0),[O,N]=(0,E.useState)(``),[P,F]=(0,E.useState)(!1),[I,L]=(0,E.useSt",
+    "new": "]=(0,D.useState)([]),[C,w]=(0,D.useState)(``),[T,E]=(0,D.useState)([]),[O,k]=(0,D.useState)(0),[P,F]=(0,D.useState)(``),[I,L]=(0,D.useState)(!1),[R,z]=(0,D.useSt"
+  },
+  {
+    "old": "([]),[x,S]=(0,E.useState)(``),[C,w]=(0,E.useState)([]),[T,D]=(0,E.useState)(0),[O,N]=(0,E.useState)(``),[P,F]=(0,E.useState)(!1),[I,L]=(0,E.useState)(`loading`),",
+    "new": "([]),[C,w]=(0,D.useState)(``),[T,E]=(0,D.useState)([]),[O,k]=(0,D.useState)(0),[P,F]=(0,D.useState)(``),[I,L]=(0,D.useState)(!1),[R,z]=(0,D.useState)(`loading`),"
+  },
+  {
+    "old": "]),[x,S]=(0,E.useState)(``),[C,w]=(0,E.useState)([]),[T,D]=(0,E.useState)(0),[O,N]=(0,E.useState)(``),[P,F]=(0,E.useState)(!1),[I,L]=(0,E.useState)(`loading`),[R",
+    "new": "]),[C,w]=(0,D.useState)(``),[T,E]=(0,D.useState)([]),[O,k]=(0,D.useState)(0),[P,F]=(0,D.useState)(``),[I,L]=(0,D.useState)(!1),[R,z]=(0,D.useState)(`loading`),[B"
+  },
+  {
+    "old": "S]=(0,E.useState)(``),[C,w]=(0,E.useState)([]),[T,D]=(0,E.useState)(0),[O,N]=(0,E.useState)(``),[P,F]=(0,E.useState)(!1),[I,L]=(0,E.useState)(`loading`),[R,z]=(0",
+    "new": "w]=(0,D.useState)(``),[T,E]=(0,D.useState)([]),[O,k]=(0,D.useState)(0),[P,F]=(0,D.useState)(``),[I,L]=(0,D.useState)(!1),[R,z]=(0,D.useState)(`loading`),[B,V]=(0"
+  },
+  {
+    "old": "(``),[C,w]=(0,E.useState)([]),[T,D]=(0,E.useState)(0),[O,N]=(0,E.useState)(``),[P,F]=(0,E.useState)(!1),[I,L]=(0,E.useState)(`loading`),[R,z]=(0,E.useState)(null",
+    "new": "(``),[T,E]=(0,D.useState)([]),[O,k]=(0,D.useState)(0),[P,F]=(0,D.useState)(``),[I,L]=(0,D.useState)(!1),[R,z]=(0,D.useState)(`loading`),[B,V]=(0,D.useState)(null"
+  },
+  {
+    "old": "`),[C,w]=(0,E.useState)([]),[T,D]=(0,E.useState)(0),[O,N]=(0,E.useState)(``),[P,F]=(0,E.useState)(!1),[I,L]=(0,E.useState)(`loading`),[R,z]=(0,E.useState)(null),",
+    "new": "`),[T,E]=(0,D.useState)([]),[O,k]=(0,D.useState)(0),[P,F]=(0,D.useState)(``),[I,L]=(0,D.useState)(!1),[R,z]=(0,D.useState)(`loading`),[B,V]=(0,D.useState)(null),"
+  },
+  {
+    "old": "w]=(0,E.useState)([]),[T,D]=(0,E.useState)(0),[O,N]=(0,E.useState)(``),[P,F]=(0,E.useState)(!1),[I,L]=(0,E.useState)(`loading`),[R,z]=(0,E.useState)(null),B=(0,E",
+    "new": "E]=(0,D.useState)([]),[O,k]=(0,D.useState)(0),[P,F]=(0,D.useState)(``),[I,L]=(0,D.useState)(!1),[R,z]=(0,D.useState)(`loading`),[B,V]=(0,D.useState)(null),H=(0,D"
+  },
+  {
+    "old": "([]),[T,D]=(0,E.useState)(0),[O,N]=(0,E.useState)(``),[P,F]=(0,E.useState)(!1),[I,L]=(0,E.useState)(`loading`),[R,z]=(0,E.useState)(null),B=(0,E.useRef)(null),V=",
+    "new": "([]),[O,k]=(0,D.useState)(0),[P,F]=(0,D.useState)(``),[I,L]=(0,D.useState)(!1),[R,z]=(0,D.useState)(`loading`),[B,V]=(0,D.useState)(null),H=(0,D.useRef)(null),U="
+  },
+  {
+    "old": "]),[T,D]=(0,E.useState)(0),[O,N]=(0,E.useState)(``),[P,F]=(0,E.useState)(!1),[I,L]=(0,E.useState)(`loading`),[R,z]=(0,E.useState)(null),B=(0,E.useRef)(null),V=(0",
+    "new": "]),[O,k]=(0,D.useState)(0),[P,F]=(0,D.useState)(``),[I,L]=(0,D.useState)(!1),[R,z]=(0,D.useState)(`loading`),[B,V]=(0,D.useState)(null),H=(0,D.useRef)(null),U=(0"
+  },
+  {
+    "old": "D]=(0,E.useState)(0),[O,N]=(0,E.useState)(``),[P,F]=(0,E.useState)(!1),[I,L]=(0,E.useState)(`loading`),[R,z]=(0,E.useState)(null),B=(0,E.useRef)(null),V=(0,E.use",
+    "new": "k]=(0,D.useState)(0),[P,F]=(0,D.useState)(``),[I,L]=(0,D.useState)(!1),[R,z]=(0,D.useState)(`loading`),[B,V]=(0,D.useState)(null),H=(0,D.useRef)(null),U=(0,D.use"
+  },
+  {
+    "old": "N]=(0,E.useState)(``),[P,F]=(0,E.useState)(!1),[I,L]=(0,E.useState)(`loading`),[R,z]=(0,E.useState)(null),B=(0,E.useRef)(null),V=(0,E.useRef)(!1);(0,E.useEffect)",
+    "new": "F]=(0,D.useState)(``),[I,L]=(0,D.useState)(!1),[R,z]=(0,D.useState)(`loading`),[B,V]=(0,D.useState)(null),H=(0,D.useRef)(null),U=(0,D.useRef)(!1);(0,D.useEffect)"
+  },
+  {
+    "old": "=(0,E.useState)(``),[P,F]=(0,E.useState)(!1),[I,L]=(0,E.useState)(`loading`),[R,z]=(0,E.useState)(null),B=(0,E.useRef)(null),V=(0,E.useRef)(!1);(0,E.useEffect)((",
+    "new": "=(0,D.useState)(``),[I,L]=(0,D.useState)(!1),[R,z]=(0,D.useState)(`loading`),[B,V]=(0,D.useState)(null),H=(0,D.useRef)(null),U=(0,D.useRef)(!1);(0,D.useEffect)(("
+  },
+  {
+    "old": "useState)(``),[P,F]=(0,E.useState)(!1),[I,L]=(0,E.useState)(`loading`),[R,z]=(0,E.useState)(null),B=(0,E.useRef)(null),V=(0,E.useRef)(!1);(0,E.useEffect)(()=>{o(",
+    "new": "useState)(``),[I,L]=(0,D.useState)(!1),[R,z]=(0,D.useState)(`loading`),[B,V]=(0,D.useState)(null),H=(0,D.useRef)(null),U=(0,D.useRef)(!1);(0,D.useEffect)(()=>{o("
+  },
+  {
+    "old": "]=(0,E.useState)(!1),[I,L]=(0,E.useState)(`loading`),[R,z]=(0,E.useState)(null),B=(0,E.useRef)(null),V=(0,E.useRef)(!1);(0,E.useEffect)(()=>{o({content:n,count:s",
+    "new": "]=(0,D.useState)(!1),[R,z]=(0,D.useState)(`loading`),[B,V]=(0,D.useState)(null),H=(0,D.useRef)(null),U=(0,D.useRef)(!1);(0,D.useEffect)(()=>{o({content:n,count:s"
+  },
+  {
+    "old": "E.useState)(!1),[I,L]=(0,E.useState)(`loading`),[R,z]=(0,E.useState)(null),B=(0,E.useRef)(null),V=(0,E.useRef)(!1);(0,E.useEffect)(()=>{o({content:n,count:s})},[",
+    "new": "D.useState)(!1),[R,z]=(0,D.useState)(`loading`),[B,V]=(0,D.useState)(null),H=(0,D.useRef)(null),U=(0,D.useRef)(!1);(0,D.useEffect)(()=>{o({content:n,count:s})},["
+  },
+  {
+    "old": "[I,L]=(0,E.useState)(`loading`),[R,z]=(0,E.useState)(null),B=(0,E.useRef)(null),V=(0,E.useRef)(!1);(0,E.useEffect)(()=>{o({content:n,count:s})},[n,s]);let H=(0,E",
+    "new": "[R,z]=(0,D.useState)(`loading`),[B,V]=(0,D.useState)(null),H=(0,D.useRef)(null),U=(0,D.useRef)(!1);(0,D.useEffect)(()=>{o({content:n,count:s})},[n,s]);let W=(0,D"
+  },
+  {
+    "old": "=(0,E.useState)(`loading`),[R,z]=(0,E.useState)(null),B=(0,E.useRef)(null),V=(0,E.useRef)(!1);(0,E.useEffect)(()=>{o({content:n,count:s})},[n,s]);let H=(0,E.useC",
+    "new": "=(0,D.useState)(`loading`),[B,V]=(0,D.useState)(null),H=(0,D.useRef)(null),U=(0,D.useRef)(!1);(0,D.useEffect)(()=>{o({content:n,count:s})},[n,s]);let W=(0,D.useC"
+  },
+  {
+    "old": "loading`),[R,z]=(0,E.useState)(null),B=(0,E.useRef)(null),V=(0,E.useRef)(!1);(0,E.useEffect)(()=>{o({content:n,count:s})},[n,s]);let H=(0,E.useCallback)((e,t=!1)",
+    "new": "loading`),[B,V]=(0,D.useState)(null),H=(0,D.useRef)(null),U=(0,D.useRef)(!1);(0,D.useEffect)(()=>{o({content:n,count:s})},[n,s]);let W=(0,D.useCallback)((e,t=!1)"
+  },
+  {
+    "old": "ull),V=(0,E.useRef)(!1);(0,E.useEffect)(()=>{o({content:n,count:s})},[n,s]);let H=(0,E.useCallback)((e,t=!1)=>{N(e),F(t)},[]),U=(0,E.useCallback)(async(t,n)=>{le",
+    "new": "ull),U=(0,D.useRef)(!1);(0,D.useEffect)(()=>{o({content:n,count:s})},[n,s]);let W=(0,D.useCallback)((e,t=!1)=>{F(e),L(t)},[]),G=(0,D.useCallback)(async(t,n)=>{le"
+  },
+  {
+    "old": "V=(0,E.useRef)(!1);(0,E.useEffect)(()=>{o({content:n,count:s})},[n,s]);let H=(0,E.useCallback)((e,t=!1)=>{N(e),F(t)},[]),U=(0,E.useCallback)(async(t,n)=>{let a=0",
+    "new": "U=(0,D.useRef)(!1);(0,D.useEffect)(()=>{o({content:n,count:s})},[n,s]);let W=(0,D.useCallback)((e,t=!1)=>{F(e),L(t)},[]),G=(0,D.useCallback)(async(t,n)=>{let a=0"
+  },
+  {
+    "old": "eEffect)(()=>{o({content:n,count:s})},[n,s]);let H=(0,E.useCallback)((e,t=!1)=>{N(e),F(t)},[]),U=(0,E.useCallback)(async(t,n)=>{let a=0;for(;!n.aborted;){let o;t",
+    "new": "eEffect)(()=>{o({content:n,count:s})},[n,s]);let W=(0,D.useCallback)((e,t=!1)=>{F(e),L(t)},[]),G=(0,D.useCallback)(async(t,n)=>{let a=0;for(;!n.aborted;){let o;t"
+  },
+  {
+    "old": "ct)(()=>{o({content:n,count:s})},[n,s]);let H=(0,E.useCallback)((e,t=!1)=>{N(e),F(t)},[]),U=(0,E.useCallback)(async(t,n)=>{let a=0;for(;!n.aborted;){let o;try{o=",
+    "new": "ct)(()=>{o({content:n,count:s})},[n,s]);let W=(0,D.useCallback)((e,t=!1)=>{F(e),L(t)},[]),G=(0,D.useCallback)(async(t,n)=>{let a=0;for(;!n.aborted;){let o;try{o="
+  },
+  {
+    "old": "({content:n,count:s})},[n,s]);let H=(0,E.useCallback)((e,t=!1)=>{N(e),F(t)},[]),U=(0,E.useCallback)(async(t,n)=>{let a=0;for(;!n.aborted;){let o;try{o=await i(`/",
+    "new": "({content:n,count:s})},[n,s]);let W=(0,D.useCallback)((e,t=!1)=>{F(e),L(t)},[]),G=(0,D.useCallback)(async(t,n)=>{let a=0;for(;!n.aborted;){let o;try{o=await i(`/"
+  },
+  {
+    "old": "tent:n,count:s})},[n,s]);let H=(0,E.useCallback)((e,t=!1)=>{N(e),F(t)},[]),U=(0,E.useCallback)(async(t,n)=>{let a=0;for(;!n.aborted;){let o;try{o=await i(`/v1/jo",
+    "new": "tent:n,count:s})},[n,s]);let W=(0,D.useCallback)((e,t=!1)=>{F(e),L(t)},[]),G=(0,D.useCallback)(async(t,n)=>{let a=0;for(;!n.aborted;){let o;try{o=await i(`/v1/jo"
+  },
+  {
+    "old": "t o;try{o=await i(`/v1/jobs/`+encodeURIComponent(t),{signal:n}),a=0}catch(t){if(A(t)||(t instanceof r&&t.status===404&&f(e.id,null),t instanceof r&&[401,404].inc",
+    "new": "t o;try{o=await i(`/v1/jobs/`+encodeURIComponent(t),{signal:n}),a=0}catch(t){if(j(t)||(t instanceof r&&t.status===404&&f(e.id,null),t instanceof r&&[401,404].inc"
+  },
+  {
+    "old": "=404&&f(e.id,null),t instanceof r&&[401,404].includes(t.status)||++a>4))throw t;H(`Восстанавливаем соединение…`),await j(n);continue}if(n.aborted)return;if(z(o.p",
+    "new": "=404&&f(e.id,null),t instanceof r&&[401,404].includes(t.status)||++a>4))throw t;W(`Восстанавливаем соединение…`),await M(n);continue}if(n.aborted)return;if(V(o.p"
+  },
+  {
+    "old": ",404].includes(t.status)||++a>4))throw t;H(`Восстанавливаем соединение…`),await j(n);continue}if(n.aborted)return;if(z(o.progress||0),H((k[o.stage?.split(`:`).po",
+    "new": ",404].includes(t.status)||++a>4))throw t;W(`Восстанавливаем соединение…`),await M(n);continue}if(n.aborted)return;if(V(o.progress||0),W((A[o.stage?.split(`:`).po"
+  },
+  {
+    "old": "w t;H(`Восстанавливаем соединение…`),await j(n);continue}if(n.aborted)return;if(z(o.progress||0),H((k[o.stage?.split(`:`).pop()||``]||`Обрабатываем материалы`)+`",
+    "new": "w t;W(`Восстанавливаем соединение…`),await M(n);continue}if(n.aborted)return;if(V(o.progress||0),W((A[o.stage?.split(`:`).pop()||``]||`Обрабатываем материалы`)+`"
+  },
+  {
+    "old": "иваем соединение…`),await j(n);continue}if(n.aborted)return;if(z(o.progress||0),H((k[o.stage?.split(`:`).pop()||``]||`Обрабатываем материалы`)+` · ${o.progress||",
+    "new": "иваем соединение…`),await M(n);continue}if(n.aborted)return;if(V(o.progress||0),W((A[o.stage?.split(`:`).pop()||``]||`Обрабатываем материалы`)+` · ${o.progress||"
+  },
+  {
+    "old": "ем соединение…`),await j(n);continue}if(n.aborted)return;if(z(o.progress||0),H((k[o.stage?.split(`:`).pop()||``]||`Обрабатываем материалы`)+` · ${o.progress||0}%",
+    "new": "ем соединение…`),await M(n);continue}if(n.aborted)return;if(V(o.progress||0),W((A[o.stage?.split(`:`).pop()||``]||`Обрабатываем материалы`)+` · ${o.progress||0}%"
+  },
+  {
+    "old": "th)throw Error(o.error||`Не удалось завершить генерацию. Проверьте материалы.`);w(o.batch.variants),D(0),S(o.batch.batch_id),b(await i(`/v1/batches`,{signal:n}))",
+    "new": "th)throw Error(o.error||`Не удалось завершить генерацию. Проверьте материалы.`);E(o.batch.variants),k(0),w(o.batch.batch_id),S(await i(`/v1/batches`,{signal:n}))"
+  },
+  {
+    "old": "or||`Не удалось завершить генерацию. Проверьте материалы.`);w(o.batch.variants),D(0),S(o.batch.batch_id),b(await i(`/v1/batches`,{signal:n})),H(o.status===`faile",
+    "new": "or||`Не удалось завершить генерацию. Проверьте материалы.`);E(o.batch.variants),k(0),w(o.batch.batch_id),S(await i(`/v1/batches`,{signal:n})),W(o.status===`faile"
+  },
+  {
+    "old": "Не удалось завершить генерацию. Проверьте материалы.`);w(o.batch.variants),D(0),S(o.batch.batch_id),b(await i(`/v1/batches`,{signal:n})),H(o.status===`failed`?`В",
+    "new": "Не удалось завершить генерацию. Проверьте материалы.`);E(o.batch.variants),k(0),w(o.batch.batch_id),S(await i(`/v1/batches`,{signal:n})),W(o.status===`failed`?`В"
+  },
+  {
+    "old": " генерацию. Проверьте материалы.`);w(o.batch.variants),D(0),S(o.batch.batch_id),b(await i(`/v1/batches`,{signal:n})),H(o.status===`failed`?`Варианты собраны, но ",
+    "new": " генерацию. Проверьте материалы.`);E(o.batch.variants),k(0),w(o.batch.batch_id),S(await i(`/v1/batches`,{signal:n})),W(o.status===`failed`?`Варианты собраны, но "
+  },
+  {
+    "old": "o.batch.variants),D(0),S(o.batch.batch_id),b(await i(`/v1/batches`,{signal:n})),H(o.status===`failed`?`Варианты собраны, но есть замечания к проверке или экспорт",
+    "new": "o.batch.variants),k(0),w(o.batch.batch_id),S(await i(`/v1/batches`,{signal:n})),W(o.status===`failed`?`Варианты собраны, но есть замечания к проверке или экспорт"
+  },
+  {
+    "old": "ssed`?`Три варианта готовы. Выберите свой.`:`Варианты готовы. Проверьте различия: в шаблоне может быть недостаточно разных макетов.`,o.status===`failed`);return",
+    "new": "ssed`?`Три варианта готовы. Выберите свой.`:`Варианты готовы. Проверьте различия на готовом рендере: варианты могут выглядеть одинаково.`,o.status===`failed`);return}await M(n)}},"
+  },
+  {
+    "old": "d`?`Три варианта готовы. Выберите свой.`:`Варианты готовы. Проверьте различия: в шаблоне может быть недостаточно разных макетов.`,o.status===`failed`);return}awai",
+    "new": "товы. Выберите свой.`:`Варианты готовы. Проверьте различия на готовом рендере: варианты могут выглядеть одинаково.`,o.status===`failed`);return}await M(n)}},[W,"
+  },
+  {
+    "old": "`Три варианта готовы. Выберите свой.`:`Варианты готовы. Проверьте различия: в шаблоне может быть недостаточно разных макетов.`,o.status===`failed`);return}await j(",
+    "new": "овы. Выберите свой.`:`Варианты готовы. Проверьте различия на готовом рендере: варианты могут выглядеть одинаково.`,o.status===`failed`);return}await M(n)}},[W,e.id"
+  },
+  {
+    "old": " варианта готовы. Выберите свой.`:`Варианты готовы. Проверьте различия: в шаблоне может быть недостаточно разных макетов.`,o.status===`failed`);return}await j(n)",
+    "new": " Выберите свой.`:`Варианты готовы. Проверьте различия на готовом рендере: варианты могут выглядеть одинаково.`,o.status===`failed`);return}await M(n)}},[W,e.id]);"
+  },
+  {
+    "old": "ианта готовы. Выберите свой.`:`Варианты готовы. Проверьте различия: в шаблоне может быть недостаточно разных макетов.`,o.status===`failed`);return}await j(n)}},[H",
+    "new": "рите свой.`:`Варианты готовы. Проверьте различия на готовом рендере: варианты могут выглядеть одинаково.`,o.status===`failed`);return}await M(n)}},[W,e.id]);(0,D."
+  },
+  {
+    "old": "а готовы. Выберите свой.`:`Варианты готовы. Проверьте различия: в шаблоне может быть недостаточно разных макетов.`,o.status===`failed`);return}await j(n)}},[H,e.",
+    "new": " свой.`:`Варианты готовы. Проверьте различия на готовом рендере: варианты могут выглядеть одинаково.`,o.status===`failed`);return}await M(n)}},[W,e.id]);(0,D.use"
+  },
+  {
+    "old": "готовы. Выберите свой.`:`Варианты готовы. Проверьте различия: в шаблоне может быть недостаточно разных макетов.`,o.status===`failed`);return}await j(n)}},[H,e.i",
+    "new": "вой.`:`Варианты готовы. Проверьте различия на готовом рендере: варианты могут выглядеть одинаково.`,o.status===`failed`);return}await M(n)}},[W,e.id]);(0,D.useEffect"
+  },
+  {
+    "old": "овы. Выберите свой.`:`Варианты готовы. Проверьте различия: в шаблоне может быть недостаточно разных макетов.`,o.status===`failed`);return}await j(n)}},[H,e.id])",
+    "new": "арианты готовы. Проверьте различия на готовом рендере: варианты могут выглядеть одинаково.`,o.status===`failed`);return}await M(n)}},[W,e.id]);(0,D.useEffect)(()=>"
+  },
+  {
+    "old": "вы. Выберите свой.`:`Варианты готовы. Проверьте различия: в шаблоне может быть недостаточно разных макетов.`,o.status===`failed`);return}await j(n)}},[H,e.id]);(0,E.useEffect)(()=>",
+    "new": "нты готовы. Проверьте различия на готовом рендере: варианты могут выглядеть одинаково.`,o.status===`failed`);return}await M(n)}},[W,e.id]);(0,D.useEffect)(()=>{"
+  },
+  {
+    "old": "арианты готовы. Проверьте различия: в шаблоне может быть недостаточно разных макетов.`,o.status===`failed`);return}await j(n)}},[H,e.id]);(0,E.useEffect)(()=>{let",
+    "new": "ы готовы. Проверьте различия на готовом рендере: варианты могут выглядеть одинаково.`,o.status===`failed`);return}await M(n)}},[W,e.id]);(0,D.useEffect)(()=>{le"
+  },
+  {
+    "old": "нты готовы. Проверьте различия: в шаблоне может быть недостаточно разных макетов.`,o.status===`failed`);return}await j(n)}},[H,e.id]);(0,E.useEffect)(()=>{let t",
+    "new": "готовы. Проверьте различия на готовом рендере: варианты могут выглядеть одинаково.`,o.status===`failed`);return}await M(n)}},[W,e.id]);(0,D.useEffect)(()=>{let t"
+  },
+  {
+    "old": "лоне может быть недостаточно разных макетов.`,o.status===`failed`);return}await j(n)}},[H,e.id]);(0,E.useEffect)(()=>{let t=new AbortController;B.current=t;async",
+    "new": "рендере: варианты могут выглядеть одинаково.`,o.status===`failed`);return}await M(n)}},[W,e.id]);(0,D.useEffect)(()=>{let t=new AbortController;H.current=t;async"
+  },
+  {
+    "old": "ет быть недостаточно разных макетов.`,o.status===`failed`);return}await j(n)}},[H,e.id]);(0,E.useEffect)(()=>{let t=new AbortController;B.current=t;async functio",
+    "new": " варианты могут выглядеть одинаково.`,o.status===`failed`);return}await M(n)}},[W,e.id]);(0,D.useEffect)(()=>{let t=new AbortController;H.current=t;async functio"
+  },
+  {
+    "old": "статочно разных макетов.`,o.status===`failed`);return}await j(n)}},[H,e.id]);(0,E.useEffect)(()=>{let t=new AbortController;B.current=t;async function n(){try{le",
+    "new": "гут выглядеть одинаково.`,o.status===`failed`);return}await M(n)}},[W,e.id]);(0,D.useEffect)(()=>{let t=new AbortController;H.current=t;async function n(){try{le"
+  },
+  {
+    "old": "`);return}await j(n)}},[H,e.id]);(0,E.useEffect)(()=>{let t=new AbortController;B.current=t;async function n(){try{let[n,r,a]=await Promise.all([i(`/api/config`,",
+    "new": "`);return}await M(n)}},[W,e.id]);(0,D.useEffect)(()=>{let t=new AbortController;H.current=t;async function n(){try{let[n,r,a]=await Promise.all([i(`/api/config`,"
+  },
+  {
+    "old": "turn;g(n.model_configured),v(!n.model_configured),d(r),m(r[0]?.template_id||``),b(a);let o=f(e.id);o&&(V.current=!0,L(`generate`),z(0),await U(o,t.signal))}catch",
+    "new": "turn;g(n.model_configured),v(!n.model_configured),d(r),m(r[0]?.template_id||``),S(a);let o=f(e.id);o&&(U.current=!0,z(`generate`),V(0),await G(o,t.signal))}catch"
+  },
+  {
+    "old": "ed),v(!n.model_configured),d(r),m(r[0]?.template_id||``),b(a);let o=f(e.id);o&&(V.current=!0,L(`generate`),z(0),await U(o,t.signal))}catch(e){A(e)||H(e instanceo",
+    "new": "ed),v(!n.model_configured),d(r),m(r[0]?.template_id||``),S(a);let o=f(e.id);o&&(U.current=!0,z(`generate`),V(0),await G(o,t.signal))}catch(e){j(e)||W(e instanceo"
+  },
+  {
+    "old": "l_configured),d(r),m(r[0]?.template_id||``),b(a);let o=f(e.id);o&&(V.current=!0,L(`generate`),z(0),await U(o,t.signal))}catch(e){A(e)||H(e instanceof Error?e.mes",
+    "new": "l_configured),d(r),m(r[0]?.template_id||``),S(a);let o=f(e.id);o&&(U.current=!0,z(`generate`),V(0),await G(o,t.signal))}catch(e){j(e)||W(e instanceof Error?e.mes"
+  },
+  {
+    "old": "d(r),m(r[0]?.template_id||``),b(a);let o=f(e.id);o&&(V.current=!0,L(`generate`),z(0),await U(o,t.signal))}catch(e){A(e)||H(e instanceof Error?e.message:`Не удало",
+    "new": "d(r),m(r[0]?.template_id||``),S(a);let o=f(e.id);o&&(U.current=!0,z(`generate`),V(0),await G(o,t.signal))}catch(e){j(e)||W(e instanceof Error?e.message:`Не удало"
+  },
+  {
+    "old": "?.template_id||``),b(a);let o=f(e.id);o&&(V.current=!0,L(`generate`),z(0),await U(o,t.signal))}catch(e){A(e)||H(e instanceof Error?e.message:`Не удалось открыть ",
+    "new": "?.template_id||``),S(a);let o=f(e.id);o&&(U.current=!0,z(`generate`),V(0),await G(o,t.signal))}catch(e){j(e)||W(e instanceof Error?e.message:`Не удалось открыть "
+  },
+  {
+    "old": "let o=f(e.id);o&&(V.current=!0,L(`generate`),z(0),await U(o,t.signal))}catch(e){A(e)||H(e instanceof Error?e.message:`Не удалось открыть студию.`,!0)}finally{t.s",
+    "new": "let o=f(e.id);o&&(U.current=!0,z(`generate`),V(0),await G(o,t.signal))}catch(e){j(e)||W(e instanceof Error?e.message:`Не удалось открыть студию.`,!0)}finally{t.s"
+  },
+  {
+    "old": "f(e.id);o&&(V.current=!0,L(`generate`),z(0),await U(o,t.signal))}catch(e){A(e)||H(e instanceof Error?e.message:`Не удалось открыть студию.`,!0)}finally{t.signal.",
+    "new": "f(e.id);o&&(U.current=!0,z(`generate`),V(0),await G(o,t.signal))}catch(e){j(e)||W(e instanceof Error?e.message:`Не удалось открыть студию.`,!0)}finally{t.signal."
+  },
+  {
+    "old": "eof Error?e.message:`Не удалось открыть студию.`,!0)}finally{t.signal.aborted||(V.current=!1,L(null),z(null))}}return n(),()=>{t.abort(),V.current=!1}},[e.id,H,U",
+    "new": "eof Error?e.message:`Не удалось открыть студию.`,!0)}finally{t.signal.aborted||(U.current=!1,z(null),V(null))}}return n(),()=>{t.abort(),U.current=!1}},[e.id,W,G"
+  },
+  {
+    "old": "essage:`Не удалось открыть студию.`,!0)}finally{t.signal.aborted||(V.current=!1,L(null),z(null))}}return n(),()=>{t.abort(),V.current=!1}},[e.id,H,U]);async func",
+    "new": "essage:`Не удалось открыть студию.`,!0)}finally{t.signal.aborted||(U.current=!1,z(null),V(null))}}return n(),()=>{t.abort(),U.current=!1}},[e.id,W,G]);async func"
+  },
+  {
+    "old": "Не удалось открыть студию.`,!0)}finally{t.signal.aborted||(V.current=!1,L(null),z(null))}}return n(),()=>{t.abort(),V.current=!1}},[e.id,H,U]);async function W(e",
+    "new": "Не удалось открыть студию.`,!0)}finally{t.signal.aborted||(U.current=!1,z(null),V(null))}}return n(),()=>{t.abort(),U.current=!1}},[e.id,W,G]);async function K(e"
+  },
+  {
+    "old": "lly{t.signal.aborted||(V.current=!1,L(null),z(null))}}return n(),()=>{t.abort(),V.current=!1}},[e.id,H,U]);async function W(e,t){if(V.current||I)return;V.current",
+    "new": "lly{t.signal.aborted||(U.current=!1,z(null),V(null))}}return n(),()=>{t.abort(),U.current=!1}},[e.id,W,G]);async function K(e,t){if(U.current||R)return;U.current"
+  },
+  {
+    "old": "|(V.current=!1,L(null),z(null))}}return n(),()=>{t.abort(),V.current=!1}},[e.id,H,U]);async function W(e,t){if(V.current||I)return;V.current=!0,L(e),F(!1);let n=",
+    "new": "|(U.current=!1,z(null),V(null))}}return n(),()=>{t.abort(),U.current=!1}},[e.id,W,G]);async function K(e,t){if(U.current||R)return;U.current=!0,z(e),L(!1);let n="
+  },
+  {
+    "old": "V.current=!1,L(null),z(null))}}return n(),()=>{t.abort(),V.current=!1}},[e.id,H,U]);async function W(e,t){if(V.current||I)return;V.current=!0,L(e),F(!1);let n=ne",
+    "new": "U.current=!1,z(null),V(null))}}return n(),()=>{t.abort(),U.current=!1}},[e.id,W,G]);async function K(e,t){if(U.current||R)return;U.current=!0,z(e),L(!1);let n=ne"
+  },
+  {
+    "old": "),z(null))}}return n(),()=>{t.abort(),V.current=!1}},[e.id,H,U]);async function W(e,t){if(V.current||I)return;V.current=!0,L(e),F(!1);let n=new AbortController;B",
+    "new": "),V(null))}}return n(),()=>{t.abort(),U.current=!1}},[e.id,W,G]);async function K(e,t){if(U.current||R)return;U.current=!0,z(e),L(!1);let n=new AbortController;H"
+  },
+  {
+    "old": "}}return n(),()=>{t.abort(),V.current=!1}},[e.id,H,U]);async function W(e,t){if(V.current||I)return;V.current=!0,L(e),F(!1);let n=new AbortController;B.current=n",
+    "new": "}}return n(),()=>{t.abort(),U.current=!1}},[e.id,W,G]);async function K(e,t){if(U.current||R)return;U.current=!0,z(e),L(!1);let n=new AbortController;H.current=n"
+  },
+  {
+    "old": "),()=>{t.abort(),V.current=!1}},[e.id,H,U]);async function W(e,t){if(V.current||I)return;V.current=!0,L(e),F(!1);let n=new AbortController;B.current=n;try{await ",
+    "new": "),()=>{t.abort(),U.current=!1}},[e.id,W,G]);async function K(e,t){if(U.current||R)return;U.current=!0,z(e),L(!1);let n=new AbortController;H.current=n;try{await "
+  },
+  {
+    "old": "abort(),V.current=!1}},[e.id,H,U]);async function W(e,t){if(V.current||I)return;V.current=!0,L(e),F(!1);let n=new AbortController;B.current=n;try{await t(n.signa",
+    "new": "abort(),U.current=!1}},[e.id,W,G]);async function K(e,t){if(U.current||R)return;U.current=!0,z(e),L(!1);let n=new AbortController;H.current=n;try{await t(n.signa"
+  },
+  {
+    "old": "rent=!1}},[e.id,H,U]);async function W(e,t){if(V.current||I)return;V.current=!0,L(e),F(!1);let n=new AbortController;B.current=n;try{await t(n.signal)}catch(e){A",
+    "new": "rent=!1}},[e.id,W,G]);async function K(e,t){if(U.current||R)return;U.current=!0,z(e),L(!1);let n=new AbortController;H.current=n;try{await t(n.signal)}catch(e){j"
+  },
+  {
+    "old": "!1}},[e.id,H,U]);async function W(e,t){if(V.current||I)return;V.current=!0,L(e),F(!1);let n=new AbortController;B.current=n;try{await t(n.signal)}catch(e){A(e)||",
+    "new": "!1}},[e.id,W,G]);async function K(e,t){if(U.current||R)return;U.current=!0,z(e),L(!1);let n=new AbortController;H.current=n;try{await t(n.signal)}catch(e){j(e)||"
+  },
+  {
+    "old": "W(e,t){if(V.current||I)return;V.current=!0,L(e),F(!1);let n=new AbortController;B.current=n;try{await t(n.signal)}catch(e){A(e)||H(e instanceof Error?e.message:`",
+    "new": "K(e,t){if(U.current||R)return;U.current=!0,z(e),L(!1);let n=new AbortController;H.current=n;try{await t(n.signal)}catch(e){j(e)||W(e instanceof Error?e.message:`"
+  },
+  {
+    "old": "L(e),F(!1);let n=new AbortController;B.current=n;try{await t(n.signal)}catch(e){A(e)||H(e instanceof Error?e.message:`Не удалось выполнить запрос.`,!0)}finally{V",
+    "new": "z(e),L(!1);let n=new AbortController;H.current=n;try{await t(n.signal)}catch(e){j(e)||W(e instanceof Error?e.message:`Не удалось выполнить запрос.`,!0)}finally{U"
+  },
+  {
+    "old": "(!1);let n=new AbortController;B.current=n;try{await t(n.signal)}catch(e){A(e)||H(e instanceof Error?e.message:`Не удалось выполнить запрос.`,!0)}finally{V.curre",
+    "new": "(!1);let n=new AbortController;H.current=n;try{await t(n.signal)}catch(e){j(e)||W(e instanceof Error?e.message:`Не удалось выполнить запрос.`,!0)}finally{U.curre"
+  },
+  {
+    "old": "A(e)||H(e instanceof Error?e.message:`Не удалось выполнить запрос.`,!0)}finally{V.current=!1,n.signal.aborted||(L(null),z(null))}}(0,E.useEffect)(()=>()=>B.curre",
+    "new": "j(e)||W(e instanceof Error?e.message:`Не удалось выполнить запрос.`,!0)}finally{U.current=!1,n.signal.aborted||(z(null),V(null))}}(0,D.useEffect)(()=>()=>H.curre"
+  },
+  {
+    "old": "sage:`Не удалось выполнить запрос.`,!0)}finally{V.current=!1,n.signal.aborted||(L(null),z(null))}}(0,E.useEffect)(()=>()=>B.current?.abort(),[]);async function G",
+    "new": "sage:`Не удалось выполнить запрос.`,!0)}finally{U.current=!1,n.signal.aborted||(z(null),V(null))}}(0,D.useEffect)(()=>()=>H.current?.abort(),[]);async function q"
+  },
+  {
+    "old": " удалось выполнить запрос.`,!0)}finally{V.current=!1,n.signal.aborted||(L(null),z(null))}}(0,E.useEffect)(()=>()=>B.current?.abort(),[]);async function G(e){try{",
+    "new": " удалось выполнить запрос.`,!0)}finally{U.current=!1,n.signal.aborted||(z(null),V(null))}}(0,D.useEffect)(()=>()=>H.current?.abort(),[]);async function q(e){try{"
+  },
+  {
+    "old": "лнить запрос.`,!0)}finally{V.current=!1,n.signal.aborted||(L(null),z(null))}}(0,E.useEffect)(()=>()=>B.current?.abort(),[]);async function G(e){try{M(e,[`pptx`,`",
+    "new": "лнить запрос.`,!0)}finally{U.current=!1,n.signal.aborted||(z(null),V(null))}}(0,D.useEffect)(()=>()=>H.current?.abort(),[]);async function q(e){try{N(e,[`pptx`,`"
+  },
+  {
+    "old": "nally{V.current=!1,n.signal.aborted||(L(null),z(null))}}(0,E.useEffect)(()=>()=>B.current?.abort(),[]);async function G(e){try{M(e,[`pptx`,`pdf`],100)}catch(e){H",
+    "new": "nally{U.current=!1,n.signal.aborted||(z(null),V(null))}}(0,D.useEffect)(()=>()=>H.current?.abort(),[]);async function q(e){try{N(e,[`pptx`,`pdf`],100)}catch(e){W"
+  },
+  {
+    "old": "L(null),z(null))}}(0,E.useEffect)(()=>()=>B.current?.abort(),[]);async function G(e){try{M(e,[`pptx`,`pdf`],100)}catch(e){H(e.message,!0);return}await W(`upload`",
+    "new": "z(null),V(null))}}(0,D.useEffect)(()=>()=>H.current?.abort(),[]);async function q(e){try{N(e,[`pptx`,`pdf`],100)}catch(e){W(e.message,!0);return}await K(`upload`"
+  },
+  {
+    "old": "(null))}}(0,E.useEffect)(()=>()=>B.current?.abort(),[]);async function G(e){try{M(e,[`pptx`,`pdf`],100)}catch(e){H(e.message,!0);return}await W(`upload`,async t=",
+    "new": "(null))}}(0,D.useEffect)(()=>()=>H.current?.abort(),[]);async function q(e){try{N(e,[`pptx`,`pdf`],100)}catch(e){W(e.message,!0);return}await K(`upload`,async t="
+  },
+  {
+    "old": "B.current?.abort(),[]);async function G(e){try{M(e,[`pptx`,`pdf`],100)}catch(e){H(e.message,!0);return}await W(`upload`,async t=>{H(`Изучаем цвета, шрифты и маке",
+    "new": "H.current?.abort(),[]);async function q(e){try{N(e,[`pptx`,`pdf`],100)}catch(e){W(e.message,!0);return}await K(`upload`,async t=>{W(`Изучаем цвета, шрифты и маке"
+  },
+  {
+    "old": "function G(e){try{M(e,[`pptx`,`pdf`],100)}catch(e){H(e.message,!0);return}await W(`upload`,async t=>{H(`Изучаем цвета, шрифты и макеты вашего шаблона…`);let n=ne",
+    "new": "function q(e){try{N(e,[`pptx`,`pdf`],100)}catch(e){W(e.message,!0);return}await K(`upload`,async t=>{W(`Изучаем цвета, шрифты и макеты вашего шаблона…`);let n=ne"
+  },
+  {
+    "old": ",[`pptx`,`pdf`],100)}catch(e){H(e.message,!0);return}await W(`upload`,async t=>{H(`Изучаем цвета, шрифты и макеты вашего шаблона…`);let n=new FormData;n.append(`",
+    "new": ",[`pptx`,`pdf`],100)}catch(e){W(e.message,!0);return}await K(`upload`,async t=>{W(`Изучаем цвета, шрифты и макеты вашего шаблона…`);let n=new FormData;n.append(`"
+  },
+  {
+    "old": "POST`,body:n,signal:t});d(await i(`/v1/templates`,{signal:t})),m(r.template_id),H(`Шаблон готов: ${r.slide_count} слайдов, ${r.pattern_count} вариантов макета.`)",
+    "new": "POST`,body:n,signal:t});d(await i(`/v1/templates`,{signal:t})),m(r.template_id),W(`Шаблон готов: ${r.slide_count} слайдов, ${r.pattern_count} вариантов макета.`)"
+  },
+  {
+    "old": "r.slide_count} слайдов, ${r.pattern_count} вариантов макета.`)})}async function K(t){if(!p){H(`Сначала добавьте фирменный шаблон.`,!0);return}if(!n.trim()&&!t){H",
+    "new": "r.slide_count} слайдов, ${r.pattern_count} вариантов макета.`)})}async function J(t,r=[]){if(!p){W(`Сначала добавьте фирменный шаблон.`,!0);return}if(!n.trim()&&"
+  },
+  {
+    "old": "lide_count} слайдов, ${r.pattern_count} вариантов макета.`)})}async function K(t){if(!p){H(`Сначала добавьте фирменный шаблон.`,!0);return}if(!n.trim()&&!t){H(`",
+    "new": "lide_count} слайдов, ${r.pattern_count} вариантов макета.`)})}async function J(t,r=[]){if(!p){W(`Сначала добавьте фирменный шаблон.`,!0);return}if(!n.trim()&&!t){W(`"
+  },
+  {
+    "old": "t} слайдов, ${r.pattern_count} вариантов макета.`)})}async function K(t){if(!p){H(`Сначала добавьте фирменный шаблон.`,!0);return}if(!n.trim()&&!t){H(`Добавьте т",
+    "new": "айдов, ${r.pattern_count} вариантов макета.`)})}async function J(t,r=[]){if(!p){W(`Сначала добавьте фирменный шаблон.`,!0);return}if(!n.trim()&&!t){W(`Добавьте т"
+  },
+  {
+    "old": "K(t){if(!p){H(`Сначала добавьте фирменный шаблон.`,!0);return}if(!n.trim()&&!t){H(`Добавьте текст или файл с материалами.`,!0);return}if(t)try{M(t,[`md`,`txt`,`c",
+    "new": "=[]){if(!p){W(`Сначала добавьте фирменный шаблон.`,!0);return}if(!n.trim()&&!t){W(`Добавьте текст или файл с материалами.`,!0);return}if(t)try{N(t,[`md`,`txt`,`c"
+  },
+  {
+    "old": "f(!n.trim()&&!t){H(`Добавьте текст или файл с материалами.`,!0);return}if(t)try{M(t,[`md`,`txt`,`csv`,`json`,`pptx`,`pdf`,`docx`,`xlsx`],50)}catch(e){H(e.message",
+    "new": "f(!n.trim()&&!t){W(`Добавьте текст или файл с материалами.`,!0);return}if(t)try{N(t,[`md`,`txt`,`csv`,`json`,`pptx`,`pdf`,`docx`,`xlsx`],50)}catch(e){W(e.message"
+  },
+  {
+    "old": "}if(t)try{M(t,[`md`,`txt`,`csv`,`json`,`pptx`,`pdf`,`docx`,`xlsx`],50)}catch(e){H(e.message,!0);return}await W(`generate`,async r=>{z(0),H(`Создаём три варианта…",
+    "new": "}if(t)try{N(t,[`md`,`txt`,`csv`,`json`,`pptx`,`pdf`,`docx`,`xlsx`],50)}catch(e){W(e.message,!0);return}try{if(r.length>20)throw Error(`Можно добавить не больше 20 изображений.`);r.forEach(e=>N(e,[`png`,`jpg`,`jpeg`,`webp`],15))}catch(e){W(e.message,!0);return}await K(`generate`,async a=>{V(0),W(`Создаём три варианта…"
+  },
+  {
+    "old": "v`,`json`,`pptx`,`pdf`,`docx`,`xlsx`],50)}catch(e){H(e.message,!0);return}await W(`generate`,async r=>{z(0),H(`Создаём три варианта…`);let a=new FormData;a.appen",
+    "new": "h(e=>N(e,[`png`,`jpg`,`jpeg`,`webp`],15))}catch(e){W(e.message,!0);return}await K(`generate`,async a=>{V(0),W(`Создаём три варианта…`);let o=new FormData;o.appen"
+  },
+  {
+    "old": "df`,`docx`,`xlsx`],50)}catch(e){H(e.message,!0);return}await W(`generate`,async r=>{z(0),H(`Создаём три варианта…`);let a=new FormData;a.append(`template_id`,p),",
+    "new": "g`,`jpeg`,`webp`],15))}catch(e){W(e.message,!0);return}await K(`generate`,async a=>{V(0),W(`Создаём три варианта…`);let o=new FormData;o.append(`template_id`,p),"
+  },
+  {
+    "old": "`docx`,`xlsx`],50)}catch(e){H(e.message,!0);return}await W(`generate`,async r=>{z(0),H(`Создаём три варианта…`);let a=new FormData;a.append(`template_id`,p),a.ap",
+    "new": "jpeg`,`webp`],15))}catch(e){W(e.message,!0);return}await K(`generate`,async a=>{V(0),W(`Создаём три варианта…`);let o=new FormData;o.append(`template_id`,p),o.ap"
+  },
+  {
+    "old": "`,`xlsx`],50)}catch(e){H(e.message,!0);return}await W(`generate`,async r=>{z(0),H(`Создаём три варианта…`);let a=new FormData;a.append(`template_id`,p),a.append(",
+    "new": ",`webp`],15))}catch(e){W(e.message,!0);return}await K(`generate`,async a=>{V(0),W(`Создаём три варианта…`);let o=new FormData;o.append(`template_id`,p),o.append("
+  },
+  {
+    "old": "age,!0);return}await W(`generate`,async r=>{z(0),H(`Создаём три варианта…`);let a=new FormData;a.append(`template_id`,p),a.append(`content`,n.trim()),a.append(`s",
+    "new": "age,!0);return}await K(`generate`,async a=>{V(0),W(`Создаём три варианта…`);let o=new FormData;o.append(`template_id`,p),o.append(`content`,n.trim()),o.append(`s"
+  },
+  {
+    "old": "await W(`generate`,async r=>{z(0),H(`Создаём три варианта…`);let a=new FormData;a.append(`template_id`,p),a.append(`content`,n.trim()),a.append(`slide_count`,Str",
+    "new": "await K(`generate`,async a=>{V(0),W(`Создаём три варианта…`);let o=new FormData;o.append(`template_id`,p),o.append(`content`,n.trim()),o.append(`slide_count`,Str"
+  },
+  {
+    "old": "=>{z(0),H(`Создаём три варианта…`);let a=new FormData;a.append(`template_id`,p),a.append(`content`,n.trim()),a.append(`slide_count`,String(s)),a.append(`offline`",
+    "new": "=>{V(0),W(`Создаём три варианта…`);let o=new FormData;o.append(`template_id`,p),o.append(`content`,n.trim()),o.append(`slide_count`,String(s)),o.append(`offline`"
+  },
+  {
+    "old": "та…`);let a=new FormData;a.append(`template_id`,p),a.append(`content`,n.trim()),a.append(`slide_count`,String(s)),a.append(`offline`,String(_)),a.append(`variant",
+    "new": "та…`);let o=new FormData;o.append(`template_id`,p),o.append(`content`,n.trim()),o.append(`slide_count`,String(s)),o.append(`offline`,String(_)),y&&!_&&o.append(`"
+  },
+  {
+    "old": "`template_id`,p),a.append(`content`,n.trim()),a.append(`slide_count`,String(s)),a.append(`offline`,String(_)),a.append(`variants`,`true`),a.append(`export_all`,`",
+    "new": "`template_id`,p),o.append(`content`,n.trim()),o.append(`slide_count`,String(s)),o.append(`offline`,String(_)),y&&!_&&o.append(`purpose`,y),o.append(`variants`,`t"
+  },
+  {
+    "old": "tent`,n.trim()),a.append(`slide_count`,String(s)),a.append(`offline`,String(_)),a.append(`variants`,`true`),a.append(`export_all`,`true`),t&&a.append(`content_f",
+    "new": "tent`,n.trim()),o.append(`slide_count`,String(s)),o.append(`offline`,String(_)),y&&!_&&o.append(`purpose`,y),o.append(`variants`,`true`),o.append(`export_all`,`true`),t&"
+  },
+  {
+    "old": "ent`,n.trim()),a.append(`slide_count`,String(s)),a.append(`offline`,String(_)),a.append(`variants`,`true`),a.append(`export_all`,`true`),t&&a.append(`content_fi",
+    "new": "im()),o.append(`slide_count`,String(s)),o.append(`offline`,String(_)),y&&!_&&o.append(`purpose`,y),o.append(`variants`,`true`),o.append(`export_all`,`true`),t&&o.append(`content_fi"
+  },
+  {
+    "old": "ide_count`,String(s)),a.append(`offline`,String(_)),a.append(`variants`,`true`),a.append(`export_all`,`true`),t&&a.append(`content_file`,t);let o=await i(`/v1/pr",
+    "new": "d(`offline`,String(_)),y&&!_&&o.append(`purpose`,y),o.append(`variants`,`true`),o.append(`export_all`,`true`),t&&o.append(`content_file`,t),r.forEach(e=>o.append"
+  },
+  {
+    "old": "ffline`,String(_)),a.append(`variants`,`true`),a.append(`export_all`,`true`),t&&a.append(`content_file`,t);let o=await i(`/v1/presentations/jobs`,{method:`POST`,",
+    "new": "ppend(`purpose`,y),o.append(`variants`,`true`),o.append(`export_all`,`true`),t&&o.append(`content_file`,t),r.forEach(e=>o.append(`image_files`,e));let c=await i("
+  },
+  {
+    "old": "d(`variants`,`true`),a.append(`export_all`,`true`),t&&a.append(`content_file`,t);let o=await i(`/v1/presentations/jobs`,{method:`POST`,body:a,signal:r});f(e.id,",
+    "new": "d(`variants`,`true`),o.append(`export_all`,`true`),t&&o.append(`content_file`,t),r.forEach(e=>o.append(`image_files`,e));let c=await i(`/v1/presentations/jobs`,{method:`POST`,body:o,signal:a});f(e.id,"
+  },
+  {
+    "old": "riants`,`true`),a.append(`export_all`,`true`),t&&a.append(`content_file`,t);let o=await i(`/v1/presentations/jobs`,{method:`POST`,body:a,signal:r});f(e.id,o.job_",
+    "new": "rue`),t&&o.append(`content_file`,t),r.forEach(e=>o.append(`image_files`,e));let c=await i(`/v1/presentations/jobs`,{method:`POST`,body:o,signal:a});f(e.id,c.job_"
+  },
+  {
+    "old": "nd(`content_file`,t);let o=await i(`/v1/presentations/jobs`,{method:`POST`,body:a,signal:r});f(e.id,o.job_id),await U(o.job_id,r)})}async function q(e){e&&await ",
+    "new": "nd(`image_files`,e));let c=await i(`/v1/presentations/jobs`,{method:`POST`,body:o,signal:a});f(e.id,c.job_id),await G(c.job_id,a)})}async function Y(e){e&&await "
+  },
+  {
+    "old": "nt_file`,t);let o=await i(`/v1/presentations/jobs`,{method:`POST`,body:a,signal:r});f(e.id,o.job_id),await U(o.job_id,r)})}async function q(e){e&&await W(`histor",
+    "new": "_files`,e));let c=await i(`/v1/presentations/jobs`,{method:`POST`,body:o,signal:a});f(e.id,c.job_id),await G(c.job_id,a)})}async function Y(e){e&&await K(`histor"
+  },
+  {
+    "old": ";let o=await i(`/v1/presentations/jobs`,{method:`POST`,body:a,signal:r});f(e.id,o.job_id),await U(o.job_id,r)})}async function q(e){e&&await W(`history`,async t=",
+    "new": ";let c=await i(`/v1/presentations/jobs`,{method:`POST`,body:o,signal:a});f(e.id,c.job_id),await G(c.job_id,a)})}async function Y(e){e&&await K(`history`,async t="
+  },
+  {
+    "old": "/v1/presentations/jobs`,{method:`POST`,body:a,signal:r});f(e.id,o.job_id),await U(o.job_id,r)})}async function q(e){e&&await W(`history`,async t=>{let n=await i(",
+    "new": "/v1/presentations/jobs`,{method:`POST`,body:o,signal:a});f(e.id,c.job_id),await G(c.job_id,a)})}async function Y(e){e&&await K(`history`,async t=>{let n=await i("
+  },
+  {
+    "old": "1/presentations/jobs`,{method:`POST`,body:a,signal:r});f(e.id,o.job_id),await U(o.job_id,r)})}async function q(e){e&&await W(`history`,async t=>{let n=await i(`/",
+    "new": "1/presentations/jobs`,{method:`POST`,body:o,signal:a});f(e.id,c.job_id),await G(c.job_id,a)})}async function Y(e){e&&await K(`history`,async t=>{let n=await i(`/"
+  },
+  {
+    "old": "ations/jobs`,{method:`POST`,body:a,signal:r});f(e.id,o.job_id),await U(o.job_id,r)})}async function q(e){e&&await W(`history`,async t=>{let n=await i(`/v1/batche",
+    "new": "ations/jobs`,{method:`POST`,body:o,signal:a});f(e.id,c.job_id),await G(c.job_id,a)})}async function Y(e){e&&await K(`history`,async t=>{let n=await i(`/v1/batche"
+  },
+  {
+    "old": ":`POST`,body:a,signal:r});f(e.id,o.job_id),await U(o.job_id,r)})}async function q(e){e&&await W(`history`,async t=>{let n=await i(`/v1/batches/`+encodeURICompone",
+    "new": ":`POST`,body:o,signal:a});f(e.id,c.job_id),await G(c.job_id,a)})}async function Y(e){e&&await K(`history`,async t=>{let n=await i(`/v1/batches/`+encodeURICompone"
+  },
+  {
+    "old": ",signal:r});f(e.id,o.job_id),await U(o.job_id,r)})}async function q(e){e&&await W(`history`,async t=>{let n=await i(`/v1/batches/`+encodeURIComponent(e),{signal:",
+    "new": ",signal:a});f(e.id,c.job_id),await G(c.job_id,a)})}async function Y(e){e&&await K(`history`,async t=>{let n=await i(`/v1/batches/`+encodeURIComponent(e),{signal:"
+  },
+  {
+    "old": "story`,async t=>{let n=await i(`/v1/batches/`+encodeURIComponent(e),{signal:t});w(n.variants),D(0),S(e),H(`Загружен сохранённый результат.`)})}async function J(e",
+    "new": "story`,async t=>{let n=await i(`/v1/batches/`+encodeURIComponent(e),{signal:t});E(n.variants),k(0),w(e),W(`Загружен сохранённый результат.`)})}async function X(e"
+  },
+  {
+    "old": "=>{let n=await i(`/v1/batches/`+encodeURIComponent(e),{signal:t});w(n.variants),D(0),S(e),H(`Загружен сохранённый результат.`)})}async function J(e){let t=C[T];t",
+    "new": "=>{let n=await i(`/v1/batches/`+encodeURIComponent(e),{signal:t});E(n.variants),k(0),w(e),W(`Загружен сохранённый результат.`)})}async function X(e){let t=T[O];t"
+  },
+  {
+    "old": "t n=await i(`/v1/batches/`+encodeURIComponent(e),{signal:t});w(n.variants),D(0),S(e),H(`Загружен сохранённый результат.`)})}async function J(e){let t=C[T];t&&e.l",
+    "new": "t n=await i(`/v1/batches/`+encodeURIComponent(e),{signal:t});E(n.variants),k(0),w(e),W(`Загружен сохранённый результат.`)})}async function X(e){let t=T[O];t&&e.l"
+  },
+  {
+    "old": "wait i(`/v1/batches/`+encodeURIComponent(e),{signal:t});w(n.variants),D(0),S(e),H(`Загружен сохранённый результат.`)})}async function J(e){let t=C[T];t&&e.length",
+    "new": "wait i(`/v1/batches/`+encodeURIComponent(e),{signal:t});E(n.variants),k(0),w(e),W(`Загружен сохранённый результат.`)})}async function X(e){let t=T[O];t&&e.length"
+  },
+  {
+    "old": ");w(n.variants),D(0),S(e),H(`Загружен сохранённый результат.`)})}async function J(e){let t=C[T];t&&e.length&&await W(`repair`,async n=>{H(`Исправляем выбранные с",
+    "new": ");E(n.variants),k(0),w(e),W(`Загружен сохранённый результат.`)})}async function X(e){let t=T[O];t&&e.length&&await K(`repair`,async n=>{W(`Исправляем выбранные с"
+  },
+  {
+    "old": "nts),D(0),S(e),H(`Загружен сохранённый результат.`)})}async function J(e){let t=C[T];t&&e.length&&await W(`repair`,async n=>{H(`Исправляем выбранные слайды в нов",
+    "new": "nts),k(0),w(e),W(`Загружен сохранённый результат.`)})}async function X(e){let t=T[O];t&&e.length&&await K(`repair`,async n=>{W(`Исправляем выбранные слайды в нов"
+  },
+  {
+    "old": "s),D(0),S(e),H(`Загружен сохранённый результат.`)})}async function J(e){let t=C[T];t&&e.length&&await W(`repair`,async n=>{H(`Исправляем выбранные слайды в новой",
+    "new": "s),k(0),w(e),W(`Загружен сохранённый результат.`)})}async function X(e){let t=T[O];t&&e.length&&await K(`repair`,async n=>{W(`Исправляем выбранные слайды в новой"
+  },
+  {
+    "old": "ен сохранённый результат.`)})}async function J(e){let t=C[T];t&&e.length&&await W(`repair`,async n=>{H(`Исправляем выбранные слайды в новой версии…`);let r=await",
+    "new": "ен сохранённый результат.`)})}async function X(e){let t=T[O];t&&e.length&&await K(`repair`,async n=>{W(`Исправляем выбранные слайды в новой версии…`);let r=await"
+  },
+  {
+    "old": "тат.`)})}async function J(e){let t=C[T];t&&e.length&&await W(`repair`,async n=>{H(`Исправляем выбранные слайды в новой версии…`);let r=await i(`/v1/presentations",
+    "new": "тат.`)})}async function X(e){let t=T[O];t&&e.length&&await K(`repair`,async n=>{W(`Исправляем выбранные слайды в новой версии…`);let r=await i(`/v1/presentations"
+  },
+  {
+    "old": "Content-Type\":`application/json`},body:JSON.stringify({issue_ids:e}),signal:n});D(C.length),w([...C,r]),H(`Новая версия готова. Проверьте оставшиеся замечания.`)",
+    "new": "Content-Type\":`application/json`},body:JSON.stringify({issue_ids:e}),signal:n});k(T.length),E([...T,r]),W(`Новая версия готова. Проверьте оставшиеся замечания.`)"
+  },
+  {
+    "old": "ntent-Type\":`application/json`},body:JSON.stringify({issue_ids:e}),signal:n});D(C.length),w([...C,r]),H(`Новая версия готова. Проверьте оставшиеся замечания.`)})",
+    "new": "ntent-Type\":`application/json`},body:JSON.stringify({issue_ids:e}),signal:n});k(T.length),E([...T,r]),W(`Новая версия готова. Проверьте оставшиеся замечания.`)})"
+  },
+  {
+    "old": "\":`application/json`},body:JSON.stringify({issue_ids:e}),signal:n});D(C.length),w([...C,r]),H(`Новая версия готова. Проверьте оставшиеся замечания.`)})}return{co",
+    "new": "\":`application/json`},body:JSON.stringify({issue_ids:e}),signal:n});k(T.length),E([...T,r]),W(`Новая версия готова. Проверьте оставшиеся замечания.`)})}return{co"
+  },
+  {
+    "old": "lication/json`},body:JSON.stringify({issue_ids:e}),signal:n});D(C.length),w([...C,r]),H(`Новая версия готова. Проверьте оставшиеся замечания.`)})}return{content:",
+    "new": "lication/json`},body:JSON.stringify({issue_ids:e}),signal:n});k(T.length),E([...T,r]),W(`Новая версия готова. Проверьте оставшиеся замечания.`)})}return{content:"
+  },
+  {
+    "old": "on/json`},body:JSON.stringify({issue_ids:e}),signal:n});D(C.length),w([...C,r]),H(`Новая версия готова. Проверьте оставшиеся замечания.`)})}return{content:n,setC",
+    "new": "on/json`},body:JSON.stringify({issue_ids:e}),signal:n});k(T.length),E([...T,r]),W(`Новая версия готова. Проверьте оставшиеся замечания.`)})}return{content:n,setC"
+  },
+  {
+    "old": "mplates:u,templateId:p,setTemplateId:m,modelConfigured:h,offline:_,setOffline:v,history:y,batchId:x,decks:C,active:T,setActive:D,status:O,error:P,busy:I,progres",
+    "new": "mplates:u,templateId:p,setTemplateId:m,modelConfigured:h,offline:_,setOffline:v,purpose:y,setPurpose:b,history:x,batchId:C,decks:T,active:O,setActive:k,status:P,error:I,busy:R,progres"
+  },
+  {
+    "old": "u,templateId:p,setTemplateId:m,modelConfigured:h,offline:_,setOffline:v,history:y,batchId:x,decks:C,active:T,setActive:D,status:O,error:P,busy:I,progress:R,uploa",
+    "new": "ateId:m,modelConfigured:h,offline:_,setOffline:v,purpose:y,setPurpose:b,history:x,batchId:C,decks:T,active:O,setActive:k,status:P,error:I,busy:R,progress:B,uploa"
+  },
+  {
+    "old": "Id:p,setTemplateId:m,modelConfigured:h,offline:_,setOffline:v,history:y,batchId:x,decks:C,active:T,setActive:D,status:O,error:P,busy:I,progress:R,upload:G,genera",
+    "new": "delConfigured:h,offline:_,setOffline:v,purpose:y,setPurpose:b,history:x,batchId:C,decks:T,active:O,setActive:k,status:P,error:I,busy:R,progress:B,upload:q,genera"
+  },
+  {
+    "old": "TemplateId:m,modelConfigured:h,offline:_,setOffline:v,history:y,batchId:x,decks:C,active:T,setActive:D,status:O,error:P,busy:I,progress:R,upload:G,generate:K,loa",
+    "new": "gured:h,offline:_,setOffline:v,purpose:y,setPurpose:b,history:x,batchId:C,decks:T,active:O,setActive:k,status:P,error:I,busy:R,progress:B,upload:q,generate:J,loa"
+  },
+  {
+    "old": "d:m,modelConfigured:h,offline:_,setOffline:v,history:y,batchId:x,decks:C,active:T,setActive:D,status:O,error:P,busy:I,progress:R,upload:G,generate:K,loadBatch:q,",
+    "new": "ffline:_,setOffline:v,purpose:y,setPurpose:b,history:x,batchId:C,decks:T,active:O,setActive:k,status:P,error:I,busy:R,progress:B,upload:q,generate:J,loadBatch:Y,"
+  },
+  {
+    "old": "figured:h,offline:_,setOffline:v,history:y,batchId:x,decks:C,active:T,setActive:D,status:O,error:P,busy:I,progress:R,upload:G,generate:K,loadBatch:q,repair:J,not",
+    "new": "Offline:v,purpose:y,setPurpose:b,history:x,batchId:C,decks:T,active:O,setActive:k,status:P,error:I,busy:R,progress:B,upload:q,generate:J,loadBatch:Y,repair:X,not"
+  },
+  {
+    "old": ",offline:_,setOffline:v,history:y,batchId:x,decks:C,active:T,setActive:D,status:O,error:P,busy:I,progress:R,upload:G,generate:K,loadBatch:q,repair:J,notify:H}}fu",
+    "new": ",purpose:y,setPurpose:b,history:x,batchId:C,decks:T,active:O,setActive:k,status:P,error:I,busy:R,progress:B,upload:q,generate:J,loadBatch:Y,repair:X,notify:W}}fu"
+  },
+  {
+    "old": ":_,setOffline:v,history:y,batchId:x,decks:C,active:T,setActive:D,status:O,error:P,busy:I,progress:R,upload:G,generate:K,loadBatch:q,repair:J,notify:H}}function P",
+    "new": ":y,setPurpose:b,history:x,batchId:C,decks:T,active:O,setActive:k,status:P,error:I,busy:R,progress:B,upload:q,generate:J,loadBatch:Y,repair:X,notify:W}}function F"
+  },
+  {
+    "old": "ffline:v,history:y,batchId:x,decks:C,active:T,setActive:D,status:O,error:P,busy:I,progress:R,upload:G,generate:K,loadBatch:q,repair:J,notify:H}}function P({user:",
+    "new": "urpose:b,history:x,batchId:C,decks:T,active:O,setActive:k,status:P,error:I,busy:R,progress:B,upload:q,generate:J,loadBatch:Y,repair:X,notify:W}}function F({user:"
+  },
+  {
+    "old": "story:y,batchId:x,decks:C,active:T,setActive:D,status:O,error:P,busy:I,progress:R,upload:G,generate:K,loadBatch:q,repair:J,notify:H}}function P({user:e,onLogout:",
+    "new": "story:x,batchId:C,decks:T,active:O,setActive:k,status:P,error:I,busy:R,progress:B,upload:q,generate:J,loadBatch:Y,repair:X,notify:W}}function F({user:e,onLogout:"
+  },
+  {
+    "old": "atchId:x,decks:C,active:T,setActive:D,status:O,error:P,busy:I,progress:R,upload:G,generate:K,loadBatch:q,repair:J,notify:H}}function P({user:e,onLogout:n}){let r",
+    "new": "atchId:C,decks:T,active:O,setActive:k,status:P,error:I,busy:R,progress:B,upload:q,generate:J,loadBatch:Y,repair:X,notify:W}}function F({user:e,onLogout:n}){let r"
+  },
+  {
+    "old": "cks:C,active:T,setActive:D,status:O,error:P,busy:I,progress:R,upload:G,generate:K,loadBatch:q,repair:J,notify:H}}function P({user:e,onLogout:n}){let r=N(e),[i,a]",
+    "new": "cks:T,active:O,setActive:k,status:P,error:I,busy:R,progress:B,upload:q,generate:J,loadBatch:Y,repair:X,notify:W}}function F({user:e,onLogout:n}){let r=P(e),[i,a]"
+  },
+  {
+    "old": ":T,setActive:D,status:O,error:P,busy:I,progress:R,upload:G,generate:K,loadBatch:q,repair:J,notify:H}}function P({user:e,onLogout:n}){let r=N(e),[i,a]=(0,E.useSta",
+    "new": ":O,setActive:k,status:P,error:I,busy:R,progress:B,upload:q,generate:J,loadBatch:Y,repair:X,notify:W}}function F({user:e,onLogout:n}){let r=P(e),[i,a]=(0,D.useSta"
+  },
+  {
+    "old": "ive:D,status:O,error:P,busy:I,progress:R,upload:G,generate:K,loadBatch:q,repair:J,notify:H}}function P({user:e,onLogout:n}){let r=N(e),[i,a]=(0,E.useState)(null)",
+    "new": "ive:k,status:P,error:I,busy:R,progress:B,upload:q,generate:J,loadBatch:Y,repair:X,notify:W}}function F({user:e,onLogout:n}){let r=P(e),[i,a]=(0,D.useState)(null)"
+  },
+  {
+    "old": "tus:O,error:P,busy:I,progress:R,upload:G,generate:K,loadBatch:q,repair:J,notify:H}}function P({user:e,onLogout:n}){let r=N(e),[i,a]=(0,E.useState)(null),[o,l]=(0",
+    "new": "tus:P,error:I,busy:R,progress:B,upload:q,generate:J,loadBatch:Y,repair:X,notify:W}}function F({user:e,onLogout:n}){let r=P(e),[i,a]=(0,D.useState)(null),[o,l]=(0"
+  },
+  {
+    "old": "P,busy:I,progress:R,upload:G,generate:K,loadBatch:q,repair:J,notify:H}}function P({user:e,onLogout:n}){let r=N(e),[i,a]=(0,E.useState)(null),[o,l]=(0,E.useState)",
+    "new": "I,busy:R,progress:B,upload:q,generate:J,loadBatch:Y,repair:X,notify:W}}function F({user:e,onLogout:n}){let r=P(e),[i,a]=(0,D.useState)(null),[o,l]=(0,D.useState)"
+  },
+  {
+    "old": "generate:K,loadBatch:q,repair:J,notify:H}}function P({user:e,onLogout:n}){let r=N(e),[i,a]=(0,E.useState)(null),[o,l]=(0,E.useState)(null),[f,g]=(0,E.useState)(!",
+    "new": "generate:J,loadBatch:Y,repair:X,notify:W}}function F({user:e,onLogout:n}){let r=P(e),[i,a]=(0,D.useState)(null),[o,l]=(0,D.useState)(null),[f,g]=(0,D.useState)(["
+  },
+  {
+    "old": "dBatch:q,repair:J,notify:H}}function P({user:e,onLogout:n}){let r=N(e),[i,a]=(0,E.useState)(null),[o,l]=(0,E.useState)(null),[f,g]=(0,E.useState)(!1),[_,b]=(0,E.",
+    "new": "dBatch:Y,repair:X,notify:W}}function F({user:e,onLogout:n}){let r=P(e),[i,a]=(0,D.useState)(null),[o,l]=(0,D.useState)(null),[f,g]=(0,D.useState)([]),[_,b]=(0,D."
+  },
+  {
+    "old": "}function P({user:e,onLogout:n}){let r=N(e),[i,a]=(0,E.useState)(null),[o,l]=(0,E.useState)(null),[f,g]=(0,E.useState)(!1),[_,b]=(0,E.useState)(!1),x=(0,E.useRef",
+    "new": "}function F({user:e,onLogout:n}){let r=P(e),[i,a]=(0,D.useState)(null),[o,l]=(0,D.useState)(null),[f,g]=(0,D.useState)([]),[_,b]=(0,D.useState)(!1),[x,E]=(0,D.us"
+  },
+  {
+    "old": "t:n}){let r=N(e),[i,a]=(0,E.useState)(null),[o,l]=(0,E.useState)(null),[f,g]=(0,E.useState)(!1),[_,b]=(0,E.useState)(!1),x=(0,E.useRef)(null),T=!!r.busy,k=r.deck",
+    "new": "t:n}){let r=P(e),[i,a]=(0,D.useState)(null),[o,l]=(0,D.useState)(null),[f,g]=(0,D.useState)([]),[_,b]=(0,D.useState)(!1),[x,E]=(0,D.useState)(!1),A=(0,D.useRef)(null),j=!!r.busy,M=r.deck"
+  },
+  {
+    "old": "[i,a]=(0,E.useState)(null),[o,l]=(0,E.useState)(null),[f,g]=(0,E.useState)(!1),[_,b]=(0,E.useState)(!1),x=(0,E.useRef)(null),T=!!r.busy,k=r.decks[r.active];funct",
+    "new": "),[o,l]=(0,D.useState)(null),[f,g]=(0,D.useState)([]),[_,b]=(0,D.useState)(!1),[x,E]=(0,D.useState)(!1),A=(0,D.useRef)(null),j=!!r.busy,M=r.decks[r.active];funct"
+  },
+  {
+    "old": ",a]=(0,E.useState)(null),[o,l]=(0,E.useState)(null),[f,g]=(0,E.useState)(!1),[_,b]=(0,E.useState)(!1),x=(0,E.useRef)(null),T=!!r.busy,k=r.decks[r.active];functio",
+    "new": "[o,l]=(0,D.useState)(null),[f,g]=(0,D.useState)([]),[_,b]=(0,D.useState)(!1),[x,E]=(0,D.useState)(!1),A=(0,D.useRef)(null),j=!!r.busy,M=r.decks[r.active];functio"
+  },
+  {
+    "old": ",E.useState)(null),[o,l]=(0,E.useState)(null),[f,g]=(0,E.useState)(!1),[_,b]=(0,E.useState)(!1),x=(0,E.useRef)(null),T=!!r.busy,k=r.decks[r.active];function A(e)",
+    "new": "(0,D.useState)(null),[f,g]=(0,D.useState)([]),[_,b]=(0,D.useState)(!1),[x,E]=(0,D.useState)(!1),A=(0,D.useRef)(null),j=!!r.busy,M=r.decks[r.active];function F(e)"
+  },
+  {
+    "old": "l),[o,l]=(0,E.useState)(null),[f,g]=(0,E.useState)(!1),[_,b]=(0,E.useState)(!1),x=(0,E.useRef)(null),T=!!r.busy,k=r.decks[r.active];function A(e){e.preventDefaul",
+    "new": "ull),[f,g]=(0,D.useState)([]),[_,b]=(0,D.useState)(!1),[x,E]=(0,D.useState)(!1),A=(0,D.useRef)(null),j=!!r.busy,M=r.decks[r.active];function F(e){e.preventDefaul"
+  },
+  {
+    "old": ",l]=(0,E.useState)(null),[f,g]=(0,E.useState)(!1),[_,b]=(0,E.useState)(!1),x=(0,E.useRef)(null),T=!!r.busy,k=r.decks[r.active];function A(e){e.preventDefault(),r",
+    "new": "[f,g]=(0,D.useState)([]),[_,b]=(0,D.useState)(!1),[x,E]=(0,D.useState)(!1),A=(0,D.useRef)(null),j=!!r.busy,M=r.decks[r.active];function F(e){e.preventDefault(),r"
+  },
+  {
+    "old": "e)(null),[f,g]=(0,E.useState)(!1),[_,b]=(0,E.useState)(!1),x=(0,E.useRef)(null),T=!!r.busy,k=r.decks[r.active];function A(e){e.preventDefault(),r.upload(i)}funct",
+    "new": "ate)([]),[_,b]=(0,D.useState)(!1),[x,E]=(0,D.useState)(!1),A=(0,D.useRef)(null),j=!!r.busy,M=r.decks[r.active];function F(e){e.preventDefault(),r.upload(i)}funct"
+  },
+  {
+    "old": ",g]=(0,E.useState)(!1),[_,b]=(0,E.useState)(!1),x=(0,E.useRef)(null),T=!!r.busy,k=r.decks[r.active];function A(e){e.preventDefault(),r.upload(i)}function j(e){e.",
+    "new": ",b]=(0,D.useState)(!1),[x,E]=(0,D.useState)(!1),A=(0,D.useRef)(null),j=!!r.busy,M=r.decks[r.active];function F(e){e.preventDefault(),r.upload(i)}function I(e){e."
+  },
+  {
+    "old": "(0,E.useState)(!1),x=(0,E.useRef)(null),T=!!r.busy,k=r.decks[r.active];function A(e){e.preventDefault(),r.upload(i)}function j(e){e.preventDefault(),r.generate(o",
+    "new": "(0,D.useState)(!1),A=(0,D.useRef)(null),j=!!r.busy,M=r.decks[r.active];function F(e){e.preventDefault(),r.upload(i)}function I(e){e.preventDefault(),r.generate(o"
+  },
+  {
+    "old": ".busy,k=r.decks[r.active];function A(e){e.preventDefault(),r.upload(i)}function j(e){e.preventDefault(),r.generate(o)}function P(e){try{M(e,[`pptx`,`pdf`],100),a",
+    "new": ".busy,M=r.decks[r.active];function F(e){e.preventDefault(),r.upload(i)}function I(e){e.preventDefault(),r.generate(o,f)}function L(e){try{N(e,[`pptx`,`pdf`],100)"
+  },
+  {
+    "old": "(e){e.preventDefault(),r.upload(i)}function j(e){e.preventDefault(),r.generate(o)}function P(e){try{M(e,[`pptx`,`pdf`],100),a(e)}catch(e){r.notify(e.message,!0)",
+    "new": "(e){e.preventDefault(),r.upload(i)}function I(e){e.preventDefault(),r.generate(o,f)}function L(e){try{N(e,[`pptx`,`pdf`],100),a(e)}catch(e){r.notify(e.message,!0)"
+  },
+  {
+    "old": "ntDefault(),r.upload(i)}function j(e){e.preventDefault(),r.generate(o)}function P(e){try{M(e,[`pptx`,`pdf`],100),a(e)}catch(e){r.notify(e.message,!0)}}let F=r.mo",
+    "new": "Default(),r.upload(i)}function I(e){e.preventDefault(),r.generate(o,f)}function L(e){try{N(e,[`pptx`,`pdf`],100),a(e)}catch(e){r.notify(e.message,!0)}}let R=r.mo"
+  },
+  {
+    "old": "(),r.upload(i)}function j(e){e.preventDefault(),r.generate(o)}function P(e){try{M(e,[`pptx`,`pdf`],100),a(e)}catch(e){r.notify(e.message,!0)}}let F=r.modelConfig",
+    "new": ",r.upload(i)}function I(e){e.preventDefault(),r.generate(o,f)}function L(e){try{N(e,[`pptx`,`pdf`],100),a(e)}catch(e){r.notify(e.message,!0)}}let R=r.modelConfig"
+  },
+  {
+    "old": "tion P(e){try{M(e,[`pptx`,`pdf`],100),a(e)}catch(e){r.notify(e.message,!0)}}let F=r.modelConfigured===null?`Проверяем настройки модели…`:r.modelConfigured?r.offl",
+    "new": "tion L(e){try{N(e,[`pptx`,`pdf`],100),a(e)}catch(e){r.notify(e.message,!0)}}let R=r.modelConfigured===null?`Проверяем настройки модели…`:r.modelConfigured?r.offl"
+  },
+  {
+    "old": "одели: распределяем готовые материалы по слайдам.`:`Модель спланирует содержание по вашим материалам.`:`Модель пока не подключена. Добавьте готовый текст — дост",
+    "new": "одели: распределяем готовые материалы по слайдам.`:`Модель спланирует содержание. Короткий бриф до 1500 знаков она развернёт в структуру и текст слайдов.`:`Модел"
+  },
+  {
+    "old": "дели: распределяем готовые материалы по слайдам.`:`Модель спланирует содержание по вашим материалам.`:`Модель пока не подключена. Добавьте готовый текст — доступ",
+    "new": "ели: распределяем готовые материалы по слайдам.`:`Модель спланирует содержание. Короткий бриф до 1500 знаков она развернёт в структуру и текст слайдов.`:`Модель пока не подклю"
+  },
+  {
+    "old": "и: распределяем готовые материалы по слайдам.`:`Модель спланирует содержание по вашим материалам.`:`Модель пока не подключена. Добавьте готовый текст — доступна",
+    "new": " готовые материалы по слайдам.`:`Модель спланирует содержание. Короткий бриф до 1500 знаков она развернёт в структуру и текст слайдов.`:`Модель пока не подключена. Добавь"
+  },
+  {
+    "old": ": распределяем готовые материалы по слайдам.`:`Модель спланирует содержание по вашим материалам.`:`Модель пока не подключена. Добавьте готовый текст — доступна ",
+    "new": "териалы по слайдам.`:`Модель спланирует содержание. Короткий бриф до 1500 знаков она развернёт в структуру и текст слайдов.`:`Модель пока не подключена. Добавьте г"
+  },
+  {
+    "old": " распределяем готовые материалы по слайдам.`:`Модель спланирует содержание по вашим материалам.`:`Модель пока не подключена. Добавьте готовый текст — доступна сб",
+    "new": "алы по слайдам.`:`Модель спланирует содержание. Короткий бриф до 1500 знаков она развернёт в структуру и текст слайдов.`:`Модель пока не подключена. Добавьте готовый текст — доступна "
+  },
+  {
+    "old": "аспределяем готовые материалы по слайдам.`:`Модель спланирует содержание по вашим материалам.`:`Модель пока не подключена. Добавьте готовый текст — доступна сбор",
+    "new": " спланирует содержание. Короткий бриф до 1500 знаков она развернёт в структуру и текст слайдов.`:`Модель пока не подключена. Добавьте готовый текст — доступна с"
+  },
+  {
+    "old": "пределяем готовые материалы по слайдам.`:`Модель спланирует содержание по вашим материалам.`:`Модель пока не подключена. Добавьте готовый текст — доступна сборка ",
+    "new": "спланирует содержание. Короткий бриф до 1500 знаков она развернёт в структуру и текст слайдов.`:`Модель пока не подключена. Добавьте готовый текст — доступна сб"
+  },
+  {
+    "old": "еляем готовые материалы по слайдам.`:`Модель спланирует содержание по вашим материалам.`:`Модель пока не подключена. Добавьте готовый текст — доступна сборка без м",
+    "new": "ланирует содержание. Короткий бриф до 1500 знаков она развернёт в структуру и текст слайдов.`:`Модель пока не подключена. Добавьте готовый текст — доступна сборка бе"
+  },
+  {
+    "old": " готовые материалы по слайдам.`:`Модель спланирует содержание по вашим материалам.`:`Модель пока не подключена. Добавьте готовый текст — доступна сборка без моде",
+    "new": "т содержание. Короткий бриф до 1500 знаков она развернёт в структуру и текст слайдов.`:`Модель пока не подключена. Добавьте готовый текст — доступна сборка без моде"
+  },
+  {
+    "old": "а не подключена. Добавьте готовый текст — доступна сборка без модели.`;return(0,D.jsxs)(`div`,{className:`studio-page`,children:[(0,D.jsx)(`a`,{className:`skip-l",
+    "new": "а не подключена. Добавьте готовый текст — доступна сборка без модели.`;return(0,O.jsxs)(`div`,{className:`studio-page`,children:[(0,O.jsx)(`a`,{className:`skip-l"
+  },
+  {
+    "old": "борка без модели.`;return(0,D.jsxs)(`div`,{className:`studio-page`,children:[(0,D.jsx)(`a`,{className:`skip-link`,href:`#workspace`,children:`К рабочей области`}",
+    "new": "борка без модели.`;return(0,O.jsxs)(`div`,{className:`studio-page`,children:[(0,O.jsx)(`a`,{className:`skip-link`,href:`#workspace`,children:`К рабочей области`}"
+  },
+  {
+    "old": "(`a`,{className:`skip-link`,href:`#workspace`,children:`К рабочей области`}),(0,D.jsxs)(`header`,{className:`studio-header`,children:[(0,D.jsx)(h,{}),(0,D.jsxs)(",
+    "new": "(`a`,{className:`skip-link`,href:`#workspace`,children:`К рабочей области`}),(0,O.jsxs)(`header`,{className:`studio-header`,children:[(0,O.jsx)(h,{}),(0,O.jsxs)("
+  },
+  {
+    "old": " рабочей области`}),(0,D.jsxs)(`header`,{className:`studio-header`,children:[(0,D.jsx)(h,{}),(0,D.jsxs)(`span`,{className:`studio-breadcrumb`,children:[(0,D.jsx)",
+    "new": " рабочей области`}),(0,O.jsxs)(`header`,{className:`studio-header`,children:[(0,O.jsx)(h,{}),(0,O.jsxs)(`span`,{className:`studio-breadcrumb`,children:[(0,O.jsx)"
+  },
+  {
+    "old": "`}),(0,D.jsxs)(`header`,{className:`studio-header`,children:[(0,D.jsx)(h,{}),(0,D.jsxs)(`span`,{className:`studio-breadcrumb`,children:[(0,D.jsx)(y,{size:16}),`С",
+    "new": "`}),(0,O.jsxs)(`header`,{className:`studio-header`,children:[(0,O.jsx)(h,{}),(0,O.jsxs)(`span`,{className:`studio-breadcrumb`,children:[(0,O.jsx)(y,{size:16}),`С"
+  },
+  {
+    "old": ":[(0,D.jsx)(h,{}),(0,D.jsxs)(`span`,{className:`studio-breadcrumb`,children:[(0,D.jsx)(y,{size:16}),`Студия презентаций`]}),(0,D.jsxs)(`div`,{className:`studio-a",
+    "new": ":[(0,O.jsx)(h,{}),(0,O.jsxs)(`span`,{className:`studio-breadcrumb`,children:[(0,O.jsx)(y,{size:16}),`Студия презентаций`]}),(0,O.jsxs)(`div`,{className:`studio-a"
+  },
+  {
+    "old": "`studio-breadcrumb`,children:[(0,D.jsx)(y,{size:16}),`Студия презентаций`]}),(0,D.jsxs)(`div`,{className:`studio-account`,children:[(0,D.jsx)(`span`,{className:`",
+    "new": "`studio-breadcrumb`,children:[(0,O.jsx)(y,{size:16}),`Студия презентаций`]}),(0,O.jsxs)(`div`,{className:`studio-account`,children:[(0,O.jsx)(`span`,{className:`"
+  },
+  {
+    "old": "тудия презентаций`]}),(0,D.jsxs)(`div`,{className:`studio-account`,children:[(0,D.jsx)(`span`,{className:`avatar`,children:e.username.slice(0,1).toUpperCase()}),",
+    "new": "тудия презентаций`]}),(0,O.jsxs)(`div`,{className:`studio-account`,children:[(0,O.jsx)(`span`,{className:`avatar`,children:e.username.slice(0,1).toUpperCase()}),"
+  },
+  {
+    "old": "x)(`span`,{className:`avatar`,children:e.username.slice(0,1).toUpperCase()}),(0,D.jsx)(`span`,{className:`account-name`,title:e.position,children:e.username}),(0",
+    "new": "x)(`span`,{className:`avatar`,children:e.username.slice(0,1).toUpperCase()}),(0,O.jsx)(`span`,{className:`account-name`,title:e.position,children:e.username}),(0"
+  },
+  {
+    "old": "jsx)(`span`,{className:`account-name`,title:e.position,children:e.username}),(0,D.jsx)(`button`,{id:`logout`,className:`icon-button`,\"aria-label\":`Выйти`,title:`",
+    "new": "jsx)(`span`,{className:`account-name`,title:e.position,children:e.username}),(0,O.jsx)(`button`,{id:`logout`,className:`icon-button`,\"aria-label\":`Выйти`,title:`"
+  },
+  {
+    "old": "id:`logout`,className:`icon-button`,\"aria-label\":`Выйти`,title:`Выйти`,disabled:_,onClick:async()=>{b(!0);try{await n()}catch(e){r.notify(e.message,!0),b(!1)}},c",
+    "new": "id:`logout`,className:`icon-button`,\"aria-label\":`Выйти`,title:`Выйти`,disabled:x,onClick:async()=>{E(!0);try{await n()}catch(e){r.notify(e.message,!0),E(!1)}},c"
+  },
+  {
+    "old": "e:`icon-button`,\"aria-label\":`Выйти`,title:`Выйти`,disabled:_,onClick:async()=>{b(!0);try{await n()}catch(e){r.notify(e.message,!0),b(!1)}},children:(0,D.jsx)(C,",
+    "new": "e:`icon-button`,\"aria-label\":`Выйти`,title:`Выйти`,disabled:x,onClick:async()=>{E(!0);try{await n()}catch(e){r.notify(e.message,!0),E(!1)}},children:(0,O.jsx)(w,"
+  },
+  {
+    "old": "isabled:_,onClick:async()=>{b(!0);try{await n()}catch(e){r.notify(e.message,!0),b(!1)}},children:(0,D.jsx)(C,{size:18})})]})]}),(0,D.jsxs)(`main`,{className:`stu",
+    "new": "isabled:x,onClick:async()=>{E(!0);try{await n()}catch(e){r.notify(e.message,!0),E(!1)}},children:(0,O.jsx)(w,{size:18})})]})]}),(0,O.jsxs)(`main`,{className:`stu"
+  },
+  {
+    "old": "ync()=>{b(!0);try{await n()}catch(e){r.notify(e.message,!0),b(!1)}},children:(0,D.jsx)(C,{size:18})})]})]}),(0,D.jsxs)(`main`,{className:`studio-shell`,id:`works",
+    "new": "ync()=>{E(!0);try{await n()}catch(e){r.notify(e.message,!0),E(!1)}},children:(0,O.jsx)(w,{size:18})})]})]}),(0,O.jsxs)(`main`,{className:`studio-shell`,id:`works"
+  },
+  {
+    "old": "{b(!0);try{await n()}catch(e){r.notify(e.message,!0),b(!1)}},children:(0,D.jsx)(C,{size:18})})]})]}),(0,D.jsxs)(`main`,{className:`studio-shell`,id:`workspace`,\"",
+    "new": "{E(!0);try{await n()}catch(e){r.notify(e.message,!0),E(!1)}},children:(0,O.jsx)(w,{size:18})})]})]}),(0,O.jsxs)(`main`,{className:`studio-shell`,id:`workspace`,\""
+  },
+  {
+    "old": "ch(e){r.notify(e.message,!0),b(!1)}},children:(0,D.jsx)(C,{size:18})})]})]}),(0,D.jsxs)(`main`,{className:`studio-shell`,id:`workspace`,\"aria-busy\":T,children:[(",
+    "new": "ch(e){r.notify(e.message,!0),E(!1)}},children:(0,O.jsx)(w,{size:18})})]})]}),(0,O.jsxs)(`main`,{className:`studio-shell`,id:`workspace`,\"aria-busy\":j,children:[("
+  },
+  {
+    "old": "})]})]}),(0,D.jsxs)(`main`,{className:`studio-shell`,id:`workspace`,\"aria-busy\":T,children:[(0,D.jsxs)(`div`,{className:`studio-title`,children:[(0,D.jsxs)(`div`",
+    "new": "})]})]}),(0,O.jsxs)(`main`,{className:`studio-shell`,id:`workspace`,\"aria-busy\":j,children:[(0,O.jsxs)(`div`,{className:`studio-title`,children:[(0,O.jsxs)(`div`"
+  },
+  {
+    "old": "sxs)(`main`,{className:`studio-shell`,id:`workspace`,\"aria-busy\":T,children:[(0,D.jsxs)(`div`,{className:`studio-title`,children:[(0,D.jsxs)(`div`,{children:[(0,",
+    "new": "sxs)(`main`,{className:`studio-shell`,id:`workspace`,\"aria-busy\":j,children:[(0,O.jsxs)(`div`,{className:`studio-title`,children:[(0,O.jsxs)(`div`,{children:[(0,"
+  },
+  {
+    "old": "\"aria-busy\":T,children:[(0,D.jsxs)(`div`,{className:`studio-title`,children:[(0,D.jsxs)(`div`,{children:[(0,D.jsxs)(`a`,{href:`/`,className:`back-link`,children:",
+    "new": "\"aria-busy\":j,children:[(0,O.jsxs)(`div`,{className:`studio-title`,children:[(0,O.jsxs)(`div`,{children:[(0,O.jsxs)(`a`,{href:`/`,className:`back-link`,children:"
+  },
+  {
+    "old": ".jsxs)(`div`,{className:`studio-title`,children:[(0,D.jsxs)(`div`,{children:[(0,D.jsxs)(`a`,{href:`/`,className:`back-link`,children:[(0,D.jsx)(v,{size:14}),`На ",
+    "new": ".jsxs)(`div`,{className:`studio-title`,children:[(0,O.jsxs)(`div`,{children:[(0,O.jsxs)(`a`,{href:`/`,className:`back-link`,children:[(0,O.jsx)(v,{size:14}),`На "
+  },
+  {
+    "old": "s)(`div`,{children:[(0,D.jsxs)(`a`,{href:`/`,className:`back-link`,children:[(0,D.jsx)(v,{size:14}),`На главную`]}),(0,D.jsxs)(`h1`,{children:[`Новая презентация",
+    "new": "s)(`div`,{children:[(0,O.jsxs)(`a`,{href:`/`,className:`back-link`,children:[(0,O.jsx)(v,{size:14}),`На главную`]}),(0,O.jsxs)(`h1`,{children:[`Новая презентация"
+  },
+  {
+    "old": "f:`/`,className:`back-link`,children:[(0,D.jsx)(v,{size:14}),`На главную`]}),(0,D.jsxs)(`h1`,{children:[`Новая презентация`,(0,D.jsx)(`span`,{children:`.`})]}),(",
+    "new": "f:`/`,className:`back-link`,children:[(0,O.jsx)(v,{size:14}),`На главную`]}),(0,O.jsxs)(`h1`,{children:[`Новая презентация`,(0,O.jsx)(`span`,{children:`.`})]}),("
+  },
+  {
+    "old": "(v,{size:14}),`На главную`]}),(0,D.jsxs)(`h1`,{children:[`Новая презентация`,(0,D.jsx)(`span`,{children:`.`})]}),(0,D.jsx)(`p`,{children:`Ваши материалы. Ваш сти",
+    "new": "(v,{size:14}),`На главную`]}),(0,O.jsxs)(`h1`,{children:[`Новая презентация`,(0,O.jsx)(`span`,{children:`.`})]}),(0,O.jsx)(`p`,{children:`Ваши материалы. Ваш сти"
+  },
+  {
+    "old": "sxs)(`h1`,{children:[`Новая презентация`,(0,D.jsx)(`span`,{children:`.`})]}),(0,D.jsx)(`p`,{children:`Ваши материалы. Ваш стиль. Три варианта.`})]}),(0,D.jsxs)(`",
+    "new": "sxs)(`h1`,{children:[`Новая презентация`,(0,O.jsx)(`span`,{children:`.`})]}),(0,O.jsx)(`p`,{children:`Ваши материалы. Ваш стиль. Три варианта.`})]}),(0,O.jsxs)(`"
+  },
+  {
+    "old": ")]}),(0,D.jsx)(`p`,{children:`Ваши материалы. Ваш стиль. Три варианта.`})]}),(0,D.jsxs)(`span`,{className:`private-note`,children:[(0,D.jsx)(m,{size:14}),` Видно",
+    "new": ")]}),(0,O.jsx)(`p`,{children:`Ваши материалы. Ваш стиль. Три варианта.`})]}),(0,O.jsxs)(`span`,{className:`private-note`,children:[(0,O.jsx)(m,{size:14}),` Видно"
+  },
+  {
+    "old": "ь. Три варианта.`})]}),(0,D.jsxs)(`span`,{className:`private-note`,children:[(0,D.jsx)(m,{size:14}),` Видно только вам`]})]}),(0,D.jsxs)(`div`,{className:`studio",
+    "new": "ь. Три варианта.`})]}),(0,O.jsxs)(`span`,{className:`private-note`,children:[(0,O.jsx)(m,{size:14}),` Видно только вам`]})]}),(0,O.jsxs)(`div`,{className:`studio"
+  },
+  {
+    "old": "me:`private-note`,children:[(0,D.jsx)(m,{size:14}),` Видно только вам`]})]}),(0,D.jsxs)(`div`,{className:`studio-layout`,children:[(0,D.jsx)(`aside`,{className:`",
+    "new": "me:`private-note`,children:[(0,O.jsx)(m,{size:14}),` Видно только вам`]})]}),(0,O.jsxs)(`div`,{className:`studio-layout`,children:[(0,O.jsx)(`aside`,{className:`"
+  },
+  {
+    "old": "идно только вам`]})]}),(0,D.jsxs)(`div`,{className:`studio-layout`,children:[(0,D.jsx)(`aside`,{className:`studio-controls`,children:(0,D.jsxs)(`fieldset`,{disab",
+    "new": "идно только вам`]})]}),(0,O.jsxs)(`div`,{className:`studio-layout`,children:[(0,O.jsx)(`aside`,{className:`studio-controls`,children:(0,O.jsxs)(`fieldset`,{disab"
+  },
+  {
+    "old": "io-layout`,children:[(0,D.jsx)(`aside`,{className:`studio-controls`,children:(0,D.jsxs)(`fieldset`,{disabled:T,children:[(0,D.jsxs)(`section`,{className:`control",
+    "new": "io-layout`,children:[(0,O.jsx)(`aside`,{className:`studio-controls`,children:(0,O.jsxs)(`fieldset`,{disabled:j,children:[(0,O.jsxs)(`section`,{className:`control"
+  },
+  {
+    "old": ")(`aside`,{className:`studio-controls`,children:(0,D.jsxs)(`fieldset`,{disabled:T,children:[(0,D.jsxs)(`section`,{className:`control-section`,children:[(0,D.jsxs",
+    "new": ")(`aside`,{className:`studio-controls`,children:(0,O.jsxs)(`fieldset`,{disabled:j,children:[(0,O.jsxs)(`section`,{className:`control-section`,children:[(0,O.jsxs"
+  },
+  {
+    "old": "sName:`studio-controls`,children:(0,D.jsxs)(`fieldset`,{disabled:T,children:[(0,D.jsxs)(`section`,{className:`control-section`,children:[(0,D.jsxs)(`div`,{classN",
+    "new": "sName:`studio-controls`,children:(0,O.jsxs)(`fieldset`,{disabled:j,children:[(0,O.jsxs)(`section`,{className:`control-section`,children:[(0,O.jsxs)(`div`,{classN"
+  },
+  {
+    "old": "bled:T,children:[(0,D.jsxs)(`section`,{className:`control-section`,children:[(0,D.jsxs)(`div`,{className:`control-heading`,children:[(0,D.jsx)(`span`,{children:`",
+    "new": "bled:j,children:[(0,O.jsxs)(`section`,{className:`control-section`,children:[(0,O.jsxs)(`div`,{className:`control-heading`,children:[(0,O.jsx)(`span`,{children:`"
+  },
+  {
+    "old": "l-section`,children:[(0,D.jsxs)(`div`,{className:`control-heading`,children:[(0,D.jsx)(`span`,{children:`01`}),(0,D.jsx)(`h2`,{children:`Ваш шаблон`}),(0,D.jsx)(",
+    "new": "l-section`,children:[(0,O.jsxs)(`div`,{className:`control-heading`,children:[(0,O.jsx)(`span`,{children:`01`}),(0,O.jsx)(`h2`,{children:`Ваш шаблон`}),(0,O.jsx)("
+  },
+  {
+    "old": "iv`,{className:`control-heading`,children:[(0,D.jsx)(`span`,{children:`01`}),(0,D.jsx)(`h2`,{children:`Ваш шаблон`}),(0,D.jsx)(d,{size:18})]}),(0,D.jsxs)(`form`,",
+    "new": "iv`,{className:`control-heading`,children:[(0,O.jsx)(`span`,{children:`01`}),(0,O.jsx)(`h2`,{children:`Ваш шаблон`}),(0,O.jsx)(d,{size:18})]}),(0,O.jsxs)(`form`,"
+  },
+  {
+    "old": "n:[(0,D.jsx)(`span`,{children:`01`}),(0,D.jsx)(`h2`,{children:`Ваш шаблон`}),(0,D.jsx)(d,{size:18})]}),(0,D.jsxs)(`form`,{id:`upload`,onSubmit:A,children:[(0,D.j",
+    "new": "n:[(0,O.jsx)(`span`,{children:`01`}),(0,O.jsx)(`h2`,{children:`Ваш шаблон`}),(0,O.jsx)(d,{size:18})]}),(0,O.jsxs)(`form`,{id:`upload`,onSubmit:F,children:[(0,O.j"
+  },
+  {
+    "old": "ren:`01`}),(0,D.jsx)(`h2`,{children:`Ваш шаблон`}),(0,D.jsx)(d,{size:18})]}),(0,D.jsxs)(`form`,{id:`upload`,onSubmit:A,children:[(0,D.jsxs)(`label`,{className:`f",
+    "new": "ren:`01`}),(0,O.jsx)(`h2`,{children:`Ваш шаблон`}),(0,O.jsx)(d,{size:18})]}),(0,O.jsxs)(`form`,{id:`upload`,onSubmit:F,children:[(0,O.jsxs)(`label`,{className:`f"
+  },
+  {
+    "old": "Ваш шаблон`}),(0,D.jsx)(d,{size:18})]}),(0,D.jsxs)(`form`,{id:`upload`,onSubmit:A,children:[(0,D.jsxs)(`label`,{className:`file-drop ${f?`dragging`:``} ${i?`has-",
+    "new": "Ваш шаблон`}),(0,O.jsx)(d,{size:18})]}),(0,O.jsxs)(`form`,{id:`upload`,onSubmit:F,children:[(0,O.jsxs)(`label`,{className:`file-drop ${_?`dragging`:``} ${i?`has-"
+  },
+  {
+    "old": "0,D.jsx)(d,{size:18})]}),(0,D.jsxs)(`form`,{id:`upload`,onSubmit:A,children:[(0,D.jsxs)(`label`,{className:`file-drop ${f?`dragging`:``} ${i?`has-file`:``}`,onDr",
+    "new": "0,O.jsx)(d,{size:18})]}),(0,O.jsxs)(`form`,{id:`upload`,onSubmit:F,children:[(0,O.jsxs)(`label`,{className:`file-drop ${_?`dragging`:``} ${i?`has-file`:``}`,onDr"
+  },
+  {
+    "old": "m`,{id:`upload`,onSubmit:A,children:[(0,D.jsxs)(`label`,{className:`file-drop ${f?`dragging`:``} ${i?`has-file`:``}`,onDragOver:e=>{e.preventDefault(),T||g(!0)},",
+    "new": "m`,{id:`upload`,onSubmit:F,children:[(0,O.jsxs)(`label`,{className:`file-drop ${_?`dragging`:``} ${i?`has-file`:``}`,onDragOver:e=>{e.preventDefault(),j||b(!0)},"
+  },
+  {
+    "old": "e-drop ${f?`dragging`:``} ${i?`has-file`:``}`,onDragOver:e=>{e.preventDefault(),T||g(!0)},onDragLeave:()=>g(!1),onDrop:e=>{e.preventDefault(),g(!1),!T&&e.dataTra",
+    "new": "e-drop ${_?`dragging`:``} ${i?`has-file`:``}`,onDragOver:e=>{e.preventDefault(),j||b(!0)},onDragLeave:()=>b(!1),onDrop:e=>{e.preventDefault(),b(!1),!j&&e.dataTra"
+  },
+  {
+    "old": "rop ${f?`dragging`:``} ${i?`has-file`:``}`,onDragOver:e=>{e.preventDefault(),T||g(!0)},onDragLeave:()=>g(!1),onDrop:e=>{e.preventDefault(),g(!1),!T&&e.dataTransf",
+    "new": "rop ${_?`dragging`:``} ${i?`has-file`:``}`,onDragOver:e=>{e.preventDefault(),j||b(!0)},onDragLeave:()=>b(!1),onDrop:e=>{e.preventDefault(),b(!1),!j&&e.dataTransf"
+  },
+  {
+    "old": "${i?`has-file`:``}`,onDragOver:e=>{e.preventDefault(),T||g(!0)},onDragLeave:()=>g(!1),onDrop:e=>{e.preventDefault(),g(!1),!T&&e.dataTransfer.files[0]&&P(e.dataTr",
+    "new": "${i?`has-file`:``}`,onDragOver:e=>{e.preventDefault(),j||b(!0)},onDragLeave:()=>b(!1),onDrop:e=>{e.preventDefault(),b(!1),!j&&e.dataTransfer.files[0]&&L(e.dataTr"
+  },
+  {
+    "old": ".preventDefault(),T||g(!0)},onDragLeave:()=>g(!1),onDrop:e=>{e.preventDefault(),g(!1),!T&&e.dataTransfer.files[0]&&P(e.dataTransfer.files[0])},children:[(0,D.jsx",
+    "new": ".preventDefault(),j||b(!0)},onDragLeave:()=>b(!1),onDrop:e=>{e.preventDefault(),b(!1),!j&&e.dataTransfer.files[0]&&L(e.dataTransfer.files[0])},children:[(0,O.jsx"
+  },
+  {
+    "old": "tDefault(),T||g(!0)},onDragLeave:()=>g(!1),onDrop:e=>{e.preventDefault(),g(!1),!T&&e.dataTransfer.files[0]&&P(e.dataTransfer.files[0])},children:[(0,D.jsx)(`span",
+    "new": "tDefault(),j||b(!0)},onDragLeave:()=>b(!1),onDrop:e=>{e.preventDefault(),b(!1),!j&&e.dataTransfer.files[0]&&L(e.dataTransfer.files[0])},children:[(0,O.jsx)(`span"
+  },
+  {
+    "old": "eave:()=>g(!1),onDrop:e=>{e.preventDefault(),g(!1),!T&&e.dataTransfer.files[0]&&P(e.dataTransfer.files[0])},children:[(0,D.jsx)(`span`,{className:`upload-icon`,c",
+    "new": "eave:()=>b(!1),onDrop:e=>{e.preventDefault(),b(!1),!j&&e.dataTransfer.files[0]&&L(e.dataTransfer.files[0])},children:[(0,O.jsx)(`span`,{className:`upload-icon`,c"
+  },
+  {
+    "old": "t(),g(!1),!T&&e.dataTransfer.files[0]&&P(e.dataTransfer.files[0])},children:[(0,D.jsx)(`span`,{className:`upload-icon`,children:(0,D.jsx)(w,{size:24})}),(0,D.jsx",
+    "new": "t(),b(!1),!j&&e.dataTransfer.files[0]&&L(e.dataTransfer.files[0])},children:[(0,O.jsx)(`span`,{className:`upload-icon`,children:(0,O.jsx)(T,{size:24})}),(0,O.jsx"
+  },
+  {
+    "old": "sfer.files[0])},children:[(0,D.jsx)(`span`,{className:`upload-icon`,children:(0,D.jsx)(w,{size:24})}),(0,D.jsx)(`strong`,{children:i?i.name:`Перетащите шаблон сю",
+    "new": "sfer.files[0])},children:[(0,O.jsx)(`span`,{className:`upload-icon`,children:(0,O.jsx)(T,{size:24})}),(0,O.jsx)(`strong`,{children:i?i.name:`Перетащите шаблон сю"
+  },
+  {
+    "old": "les[0])},children:[(0,D.jsx)(`span`,{className:`upload-icon`,children:(0,D.jsx)(w,{size:24})}),(0,D.jsx)(`strong`,{children:i?i.name:`Перетащите шаблон сюда`}),(",
+    "new": "les[0])},children:[(0,O.jsx)(`span`,{className:`upload-icon`,children:(0,O.jsx)(T,{size:24})}),(0,O.jsx)(`strong`,{children:i?i.name:`Перетащите шаблон сюда`}),("
+  },
+  {
+    "old": "[(0,D.jsx)(`span`,{className:`upload-icon`,children:(0,D.jsx)(w,{size:24})}),(0,D.jsx)(`strong`,{children:i?i.name:`Перетащите шаблон сюда`}),(0,D.jsx)(`span`,{c",
+    "new": "[(0,O.jsx)(`span`,{className:`upload-icon`,children:(0,O.jsx)(T,{size:24})}),(0,O.jsx)(`strong`,{children:i?i.name:`Перетащите шаблон сюда`}),(0,O.jsx)(`span`,{c"
+  },
+  {
+    "old": "size:24})}),(0,D.jsx)(`strong`,{children:i?i.name:`Перетащите шаблон сюда`}),(0,D.jsx)(`span`,{children:i?`${(i.size/1024/1024).toFixed(1)} МБ · файл выбран`:`ил",
+    "new": "size:24})}),(0,O.jsx)(`strong`,{children:i?i.name:`Перетащите шаблон сюда`}),(0,O.jsx)(`span`,{children:i?`${(i.size/1024/1024).toFixed(1)} МБ · файл выбран`:`ил"
+  },
+  {
+    "old": "size/1024/1024).toFixed(1)} МБ · файл выбран`:`или нажмите, чтобы выбрать`}),(0,D.jsx)(`small`,{children:`PPTX, PDF · до 100 МБ`}),(0,D.jsx)(`input`,{ref:x,id:`t",
+    "new": "size/1024/1024).toFixed(1)} МБ · файл выбран`:`или нажмите, чтобы выбрать`}),(0,O.jsx)(`small`,{children:`PPTX, PDF · до 100 МБ`}),(0,O.jsx)(`input`,{ref:A,id:`t"
+  },
+  {
+    "old": "мите, чтобы выбрать`}),(0,D.jsx)(`small`,{children:`PPTX, PDF · до 100 МБ`}),(0,D.jsx)(`input`,{ref:x,id:`templateFile`,type:`file`,accept:`.pptx,.pdf`,onChange:",
+    "new": "мите, чтобы выбрать`}),(0,O.jsx)(`small`,{children:`PPTX, PDF · до 100 МБ`}),(0,O.jsx)(`input`,{ref:A,id:`templateFile`,type:`file`,accept:`.pptx,.pdf`,onChange:"
+  },
+  {
+    "old": "}),(0,D.jsx)(`small`,{children:`PPTX, PDF · до 100 МБ`}),(0,D.jsx)(`input`,{ref:x,id:`templateFile`,type:`file`,accept:`.pptx,.pdf`,onChange:e=>a(e.target.files?",
+    "new": "}),(0,O.jsx)(`small`,{children:`PPTX, PDF · до 100 МБ`}),(0,O.jsx)(`input`,{ref:A,id:`templateFile`,type:`file`,accept:`.pptx,.pdf`,onChange:e=>a(e.target.files?"
+  },
+  {
+    "old": "nChange:e=>a(e.target.files?.[0]||null),\"aria-label\":`Фирменный шаблон`})]}),(0,D.jsxs)(`button`,{id:`uploadButton`,className:`button secondary full`,type:`submi",
+    "new": "nChange:e=>a(e.target.files?.[0]||null),\"aria-label\":`Фирменный шаблон`})]}),(0,O.jsxs)(`button`,{id:`uploadButton`,className:`button secondary full`,type:`submi"
+  },
+  {
+    "old": "ype:`submit`,children:[r.busy===`upload`?`Изучаем шаблон…`:`Добавить шаблон`,(0,D.jsx)(s,{size:16})]})]}),(0,D.jsx)(`label`,{htmlFor:`template`,children:`Мои шаб",
+    "new": "ype:`submit`,children:[r.busy===`upload`?`Изучаем шаблон…`:`Добавить шаблон`,(0,O.jsx)(s,{size:16})]})]}),(0,O.jsx)(`label`,{htmlFor:`template`,children:`Мои шаб"
+  },
+  {
+    "old": "===`upload`?`Изучаем шаблон…`:`Добавить шаблон`,(0,D.jsx)(s,{size:16})]})]}),(0,D.jsx)(`label`,{htmlFor:`template`,children:`Мои шаблоны`}),(0,D.jsxs)(`select`,{",
+    "new": "===`upload`?`Изучаем шаблон…`:`Добавить шаблон`,(0,O.jsx)(s,{size:16})]})]}),(0,O.jsx)(`label`,{htmlFor:`template`,children:`Мои шаблоны`}),(0,O.jsxs)(`select`,{"
+  },
+  {
+    "old": "ze:16})]})]}),(0,D.jsx)(`label`,{htmlFor:`template`,children:`Мои шаблоны`}),(0,D.jsxs)(`select`,{id:`template`,value:r.templateId,onChange:e=>r.setTemplateId(e.",
+    "new": "ze:16})]})]}),(0,O.jsx)(`label`,{htmlFor:`template`,children:`Мои шаблоны`}),(0,O.jsxs)(`select`,{id:`template`,value:r.templateId,onChange:e=>r.setTemplateId(e."
+  },
+  {
+    "old": "d,onChange:e=>r.setTemplateId(e.target.value),children:[!r.templates.length&&(0,D.jsx)(`option`,{value:``,children:`Загрузите первый шаблон`}),r.templates.map(e=",
+    "new": "d,onChange:e=>r.setTemplateId(e.target.value),children:[!r.templates.length&&(0,O.jsx)(`option`,{value:``,children:`Загрузите первый шаблон`}),r.templates.map(e="
+  },
+  {
+    "old": ")(`option`,{value:``,children:`Загрузите первый шаблон`}),r.templates.map(e=>(0,D.jsx)(`option`,{value:e.template_id,children:e.name||e.source_file},e.template_i",
+    "new": ")(`option`,{value:``,children:`Загрузите первый шаблон`}),r.templates.map(e=>(0,O.jsx)(`option`,{value:e.template_id,children:e.name||e.source_file},e.template_i"
+  },
+  {
+    "old": "`,{value:e.template_id,children:e.name||e.source_file},e.template_id))]})]}),(0,D.jsxs)(`section`,{className:`control-section`,children:[(0,D.jsxs)(`div`,{classN",
+    "new": "`,{value:e.template_id,children:e.name||e.source_file},e.template_id))]})]}),(0,O.jsxs)(`section`,{className:`control-section`,children:[(0,O.jsxs)(`div`,{classN"
+  },
+  {
+    "old": "plate_id))]})]}),(0,D.jsxs)(`section`,{className:`control-section`,children:[(0,D.jsxs)(`div`,{className:`control-heading`,children:[(0,D.jsx)(`span`,{children:`",
+    "new": "plate_id))]})]}),(0,O.jsxs)(`section`,{className:`control-section`,children:[(0,O.jsxs)(`div`,{className:`control-heading`,children:[(0,O.jsx)(`span`,{children:`"
+  },
+  {
+    "old": "l-section`,children:[(0,D.jsxs)(`div`,{className:`control-heading`,children:[(0,D.jsx)(`span`,{children:`02`}),(0,D.jsx)(`h2`,{children:`Ваше содержание`}),(0,D.",
+    "new": "l-section`,children:[(0,O.jsxs)(`div`,{className:`control-heading`,children:[(0,O.jsx)(`span`,{children:`02`}),(0,O.jsx)(`h2`,{children:`Ваше содержание`}),(0,O."
+  },
+  {
+    "old": "iv`,{className:`control-heading`,children:[(0,D.jsx)(`span`,{children:`02`}),(0,D.jsx)(`h2`,{children:`Ваше содержание`}),(0,D.jsx)(S,{size:18})]}),(0,D.jsxs)(`f",
+    "new": "iv`,{className:`control-heading`,children:[(0,O.jsx)(`span`,{children:`02`}),(0,O.jsx)(`h2`,{children:`Ваше содержание`}),(0,O.jsx)(S,{size:18})]}),(0,O.jsxs)(`f"
+  },
+  {
+    "old": ",D.jsx)(`span`,{children:`02`}),(0,D.jsx)(`h2`,{children:`Ваше содержание`}),(0,D.jsx)(S,{size:18})]}),(0,D.jsxs)(`form`,{id:`generate`,onSubmit:j,children:[(0,D",
+    "new": ",O.jsx)(`span`,{children:`02`}),(0,O.jsx)(`h2`,{children:`Ваше содержание`}),(0,O.jsx)(S,{size:18})]}),(0,O.jsxs)(`form`,{id:`generate`,onSubmit:I,children:[(0,O"
+  },
+  {
+    "old": "02`}),(0,D.jsx)(`h2`,{children:`Ваше содержание`}),(0,D.jsx)(S,{size:18})]}),(0,D.jsxs)(`form`,{id:`generate`,onSubmit:j,children:[(0,D.jsx)(`label`,{htmlFor:`co",
+    "new": "02`}),(0,O.jsx)(`h2`,{children:`Ваше содержание`}),(0,O.jsx)(S,{size:18})]}),(0,O.jsxs)(`form`,{id:`generate`,onSubmit:I,children:[(0,O.jsx)(`label`,{htmlFor:`co"
+  },
+  {
+    "old": "держание`}),(0,D.jsx)(S,{size:18})]}),(0,D.jsxs)(`form`,{id:`generate`,onSubmit:j,children:[(0,D.jsx)(`label`,{htmlFor:`content`,children:`Тема, факты и ключевые",
+    "new": "держание`}),(0,O.jsx)(S,{size:18})]}),(0,O.jsxs)(`form`,{id:`generate`,onSubmit:I,children:[(0,O.jsx)(`label`,{htmlFor:`content`,children:`Тема, факты и ключевые"
+  },
+  {
+    "old": "D.jsx)(S,{size:18})]}),(0,D.jsxs)(`form`,{id:`generate`,onSubmit:j,children:[(0,D.jsx)(`label`,{htmlFor:`content`,children:`Тема, факты и ключевые тезисы`}),(0,D",
+    "new": "O.jsx)(S,{size:18})]}),(0,O.jsxs)(`form`,{id:`generate`,onSubmit:I,children:[(0,O.jsx)(`label`,{htmlFor:`content`,children:`Тема, факты и ключевые тезисы`}),(0,O"
+  },
+  {
+    "old": "D.jsx)(`label`,{htmlFor:`content`,children:`Тема, факты и ключевые тезисы`}),(0,D.jsx)(`textarea`,{id:`content`,rows:6,maxLength:1e5,value:r.content,onChange:e=>",
+    "new": "O.jsx)(`label`,{htmlFor:`content`,children:`Тема, факты и ключевые тезисы`}),(0,O.jsx)(`textarea`,{id:`content`,rows:6,maxLength:1e5,value:r.content,onChange:e=>"
+  },
+  {
+    "old": "der:`Для кого презентация? Что важно рассказать? Добавьте факты и выводы.`}),(0,D.jsxs)(`label`,{className:`attach-file`,htmlFor:`contentFile`,children:[(0,D.jsx",
+    "new": "der:`Для кого презентация? Что важно рассказать? Добавьте факты и выводы.`}),(0,O.jsxs)(`label`,{className:`attach-file`,htmlFor:`contentFile`,children:[(0,O.jsx"
+  },
+  {
+    "old": ",(0,D.jsxs)(`label`,{className:`attach-file`,htmlFor:`contentFile`,children:[(0,D.jsx)(s,{size:16}),(0,D.jsx)(`span`,{children:o?.name||`Прикрепить материалы`}),",
+    "new": ",(0,O.jsxs)(`label`,{className:`attach-file`,htmlFor:`contentFile`,children:[(0,O.jsx)(s,{size:16}),(0,O.jsx)(`span`,{children:o?.name||`Прикрепить материалы`}),"
+  },
+  {
+    "old": "assName:`attach-file`,htmlFor:`contentFile`,children:[(0,D.jsx)(s,{size:16}),(0,D.jsx)(`span`,{children:o?.name||`Прикрепить материалы`}),(0,D.jsx)(`input`,{id:`",
+    "new": "assName:`attach-file`,htmlFor:`contentFile`,children:[(0,O.jsx)(s,{size:16}),(0,O.jsx)(`span`,{children:o?.name||`Прикрепить материалы`}),(0,O.jsx)(`input`,{id:`"
+  },
+  {
+    "old": "x)(s,{size:16}),(0,D.jsx)(`span`,{children:o?.name||`Прикрепить материалы`}),(0,D.jsx)(`input`,{id:`contentFile`,type:`file`,accept:`.md,.txt,.csv,.json,.pptx,.p",
+    "new": "x)(s,{size:16}),(0,O.jsx)(`span`,{children:o?.name||`Прикрепить материалы`}),(0,O.jsx)(`input`,{id:`contentFile`,type:`file`,accept:`.md,.txt,.csv,.json,.pptx,.p"
+  },
+  {
+    "old": "son,.pptx,.pdf,.docx,.xlsx`,onChange:e=>l(e.target.files?.[0]||null)})]}),o&&(0,D.jsxs)(`button`,{className:`remove-file`,type:`button`,onClick:()=>{l(null);let ",
+    "new": "son,.pptx,.pdf,.docx,.xlsx`,onChange:e=>l(e.target.files?.[0]||null)})]}),o&&(0,O.jsxs)(`button`,{className:`remove-file`,type:`button`,onClick:()=>{l(null);let "
+  },
+  {
+    "old": ">{l(null);let e=document.getElementById(`contentFile`);e.value=``},children:[(0,D.jsx)(u,{size:12}),` Убрать файл`]}),(0,D.jsx)(`p`,{className:`field-hint`,child",
+    "new": ">{l(null);let e=document.getElementById(`contentFile`);e.value=``},children:[(0,O.jsx)(u,{size:12}),` Убрать файл`]}),(0,O.jsxs)(`label`,{className:`attach-file`"
+  },
+  {
+    "old": "contentFile`);e.value=``},children:[(0,D.jsx)(u,{size:12}),` Убрать файл`]}),(0,D.jsx)(`p`,{className:`field-hint`,children:`До 50 МБ. Если прикреплён файл, соде",
+    "new": "contentFile`);e.value=``},children:[(0,O.jsx)(u,{size:12}),` Убрать файл`]}),(0,O.jsxs)(`label`,{className:`attach-file`,htmlFor:`imageFiles`,children:[(0,O.jsx)(C,{size:16}),(0,O.jsx)(`span`,{children:f.length?`Изображений: ${f.length}`:`Добавить изображения`}),(0,O.jsx)(`input`,{id:`imageFiles`,type:`file`,multiple:!0,accept:`.png,.jpg,.jpeg,.webp`,onChange:e=>g(Array.from(e.target.files||[]))})]}),f.length>0&&(0,O.jsxs)(`button`,{className:`remove-file`,type:`button`,onClick:()=>{g([]);let e=document.getElementById(`imageFiles`);e.value=``},children:[(0,O.jsx)(u,{size:12}),` Убрать изображения`]}),(0,O.jsx)(`p`,{className:`field-hint`,children:`До 50 МБ. Если прикреплён файл, соде"
+  },
+  {
+    "old": "ield-hint`,children:`До 50 МБ. Если прикреплён файл, содержание берётся из него.`}),(0,D.jsxs)(`div`,{className:`generation-options`,children:[(0,D.jsxs)(`label",
+    "new": "ield-hint`,children:`До 50 МБ. Если прикреплён файл, содержание берётся из него. Изображения (PNG, JPG, WEBP, до 20) размещаются на слайдах по совпадению подписи или имени файла с текстом слайда.`}),(0,O.jsx)(`label`,{htmlFor:`purpose`,children:`Назначение презентации`}),(0,"
+  },
+  {
+    "old": "nt`,children:`До 50 МБ. Если прикреплён файл, содержание берётся из него.`}),(0,D.jsxs)(`div`,{className:`generation-options`,children:[(0,D.jsxs)(`label`,{htmlF",
+    "new": "щаются на слайдах по совпадению подписи или имени файла с текстом слайда.`}),(0,O.jsx)(`label`,{htmlFor:`purpose`,children:`Назначение презентации`}),(0,O.jsxs)(`select`,{id:`purpose`,value:r.purpose,disabled:r.offline,onChange:e=>r.setPurpose(e.target.value),children:[(0,O.jsx)(`option`,{value:``,children:`Определить по тексту`}),(0,O.jsx)(`option`,{value:`feature`,children:`Фича`}),(0,O.jsx)(`option`,{value:`product`,children:`Продукт`}),(0,O.jsx)(`option`,{value:`project`,children:`Проект`}),(0,O.jsx)(`option`,{value:`initiative`,children:`Инициатива`})]}),(0,O.jsxs)(`div`,{className:`generation-options`,children:[(0,O.jsxs)(`label`,{htmlF"
+  },
+  {
+    "old": "рётся из него.`}),(0,D.jsxs)(`div`,{className:`generation-options`,children:[(0,D.jsxs)(`label`,{htmlFor:`count`,children:[`Слайдов`,(0,D.jsx)(`input`,{id:`count",
+    "new": "`Инициатива`})]}),(0,O.jsxs)(`div`,{className:`generation-options`,children:[(0,O.jsxs)(`label`,{htmlFor:`count`,children:[`Слайдов`,(0,O.jsx)(`input`,{id:`count"
+  },
+  {
+    "old": "n-options`,children:[(0,D.jsxs)(`label`,{htmlFor:`count`,children:[`Слайдов`,(0,D.jsx)(`input`,{id:`count`,type:`number`,min:3,max:100,value:r.count,onChange:e=>",
+    "new": "n-options`,children:[(0,O.jsxs)(`label`,{htmlFor:`count`,children:[`Слайдов`,(0,O.jsx)(`input`,{id:`count`,type:`number`,min:3,max:100,value:r.count,onChange:e=>"
+  },
+  {
+    "old": "alue:r.count,onChange:e=>r.setCount(Number(e.target.value)),required:!0})]}),(0,D.jsxs)(`label`,{className:`checkbox-label`,children:[(0,D.jsx)(`input`,{id:`offl",
+    "new": "alue:r.count,onChange:e=>r.setCount(Number(e.target.value)),required:!0})]}),(0,O.jsxs)(`label`,{className:`checkbox-label`,children:[(0,O.jsx)(`input`,{id:`offl"
+  },
+  {
+    "old": ")),required:!0})]}),(0,D.jsxs)(`label`,{className:`checkbox-label`,children:[(0,D.jsx)(`input`,{id:`offline`,type:`checkbox`,checked:r.offline,disabled:!r.modelC",
+    "new": ")),required:!0})]}),(0,O.jsxs)(`label`,{className:`checkbox-label`,children:[(0,O.jsx)(`input`,{id:`offline`,type:`checkbox`,checked:r.offline,disabled:!r.modelC"
+  },
+  {
+    "old": "elConfigured,onChange:e=>r.setOffline(e.target.checked)}),`Без модели`]})]}),(0,D.jsx)(`p`,{id:`modelNote`,className:`model-note`,children:F}),(0,D.jsxs)(`button",
+    "new": "elConfigured,onChange:e=>r.setOffline(e.target.checked)}),`Без модели`]})]}),(0,O.jsx)(`p`,{id:`modelNote`,className:`model-note`,children:R}),(0,O.jsxs)(`button"
+  },
+  {
+    "old": "Без модели`]})]}),(0,D.jsx)(`p`,{id:`modelNote`,className:`model-note`,children:F}),(0,D.jsxs)(`button`,{id:`generateButton`,className:`button primary full`,type",
+    "new": "Без модели`]})]}),(0,O.jsx)(`p`,{id:`modelNote`,className:`model-note`,children:R}),(0,O.jsxs)(`button`,{id:`generateButton`,className:`button primary full`,type"
+  },
+  {
+    "old": "ели`]})]}),(0,D.jsx)(`p`,{id:`modelNote`,className:`model-note`,children:F}),(0,D.jsxs)(`button`,{id:`generateButton`,className:`button primary full`,type:`submi",
+    "new": "ели`]})]}),(0,O.jsx)(`p`,{id:`modelNote`,className:`model-note`,children:R}),(0,O.jsxs)(`button`,{id:`generateButton`,className:`button primary full`,type:`submi"
+  },
+  {
+    "old": "{id:`generateButton`,className:`button primary full`,type:`submit`,children:[(0,D.jsx)(p,{size:17}),r.busy===`generate`?`Создаём варианты…`:`Создать 3 варианта`,",
+    "new": "{id:`generateButton`,className:`button primary full`,type:`submit`,children:[(0,O.jsx)(p,{size:17}),r.busy===`generate`?`Создаём варианты…`:`Создать 3 варианта`,"
+  },
+  {
+    "old": "x)(p,{size:17}),r.busy===`generate`?`Создаём варианты…`:`Создать 3 варианта`,(0,D.jsx)(c,{size:17})]})]})]})]})}),(0,D.jsxs)(`section`,{className:`studio-results",
+    "new": "x)(p,{size:17}),r.busy===`generate`?`Создаём варианты…`:`Создать 3 варианта`,(0,O.jsx)(c,{size:17})]})]})]})]})}),(0,O.jsxs)(`section`,{className:`studio-results"
+  },
+  {
+    "old": "Создаём варианты…`:`Создать 3 варианта`,(0,D.jsx)(c,{size:17})]})]})]})]})}),(0,D.jsxs)(`section`,{className:`studio-results`,\"aria-labelledby\":`resultsTitle`,ch",
+    "new": "Создаём варианты…`:`Создать 3 варианта`,(0,O.jsx)(c,{size:17})]})]})]})]})}),(0,O.jsxs)(`section`,{className:`studio-results`,\"aria-labelledby\":`resultsTitle`,ch"
+  },
+  {
+    "old": "tion`,{className:`studio-results`,\"aria-labelledby\":`resultsTitle`,children:[(0,D.jsxs)(`div`,{className:`results-heading`,children:[(0,D.jsx)(`h2`,{id:`resultsT",
+    "new": "tion`,{className:`studio-results`,\"aria-labelledby\":`resultsTitle`,children:[(0,O.jsxs)(`div`,{className:`results-heading`,children:[(0,O.jsx)(`h2`,{id:`resultsT"
+  },
+  {
+    "old": "ultsTitle`,children:[(0,D.jsxs)(`div`,{className:`results-heading`,children:[(0,D.jsx)(`h2`,{id:`resultsTitle`,children:`Варианты презентации`}),(0,D.jsxs)(`span",
+    "new": "ultsTitle`,children:[(0,O.jsxs)(`div`,{className:`results-heading`,children:[(0,O.jsx)(`h2`,{id:`resultsTitle`,children:`Варианты презентации`}),(0,O.jsxs)(`span"
+  },
+  {
+    "old": "hildren:[(0,D.jsx)(`h2`,{id:`resultsTitle`,children:`Варианты презентации`}),(0,D.jsxs)(`span`,{className:`status-badge ${T?`working`:``}`,id:`statusBadge`,child",
+    "new": "hildren:[(0,O.jsx)(`h2`,{id:`resultsTitle`,children:`Варианты презентации`}),(0,O.jsxs)(`span`,{className:`status-badge ${j?`working`:``}`,id:`statusBadge`,child"
+  },
+  {
+    "old": ",children:`Варианты презентации`}),(0,D.jsxs)(`span`,{className:`status-badge ${T?`working`:``}`,id:`statusBadge`,children:[(0,D.jsx)(`i`,{}),T?`В работе`:`Готов",
+    "new": ",children:`Варианты презентации`}),(0,O.jsxs)(`span`,{className:`status-badge ${j?`working`:``}`,id:`statusBadge`,children:[(0,O.jsx)(`i`,{}),j?`В работе`:`Готов"
+  },
+  {
+    "old": "span`,{className:`status-badge ${T?`working`:``}`,id:`statusBadge`,children:[(0,D.jsx)(`i`,{}),T?`В работе`:`Готов к работе`]})]}),(0,D.jsx)(`div`,{id:`status`,c",
+    "new": "span`,{className:`status-badge ${j?`working`:``}`,id:`statusBadge`,children:[(0,O.jsx)(`i`,{}),j?`В работе`:`Готов к работе`]})]}),(0,O.jsx)(`div`,{id:`status`,c"
+  },
+  {
+    "old": "e:`status-badge ${T?`working`:``}`,id:`statusBadge`,children:[(0,D.jsx)(`i`,{}),T?`В работе`:`Готов к работе`]})]}),(0,D.jsx)(`div`,{id:`status`,className:r.erro",
+    "new": "e:`status-badge ${j?`working`:``}`,id:`statusBadge`,children:[(0,O.jsx)(`i`,{}),j?`В работе`:`Готов к работе`]})]}),(0,O.jsx)(`div`,{id:`status`,className:r.erro"
+  },
+  {
+    "old": "statusBadge`,children:[(0,D.jsx)(`i`,{}),T?`В работе`:`Готов к работе`]})]}),(0,D.jsx)(`div`,{id:`status`,className:r.error?`studio-status error`:`studio-status`",
+    "new": "statusBadge`,children:[(0,O.jsx)(`i`,{}),j?`В работе`:`Готов к работе`]})]}),(0,O.jsx)(`div`,{id:`status`,className:r.error?`studio-status error`:`studio-status`"
+  },
+  {
+    "old": "s`,role:`status`,\"aria-live\":`polite`,children:r.status}),r.progress!==null&&(0,D.jsx)(`progress`,{id:`progress`,value:r.progress,max:100,\"aria-label\":`Готовност",
+    "new": "s`,role:`status`,\"aria-live\":`polite`,children:r.status}),r.progress!==null&&(0,O.jsx)(`progress`,{id:`progress`,value:r.progress,max:100,\"aria-label\":`Готовност"
+  },
+  {
+    "old": "progress,max:100,\"aria-label\":`Готовность презентации`}),r.history.length>0&&(0,D.jsxs)(`div`,{id:`history`,className:`history-select`,children:[(0,D.jsx)(`label",
+    "new": "progress,max:100,\"aria-label\":`Готовность презентации`}),r.history.length>0&&(0,O.jsxs)(`div`,{id:`history`,className:`history-select`,children:[(0,O.jsx)(`label"
+  },
+  {
+    "old": "ength>0&&(0,D.jsxs)(`div`,{id:`history`,className:`history-select`,children:[(0,D.jsx)(`label`,{htmlFor:`batches`,children:`Сохранённые результаты`}),(0,D.jsxs)(",
+    "new": "ength>0&&(0,O.jsxs)(`div`,{id:`history`,className:`history-select`,children:[(0,O.jsx)(`label`,{htmlFor:`batches`,children:`Сохранённые результаты`}),(0,O.jsxs)("
+  },
+  {
+    "old": "en:[(0,D.jsx)(`label`,{htmlFor:`batches`,children:`Сохранённые результаты`}),(0,D.jsxs)(`select`,{id:`batches`,value:r.batchId,disabled:T,onChange:e=>void r.load",
+    "new": "en:[(0,O.jsx)(`label`,{htmlFor:`batches`,children:`Сохранённые результаты`}),(0,O.jsxs)(`select`,{id:`batches`,value:r.batchId,disabled:j,onChange:e=>void r.load"
+  },
+  {
+    "old": "нённые результаты`}),(0,D.jsxs)(`select`,{id:`batches`,value:r.batchId,disabled:T,onChange:e=>void r.loadBatch(e.target.value),children:[(0,D.jsx)(`option`,{valu",
+    "new": "нённые результаты`}),(0,O.jsxs)(`select`,{id:`batches`,value:r.batchId,disabled:j,onChange:e=>void r.loadBatch(e.target.value),children:[(0,O.jsx)(`option`,{valu"
+  },
+  {
+    "old": ":r.batchId,disabled:T,onChange:e=>void r.loadBatch(e.target.value),children:[(0,D.jsx)(`option`,{value:``,children:`Выберите результат`}),r.history.map(e=>(0,D.j",
+    "new": ":r.batchId,disabled:j,onChange:e=>void r.loadBatch(e.target.value),children:[(0,O.jsx)(`option`,{value:``,children:`Выберите результат`}),r.history.map(e=>(0,O.j"
+  },
+  {
+    "old": "0,D.jsx)(`option`,{value:``,children:`Выберите результат`}),r.history.map(e=>(0,D.jsxs)(`option`,{value:e.batch_id,children:[r.templates.find(t=>t.template_id===",
+    "new": "0,O.jsx)(`option`,{value:``,children:`Выберите результат`}),r.history.map(e=>(0,O.jsxs)(`option`,{value:e.batch_id,children:[r.templates.find(t=>t.template_id==="
+  },
+  {
+    "old": "тация`,` `,`· `,e.batch_id.slice(-17)]},e.batch_id))]})]}),r.decks.length>0&&(0,D.jsx)(`nav`,{id:`variants`,className:`result-variants`,\"aria-label\":`Варианты пр",
+    "new": "тация`,` `,`· `,e.batch_id.slice(-17)]},e.batch_id))]})]}),r.decks.length>0&&(0,O.jsx)(`nav`,{id:`variants`,className:`result-variants`,\"aria-label\":`Варианты пр"
+  },
+  {
+    "old": "lt-variants`,\"aria-label\":`Варианты презентации`,children:r.decks.map((e,t)=>(0,D.jsx)(`button`,{className:r.active===t?`active`:``,\"aria-pressed\":r.active===t,d",
+    "new": "lt-variants`,\"aria-label\":`Варианты презентации`,children:r.decks.map((e,t)=>(0,O.jsx)(`button`,{className:r.active===t?`active`:``,\"aria-pressed\":r.active===t,d"
+  },
+  {
+    "old": "utton`,{className:r.active===t?`active`:``,\"aria-pressed\":r.active===t,disabled:T,onClick:()=>r.setActive(t),children:e.variant?.label||`Исправленная версия`},e.",
+    "new": "utton`,{className:r.active===t?`active`:``,\"aria-pressed\":r.active===t,disabled:j,onClick:()=>r.setActive(t),children:e.variant?.label||`Исправленная версия`},e."
+  },
+  {
+    "old": "tive(t),children:e.variant?.label||`Исправленная версия`},e.presentation_id))}),k?(0,D.jsx)(O,{deck:k,busy:T,onRepair:e=>void r.repair(e)},k.presentation_id):(0,",
+    "new": "tive(t),children:e.variant?.label||`Исправленная версия`},e.presentation_id))}),M?(0,O.jsx)(k,{deck:M,busy:j,onRepair:e=>void r.repair(e)},M.presentation_id):(0,"
+  },
+  {
+    "old": "t),children:e.variant?.label||`Исправленная версия`},e.presentation_id))}),k?(0,D.jsx)(O,{deck:k,busy:T,onRepair:e=>void r.repair(e)},k.presentation_id):(0,D.jsx",
+    "new": "t),children:e.variant?.label||`Исправленная версия`},e.presentation_id))}),M?(0,O.jsx)(k,{deck:M,busy:j,onRepair:e=>void r.repair(e)},M.presentation_id):(0,O.jsx"
+  },
+  {
+    "old": "dren:e.variant?.label||`Исправленная версия`},e.presentation_id))}),k?(0,D.jsx)(O,{deck:k,busy:T,onRepair:e=>void r.repair(e)},k.presentation_id):(0,D.jsxs)(`div",
+    "new": "dren:e.variant?.label||`Исправленная версия`},e.presentation_id))}),M?(0,O.jsx)(k,{deck:M,busy:j,onRepair:e=>void r.repair(e)},M.presentation_id):(0,O.jsxs)(`div"
+  },
+  {
+    "old": "ariant?.label||`Исправленная версия`},e.presentation_id))}),k?(0,D.jsx)(O,{deck:k,busy:T,onRepair:e=>void r.repair(e)},k.presentation_id):(0,D.jsxs)(`div`,{class",
+    "new": "ariant?.label||`Исправленная версия`},e.presentation_id))}),M?(0,O.jsx)(k,{deck:M,busy:j,onRepair:e=>void r.repair(e)},M.presentation_id):(0,O.jsxs)(`div`,{class"
+  },
+  {
+    "old": ".label||`Исправленная версия`},e.presentation_id))}),k?(0,D.jsx)(O,{deck:k,busy:T,onRepair:e=>void r.repair(e)},k.presentation_id):(0,D.jsxs)(`div`,{className:`s",
+    "new": ".label||`Исправленная версия`},e.presentation_id))}),M?(0,O.jsx)(k,{deck:M,busy:j,onRepair:e=>void r.repair(e)},M.presentation_id):(0,O.jsxs)(`div`,{className:`s"
+  },
+  {
+    "old": ".presentation_id))}),k?(0,D.jsx)(O,{deck:k,busy:T,onRepair:e=>void r.repair(e)},k.presentation_id):(0,D.jsxs)(`div`,{className:`studio-empty`,id:`empty`,children",
+    "new": ".presentation_id))}),M?(0,O.jsx)(k,{deck:M,busy:j,onRepair:e=>void r.repair(e)},M.presentation_id):(0,O.jsxs)(`div`,{className:`studio-empty`,id:`empty`,children"
+  },
+  {
+    "old": "?(0,D.jsx)(O,{deck:k,busy:T,onRepair:e=>void r.repair(e)},k.presentation_id):(0,D.jsxs)(`div`,{className:`studio-empty`,id:`empty`,children:[(0,D.jsxs)(`div`,{cl",
+    "new": "?(0,O.jsx)(k,{deck:M,busy:j,onRepair:e=>void r.repair(e)},M.presentation_id):(0,O.jsxs)(`div`,{className:`studio-empty`,id:`empty`,children:[(0,O.jsxs)(`div`,{cl"
+  },
+  {
+    "old": "entation_id):(0,D.jsxs)(`div`,{className:`studio-empty`,id:`empty`,children:[(0,D.jsxs)(`div`,{className:`empty-object`,\"aria-hidden\":`true`,children:[(0,D.jsx)(",
+    "new": "entation_id):(0,O.jsxs)(`div`,{className:`studio-empty`,id:`empty`,children:[(0,O.jsxs)(`div`,{className:`empty-object`,\"aria-hidden\":`true`,children:[(0,O.jsx)("
+  },
+  {
+    "old": "n:[(0,D.jsxs)(`div`,{className:`empty-object`,\"aria-hidden\":`true`,children:[(0,D.jsx)(`i`,{}),(0,D.jsx)(`i`,{}),(0,D.jsx)(`i`,{children:(0,D.jsx)(t,{size:46,str",
+    "new": "n:[(0,O.jsxs)(`div`,{className:`empty-object`,\"aria-hidden\":`true`,children:[(0,O.jsx)(`i`,{}),(0,O.jsx)(`i`,{}),(0,O.jsx)(`i`,{children:(0,O.jsx)(t,{size:46,str"
+  },
+  {
+    "old": "`,{className:`empty-object`,\"aria-hidden\":`true`,children:[(0,D.jsx)(`i`,{}),(0,D.jsx)(`i`,{}),(0,D.jsx)(`i`,{children:(0,D.jsx)(t,{size:46,strokeWidth:1.2})})]}",
+    "new": "`,{className:`empty-object`,\"aria-hidden\":`true`,children:[(0,O.jsx)(`i`,{}),(0,O.jsx)(`i`,{}),(0,O.jsx)(`i`,{children:(0,O.jsx)(t,{size:46,strokeWidth:1.2})})]}"
+  },
+  {
+    "old": "y-object`,\"aria-hidden\":`true`,children:[(0,D.jsx)(`i`,{}),(0,D.jsx)(`i`,{}),(0,D.jsx)(`i`,{children:(0,D.jsx)(t,{size:46,strokeWidth:1.2})})]}),(0,D.jsxs)(`h3`,",
+    "new": "y-object`,\"aria-hidden\":`true`,children:[(0,O.jsx)(`i`,{}),(0,O.jsx)(`i`,{}),(0,O.jsx)(`i`,{children:(0,O.jsx)(t,{size:46,strokeWidth:1.2})})]}),(0,O.jsxs)(`h3`,"
+  },
+  {
+    "old": "`true`,children:[(0,D.jsx)(`i`,{}),(0,D.jsx)(`i`,{}),(0,D.jsx)(`i`,{children:(0,D.jsx)(t,{size:46,strokeWidth:1.2})})]}),(0,D.jsxs)(`h3`,{children:[`Здесь начина",
+    "new": "`true`,children:[(0,O.jsx)(`i`,{}),(0,O.jsx)(`i`,{}),(0,O.jsx)(`i`,{children:(0,O.jsx)(t,{size:46,strokeWidth:1.2})})]}),(0,O.jsxs)(`h3`,{children:[`Здесь начина"
+  },
+  {
+    "old": "(`i`,{}),(0,D.jsx)(`i`,{children:(0,D.jsx)(t,{size:46,strokeWidth:1.2})})]}),(0,D.jsxs)(`h3`,{children:[`Здесь начинается`,(0,D.jsx)(`br`,{}),`ваша история.`]}),",
+    "new": "(`i`,{}),(0,O.jsx)(`i`,{children:(0,O.jsx)(t,{size:46,strokeWidth:1.2})})]}),(0,O.jsxs)(`h3`,{children:[`Здесь начинается`,(0,O.jsx)(`br`,{}),`ваша история.`]}),"
+  },
+  {
+    "old": "size:46,strokeWidth:1.2})})]}),(0,D.jsxs)(`h3`,{children:[`Здесь начинается`,(0,D.jsx)(`br`,{}),`ваша история.`]}),(0,D.jsxs)(`p`,{children:[`Добавьте шаблон и м",
+    "new": "size:46,strokeWidth:1.2})})]}),(0,O.jsxs)(`h3`,{children:[`Здесь начинается`,(0,O.jsx)(`br`,{}),`ваша история.`]}),(0,O.jsxs)(`p`,{children:[`Добавьте шаблон и м"
+  },
+  {
+    "old": "xs)(`h3`,{children:[`Здесь начинается`,(0,D.jsx)(`br`,{}),`ваша история.`]}),(0,D.jsxs)(`p`,{children:[`Добавьте шаблон и материалы.`,(0,D.jsx)(`br`,{}),`Мы собе",
+    "new": "xs)(`h3`,{children:[`Здесь начинается`,(0,O.jsx)(`br`,{}),`ваша история.`]}),(0,O.jsxs)(`p`,{children:[`Добавьте шаблон и материалы.`,(0,O.jsx)(`br`,{}),`Мы собе"
+  },
+  {
+    "old": ",`ваша история.`]}),(0,D.jsxs)(`p`,{children:[`Добавьте шаблон и материалы.`,(0,D.jsx)(`br`,{}),`Мы соберём три варианта — выбор за вами.`]}),(0,D.jsxs)(`div`,{c",
+    "new": ",`ваша история.`]}),(0,O.jsxs)(`p`,{children:[`Добавьте шаблон и материалы.`,(0,O.jsx)(`br`,{}),`Мы соберём три варианта — выбор за вами.`]}),(0,O.jsxs)(`div`,{c"
+  },
+  {
+    "old": "материалы.`,(0,D.jsx)(`br`,{}),`Мы соберём три варианта — выбор за вами.`]}),(0,D.jsxs)(`div`,{className:`empty-formats`,children:[(0,D.jsx)(`span`,{children:`PP",
+    "new": "материалы.`,(0,O.jsx)(`br`,{}),`Мы соберём три варианта — выбор за вами.`]}),(0,O.jsxs)(`div`,{className:`empty-formats`,children:[(0,O.jsx)(`span`,{children:`PP"
+  },
+  {
+    "old": "а — выбор за вами.`]}),(0,D.jsxs)(`div`,{className:`empty-formats`,children:[(0,D.jsx)(`span`,{children:`PPTX`}),(0,D.jsx)(`span`,{children:`PDF`}),(0,D.jsx)(`sp",
+    "new": "а — выбор за вами.`]}),(0,O.jsxs)(`div`,{className:`empty-formats`,children:[(0,O.jsx)(`span`,{children:`PPTX`}),(0,O.jsx)(`span`,{children:`PDF`}),(0,O.jsx)(`sp"
+  },
+  {
+    "old": "iv`,{className:`empty-formats`,children:[(0,D.jsx)(`span`,{children:`PPTX`}),(0,D.jsx)(`span`,{children:`PDF`}),(0,D.jsx)(`span`,{children:`HTML`})]})]})]})]}),(",
+    "new": "iv`,{className:`empty-formats`,children:[(0,O.jsx)(`span`,{children:`PPTX`}),(0,O.jsx)(`span`,{children:`PDF`}),(0,O.jsx)(`span`,{children:`HTML`})]})]})]})]}),("
+  },
+  {
+    "old": "dren:[(0,D.jsx)(`span`,{children:`PPTX`}),(0,D.jsx)(`span`,{children:`PDF`}),(0,D.jsx)(`span`,{children:`HTML`})]})]})]})]}),(0,D.jsxs)(`footer`,{className:`stud",
+    "new": "dren:[(0,O.jsx)(`span`,{children:`PPTX`}),(0,O.jsx)(`span`,{children:`PDF`}),(0,O.jsx)(`span`,{children:`HTML`})]})]})]})]}),(0,O.jsxs)(`footer`,{className:`stud"
+  },
+  {
+    "old": "sx)(`span`,{children:`PDF`}),(0,D.jsx)(`span`,{children:`HTML`})]})]})]})]}),(0,D.jsxs)(`footer`,{className:`studio-footer`,children:[(0,D.jsx)(`span`,{children:",
+    "new": "sx)(`span`,{children:`PDF`}),(0,O.jsx)(`span`,{children:`HTML`})]})]})]})]}),(0,O.jsxs)(`footer`,{className:`studio-footer`,children:[(0,O.jsx)(`span`,{children:"
+  },
+  {
+    "old": "HTML`})]})]})]})]}),(0,D.jsxs)(`footer`,{className:`studio-footer`,children:[(0,D.jsx)(`span`,{children:`predel · Ваш смысл. Ваша форма.`}),(0,D.jsx)(`span`,{chi",
+    "new": "HTML`})]})]})]})]}),(0,O.jsxs)(`footer`,{className:`studio-footer`,children:[(0,O.jsx)(`span`,{children:`predel · Ваш смысл. Ваша форма.`}),(0,O.jsx)(`span`,{chi"
+  },
+  {
+    "old": "er`,children:[(0,D.jsx)(`span`,{children:`predel · Ваш смысл. Ваша форма.`}),(0,D.jsx)(`span`,{children:`Проверка вёрстки не заменяет проверку фактов.`})]})]})]}",
+    "new": "er`,children:[(0,O.jsx)(`span`,{children:`predel · Ваш смысл. Ваша форма.`}),(0,O.jsx)(`span`,{children:`Проверка вёрстки не заменяет проверку фактов.`})]})]})]}"
+  },
+  {
+    "old": "an`,{children:`Проверка вёрстки не заменяет проверку фактов.`})]})]})]})}export{P as default};",
+    "new": "an`,{children:`Проверка вёрстки не заменяет проверку фактов.`})]})]})]})}export{F as default};"
+  }
+]
