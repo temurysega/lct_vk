@@ -5,7 +5,7 @@ from pathlib import Path
 from pptx import Presentation
 from pptx.chart.data import CategoryChartData
 from pptx.dml.color import RGBColor
-from pptx.enum.chart import XL_CHART_TYPE
+from pptx.enum.chart import XL_CHART_TYPE, XL_LEGEND_POSITION
 from pptx.enum.shapes import MSO_SHAPE
 from pptx.util import Inches, Pt
 
@@ -70,6 +70,44 @@ def test_style_checks_flag_size_scale_colour_margin_and_chart(tmp_path: Path):
     } <= codes
     assert not {code for slide, code in codes if slide == 2} & {
         "text_too_small", "font_off_scale", "off_palette_color", "margin_intrusion"
+    }
+
+
+def test_pie_chart_flags_cramped_legend_and_duplicated_numbers(tmp_path: Path):
+    prs = _deck()
+    data = CategoryChartData()
+    data.categories = ["Продажи", "Поддержка"]
+    data.add_series("Значения", [60, 90])
+    cramped = prs.slides.add_slide(prs.slide_layouts[6])
+    frame = cramped.shapes.add_chart(
+        XL_CHART_TYPE.PIE, Inches(3.5), Inches(2), Inches(3.2), Inches(4.5), data
+    )
+    frame.name = "BrandDeck Chart"
+    frame.chart.has_legend = True
+    frame.chart.legend.position = XL_LEGEND_POSITION.RIGHT
+    frame.chart.plots[0].has_data_labels = True
+    labels = frame.chart.plots[0].data_labels
+    labels.show_value = True
+    labels.show_percentage = True
+
+    roomy = prs.slides.add_slide(prs.slide_layouts[6])
+    second = roomy.shapes.add_chart(
+        XL_CHART_TYPE.PIE, Inches(3), Inches(2), Inches(5), Inches(4), data
+    )
+    second.name = "BrandDeck Chart"
+    second.chart.has_legend = True
+    second.chart.legend.position = XL_LEGEND_POSITION.BOTTOM
+    second.chart.plots[0].has_data_labels = True
+    second.chart.plots[0].data_labels.show_value = False
+    second.chart.plots[0].data_labels.show_percentage = True
+    output = tmp_path / "charts.pptx"
+    prs.save(output)
+
+    codes = _codes(output)
+    assert (1, "chart_legend_too_narrow") in codes
+    assert (1, "chart_redundant_labels") in codes
+    assert not {code for slide, code in codes if slide == 2} & {
+        "chart_legend_too_narrow", "chart_redundant_labels", "chart_too_small"
     }
 
 

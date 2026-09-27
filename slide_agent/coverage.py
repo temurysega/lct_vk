@@ -99,6 +99,71 @@ _DIRECTION = re.compile(
     r"\b(?P<neutral>измер\w*|отслеж\w*|контрол\w*|оцен\w*|measure\w*|track\w*)\b",
     re.IGNORECASE,
 )
+_CURRENT_DURATION = re.compile(
+    r"\b(?:до|up\s+to)\s*(?P<number>\d+(?:[.,]\d+)?)\s*"
+    r"(?P<unit>минут\w*|час\w*|секунд\w*|minutes?|hours?|seconds?)\b",
+    re.IGNORECASE,
+)
+_BASELINE_CUE = re.compile(
+    r"\b(?:сейчас|сегодня|текущ\w*|занима\w*|трат\w*|"
+    r"currently|today|now|takes?|spends?)\b",
+    re.IGNORECASE,
+)
+_REDUCTION_WITH_DURATION = re.compile(
+    r"\b(?:сокращ\w*|сократ\w*|сниж\w*|сниз\w*|уменьш\w*|"
+    r"reduc\w*|decreas\w*|lower\w*)\b[^.!?;\n]{0,100}?"
+    r"\b(?P<relation>до|с|to|from)\s*(?P<number>\d+(?:[.,]\d+)?)\s*"
+    r"(?P<unit>минут\w*|час\w*|секунд\w*|minutes?|hours?|seconds?)\b",
+    re.IGNORECASE,
+)
+
+
+def _duration_key(match: re.Match[str]) -> tuple[str, str]:
+    number = match.group("number").replace(",", ".")
+    number = number.rstrip("0").rstrip(".") if "." in number else number
+    unit = match.group("unit").casefold()
+    if unit.startswith(("минут", "minute")):
+        return number, "minute"
+    if unit.startswith(("секунд", "second")):
+        return number, "second"
+    return number, "hour"
+
+
+def _baseline_durations(source: str) -> dict[tuple[str, str], str]:
+    """Current durations and a short literal source phrase safe for replacement."""
+    baselines: dict[tuple[str, str], str] = {}
+    for match in _CURRENT_DURATION.finditer(source):
+        start = max(source.rfind(char, 0, match.start()) for char in ".!?;\n") + 1
+        before = source[start:match.start()]
+        if not _BASELINE_CUE.search(before):
+            continue
+        end = min(
+            (index for char in ".!?;\n" if (index := source.find(char, match.end())) >= 0),
+            default=len(source),
+        )
+        phrase = source[start:end].strip(" \t,:—-")
+        phrase = re.split(r",\s*(?:а|но|but|while)\b", phrase, maxsplit=1, flags=re.IGNORECASE)[0]
+        baselines[_duration_key(match)] = phrase.strip(" \t,:—-")
+    return baselines
+
+
+def _baseline_as_target(source: str, text: str) -> bool:
+    """A stated current duration must not become the same reduction target."""
+    baselines = _baseline_durations(source)
+    if not baselines:
+        return False
+    source_claims = {
+        (_duration_key(match), match.group("relation").casefold())
+        for match in _REDUCTION_WITH_DURATION.finditer(source)
+    }
+    for match in _REDUCTION_WITH_DURATION.finditer(text):
+        if re.search(r"\b(?:не|без|not|without)\s+$", text[max(0, match.start() - 12):match.start()], re.IGNORECASE):
+            continue
+        key = _duration_key(match)
+        relation = match.group("relation").casefold()
+        if key in baselines and (key, relation) not in source_claims:
+            return True
+    return False
 _TIME_WORDS = {
     "один": 1, "одна": 1, "одно": 1, "одного": 1,
     "два": 2, "две": 2, "двух": 2,
@@ -275,6 +340,46 @@ def source_backed_kpi_fallback(source: str, slide: dict) -> dict | None:
     return revised if changed else None
 
 
+def source_backed_baseline_fallback(source: str, slide: dict) -> dict | None:
+    """Replace a current-duration-as-target claim with the source's words.
+
+    This deliberately handles plain text only. A visual claim that cannot be
+    repaired by the model remains a blocking grounding issue.
+    """
+    baselines = _baseline_durations(source)
+    if not baselines:
+        return None
+    source_claims = {
+        (_duration_key(match), match.group("relation").casefold())
+        for match in _REDUCTION_WITH_DURATION.finditer(source)
+    }
+
+    def replacement(value: str) -> str:
+        for match in _REDUCTION_WITH_DURATION.finditer(value):
+            key = _duration_key(match)
+            phrase = baselines.get(key)
+            relation = match.group("relation").casefold()
+            if phrase and (key, relation) not in source_claims and len(phrase) <= 100:
+                return phrase
+        return value
+
+    revised = deepcopy(slide)
+    changed = False
+    for key in ("title", "subtitle", "body", "goal", "speaker_notes"):
+        value = revised.get(key)
+        if isinstance(value, str) and _baseline_as_target(source, value):
+            revised[key] = replacement(value)
+            changed |= revised[key] != value
+    bullets = revised.get("bullets")
+    if isinstance(bullets, list):
+        revised["bullets"] = [
+            replacement(item) if isinstance(item, str) and _baseline_as_target(source, item) else item
+            for item in bullets
+        ]
+        changed |= revised["bullets"] != bullets
+    return revised if changed else None
+
+
 def grounding_findings(source: str, plan: dict) -> list[dict]:
     """High-confidence, exact-quote findings for risky brief extrapolations.
 
@@ -318,6 +423,11 @@ def grounding_findings(source: str, plan: dict) -> list[dict]:
                 reasons.append("Абсолютная гарантия безопасности не следует из брифа; используйте его точную формулировку.")
             if _decreases_self_service(text) and not source_decreases_self_service:
                 reasons.append("Уменьшение доли обращений без специалиста меняет смысл метрики успеха.")
+            if _baseline_as_target(source, text):
+                reasons.append(
+                    "В брифе текущее время указано как верхняя граница, а не точный "
+                    "исходный уровень или целевой результат сокращения."
+                )
             broad_scope = _BROAD_ROLLOUT.search(text)
             if broad_scope and source_has_pilot and not source_allows_rollout:
                 before_scope = text[max(0, broad_scope.start() - 35) : broad_scope.start()]
@@ -355,16 +465,21 @@ def grounding_findings(source: str, plan: dict) -> list[dict]:
     return findings
 
 
-def unsupported_numbers(source: str, plan: dict) -> list[dict]:
+def unsupported_numbers(
+    source: str, plan: dict, *, include_notes: bool = False
+) -> list[dict]:
     """Visible numbers of the plan that the source never states.
 
     Integers below 10 are skipped: they usually count the slide's own items.
-    Speaker notes are not visible and are not checked.
+    Speaker notes are excluded from visible coverage, but brief generation can
+    opt into checking them because they are saved in the final PPTX.
     """
     known = _numbers(source)
     result = []
     for number, slide in enumerate(plan.get("slides", []), 1):
         texts = visible_texts(slide)
+        if include_notes:
+            texts.append(str(slide.get("speaker_notes") or ""))
         missing = sorted(
             value
             for value in _numbers("\n".join(texts)) - known

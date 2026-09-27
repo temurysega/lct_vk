@@ -29,13 +29,16 @@ Open-source сервис, который анализирует произвол
 
 ## Результаты
 
-Финальный прогон 26.09.2026: краткий бриф [`examples/brief_feature.md`](examples/brief_feature.md)
+Контрольный прогон 26.09.2026: краткий бриф [`examples/brief_feature.md`](examples/brief_feature.md)
 и две картинки → Qwen3.5-9B Q4_K_M (llama.cpp) на RTX 2070 SUPER 8 ГБ → три
 предоставленных шаблона VK × три варианта с экспортом PPTX/PDF/HTML. Конфиг —
 [`examples/brief_demo.json`](examples/brief_demo.json). **Все девять презентаций
-(PPTX и PDF) лежат в [`deliverables/`](deliverables/README.md).** Хэш исходников
-движка и промптов во время прогона — `0fb0a944…`; после прогона из движка удалён
-только неиспользуемый код, путь основной модели он не затрагивал.
+(PPTX и PDF) лежат в [`deliverables/`](deliverables/README.md).** Проверяемые
+хэши входов и опубликованных файлов, а также машинные метрики находятся в
+[`reports/final-dataset/evidence.json`](reports/final-dataset/evidence.json).
+Хэш исходников во время этого прогона — `0fb0a944…`; он отличается от текущего
+кода. Условия и пределы воспроизводимости описаны в
+[`reports/final-dataset/README.md`](reports/final-dataset/README.md).
 Прогон прошёл все строгие критерии конфига: QA `passed` у каждой колоды, не
 меньше двух картинок, различимые варианты и не больше 300 с на шаблон.
 
@@ -77,6 +80,9 @@ Open-source сервис, который анализирует произвол
   укладывается в лимит с запасом 29 с.
 - Контент синтетический, не официальный контент-пакет организаторов. Графики и
   таблицу пересобирает `python examples/readme_charts.py --after <dataset_report.json>`.
+- Исходные PPTX организаторов лежат вне Git в `../task+data/Датасет`. Для
+  повторного прогона их нужно разместить рядом с клоном и проверить SHA-256 по
+  [отчёту](reports/final-dataset/README.md).
 
 ## Что уже работает
 

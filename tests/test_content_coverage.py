@@ -7,6 +7,7 @@ from pptx.util import Inches
 from slide_agent.coverage import (
     coverage_report,
     grounding_findings,
+    source_backed_baseline_fallback,
     unsupported_numbers,
 )
 from slide_agent.planner import _fallback_plan, _sentences, normalize_plan
@@ -105,6 +106,19 @@ def test_image_match_score_is_not_treated_as_slide_claim():
     assert unsupported_numbers("Сотрудники используют помощника.", plan) == []
 
 
+def test_brief_numeric_check_includes_notes_without_changing_visible_coverage():
+    source = "Треть обращений повторяется."
+    plan = {"slides": [{
+        "title": "Повторные обращения",
+        "bullets": ["33% обращений повторяются"],
+        "speaker_notes": "Проверка пройдёт в 2027 году.",
+    }]}
+    assert unsupported_numbers(source, plan) == [{"slide": 1, "numbers": ["33"]}]
+    assert unsupported_numbers(source, plan, include_notes=True) == [
+        {"slide": 1, "numbers": ["2027", "33"]}
+    ]
+
+
 def test_grounding_rules_find_budget_guarantee_and_reversed_success_metric():
     source = (
         "Документы не уходят наружу. Успех: время ответа и доля обращений, "
@@ -162,6 +176,39 @@ def test_explicit_launch_deadline_and_pilot_duration_remain_supported():
         {"title": "Запустить продукт в течение 6 недель"},
     ]}
     assert grounding_findings(source, plan) == []
+
+
+def test_current_search_duration_cannot_become_same_reduction_target():
+    source = (
+        "Сейчас сотрудник тратит до 30 минут, чтобы найти нужную инструкцию, "
+        "а треть обращений повторяется."
+    )
+    claim = "Сокращение времени поиска инструкций до 30 минут"
+    plan = {"slides": [{
+        "title": claim,
+        "subtitle": "Сейчас сотрудник тратит до 30 минут, чтобы найти инструкцию",
+        "speaker_notes": "Снизим время поиска до 30 минут.",
+        "bullets": ["Сокращение времени поиска с 30 минут"],
+    }]}
+    findings = grounding_findings(source, plan)
+    assert [item["quote"] for item in findings] == [
+        claim, "Сокращение времени поиска с 30 минут", "Снизим время поиска до 30 минут."
+    ]
+    repaired = source_backed_baseline_fallback(source, plan["slides"][0])
+    assert repaired["title"] == "Сейчас сотрудник тратит до 30 минут, чтобы найти нужную инструкцию"
+    assert grounding_findings(source, {"slides": [repaired]}) == []
+
+
+def test_reduction_target_rule_keeps_actual_targets_and_baseline_wording():
+    source = "Сейчас поиск занимает до 30 минут."
+    supported = {"slides": [{"title": "Поиск сейчас занимает до 30 минут"},
+                            {"title": "Измеряем время поиска"},
+                            {"title": "Сократить время поиска после измерения исходного уровня"}]}
+    assert grounding_findings(source, supported) == []
+    explicit_target = source + " Цель пилота: сократить время поиска до 30 минут."
+    assert grounding_findings(explicit_target, {
+        "slides": [{"title": "Сократить время поиска до 30 минут"}]
+    }) == []
 
 
 def test_team_headcount_does_not_assign_duties_but_explicit_duties_do():

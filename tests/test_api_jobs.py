@@ -38,6 +38,16 @@ def test_async_job_accepts_document_upload(tmp_path: Path, monkeypatch):
             )
         assert analyzed.status_code == 200
         template_id = analyzed.json()["template_id"]
+        jobs_dir = workspace / "users" / registration.json()["id"] / "jobs"
+        for filename, payload in (("data.exe", b"bad"), ("empty.md", b"")):
+            existing = set(jobs_dir.glob("*/job.json"))
+            rejected = client.post(
+                "/v1/presentations/jobs",
+                data={"template_id": template_id, "offline": "true"},
+                files={"content_file": (filename, payload)},
+            )
+            assert rejected.status_code == 400
+            assert set(jobs_dir.glob("*/job.json")) == existing
         response = client.post(
             "/v1/presentations/jobs",
             data={

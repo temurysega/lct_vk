@@ -17,7 +17,7 @@ dependencies = [
 
 [project.optional-dependencies]
 api = ["fastapi>=0.115", "python-multipart>=0.0.9", "uvicorn>=0.30"]
-documents = ["markitdown[all]>=0.1.0"]
+documents = ["markitdown[docx,pdf,xlsx]>=0.1.0"]
 pdf-reference = ["PyMuPDF>=1.24"]
 export = ["PyMuPDF>=1.24"]
 dev = ["pytest>=8.0", "ruff>=0.9", "fastapi>=0.115", "python-multipart>=0.0.9", "httpx>=0.28", "PyMuPDF>=1.24"]
@@ -26,7 +26,7 @@ dev = ["pytest>=8.0", "ruff>=0.9", "fastapi>=0.115", "python-multipart>=0.0.9", 
 branddeck = "slide_agent.cli:main"
 
 [tool.setuptools.packages.find]
-include = ["slide_agent*", "backend*", "frontend*"]
+include = ["slide_agent*", "backend*", "frontend*", "shared*"]
 namespaces = false
 
 [tool.setuptools.package-data]

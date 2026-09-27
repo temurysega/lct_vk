@@ -22,8 +22,11 @@ export function DeckResult({
   const id = encodeURIComponent(deck.presentation_id);
   const qa = deck.qa || { status: "unknown", issues: [] };
   const issues = (qa.issues || []).filter((issue) => issue.severity !== "info");
-  const technicalIssues = issues.filter((issue) => issue.check_type !== "contextual");
-  const editorialIssues = issues.length - technicalIssues.length;
+  const technicalIssues = issues.filter(
+    (issue) => !["contextual", "vision_model"].includes(issue.check_type || ""),
+  );
+  const editorialIssues = issues.filter((issue) => issue.check_type === "contextual").length;
+  const visualSuggestions = issues.filter((issue) => issue.check_type === "vision_model").length;
   const previews = deck.exports?.previews || [];
   const formats = [
     "pptx",
@@ -77,8 +80,13 @@ export function DeckResult({
           </strong>
           <p>
             Технических замечаний: {technicalIssues.length}. {qa.contextual_audit?.status === "reviewed"
-              ? `Редакторских подсказок модели: ${editorialIssues}; их нужно проверить вручную. Смысл изображений требует просмотра человеком.`
-              : "Смысловая проверка моделью не проводилась."}
+              ? `Редакторских подсказок модели: ${editorialIssues}; их нужно проверить вручную.`
+              : "Смысловая проверка моделью не проводилась."}{" "}
+            {qa.vision_audit?.status === "reviewed"
+              ? `Визуальных подсказок модели: ${visualSuggestions}; итог требует просмотра человеком.`
+              : qa.vision_audit?.status === "partial"
+                ? `Визуальная модель проверила ${qa.vision_audit.reviewed_slides?.length || 0} слайдов; остальные нужно просмотреть вручную.`
+                : "Итоговый рендер визуальной моделью не проверялся."}
             {["offline", "fallback"].includes(deck.planner_mode || "")
               ? " Содержание распределено без модели."
               : ""}
@@ -93,6 +101,12 @@ export function DeckResult({
             : issue.message}
         </p>
       ))}
+      {!!deck.revision?.repair_result?.unresolved_issue_ids.length && (
+        <p className="export-note">
+          <AlertCircle size={16} />
+          Выбранные замечания не устранены: {deck.revision.repair_result.unresolved_issue_ids.length}. Проверьте слайды и исправьте их вручную.
+        </p>
+      )}
       {!previews.length && (
         <div className="no-preview">
           <FileSliders size={40} strokeWidth={1.2} />

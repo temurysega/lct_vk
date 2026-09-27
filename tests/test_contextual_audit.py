@@ -321,6 +321,44 @@ def test_stubborn_kpi_rewrite_uses_exact_metric_from_neutral_brief():
     assert grounding_findings(source, plan) == []
 
 
+def test_stubborn_cover_rewrite_restores_current_duration_from_brief():
+    source = "Сейчас поиск инструкции занимает до 30 минут."
+    bad = "Сокращение времени поиска инструкции до 30 минут"
+    plan = {
+        "title": bad,
+        "brief": {"purpose": "feature", "outline": [
+            {"title": bad, "role": "cover", "goal": "", "visual": "none"},
+            {"title": "Пилот", "role": "content", "goal": "Проверка", "visual": "none"},
+            {"title": "Решение", "role": "closing", "goal": "", "visual": "none"},
+        ]},
+        "slides": [
+            {"title": bad, "role": "cover", "subtitle": bad},
+            {"title": "Пилот", "role": "content"},
+            {"title": "Решение", "role": "closing"},
+        ],
+    }
+    audit = {"status": "reviewed", "issues": grounding_findings(source, plan)}
+
+    class StubbornClient:
+        settings = type("Settings", (), {"parallel_requests": 1})()
+
+        def __init__(self):
+            self.calls = 0
+
+        def chat_json(self, **kwargs):
+            self.calls += 1
+            return {"title": bad, "subtitle": bad, "bullets": [], "speaker_notes": ""}
+
+    client = StubbornClient()
+    assert revise_flagged_slides(plan, brief=source, client=client, audit=audit) == [1]
+    assert client.calls == 2
+    assert plan["slides"][0]["title"] == "Сейчас поиск инструкции занимает до 30 минут"
+    assert plan["title"] == plan["slides"][0]["title"]
+    assert plan["brief"]["outline"][0]["title"] == plan["title"]
+    assert plan["brief"]["source_backed_baseline_fallbacks"] == [1]
+    assert grounding_findings(source, plan) == []
+
+
 def test_brief_rewrite_blocks_remaining_unsupported_budget():
     class StubbornClient:
         settings = type("Settings", (), {"parallel_requests": 1})()

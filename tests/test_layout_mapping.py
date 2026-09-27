@@ -1,6 +1,40 @@
-from slide_agent.analyzer import _backdrop_area_ratio
+from slide_agent.analyzer import _backdrop_area_ratio, _slide_exemplar_patterns
 from slide_agent.planner import assign_patterns
 from slide_agent.service import _hint_cards_for_underfilled, _qa_pattern_feedback
+
+
+def test_exemplar_catalog_ignores_large_navigation_number():
+    def element(text, x, y, w, h, size):
+        return {
+            "left": x,
+            "top": y,
+            "width": w,
+            "height": h,
+            "paragraphs": [{"text": text, "font": {"size_pt": size}}],
+        }
+
+    context = {
+        "presentation": {"slide_width_inches": 13.33, "slide_height_inches": 7.5},
+        "slide_layouts": [{}],
+        "slides": [
+            {
+                "index": 1,
+                "layout_index": 0,
+                "text_elements": [
+                    element("02", 11.3, 0.4, 1.6, 1.9, 72),
+                    element("PART ONE", 0.5, 0.4, 2.2, 0.3, 12),
+                    element("Настоящий заголовок", 0.5, 0.9, 6.8, 0.6, 30),
+                    element("Основной текст", 0.5, 2.1, 6.0, 2.3, 18),
+                ],
+            }
+        ],
+    }
+
+    pattern = _slide_exemplar_patterns(context)[0]
+    assert len(pattern["placeholders"]) == 3
+    title = next(zone for zone in pattern["placeholders"] if zone["type"] == "title")
+    assert title["w"] == 6.8
+    assert title["y"] == 0.9
 
 
 def _pattern(pattern_id: str, rhetorical: str, *, roles=None):

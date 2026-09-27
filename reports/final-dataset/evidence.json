@@ -1,0 +1,399 @@
+{
+  "schema_version": 1,
+  "source_report_sha256": "7aaaa6d502787185ff83d94bcda6817b95e1a948f0cc42aa0f911a67cc3250c8",
+  "run_started_at_utc": null,
+  "run_finished_at_utc": null,
+  "git_revision_at_run_start": null,
+  "source_digest_at_run": "0fb0a9445fec0f9b74432ada0ad51b632aefe03bd8e75fb87f8cf5b16e954d82",
+  "source_digest_after_run": "0fb0a9445fec0f9b74432ada0ad51b632aefe03bd8e75fb87f8cf5b16e954d82",
+  "source_digest_at_export": "4b45d8fc1049a3cff628a3f8d69e6831178318520867edee95b44a9686c0d524",
+  "config": {
+    "path": "examples/brief_demo.json",
+    "sha256": "2002f27ef02ac7089a7fe86bcd8f0be71e93168755da3e7d57380cbb415c56d6",
+    "content_kind": "synthetic_demo",
+    "mode": "brief",
+    "offline": false,
+    "slide_count": 12,
+    "max_seconds_per_template": 300,
+    "min_images_placed": 2,
+    "inference_model": "qwen3.5-9b"
+  },
+  "inputs": {
+    "content": {
+      "path": "examples/brief_feature.md",
+      "sha256": "e1984f727ae7cbb48b275666a9d59ffbafdb6b8b5cab0d829ac9794219d78444",
+      "reported_sha256": "e1984f727ae7cbb48b275666a9d59ffbafdb6b8b5cab0d829ac9794219d78444",
+      "matches_report": true
+    },
+    "images": [
+      {
+        "path": "examples/acceptance_images/внутренний_контур_серверная.png",
+        "sha256": "926bedda4311fd11a8e42c7c4967502eefb018473587f2f03a90b6f353d66def"
+      },
+      {
+        "path": "examples/acceptance_images/сотрудник_специалист_поддержки.png",
+        "sha256": "a252b019c5490b70a935d0b29eb53802f7447697b1e1f8bd07e8214d1d50a873"
+      }
+    ],
+    "templates_directory": "../task+data/Датасет"
+  },
+  "runs": [
+    {
+      "template": "VK Tech шаблон.pptx",
+      "template_sha256": "cbbe3aa6a21d23cebc4d1383b93dd07a9cea460d683de1903567b616c839485d",
+      "template_sha256_on_disk": "cbbe3aa6a21d23cebc4d1383b93dd07a9cea460d683de1903567b616c839485d",
+      "template_matches_report": true,
+      "template_unchanged_during_run": true,
+      "elapsed_seconds": 271.0,
+      "planner": {
+        "mode": "inference",
+        "input": "brief"
+      },
+      "brief_timings_seconds": {
+        "outline": 15.04,
+        "slides": 24.97
+      },
+      "status": "completed",
+      "diversity_status": "passed",
+      "workflow": {
+        "version": "1.7.0",
+        "prompt_sha256": {
+          "planner": "f332e0e3b2857ae86342b74cb05a4ac77b02feebde170ba760403842b70d6c5d",
+          "planner-cpu": "3fe64b4a2a95fca05bc715765d60d0824bea3abf5a8789c04224d02f35aea727",
+          "analyzer": "d317316d81afafb12f938f497821818ff192eb76f65480b95018f392dcb3508f",
+          "layout": "9b42cfe84dce4c553c5fb38527599d8090651a08f36b57b07e3da62aaabd5e3c",
+          "image": "510c07113d1dc9af82249f868c50bf5584a75d5e6f3440378e300496658d2878",
+          "brief-outline": "8a695dc3e1c995dca4267a6d5072b48040082ef0b706415fb6ae5cc9cc6561a0",
+          "brief-slide": "56f5239c5f4f4353d55ff4af28cb3cdc1a40f35ff1c26fc83ce41123e2867944",
+          "context-audit": "c0dafd5a36d06c86465f91a42e04739c5bdf4210267c8aa32634edac68994fa5"
+        },
+        "pictograms": {
+          "package": "lucide-react",
+          "version": "0.468.0",
+          "license": "ISC",
+          "icons": 135,
+          "keywords_sha256": "efc5af9f4afb5852911be98e01b4e8ace09d2abcc33e518d4fd4631f5e4acd97"
+        }
+      },
+      "variants": [
+        {
+          "id": "balanced",
+          "status": "completed",
+          "slides": 12,
+          "elapsed_seconds": 41.992,
+          "qa_status": "passed",
+          "qa_score": 100,
+          "editorial_suggestions": 3,
+          "images_placed": 2,
+          "images_available": 2,
+          "artifacts": {
+            "pptx": {
+              "path": "deliverables/vk-tech-balanced.pptx",
+              "sha256": "1c00c86722a00e4478918d4b9b23bfc689e5c7e547181d5ca1ef7b32b40519b5",
+              "bytes": 3908271
+            },
+            "pdf": {
+              "path": "deliverables/vk-tech-balanced.pdf",
+              "sha256": "48c39bc7b9acc6c388648d83438f99c1f1668ba4ea1e38cef1059f6a6b006c75",
+              "bytes": 1682334
+            }
+          },
+          "pdf_matches_run_export": true
+        },
+        {
+          "id": "columns",
+          "status": "completed",
+          "slides": 12,
+          "elapsed_seconds": 72.94,
+          "qa_status": "passed",
+          "qa_score": 100,
+          "editorial_suggestions": 3,
+          "images_placed": 2,
+          "images_available": 2,
+          "artifacts": {
+            "pptx": {
+              "path": "deliverables/vk-tech-columns.pptx",
+              "sha256": "b03d2a7ceb7f52af6cb7ad8c1f67bc7def28fbf6f49f076d23b1ea7afb392dde",
+              "bytes": 3661179
+            },
+            "pdf": {
+              "path": "deliverables/vk-tech-columns.pdf",
+              "sha256": "1d06f0b6e64eb7297b7b79b163296ab583e8394ece59453f60e570b7b4ced5a5",
+              "bytes": 1669552
+            }
+          },
+          "pdf_matches_run_export": true
+        },
+        {
+          "id": "focus",
+          "status": "completed",
+          "slides": 12,
+          "elapsed_seconds": 39.0,
+          "qa_status": "passed",
+          "qa_score": 100,
+          "editorial_suggestions": 3,
+          "images_placed": 2,
+          "images_available": 2,
+          "artifacts": {
+            "pptx": {
+              "path": "deliverables/vk-tech-focus.pptx",
+              "sha256": "1f1a5b5138bfb23126843c0c7988498289b6545b0a2ac48e474b3ccdb4f83444",
+              "bytes": 3260047
+            },
+            "pdf": {
+              "path": "deliverables/vk-tech-focus.pdf",
+              "sha256": "8a8f00acc009ec6d9aac14f8b94a769227ff58cdbb96ec1e4ecc1b11e0d01915",
+              "bytes": 1642598
+            }
+          },
+          "pdf_matches_run_export": true
+        }
+      ]
+    },
+    {
+      "template": "VK_WorkSpace_Клиентская_конференция_Шаблон_03.pptx",
+      "template_sha256": "1b8883114486c69dff706e9c4fd9382727c4506c2cfa3ec34f86987f1e852f2f",
+      "template_sha256_on_disk": "1b8883114486c69dff706e9c4fd9382727c4506c2cfa3ec34f86987f1e852f2f",
+      "template_matches_report": true,
+      "template_unchanged_during_run": true,
+      "elapsed_seconds": 230.4,
+      "planner": {
+        "mode": "inference",
+        "input": "brief"
+      },
+      "brief_timings_seconds": {
+        "outline": 35.44,
+        "slides": 27.0
+      },
+      "status": "completed",
+      "diversity_status": "passed",
+      "workflow": {
+        "version": "1.7.0",
+        "prompt_sha256": {
+          "planner": "f332e0e3b2857ae86342b74cb05a4ac77b02feebde170ba760403842b70d6c5d",
+          "planner-cpu": "3fe64b4a2a95fca05bc715765d60d0824bea3abf5a8789c04224d02f35aea727",
+          "analyzer": "d317316d81afafb12f938f497821818ff192eb76f65480b95018f392dcb3508f",
+          "layout": "9b42cfe84dce4c553c5fb38527599d8090651a08f36b57b07e3da62aaabd5e3c",
+          "image": "510c07113d1dc9af82249f868c50bf5584a75d5e6f3440378e300496658d2878",
+          "brief-outline": "8a695dc3e1c995dca4267a6d5072b48040082ef0b706415fb6ae5cc9cc6561a0",
+          "brief-slide": "56f5239c5f4f4353d55ff4af28cb3cdc1a40f35ff1c26fc83ce41123e2867944",
+          "context-audit": "c0dafd5a36d06c86465f91a42e04739c5bdf4210267c8aa32634edac68994fa5"
+        },
+        "pictograms": {
+          "package": "lucide-react",
+          "version": "0.468.0",
+          "license": "ISC",
+          "icons": 135,
+          "keywords_sha256": "efc5af9f4afb5852911be98e01b4e8ace09d2abcc33e518d4fd4631f5e4acd97"
+        }
+      },
+      "variants": [
+        {
+          "id": "balanced",
+          "status": "completed",
+          "slides": 12,
+          "elapsed_seconds": 44.234,
+          "qa_status": "passed",
+          "qa_score": 100,
+          "editorial_suggestions": 2,
+          "images_placed": 2,
+          "images_available": 2,
+          "artifacts": {
+            "pptx": {
+              "path": "deliverables/vk-workspace-balanced.pptx",
+              "sha256": "0299557f8c39849759e53ed929663769c3413b80baf717ea74ed54af32a0b175",
+              "bytes": 4288652
+            },
+            "pdf": {
+              "path": "deliverables/vk-workspace-balanced.pdf",
+              "sha256": "67d946b522050afb0d9be635180b91087bb3156d5fbe23c9636224e0154012a3",
+              "bytes": 2325193
+            }
+          },
+          "pdf_matches_run_export": true
+        },
+        {
+          "id": "columns",
+          "status": "completed",
+          "slides": 12,
+          "elapsed_seconds": 43.218,
+          "qa_status": "passed",
+          "qa_score": 100,
+          "editorial_suggestions": 2,
+          "images_placed": 2,
+          "images_available": 2,
+          "artifacts": {
+            "pptx": {
+              "path": "deliverables/vk-workspace-columns.pptx",
+              "sha256": "92b73be40c3aac74f2afdc40fbc27c6277b1aa7be023ac237fc48b4763656042",
+              "bytes": 4210778
+            },
+            "pdf": {
+              "path": "deliverables/vk-workspace-columns.pdf",
+              "sha256": "9a05df6a0b9ee3c44f02bba3a1986299d5550192d0c77e428ee02c994efb3c3b",
+              "bytes": 2302348
+            }
+          },
+          "pdf_matches_run_export": true
+        },
+        {
+          "id": "focus",
+          "status": "completed",
+          "slides": 12,
+          "elapsed_seconds": 44.039,
+          "qa_status": "passed",
+          "qa_score": 100,
+          "editorial_suggestions": 2,
+          "images_placed": 2,
+          "images_available": 2,
+          "artifacts": {
+            "pptx": {
+              "path": "deliverables/vk-workspace-focus.pptx",
+              "sha256": "babfcd12dd2bd41bdcd49df233facb8a7ee514f6ffced53fcfede1f7fb95fba8",
+              "bytes": 4288485
+            },
+            "pdf": {
+              "path": "deliverables/vk-workspace-focus.pdf",
+              "sha256": "bb8f036de5caa8de1701f639656126f8f628e269f8fd84b2e1f769ab270ee357",
+              "bytes": 2318588
+            }
+          },
+          "pdf_matches_run_export": true
+        }
+      ]
+    },
+    {
+      "template": "Шаблон презентации VK Education.pptx",
+      "template_sha256": "9ef2323ed5f49f464aee5ae7065f1f57bb92c8be3a635be507d59819e285cfe0",
+      "template_sha256_on_disk": "9ef2323ed5f49f464aee5ae7065f1f57bb92c8be3a635be507d59819e285cfe0",
+      "template_matches_report": true,
+      "template_unchanged_during_run": true,
+      "elapsed_seconds": 183.6,
+      "planner": {
+        "mode": "inference",
+        "input": "brief"
+      },
+      "brief_timings_seconds": {
+        "outline": 15.96,
+        "slides": 23.18
+      },
+      "status": "completed",
+      "diversity_status": "passed",
+      "workflow": {
+        "version": "1.7.0",
+        "prompt_sha256": {
+          "planner": "f332e0e3b2857ae86342b74cb05a4ac77b02feebde170ba760403842b70d6c5d",
+          "planner-cpu": "3fe64b4a2a95fca05bc715765d60d0824bea3abf5a8789c04224d02f35aea727",
+          "analyzer": "d317316d81afafb12f938f497821818ff192eb76f65480b95018f392dcb3508f",
+          "layout": "9b42cfe84dce4c553c5fb38527599d8090651a08f36b57b07e3da62aaabd5e3c",
+          "image": "510c07113d1dc9af82249f868c50bf5584a75d5e6f3440378e300496658d2878",
+          "brief-outline": "8a695dc3e1c995dca4267a6d5072b48040082ef0b706415fb6ae5cc9cc6561a0",
+          "brief-slide": "56f5239c5f4f4353d55ff4af28cb3cdc1a40f35ff1c26fc83ce41123e2867944",
+          "context-audit": "c0dafd5a36d06c86465f91a42e04739c5bdf4210267c8aa32634edac68994fa5"
+        },
+        "pictograms": {
+          "package": "lucide-react",
+          "version": "0.468.0",
+          "license": "ISC",
+          "icons": 135,
+          "keywords_sha256": "efc5af9f4afb5852911be98e01b4e8ace09d2abcc33e518d4fd4631f5e4acd97"
+        }
+      },
+      "variants": [
+        {
+          "id": "balanced",
+          "status": "completed",
+          "slides": 12,
+          "elapsed_seconds": 31.07,
+          "qa_status": "passed",
+          "qa_score": 100,
+          "editorial_suggestions": 2,
+          "images_placed": 2,
+          "images_available": 2,
+          "artifacts": {
+            "pptx": {
+              "path": "deliverables/vk-education-balanced.pptx",
+              "sha256": "bffac9df3d93d7144c686e1ff7a98d84398983e3623f538141db05692ed6a22f",
+              "bytes": 733816
+            },
+            "pdf": {
+              "path": "deliverables/vk-education-balanced.pdf",
+              "sha256": "76d844f1bdfbd28b15960ed66c19759e29a0fcda39395d417c1edd389e9191e1",
+              "bytes": 755807
+            }
+          },
+          "pdf_matches_run_export": true
+        },
+        {
+          "id": "columns",
+          "status": "completed",
+          "slides": 12,
+          "elapsed_seconds": 30.857,
+          "qa_status": "passed",
+          "qa_score": 100,
+          "editorial_suggestions": 2,
+          "images_placed": 2,
+          "images_available": 2,
+          "artifacts": {
+            "pptx": {
+              "path": "deliverables/vk-education-columns.pptx",
+              "sha256": "22767818c5113969b8b3375e7b62da38f69106c419dd98296f213bc5bb9995d9",
+              "bytes": 771541
+            },
+            "pdf": {
+              "path": "deliverables/vk-education-columns.pdf",
+              "sha256": "d53ceaec784d88b4eccec228e8234994529ec9bd25beaf7889d88415c114cf17",
+              "bytes": 762594
+            }
+          },
+          "pdf_matches_run_export": true
+        },
+        {
+          "id": "focus",
+          "status": "completed",
+          "slides": 12,
+          "elapsed_seconds": 30.22,
+          "qa_status": "passed",
+          "qa_score": 100,
+          "editorial_suggestions": 2,
+          "images_placed": 2,
+          "images_available": 2,
+          "artifacts": {
+            "pptx": {
+              "path": "deliverables/vk-education-focus.pptx",
+              "sha256": "e5f136cb16b02eb15109f392ad9ea020419257d54cdaa3e26a32821fa35c4c2b",
+              "bytes": 732715
+            },
+            "pdf": {
+              "path": "deliverables/vk-education-focus.pdf",
+              "sha256": "6a886b26046aa59f8c83eca84fb7e87e40f74bbceed1f14359dc7dcd7e0b5fb5",
+              "bytes": 760760
+            }
+          },
+          "pdf_matches_run_export": true
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "source_unchanged_during_run": true,
+    "source_matched_git_head_at_run_start": null,
+    "inputs_unchanged_during_run": null,
+    "source_matches_current_tree": false,
+    "config_matches_current_file": true,
+    "content_matches_report": true,
+    "image_names_match_report": true,
+    "image_hashes_match_report": null,
+    "templates_match_report": true,
+    "templates_unchanged_during_run": true,
+    "all_artifacts_present": true,
+    "pdf_copies_match_run_exports": true,
+    "all_runs_passed_config_gates": true
+  },
+  "limitations": [
+    "Source PPTX files are supplied separately from this Git repository.",
+    "Structural QA and text-model suggestions do not certify factual accuracy or visual quality.",
+    "Model sampling and rendering environment can change generated text, layout, and elapsed time.",
+    "Published PPTX files are compacted copies; published PDF files are byte-for-byte copies of run exports."
+  ]
+}

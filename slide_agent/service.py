@@ -30,6 +30,7 @@ from .render_audit import (
 )
 from .resources import serialized_on_cpu
 from .utils import find_latest, read_json, resolve_workspace, unique_dir, write_json
+from .vision_audit import review_rendered_slides
 from .visual_diversity import inspect_visual_diversity
 
 
@@ -94,6 +95,29 @@ def _rewrite_audit(
     issues = list(review.get("issues") or []) if review.get("status") == "reviewed" else []
     issues.extend(_number_findings(source, plan))
     return {"status": "reviewed" if issues else review.get("status"), "issues": issues}
+
+
+def _attach_vision_audit(qa: dict[str, Any], vision: dict[str, Any]) -> None:
+    """Expose visual-model suggestions without changing structural QA."""
+    qa["vision_audit"] = vision
+    for item in vision["issues"]:
+        identity = json.dumps(
+            [item["slide"], item["code"], item["evidence"]], ensure_ascii=False
+        )
+        qa["issues"].append(
+            {
+                "id": hashlib.sha256(identity.encode("utf-8")).hexdigest()[:16],
+                "severity": "suggestion",
+                "check_type": "vision_model",
+                "code": item["code"],
+                "slide": item["slide"],
+                "message": (
+                    f"Визуальная проверка: {item['reason']} — {item['evidence']}"
+                ),
+                "bounds": [],
+                "repairable": False,
+            }
+        )
 
 
 def _hint_cards_for_underfilled(
@@ -535,6 +559,10 @@ def _generate_from_plan(
             )
         # Model feedback is useful for an editor, but is not deterministic
         # evidence of a defect. Keep the measurable QA score independent.
+    vision = review_rendered_slides(
+        exports, client, expected_slide_count=len(current_plan["slides"])
+    )
+    _attach_vision_audit(qa, vision)
     write_json(run_dir / "qa_report.json", qa)
     write_json(run_dir / "deck_plan.final.json", current_plan)
     planner_mode = plan.get("planner", {}).get("mode", "unknown")
@@ -554,6 +582,7 @@ def _generate_from_plan(
         "attempts": attempts,
         "cards_for_underfilled_slides": cards_for_underfilled,
         "exports": exports,
+        "requested_export_formats": list(export_formats),
         "status": "failed"
         if qa["status"] == "failed" or exports["status"] == "failed"
         else "completed",
@@ -839,13 +868,21 @@ def repair_presentation(
     )
     for number in selected_slides:
         plan["slides"][number - 1] = remapped["slides"][number - 1]
-    return _generate_from_plan(
+    requested_formats = manifest.get("requested_export_formats")
+    if requested_formats is None:
+        # Manifests created before this field existed only recorded successful
+        # exports. A failed export with no artifacts still needs a renderer in
+        # the revision; request both formats used by the UI export action.
+        requested_formats = list(manifest.get("exports", {}).get("artifacts", {}))
+        if not requested_formats and manifest.get("exports", {}).get("status") == "failed":
+            requested_formats = ["pdf", "html"]
+    fixed = _generate_from_plan(
         plan=plan,
         template_dir=template_dir,
         source_text=source,
         source_label=manifest["source"],
         workspace_path=workspace_path,
-        export_formats=tuple(manifest.get("exports", {}).get("artifacts", {})),
+        export_formats=tuple(requested_formats),
         revision={
             "parent_id": presentation_id,
             "selected_issue_ids": issue_ids,
@@ -853,3 +890,23 @@ def repair_presentation(
             "action": "remap_layout",
         },
     )
+    # Issue IDs contain the position in the QA list and may change after a
+    # rebuild. Compare the selected issue types on their original slides.
+    remaining = {
+        (issue.get("slide"), issue.get("code"))
+        for issue in fixed["qa"]["issues"]
+    }
+    unresolved = [
+        issue["id"]
+        for issue in selected
+        if (issue.get("slide"), issue.get("code")) in remaining
+    ]
+    fixed["revision"]["repair_result"] = {
+        "status": "unresolved" if unresolved else "resolved",
+        "unresolved_issue_ids": unresolved,
+        "resolved_issue_ids": [
+            issue["id"] for issue in selected if issue["id"] not in unresolved
+        ],
+    }
+    write_json(Path(fixed["presentation_dir"]) / "manifest.json", fixed)
+    return fixed

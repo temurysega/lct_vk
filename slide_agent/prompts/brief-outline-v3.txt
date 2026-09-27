@@ -11,6 +11,7 @@ The closing title is the decision or next step requested in the brief.
 Reserve the request for approval and resources for the closing slide only. The preceding slide must add a distinct fact, risk, measurement plan or implementation condition; it must not ask for the same decision again.
 Ask only for approvals and resources explicitly requested in the brief. A team request does not imply a budget request; do not add budget approval or funding unless the brief asks for it.
 Keep success measures in their original direction. If the brief only names a metric, describe measuring it without inventing a target. For a share of requests resolved without a specialist, do not propose decreasing that share.
+Keep baseline and target separate. "Сейчас поиск занимает до 30 минут" is the current state, so never title a slide "Сокращение поиска до 30 минут" unless the brief explicitly states that target. State the current duration or the intended measurement instead.
 Security controls or keeping data inside a company do not prove zero leak risk. Describe the stated control, never claim that a security risk is eliminated or impossible.
 goal is one sentence: what the audience must take away from this slide.
 visual is one of visual_types. Choose process for ordered or dated steps, icon_grid for 3-5 parallel ideas or key numbers,
@@ -19,6 +20,7 @@ matrix for a 2x2 comparison, table for comparing options by criteria, none for a
 Use at least three different visual types across the deck.
 Write in the language of the brief.
 Use only facts and numbers present in the brief. Never invent statistics, dates, prices, names or results.
+Keep verbal proportions in their source form: "треть" is not an exact "33%" target or measurement.
 Keep a duration attached to its activity: a six-week pilot is not a deadline to launch, prepare, deliver or approve the project.
 The size of a requested team does not establish its members' roles or duties. Name tasks only when the brief assigns them.
 If the requested slide count needs more distinct messages, split a slide that combines independent facts from the brief before repeating the approval request.

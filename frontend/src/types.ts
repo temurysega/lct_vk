@@ -25,6 +25,14 @@ export interface Issue {
 }
 export interface Deck {
   presentation_id: string;
+  revision?: {
+    parent_id?: string;
+    repair_result?: {
+      status: "resolved" | "unresolved";
+      unresolved_issue_ids: string[];
+      resolved_issue_ids: string[];
+    };
+  } | null;
   slide_count: number;
   planner_mode?: string;
   variant?: { label: string; id: string };
@@ -38,6 +46,13 @@ export interface Deck {
     status: string;
     issues: Issue[];
     contextual_audit?: { status: string; method?: string; limitations?: string };
+    vision_audit?: {
+      status: "not_run" | "unavailable" | "partial" | "reviewed";
+      reviewed_slides?: number[];
+      unreviewed_slides?: number[];
+      limitations?: string;
+      reason?: string;
+    };
     canvas?: { width_inches: number; height_inches: number };
   };
   exports?: {

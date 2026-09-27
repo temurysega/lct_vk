@@ -310,7 +310,12 @@ export function useStudio(user: User) {
       );
       setActive(decks.length);
       setDecks([...decks, fixed]);
-      notify("Новая версия готова. Проверьте оставшиеся замечания.");
+      const remaining = fixed.revision?.repair_result?.unresolved_issue_ids.length || 0;
+      notify(
+        remaining
+          ? `Новая версия создана, но выбранные замечания остались: ${remaining}. Проверьте их вручную или попробуйте другой макет.`
+          : "Новая версия готова. Выбранные замечания устранены.",
+      );
     });
   }
   return {

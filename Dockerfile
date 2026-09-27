@@ -14,10 +14,13 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 COPY . /app
 COPY --from=frontend-build /web/dist /app/frontend/dist
+COPY deploy/fonts /usr/local/share/fonts/truetype/branddeck/
 RUN apt-get update && apt-get install -y --no-install-recommends \
-      libreoffice-impress fonts-dejavu-core fonts-liberation \
+      libreoffice-impress fontconfig fonts-dejavu-core fonts-liberation \
     && rm -rf /var/lib/apt/lists/* \
-    && pip install --no-cache-dir ".[api,export]"
+    && fc-cache -f \
+    && test "$(fc-match -f '%{family}' Play)" = Play \
+    && pip install --no-cache-dir ".[api,export,documents]"
 
 VOLUME ["/data"]
 EXPOSE 8000

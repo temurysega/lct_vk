@@ -10,6 +10,9 @@ import pytest
 from examples.create_demo_assets import create_template
 from slide_agent.audit import _language_issues
 from slide_agent.brief import (
+    _content_problems,
+    _ensure_grounded,
+    _outline_problems,
     detect_purpose,
     outline_schema,
     plan_from_brief,
@@ -28,15 +31,35 @@ BRIEF = (
     "Сейчас поиск инструкции занимает до 30 минут. Пилот: 2 подразделения, "
     "150 сотрудников, 6 недель. Просим одобрить пилот."
 )
+
+
+def test_brief_rejects_percent_and_date_absent_from_source():
+    brief = "Треть обращений повторяется. Решение проверяем в пилоте."
+    outline = [{
+        "title": "33% обращений повторяются",
+        "goal": "Сократить повторные вопросы",
+        "role": "cover",
+        "visual": "none",
+    }]
+    assert any("33" in problem for problem in _outline_problems(outline, brief))
+    content = {
+        "subtitle": "",
+        "bullets": ["Треть обращений повторяется", "Проверяем решение в пилоте"],
+        "speaker_notes": "Запуск в 2027 году.",
+    }
+    problems = _content_problems(content, {**outline[0], "title": "Пилот"}, brief)
+    assert any("2027" in problem for problem in problems)
+    with pytest.raises(InferenceError, match="2027"):
+        _ensure_grounded(brief, {"slides": [{"title": "Пилот", "speaker_notes": "Запуск в 2027 году"}]})
 VISUALS = ["none", "process", "icon_grid", "none", "table", "none"]
 
 
 def _outline(count: int, *, duplicate: bool = False) -> dict:
     slides = [
         {
-            "title": "Повтор" if duplicate and 0 < i < 3 else f"Вывод {i}",
+            "title": "Повтор" if duplicate and 0 < i < 3 else f"Вывод {chr(0x410 + i)}",
             "role": "content",
-            "goal": f"Цель слайда {i}",
+            "goal": f"Цель слайда {chr(0x410 + i)}",
             "visual": VISUALS[i % len(VISUALS)],
         }
         for i in range(count)
@@ -107,13 +130,33 @@ def test_brief_builds_exact_outline_and_content():
     slides = plan["slides"]
     assert len(slides) == 12
     assert slides[0]["role"] == "cover" and slides[-1]["role"] == "closing"
-    assert [s["title"] for s in slides] == [f"Вывод {i}" for i in range(12)]
+    assert [s["title"] for s in slides] == [f"Вывод {chr(0x410 + i)}" for i in range(12)]
     outline_schema_sent = client.schemas[0]["properties"]["slides"]
     assert outline_schema_sent["minItems"] == outline_schema_sent["maxItems"] == 12
     diagram = next(s for s in slides if (s["visual"] or {}).get("type") == "process")
     assert diagram["bullets"] == []
     assert plan["brief"]["purpose"] == "feature"
     assert plan["brief"]["outline_problems"] == []
+
+
+def test_stubborn_outline_cannot_turn_current_duration_into_target():
+    bad = "Сокращение времени поиска инструкции до 30 минут"
+
+    class StubbornOutline(FakeClient):
+        def chat_json(self, *, system, user, schema=None, **kwargs):
+            result = super().chat_json(system=system, user=user, schema=schema, **kwargs)
+            if system == load_prompt("brief-outline"):
+                result["title"] = bad
+                result["slides"][0]["title"] = bad
+            return result
+
+    client = StubbornOutline()
+    plan = plan_from_brief(BRIEF, client=client, slide_count=6)
+    assert len(client.outline_requests) == 3
+    assert "верхняя граница" in client.outline_requests[1]["fix_previous_outline"][0]
+    assert plan["slides"][0]["title"] == "Сейчас поиск инструкции занимает до 30 минут"
+    assert plan["title"] == plan["slides"][0]["title"]
+    assert plan["brief"]["outline_source_backed_baseline_fallbacks"] == [1]
     assert "metric_cards" not in plan["brief"]["visual_types"]
     assert "timeline" not in plan["brief"]["visual_types"]
 
@@ -168,7 +211,7 @@ def test_outline_duplicate_remaining_after_third_attempt_blocks_deck():
 
 def test_failed_slide_keeps_outline_goal():
     plan = plan_from_brief(BRIEF, client=FakeClient(fail_slide=3), slide_count=6)
-    assert plan["slides"][2]["bullets"] == ["Цель слайда 2"]
+    assert plan["slides"][2]["bullets"] == ["Цель слайда В"]
     assert plan["brief"]["slide_failures"][0]["slide"] == 3
 
 
@@ -308,7 +351,7 @@ def test_empty_diagram_becomes_bullets_and_is_retried():
         assert slide["bullets"] or slide["visual"], slide
     diagram_slide = plan["slides"][1]
     assert diagram_slide["visual"] is None
-    assert diagram_slide["bullets"] == ["Цель слайда 1"]
+    assert diagram_slide["bullets"] == ["Цель слайда Б"]
 
 
 class _SchemaHandler(BaseHTTPRequestHandler):

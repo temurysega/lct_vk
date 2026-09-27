@@ -76,7 +76,7 @@ def test_variants_share_content_and_preserve_source(template, tmp_path):
     assert hashlib.sha256(template.read_bytes()).hexdigest() == before
 
 
-def test_selective_repair_preserves_parent_and_unselected_slides(template, tmp_path):
+def test_selective_repair_preserves_parent_and_unselected_slides(template, tmp_path, monkeypatch):
     workspace = tmp_path / "w"
     deck = generate_deck(
         template=template,
@@ -116,6 +116,38 @@ def test_selective_repair_preserves_parent_and_unselected_slides(template, tmp_p
         repair_presentation(deck["presentation_id"], ["unknown"], workspace=workspace)
     with pytest.raises(ValueError):
         repair_presentation("../outside", ["selected"], workspace=workspace)
+
+    # A failed parent export must not silently turn into a skipped export in
+    # the revision. A rebuilt deck must also report when the chosen defect
+    # survives, even if a different issue ID was assigned to it.
+    original_manifest = read_json(directory / "manifest.json")
+    original_manifest["requested_export_formats"] = ["pdf", "html"]
+    original_manifest["exports"] = {"status": "failed", "artifacts": {}}
+    write_json(directory / "manifest.json", original_manifest)
+    captured = {}
+
+    def fake_generate_from_plan(**kwargs):
+        captured["formats"] = kwargs["export_formats"]
+        target = tmp_path / "fake-repair"
+        target.mkdir(exist_ok=True)
+        return {
+            "presentation_dir": str(target),
+            "revision": kwargs["revision"],
+            "qa": {"issues": [{"id": "new-id", "slide": 2, "code": "text_overflow_risk"}]},
+        }
+
+    monkeypatch.setattr("slide_agent.service._generate_from_plan", fake_generate_from_plan)
+    unresolved = repair_presentation(
+        deck["presentation_id"], ["selected"], workspace=workspace
+    )
+    assert captured["formats"] == ("pdf", "html")
+    assert unresolved["revision"]["repair_result"]["status"] == "unresolved"
+    assert unresolved["revision"]["repair_result"]["unresolved_issue_ids"] == ["selected"]
+    assert read_json(tmp_path / "fake-repair" / "manifest.json") == unresolved
+    original_manifest.pop("requested_export_formats")
+    write_json(directory / "manifest.json", original_manifest)
+    repair_presentation(deck["presentation_id"], ["selected"], workspace=workspace)
+    assert captured["formats"] == ("pdf", "html")
 
 
 def test_failed_qa_does_not_complete_job(monkeypatch, tmp_path):

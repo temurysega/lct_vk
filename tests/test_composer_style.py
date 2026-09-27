@@ -7,6 +7,7 @@ from pptx.util import Inches, Pt
 
 from slide_agent.composer import (
     _add_body_text,
+    _add_pie_chart,
     _constrain_title_width,
     _fill_slide,
     _set_text_frame,
@@ -213,6 +214,72 @@ def test_inherited_layout_font_is_fitted_without_changing_template():
     assert title.text == text
     assert 9 <= title.text_frame.paragraphs[0].runs[0].font.size.pt < 48
     assert layout.element.xml == layout_xml
+
+
+def test_generated_text_overrides_vertical_layout_writing_direction(tmp_path):
+    prs = Presentation()
+    layout = prs.slide_layouts[1]
+    body_layout = layout.placeholders[1]
+    body_layout.text_frame._txBody.bodyPr.set("vert", "eaVert")
+    slide = prs.slides.add_slide(layout)
+    body = slide.placeholders[1]
+
+    _set_text_frame(body, ["Горизонтальный русский текст"])
+    output = tmp_path / "vertical-template.pptx"
+    prs.save(output)
+    restored = Presentation(output)
+
+    assert restored.slides[0].placeholders[1].text_frame._txBody.bodyPr.get("vert") == "horz"
+    assert restored.slide_layouts[1].placeholders[1].text_frame._txBody.bodyPr.get("vert") == "eaVert"
+
+
+def test_large_page_number_does_not_replace_real_exemplar_title():
+    prs = Presentation()
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    number = slide.shapes.add_textbox(Inches(8.1), Inches(0.3), Inches(1.2), Inches(1.4))
+    number.text = "02"
+    number.text_frame.paragraphs[0].runs[0].font.size = Pt(72)
+    heading = slide.shapes.add_textbox(Inches(0.6), Inches(0.9), Inches(6), Inches(0.65))
+    heading.text = "Настоящий заголовок"
+    heading.text_frame.paragraphs[0].runs[0].font.size = Pt(30)
+    body = slide.shapes.add_textbox(Inches(0.6), Inches(2.1), Inches(6), Inches(2.5))
+    body.text = "Исходный абзац."
+
+    _fill_slide(
+        slide,
+        {"role": "content", "title": "Новая тема", "body": "Подтверждённое содержание", "bullets": []},
+        _design(),
+        set(),
+    )
+
+    assert heading.text == "Новая тема"
+    assert number.text == ""
+    assert any("Подтверждённое содержание" in shape.text for shape in slide.shapes if shape.has_text_frame)
+
+
+def test_pie_chart_expands_narrow_exemplar_slot_and_uses_readable_labels():
+    prs = Presentation()
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    title = slide.shapes.add_textbox(Inches(0.6), Inches(0.5), Inches(8.8), Inches(0.8))
+    title.name = "BrandDeck Title"
+    title.text = "Доли участников"
+
+    _add_pie_chart(
+        slide,
+        {"categories": ["Продажи", "Поддержка"], "values": [60, 90]},
+        (3.0, 1.45, 3.0, 5.3),
+        _design(),
+    )
+
+    shape = next(shape for shape in slide.shapes if shape.has_chart)
+    chart = shape.chart
+    labels = chart.plots[0].data_labels
+    assert shape.name == "BrandDeck Pie Chart"
+    assert shape.width >= Inches(6)
+    assert chart._chartSpace.xpath(".//c:autoTitleDeleted")[0].get("val") == "1"
+    assert labels.show_percentage is True
+    assert labels.show_value is False
+    assert labels.font.size.pt == 12
 
 
 def test_explicit_font_overrides_layout_size():

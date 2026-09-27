@@ -19,7 +19,13 @@ from slide_agent import __version__
 from slide_agent.analyzer import analyze_template
 from slide_agent.config import InferenceSettings
 from slide_agent.imagegen import ImageSettings
-from slide_agent.jobs import create_job, get_job, job_directory, run_generation_job
+from slide_agent.jobs import (
+    create_job,
+    get_job,
+    job_directory,
+    run_generation_job,
+    update_job,
+)
 from slide_agent.service import (
     configured_client,
     generate_deck,
@@ -293,24 +299,41 @@ def create_generation_job_endpoint(
         raise HTTPException(
             400, f"Можно добавить не больше {MAX_IMAGE_UPLOADS} изображений."
         )
-    record = create_job(
-        template_id=template_id,
-        slide_count=slide_count,
-        offline=offline,
-    )
-    content_input: str | Path = content or ""
-    if content_file is not None:
-        content_input = _save_content_upload(
-            content_file,
-            job_directory(record["job_id"]) / "source",
+    # Validate and read uploads before persisting a queued job. Otherwise a
+    # rejected file leaves a job that can never be started or completed.
+    with tempfile.TemporaryDirectory(prefix="branddeck-job-upload-") as staging:
+        stage = Path(staging)
+        staged_content = (
+            _save_content_upload(content_file, stage / "source")
+            if content_file is not None
+            else _save_inline_content(content or "", stage / "source")
         )
-    else:
-        content_input = _save_inline_content(
-            content or "", job_directory(record["job_id"]) / "source"
+        staged_images = _save_image_uploads(image_files, stage / "images")
+        record = create_job(
+            template_id=template_id,
+            slide_count=slide_count,
+            offline=offline,
         )
-    images = _save_image_uploads(
-        image_files, job_directory(record["job_id"]) / "images"
-    )
+        destination = job_directory(record["job_id"])
+        try:
+            source_dir = destination / "source"
+            source_dir.mkdir(parents=True, exist_ok=True)
+            content_input = source_dir / staged_content.name
+            shutil.copy2(staged_content, content_input)
+            images = []
+            if staged_images:
+                image_dir = destination / "images"
+                image_dir.mkdir(parents=True, exist_ok=True)
+                for staged_image in staged_images:
+                    target = image_dir / staged_image.name
+                    shutil.copy2(staged_image, target)
+                    images.append(target)
+        except OSError as exc:
+            update_job(
+                record["job_id"],
+                {"status": "failed", "stage": "failed", "error": str(exc)},
+            )
+            raise HTTPException(500, "Не удалось сохранить материалы задания.") from exc
     background_tasks.add_task(
         run_generation_job,
         record["job_id"],

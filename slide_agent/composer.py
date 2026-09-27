@@ -40,6 +40,7 @@ from .layout_geometry import (
     intersection,
     is_framing,
     is_generated,
+    is_navigation_label,
     is_opaque,
     is_photo_frame,
     is_visible_box,
@@ -344,6 +345,7 @@ def _infer_text_groups(
     titles: list[Any],
     subtitles: list[Any],
     bodies: list[Any],
+    canvas_width: float,
     canvas_height: float,
 ) -> tuple[list[Any], list[Any], list[Any]]:
     if titles and bodies:
@@ -358,6 +360,15 @@ def _infer_text_groups(
         and shape.width / 914400 >= 1.0
         and shape.height / 914400 >= 0.18
     ]
+    content_candidates = [
+        shape
+        for shape in candidates
+        if not is_navigation_label(
+            shape.text, shape.width / 914400, canvas_width
+        )
+    ]
+    if content_candidates:
+        candidates = content_candidates
     if not titles and candidates:
         upper = [
             shape for shape in candidates if shape.top / 914400 < canvas_height * 0.28
@@ -366,6 +377,14 @@ def _infer_text_groups(
             shape for shape in candidates if shape.top / 914400 < canvas_height * 0.55
         ]
         pool = pool or candidates
+        wide_titles = [
+            shape
+            for shape in pool
+            if shape.width / 914400 >= canvas_width * 0.25
+            and len(shape.text.strip()) >= 4
+        ]
+        if wide_titles:
+            pool = wide_titles
         title = max(
             pool, key=lambda shape: (_largest_font(shape), shape.width, -shape.top)
         )
@@ -445,6 +464,10 @@ def _set_text_frame(
         font_size = _snap_size(max(min_font_size, fitted_size), min_font_size)
     text_frame = shape.text_frame
     text_frame.clear()
+    # The frame may inherit East Asian vertical writing from its layout.
+    # Generated Cyrillic/Latin paragraphs always use horizontal writing.
+    if paragraphs:
+        text_frame._txBody.bodyPr.set("vert", "horz")
     text_frame.word_wrap = True
     text_frame.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
     text_frame.vertical_anchor = MSO_ANCHOR.TOP
@@ -938,15 +961,17 @@ def _add_bar_chart(
         values = [_number(value) for value in item.get("values", [])[: len(categories)]]
         values.extend([0.0] * (len(categories) - len(values)))
         chart_data.add_series(str(item.get("name", "Series")), values)
-    x, y, w, h = zone
-    chart = slide.shapes.add_chart(
+    x, y, w, h = _chart_zone(slide, zone, design)
+    chart_shape = slide.shapes.add_chart(
         XL_CHART_TYPE.COLUMN_CLUSTERED,
         Inches(x),
         Inches(y),
         Inches(w),
         Inches(h),
         chart_data,
-    ).chart
+    )
+    chart_shape.name = "BrandDeck Bar Chart"
+    chart = chart_shape.chart
     chart.has_legend = len(series) > 1
     if chart.has_legend:
         chart.legend.position = XL_LEGEND_POSITION.BOTTOM
@@ -982,20 +1007,54 @@ def _add_pie_chart(
         return
     chart_data = ChartData()
     chart_data.categories = categories
-    chart_data.add_series("Values", values)
-    x, y, w, h = zone
-    chart = slide.shapes.add_chart(
+    chart_data.add_series("Доли", values)
+    x, y, w, h = _chart_zone(slide, zone, design)
+    chart_shape = slide.shapes.add_chart(
         XL_CHART_TYPE.PIE,
         Inches(x),
         Inches(y),
         Inches(w),
         Inches(h),
         chart_data,
-    ).chart
+    )
+    chart_shape.name = "BrandDeck Pie Chart"
+    chart = chart_shape.chart
+    # LibreOffice displays the single series name as an automatic chart title
+    # unless autoTitleDeleted is set explicitly.
+    chart.has_title = False
     chart.has_legend = True
-    chart.legend.position = XL_LEGEND_POSITION.RIGHT
+    chart.legend.position = XL_LEGEND_POSITION.BOTTOM
+    chart.legend.include_in_layout = False
+    chart.legend.font.size = Pt(12)
     chart.plots[0].has_data_labels = True
-    chart.plots[0].data_labels.show_percentage = True
+    labels = chart.plots[0].data_labels
+    labels.show_value = False
+    labels.show_percentage = True
+    labels.font.size = Pt(12)
+
+
+def _chart_zone(
+    slide: Any,
+    zone: tuple[float, float, float, float],
+    design: dict[str, Any],
+) -> tuple[float, float, float, float]:
+    """Use the content area when a chart-only slide inherited a narrow slot."""
+    canvas = design["canvas"]
+    canvas_area = float(canvas["width_inches"]) * float(canvas["height_inches"])
+    if zone[2] >= float(canvas["width_inches"]) * 0.42 and area(zone) >= canvas_area * 0.24:
+        return zone
+    text_shapes = [shape for shape in slide.shapes if has_text(shape)]
+    if any(
+        shape.name == "BrandDeck Body"
+        or (shape.top + shape.height) / 914400 > zone[1] + 0.05
+        for shape in text_shapes
+    ):
+        return zone
+    candidate = _content_zone(slide, design, text_shapes)
+    candidate = _clear_layout_art(candidate, layout_art_boxes(slide, design))
+    if area(candidate) > area(zone) * 1.4 and candidate[2] >= 4.0:
+        return candidate
+    return zone
 
 
 def _add_table(
@@ -2647,7 +2706,12 @@ def _fill_slide(
     )
     titles, subtitles, bodies = _placeholder_groups(slide)
     titles, subtitles, bodies = _infer_text_groups(
-        slide, titles, subtitles, bodies, float(design["canvas"]["height_inches"])
+        slide,
+        titles,
+        subtitles,
+        bodies,
+        float(design["canvas"]["width_inches"]),
+        float(design["canvas"]["height_inches"]),
     )
     if (
         not subtitles

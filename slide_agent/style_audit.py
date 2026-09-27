@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from pptx.enum.chart import XL_CHART_TYPE
+from pptx.enum.chart import XL_CHART_TYPE, XL_LEGEND_POSITION
 from pptx.enum.dml import MSO_COLOR_TYPE, MSO_FILL
 from pptx.enum.shapes import MSO_SHAPE_TYPE
 
@@ -110,6 +110,53 @@ def _chart_labelled(chart: Any) -> bool:
     return plot.has_data_labels or axis_title
 
 
+def _chart_readability_issues(shape: Any) -> list[dict[str, Any]]:
+    """Catch pie layouts whose legend squeezes the plot or duplicates labels."""
+    chart = shape.chart
+    if chart.chart_type not in PIE_TYPES or not chart.plots:
+        return []
+    plot = chart.plots[0]
+    issues: list[dict[str, Any]] = []
+    width = shape.width / 914400
+    height = shape.height / 914400
+    if width < 2.8 or height < 2.4:
+        issues.append(
+            {
+                "severity": "warning",
+                "code": "chart_too_small",
+                "shape": shape.name,
+                "message": "Круговая диаграмма слишком мала для читаемых секторов и подписей",
+            }
+        )
+    if chart.has_legend and chart.legend.position == XL_LEGEND_POSITION.RIGHT:
+        labels = [str(category.label) for category in plot.categories]
+        longest = max((len(label) for label in labels), default=0)
+        # Leave a usable pie and space for the longest category. A right
+        # legend in a narrower frame produced one-letter lines in Office.
+        required = 2.8 + min(longest, 24) * 0.11
+        if width < required:
+            issues.append(
+                {
+                    "severity": "warning",
+                    "code": "chart_legend_too_narrow",
+                    "shape": shape.name,
+                    "message": "Легенда круговой диаграммы сжимает подписи и сектора",
+                }
+            )
+    if plot.has_data_labels:
+        labels = plot.data_labels
+        if labels.show_value and labels.show_percentage:
+            issues.append(
+                {
+                    "severity": "warning",
+                    "code": "chart_redundant_labels",
+                    "shape": shape.name,
+                    "message": "Подписи круговой диаграммы смешивают значения и доли",
+                }
+            )
+    return issues
+
+
 def inspect_style(
     slide: Any,
     canvas: tuple[float, float],
@@ -182,15 +229,17 @@ def inspect_style(
             )
         if nested:
             continue
-        if getattr(shape, "has_chart", False) and not _chart_labelled(shape.chart):
-            issues.append(
-                {
-                    "severity": "warning",
-                    "code": "chart_unlabeled",
-                    "shape": shape.name,
-                    "message": "У диаграммы нет подписей значений, единиц или легенды",
-                }
-            )
+        if getattr(shape, "has_chart", False):
+            if not _chart_labelled(shape.chart):
+                issues.append(
+                    {
+                        "severity": "warning",
+                        "code": "chart_unlabeled",
+                        "shape": shape.name,
+                        "message": "У диаграммы нет подписей значений, единиц или легенды",
+                    }
+                )
+            issues.extend(_chart_readability_issues(shape))
         placed_by_composer = not getattr(shape, "is_placeholder", False) and (
             (shape.left, shape.top, shape.width, shape.height) not in template_shapes
         )

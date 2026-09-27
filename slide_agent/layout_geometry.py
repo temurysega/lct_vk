@@ -2,12 +2,22 @@
 
 from __future__ import annotations
 
+import re
 from typing import Any
 
 from pptx.enum.shapes import MSO_SHAPE_TYPE, PP_PLACEHOLDER
 from pptx.oxml.ns import qn
 
 Box = tuple[float, float, float, float]
+
+
+def is_navigation_label(text: str, width: float, canvas_width: float) -> bool:
+    """Identify a small page number that must not become a content zone."""
+    return bool(
+        width < canvas_width * 0.25
+        and re.fullmatch(r"(?:0?[1-9]\d?|[IVXLCDM]{1,6})", text.strip().upper())
+    )
+
 
 OPAQUE_TYPES = {
     MSO_SHAPE_TYPE.PICTURE,

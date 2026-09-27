@@ -23,7 +23,12 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
-from .coverage import grounding_findings, source_backed_kpi_fallback
+from .coverage import (
+    grounding_findings,
+    source_backed_baseline_fallback,
+    source_backed_kpi_fallback,
+    unsupported_numbers,
+)
 from .diagrams import ITEM_LIMITS
 from .images import stems
 from .llm import InferenceClient, InferenceError
@@ -303,6 +308,11 @@ def _outline_problems(slides: list[dict[str, Any]], brief: str = "") -> list[str
             f"{issue['quote']!r} ({issue['reason']})"
             for issue in grounding_findings(brief, outline_plan)
         )
+        problems.extend(
+            f"slide {issue['slide']} uses numbers absent from the brief: "
+            f"{', '.join(issue['numbers'])}"
+            for issue in unsupported_numbers(brief, outline_plan)
+        )
     return problems
 
 
@@ -391,10 +401,15 @@ def _content_problems(
         if long(cell, LIMITS["cell"])
     )
     if brief:
+        payload = _slide_payload(content, slide)
         problems.extend(
             f"unsupported claim {issue['quote']!r}: {issue['reason']}"
-            for issue in grounding_findings(
-                brief, {"slides": [_slide_payload(content, slide)]}
+            for issue in grounding_findings(brief, {"slides": [payload]})
+        )
+        problems.extend(
+            "numbers absent from the brief: " + ", ".join(issue["numbers"])
+            for issue in unsupported_numbers(
+                brief, {"slides": [payload]}, include_notes=True
             )
         )
     return problems
@@ -436,6 +451,13 @@ def _ensure_grounded(brief: str, plan: dict[str, Any]) -> None:
             f"Brief deck has {len(risks)} unresolved grounding issue(s); "
             f"slide {first['slide']}: {first['quote']!r}. {first['reason']}"
         )
+    missing_numbers = unsupported_numbers(brief, plan, include_notes=True)
+    if missing_numbers:
+        first = missing_numbers[0]
+        raise InferenceError(
+            f"Brief deck has numbers absent from source on slide {first['slide']}: "
+            + ", ".join(first["numbers"])
+        )
 
 
 def revise_flagged_slides(
@@ -465,7 +487,7 @@ def revise_flagged_slides(
     system = load_prompt("brief-slide")
     titles = [str(slide.get("title", "")) for slide in plan["slides"]]
 
-    def rewrite(number: int) -> tuple[int, dict[str, Any] | None, bool]:
+    def rewrite(number: int) -> tuple[int, dict[str, Any] | None, list[str]]:
         original = plan["slides"][number - 1]
         current = original
         issues = findings[number]
@@ -508,27 +530,58 @@ def revise_flagged_slides(
                 payload["visual"] = original["visual"]
             current = {**current, **payload}
             issues = grounding_findings(brief, {"slides": [current]})
+            issues.extend(
+                {
+                    "quote": ", ".join(item["numbers"]),
+                    "reason": "Чисел нет в брифе",
+                }
+                for item in unsupported_numbers(
+                    brief, {"slides": [current]}, include_notes=True
+                )
+            )
             if not issues:
-                return number, payload, False
-        fallback = source_backed_kpi_fallback(brief, current)
-        if fallback is not None and not grounding_findings(brief, {"slides": [fallback]}):
-            return number, fallback, True
-        return number, None, False
+                return number, payload, []
+        fallback = current
+        used_fallbacks = []
+        for name, repair in (
+            ("kpi", source_backed_kpi_fallback),
+            ("baseline", source_backed_baseline_fallback),
+        ):
+            revised = repair(brief, fallback)
+            if revised is not None:
+                fallback = revised
+                used_fallbacks.append(name)
+        if (
+            used_fallbacks
+            and not grounding_findings(brief, {"slides": [fallback]})
+            and not unsupported_numbers(
+                brief, {"slides": [fallback]}, include_notes=True
+            )
+        ):
+            return number, fallback, used_fallbacks
+        return number, None, []
 
     workers = max(1, client.settings.parallel_requests)
     with ThreadPoolExecutor(max_workers=workers) as pool:
         results = list(pool.map(rewrite, sorted(findings)))
     revised = []
-    fallbacks = []
-    for number, payload, used_fallback in results:
+    fallbacks: dict[str, list[int]] = {"kpi": [], "baseline": []}
+    for number, payload, used_fallbacks in results:
         if payload is None:
             continue
+        old_title = str(plan["slides"][number - 1].get("title") or "")
         plan["slides"][number - 1] = {**plan["slides"][number - 1], **payload}
         revised.append(number)
-        if used_fallback:
-            fallbacks.append(number)
-    if fallbacks:
-        plan["brief"]["source_backed_kpi_fallbacks"] = fallbacks
+        if plan["slides"][number - 1].get("title") != old_title:
+            outline[number - 1]["title"] = plan["slides"][number - 1]["title"]
+            if number == 1 and plan.get("title") == old_title:
+                plan["title"] = plan["slides"][number - 1]["title"]
+        for name in used_fallbacks:
+            fallbacks[name].append(number)
+    if fallbacks["kpi"]:
+        plan["brief"]["source_backed_kpi_fallbacks"] = fallbacks["kpi"]
+    if fallbacks["baseline"]:
+        plan["brief"]["source_backed_baseline_fallbacks"] = fallbacks["baseline"]
     _ensure_grounded(brief, plan)
     return revised
 
@@ -572,6 +625,14 @@ def plan_from_brief(
         if not problems:
             break
         request["fix_previous_outline"] = problems
+    outline_baseline_fallbacks = []
+    if problems:
+        for number, slide in enumerate(outline, 1):
+            repaired = source_backed_baseline_fallback(brief, slide)
+            if repaired is not None:
+                outline[number - 1] = repaired
+                outline_baseline_fallbacks.append(number)
+        problems = _outline_problems(outline, brief)
     if problems:
         raise InferenceError(
             "Outline remains invalid after three attempts: "
@@ -581,6 +642,8 @@ def plan_from_brief(
         outline = _assign_outline_images(outline, image_catalog)
     outline_seconds = time.perf_counter() - started
     deck_title = str(outline_raw.get("title") or outline[0]["title"]).strip()
+    if source_backed_baseline_fallback(brief, {"title": deck_title}) is not None:
+        deck_title = outline[0]["title"]
     titles = [slide["title"] for slide in outline]
     system = load_prompt("brief-slide")
 
@@ -642,6 +705,7 @@ def plan_from_brief(
             "slide_count": count,
             "outline": outline,
             "outline_problems": problems,
+            "outline_source_backed_baseline_fallbacks": outline_baseline_fallbacks,
             "visual_types": visuals,
             "slide_failures": failures,
             "parallel_requests": workers,

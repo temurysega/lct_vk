@@ -13,7 +13,7 @@ from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 from typing import Any
 
-from .layout_geometry import intersection
+from .layout_geometry import intersection, is_navigation_label
 from .llm import InferenceClient, InferenceError
 from .renderer import render_context_previews
 from .resources import serialized_on_cpu
@@ -885,13 +885,31 @@ def _slide_exemplar_patterns(context: dict[str, Any]) -> list[dict[str, Any]]:
     for position, slide in enumerate(slides, 1):
         layout_index = int(slide.get("layout_index", 0))
         layout = layouts[layout_index] if 0 <= layout_index < len(layouts) else {}
-        elements = slide.get("text_elements", [])
+        elements = [
+            element
+            for element in slide.get("text_elements", [])
+            if not is_navigation_label(
+                _element_text(element),
+                float(element.get("width", 0) or 0),
+                width,
+            )
+        ]
+        if not elements:
+            elements = slide.get("text_elements", [])
         upper_elements = [
             element
             for element in elements
             if float(element.get("top", 0) or 0) < height * 0.28
         ]
         title_pool = upper_elements or elements
+        wide_titles = [
+            element
+            for element in title_pool
+            if float(element.get("width", 0) or 0) >= width * 0.25
+            and len(_element_text(element)) >= 4
+        ]
+        if wide_titles:
+            title_pool = wide_titles
         title_element = (
             max(
                 title_pool,
@@ -905,7 +923,7 @@ def _slide_exemplar_patterns(context: dict[str, Any]) -> list[dict[str, Any]]:
             else None
         )
         zones = []
-        for element in slide.get("text_elements", []):
+        for element in elements:
             zones.append(
                 {
                     "idx": None,
