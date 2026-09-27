@@ -7,7 +7,9 @@ import hashlib
 import html
 import json
 import os
+import subprocess
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 from slide_agent.service import generate_variants
@@ -19,6 +21,7 @@ def source_digest(root: Path) -> str:
     digest = hashlib.sha256()
     paths = sorted((root / "slide_agent").rglob("*.py"))
     paths += sorted((root / "slide_agent" / "prompts").glob("*.txt"))
+    paths += sorted((root / "slide_agent" / "assets").rglob("*.json"))
     for path in paths:
         digest.update(path.relative_to(root).as_posix().encode("utf-8"))
         digest.update(path.read_bytes())
@@ -41,8 +44,39 @@ def main() -> int:
     templates = sorted((root / config["templates"]).glob("*.pptx"))
     if not templates:
         parser.error("No PPTX templates found in the configured directory")
+    try:
+        git_revision = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        git_head = git_revision.stdout.strip() if git_revision.returncode == 0 else None
+        git_source_status = subprocess.run(
+            ["git", "status", "--porcelain", "--untracked-files=all", "--", "slide_agent"],
+            cwd=root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        source_matches_git_head = (
+            git_source_status.returncode == 0 and not git_source_status.stdout.strip()
+        ) if git_head else None
+    except FileNotFoundError:
+        git_head = None
+        source_matches_git_head = None
+    try:
+        config_path = args.config.resolve().relative_to(root).as_posix()
+    except ValueError:
+        config_path = None
     report = {
         "config": config,
+        "config_path": config_path,
+        "config_sha256": hashlib.sha256(args.config.read_bytes()).hexdigest(),
+        "started_at_utc": datetime.now(timezone.utc).isoformat(),
+        "git_revision_at_start": git_head,
+        "source_matches_git_head_at_start": source_matches_git_head,
         "source_digest_before": source_digest(root),
         "content_sha256": hashlib.sha256(
             (root / config["content"]).read_bytes()
@@ -58,6 +92,9 @@ def main() -> int:
             if path.suffix.lower() in {".png", ".jpg", ".jpeg", ".webp"}
         )
     report["images"] = [path.name for path in images]
+    report["images_sha256_before"] = {
+        path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in images
+    }
     for template in templates:
         digest = hashlib.sha256(template.read_bytes()).hexdigest()
         started = time.perf_counter()
@@ -147,6 +184,19 @@ def main() -> int:
         encoding="utf-8",
     )
     report["source_digest_after"] = source_digest(root)
+    report["finished_at_utc"] = datetime.now(timezone.utc).isoformat()
+    report["config_sha256_after"] = hashlib.sha256(args.config.read_bytes()).hexdigest()
+    report["content_sha256_after"] = hashlib.sha256(
+        (root / config["content"]).read_bytes()
+    ).hexdigest()
+    report["images_sha256_after"] = {
+        path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in images
+    }
+    report["inputs_unchanged_during_run"] = (
+        report["config_sha256"] == report["config_sha256_after"]
+        and report["content_sha256"] == report["content_sha256_after"]
+        and report["images_sha256_before"] == report["images_sha256_after"]
+    )
     report["source_unchanged_during_run"] = (
         report["source_digest_before"] == report["source_digest_after"]
     )
@@ -157,6 +207,7 @@ def main() -> int:
     max_seconds = float(config.get("max_seconds_per_template", 0))
     return int(
         not report["source_unchanged_during_run"]
+        or not report["inputs_unchanged_during_run"]
         or any(
             max_seconds and r["elapsed_seconds"] > max_seconds
             for r in report["runs"]

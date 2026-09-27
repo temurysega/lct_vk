@@ -1,6 +1,10 @@
 """Contextual suggestions are limited to quotes that occur on the slide."""
 
+import pytest
+
+from slide_agent.brief import revise_flagged_slides
 from slide_agent.contextual_audit import MAX_SOURCE_CHARS, review_content
+from slide_agent.llm import InferenceError
 from slide_agent.service import _number_findings, _rewrite_audit
 
 
@@ -184,3 +188,48 @@ def test_the_rewrite_takes_audit_findings_and_numbers_missing_from_the_brief():
     audit = _rewrite_audit(brief, plan, {"status": "not_run"})
     assert audit["status"] == "reviewed" and len(audit["issues"]) == 1
     assert _rewrite_audit("33%", plan, {"status": "not_run"}) == {"status": "not_run", "issues": []}
+
+
+def test_grounding_rules_reach_rewrite_when_model_audit_is_disabled(monkeypatch):
+    monkeypatch.setenv("INFERENCE_CONTEXT_AUDIT", "0")
+    plan = {"slides": [{"title": "Просим утвердить бюджет пилота"}]}
+    report = review_content("Просим одобрить пилот.", plan, FakeClient())
+    assert report["status"] == "reviewed"
+    assert report["method"] == "deterministic_grounding_rules_v1"
+    assert report["issues"][0]["code"] == "unsupported_claim"
+
+
+def test_brief_rewrite_blocks_remaining_unsupported_budget():
+    class StubbornClient:
+        settings = type("Settings", (), {"parallel_requests": 1})()
+
+        def chat_json(self, **kwargs):
+            return {
+                "title": "Просим утвердить бюджет пилота",
+                "subtitle": "",
+                "bullets": ["Утвердить бюджет", "Одобрить пилот"],
+                "speaker_notes": "",
+            }
+
+    plan = {
+        "title": "Пилот",
+        "brief": {"purpose": "feature", "outline": [
+            {"title": "Пилот", "role": "cover", "goal": "", "visual": "none"},
+            {"title": "Просим утвердить бюджет пилота", "role": "content", "goal": "решение", "visual": "none"},
+            {"title": "Решение", "role": "closing", "goal": "", "visual": "none"},
+        ]},
+        "slides": [
+            {"title": "Пилот", "role": "cover"},
+            {"title": "Просим утвердить бюджет пилота", "role": "content"},
+            {"title": "Решение", "role": "closing"},
+        ],
+    }
+    audit = {"status": "reviewed", "issues": [{
+        "slide": 2, "code": "unsupported_claim",
+        "quote": "Просим утвердить бюджет пилота",
+        "reason": "В брифе нет бюджета",
+    }]}
+    with pytest.raises(InferenceError, match="unresolved grounding issue"):
+        revise_flagged_slides(
+            plan, brief="Просим одобрить пилот.", client=StubbornClient(), audit=audit
+        )

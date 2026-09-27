@@ -115,6 +115,46 @@ def test_cover_reuses_body_placeholder_below_title():
     assert not any(s.name == "BrandDeck Subtitle" for s in slide.shapes)
 
 
+def test_long_centered_cover_uses_wide_text_band_above_art():
+    prs = Presentation()
+    slide = prs.slides.add_slide(prs.slide_layouts[1])
+    title, subtitle = list(slide.placeholders)
+    for shape, size, value in (
+        (title, 48, "Короткий образец"),
+        (subtitle, 16, "Подпись образца"),
+    ):
+        shape.left = Inches(2.71)
+        shape.width = Inches(4.69)
+        shape.text = value
+        shape.text_frame.paragraphs[0].runs[0].font.size = Pt(size)
+    title.top, title.height = Inches(1.5), Inches(0.87)
+    subtitle.top, subtitle.height = Inches(2.41), Inches(0.31)
+    design = {
+        **_design(),
+        "canvas": {"width_inches": 10, "height_inches": 5.625},
+    }
+
+    _fill_slide(
+        slide,
+        {
+            "role": "cover",
+            "title": "Ускорение работы сотрудников через ИИ",
+            "subtitle": "Инициатива по внедрению ИИ-помощника во внутренний портал",
+            "bullets": [],
+            "body": "",
+        },
+        design,
+        set(),
+    )
+
+    assert title.width >= Inches(7.5)
+    assert title.top < Inches(1.5)
+    assert subtitle.top >= title.top + title.height
+    assert subtitle.top + subtitle.height < Inches(2.5)
+    assert title.text_frame.paragraphs[0].runs[0].font.size.pt >= 23
+    assert subtitle.text_frame.paragraphs[0].runs[0].font.size.pt >= 13
+
+
 def test_replacing_exemplar_text_preserves_explicit_style():
     presentation = Presentation()
     slide = presentation.slides.add_slide(presentation.slide_layouts[6])

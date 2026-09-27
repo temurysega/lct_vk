@@ -4,7 +4,11 @@ import pytest
 from pptx import Presentation
 from pptx.util import Inches
 
-from slide_agent.coverage import coverage_report, unsupported_numbers
+from slide_agent.coverage import (
+    coverage_report,
+    grounding_findings,
+    unsupported_numbers,
+)
 from slide_agent.planner import _fallback_plan, _sentences, normalize_plan
 from slide_agent.qa import compact_plan
 
@@ -99,6 +103,39 @@ def test_image_match_score_is_not_treated_as_slide_claim():
         ]
     }
     assert unsupported_numbers("Сотрудники используют помощника.", plan) == []
+
+
+def test_grounding_rules_find_budget_guarantee_and_reversed_success_metric():
+    source = (
+        "Документы не уходят наружу. Успех: время ответа и доля обращений, "
+        "закрытых без специалиста. Просим одобрить пилот и команду."
+    )
+    plan = {"slides": [
+        {"title": "Снижение доли обращений, закрытых без специалиста"},
+        {"title": "Риск утечки исключён"},
+        {"title": "Просим утвердить бюджет пилота"},
+    ]}
+    findings = grounding_findings(source, plan)
+    assert [(item["slide"], item["quote"]) for item in findings] == [
+        (1, "Снижение доли обращений, закрытых без специалиста"),
+        (2, "Риск утечки исключён"),
+        (3, "Просим утвердить бюджет пилота"),
+    ]
+    assert coverage_report(source, plan)["grounding_findings"] == findings
+
+
+def test_grounding_rules_keep_supported_and_neutral_wording():
+    source = (
+        "Документы не уходят наружу. Измеряем долю обращений, закрытых "
+        "без специалиста. Просим утвердить бюджет пилота."
+    )
+    plan = {"slides": [
+        {"title": "Рост доли обращений, закрытых без специалиста"},
+        {"title": "Измеряем долю обращений, закрытых без специалиста"},
+        {"title": "Документы не уходят наружу"},
+        {"title": "Просим утвердить бюджет пилота"},
+    ]}
+    assert grounding_findings(source, plan) == []
 
 
 def test_too_little_content_does_not_create_empty_slides():

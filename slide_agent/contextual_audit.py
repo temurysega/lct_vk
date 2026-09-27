@@ -11,6 +11,7 @@ import os
 import re
 from typing import Any
 
+from .coverage import grounding_findings
 from .llm import InferenceClient, InferenceError
 from .prompt_config import load_prompt
 
@@ -59,10 +60,19 @@ def review_content(
     source: str, plan: dict[str, Any], client: InferenceClient | None
 ) -> dict[str, Any]:
     """Review one shared content plan before its three layout variants."""
+    rule_issues = grounding_findings(source, plan)
+    rule_report = {
+        "status": "reviewed",
+        "method": "deterministic_grounding_rules_v1",
+        "issues": rule_issues,
+        "limitations": "Rules cover selected claim patterns only; other facts and rendered visuals need review",
+    }
     if client is None or os.getenv("INFERENCE_CONTEXT_AUDIT", "0") != "1":
-        return {"status": "not_run", "reason": "No configured model or audit disabled"}
+        return rule_report if rule_issues else {
+            "status": "not_run", "reason": "No configured model or audit disabled"
+        }
     if len(source) > MAX_SOURCE_CHARS:
-        return {
+        return rule_report if rule_issues else {
             "status": "not_run",
             "reason": "Source exceeds the text audit context limit; manual review required",
         }
@@ -104,9 +114,12 @@ def review_content(
             temperature=0.1,
         )
     except (InferenceError, ValueError) as exc:
-        return {"status": "not_run", "reason": str(exc)[:240]}
-    accepted: list[dict[str, Any]] = []
-    seen: set[tuple[int, str, str]] = set()
+        return rule_report if rule_issues else {"status": "not_run", "reason": str(exc)[:240]}
+    accepted: list[dict[str, Any]] = list(rule_issues)
+    seen: set[tuple[int, str, str]] = {
+        (item["slide"], item["code"], _normalized(item["quote"]))
+        for item in rule_issues
+    }
     for item in result.get("issues") or []:
         if not isinstance(item, dict):
             continue
@@ -134,7 +147,7 @@ def review_content(
         )
     return {
         "status": "reviewed",
-        "method": "text_model_suggestions_v1",
+        "method": "text_model_suggestions_and_grounding_rules_v1",
         "issues": accepted,
         "limitations": "No rendered slide image was examined; a person must confirm every suggestion and visual relevance",
     }

@@ -23,6 +23,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
+from .coverage import grounding_findings
 from .diagrams import ITEM_LIMITS
 from .images import stems
 from .llm import InferenceClient, InferenceError
@@ -276,7 +277,7 @@ def _normalized_outline(outline: dict[str, Any], count: int) -> list[dict[str, A
     return slides
 
 
-def _outline_problems(slides: list[dict[str, Any]]) -> list[str]:
+def _outline_problems(slides: list[dict[str, Any]], brief: str = "") -> list[str]:
     problems = []
     seen: dict[str, int] = {}
     for number, slide in enumerate(slides, 1):
@@ -292,6 +293,16 @@ def _outline_problems(slides: list[dict[str, Any]]) -> list[str]:
     goals = [slide["goal"].casefold() for slide in slides[1:-1]]
     if goals and len(set(goals)) < len(goals):
         problems.append("goals repeat: every slide needs its own message")
+    if brief:
+        outline_plan = {"slides": [
+            {"title": slide["title"], "subtitle": slide["goal"]}
+            for slide in slides
+        ]}
+        problems.extend(
+            f"slide {issue['slide']} is not grounded in the brief: "
+            f"{issue['quote']!r} ({issue['reason']})"
+            for issue in grounding_findings(brief, outline_plan)
+        )
     return problems
 
 
@@ -331,7 +342,9 @@ def _visual_bullets(visual: Any) -> list[str]:
     return lines
 
 
-def _content_problems(content: dict[str, Any], slide: dict[str, Any]) -> list[str]:
+def _content_problems(
+    content: dict[str, Any], slide: dict[str, Any], brief: str = ""
+) -> list[str]:
     def long(text: Any, limit: int) -> bool:
         return len(str(text or "").split()) > limit
 
@@ -377,6 +390,13 @@ def _content_problems(content: dict[str, Any], slide: dict[str, Any]) -> list[st
         for cell in cells
         if long(cell, LIMITS["cell"])
     )
+    if brief:
+        problems.extend(
+            f"unsupported claim {issue['quote']!r}: {issue['reason']}"
+            for issue in grounding_findings(
+                brief, {"slides": [_slide_payload(content, slide)]}
+            )
+        )
     return problems
 
 
@@ -407,6 +427,17 @@ def _slide_payload(
 EDITORIAL_CODES = {"unsupported_claim", "repeated_message"}
 
 
+def _ensure_grounded(brief: str, plan: dict[str, Any]) -> None:
+    """Do not compose a brief deck with known unsupported claims."""
+    risks = grounding_findings(brief, plan)
+    if risks:
+        first = risks[0]
+        raise InferenceError(
+            f"Brief deck has {len(risks)} unresolved grounding issue(s); "
+            f"slide {first['slide']}: {first['quote']!r}. {first['reason']}"
+        )
+
+
 def revise_flagged_slides(
     plan: dict[str, Any],
     *,
@@ -423,12 +454,14 @@ def revise_flagged_slides(
     """
     outline = (plan.get("brief") or {}).get("outline") or []
     if audit.get("status") != "reviewed" or len(outline) != len(plan.get("slides", [])):
+        _ensure_grounded(brief, plan)
         return []
     findings: dict[int, list[dict[str, Any]]] = {}
     for issue in audit.get("issues") or []:
         if issue.get("code") in EDITORIAL_CODES:
             findings.setdefault(int(issue["slide"]), []).append(issue)
     if not findings:
+        _ensure_grounded(brief, plan)
         return []
     system = load_prompt("brief-slide")
     titles = [str(slide.get("title", "")) for slide in plan["slides"]]
@@ -482,6 +515,7 @@ def revise_flagged_slides(
             continue
         plan["slides"][number - 1] = {**plan["slides"][number - 1], **payload}
         revised.append(number)
+    _ensure_grounded(brief, plan)
     return revised
 
 
@@ -520,7 +554,7 @@ def plan_from_brief(
             temperature=0.3,
         )
         outline = _normalized_outline(outline_raw, count)
-        problems = _outline_problems(outline)
+        problems = _outline_problems(outline, brief)
         if not problems:
             break
         request["fix_previous_outline"] = problems
@@ -556,7 +590,7 @@ def plan_from_brief(
                 error = str(exc)[:300]
                 continue
             best, error = content, None
-            problems = _content_problems(content, slide)
+            problems = _content_problems(content, slide, brief)
             if not problems:
                 break
             request["fix_previous_answer"] = problems

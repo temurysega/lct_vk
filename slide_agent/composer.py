@@ -2139,6 +2139,84 @@ def _constrain_title_width(slide: Any, title: Any) -> None:
         title.width, title.height = right - left, height
 
 
+def _compact_centered_cover(
+    slide: Any,
+    title_shape: Any,
+    subtitle_shape: Any,
+    title: str,
+    subtitle: str,
+    design: dict[str, Any],
+) -> tuple[float, float] | None:
+    """Give a long centered cover stack one line above its background art.
+
+    Some covers have short, centered placeholders over a full-bleed image.
+    Their sample title and caption fit, but a brief-length replacement wraps
+    into the illustration. Widen and lift both frames only when the original
+    geometry identifies this particular cover arrangement and the text fits
+    the wider frame at a readable size.
+    """
+    canvas = design["canvas"]
+    width, height = float(canvas["width_inches"]), float(canvas["height_inches"])
+    x, y, w, h = _zone_from_shape(title_shape)
+    sx, sy, sw, _ = _zone_from_shape(subtitle_shape)
+    center = x + w / 2
+    original_title_size = float(effective_font_size(title_shape, 24) or 24)
+    original_subtitle_size = float(effective_font_size(subtitle_shape, 14) or 14)
+    preferred_title_size = min(original_title_size, 24 * width / 10)
+    preferred_subtitle_size = min(original_subtitle_size, 14 * width / 10)
+    if not (
+        title
+        and subtitle
+        and len(title) * preferred_title_size * 0.52 / 72 > w - 0.2
+        and len(subtitle) * preferred_subtitle_size * 0.52 / 72 > sw - 0.2
+        and 0.35 * width <= w <= 0.60 * width
+        and 0.20 * height <= y <= 0.34 * height
+        and abs(center - width / 2) <= 0.06 * width
+        and abs(sx + sw / 2 - center) <= 0.03 * width
+        and abs(sw - w) <= 0.05 * width
+        and -0.05 <= sy - y - h <= 0.25
+    ):
+        return None
+
+    new_w = 0.76 * width
+    new_x = center - new_w / 2
+    new_y = y - min(0.2, 0.035 * height)
+    title_h = max(0.50, min(0.65, 0.10 * height))
+    subtitle_y = new_y + title_h + 0.11
+    subtitle_h = max(0.42, min(0.50, subtitle_shape.height / 914400 + 0.1))
+    if new_x < 0.05 * width or new_x + new_w > 0.95 * width:
+        return None
+    if subtitle_y + subtitle_h >= height * 0.52:
+        return None
+
+    title_zone = (new_x, new_y, new_w, title_h)
+    subtitle_zone = (new_x, subtitle_y, new_w, subtitle_h)
+    for layer in (slide, slide.slide_layout, slide.slide_layout.slide_master):
+        for shape in layer.shapes:
+            if shape.shape_type not in {MSO_SHAPE_TYPE.PICTURE, MSO_SHAPE_TYPE.GROUP}:
+                continue
+            artwork = _zone_from_shape(shape)
+            # A full-slide picture is the intended cover background.
+            if area(artwork) >= 0.8 * width * height:
+                continue
+            if intersection(artwork, title_zone) or intersection(artwork, subtitle_zone):
+                return None
+
+    title_size = min(
+        preferred_title_size,
+        (new_w - 0.2) * 72 / (len(title) * 0.52),
+    )
+    subtitle_size = min(
+        preferred_subtitle_size,
+        (new_w - 0.2) * 72 / (len(subtitle) * 0.52),
+    )
+    if title_size < 18 * width / 10 or subtitle_size < 11 * width / 10:
+        return None
+    _set_geometry(title_shape, *(Inches(value) for value in title_zone))
+    _set_geometry(subtitle_shape, *(Inches(value) for value in subtitle_zone))
+    return title_size, subtitle_size
+
+
 def _zone_beside(
     zone: tuple[float, float, float, float], slot: tuple[float, float, float, float]
 ) -> tuple[float, float, float, float]:
@@ -2584,10 +2662,20 @@ def _fill_slide(
     colors = _theme_colors(design)
     title = slide_spec.get("title", "")
     subtitle = slide_spec.get("subtitle", "")
+    cover_sizes = None
+    if slide_spec.get("role") == "cover" and titles and subtitles:
+        cover_sizes = _compact_centered_cover(
+            slide, titles[0], subtitles[0], title, subtitle, design
+        )
 
     if titles:
         _constrain_title_width(slide, titles[0])
-        _set_text_frame(titles[0], [title])
+        if cover_sizes:
+            _set_text_frame(
+                titles[0], [title], font_size=cover_sizes[0], min_font_size=cover_sizes[0]
+            )
+        else:
+            _set_text_frame(titles[0], [title])
     else:
         margin = float(design["spacing"].get("typical_left_margin_inches", 0.6))
         new_title = _add_textbox(
@@ -2603,7 +2691,7 @@ def _fill_slide(
         titles.append(new_title)
 
     if subtitles:
-        if slide_spec.get("role") in {"cover", "closing"} and subtitle:
+        if slide_spec.get("role") in {"cover", "closing"} and subtitle and not cover_sizes:
             # Corporate exemplars often provide a one-line caption frame that
             # is too short for an expanded brief. Give its real text enough
             # height before fitting instead of shrinking it to illegibility.
@@ -2615,7 +2703,15 @@ def _fill_slide(
                 subtitle_shape.width,
                 max(subtitle_shape.height, Inches(0.55)),
             )
-        _set_text_frame(subtitles[0], [subtitle])
+        if cover_sizes:
+            _set_text_frame(
+                subtitles[0],
+                [subtitle],
+                font_size=cover_sizes[1],
+                min_font_size=cover_sizes[1],
+            )
+        else:
+            _set_text_frame(subtitles[0], [subtitle])
     elif subtitle and slide_spec.get("role") in {"cover", "closing", "section"}:
         canvas = design["canvas"]
         box = (0.8, canvas["height_inches"] * 0.64, canvas["width_inches"] - 1.6, 0.65)
