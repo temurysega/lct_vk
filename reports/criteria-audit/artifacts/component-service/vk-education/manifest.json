@@ -1,0 +1,925 @@
+{
+  "output": "/private/tmp/branddeck-criteria-audit.TZjsAv/component-service/presentations/kontrol-komponentov-20260927-201517/output.pptx",
+  "slide_count": 10,
+  "patterns_used": [
+    "slide-1",
+    "slide-21",
+    "slide-22",
+    "slide-38",
+    "slide-21",
+    "slide-21",
+    "slide-21",
+    "slide-38",
+    "slide-38",
+    "slide-52"
+  ],
+  "source_patterns": [
+    "slide-1",
+    "slide-21",
+    "slide-22",
+    "slide-38",
+    "slide-21",
+    "slide-21",
+    "slide-21",
+    "slide-38",
+    "slide-38",
+    "slide-52"
+  ],
+  "composition_mode": "template_layout",
+  "visuals": {
+    "diagrams": 4,
+    "pictograms": 3,
+    "images": 0,
+    "illustrations": 0,
+    "by_type": {
+      "process": 1,
+      "cycle": 1,
+      "hierarchy": 1,
+      "icon_grid": 1
+    },
+    "slides": [
+      {
+        "slide": 5,
+        "type": "process",
+        "items": 4,
+        "native": true,
+        "orientation": "vertical"
+      },
+      {
+        "slide": 6,
+        "type": "cycle",
+        "items": 4,
+        "native": true,
+        "layout": "ring_with_legend"
+      },
+      {
+        "slide": 7,
+        "type": "hierarchy",
+        "items": 3,
+        "native": true
+      },
+      {
+        "slide": 8,
+        "type": "icon_grid",
+        "items": 3,
+        "native": true,
+        "columns": 2,
+        "icons": [
+          "clock",
+          "chart-pie",
+          "star"
+        ],
+        "icon_matches": 3
+      }
+    ],
+    "note": "Diagrams are native grouped shapes (SmartArt-style), not OOXML SmartArt parts."
+  },
+  "exemplar_cleanup": [
+    {
+      "slide": 2,
+      "removed": [
+        {
+          "shape": "Google Shape;491;p53",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 3,
+      "removed": [
+        {
+          "shape": "Google Shape;505;p54",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 5,
+      "removed": [
+        {
+          "shape": "Google Shape;491;p53",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 6,
+      "removed": [
+        {
+          "shape": "Google Shape;491;p53",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 7,
+      "removed": [
+        {
+          "shape": "Google Shape;491;p53",
+          "reason": "erased_sample"
+        }
+      ]
+    }
+  ],
+  "presentation_id": "kontrol-komponentov-20260927-201517",
+  "presentation_dir": "/private/tmp/branddeck-criteria-audit.TZjsAv/component-service/presentations/kontrol-komponentov-20260927-201517",
+  "template_id": "shablon-prezentatsii-vk-education-9ef2323e",
+  "template_dir": "/private/tmp/branddeck-criteria-audit.TZjsAv/app-workspace/users/15d6851f2bda066bd688ae938fc90e06/templates/shablon-prezentatsii-vk-education-9ef2323e",
+  "source": "Auditor supplied plan; no model or UI planning",
+  "inference_configured": false,
+  "inference_used": false,
+  "planner_mode": "unknown",
+  "qa": {
+    "status": "warning",
+    "score": 84,
+    "output": "/private/tmp/branddeck-criteria-audit.TZjsAv/component-service/presentations/kontrol-komponentov-20260927-201517/output.pptx",
+    "file_size_bytes": 18099862,
+    "slide_count": 10,
+    "canvas": {
+      "width_inches": 13.333333333333334,
+      "height_inches": 7.5
+    },
+    "explicit_fonts": [
+      "Play"
+    ],
+    "issues": [
+      {
+        "severity": "warning",
+        "code": "content_coverage_unverified",
+        "message": "Some source units were not matched in the plan/PPTX; see coverage_report.json",
+        "id": "e5f657855a8d985c",
+        "check_type": "deterministic",
+        "bounds": [],
+        "repairable": false
+      },
+      {
+        "id": "0e329e826d00260a",
+        "slide": 2,
+        "code": "slide_underfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.065,
+        "bounds": [],
+        "message": "Контент занимает 7% слайда (меньше четверти)",
+        "repairable": true
+      },
+      {
+        "id": "60e1f26014181938",
+        "slide": 3,
+        "code": "slide_underfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.061,
+        "bounds": [],
+        "message": "Контент занимает 6% слайда (меньше четверти)",
+        "repairable": true
+      },
+      {
+        "id": "30fe899dba4378b0",
+        "slide": 7,
+        "code": "slide_underfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.218,
+        "bounds": [],
+        "message": "Контент занимает 22% слайда (меньше четверти)",
+        "repairable": true
+      }
+    ],
+    "slides": [
+      {
+        "slide": 1,
+        "shape_count": 2,
+        "text_shape_count": 1
+      },
+      {
+        "slide": 2,
+        "shape_count": 2,
+        "text_shape_count": 1
+      },
+      {
+        "slide": 3,
+        "shape_count": 2,
+        "text_shape_count": 1
+      },
+      {
+        "slide": 4,
+        "shape_count": 2,
+        "text_shape_count": 1
+      },
+      {
+        "slide": 5,
+        "shape_count": 2,
+        "text_shape_count": 9
+      },
+      {
+        "slide": 6,
+        "shape_count": 2,
+        "text_shape_count": 13
+      },
+      {
+        "slide": 7,
+        "shape_count": 2,
+        "text_shape_count": 5
+      },
+      {
+        "slide": 8,
+        "shape_count": 2,
+        "text_shape_count": 4
+      },
+      {
+        "slide": 9,
+        "shape_count": 2,
+        "text_shape_count": 1
+      },
+      {
+        "slide": 10,
+        "shape_count": 2,
+        "text_shape_count": 1
+      }
+    ],
+    "powerpoint_render": {
+      "status": "skipped",
+      "score": null,
+      "renderer": "powerpoint_com",
+      "issues": [],
+      "previews": []
+    },
+    "content_coverage": "needs_review",
+    "schema_version": "2.0",
+    "rendered_visual_audit": {
+      "status": "passed",
+      "checked_spans": 58,
+      "uncertain_spans": 0,
+      "issues": [],
+      "repairs": [
+        {
+          "slide": 1,
+          "shape": "BrandDeck Text 237",
+          "color": "#000000",
+          "issue_id": "844b5eb335360c80"
+        },
+        {
+          "slide": 2,
+          "shape": "BrandDeck Text 490",
+          "color": "#000000",
+          "issue_id": "b8ae8711b5555001"
+        },
+        {
+          "slide": 3,
+          "shape": "BrandDeck Text 504",
+          "color": "#000000",
+          "issue_id": "d1b674f8acdc29a5"
+        },
+        {
+          "slide": 4,
+          "shape": "BrandDeck Text 887",
+          "color": "#000000",
+          "issue_id": "7cd641573a8dffb8"
+        },
+        {
+          "slide": 5,
+          "shape": "BrandDeck Text 490",
+          "color": "#000000",
+          "issue_id": "1e41320eb426fb00"
+        },
+        {
+          "slide": 6,
+          "shape": "BrandDeck Text 490",
+          "color": "#000000",
+          "issue_id": "942e80f55f64a43c"
+        },
+        {
+          "slide": 7,
+          "shape": "BrandDeck Text 490",
+          "color": "#000000",
+          "issue_id": "c6df050b06597c28"
+        },
+        {
+          "slide": 8,
+          "shape": "BrandDeck Text 887",
+          "color": "#000000",
+          "issue_id": "9e3399907a80b12b"
+        },
+        {
+          "slide": 9,
+          "shape": "BrandDeck Text 887",
+          "color": "#000000",
+          "issue_id": "0bc6ae8a0eaea0fe"
+        },
+        {
+          "slide": 10,
+          "shape": "BrandDeck Text 1075",
+          "color": "#000000",
+          "issue_id": "6b04eeba3296edcb"
+        }
+      ]
+    },
+    "rendered_fill_audit": {
+      "status": "warning",
+      "slides": [
+        {
+          "slide": 2,
+          "coverage": 0.065
+        },
+        {
+          "slide": 3,
+          "coverage": 0.061
+        },
+        {
+          "slide": 4,
+          "coverage": 0.299
+        },
+        {
+          "slide": 5,
+          "coverage": 0.343
+        },
+        {
+          "slide": 6,
+          "coverage": 0.356
+        },
+        {
+          "slide": 7,
+          "coverage": 0.218
+        },
+        {
+          "slide": 8,
+          "coverage": 0.285
+        },
+        {
+          "slide": 9,
+          "coverage": 0.306
+        }
+      ],
+      "issues": [
+        {
+          "id": "0e329e826d00260a",
+          "slide": 2,
+          "code": "slide_underfilled",
+          "severity": "warning",
+          "check_type": "deterministic",
+          "coverage": 0.065,
+          "bounds": [],
+          "message": "Контент занимает 7% слайда (меньше четверти)",
+          "repairable": true
+        },
+        {
+          "id": "60e1f26014181938",
+          "slide": 3,
+          "code": "slide_underfilled",
+          "severity": "warning",
+          "check_type": "deterministic",
+          "coverage": 0.061,
+          "bounds": [],
+          "message": "Контент занимает 6% слайда (меньше четверти)",
+          "repairable": true
+        },
+        {
+          "id": "30fe899dba4378b0",
+          "slide": 7,
+          "code": "slide_underfilled",
+          "severity": "warning",
+          "check_type": "deterministic",
+          "coverage": 0.218,
+          "bounds": [],
+          "message": "Контент занимает 22% слайда (меньше четверти)",
+          "repairable": true
+        }
+      ]
+    },
+    "structural_score": 84,
+    "contextual_audit": {
+      "status": "not_run",
+      "reason": "A contextual audit has not been performed"
+    }
+  },
+  "content_coverage": {
+    "method": "literal_source_units_v1",
+    "semantic_verification": "not_performed",
+    "source_sha256": "0cd470b574dc74ffce0f62fa74e05b78fb6e5535c618191d3f23fa365a751ee4",
+    "status": "needs_review",
+    "units": [
+      {
+        "source_id": "s0001",
+        "text": "Проверка нативных объектов",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0002",
+        "text": "Два подразделения: 60 и 90 участников",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0003",
+        "text": "bar_chart",
+        "in_plan": true,
+        "in_pptx": false
+      },
+      {
+        "source_id": "s0004",
+        "text": "Продажи",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0005",
+        "text": "Поддержка",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0006",
+        "text": "Сотрудники",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0007",
+        "text": "60",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0008",
+        "text": "90",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0009",
+        "text": "человек",
+        "in_plan": true,
+        "in_pptx": false
+      },
+      {
+        "source_id": "s0010",
+        "text": "Доля участников по подразделениям",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0011",
+        "text": "pie_chart",
+        "in_plan": true,
+        "in_pptx": false
+      },
+      {
+        "source_id": "s0012",
+        "text": "Продажи",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0013",
+        "text": "Поддержка",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0014",
+        "text": "60",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0015",
+        "text": "90",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0016",
+        "text": "Пилот рассчитан на шесть недель",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0017",
+        "text": "table",
+        "in_plan": true,
+        "in_pptx": false
+      },
+      {
+        "source_id": "s0018",
+        "text": "Этап",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0019",
+        "text": "Недели",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0020",
+        "text": "Ответственный",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0021",
+        "text": "Подготовка",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0022",
+        "text": "1–2",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0023",
+        "text": "Аналитик",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0024",
+        "text": "Запуск",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0025",
+        "text": "3–4",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0026",
+        "text": "Инженер",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0027",
+        "text": "Оценка",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0028",
+        "text": "5–6",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0029",
+        "text": "Менеджер",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0030",
+        "text": "Проверяем путь обращения",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0031",
+        "text": "process",
+        "in_plan": true,
+        "in_pptx": false
+      },
+      {
+        "source_id": "s0032",
+        "text": "Задать вопрос",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0033",
+        "text": "Найти регламент",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0034",
+        "text": "Показать источник",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0035",
+        "text": "Передать специалисту",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0036",
+        "text": "Качество улучшаем после проверки",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0037",
+        "text": "cycle",
+        "in_plan": true,
+        "in_pptx": false
+      },
+      {
+        "source_id": "s0038",
+        "text": "Собрать",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0039",
+        "text": "Проверить",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0040",
+        "text": "Запустить",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0041",
+        "text": "Измерить",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0042",
+        "text": "У каждого участника есть роль",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0043",
+        "text": "hierarchy",
+        "in_plan": true,
+        "in_pptx": false
+      },
+      {
+        "source_id": "s0044",
+        "text": "Команда пилота",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0045",
+        "text": "Аналитик",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0046",
+        "text": "Готовит материалы",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0047",
+        "text": "Инженер",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0048",
+        "text": "Настраивает сервис",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0049",
+        "text": "Менеджер",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0050",
+        "text": "Измеряет результаты",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0051",
+        "text": "Измеряем три результата",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0052",
+        "text": "icon_grid",
+        "in_plan": true,
+        "in_pptx": false
+      },
+      {
+        "source_id": "s0053",
+        "text": "Время поиска ответа",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0054",
+        "text": "Доля обращений без специалиста",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0055",
+        "text": "Оценка сотрудника",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0056",
+        "text": "Решение принимаем по итогам пилота",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0057",
+        "text": "table",
+        "in_plan": true,
+        "in_pptx": false
+      },
+      {
+        "source_id": "s0058",
+        "text": "Метрика",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0059",
+        "text": "Статус",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0060",
+        "text": "Время поиска",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0061",
+        "text": "Будет измерено",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0062",
+        "text": "Качество ответа",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0063",
+        "text": "Будет проверено",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0064",
+        "text": "Объекты доступны для редактирования",
+        "in_plan": true,
+        "in_pptx": true
+      }
+    ],
+    "missing_from_plan": [],
+    "missing_from_pptx": [
+      "s0003",
+      "s0009",
+      "s0011",
+      "s0017",
+      "s0031",
+      "s0037",
+      "s0043",
+      "s0052",
+      "s0057"
+    ],
+    "unsupported_numbers": [],
+    "note": "Unmatched paraphrases are not proof of omission; speaker notes do not count as slide content."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "render_pass": 1,
+      "qa_status": "warning",
+      "qa_score": 96
+    },
+    {
+      "attempt": 1,
+      "render_pass": 2,
+      "qa_status": "warning",
+      "qa_score": 96
+    }
+  ],
+  "cards_for_underfilled_slides": [
+    2,
+    3,
+    7
+  ],
+  "exports": {
+    "status": "passed",
+    "renderer": "libreoffice",
+    "artifacts": {
+      "pdf": "/private/tmp/branddeck-criteria-audit.TZjsAv/component-service/presentations/kontrol-komponentov-20260927-201517/exports/output.pdf",
+      "html": "/private/tmp/branddeck-criteria-audit.TZjsAv/component-service/presentations/kontrol-komponentov-20260927-201517/exports/output.html"
+    },
+    "previews": [
+      {
+        "slide": 1,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/component-service/presentations/kontrol-komponentov-20260927-201517/exports/slide-1.png",
+        "width": 960.0094604492188,
+        "height": 540.0
+      },
+      {
+        "slide": 2,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/component-service/presentations/kontrol-komponentov-20260927-201517/exports/slide-2.png",
+        "width": 960.0094604492188,
+        "height": 540.0
+      },
+      {
+        "slide": 3,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/component-service/presentations/kontrol-komponentov-20260927-201517/exports/slide-3.png",
+        "width": 960.0094604492188,
+        "height": 540.0
+      },
+      {
+        "slide": 4,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/component-service/presentations/kontrol-komponentov-20260927-201517/exports/slide-4.png",
+        "width": 960.0094604492188,
+        "height": 540.0
+      },
+      {
+        "slide": 5,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/component-service/presentations/kontrol-komponentov-20260927-201517/exports/slide-5.png",
+        "width": 960.0094604492188,
+        "height": 540.0
+      },
+      {
+        "slide": 6,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/component-service/presentations/kontrol-komponentov-20260927-201517/exports/slide-6.png",
+        "width": 960.0094604492188,
+        "height": 540.0
+      },
+      {
+        "slide": 7,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/component-service/presentations/kontrol-komponentov-20260927-201517/exports/slide-7.png",
+        "width": 960.0094604492188,
+        "height": 540.0
+      },
+      {
+        "slide": 8,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/component-service/presentations/kontrol-komponentov-20260927-201517/exports/slide-8.png",
+        "width": 960.0094604492188,
+        "height": 540.0
+      },
+      {
+        "slide": 9,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/component-service/presentations/kontrol-komponentov-20260927-201517/exports/slide-9.png",
+        "width": 960.0094604492188,
+        "height": 540.0
+      },
+      {
+        "slide": 10,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/component-service/presentations/kontrol-komponentov-20260927-201517/exports/slide-10.png",
+        "width": 960.0094604492188,
+        "height": 540.0
+      }
+    ],
+    "issues": [],
+    "slide_count": 10
+  },
+  "status": "completed",
+  "elapsed_seconds": 17.493,
+  "workflow": {
+    "version": "1.7.0",
+    "files": {
+      "planner": "planner-v3.txt",
+      "analyzer": "analyzer-v1.txt",
+      "image": "image-v1.txt",
+      "brief-outline": "brief-outline-v1.txt",
+      "brief-slide": "brief-slide-v3.txt",
+      "context-audit": "context-audit-v2.txt"
+    },
+    "sha256": {
+      "planner": "f332e0e3b2857ae86342b74cb05a4ac77b02feebde170ba760403842b70d6c5d",
+      "analyzer": "d317316d81afafb12f938f497821818ff192eb76f65480b95018f392dcb3508f",
+      "image": "510c07113d1dc9af82249f868c50bf5584a75d5e6f3440378e300496658d2878",
+      "brief-outline": "8a695dc3e1c995dca4267a6d5072b48040082ef0b706415fb6ae5cc9cc6561a0",
+      "brief-slide": "56f5239c5f4f4353d55ff4af28cb3cdc1a40f35ff1c26fc83ce41123e2867944",
+      "context-audit": "c0dafd5a36d06c86465f91a42e04739c5bdf4210267c8aa32634edac68994fa5"
+    },
+    "pictograms": {
+      "package": "lucide-react",
+      "version": "0.468.0",
+      "license": "ISC",
+      "icons": 135,
+      "keywords_sha256": "8ce713fec09f1d30c82065ad0d8480152ee77fcc6593c51c010d7a568941ff71"
+    }
+  },
+  "variant": null,
+  "revision": null,
+  "images": null,
+  "image_generation": null
+}

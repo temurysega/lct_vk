@@ -1,0 +1,8 @@
+{
+  "renderer": "Keynote (not PowerPoint)",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "/tmp/branddeck-criteria-audit.TZjsAv/keynote-export.applescript:105:165: execution error: Получена ошибка от «Keynote»: Не удается превратить missing value в тип document. (-1700)\n",
+  "seconds": 10.467,
+  "pdf_exists": false
+}

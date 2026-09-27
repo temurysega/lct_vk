@@ -1,0 +1,142 @@
+slide_agent/exporter.py:14:def find_libreoffice() -> str | None:
+slide_agent/exporter.py:29:def export_presentation(
+backend/main.py:12:from fastapi.staticfiles import StaticFiles
+backend/main.py:31:WEB_ROOT = Path(frontend.__file__).parent / "dist"
+backend/main.py:40:    StaticFiles(directory=WEB_ROOT / "assets", check_dir=False),
+backend/main.py:46:@app.get("/", include_in_schema=False)
+backend/main.py:47:def homepage() -> FileResponse:
+backend/main.py:48:    entry = WEB_ROOT / "index.html"
+backend/main.py:57:@app.get("/studio", include_in_schema=False)
+backend/main.py:58:def studio() -> FileResponse:
+backend/main.py:62:def _presentation_dir(presentation_id: str) -> Path:
+backend/main.py:72:def _save_content_upload(file: UploadFile, directory: Path) -> Path:
+backend/main.py:92:def _copy_upload(file: UploadFile, target: Path, max_mb: int) -> None:
+backend/main.py:112:def _save_image_uploads(files: list[UploadFile] | None, directory: Path) -> list[Path]:
+backend/main.py:136:def _save_inline_content(content: str, directory: Path) -> Path:
+backend/main.py:144:@app.get("/health")
+backend/main.py:145:def health() -> dict[str, str]:
+backend/main.py:149:@app.get("/api/config")
+backend/main.py:150:def client_config() -> dict:
+backend/main.py:157:def _template_path(template_id: str) -> str:
+backend/main.py:165:@app.get("/v1/templates")
+backend/main.py:166:def templates() -> list[dict]:
+backend/main.py:170:@app.get("/v1/batches")
+backend/main.py:171:def batches_endpoint() -> list[dict]:
+backend/main.py:186:@app.get("/v1/batches/{batch_id}")
+backend/main.py:187:def batch_endpoint(batch_id: str) -> dict:
+backend/main.py:197:@app.post("/v1/templates/analyze")
+backend/main.py:198:def analyze_endpoint(
+backend/main.py:228:@app.post("/v1/presentations/generate")
+backend/main.py:229:def generate_endpoint(
+backend/main.py:269:@app.post("/v1/presentations/jobs", status_code=202)
+backend/main.py:270:def create_generation_job_endpoint(
+backend/main.py:330:@app.get("/v1/jobs/{job_id}")
+backend/main.py:331:def job_status_endpoint(job_id: str) -> dict:
+backend/main.py:338:@app.get("/v1/jobs/{job_id}/download")
+backend/main.py:339:def job_download_endpoint(job_id: str) -> FileResponse:
+backend/main.py:359:@app.get("/v1/presentations/{presentation_id}/download")
+backend/main.py:360:def download_endpoint(
+backend/main.py:382:@app.get("/v1/presentations/{presentation_id}")
+backend/main.py:383:def presentation_endpoint(presentation_id: str) -> dict:
+backend/main.py:387:@app.get("/v1/presentations/{presentation_id}/preview/{slide}")
+backend/main.py:388:def preview_endpoint(presentation_id: str, slide: int) -> FileResponse:
+backend/main.py:396:class RepairRequest(BaseModel):
+backend/main.py:400:@app.post("/v1/presentations/{presentation_id}/repair")
+backend/main.py:401:def repair_endpoint(presentation_id: str, body: RepairRequest) -> dict:
+slide_agent/powerpoint.py:13:def powerpoint_render_enabled() -> bool:
+slide_agent/powerpoint.py:30:def _powershell_literal(path: Path) -> str:
+slide_agent/powerpoint.py:34:def _slide_number(path: Path) -> int:
+slide_agent/powerpoint.py:39:def inspect_powerpoint_render(
+slide_agent/service.py:36:def _qa_pattern_feedback(
+slide_agent/service.py:62:def _number_findings(source: str, plan: dict[str, Any]) -> list[dict[str, Any]]:
+slide_agent/service.py:86:def _rewrite_audit(
+slide_agent/service.py:99:def _hint_cards_for_underfilled(
+slide_agent/service.py:142:def _collect_images(
+slide_agent/service.py:156:def _place_images(
+slide_agent/service.py:167:def configured_client(*, offline: bool = False) -> InferenceClient | None:
+slide_agent/service.py:172:def resolve_template(
+slide_agent/service.py:200:def list_templates(workspace: str | Path | None = None) -> list[dict[str, Any]]:
+slide_agent/service.py:216:def generate_deck(
+slide_agent/service.py:283:def _generate_from_plan(
+slide_agent/service.py:572:def run_pipeline(
+slide_agent/service.py:606:def _diversity_hybrid_plan(
+slide_agent/service.py:657:def generate_variants(
+slide_agent/service.py:806:def repair_presentation(
+slide_agent/prompt_config.py:19:def load_prompt(name: str) -> str:
+slide_agent/prompt_config.py:25:def prompt_manifest() -> dict:
+slide_agent/llm.py:16:class InferenceError(RuntimeError):
+slide_agent/llm.py:21:class InferenceClient:
+slide_agent/llm.py:50:                "Inference API is not configured. Set INFERENCE_BASE_URL and INFERENCE_MODEL."
+slide_agent/llm.py:90:                    "INFERENCE_EXTRA_BODY must be a JSON object"
+slide_agent/llm.py:93:                raise InferenceError("INFERENCE_EXTRA_BODY must be a JSON object")
+slide_agent/config.py:8:class InferenceSettings:
+slide_agent/config.py:26:            base_url=os.getenv("INFERENCE_BASE_URL", "").rstrip("/"),
+slide_agent/config.py:27:            api_key=os.getenv("INFERENCE_API_KEY", ""),
+slide_agent/config.py:28:            model=os.getenv("INFERENCE_MODEL", ""),
+slide_agent/config.py:29:            timeout_seconds=int(os.getenv("INFERENCE_TIMEOUT", "120")),
+slide_agent/config.py:30:            max_retries=int(os.getenv("INFERENCE_MAX_RETRIES", "3")),
+slide_agent/config.py:31:            vision_enabled=os.getenv("INFERENCE_VISION", "1").strip().lower()
+slide_agent/config.py:33:            max_output_tokens=int(os.getenv("INFERENCE_MAX_OUTPUT_TOKENS", "0")),
+slide_agent/config.py:34:            parallel_requests=max(1, int(os.getenv("INFERENCE_PARALLEL", "1"))),
+slide_agent/config.py:35:            extra_body=os.getenv("INFERENCE_EXTRA_BODY", "").strip(),
+slide_agent/brief.py:56:def purpose_config() -> dict[str, Any]:
+slide_agent/brief.py:60:def purposes() -> tuple[str, ...]:
+slide_agent/brief.py:64:def detect_purpose(brief: str) -> str:
+slide_agent/brief.py:80:def use_brief_mode(content: str, mode: str, client: InferenceClient | None) -> bool:
+slide_agent/brief.py:90:                "Generation from a brief needs a model: set INFERENCE_BASE_URL and "
+slide_agent/brief.py:91:                "INFERENCE_MODEL, or provide full source material"
+slide_agent/brief.py:101:def _brief_visuals(
+slide_agent/brief.py:111:def _assign_outline_images(
+slide_agent/brief.py:153:def _text(limit: int) -> dict[str, Any]:
+slide_agent/brief.py:159:def _object(properties: dict[str, Any]) -> dict[str, Any]:
+slide_agent/brief.py:168:def outline_schema(count: int, visuals: list[str]) -> dict[str, Any]:
+slide_agent/brief.py:192:def _visual_schema(kind: str) -> dict[str, Any] | None:
+slide_agent/brief.py:224:def slide_schema(role: str, visual: str) -> dict[str, Any]:
+slide_agent/brief.py:249:def _normalized_outline(outline: dict[str, Any], count: int) -> list[dict[str, Any]]:
+slide_agent/brief.py:279:def _outline_problems(slides: list[dict[str, Any]]) -> list[str]:
+slide_agent/brief.py:298:def _filled(item: Any) -> bool:
+slide_agent/brief.py:304:def _usable_visual(visual: Any, kind: str) -> dict[str, Any] | None:
+slide_agent/brief.py:323:def _visual_bullets(visual: Any) -> list[str]:
+slide_agent/brief.py:334:def _content_problems(content: dict[str, Any], slide: dict[str, Any]) -> list[str]:
+slide_agent/brief.py:383:def _slide_payload(
+slide_agent/brief.py:410:def revise_flagged_slides(
+slide_agent/brief.py:488:def plan_from_brief(
+slide_agent/analyzer.py:32:def _load_extractor():
+slide_agent/analyzer.py:46:def _walk(value: Any) -> Iterable[tuple[str, Any]]:
+slide_agent/analyzer.py:56:def _normal_color(value: Any) -> str | None:
+slide_agent/analyzer.py:67:def _observed_colors(context: dict[str, Any]) -> list[dict[str, Any]]:
+slide_agent/analyzer.py:98:def _font_samples(context: dict[str, Any]) -> list[tuple[str, float, str, bool]]:
+slide_agent/analyzer.py:112:def _mode(values: Iterable[str], fallback: str) -> str:
+slide_agent/analyzer.py:117:def _source_model(context: dict[str, Any]) -> dict[str, Any]:
+slide_agent/analyzer.py:156:def _contrast_text(background: str) -> str:
+slide_agent/analyzer.py:163:def _accent_candidate(observed: list[dict[str, Any]], excluded: set[str]) -> str | None:
+slide_agent/analyzer.py:181:def _color_luminance(value: str | None) -> float:
+slide_agent/analyzer.py:189:def _header_navigation_rule(
+slide_agent/analyzer.py:276:def _closing_panel_rule(
+slide_agent/analyzer.py:346:def build_design_system(context: dict[str, Any]) -> dict[str, Any]:
+slide_agent/analyzer.py:552:def _placeholder_kind(value: Any) -> str:
+slide_agent/analyzer.py:556:def _pattern_roles(layout: dict[str, Any], examples: list[dict[str, Any]]) -> list[str]:
+slide_agent/analyzer.py:621:def _text_size(element: dict[str, Any]) -> float:
+slide_agent/analyzer.py:631:def _element_text(element: dict[str, Any]) -> str:
+slide_agent/analyzer.py:639:def _zone_capacity(zone: dict[str, Any], default_size: float = 18.0) -> int:
+slide_agent/analyzer.py:648:def _backdrop_area_ratio(
+slide_agent/analyzer.py:689:def _rhetorical_pattern(
+slide_agent/analyzer.py:714:def _capacity_profile(
+slide_agent/analyzer.py:825:def _slide_roles(
+slide_agent/analyzer.py:878:def _slide_exemplar_patterns(context: dict[str, Any]) -> list[dict[str, Any]]:
+slide_agent/analyzer.py:981:def build_pattern_catalog(context: dict[str, Any]) -> dict[str, Any]:
+slide_agent/analyzer.py:1137:def _guideline_markdown(
+slide_agent/analyzer.py:1191:def _llm_analyze(
+slide_agent/analyzer.py:1231:def analyze_template(
+slide_agent/planner.py:26:def load_content(value: str | Path) -> tuple[str, str]:
+slide_agent/planner.py:69:def _detect_russian(text: str) -> bool:
+slide_agent/planner.py:75:def _sentences(text: str) -> list[str]:
+slide_agent/planner.py:85:def _sections(text: str) -> list[tuple[str, list[str]]]:
+slide_agent/planner.py:104:def _fallback_plan(text: str, slide_count: int | None) -> dict[str, Any]:
+slide_agent/planner.py:210:def _sanitize_visual(
+slide_agent/planner.py:225:def normalize_plan(
+slide_agent/planner.py:283:def plan_deck(
+slide_agent/planner.py:382:def _data_text(visual: dict[str, Any]) -> list[str]:
+slide_agent/planner.py:407:def _slide_requirements(slide: dict[str, Any]) -> dict[str, Any]:
+slide_agent/planner.py:448:def _score_pattern(
+slide_agent/planner.py:607:def assign_patterns(

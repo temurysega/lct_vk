@@ -1,0 +1,31 @@
+{
+  "same_build": false,
+  "served": {
+    "index.html": "61d50e01e9d528e5bf0b769fa07ea043e063af615b04c7bb0b1d20155633986d",
+    "assets/index-DjYsSnjd.js": "7c9b6b172d6732baae4296c03cf85e64d24dfa78e25dec023bb43acb6f4ce3e2",
+    "assets/README.md": "a7172741d1022f4a483df1c54836cd934d231d5b070129dfe98b3f3a3f410ba1",
+    "assets/index-Cx8y9tKb.css": "fca1cd1b305ba7bc2e1d07835f2e867ae48896597536edc26716ae9607fedc22",
+    "assets/Studio-QGdGXJY0.js": "9bbaadecb5d2f65d32a458c91aae18918de48602b7fc7442a46f1f34dac6dd97",
+    "assets/favicon.svg": "f07a0a68e28c14580cf23597f7fb60c44435bb80e64351fe53bbdc9d8b2e3afe",
+    "assets/images/predel-keychain.png": "e19f95ca6f198ca87e70607412309fd83a5866a86efa3f6f3365d02bfb7f997b",
+    "assets/images/workspace.jpg": "929ed303a7ba5767def2c42f565243ebf73b13fe5c5b44ef18402e3d3a5e3176",
+    "assets/images/architecture.jpg": "9232c8ba1d032dd33600794496905a40dc74a898eef1c3295e6ca9bdc847d5b5",
+    "assets/fonts/manrope-latin.woff2": "e310b55a7fd9677f5e3555e6c6c4d064fa1f1d24393f0ddbe217cea12a8c432f",
+    "assets/fonts/manrope-cyrillic.woff2": "95a493061fe0a8d0d027c2892747134ba747141112d3be4d5022e70ab7d3a1a6",
+    "assets/fonts/OFL.txt": "d6a309fcfb963d329a93baf9df66fa5f3c23a4be2b5f67edf24d6cafecde12ac"
+  },
+  "fresh": {
+    "index.html": "fe21fbd14382e69d33d83910941d6fdd17f898b6d3559f920bcb9b5d52a1f360",
+    "assets/Studio-eC4N-lC8.js": "248f4082784b7163efb894d86d8ccaeb12c9e3511a150ad6ec7a0fa88f9726b3",
+    "assets/README.md": "a7172741d1022f4a483df1c54836cd934d231d5b070129dfe98b3f3a3f410ba1",
+    "assets/index-CQdtb4Xe.js": "db1daf58fb63ee5a145601785a482c278cef2b7241a58a7196d781397b7c96f6",
+    "assets/index-Cx8y9tKb.css": "fca1cd1b305ba7bc2e1d07835f2e867ae48896597536edc26716ae9607fedc22",
+    "assets/favicon.svg": "f07a0a68e28c14580cf23597f7fb60c44435bb80e64351fe53bbdc9d8b2e3afe",
+    "assets/images/predel-keychain.png": "e19f95ca6f198ca87e70607412309fd83a5866a86efa3f6f3365d02bfb7f997b",
+    "assets/images/workspace.jpg": "929ed303a7ba5767def2c42f565243ebf73b13fe5c5b44ef18402e3d3a5e3176",
+    "assets/images/architecture.jpg": "9232c8ba1d032dd33600794496905a40dc74a898eef1c3295e6ca9bdc847d5b5",
+    "assets/fonts/manrope-latin.woff2": "e310b55a7fd9677f5e3555e6c6c4d064fa1f1d24393f0ddbe217cea12a8c432f",
+    "assets/fonts/manrope-cyrillic.woff2": "95a493061fe0a8d0d027c2892747134ba747141112d3be4d5022e70ab7d3a1a6",
+    "assets/fonts/OFL.txt": "d6a309fcfb963d329a93baf9df66fa5f3c23a4be2b5f67edf24d6cafecde12ac"
+  }
+}

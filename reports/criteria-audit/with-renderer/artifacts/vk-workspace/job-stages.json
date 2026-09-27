@@ -1,0 +1,82 @@
+[
+  {
+    "status": "running",
+    "stage": "template_analysis",
+    "progress": 5
+  },
+  {
+    "status": "running",
+    "stage": "balanced:layout_mapping",
+    "progress": 33
+  },
+  {
+    "status": "running",
+    "stage": "balanced:composition",
+    "progress": 36
+  },
+  {
+    "status": "running",
+    "stage": "balanced:quality_assurance",
+    "progress": 40
+  },
+  {
+    "status": "running",
+    "stage": "balanced:export",
+    "progress": 43
+  },
+  {
+    "status": "running",
+    "stage": "columns:composition",
+    "progress": 62
+  },
+  {
+    "status": "running",
+    "stage": "columns:quality_assurance",
+    "progress": 66
+  },
+  {
+    "status": "running",
+    "stage": "columns:composition",
+    "progress": 63
+  },
+  {
+    "status": "running",
+    "stage": "columns:quality_assurance",
+    "progress": 67
+  },
+  {
+    "status": "running",
+    "stage": "columns:export",
+    "progress": 69
+  },
+  {
+    "status": "running",
+    "stage": "focus:composition",
+    "progress": 88
+  },
+  {
+    "status": "running",
+    "stage": "focus:quality_assurance",
+    "progress": 92
+  },
+  {
+    "status": "running",
+    "stage": "focus:composition",
+    "progress": 89
+  },
+  {
+    "status": "running",
+    "stage": "focus:quality_assurance",
+    "progress": 93
+  },
+  {
+    "status": "running",
+    "stage": "focus:export",
+    "progress": 95
+  },
+  {
+    "status": "completed",
+    "stage": "completed",
+    "progress": 100
+  }
+]

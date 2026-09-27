@@ -1,0 +1,264 @@
+{
+  "status": "warning",
+  "score": 84,
+  "output": "/private/tmp/branddeck-criteria-audit.TZjsAv/component-service/presentations/kontrol-komponentov-20260927-201517/output.pptx",
+  "file_size_bytes": 18099862,
+  "slide_count": 10,
+  "canvas": {
+    "width_inches": 13.333333333333334,
+    "height_inches": 7.5
+  },
+  "explicit_fonts": [
+    "Play"
+  ],
+  "issues": [
+    {
+      "severity": "warning",
+      "code": "content_coverage_unverified",
+      "message": "Some source units were not matched in the plan/PPTX; see coverage_report.json",
+      "id": "e5f657855a8d985c",
+      "check_type": "deterministic",
+      "bounds": [],
+      "repairable": false
+    },
+    {
+      "id": "0e329e826d00260a",
+      "slide": 2,
+      "code": "slide_underfilled",
+      "severity": "warning",
+      "check_type": "deterministic",
+      "coverage": 0.065,
+      "bounds": [],
+      "message": "Контент занимает 7% слайда (меньше четверти)",
+      "repairable": true
+    },
+    {
+      "id": "60e1f26014181938",
+      "slide": 3,
+      "code": "slide_underfilled",
+      "severity": "warning",
+      "check_type": "deterministic",
+      "coverage": 0.061,
+      "bounds": [],
+      "message": "Контент занимает 6% слайда (меньше четверти)",
+      "repairable": true
+    },
+    {
+      "id": "30fe899dba4378b0",
+      "slide": 7,
+      "code": "slide_underfilled",
+      "severity": "warning",
+      "check_type": "deterministic",
+      "coverage": 0.218,
+      "bounds": [],
+      "message": "Контент занимает 22% слайда (меньше четверти)",
+      "repairable": true
+    }
+  ],
+  "slides": [
+    {
+      "slide": 1,
+      "shape_count": 2,
+      "text_shape_count": 1
+    },
+    {
+      "slide": 2,
+      "shape_count": 2,
+      "text_shape_count": 1
+    },
+    {
+      "slide": 3,
+      "shape_count": 2,
+      "text_shape_count": 1
+    },
+    {
+      "slide": 4,
+      "shape_count": 2,
+      "text_shape_count": 1
+    },
+    {
+      "slide": 5,
+      "shape_count": 2,
+      "text_shape_count": 9
+    },
+    {
+      "slide": 6,
+      "shape_count": 2,
+      "text_shape_count": 13
+    },
+    {
+      "slide": 7,
+      "shape_count": 2,
+      "text_shape_count": 5
+    },
+    {
+      "slide": 8,
+      "shape_count": 2,
+      "text_shape_count": 4
+    },
+    {
+      "slide": 9,
+      "shape_count": 2,
+      "text_shape_count": 1
+    },
+    {
+      "slide": 10,
+      "shape_count": 2,
+      "text_shape_count": 1
+    }
+  ],
+  "powerpoint_render": {
+    "status": "skipped",
+    "score": null,
+    "renderer": "powerpoint_com",
+    "issues": [],
+    "previews": []
+  },
+  "content_coverage": "needs_review",
+  "schema_version": "2.0",
+  "rendered_visual_audit": {
+    "status": "passed",
+    "checked_spans": 58,
+    "uncertain_spans": 0,
+    "issues": [],
+    "repairs": [
+      {
+        "slide": 1,
+        "shape": "BrandDeck Text 237",
+        "color": "#000000",
+        "issue_id": "844b5eb335360c80"
+      },
+      {
+        "slide": 2,
+        "shape": "BrandDeck Text 490",
+        "color": "#000000",
+        "issue_id": "b8ae8711b5555001"
+      },
+      {
+        "slide": 3,
+        "shape": "BrandDeck Text 504",
+        "color": "#000000",
+        "issue_id": "d1b674f8acdc29a5"
+      },
+      {
+        "slide": 4,
+        "shape": "BrandDeck Text 887",
+        "color": "#000000",
+        "issue_id": "7cd641573a8dffb8"
+      },
+      {
+        "slide": 5,
+        "shape": "BrandDeck Text 490",
+        "color": "#000000",
+        "issue_id": "1e41320eb426fb00"
+      },
+      {
+        "slide": 6,
+        "shape": "BrandDeck Text 490",
+        "color": "#000000",
+        "issue_id": "942e80f55f64a43c"
+      },
+      {
+        "slide": 7,
+        "shape": "BrandDeck Text 490",
+        "color": "#000000",
+        "issue_id": "c6df050b06597c28"
+      },
+      {
+        "slide": 8,
+        "shape": "BrandDeck Text 887",
+        "color": "#000000",
+        "issue_id": "9e3399907a80b12b"
+      },
+      {
+        "slide": 9,
+        "shape": "BrandDeck Text 887",
+        "color": "#000000",
+        "issue_id": "0bc6ae8a0eaea0fe"
+      },
+      {
+        "slide": 10,
+        "shape": "BrandDeck Text 1075",
+        "color": "#000000",
+        "issue_id": "6b04eeba3296edcb"
+      }
+    ]
+  },
+  "rendered_fill_audit": {
+    "status": "warning",
+    "slides": [
+      {
+        "slide": 2,
+        "coverage": 0.065
+      },
+      {
+        "slide": 3,
+        "coverage": 0.061
+      },
+      {
+        "slide": 4,
+        "coverage": 0.299
+      },
+      {
+        "slide": 5,
+        "coverage": 0.343
+      },
+      {
+        "slide": 6,
+        "coverage": 0.356
+      },
+      {
+        "slide": 7,
+        "coverage": 0.218
+      },
+      {
+        "slide": 8,
+        "coverage": 0.285
+      },
+      {
+        "slide": 9,
+        "coverage": 0.306
+      }
+    ],
+    "issues": [
+      {
+        "id": "0e329e826d00260a",
+        "slide": 2,
+        "code": "slide_underfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.065,
+        "bounds": [],
+        "message": "Контент занимает 7% слайда (меньше четверти)",
+        "repairable": true
+      },
+      {
+        "id": "60e1f26014181938",
+        "slide": 3,
+        "code": "slide_underfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.061,
+        "bounds": [],
+        "message": "Контент занимает 6% слайда (меньше четверти)",
+        "repairable": true
+      },
+      {
+        "id": "30fe899dba4378b0",
+        "slide": 7,
+        "code": "slide_underfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.218,
+        "bounds": [],
+        "message": "Контент занимает 22% слайда (меньше четверти)",
+        "repairable": true
+      }
+    ]
+  },
+  "structural_score": 84,
+  "contextual_audit": {
+    "status": "not_run",
+    "reason": "A contextual audit has not been performed"
+  }
+}

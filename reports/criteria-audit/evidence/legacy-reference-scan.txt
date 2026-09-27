@@ -1,0 +1,13 @@
+./examples/fetch_vk_tech_references.py:39:        "id": "vk-tech-training-2026",
+./docs/vk-tech-validation.md:17:Второй training deck относится к визуальной системе конференции, где выступали
+./examples/run_heldout.py:1:"""Reproduce an independent, previously untrained PPTX stress test."""
+./docs/architecture.md:8:4. `planner.py` sends compact style constraints, available pattern capacities, requested slide count, and source content to an OpenAI-compatible chat-completions endpoint. The response is normalized and constrained before composition. A deterministic planner is available for offline execution.
+./slide_agent/llm.py:77:            # Grammar-constrained decoding (llama.cpp, vLLM): valid JSON with
+./slide_agent/llm.py:170:        # Strongest supported constraint first: JSON schema, JSON mode, plain text.
+./slide_agent/brief.py:3:Two model stages, both with grammar-constrained JSON (``response_format`` with a
+./frontend/public/assets/README.md:24:> playful but restrained. Genuine transparent alpha background, absolutely no
+./slide_agent/planner.py:328:        # full model gets it as a grammar constraint, not only as a request.
+./tests/test_composer_style.py:10:    _constrain_title_width,
+./tests/test_composer_style.py:190:    _constrain_title_width(slide, title)
+./slide_agent/composer.py:2116:def _constrain_title_width(slide: Any, title: Any) -> None:
+./slide_agent/composer.py:2589:        _constrain_title_width(slide, titles[0])

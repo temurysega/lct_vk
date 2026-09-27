@@ -1,0 +1,974 @@
+[
+  {
+    "label": "health",
+    "method": "GET",
+    "url": "/health",
+    "status": 200,
+    "seconds": 0.009,
+    "body": {
+      "status": "ok",
+      "version": "0.1.0"
+    }
+  },
+  {
+    "label": "config",
+    "method": "GET",
+    "url": "/api/config",
+    "status": 200,
+    "seconds": 0.001,
+    "body": {
+      "model_configured": false,
+      "image_generation_configured": false
+    }
+  },
+  {
+    "label": "unauthorized templates",
+    "method": "GET",
+    "url": "/v1/templates",
+    "status": 401,
+    "seconds": 0.001,
+    "body": {
+      "detail": "Войдите в аккаунт."
+    }
+  },
+  {
+    "label": "empty template",
+    "method": "POST",
+    "url": "/v1/templates/analyze",
+    "status": 400,
+    "seconds": 0.003,
+    "body": {
+      "detail": "Выбранный файл пуст."
+    }
+  },
+  {
+    "label": "corrupt template",
+    "method": "POST",
+    "url": "/v1/templates/analyze",
+    "status": 400,
+    "seconds": 0.009,
+    "body": {
+      "detail": "Не удалось прочитать шаблон. Проверьте файл PPTX или PDF."
+    }
+  },
+  {
+    "label": "wrong extension",
+    "method": "POST",
+    "url": "/v1/templates/analyze",
+    "status": 400,
+    "seconds": 0.001,
+    "body": {
+      "detail": "A .pptx or .pdf template is required"
+    }
+  },
+  {
+    "label": "vk-tech analysis",
+    "method": "POST",
+    "url": "/v1/templates/analyze",
+    "status": 200,
+    "seconds": 3.409,
+    "body": {
+      "schema_version": "1.6",
+      "template_id": "vk-tech-shablon-cbbe3aa6",
+      "source_file": "VK Tech шаблон.pptx",
+      "source_sha256": "cbbe3aa6a21d23cebc4d1383b93dd07a9cea460d683de1903567b616c839485d",
+      "slide_count": 54,
+      "master_count": 2,
+      "layout_count": 39,
+      "pattern_count": 93,
+      "ai_enhanced": false,
+      "vision_preview_count": 8,
+      "vision_assisted": false,
+      "imported_from_pdf": false,
+      "pdf_import": null,
+      "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/templates/vk-tech-shablon-cbbe3aa6"
+    }
+  },
+  {
+    "label": "cached analysis",
+    "method": "POST",
+    "url": "/v1/templates/analyze",
+    "status": 200,
+    "seconds": 0.037,
+    "body": {
+      "schema_version": "1.6",
+      "template_id": "vk-tech-shablon-cbbe3aa6",
+      "source_file": "VK Tech шаблон.pptx",
+      "source_sha256": "cbbe3aa6a21d23cebc4d1383b93dd07a9cea460d683de1903567b616c839485d",
+      "slide_count": 54,
+      "master_count": 2,
+      "layout_count": 39,
+      "pattern_count": 93,
+      "ai_enhanced": false,
+      "vision_preview_count": 8,
+      "vision_assisted": false,
+      "imported_from_pdf": false,
+      "pdf_import": null,
+      "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/templates/vk-tech-shablon-cbbe3aa6"
+    }
+  },
+  {
+    "label": "no content",
+    "method": "POST",
+    "url": "/v1/presentations/jobs",
+    "status": 400,
+    "seconds": 0.002,
+    "body": {
+      "detail": "Provide content text or content_file"
+    }
+  },
+  {
+    "label": "invalid count",
+    "method": "POST",
+    "url": "/v1/presentations/jobs",
+    "status": 422,
+    "seconds": 0.002,
+    "body": {
+      "detail": [
+        {
+          "type": "greater_than_equal",
+          "loc": [
+            "body",
+            "slide_count"
+          ],
+          "msg": "Input should be greater than or equal to 3",
+          "input": "2",
+          "ctx": {
+            "ge": 3
+          }
+        }
+      ]
+    }
+  },
+  {
+    "label": "unknown template",
+    "method": "POST",
+    "url": "/v1/presentations/jobs",
+    "status": 404,
+    "seconds": 0.002,
+    "body": {
+      "detail": "Шаблон не найден. Добавьте свой PPTX или PDF."
+    }
+  },
+  {
+    "label": "brief without model",
+    "method": "POST",
+    "url": "/v1/presentations/generate",
+    "status": 400,
+    "seconds": 0.005,
+    "body": {
+      "detail": "Generation from a brief needs a model: set INFERENCE_BASE_URL and INFERENCE_MODEL, or provide full source material"
+    }
+  },
+  {
+    "label": "vk-tech submit",
+    "method": "POST",
+    "url": "/v1/presentations/jobs",
+    "status": 202,
+    "seconds": 0.009,
+    "body": {
+      "job_id": "f6c4c9da5ad54c8eb9413ed448146e72",
+      "status": "queued",
+      "stage": "queued",
+      "progress": 0,
+      "template_id": "vk-tech-shablon-cbbe3aa6",
+      "slide_count": 10,
+      "offline": true,
+      "created_at": "2026-09-27T17:10:41.512831+00:00",
+      "updated_at": "2026-09-27T17:10:41.512840+00:00"
+    }
+  },
+  {
+    "label": "vk-tech/balanced download pptx",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201043/download?format=pptx",
+    "status": 200,
+    "seconds": 0.04,
+    "body": {
+      "bytes": 18497229,
+      "content_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    }
+  },
+  {
+    "label": "vk-tech/balanced download pdf",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201043/download?format=pdf",
+    "status": 200,
+    "seconds": 0.008,
+    "body": {
+      "bytes": 2750062,
+      "content_type": "application/pdf"
+    }
+  },
+  {
+    "label": "vk-tech/balanced download html",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201043/download?format=html",
+    "status": 200,
+    "seconds": 0.008,
+    "body": {
+      "bytes": 4366215,
+      "content_type": "text/html; charset=utf-8"
+    }
+  },
+  {
+    "label": "vk-tech/balanced preview",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201043/preview/1",
+    "status": 200,
+    "seconds": 0.005,
+    "body": {
+      "bytes": 788180,
+      "content_type": "image/png"
+    }
+  },
+  {
+    "label": "vk-tech/columns download pptx",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201053/download?format=pptx",
+    "status": 200,
+    "seconds": 0.027,
+    "body": {
+      "bytes": 18502218,
+      "content_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    }
+  },
+  {
+    "label": "vk-tech/columns download pdf",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201053/download?format=pdf",
+    "status": 200,
+    "seconds": 0.005,
+    "body": {
+      "bytes": 2704469,
+      "content_type": "application/pdf"
+    }
+  },
+  {
+    "label": "vk-tech/columns download html",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201053/download?format=html",
+    "status": 200,
+    "seconds": 0.008,
+    "body": {
+      "bytes": 4164799,
+      "content_type": "text/html; charset=utf-8"
+    }
+  },
+  {
+    "label": "vk-tech/columns preview",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201053/preview/1",
+    "status": 200,
+    "seconds": 0.004,
+    "body": {
+      "bytes": 788180,
+      "content_type": "image/png"
+    }
+  },
+  {
+    "label": "vk-tech/focus download pptx",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201101/download?format=pptx",
+    "status": 200,
+    "seconds": 0.025,
+    "body": {
+      "bytes": 18117022,
+      "content_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    }
+  },
+  {
+    "label": "vk-tech/focus download pdf",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201101/download?format=pdf",
+    "status": 200,
+    "seconds": 0.005,
+    "body": {
+      "bytes": 2749663,
+      "content_type": "application/pdf"
+    }
+  },
+  {
+    "label": "vk-tech/focus download html",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201101/download?format=html",
+    "status": 200,
+    "seconds": 0.008,
+    "body": {
+      "bytes": 4402005,
+      "content_type": "text/html; charset=utf-8"
+    }
+  },
+  {
+    "label": "vk-tech/focus preview",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201101/preview/1",
+    "status": 200,
+    "seconds": 0.003,
+    "body": {
+      "bytes": 788180,
+      "content_type": "image/png"
+    }
+  },
+  {
+    "label": "vk-tech batch job download",
+    "method": "GET",
+    "url": "/v1/jobs/f6c4c9da5ad54c8eb9413ed448146e72/download",
+    "status": 400,
+    "seconds": 0.002,
+    "body": {
+      "detail": "Invalid job output path"
+    }
+  },
+  {
+    "label": "vk-workspace analysis",
+    "method": "POST",
+    "url": "/v1/templates/analyze",
+    "status": 200,
+    "seconds": 1.382,
+    "body": {
+      "schema_version": "1.6",
+      "template_id": "vk-workspace-klientskaya-konferentsiya-shablon-03-1b888311",
+      "source_file": "VK_WorkSpace_Клиентская_конференция_Шаблон_03.pptx",
+      "source_sha256": "1b8883114486c69dff706e9c4fd9382727c4506c2cfa3ec34f86987f1e852f2f",
+      "slide_count": 29,
+      "master_count": 1,
+      "layout_count": 15,
+      "pattern_count": 44,
+      "ai_enhanced": false,
+      "vision_preview_count": 8,
+      "vision_assisted": false,
+      "imported_from_pdf": false,
+      "pdf_import": null,
+      "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/templates/vk-workspace-klientskaya-konferentsiya-shablon-03-1b888311"
+    }
+  },
+  {
+    "label": "vk-workspace submit",
+    "method": "POST",
+    "url": "/v1/presentations/jobs",
+    "status": 202,
+    "seconds": 0.009,
+    "body": {
+      "job_id": "5b1c6035a8bf4cc0822d09aec9758fe7",
+      "status": "queued",
+      "stage": "queued",
+      "progress": 0,
+      "template_id": "vk-workspace-klientskaya-konferentsiya-shablon-03-1b888311",
+      "slide_count": 10,
+      "offline": true,
+      "created_at": "2026-09-27T17:11:17.537602+00:00",
+      "updated_at": "2026-09-27T17:11:17.537608+00:00"
+    }
+  },
+  {
+    "label": "vk-workspace/balanced download pptx",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201119/download?format=pptx",
+    "status": 200,
+    "seconds": 0.022,
+    "body": {
+      "bytes": 12869115,
+      "content_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    }
+  },
+  {
+    "label": "vk-workspace/balanced download pdf",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201119/download?format=pdf",
+    "status": 200,
+    "seconds": 0.006,
+    "body": {
+      "bytes": 2117563,
+      "content_type": "application/pdf"
+    }
+  },
+  {
+    "label": "vk-workspace/balanced download html",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201119/download?format=html",
+    "status": 200,
+    "seconds": 0.007,
+    "body": {
+      "bytes": 3850862,
+      "content_type": "text/html; charset=utf-8"
+    }
+  },
+  {
+    "label": "vk-workspace/balanced preview",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201119/preview/1",
+    "status": 200,
+    "seconds": 0.002,
+    "body": {
+      "bytes": 253872,
+      "content_type": "image/png"
+    }
+  },
+  {
+    "label": "vk-workspace/columns download pptx",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201130/download?format=pptx",
+    "status": 200,
+    "seconds": 0.018,
+    "body": {
+      "bytes": 12869175,
+      "content_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    }
+  },
+  {
+    "label": "vk-workspace/columns download pdf",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201130/download?format=pdf",
+    "status": 200,
+    "seconds": 0.004,
+    "body": {
+      "bytes": 1978080,
+      "content_type": "application/pdf"
+    }
+  },
+  {
+    "label": "vk-workspace/columns download html",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201130/download?format=html",
+    "status": 200,
+    "seconds": 0.006,
+    "body": {
+      "bytes": 3810464,
+      "content_type": "text/html; charset=utf-8"
+    }
+  },
+  {
+    "label": "vk-workspace/columns preview",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201130/preview/1",
+    "status": 200,
+    "seconds": 0.003,
+    "body": {
+      "bytes": 253872,
+      "content_type": "image/png"
+    }
+  },
+  {
+    "label": "vk-workspace/focus download pptx",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201142/download?format=pptx",
+    "status": 200,
+    "seconds": 0.017,
+    "body": {
+      "bytes": 12869190,
+      "content_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    }
+  },
+  {
+    "label": "vk-workspace/focus download pdf",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201142/download?format=pdf",
+    "status": 200,
+    "seconds": 0.004,
+    "body": {
+      "bytes": 1979219,
+      "content_type": "application/pdf"
+    }
+  },
+  {
+    "label": "vk-workspace/focus download html",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201142/download?format=html",
+    "status": 200,
+    "seconds": 0.006,
+    "body": {
+      "bytes": 3811106,
+      "content_type": "text/html; charset=utf-8"
+    }
+  },
+  {
+    "label": "vk-workspace/focus preview",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201142/preview/1",
+    "status": 200,
+    "seconds": 0.001,
+    "body": {
+      "bytes": 253872,
+      "content_type": "image/png"
+    }
+  },
+  {
+    "label": "vk-workspace batch job download",
+    "method": "GET",
+    "url": "/v1/jobs/5b1c6035a8bf4cc0822d09aec9758fe7/download",
+    "status": 400,
+    "seconds": 0.001,
+    "body": {
+      "detail": "Invalid job output path"
+    }
+  },
+  {
+    "label": "vk-education analysis",
+    "method": "POST",
+    "url": "/v1/templates/analyze",
+    "status": 200,
+    "seconds": 1.031,
+    "body": {
+      "schema_version": "1.6",
+      "template_id": "shablon-prezentatsii-vk-education-9ef2323e",
+      "source_file": "Шаблон презентации VK Education.pptx",
+      "source_sha256": "9ef2323ed5f49f464aee5ae7065f1f57bb92c8be3a635be507d59819e285cfe0",
+      "slide_count": 55,
+      "master_count": 2,
+      "layout_count": 30,
+      "pattern_count": 85,
+      "ai_enhanced": false,
+      "vision_preview_count": 8,
+      "vision_assisted": false,
+      "imported_from_pdf": false,
+      "pdf_import": null,
+      "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/templates/shablon-prezentatsii-vk-education-9ef2323e"
+    }
+  },
+  {
+    "label": "vk-education submit",
+    "method": "POST",
+    "url": "/v1/presentations/jobs",
+    "status": 202,
+    "seconds": 0.006,
+    "body": {
+      "job_id": "a3ee716f0cc84d0db2040d591140a644",
+      "status": "queued",
+      "stage": "queued",
+      "progress": 0,
+      "template_id": "shablon-prezentatsii-vk-education-9ef2323e",
+      "slide_count": 10,
+      "offline": true,
+      "created_at": "2026-09-27T17:11:56.042525+00:00",
+      "updated_at": "2026-09-27T17:11:56.042533+00:00"
+    }
+  },
+  {
+    "label": "vk-education/balanced download pptx",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201157/download?format=pptx",
+    "status": 200,
+    "seconds": 0.035,
+    "body": {
+      "bytes": 19825735,
+      "content_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    }
+  },
+  {
+    "label": "vk-education/balanced download pdf",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201157/download?format=pdf",
+    "status": 200,
+    "seconds": 0.004,
+    "body": {
+      "bytes": 600973,
+      "content_type": "application/pdf"
+    }
+  },
+  {
+    "label": "vk-education/balanced download html",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201157/download?format=html",
+    "status": 200,
+    "seconds": 0.005,
+    "body": {
+      "bytes": 1268438,
+      "content_type": "text/html; charset=utf-8"
+    }
+  },
+  {
+    "label": "vk-education/balanced preview",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201157/preview/1",
+    "status": 200,
+    "seconds": 0.002,
+    "body": {
+      "bytes": 54757,
+      "content_type": "image/png"
+    }
+  },
+  {
+    "label": "vk-education/columns download pptx",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201206/download?format=pptx",
+    "status": 200,
+    "seconds": 0.027,
+    "body": {
+      "bytes": 19865471,
+      "content_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    }
+  },
+  {
+    "label": "vk-education/columns download pdf",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201206/download?format=pdf",
+    "status": 200,
+    "seconds": 0.002,
+    "body": {
+      "bytes": 601069,
+      "content_type": "application/pdf"
+    }
+  },
+  {
+    "label": "vk-education/columns download html",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201206/download?format=html",
+    "status": 200,
+    "seconds": 0.004,
+    "body": {
+      "bytes": 1249543,
+      "content_type": "text/html; charset=utf-8"
+    }
+  },
+  {
+    "label": "vk-education/columns preview",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201206/preview/1",
+    "status": 200,
+    "seconds": 0.002,
+    "body": {
+      "bytes": 54757,
+      "content_type": "image/png"
+    }
+  },
+  {
+    "label": "vk-education/focus download pptx",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201214/download?format=pptx",
+    "status": 200,
+    "seconds": 0.025,
+    "body": {
+      "bytes": 19826187,
+      "content_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    }
+  },
+  {
+    "label": "vk-education/focus download pdf",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201214/download?format=pdf",
+    "status": 200,
+    "seconds": 0.002,
+    "body": {
+      "bytes": 603337,
+      "content_type": "application/pdf"
+    }
+  },
+  {
+    "label": "vk-education/focus download html",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201214/download?format=html",
+    "status": 200,
+    "seconds": 0.003,
+    "body": {
+      "bytes": 1258976,
+      "content_type": "text/html; charset=utf-8"
+    }
+  },
+  {
+    "label": "vk-education/focus preview",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201214/preview/1",
+    "status": 200,
+    "seconds": 0.001,
+    "body": {
+      "bytes": 54757,
+      "content_type": "image/png"
+    }
+  },
+  {
+    "label": "vk-education batch job download",
+    "method": "GET",
+    "url": "/v1/jobs/a3ee716f0cc84d0db2040d591140a644/download",
+    "status": 400,
+    "seconds": 0.001,
+    "body": {
+      "detail": "Invalid job output path"
+    }
+  },
+  {
+    "label": "unseen-brutalism analysis",
+    "method": "POST",
+    "url": "/v1/templates/analyze",
+    "status": 200,
+    "seconds": 0.84,
+    "body": {
+      "schema_version": "1.6",
+      "template_id": "pptmaster-brutalism-field-guide-5c41309b",
+      "source_file": "pptmaster-brutalism_field_guide.pptx",
+      "source_sha256": "5c41309bddb02ddc09c3fcf0591dbf5d4f24648493bc1a72b6d45adefa6dcaa2",
+      "slide_count": 16,
+      "master_count": 1,
+      "layout_count": 1,
+      "pattern_count": 17,
+      "ai_enhanced": false,
+      "vision_preview_count": 8,
+      "vision_assisted": false,
+      "imported_from_pdf": false,
+      "pdf_import": null,
+      "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/templates/pptmaster-brutalism-field-guide-5c41309b"
+    }
+  },
+  {
+    "label": "unseen-brutalism submit",
+    "method": "POST",
+    "url": "/v1/presentations/jobs",
+    "status": 202,
+    "seconds": 0.007,
+    "body": {
+      "job_id": "f3cbaf4881db4b31bcf78343a1c0649e",
+      "status": "queued",
+      "stage": "queued",
+      "progress": 0,
+      "template_id": "pptmaster-brutalism-field-guide-5c41309b",
+      "slide_count": 10,
+      "offline": true,
+      "created_at": "2026-09-27T17:12:25.025589+00:00",
+      "updated_at": "2026-09-27T17:12:25.025597+00:00"
+    }
+  },
+  {
+    "label": "unseen-brutalism/balanced download pptx",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201226/download?format=pptx",
+    "status": 200,
+    "seconds": 0.011,
+    "body": {
+      "bytes": 3666023,
+      "content_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    }
+  },
+  {
+    "label": "unseen-brutalism/balanced download pdf",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201226/download?format=pdf",
+    "status": 200,
+    "seconds": 0.003,
+    "body": {
+      "bytes": 272337,
+      "content_type": "application/pdf"
+    }
+  },
+  {
+    "label": "unseen-brutalism/balanced download html",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201226/download?format=html",
+    "status": 200,
+    "seconds": 0.003,
+    "body": {
+      "bytes": 899058,
+      "content_type": "text/html; charset=utf-8"
+    }
+  },
+  {
+    "label": "unseen-brutalism/balanced preview",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201226/preview/1",
+    "status": 200,
+    "seconds": 0.002,
+    "body": {
+      "bytes": 11154,
+      "content_type": "image/png"
+    }
+  },
+  {
+    "label": "unseen-brutalism/columns download pptx",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201235/download?format=pptx",
+    "status": 200,
+    "seconds": 0.004,
+    "body": {
+      "bytes": 1782681,
+      "content_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    }
+  },
+  {
+    "label": "unseen-brutalism/columns download pdf",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201235/download?format=pdf",
+    "status": 200,
+    "seconds": 0.002,
+    "body": {
+      "bytes": 272754,
+      "content_type": "application/pdf"
+    }
+  },
+  {
+    "label": "unseen-brutalism/columns download html",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201235/download?format=html",
+    "status": 200,
+    "seconds": 0.002,
+    "body": {
+      "bytes": 899348,
+      "content_type": "text/html; charset=utf-8"
+    }
+  },
+  {
+    "label": "unseen-brutalism/columns preview",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201235/preview/1",
+    "status": 200,
+    "seconds": 0.001,
+    "body": {
+      "bytes": 11152,
+      "content_type": "image/png"
+    }
+  },
+  {
+    "label": "unseen-brutalism/focus download pptx",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201243/download?format=pptx",
+    "status": 200,
+    "seconds": 0.006,
+    "body": {
+      "bytes": 3666069,
+      "content_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    }
+  },
+  {
+    "label": "unseen-brutalism/focus download pdf",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201243/download?format=pdf",
+    "status": 200,
+    "seconds": 0.002,
+    "body": {
+      "bytes": 272336,
+      "content_type": "application/pdf"
+    }
+  },
+  {
+    "label": "unseen-brutalism/focus download html",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201243/download?format=html",
+    "status": 200,
+    "seconds": 0.002,
+    "body": {
+      "bytes": 899059,
+      "content_type": "text/html; charset=utf-8"
+    }
+  },
+  {
+    "label": "unseen-brutalism/focus preview",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201243/preview/1",
+    "status": 200,
+    "seconds": 0.001,
+    "body": {
+      "bytes": 11154,
+      "content_type": "image/png"
+    }
+  },
+  {
+    "label": "unseen-brutalism batch job download",
+    "method": "GET",
+    "url": "/v1/jobs/f3cbaf4881db4b31bcf78343a1c0649e/download",
+    "status": 400,
+    "seconds": 0.002,
+    "body": {
+      "detail": "Invalid job output path"
+    }
+  },
+  {
+    "label": "templates persisted",
+    "method": "GET",
+    "url": "/v1/templates",
+    "status": 200,
+    "seconds": 0.002,
+    "body": [
+      {
+        "schema_version": "1.6",
+        "template_id": "pptmaster-brutalism-field-guide-5c41309b",
+        "source_file": "pptmaster-brutalism_field_guide.pptx",
+        "source_sha256": "5c41309bddb02ddc09c3fcf0591dbf5d4f24648493bc1a72b6d45adefa6dcaa2",
+        "slide_count": 16,
+        "master_count": 1,
+        "layout_count": 1,
+        "pattern_count": 17,
+        "ai_enhanced": false,
+        "vision_preview_count": 8,
+        "vision_assisted": false,
+        "imported_from_pdf": false,
+        "pdf_import": null,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/templates/pptmaster-brutalism-field-guide-5c41309b"
+      },
+      {
+        "schema_version": "1.6",
+        "template_id": "shablon-prezentatsii-vk-education-9ef2323e",
+        "source_file": "Шаблон презентации VK Education.pptx",
+        "source_sha256": "9ef2323ed5f49f464aee5ae7065f1f57bb92c8be3a635be507d59819e285cfe0",
+        "slide_count": 55,
+        "master_count": 2,
+        "layout_count": 30,
+        "pattern_count": 85,
+        "ai_enhanced": false,
+        "vision_preview_count": 8,
+        "vision_assisted": false,
+        "imported_from_pdf": false,
+        "pdf_import": null,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/templates/shablon-prezentatsii-vk-education-9ef2323e"
+      },
+      {
+        "schema_version": "1.6",
+        "template_id": "vk-tech-shablon-cbbe3aa6",
+        "source_file": "VK Tech шаблон.pptx",
+        "source_sha256": "cbbe3aa6a21d23cebc4d1383b93dd07a9cea460d683de1903567b616c839485d",
+        "slide_count": 54,
+        "master_count": 2,
+        "layout_count": 39,
+        "pattern_count": 93,
+        "ai_enhanced": false,
+        "vision_preview_count": 8,
+        "vision_assisted": false,
+        "imported_from_pdf": false,
+        "pdf_import": null,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/templates/vk-tech-shablon-cbbe3aa6"
+      },
+      {
+        "schema_version": "1.6",
+        "template_id": "vk-workspace-klientskaya-konferentsiya-shablon-03-1b888311",
+        "source_file": "VK_WorkSpace_Клиентская_конференция_Шаблон_03.pptx",
+        "source_sha256": "1b8883114486c69dff706e9c4fd9382727c4506c2cfa3ec34f86987f1e852f2f",
+        "slide_count": 29,
+        "master_count": 1,
+        "layout_count": 15,
+        "pattern_count": 44,
+        "ai_enhanced": false,
+        "vision_preview_count": 8,
+        "vision_assisted": false,
+        "imported_from_pdf": false,
+        "pdf_import": null,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/templates/vk-workspace-klientskaya-konferentsiya-shablon-03-1b888311"
+      }
+    ]
+  },
+  {
+    "label": "history persisted",
+    "method": "GET",
+    "url": "/v1/batches",
+    "status": 200,
+    "seconds": 0.005,
+    "body": [
+      {
+        "batch_id": "pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201252",
+        "status": "completed",
+        "template_id": "pptmaster-brutalism-field-guide-5c41309b"
+      },
+      {
+        "batch_id": "pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201223",
+        "status": "completed",
+        "template_id": "shablon-prezentatsii-vk-education-9ef2323e"
+      },
+      {
+        "batch_id": "pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201154",
+        "status": "completed",
+        "template_id": "vk-workspace-klientskaya-konferentsiya-shablon-03-1b888311"
+      },
+      {
+        "batch_id": "pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201115",
+        "status": "completed",
+        "template_id": "vk-tech-shablon-cbbe3aa6"
+      }
+    ]
+  }
+]

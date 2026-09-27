@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/tmp/branddeck-criteria-audit.TZjsAv/lo-mount/LibreOffice.app/Contents/MacOS/soffice",
+    "-env:UserInstallation=file:///tmp/branddeck-criteria-audit.TZjsAv/onocom-source-profile",
+    "--headless",
+    "--convert-to",
+    "pdf",
+    "--outdir",
+    "/tmp/branddeck-criteria-audit.TZjsAv/source-renders",
+    "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/external-fixtures/expansion-20260922/templates/onocom-powerpoint-template.pptx"
+  ],
+  "exit": 0,
+  "stdout": "convert /Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/external-fixtures/expansion-20260922/templates/onocom-powerpoint-template.pptx as a Impress document -> /private/tmp/branddeck-criteria-audit.TZjsAv/source-renders/onocom-powerpoint-template.pdf using filter : impress_pdf_Export\n",
+  "stderr": "2026-09-27 20:37:32.632 soffice[7999:2137624] Task policy set failed: 4 ((os/kern) invalid argument)\n",
+  "renderer": "LibreOffice 26.2.6.3"
+}

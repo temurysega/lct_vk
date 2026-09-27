@@ -1,0 +1,169 @@
+{
+  "schema_version": "1.6",
+  "canvas": {
+    "width_inches": 10.83,
+    "height_inches": 7.5,
+    "aspect_ratio": 1.444
+  },
+  "typography": {
+    "primary_font": "游ゴシック",
+    "heading_font": "游ゴシック",
+    "families": [],
+    "theme_fonts": {
+      "majorFont": "游ゴシック",
+      "minorFont": "游ゴシック"
+    },
+    "title_size_pt": 32.0,
+    "content_title_size_pt": 34.0,
+    "cover_title_size_pt": 45.900000000000006,
+    "body_size_pt": 18.0,
+    "observed_sizes_pt": []
+  },
+  "colors": {
+    "theme": [
+      {
+        "role": "dk1",
+        "hex": "000000"
+      },
+      {
+        "role": "lt1",
+        "hex": "FFFFFF"
+      },
+      {
+        "role": "dk2",
+        "hex": "44546A"
+      },
+      {
+        "role": "lt2",
+        "hex": "E7E6E6"
+      },
+      {
+        "role": "accent1",
+        "hex": "5B9BD5"
+      },
+      {
+        "role": "accent2",
+        "hex": "ED7D31"
+      },
+      {
+        "role": "accent3",
+        "hex": "A5A5A5"
+      },
+      {
+        "role": "accent4",
+        "hex": "FFC000"
+      },
+      {
+        "role": "accent5",
+        "hex": "4472C4"
+      },
+      {
+        "role": "accent6",
+        "hex": "70AD47"
+      },
+      {
+        "role": "hlink",
+        "hex": "0563C1"
+      },
+      {
+        "role": "folHlink",
+        "hex": "954F72"
+      }
+    ],
+    "observed": [
+      {
+        "hex": "000000",
+        "usage_count": 22
+      },
+      {
+        "hex": "FFFFFF",
+        "usage_count": 5
+      },
+      {
+        "hex": "BFBFBF",
+        "usage_count": 3
+      },
+      {
+        "hex": "44546A",
+        "usage_count": 2
+      },
+      {
+        "hex": "E7E6E6",
+        "usage_count": 2
+      },
+      {
+        "hex": "5B9BD5",
+        "usage_count": 2
+      },
+      {
+        "hex": "ED7D31",
+        "usage_count": 2
+      },
+      {
+        "hex": "A5A5A5",
+        "usage_count": 2
+      },
+      {
+        "hex": "FFC000",
+        "usage_count": 2
+      },
+      {
+        "hex": "4472C4",
+        "usage_count": 2
+      },
+      {
+        "hex": "70AD47",
+        "usage_count": 2
+      },
+      {
+        "hex": "0563C1",
+        "usage_count": 2
+      },
+      {
+        "hex": "954F72",
+        "usage_count": 2
+      }
+    ]
+  },
+  "brand": {
+    "background": "FFFFFF",
+    "heading": "10243A",
+    "body": "10243A",
+    "accent": "0563C1",
+    "cover_background": "FFFFFF",
+    "cover_heading": "10243A",
+    "cover_body": "10243A",
+    "content_background": "FFFFFF",
+    "content_heading": "10243A",
+    "content_body": "10243A",
+    "closing_background": "FFFFFF",
+    "closing_heading": "10243A",
+    "closing_body": "10243A"
+  },
+  "source_model": {
+    "fragmented": false,
+    "flattened": false,
+    "pdf_shape_ratio": 0.0,
+    "flattened_slide_ratio": 0.0,
+    "composition_mode": "template_layout"
+  },
+  "layout_rules": {
+    "header_navigation": {
+      "detected": false
+    },
+    "closing_panel": {
+      "detected": false
+    }
+  },
+  "spacing": {
+    "typical_left_margin_inches": 0.25,
+    "typical_right_margin_inches": 0.25,
+    "minimum_gap_inches": 0.12
+  },
+  "imagery": {
+    "asset_count": 0,
+    "assets": [],
+    "master_assets": [],
+    "layout_assets": []
+  }
+}

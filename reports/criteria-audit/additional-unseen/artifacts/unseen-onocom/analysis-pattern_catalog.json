@@ -1,0 +1,907 @@
+{
+  "schema_version": "1.6",
+  "pattern_count": 11,
+  "patterns": [
+    {
+      "id": "layout-0",
+      "name": "タイトル スライド",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "cover",
+        "image"
+      ],
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "center_title_",
+          "x": 0.248,
+          "y": 1.227,
+          "w": 10.338,
+          "h": 2.2,
+          "font": {
+            "size_pt": 40.0
+          },
+          "alignment": null
+        },
+        {
+          "idx": 1,
+          "type": "subtitle_",
+          "x": 0.248,
+          "y": 3.555,
+          "w": 10.338,
+          "h": 0.514,
+          "font": {
+            "size_pt": 24.0
+          },
+          "alignment": null
+        },
+        {
+          "idx": 10,
+          "type": "picture_",
+          "x": 3.622,
+          "y": 5.411,
+          "w": 3.589,
+          "h": 0.939,
+          "font": {
+            "bold": false
+          },
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.16360000000000002,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.041,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 3,
+        "complexity": 0.075,
+        "rhetorical_pattern": "hero",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        1
+      ],
+      "layout_assets": [],
+      "background": {
+        "type": "inherit"
+      }
+    },
+    {
+      "id": "layout-1",
+      "name": "タイトルとコンテンツ",
+      "layout_index": 1,
+      "master_index": 0,
+      "roles": [
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.248,
+          "y": 0.031,
+          "w": 10.338,
+          "h": 0.638,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": 1,
+          "type": "object_",
+          "x": 0.248,
+          "y": 0.854,
+          "w": 10.338,
+          "h": 5.816,
+          "font": {
+            "size_pt": 24.0,
+            "bold": false
+          },
+          "alignment": null
+        },
+        {
+          "idx": 11,
+          "type": "footer_",
+          "x": 0.248,
+          "y": 6.951,
+          "w": 6.997,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": 12,
+          "type": "slide_number_",
+          "x": 7.355,
+          "y": 6.951,
+          "w": 3.231,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0041333333333333335,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 833,
+        "usable_body_zones": 1,
+        "body_area_ratio": 0.74,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 2,
+        "complexity": 0.075,
+        "rhetorical_pattern": "multi_card",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        2
+      ],
+      "layout_assets": [],
+      "background": {
+        "type": "inherit"
+      }
+    },
+    {
+      "id": "layout-2",
+      "name": "セクション見出し",
+      "layout_index": 2,
+      "master_index": 0,
+      "roles": [
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.248,
+          "y": 1.87,
+          "w": 10.326,
+          "h": 3.12,
+          "font": {
+            "size_pt": 40.0
+          },
+          "alignment": null
+        },
+        {
+          "idx": 1,
+          "type": "body_",
+          "x": 0.248,
+          "y": 5.019,
+          "w": 10.326,
+          "h": 1.641,
+          "font": {
+            "size_pt": 24.0,
+            "color": "000000",
+            "color_theme_ref": "tx1"
+          },
+          "alignment": null
+        },
+        {
+          "idx": 11,
+          "type": "footer_",
+          "x": 0.248,
+          "y": 6.951,
+          "w": 6.997,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": 12,
+          "type": "slide_number_",
+          "x": 7.355,
+          "y": 6.951,
+          "w": 3.231,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.24933333333333335,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 235,
+        "usable_body_zones": 1,
+        "body_area_ratio": 0.209,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 0,
+        "complexity": 0.05,
+        "rhetorical_pattern": "multi_card",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [],
+      "layout_assets": [],
+      "background": {
+        "type": "inherit"
+      }
+    },
+    {
+      "id": "layout-3",
+      "name": "2 つのコンテンツ",
+      "layout_index": 3,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "comparison"
+      ],
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.248,
+          "y": 0.031,
+          "w": 10.338,
+          "h": 0.638,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": 1,
+          "type": "object_",
+          "x": 0.248,
+          "y": 0.872,
+          "w": 5.101,
+          "h": 5.744,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": 2,
+          "type": "object_",
+          "x": 5.484,
+          "y": 0.872,
+          "w": 5.101,
+          "h": 5.744,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": 11,
+          "type": "footer_",
+          "x": 0.248,
+          "y": 6.951,
+          "w": 6.997,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": 12,
+          "type": "slide_number_",
+          "x": 7.355,
+          "y": 6.951,
+          "w": 3.231,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0041333333333333335,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 1442,
+        "usable_body_zones": 2,
+        "body_area_ratio": 0.721,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 2,
+        "bullets_per_zone": 3,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 0,
+        "complexity": 0.062,
+        "rhetorical_pattern": "comparison",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [],
+      "layout_assets": [],
+      "background": {
+        "type": "inherit"
+      }
+    },
+    {
+      "id": "layout-4",
+      "name": "比較",
+      "layout_index": 4,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "comparison"
+      ],
+      "placeholders": [
+        {
+          "idx": 1,
+          "type": "body_",
+          "x": 0.248,
+          "y": 0.851,
+          "w": 5.081,
+          "h": 0.901,
+          "font": {
+            "size_pt": 20.0,
+            "bold": true
+          },
+          "alignment": null
+        },
+        {
+          "idx": 2,
+          "type": "object_",
+          "x": 0.248,
+          "y": 1.935,
+          "w": 5.081,
+          "h": 4.766,
+          "font": {
+            "size_pt": 20.0
+          },
+          "alignment": null
+        },
+        {
+          "idx": 3,
+          "type": "body_",
+          "x": 5.484,
+          "y": 0.851,
+          "w": 5.101,
+          "h": 0.901,
+          "font": {
+            "size_pt": 20.0,
+            "bold": true
+          },
+          "alignment": null
+        },
+        {
+          "idx": 4,
+          "type": "object_",
+          "x": 5.484,
+          "y": 1.935,
+          "w": 5.101,
+          "h": 4.766,
+          "font": {
+            "size_pt": 20.0
+          },
+          "alignment": null
+        },
+        {
+          "idx": 11,
+          "type": "footer_",
+          "x": 0.248,
+          "y": 6.951,
+          "w": 6.997,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": 12,
+          "type": "slide_number_",
+          "x": 7.355,
+          "y": 6.951,
+          "w": 3.231,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.248,
+          "y": 0.031,
+          "w": 10.338,
+          "h": 0.638,
+          "font": {},
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0041333333333333335,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 1151,
+        "usable_body_zones": 4,
+        "body_area_ratio": 0.71,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 4,
+        "bullets_per_zone": 5,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 0,
+        "complexity": 0.087,
+        "rhetorical_pattern": "comparison",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [],
+      "layout_assets": [],
+      "background": {
+        "type": "inherit"
+      }
+    },
+    {
+      "id": "layout-5",
+      "name": "タイトルのみ",
+      "layout_index": 5,
+      "master_index": 0,
+      "roles": [
+        "section"
+      ],
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.248,
+          "y": 0.031,
+          "w": 10.338,
+          "h": 0.638,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": 11,
+          "type": "footer_",
+          "x": 0.248,
+          "y": 6.951,
+          "w": 6.997,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": 12,
+          "type": "slide_number_",
+          "x": 7.355,
+          "y": 6.951,
+          "w": 3.231,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0041333333333333335,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 0,
+        "complexity": 0.037,
+        "rhetorical_pattern": "section",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [],
+      "layout_assets": [],
+      "background": {
+        "type": "inherit"
+      }
+    },
+    {
+      "id": "layout-6",
+      "name": "タイトル付きの\nコンテンツ",
+      "layout_index": 6,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "comparison"
+      ],
+      "placeholders": [
+        {
+          "idx": 1,
+          "type": "object_",
+          "x": 4.606,
+          "y": 1.08,
+          "w": 5.484,
+          "h": 5.33,
+          "font": {
+            "size_pt": 24.0
+          },
+          "alignment": null
+        },
+        {
+          "idx": 2,
+          "type": "body_",
+          "x": 0.746,
+          "y": 1.08,
+          "w": 3.494,
+          "h": 5.339,
+          "font": {
+            "size_pt": 16.0
+          },
+          "alignment": null
+        },
+        {
+          "idx": 11,
+          "type": "footer_",
+          "x": 0.248,
+          "y": 6.951,
+          "w": 6.997,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": 12,
+          "type": "slide_number_",
+          "x": 7.355,
+          "y": 6.951,
+          "w": 3.231,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.248,
+          "y": 0.031,
+          "w": 10.338,
+          "h": 0.638,
+          "font": {},
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0041333333333333335,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 986,
+        "usable_body_zones": 2,
+        "body_area_ratio": 0.59,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 2,
+        "bullets_per_zone": 3,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 0,
+        "complexity": 0.062,
+        "rhetorical_pattern": "comparison",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [],
+      "layout_assets": [],
+      "background": {
+        "type": "inherit"
+      }
+    },
+    {
+      "id": "layout-7",
+      "name": "タイトル付きの図",
+      "layout_index": 7,
+      "master_index": 0,
+      "roles": [
+        "image",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": 1,
+          "type": "picture_",
+          "x": 4.606,
+          "y": 1.08,
+          "w": 5.484,
+          "h": 5.33,
+          "font": {
+            "size_pt": 24.0
+          },
+          "alignment": null
+        },
+        {
+          "idx": 2,
+          "type": "body_",
+          "x": 0.746,
+          "y": 1.08,
+          "w": 3.494,
+          "h": 5.339,
+          "font": {
+            "size_pt": 16.0
+          },
+          "alignment": null
+        },
+        {
+          "idx": 11,
+          "type": "footer_",
+          "x": 0.248,
+          "y": 6.951,
+          "w": 6.997,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": 12,
+          "type": "slide_number_",
+          "x": 7.355,
+          "y": 6.951,
+          "w": 3.231,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.248,
+          "y": 0.031,
+          "w": 10.338,
+          "h": 0.638,
+          "font": {},
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0041333333333333335,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 581,
+        "usable_body_zones": 1,
+        "body_area_ratio": 0.23,
+        "image_slot_area_ratio": 0.36,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 0,
+        "complexity": 0.062,
+        "rhetorical_pattern": "multi_card",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [],
+      "layout_assets": [],
+      "background": {
+        "type": "inherit"
+      }
+    },
+    {
+      "id": "layout-8",
+      "name": "タイトルと\n縦書きテキスト",
+      "layout_index": 8,
+      "master_index": 0,
+      "roles": [
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": 1,
+          "type": "body_",
+          "x": 0.248,
+          "y": 0.854,
+          "w": 10.338,
+          "h": 5.816,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": 11,
+          "type": "footer_",
+          "x": 0.248,
+          "y": 6.951,
+          "w": 6.997,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": 12,
+          "type": "slide_number_",
+          "x": 7.355,
+          "y": 6.951,
+          "w": 3.231,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.248,
+          "y": 0.031,
+          "w": 10.338,
+          "h": 0.638,
+          "font": {},
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0041333333333333335,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 1480,
+        "usable_body_zones": 1,
+        "body_area_ratio": 0.74,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 0,
+        "complexity": 0.05,
+        "rhetorical_pattern": "multi_card",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [],
+      "layout_assets": [],
+      "background": {
+        "type": "inherit"
+      }
+    },
+    {
+      "id": "slide-1",
+      "name": "Exemplar slide 1",
+      "source_kind": "slide_exemplar",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "cover"
+      ],
+      "placeholders": [],
+      "capacity": {
+        "has_title_zone": false,
+        "title_top_ratio": 0,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 3,
+        "complexity": 0.037,
+        "rhetorical_pattern": "hero",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        1
+      ],
+      "layout_assets": [],
+      "slide_assets": [],
+      "background": {
+        "color": "FFFFFF",
+        "source": "master"
+      }
+    },
+    {
+      "id": "slide-2",
+      "name": "Exemplar slide 2",
+      "source_kind": "slide_exemplar",
+      "layout_index": 1,
+      "master_index": 0,
+      "roles": [
+        "closing",
+        "section"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.248,
+          "y": 6.951,
+          "w": 6.997,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.355,
+          "y": 6.951,
+          "w": 3.231,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.9268,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 69,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 2,
+        "complexity": 0.05,
+        "rhetorical_pattern": "closing",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        2
+      ],
+      "layout_assets": [],
+      "slide_assets": [],
+      "background": {
+        "color": "FFFFFF",
+        "source": "master"
+      }
+    }
+  ]
+}

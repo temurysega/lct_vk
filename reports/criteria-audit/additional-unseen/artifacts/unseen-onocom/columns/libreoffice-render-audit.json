@@ -1,0 +1,71 @@
+{
+  "renderer": "LibreOffice",
+  "stage": "External acceptance checks on saved artifact; no repairs",
+  "fill": {
+    "status": "warning",
+    "slides": [
+      {
+        "slide": 2,
+        "coverage": 0.808
+      },
+      {
+        "slide": 3,
+        "coverage": 0.641
+      },
+      {
+        "slide": 4,
+        "coverage": 0.716
+      },
+      {
+        "slide": 5,
+        "coverage": 0.702
+      },
+      {
+        "slide": 6,
+        "coverage": 0.799
+      },
+      {
+        "slide": 7,
+        "coverage": 0.681
+      },
+      {
+        "slide": 8,
+        "coverage": 0.66
+      },
+      {
+        "slide": 9,
+        "coverage": 0.487
+      }
+    ],
+    "issues": [
+      {
+        "id": "4f54373032a892cf",
+        "slide": 2,
+        "code": "slide_overfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.808,
+        "bounds": [],
+        "message": "Контент занимает 81% слайда (больше трёх четвертей)",
+        "repairable": true
+      },
+      {
+        "id": "271b9808407c8054",
+        "slide": 6,
+        "code": "slide_overfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.799,
+        "bounds": [],
+        "message": "Контент занимает 80% слайда (больше трёх четвертей)",
+        "repairable": true
+      }
+    ]
+  },
+  "contrast": {
+    "status": "passed",
+    "checked_spans": 144,
+    "uncertain_spans": 0,
+    "issues": []
+  }
+}

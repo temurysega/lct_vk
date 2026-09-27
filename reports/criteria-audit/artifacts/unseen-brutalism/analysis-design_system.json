@@ -1,0 +1,334 @@
+{
+  "schema_version": "1.6",
+  "canvas": {
+    "width_inches": 13.33,
+    "height_inches": 7.5,
+    "aspect_ratio": 1.7773
+  },
+  "typography": {
+    "primary_font": "Consolas",
+    "heading_font": "+mj-lt",
+    "families": [
+      "+mj-lt",
+      "+mn-lt",
+      "Consolas"
+    ],
+    "theme_fonts": {
+      "majorFont": "Arial Black",
+      "minorFont": "Cambria"
+    },
+    "title_size_pt": 90.0,
+    "content_title_size_pt": 40.0,
+    "cover_title_size_pt": 52.0,
+    "body_size_pt": 16.0,
+    "observed_sizes_pt": [
+      90.0,
+      60.0,
+      57.0,
+      48.0,
+      27.0,
+      24.8,
+      18.0,
+      16.5,
+      15.0,
+      12.0,
+      9.0
+    ]
+  },
+  "colors": {
+    "theme": [
+      {
+        "role": "dk1",
+        "hex": "1C1A17"
+      },
+      {
+        "role": "lt1",
+        "hex": "F2F0EA"
+      },
+      {
+        "role": "dk2",
+        "hex": "1F497D"
+      },
+      {
+        "role": "lt2",
+        "hex": "E2DFD5"
+      },
+      {
+        "role": "accent1",
+        "hex": "14110F"
+      },
+      {
+        "role": "accent2",
+        "hex": "C8331E"
+      },
+      {
+        "role": "accent3",
+        "hex": "6E6A62"
+      },
+      {
+        "role": "accent4",
+        "hex": "14110F"
+      },
+      {
+        "role": "accent5",
+        "hex": "55514A"
+      },
+      {
+        "role": "accent6",
+        "hex": "9A958B"
+      },
+      {
+        "role": "hlink",
+        "hex": "C8331E"
+      },
+      {
+        "role": "folHlink",
+        "hex": "6E6A62"
+      }
+    ],
+    "observed": [
+      {
+        "hex": "14110F",
+        "usage_count": 195
+      },
+      {
+        "hex": "1C1A17",
+        "usage_count": 147
+      },
+      {
+        "hex": "55514A",
+        "usage_count": 66
+      },
+      {
+        "hex": "9A958B",
+        "usage_count": 60
+      },
+      {
+        "hex": "F2F0EA",
+        "usage_count": 50
+      },
+      {
+        "hex": "C8331E",
+        "usage_count": 40
+      },
+      {
+        "hex": "6E6A62",
+        "usage_count": 6
+      },
+      {
+        "hex": "C9C5BA",
+        "usage_count": 4
+      },
+      {
+        "hex": "6B6865",
+        "usage_count": 2
+      },
+      {
+        "hex": "D4D1C7",
+        "usage_count": 2
+      },
+      {
+        "hex": "7D7A74",
+        "usage_count": 2
+      },
+      {
+        "hex": "6F6D69",
+        "usage_count": 2
+      },
+      {
+        "hex": "E0DDD3",
+        "usage_count": 2
+      },
+      {
+        "hex": "1F497D",
+        "usage_count": 2
+      },
+      {
+        "hex": "E2DFD5",
+        "usage_count": 2
+      },
+      {
+        "hex": "8C8A86",
+        "usage_count": 1
+      }
+    ]
+  },
+  "brand": {
+    "background": "F2F0EA",
+    "heading": "14110F",
+    "body": "1C1A17",
+    "accent": "1C1A17",
+    "cover_background": "F2F0EA",
+    "cover_heading": "14110F",
+    "cover_body": "55514A",
+    "content_background": "F2F0EA",
+    "content_heading": "14110F",
+    "content_body": "1C1A17",
+    "closing_background": "F2F0EA",
+    "closing_heading": "14110F",
+    "closing_body": "1C1A17"
+  },
+  "source_model": {
+    "fragmented": false,
+    "flattened": false,
+    "pdf_shape_ratio": 0.0,
+    "flattened_slide_ratio": 0.0,
+    "composition_mode": "template_layout"
+  },
+  "layout_rules": {
+    "header_navigation": {
+      "detected": false
+    },
+    "closing_panel": {
+      "detected": false
+    }
+  },
+  "spacing": {
+    "typical_left_margin_inches": 3.42,
+    "typical_right_margin_inches": 6.75,
+    "minimum_gap_inches": 0.12
+  },
+  "imagery": {
+    "asset_count": 4,
+    "assets": [
+      {
+        "ref": "slide1_11_d24dd762b4.png",
+        "media_type": "image/png",
+        "width_px": 1000,
+        "height_px": 667,
+        "edge_color": "6B6865",
+        "dominant_colors": [
+          {
+            "hex": "6F6D69",
+            "ratio": 0.1591
+          },
+          {
+            "hex": "8C8A86",
+            "ratio": 0.1479
+          },
+          {
+            "hex": "86837F",
+            "ratio": 0.1427
+          },
+          {
+            "hex": "171412",
+            "ratio": 0.1404
+          },
+          {
+            "hex": "797773",
+            "ratio": 0.1351
+          },
+          {
+            "hex": "999692",
+            "ratio": 0.1118
+          }
+        ],
+        "source": "slide"
+      },
+      {
+        "ref": "slide7_22_a72bb16147.png",
+        "media_type": "image/png",
+        "width_px": 900,
+        "height_px": 675,
+        "edge_color": "D4D1C7",
+        "dominant_colors": [
+          {
+            "hex": "E0DDD3",
+            "ratio": 0.1762
+          },
+          {
+            "hex": "98958E",
+            "ratio": 0.1458
+          },
+          {
+            "hex": "64615C",
+            "ratio": 0.1371
+          },
+          {
+            "hex": "77746E",
+            "ratio": 0.1273
+          },
+          {
+            "hex": "87847E",
+            "ratio": 0.1273
+          },
+          {
+            "hex": "4C4945",
+            "ratio": 0.1204
+          }
+        ],
+        "source": "slide"
+      },
+      {
+        "ref": "slide12_22_a72bb16147.png",
+        "media_type": "image/png",
+        "width_px": 1000,
+        "height_px": 667,
+        "edge_color": "C9C5BA",
+        "dominant_colors": [
+          {
+            "hex": "C9C5BA",
+            "ratio": 0.2247
+          },
+          {
+            "hex": "605D57",
+            "ratio": 0.1308
+          },
+          {
+            "hex": "161311",
+            "ratio": 0.1285
+          },
+          {
+            "hex": "33302C",
+            "ratio": 0.128
+          },
+          {
+            "hex": "1F1C1A",
+            "ratio": 0.1214
+          },
+          {
+            "hex": "484540",
+            "ratio": 0.1214
+          }
+        ],
+        "source": "slide"
+      },
+      {
+        "ref": "slide14_34_8cab851fd1.png",
+        "media_type": "image/png",
+        "width_px": 768,
+        "height_px": 512,
+        "edge_color": "7D7A74",
+        "dominant_colors": [
+          {
+            "hex": "817E78",
+            "ratio": 0.1374
+          },
+          {
+            "hex": "93908A",
+            "ratio": 0.136
+          },
+          {
+            "hex": "6D6A64",
+            "ratio": 0.1344
+          },
+          {
+            "hex": "9D9A93",
+            "ratio": 0.1294
+          },
+          {
+            "hex": "A7A49C",
+            "ratio": 0.1289
+          },
+          {
+            "hex": "797670",
+            "ratio": 0.1221
+          }
+        ],
+        "source": "slide"
+      }
+    ],
+    "master_assets": [],
+    "layout_assets": []
+  }
+}

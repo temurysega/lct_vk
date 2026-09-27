@@ -1,0 +1,2 @@
+usage: run_dataset.py [-h] [--config CONFIG]
+run_dataset.py: error: No PPTX templates found in the configured directory

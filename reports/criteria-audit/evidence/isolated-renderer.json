@@ -1,0 +1,8 @@
+{
+  "version": "26.2.6.3",
+  "source": "https://download.documentfoundation.org/libreoffice/stable/26.2.6/mac/aarch64/LibreOffice_26.2.6_MacOS_aarch64.dmg",
+  "sha256": "94bb3248df074c225490a8a6d1d9dc87c7d6783dbb7a8e9f0d0c3d94348552af",
+  "verification": "Matched SHA-256 published in official mirrorlist",
+  "execution": "Read-only mounted DMG under /tmp; no /Applications installation; every export uses isolated temporary profile",
+  "app_path": "/tmp/branddeck-criteria-audit.TZjsAv/lo-mount/LibreOffice.app/Contents/MacOS/soffice"
+}

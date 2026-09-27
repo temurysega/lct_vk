@@ -1,0 +1,138 @@
+[
+  {
+    "case": "unsupported content",
+    "http_status": 400,
+    "response": {
+      "detail": "Неподдерживаемый формат материалов."
+    },
+    "created_job_records": [
+      {
+        "job_id": "b5d5eb65d04d4e798f21ee5408f675b6",
+        "status": "queued",
+        "stage": "queued",
+        "progress": 0,
+        "template_id": "vk-tech-shablon-cbbe3aa6",
+        "slide_count": 5,
+        "offline": true,
+        "created_at": "2026-09-27T17:11:31.322264+00:00",
+        "updated_at": "2026-09-27T17:11:31.322273+00:00"
+      }
+    ]
+  },
+  {
+    "case": "empty content",
+    "http_status": 400,
+    "response": {
+      "detail": "Выбранный файл пуст."
+    },
+    "created_job_records": [
+      {
+        "job_id": "fd4d056ecd8a4d5bb1e7feec7ea3a74a",
+        "status": "queued",
+        "stage": "queued",
+        "progress": 0,
+        "template_id": "vk-tech-shablon-cbbe3aa6",
+        "slide_count": 5,
+        "offline": true,
+        "created_at": "2026-09-27T17:11:31.324012+00:00",
+        "updated_at": "2026-09-27T17:11:31.324016+00:00"
+      }
+    ]
+  },
+  {
+    "case": "PDF materials",
+    "http_status": 202,
+    "response": {
+      "job_id": "e1092a71c38a47dd899d1bf747588169",
+      "status": "queued",
+      "stage": "queued",
+      "progress": 0,
+      "template_id": "vk-tech-shablon-cbbe3aa6",
+      "slide_count": 5,
+      "offline": true,
+      "created_at": "2026-09-27T17:11:31.325956+00:00",
+      "updated_at": "2026-09-27T17:11:31.325961+00:00"
+    },
+    "terminal_job": {
+      "job_id": "e1092a71c38a47dd899d1bf747588169",
+      "status": "failed",
+      "stage": "failed",
+      "progress": 10,
+      "template_id": "vk-tech-shablon-cbbe3aa6",
+      "slide_count": 5,
+      "offline": true,
+      "created_at": "2026-09-27T17:11:31.325956+00:00",
+      "updated_at": "2026-09-27T17:11:31.331154+00:00",
+      "error": ".pdf document type requires the optional 'documents' dependencies"
+    },
+    "created_job_records": [
+      {
+        "job_id": "e1092a71c38a47dd899d1bf747588169",
+        "status": "failed",
+        "stage": "failed",
+        "progress": 10,
+        "template_id": "vk-tech-shablon-cbbe3aa6",
+        "slide_count": 5,
+        "offline": true,
+        "created_at": "2026-09-27T17:11:31.325956+00:00",
+        "updated_at": "2026-09-27T17:11:31.331154+00:00",
+        "error": ".pdf document type requires the optional 'documents' dependencies"
+      }
+    ]
+  },
+  {
+    "case": "malformed JSON",
+    "http_status": 202,
+    "response": {
+      "job_id": "234b18d871b846329bdf4b0d3d773c91",
+      "status": "queued",
+      "stage": "queued",
+      "progress": 0,
+      "template_id": "vk-tech-shablon-cbbe3aa6",
+      "slide_count": 5,
+      "offline": true,
+      "created_at": "2026-09-27T17:11:31.439147+00:00",
+      "updated_at": "2026-09-27T17:11:31.439152+00:00"
+    },
+    "terminal_job": {
+      "job_id": "234b18d871b846329bdf4b0d3d773c91",
+      "status": "failed",
+      "stage": "failed",
+      "progress": 10,
+      "template_id": "vk-tech-shablon-cbbe3aa6",
+      "slide_count": 5,
+      "offline": true,
+      "created_at": "2026-09-27T17:11:31.439147+00:00",
+      "updated_at": "2026-09-27T17:11:31.443693+00:00",
+      "error": "Expecting property name enclosed in double quotes: line 1 column 3 (char 2)"
+    },
+    "created_job_records": [
+      {
+        "job_id": "234b18d871b846329bdf4b0d3d773c91",
+        "status": "failed",
+        "stage": "failed",
+        "progress": 10,
+        "template_id": "vk-tech-shablon-cbbe3aa6",
+        "slide_count": 5,
+        "offline": true,
+        "created_at": "2026-09-27T17:11:31.439147+00:00",
+        "updated_at": "2026-09-27T17:11:31.443693+00:00",
+        "error": "Expecting property name enclosed in double quotes: line 1 column 3 (char 2)"
+      }
+    ]
+  },
+  {
+    "case": "cross-account download",
+    "http_status": 404,
+    "response": {
+      "detail": "Presentation not found"
+    }
+  },
+  {
+    "case": "synchronous source generation without exports",
+    "http_status": 200,
+    "status": "completed",
+    "planner_mode": "offline",
+    "presentation_id": "pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201131"
+  }
+]

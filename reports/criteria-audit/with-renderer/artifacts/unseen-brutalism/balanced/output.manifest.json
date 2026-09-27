@@ -1,0 +1,545 @@
+{
+  "output": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201226/output.pptx",
+  "slide_count": 10,
+  "patterns_used": [
+    "slide-11",
+    "slide-6",
+    "slide-1",
+    "slide-12",
+    "slide-5",
+    "slide-6",
+    "slide-2",
+    "slide-2",
+    "slide-5",
+    "slide-10"
+  ],
+  "source_patterns": [
+    "slide-11",
+    "slide-6",
+    "slide-1",
+    "slide-12",
+    "slide-5",
+    "slide-6",
+    "slide-2",
+    "slide-2",
+    "slide-5",
+    "slide-10"
+  ],
+  "composition_mode": "template_layout",
+  "visuals": {
+    "diagrams": 7,
+    "pictograms": 26,
+    "images": 1,
+    "illustrations": 0,
+    "by_type": {
+      "icon_grid": 7,
+      "image": 1
+    },
+    "slides": [
+      {
+        "slide": 2,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 1,
+        "icons": [
+          "users",
+          "file-text",
+          "headset",
+          "user"
+        ],
+        "icon_matches": 4,
+        "origin": "offline_rules"
+      },
+      {
+        "slide": 3,
+        "type": "image",
+        "asset_id": "ce1df8e504b38abe",
+        "source": "upload",
+        "match": "lexical",
+        "placement": "zone"
+      },
+      {
+        "slide": 4,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 1,
+        "icons": [
+          "building",
+          "circle-help",
+          "file-text",
+          "circle-check"
+        ],
+        "icon_matches": 4,
+        "origin": "offline_rules"
+      },
+      {
+        "slide": 5,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 1,
+        "icons": [
+          "users",
+          "life-buoy",
+          "circle-check",
+          "user"
+        ],
+        "icon_matches": 4,
+        "origin": "rendered_fill"
+      },
+      {
+        "slide": 6,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 1,
+        "icons": [
+          "brain",
+          "file-text",
+          "circle-check",
+          "user"
+        ],
+        "icon_matches": 4,
+        "origin": "offline_rules"
+      },
+      {
+        "slide": 7,
+        "type": "icon_grid",
+        "items": 3,
+        "native": true,
+        "columns": 1,
+        "icons": [
+          "rocket",
+          "hourglass",
+          "user"
+        ],
+        "icon_matches": 3,
+        "origin": "rendered_fill"
+      },
+      {
+        "slide": 8,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 1,
+        "icons": [
+          "users",
+          "chart-column",
+          "target",
+          "trophy"
+        ],
+        "icon_matches": 4,
+        "origin": "rendered_fill"
+      },
+      {
+        "slide": 9,
+        "type": "icon_grid",
+        "items": 3,
+        "native": true,
+        "columns": 1,
+        "icons": [
+          "rocket",
+          "users",
+          "chart-column"
+        ],
+        "icon_matches": 3,
+        "origin": "rendered_fill"
+      }
+    ],
+    "note": "Diagrams are native grouped shapes (SmartArt-style), not OOXML SmartArt parts."
+  },
+  "exemplar_cleanup": [
+    {
+      "slide": 1,
+      "removed": [
+        {
+          "shape": "Group 7",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 9",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 11",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 13",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 23",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 26",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 31",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 34",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 2,
+      "removed": [
+        {
+          "shape": "Line 5",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Group 8",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 10",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 12",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 23",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 27",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 30",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 33",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Group 36",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 3,
+      "removed": [
+        {
+          "shape": "Group 5",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 7",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 10",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 14",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 18",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 20",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 24",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 4,
+      "removed": [
+        {
+          "shape": "Group 7",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 9",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 11",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 16",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 19",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 21",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 25",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 28",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 5,
+      "removed": [
+        {
+          "shape": "Line 5",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Group 8",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 10",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 12",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 16",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 29",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 32",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 34",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 37",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 6,
+      "removed": [
+        {
+          "shape": "Line 5",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Group 8",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 10",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 12",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 23",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 27",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 30",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 33",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Group 36",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 7,
+      "removed": [
+        {
+          "shape": "Group 7",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "!!guide-numeral",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 11",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 17",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 20",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Freeform 21",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Group 31",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 34",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 8,
+      "removed": [
+        {
+          "shape": "Group 7",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "!!guide-numeral",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 11",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 17",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 20",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Freeform 21",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Group 31",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 34",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 9,
+      "removed": [
+        {
+          "shape": "Line 5",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Group 8",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 10",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 12",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 16",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 29",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 32",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 34",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 37",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 10,
+      "removed": [
+        {
+          "shape": "Line 5",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Line 6",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Group 9",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 11",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 13",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 19",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 25",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 31",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 35",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Group 38",
+          "reason": "erased_sample"
+        }
+      ]
+    }
+  ]
+}

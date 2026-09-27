@@ -1,0 +1,224 @@
+[
+  {
+    "deck": "with-renderer/artifacts/unseen-brutalism/balanced",
+    "source_sha256": "90549b837bd647f9617199d9fbe59046f9652b3b00e0835008b8aeabda53b444",
+    "units": 38,
+    "pdf_pages": 10,
+    "missing_from_plan": [],
+    "missing_from_pptx": [],
+    "not_literally_found_in_pdf": [],
+    "pdf_fonts": {
+      "BAAAAA+DejaVuSansMono-Bold": 10,
+      "CAAAAA+DejaVuSansMono": 10
+    },
+    "planner_mode": "offline",
+    "method": "PPTX/plan fields from product coverage; PDF text independently normalized, no semantic verification"
+  },
+  {
+    "deck": "with-renderer/artifacts/unseen-brutalism/columns",
+    "source_sha256": "90549b837bd647f9617199d9fbe59046f9652b3b00e0835008b8aeabda53b444",
+    "units": 38,
+    "pdf_pages": 10,
+    "missing_from_plan": [],
+    "missing_from_pptx": [],
+    "not_literally_found_in_pdf": [],
+    "pdf_fonts": {
+      "BAAAAA+DejaVuSansMono-Bold": 10,
+      "CAAAAA+DejaVuSansMono": 10
+    },
+    "planner_mode": "offline",
+    "method": "PPTX/plan fields from product coverage; PDF text independently normalized, no semantic verification"
+  },
+  {
+    "deck": "with-renderer/artifacts/unseen-brutalism/focus",
+    "source_sha256": "90549b837bd647f9617199d9fbe59046f9652b3b00e0835008b8aeabda53b444",
+    "units": 38,
+    "pdf_pages": 10,
+    "missing_from_plan": [],
+    "missing_from_pptx": [],
+    "not_literally_found_in_pdf": [],
+    "pdf_fonts": {
+      "BAAAAA+DejaVuSansMono-Bold": 10,
+      "CAAAAA+DejaVuSansMono": 10
+    },
+    "planner_mode": "offline",
+    "method": "PPTX/plan fields from product coverage; PDF text independently normalized, no semantic verification"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-education/balanced",
+    "source_sha256": "90549b837bd647f9617199d9fbe59046f9652b3b00e0835008b8aeabda53b444",
+    "units": 38,
+    "pdf_pages": 10,
+    "missing_from_plan": [],
+    "missing_from_pptx": [],
+    "not_literally_found_in_pdf": [],
+    "pdf_fonts": {
+      "BAAAAA+ArialUnicodeMS": 10,
+      "CAAAAA+Arial-Black": 10
+    },
+    "planner_mode": "offline",
+    "method": "PPTX/plan fields from product coverage; PDF text independently normalized, no semantic verification"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-education/columns",
+    "source_sha256": "90549b837bd647f9617199d9fbe59046f9652b3b00e0835008b8aeabda53b444",
+    "units": 38,
+    "pdf_pages": 10,
+    "missing_from_plan": [],
+    "missing_from_pptx": [],
+    "not_literally_found_in_pdf": [],
+    "pdf_fonts": {
+      "BAAAAA+ArialUnicodeMS": 10,
+      "CAAAAA+Arial-Black": 10
+    },
+    "planner_mode": "offline",
+    "method": "PPTX/plan fields from product coverage; PDF text independently normalized, no semantic verification"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-education/focus",
+    "source_sha256": "90549b837bd647f9617199d9fbe59046f9652b3b00e0835008b8aeabda53b444",
+    "units": 38,
+    "pdf_pages": 10,
+    "missing_from_plan": [],
+    "missing_from_pptx": [],
+    "not_literally_found_in_pdf": [],
+    "pdf_fonts": {
+      "BAAAAA+ArialUnicodeMS": 10,
+      "CAAAAA+Arial-Black": 10
+    },
+    "planner_mode": "offline",
+    "method": "PPTX/plan fields from product coverage; PDF text independently normalized, no semantic verification"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-tech/balanced",
+    "source_sha256": "90549b837bd647f9617199d9fbe59046f9652b3b00e0835008b8aeabda53b444",
+    "units": 38,
+    "pdf_pages": 10,
+    "missing_from_plan": [],
+    "missing_from_pptx": [],
+    "not_literally_found_in_pdf": [],
+    "pdf_fonts": {
+      "BAAAAA+ArialUnicodeMS": 10,
+      "CAAAAA+Arial-Black": 10
+    },
+    "planner_mode": "offline",
+    "method": "PPTX/plan fields from product coverage; PDF text independently normalized, no semantic verification"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-tech/columns",
+    "source_sha256": "90549b837bd647f9617199d9fbe59046f9652b3b00e0835008b8aeabda53b444",
+    "units": 38,
+    "pdf_pages": 10,
+    "missing_from_plan": [],
+    "missing_from_pptx": [],
+    "not_literally_found_in_pdf": [],
+    "pdf_fonts": {
+      "BAAAAA+ArialUnicodeMS": 10,
+      "CAAAAA+Arial-Black": 10
+    },
+    "planner_mode": "offline",
+    "method": "PPTX/plan fields from product coverage; PDF text independently normalized, no semantic verification"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-tech/focus",
+    "source_sha256": "90549b837bd647f9617199d9fbe59046f9652b3b00e0835008b8aeabda53b444",
+    "units": 38,
+    "pdf_pages": 10,
+    "missing_from_plan": [],
+    "missing_from_pptx": [],
+    "not_literally_found_in_pdf": [],
+    "pdf_fonts": {
+      "BAAAAA+ArialUnicodeMS": 10,
+      "CAAAAA+Arial-Black": 10
+    },
+    "planner_mode": "offline",
+    "method": "PPTX/plan fields from product coverage; PDF text independently normalized, no semantic verification"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-workspace/balanced",
+    "source_sha256": "90549b837bd647f9617199d9fbe59046f9652b3b00e0835008b8aeabda53b444",
+    "units": 38,
+    "pdf_pages": 10,
+    "missing_from_plan": [],
+    "missing_from_pptx": [],
+    "not_literally_found_in_pdf": [],
+    "pdf_fonts": {
+      "BAAAAA+ArialUnicodeMS": 10,
+      "CAAAAA+Arial-Black": 10
+    },
+    "planner_mode": "offline",
+    "method": "PPTX/plan fields from product coverage; PDF text independently normalized, no semantic verification"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-workspace/columns",
+    "source_sha256": "90549b837bd647f9617199d9fbe59046f9652b3b00e0835008b8aeabda53b444",
+    "units": 38,
+    "pdf_pages": 10,
+    "missing_from_plan": [],
+    "missing_from_pptx": [],
+    "not_literally_found_in_pdf": [],
+    "pdf_fonts": {
+      "BAAAAA+ArialUnicodeMS": 10,
+      "CAAAAA+Arial-Black": 10
+    },
+    "planner_mode": "offline",
+    "method": "PPTX/plan fields from product coverage; PDF text independently normalized, no semantic verification"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-workspace/focus",
+    "source_sha256": "90549b837bd647f9617199d9fbe59046f9652b3b00e0835008b8aeabda53b444",
+    "units": 38,
+    "pdf_pages": 10,
+    "missing_from_plan": [],
+    "missing_from_pptx": [],
+    "not_literally_found_in_pdf": [],
+    "pdf_fonts": {
+      "BAAAAA+ArialUnicodeMS": 10,
+      "CAAAAA+Arial-Black": 10
+    },
+    "planner_mode": "offline",
+    "method": "PPTX/plan fields from product coverage; PDF text independently normalized, no semantic verification"
+  },
+  {
+    "deck": "additional-unseen/artifacts/unseen-onocom/balanced",
+    "source_sha256": "90549b837bd647f9617199d9fbe59046f9652b3b00e0835008b8aeabda53b444",
+    "units": 38,
+    "pdf_pages": 10,
+    "missing_from_plan": [],
+    "missing_from_pptx": [],
+    "not_literally_found_in_pdf": [],
+    "pdf_fonts": {
+      "BAAAAA+YuGo-Bold": 10
+    },
+    "planner_mode": "offline",
+    "method": "PPTX/plan fields from product coverage; PDF text independently normalized, no semantic verification"
+  },
+  {
+    "deck": "additional-unseen/artifacts/unseen-onocom/columns",
+    "source_sha256": "90549b837bd647f9617199d9fbe59046f9652b3b00e0835008b8aeabda53b444",
+    "units": 38,
+    "pdf_pages": 10,
+    "missing_from_plan": [],
+    "missing_from_pptx": [],
+    "not_literally_found_in_pdf": [],
+    "pdf_fonts": {
+      "BAAAAA+YuGo-Bold": 10
+    },
+    "planner_mode": "offline",
+    "method": "PPTX/plan fields from product coverage; PDF text independently normalized, no semantic verification"
+  },
+  {
+    "deck": "additional-unseen/artifacts/unseen-onocom/focus",
+    "source_sha256": "90549b837bd647f9617199d9fbe59046f9652b3b00e0835008b8aeabda53b444",
+    "units": 38,
+    "pdf_pages": 10,
+    "missing_from_plan": [],
+    "missing_from_pptx": [],
+    "not_literally_found_in_pdf": [],
+    "pdf_fonts": {
+      "BAAAAA+YuGo-Bold": 10
+    },
+    "planner_mode": "offline",
+    "method": "PPTX/plan fields from product coverage; PDF text independently normalized, no semantic verification"
+  }
+]

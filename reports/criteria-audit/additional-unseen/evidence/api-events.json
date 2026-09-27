@@ -1,0 +1,286 @@
+[
+  {
+    "label": "health",
+    "method": "GET",
+    "url": "/health",
+    "status": 200,
+    "seconds": 0.005,
+    "body": {
+      "status": "ok",
+      "version": "0.1.0"
+    }
+  },
+  {
+    "label": "config",
+    "method": "GET",
+    "url": "/api/config",
+    "status": 200,
+    "seconds": 0.001,
+    "body": {
+      "model_configured": false,
+      "image_generation_configured": false
+    }
+  },
+  {
+    "label": "unauthorized templates",
+    "method": "GET",
+    "url": "/v1/templates",
+    "status": 401,
+    "seconds": 0.001,
+    "body": {
+      "detail": "Войдите в аккаунт."
+    }
+  },
+  {
+    "label": "empty template",
+    "method": "POST",
+    "url": "/v1/templates/analyze",
+    "status": 400,
+    "seconds": 0.003,
+    "body": {
+      "detail": "Выбранный файл пуст."
+    }
+  },
+  {
+    "label": "corrupt template",
+    "method": "POST",
+    "url": "/v1/templates/analyze",
+    "status": 400,
+    "seconds": 0.01,
+    "body": {
+      "detail": "Не удалось прочитать шаблон. Проверьте файл PPTX или PDF."
+    }
+  },
+  {
+    "label": "wrong extension",
+    "method": "POST",
+    "url": "/v1/templates/analyze",
+    "status": 400,
+    "seconds": 0.001,
+    "body": {
+      "detail": "A .pptx or .pdf template is required"
+    }
+  },
+  {
+    "label": "unseen-onocom analysis",
+    "method": "POST",
+    "url": "/v1/templates/analyze",
+    "status": 200,
+    "seconds": 0.081,
+    "body": {
+      "schema_version": "1.6",
+      "template_id": "onocom-powerpoint-template-4bbb072c",
+      "source_file": "onocom-powerpoint-template.pptx",
+      "source_sha256": "4bbb072ce87a0d82ebe1c7fcf63c694bc3c131cc1b904cddc242de3b544d88df",
+      "slide_count": 2,
+      "master_count": 1,
+      "layout_count": 9,
+      "pattern_count": 11,
+      "ai_enhanced": false,
+      "vision_preview_count": 2,
+      "vision_assisted": false,
+      "imported_from_pdf": false,
+      "pdf_import": null,
+      "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/c093f54954664a18cbf24d399c0be042/templates/onocom-powerpoint-template-4bbb072c"
+    }
+  },
+  {
+    "label": "unseen-onocom submit",
+    "method": "POST",
+    "url": "/v1/presentations/jobs",
+    "status": 202,
+    "seconds": 0.01,
+    "body": {
+      "job_id": "2771b4c539ed4b51ba5ef6a22ca438e6",
+      "status": "queued",
+      "stage": "queued",
+      "progress": 0,
+      "template_id": "onocom-powerpoint-template-4bbb072c",
+      "slide_count": 10,
+      "offline": true,
+      "created_at": "2026-09-27T17:20:41.891024+00:00",
+      "updated_at": "2026-09-27T17:20:41.891031+00:00"
+    }
+  },
+  {
+    "label": "unseen-onocom/balanced download pptx",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-202043/download?format=pptx",
+    "status": 200,
+    "seconds": 0.005,
+    "body": {
+      "bytes": 1794578,
+      "content_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    }
+  },
+  {
+    "label": "unseen-onocom/balanced download pdf",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-202043/download?format=pdf",
+    "status": 200,
+    "seconds": 0.002,
+    "body": {
+      "bytes": 247988,
+      "content_type": "application/pdf"
+    }
+  },
+  {
+    "label": "unseen-onocom/balanced download html",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-202043/download?format=html",
+    "status": 200,
+    "seconds": 0.003,
+    "body": {
+      "bytes": 707583,
+      "content_type": "text/html; charset=utf-8"
+    }
+  },
+  {
+    "label": "unseen-onocom/balanced preview",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-202043/preview/1",
+    "status": 200,
+    "seconds": 0.002,
+    "body": {
+      "bytes": 22709,
+      "content_type": "image/png"
+    }
+  },
+  {
+    "label": "unseen-onocom/columns download pptx",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-202047/download?format=pptx",
+    "status": 200,
+    "seconds": 0.004,
+    "body": {
+      "bytes": 1797344,
+      "content_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    }
+  },
+  {
+    "label": "unseen-onocom/columns download pdf",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-202047/download?format=pdf",
+    "status": 200,
+    "seconds": 0.002,
+    "body": {
+      "bytes": 252106,
+      "content_type": "application/pdf"
+    }
+  },
+  {
+    "label": "unseen-onocom/columns download html",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-202047/download?format=html",
+    "status": 200,
+    "seconds": 0.002,
+    "body": {
+      "bytes": 727371,
+      "content_type": "text/html; charset=utf-8"
+    }
+  },
+  {
+    "label": "unseen-onocom/columns preview",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-202047/preview/1",
+    "status": 200,
+    "seconds": 0.001,
+    "body": {
+      "bytes": 22709,
+      "content_type": "image/png"
+    }
+  },
+  {
+    "label": "unseen-onocom/focus download pptx",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-202050/download?format=pptx",
+    "status": 200,
+    "seconds": 0.004,
+    "body": {
+      "bytes": 1794353,
+      "content_type": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    }
+  },
+  {
+    "label": "unseen-onocom/focus download pdf",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-202050/download?format=pdf",
+    "status": 200,
+    "seconds": 0.001,
+    "body": {
+      "bytes": 249480,
+      "content_type": "application/pdf"
+    }
+  },
+  {
+    "label": "unseen-onocom/focus download html",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-202050/download?format=html",
+    "status": 200,
+    "seconds": 0.002,
+    "body": {
+      "bytes": 706955,
+      "content_type": "text/html; charset=utf-8"
+    }
+  },
+  {
+    "label": "unseen-onocom/focus preview",
+    "method": "GET",
+    "url": "/v1/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-202050/preview/1",
+    "status": 200,
+    "seconds": 0.001,
+    "body": {
+      "bytes": 22709,
+      "content_type": "image/png"
+    }
+  },
+  {
+    "label": "unseen-onocom batch job download",
+    "method": "GET",
+    "url": "/v1/jobs/2771b4c539ed4b51ba5ef6a22ca438e6/download",
+    "status": 400,
+    "seconds": 0.001,
+    "body": {
+      "detail": "Invalid job output path"
+    }
+  },
+  {
+    "label": "templates persisted",
+    "method": "GET",
+    "url": "/v1/templates",
+    "status": 200,
+    "seconds": 0.001,
+    "body": [
+      {
+        "schema_version": "1.6",
+        "template_id": "onocom-powerpoint-template-4bbb072c",
+        "source_file": "onocom-powerpoint-template.pptx",
+        "source_sha256": "4bbb072ce87a0d82ebe1c7fcf63c694bc3c131cc1b904cddc242de3b544d88df",
+        "slide_count": 2,
+        "master_count": 1,
+        "layout_count": 9,
+        "pattern_count": 11,
+        "ai_enhanced": false,
+        "vision_preview_count": 2,
+        "vision_assisted": false,
+        "imported_from_pdf": false,
+        "pdf_import": null,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/c093f54954664a18cbf24d399c0be042/templates/onocom-powerpoint-template-4bbb072c"
+      }
+    ]
+  },
+  {
+    "label": "history persisted",
+    "method": "GET",
+    "url": "/v1/batches",
+    "status": 200,
+    "seconds": 0.001,
+    "body": [
+      {
+        "batch_id": "pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-202053",
+        "status": "completed",
+        "template_id": "onocom-powerpoint-template-4bbb072c"
+      }
+    ]
+  }
+]

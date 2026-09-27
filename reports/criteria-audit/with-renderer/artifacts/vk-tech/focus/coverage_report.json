@@ -1,0 +1,240 @@
+{
+  "method": "literal_source_units_v1",
+  "semantic_verification": "not_performed",
+  "source_sha256": "90549b837bd647f9617199d9fbe59046f9652b3b00e0835008b8aeabda53b444",
+  "status": "literal_coverage_complete",
+  "units": [
+    {
+      "source_id": "s0001",
+      "text": "Пилот ИИ-помощника по внутренним регламентам",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0002",
+      "text": "Поиск инструкции занимает до 30 минут, треть обращений повторяется",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0003",
+      "text": "Сотрудник тратит до 30 минут на поиск нужной инструкции.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0004",
+      "text": "Регламенты находятся в нескольких источниках, и поиск отвлекает от основной работы.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0005",
+      "text": "Треть обращений в поддержку — повторяющиеся вопросы.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0006",
+      "text": "Специалисты снова тратят время на поиск одного и того же ответа.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0007",
+      "text": "Сотруднику нужен источник ответа, специалисту — контекст вопроса",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0008",
+      "text": "Сотруднику нужен понятный ответ со ссылкой на документ-источник.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0009",
+      "text": "Специалисту нужен контекст вопроса, если автоматического ответа недостаточно.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0010",
+      "text": "Передача вопроса вместе с контекстом избавляет сотрудника от повторного объяснения.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0011",
+      "text": "ИИ-помощник отвечает по регламентам и передаёт сложные вопросы специалисту",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0012",
+      "text": "ИИ-помощник работает во внутреннем портале компании.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0013",
+      "text": "Он принимает вопрос сотрудника и ищет подходящий регламент.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0014",
+      "text": "Ответ сопровождается ссылкой на документ-источник.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0015",
+      "text": "Если подтверждённого ответа нет, вопрос принимает специалист поддержки.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0016",
+      "text": "Вопрос проходит путь от портала до ответа со ссылкой или эскалации",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0017",
+      "text": "Сотрудник задаёт вопрос во внутреннем портале.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0018",
+      "text": "Помощник ищет ответ в регламентах и показывает источник.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0019",
+      "text": "При отсутствии подтверждённого ответа вопрос передаётся специалисту.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0020",
+      "text": "Специалист получает контекст исходного обращения.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0021",
+      "text": "Документы остаются внутри контура, неподтверждённый ответ проверяет специалист",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0022",
+      "text": "Модель с открытыми весами работает внутри контура компании.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0023",
+      "text": "Документы не уходят наружу при обработке запроса.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0024",
+      "text": "Инструкция может устареть или не дать подтверждённого ответа.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0025",
+      "text": "В таком случае вопрос передаётся специалисту; ссылку на источник можно проверить.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0026",
+      "text": "Пилот охватит 150 сотрудников двух подразделений за 6 недель",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0027",
+      "text": "Пилот охватывает 2 подразделения и 150 сотрудников.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0028",
+      "text": "Продолжительность пилота — 6 недель.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0029",
+      "text": "В пилоте проверяются ответы по регламентам и передача вопросов специалисту.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0030",
+      "text": "Успех измерят временем поиска и долей обращений без специалиста",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0031",
+      "text": "Команда измеряет время поиска ответа.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0032",
+      "text": "Также измеряется доля обращений, закрытых без специалиста.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0033",
+      "text": "Целевые значения согласуются до запуска.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0034",
+      "text": "Фактических результатов пилота пока нет.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0035",
+      "text": "Команда из 3 человек подготовит и проверит пилот",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0036",
+      "text": "Просим одобрить пилот и выделить команду из 3 человек.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0037",
+      "text": "Команда готовит инструкции, проверяет ответы и сопровождает запуск.",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0038",
+      "text": "Дальнейшее использование решается после измерения результатов и обратной связи.",
+      "in_plan": true,
+      "in_pptx": true
+    }
+  ],
+  "missing_from_plan": [],
+  "missing_from_pptx": [],
+  "unsupported_numbers": [],
+  "note": "Unmatched paraphrases are not proof of omission; speaker notes do not count as slide content."
+}

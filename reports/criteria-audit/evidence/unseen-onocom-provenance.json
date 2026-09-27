@@ -1,0 +1,11 @@
+{
+  "candidate": "external-fixtures/expansion-20260922/templates/onocom-powerpoint-template.pptx",
+  "sha256": "4bbb072ce87a0d82ebe1c7fcf63c694bc3c131cc1b904cddc242de3b544d88df",
+  "prior_json_checked": 453,
+  "prior_mentions": [
+    "external-fixtures/expansion-20260922/github-sources.json",
+    "external-fixtures/expansion-20260922/curated_inventory.json"
+  ],
+  "cutoff": 1790528139.119405,
+  "limitation": "Local manifests only, no proof of never being used elsewhere; distinct from onocom-powerpoint-template-sample.pptx"
+}

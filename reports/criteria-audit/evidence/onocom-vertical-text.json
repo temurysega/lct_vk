@@ -1,0 +1,48 @@
+{
+  "slide": 9,
+  "layout": "タイトルと\n縦書きテキスト",
+  "part": "/ppt/slideLayouts/slideLayout9.xml",
+  "slide_body_properties": [
+    {
+      "name": "BrandDeck Text 2",
+      "idx": 1,
+      "bodyPr": {
+        "wrap": "square",
+        "anchor": "t"
+      }
+    },
+    {
+      "name": "BrandDeck Text 3",
+      "idx": 0,
+      "bodyPr": {
+        "wrap": "square",
+        "anchor": "t"
+      }
+    }
+  ],
+  "layout_body_properties": [
+    {
+      "name": "Vertical Text Placeholder 2",
+      "idx": 1,
+      "bodyPr": {
+        "vert": "eaVert"
+      }
+    },
+    {
+      "name": "Footer Placeholder 4",
+      "idx": 11,
+      "bodyPr": {}
+    },
+    {
+      "name": "Slide Number Placeholder 5",
+      "idx": 12,
+      "bodyPr": {}
+    },
+    {
+      "name": "タイトル 3",
+      "idx": 0,
+      "bodyPr": {}
+    }
+  ],
+  "observed": "LibreOffice renders content vertically on slide 9; generated slide frame inherits vertical writing direction from layout."
+}

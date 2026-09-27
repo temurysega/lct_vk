@@ -1,0 +1,14 @@
+{
+  "renderer": "Microsoft PowerPoint for macOS",
+  "command": [
+    "osascript",
+    "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript",
+    "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/unseen-brutalism/balanced/unseen-brutalism-balanced.pptx",
+    "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/unseen-brutalism/balanced/powerpoint.pdf"
+  ],
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "seconds": 68.094,
+  "pdf_exists": true
+}

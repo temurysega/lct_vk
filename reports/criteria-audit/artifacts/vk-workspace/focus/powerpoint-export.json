@@ -1,0 +1,14 @@
+{
+  "renderer": "Microsoft PowerPoint for macOS",
+  "command": [
+    "osascript",
+    "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript",
+    "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-workspace/focus/vk-workspace-focus.pptx",
+    "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-workspace/focus/powerpoint.pdf"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript:712:726: execution error: Получена ошибка от «Microsoft PowerPoint»: Произошла ошибка типа -9074. (-9074)\n",
+  "seconds": 0.119,
+  "pdf_exists": false
+}

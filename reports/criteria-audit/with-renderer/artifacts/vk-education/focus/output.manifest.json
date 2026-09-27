@@ -1,0 +1,158 @@
+{
+  "output": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201214/output.pptx",
+  "slide_count": 10,
+  "patterns_used": [
+    "slide-1",
+    "layout-23",
+    "layout-26",
+    "layout-23",
+    "layout-23",
+    "layout-23",
+    "layout-23",
+    "layout-23",
+    "layout-23",
+    "slide-52"
+  ],
+  "source_patterns": [
+    "slide-1",
+    "layout-23",
+    "layout-26",
+    "layout-23",
+    "layout-23",
+    "layout-23",
+    "layout-23",
+    "layout-23",
+    "layout-23",
+    "slide-52"
+  ],
+  "composition_mode": "template_layout",
+  "visuals": {
+    "diagrams": 7,
+    "pictograms": 26,
+    "images": 1,
+    "illustrations": 0,
+    "by_type": {
+      "icon_grid": 7,
+      "image": 1
+    },
+    "slides": [
+      {
+        "slide": 2,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 2,
+        "icons": [
+          "users",
+          "file-text",
+          "headset",
+          "user"
+        ],
+        "icon_matches": 4,
+        "origin": "offline_rules"
+      },
+      {
+        "slide": 3,
+        "type": "image",
+        "asset_id": "ce1df8e504b38abe",
+        "source": "upload",
+        "match": "lexical",
+        "placement": "template_placeholder"
+      },
+      {
+        "slide": 4,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 2,
+        "icons": [
+          "building",
+          "circle-help",
+          "file-text",
+          "circle-check"
+        ],
+        "icon_matches": 4,
+        "origin": "offline_rules"
+      },
+      {
+        "slide": 5,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 2,
+        "icons": [
+          "users",
+          "life-buoy",
+          "circle-check",
+          "user"
+        ],
+        "icon_matches": 4,
+        "origin": "sparse_text",
+        "estimated_fill": 0.127
+      },
+      {
+        "slide": 6,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 2,
+        "icons": [
+          "brain",
+          "file-text",
+          "circle-check",
+          "user"
+        ],
+        "icon_matches": 4,
+        "origin": "offline_rules"
+      },
+      {
+        "slide": 7,
+        "type": "icon_grid",
+        "items": 3,
+        "native": true,
+        "columns": 2,
+        "icons": [
+          "rocket",
+          "hourglass",
+          "user"
+        ],
+        "icon_matches": 3,
+        "origin": "sparse_text",
+        "estimated_fill": 0.108
+      },
+      {
+        "slide": 8,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 2,
+        "icons": [
+          "users",
+          "chart-column",
+          "target",
+          "trophy"
+        ],
+        "icon_matches": 4,
+        "origin": "sparse_text",
+        "estimated_fill": 0.112
+      },
+      {
+        "slide": 9,
+        "type": "icon_grid",
+        "items": 3,
+        "native": true,
+        "columns": 2,
+        "icons": [
+          "rocket",
+          "users",
+          "chart-column"
+        ],
+        "icon_matches": 3,
+        "origin": "sparse_text",
+        "estimated_fill": 0.117
+      }
+    ],
+    "note": "Diagrams are native grouped shapes (SmartArt-style), not OOXML SmartArt parts."
+  },
+  "exemplar_cleanup": []
+}

@@ -1,0 +1,187 @@
+[
+  {
+    "file": "artifacts/unseen-brutalism/balanced/unseen-brutalism-balanced.pptx",
+    "renderer": "Microsoft PowerPoint for macOS",
+    "command": [
+      "osascript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/unseen-brutalism/balanced/unseen-brutalism-balanced.pptx",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/unseen-brutalism/balanced/powerpoint.pdf"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 68.094,
+    "pdf_exists": true,
+    "source_unchanged": true,
+    "page_count": 10
+  },
+  {
+    "file": "artifacts/unseen-brutalism/columns/unseen-brutalism-columns.pptx",
+    "renderer": "Microsoft PowerPoint for macOS",
+    "status": "timeout",
+    "seconds": 90,
+    "source_unchanged": true
+  },
+  {
+    "file": "artifacts/unseen-brutalism/focus/unseen-brutalism-focus.pptx",
+    "renderer": "Microsoft PowerPoint for macOS",
+    "command": [
+      "osascript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/unseen-brutalism/focus/unseen-brutalism-focus.pptx",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/unseen-brutalism/focus/powerpoint.pdf"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript:712:726: execution error: Получена ошибка от «Microsoft PowerPoint»: Произошла ошибка типа -9074. (-9074)\n",
+    "seconds": 0.156,
+    "pdf_exists": false,
+    "source_unchanged": true
+  },
+  {
+    "file": "artifacts/vk-education/balanced/vk-education-balanced.pptx",
+    "renderer": "Microsoft PowerPoint for macOS",
+    "command": [
+      "osascript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-education/balanced/vk-education-balanced.pptx",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-education/balanced/powerpoint.pdf"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript:712:726: execution error: Получена ошибка от «Microsoft PowerPoint»: Произошла ошибка типа -9074. (-9074)\n",
+    "seconds": 0.126,
+    "pdf_exists": false,
+    "source_unchanged": true
+  },
+  {
+    "file": "artifacts/vk-education/columns/vk-education-columns.pptx",
+    "renderer": "Microsoft PowerPoint for macOS",
+    "command": [
+      "osascript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-education/columns/vk-education-columns.pptx",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-education/columns/powerpoint.pdf"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript:712:726: execution error: Получена ошибка от «Microsoft PowerPoint»: Произошла ошибка типа -9074. (-9074)\n",
+    "seconds": 0.129,
+    "pdf_exists": false,
+    "source_unchanged": true
+  },
+  {
+    "file": "artifacts/vk-education/focus/vk-education-focus.pptx",
+    "renderer": "Microsoft PowerPoint for macOS",
+    "command": [
+      "osascript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-education/focus/vk-education-focus.pptx",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-education/focus/powerpoint.pdf"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript:712:726: execution error: Получена ошибка от «Microsoft PowerPoint»: Произошла ошибка типа -9074. (-9074)\n",
+    "seconds": 0.128,
+    "pdf_exists": false,
+    "source_unchanged": true
+  },
+  {
+    "file": "artifacts/vk-tech/balanced/vk-tech-balanced.pptx",
+    "renderer": "Microsoft PowerPoint for macOS",
+    "command": [
+      "osascript",
+      "examples/export_powerpoint_macos.applescript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-tech/balanced/vk-tech-balanced.pptx",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-tech/balanced/powerpoint.pdf"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 15.522,
+    "pdf_exists": true,
+    "source_unchanged": true,
+    "page_count": 10
+  },
+  {
+    "file": "artifacts/vk-tech/columns/vk-tech-columns.pptx",
+    "renderer": "Microsoft PowerPoint for macOS",
+    "command": [
+      "osascript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-tech/columns/vk-tech-columns.pptx",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-tech/columns/powerpoint.pdf"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript:712:726: execution error: Получена ошибка от «Microsoft PowerPoint»: Произошла ошибка типа -9074. (-9074)\n",
+    "seconds": 0.127,
+    "pdf_exists": false,
+    "source_unchanged": true
+  },
+  {
+    "file": "artifacts/vk-tech/focus/vk-tech-focus.pptx",
+    "renderer": "Microsoft PowerPoint for macOS",
+    "command": [
+      "osascript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-tech/focus/vk-tech-focus.pptx",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-tech/focus/powerpoint.pdf"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript:712:726: execution error: Получена ошибка от «Microsoft PowerPoint»: Произошла ошибка типа -9074. (-9074)\n",
+    "seconds": 0.129,
+    "pdf_exists": false,
+    "source_unchanged": true
+  },
+  {
+    "file": "artifacts/vk-workspace/balanced/vk-workspace-balanced.pptx",
+    "renderer": "Microsoft PowerPoint for macOS",
+    "command": [
+      "osascript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-workspace/balanced/vk-workspace-balanced.pptx",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-workspace/balanced/powerpoint.pdf"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript:712:726: execution error: Получена ошибка от «Microsoft PowerPoint»: Произошла ошибка типа -9074. (-9074)\n",
+    "seconds": 0.116,
+    "pdf_exists": false,
+    "source_unchanged": true
+  },
+  {
+    "file": "artifacts/vk-workspace/columns/vk-workspace-columns.pptx",
+    "renderer": "Microsoft PowerPoint for macOS",
+    "command": [
+      "osascript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-workspace/columns/vk-workspace-columns.pptx",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-workspace/columns/powerpoint.pdf"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript:712:726: execution error: Получена ошибка от «Microsoft PowerPoint»: Произошла ошибка типа -9074. (-9074)\n",
+    "seconds": 0.12,
+    "pdf_exists": false,
+    "source_unchanged": true
+  },
+  {
+    "file": "artifacts/vk-workspace/focus/vk-workspace-focus.pptx",
+    "renderer": "Microsoft PowerPoint for macOS",
+    "command": [
+      "osascript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-workspace/focus/vk-workspace-focus.pptx",
+      "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-workspace/focus/powerpoint.pdf"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/examples/export_powerpoint_macos.applescript:712:726: execution error: Получена ошибка от «Microsoft PowerPoint»: Произошла ошибка типа -9074. (-9074)\n",
+    "seconds": 0.119,
+    "pdf_exists": false,
+    "source_unchanged": true
+  }
+]

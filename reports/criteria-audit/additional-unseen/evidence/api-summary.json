@@ -1,0 +1,39 @@
+[
+  {
+    "template": "unseen-onocom",
+    "analysis_seconds": 0.083,
+    "generation_seconds": 11.767,
+    "job_status": "completed",
+    "template_id": "onocom-powerpoint-template-4bbb072c",
+    "batch_id": "pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-202053",
+    "variants": [
+      {
+        "variant": "balanced",
+        "status": "completed",
+        "planner_mode": "offline",
+        "elapsed_seconds": 3.879,
+        "qa_status": "warning",
+        "qa_issues": 2,
+        "export_status": "passed"
+      },
+      {
+        "variant": "columns",
+        "status": "completed",
+        "planner_mode": "offline",
+        "elapsed_seconds": 3.032,
+        "qa_status": "warning",
+        "qa_issues": 2,
+        "export_status": "passed"
+      },
+      {
+        "variant": "focus",
+        "status": "completed",
+        "planner_mode": "offline",
+        "elapsed_seconds": 3.001,
+        "qa_status": "warning",
+        "qa_issues": 2,
+        "export_status": "passed"
+      }
+    ]
+  }
+]

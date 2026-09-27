@@ -1,0 +1,5341 @@
+{
+  "schema_version": "1.6",
+  "pattern_count": 44,
+  "patterns": [
+    {
+      "id": "layout-0",
+      "name": "7_Титульный слайд",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "cover"
+      ],
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.469,
+          "y": 2.785,
+          "w": 8.56,
+          "h": 2.053,
+          "font": {
+            "size_pt": 36.0,
+            "bold": false,
+            "italic": false,
+            "name": "Play",
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.37133333333333335,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 1,
+        "title_chars": 80,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 1.0,
+        "content_image_count": 3,
+        "content_image_area_ratio": 1.0,
+        "shape_count": 1,
+        "complexity": 0.25,
+        "rhetorical_pattern": "hero",
+        "backdrop_area_ratio": 0.305
+      },
+      "example_slide_indices": [
+        1
+      ],
+      "layout_assets": [
+        "layout0_77_98fd9fa8d9.png",
+        "layout0_79_4e495153f0.png",
+        "layout0_80_f74b8a2ab0.png",
+        "layout0_81_9bf3e42669.png",
+        "layout0_82_6ac81febc0.png",
+        "layout0_83_59ea3f27ec.png"
+      ],
+      "background": {
+        "type": "solid",
+        "color": "000000",
+        "theme_ref": "dk1"
+      }
+    },
+    {
+      "id": "layout-1",
+      "name": "9_Титульный слайд",
+      "layout_index": 1,
+      "master_index": 0,
+      "roles": [
+        "cover"
+      ],
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.469,
+          "y": 1.76,
+          "w": 5.253,
+          "h": 2.053,
+          "font": {
+            "size_pt": 36.0,
+            "bold": false,
+            "italic": false,
+            "name": "Play",
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.23466666666666666,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 0.197,
+        "content_image_count": 1,
+        "content_image_area_ratio": 0.167,
+        "shape_count": 0,
+        "complexity": 0.163,
+        "rhetorical_pattern": "hero",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        2
+      ],
+      "layout_assets": [
+        "layout1_85_cfe817658c.png",
+        "layout1_109_0806c62bdc.png",
+        "layout1_110_795f99d95d.png",
+        "layout1_112_b318ede934.png"
+      ],
+      "background": {
+        "type": "solid",
+        "color": "000000",
+        "theme_ref": "dk1"
+      }
+    },
+    {
+      "id": "layout-2",
+      "name": "19_Заголовок",
+      "layout_index": 2,
+      "master_index": 0,
+      "roles": [
+        "image",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {
+            "size_pt": 36.0,
+            "bold": false,
+            "italic": false,
+            "name": "Play",
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.06186666666666667,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 0.404,
+        "content_image_count": 1,
+        "content_image_area_ratio": 0.389,
+        "shape_count": 10,
+        "complexity": 0.55,
+        "rhetorical_pattern": "image_text",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        3,
+        5,
+        10
+      ],
+      "layout_assets": [
+        "layout2_114_3f71399196.png",
+        "layout2_116_53382c16e2.png"
+      ],
+      "background": {
+        "type": "solid",
+        "color": "000000",
+        "theme_ref": "dk1"
+      }
+    },
+    {
+      "id": "layout-3",
+      "name": "18_Титульный слайд",
+      "layout_index": 3,
+      "master_index": 0,
+      "roles": [
+        "cover",
+        "image"
+      ],
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {
+            "size_pt": 36.0,
+            "bold": false,
+            "italic": false,
+            "name": "Play",
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.06186666666666667,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 0.335,
+        "content_image_count": 2,
+        "content_image_area_ratio": 0.292,
+        "shape_count": 4,
+        "complexity": 0.4,
+        "rhetorical_pattern": "hero",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        4
+      ],
+      "layout_assets": [
+        "layout3_118_86c28a85a0.png",
+        "layout3_119_1f845ede74.png",
+        "layout3_141_84fa67762e.png",
+        "layout3_142_14ca71da93.png",
+        "layout3_146_bb2a110258.png"
+      ],
+      "background": {
+        "type": "solid",
+        "color": "000000",
+        "theme_ref": "dk1"
+      }
+    },
+    {
+      "id": "layout-4",
+      "name": "15_Титульный слайд",
+      "layout_index": 4,
+      "master_index": 0,
+      "roles": [
+        "cover",
+        "image"
+      ],
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {
+            "size_pt": 36.0,
+            "bold": false,
+            "italic": false,
+            "name": "Play",
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.06186666666666667,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 0.114,
+        "content_image_count": 1,
+        "content_image_area_ratio": 0.051,
+        "shape_count": 17,
+        "complexity": 0.975,
+        "rhetorical_pattern": "hero",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        6,
+        11,
+        16
+      ],
+      "layout_assets": [
+        "layout4_148_396f16b3a2.png",
+        "layout4_149_5e210e10ca.png",
+        "layout4_150_980db8614b.png",
+        "layout4_172_016d129c78.png",
+        "layout4_173_0c8c59bee0.png"
+      ],
+      "background": {
+        "type": "solid",
+        "color": "000000",
+        "theme_ref": "dk1"
+      }
+    },
+    {
+      "id": "layout-5",
+      "name": "13_Титульный слайд",
+      "layout_index": 5,
+      "master_index": 0,
+      "roles": [
+        "cover",
+        "image"
+      ],
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {
+            "size_pt": 36.0,
+            "bold": false,
+            "italic": false,
+            "name": "Play",
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.06186666666666667,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 0.063,
+        "content_image_count": 1,
+        "content_image_area_ratio": 0.037,
+        "shape_count": 0,
+        "complexity": 0.725,
+        "rhetorical_pattern": "hero",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        7,
+        8,
+        9,
+        12
+      ],
+      "layout_assets": [
+        "layout5_196_c7816ad0f3.png",
+        "layout5_197_d15ed8b726.png",
+        "layout5_201_ed1188d387.png"
+      ],
+      "background": {
+        "type": "solid",
+        "color": "000000",
+        "theme_ref": "dk1"
+      }
+    },
+    {
+      "id": "layout-6",
+      "name": "8_Заголовок",
+      "layout_index": 6,
+      "master_index": 0,
+      "roles": [
+        "image",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {
+            "size_pt": 36.0,
+            "bold": false,
+            "italic": false,
+            "name": "Play",
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.06186666666666667,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 1.0,
+        "content_image_count": 3,
+        "content_image_area_ratio": 1.0,
+        "shape_count": 13,
+        "complexity": 0.7,
+        "rhetorical_pattern": "image_text",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        13,
+        25,
+        26,
+        27
+      ],
+      "layout_assets": [
+        "layout6_203_78c44e54b2.png",
+        "layout6_204_fb6458ff44.png",
+        "layout6_206_3ceaa6ff4c.png",
+        "layout6_207_0d0268bab6.png"
+      ],
+      "background": {
+        "type": "solid",
+        "color": "000000",
+        "theme_ref": "dk1"
+      }
+    },
+    {
+      "id": "layout-7",
+      "name": "17_Титульный слайд",
+      "layout_index": 7,
+      "master_index": 0,
+      "roles": [
+        "cover",
+        "data"
+      ],
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {
+            "size_pt": 36.0,
+            "bold": false,
+            "italic": false,
+            "name": "Play",
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.06186666666666667,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": true,
+        "image_area_ratio": 0.037,
+        "content_image_count": 1,
+        "content_image_area_ratio": 0.037,
+        "shape_count": 2,
+        "complexity": 0.075,
+        "rhetorical_pattern": "hero",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        14,
+        15
+      ],
+      "layout_assets": [
+        "layout7_230_9c678483cd.png"
+      ],
+      "background": {
+        "type": "solid",
+        "color": "000000",
+        "theme_ref": "dk1"
+      }
+    },
+    {
+      "id": "layout-8",
+      "name": "14_Титульный слайд",
+      "layout_index": 8,
+      "master_index": 0,
+      "roles": [
+        "cover"
+      ],
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {
+            "size_pt": 36.0,
+            "bold": false,
+            "italic": false,
+            "name": "Play",
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.06186666666666667,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 3,
+        "title_chars": 80,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 0.141,
+        "content_image_count": 2,
+        "content_image_area_ratio": 0.133,
+        "shape_count": 0,
+        "complexity": 0.163,
+        "rhetorical_pattern": "hero",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        17,
+        18
+      ],
+      "layout_assets": [
+        "layout8_235_fc2be5be8e.png",
+        "layout8_257_c70cd9b8ba.png",
+        "layout8_258_d8cc108604.png",
+        "layout8_259_eec82db616.png"
+      ],
+      "background": {
+        "type": "solid",
+        "color": "000000",
+        "theme_ref": "dk1"
+      }
+    },
+    {
+      "id": "layout-9",
+      "name": "11_Заголовок",
+      "layout_index": 9,
+      "master_index": 0,
+      "roles": [
+        "image",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 12.418,
+          "h": 0.839,
+          "font": {
+            "size_pt": 36.0,
+            "bold": false,
+            "italic": false,
+            "name": "Play",
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.06186666666666667,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 2,
+        "title_chars": 80,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 1.0,
+        "content_image_count": 2,
+        "content_image_area_ratio": 0.672,
+        "shape_count": 0,
+        "complexity": 0.275,
+        "rhetorical_pattern": "image_text",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        19,
+        20,
+        21
+      ],
+      "layout_assets": [
+        "layout9_261_1abb28e6f7.png",
+        "layout9_263_11e5ccae20.png",
+        "layout9_264_9adbdd0462.png"
+      ],
+      "background": {
+        "type": "solid",
+        "color": "000000",
+        "theme_ref": "dk1"
+      }
+    },
+    {
+      "id": "layout-10",
+      "name": "17_Заголовок",
+      "layout_index": 10,
+      "master_index": 0,
+      "roles": [
+        "image",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {
+            "size_pt": 36.0,
+            "bold": false,
+            "italic": false,
+            "name": "Play",
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.06186666666666667,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 1.0,
+        "content_image_count": 1,
+        "content_image_area_ratio": 0.52,
+        "shape_count": 10,
+        "complexity": 0.662,
+        "rhetorical_pattern": "image_text",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        22,
+        23
+      ],
+      "layout_assets": [
+        "layout10_266_4dc6240c24.png",
+        "layout10_267_a1a6a017a2.png",
+        "layout10_269_fa8dd2fb49.png",
+        "layout10_270_c6e0e1b9d0.png"
+      ],
+      "background": {
+        "type": "solid",
+        "color": "000000",
+        "theme_ref": "dk1"
+      }
+    },
+    {
+      "id": "layout-11",
+      "name": "11_Титульный слайд",
+      "layout_index": 11,
+      "master_index": 0,
+      "roles": [
+        "cover",
+        "image"
+      ],
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.469,
+          "y": 1.76,
+          "w": 5.253,
+          "h": 2.053,
+          "font": {
+            "size_pt": 36.0,
+            "bold": false,
+            "italic": false,
+            "name": "Play",
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.23466666666666666,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 1,
+        "title_chars": 80,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 0.334,
+        "content_image_count": 2,
+        "content_image_area_ratio": 0.297,
+        "shape_count": 2,
+        "complexity": 0.263,
+        "rhetorical_pattern": "hero",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        24
+      ],
+      "layout_assets": [
+        "layout11_293_d2a2992906.png",
+        "layout11_294_69c7926692.png",
+        "layout11_295_17e2c01895.png"
+      ],
+      "background": {
+        "type": "solid",
+        "color": "000000",
+        "theme_ref": "dk1"
+      }
+    },
+    {
+      "id": "layout-12",
+      "name": "16_Титульный слайд",
+      "layout_index": 12,
+      "master_index": 0,
+      "roles": [
+        "cover"
+      ],
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.469,
+          "y": 2.506,
+          "w": 8.56,
+          "h": 2.053,
+          "font": {
+            "size_pt": 54.0,
+            "bold": false,
+            "italic": false,
+            "name": "Play",
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.3341333333333333,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 0.564,
+        "content_image_count": 1,
+        "content_image_area_ratio": 0.547,
+        "shape_count": 0,
+        "complexity": 0.125,
+        "rhetorical_pattern": "hero",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        28
+      ],
+      "layout_assets": [
+        "layout12_297_22261f54f0.png",
+        "layout12_319_fa4180b735.png",
+        "layout12_325_af778ac0c8.png"
+      ],
+      "background": {
+        "type": "solid",
+        "color": "000000",
+        "theme_ref": "dk1"
+      }
+    },
+    {
+      "id": "layout-13",
+      "name": "12_Титульный слайд",
+      "layout_index": 13,
+      "master_index": 0,
+      "roles": [
+        "cover"
+      ],
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.469,
+          "y": 2.506,
+          "w": 8.56,
+          "h": 2.053,
+          "font": {
+            "size_pt": 54.0,
+            "bold": false,
+            "italic": false,
+            "name": "Play",
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.3341333333333333,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 3,
+        "title_chars": 80,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 1.0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 2,
+        "complexity": 0.15,
+        "rhetorical_pattern": "hero",
+        "backdrop_area_ratio": 0.135
+      },
+      "example_slide_indices": [
+        29
+      ],
+      "layout_assets": [
+        "layout13_327_d2dc8d2082.png",
+        "layout13_351_83e1031dc0.png",
+        "layout13_352_d653cbd156.png"
+      ],
+      "background": {
+        "type": "solid",
+        "color": "000000",
+        "theme_ref": "dk1"
+      }
+    },
+    {
+      "id": "layout-14",
+      "name": "10_Титульный слайд",
+      "layout_index": 14,
+      "master_index": 0,
+      "roles": [
+        "cover"
+      ],
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "title_",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {
+            "size_pt": 36.0,
+            "bold": false,
+            "italic": false,
+            "name": "Play",
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.06186666666666667,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0.008,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 0,
+        "complexity": 0.087,
+        "rhetorical_pattern": "hero",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [],
+      "layout_assets": [
+        "layout14_375_9d3962614c.png",
+        "layout14_376_d9807a1089.png"
+      ],
+      "background": {
+        "type": "solid",
+        "color": "000000",
+        "theme_ref": "dk1"
+      }
+    },
+    {
+      "id": "slide-1",
+      "name": "Exemplar slide 1",
+      "source_kind": "slide_exemplar",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "cover"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.469,
+          "y": 2.724,
+          "w": 8.56,
+          "h": 2.053,
+          "font": {
+            "size_pt": 48.0
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 1.652,
+          "y": 5.121,
+          "w": 2.421,
+          "h": 0.912,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "bold": false,
+            "italic": false,
+            "color": "AFB8C2"
+          },
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.3632,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 1,
+        "title_chars": 61,
+        "body_chars": 80,
+        "usable_body_zones": 1,
+        "body_area_ratio": 0.022,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 1,
+        "complexity": 0.037,
+        "rhetorical_pattern": "hero",
+        "backdrop_area_ratio": 0.305
+      },
+      "example_slide_indices": [
+        1
+      ],
+      "layout_assets": [
+        "layout0_77_98fd9fa8d9.png",
+        "layout0_79_4e495153f0.png",
+        "layout0_80_f74b8a2ab0.png",
+        "layout0_81_9bf3e42669.png",
+        "layout0_82_6ac81febc0.png",
+        "layout0_83_59ea3f27ec.png"
+      ],
+      "slide_assets": [],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-2",
+      "name": "Exemplar slide 2",
+      "source_kind": "slide_exemplar",
+      "layout_index": 1,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "data",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 1.76,
+          "w": 5.253,
+          "h": 2.053,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 5.369,
+          "y": 1.111,
+          "w": 1.744,
+          "h": 0.763,
+          "font": {
+            "name": "Play",
+            "size_pt": 40.0,
+            "bold": true,
+            "italic": false,
+            "color": "0077FF"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 5.369,
+          "y": 2.268,
+          "w": 1.744,
+          "h": 0.763,
+          "font": {
+            "name": "Play",
+            "size_pt": 40.0,
+            "bold": true,
+            "italic": false,
+            "color": "0077FF"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 5.369,
+          "y": 3.426,
+          "w": 1.744,
+          "h": 0.763,
+          "font": {
+            "name": "Play",
+            "size_pt": 40.0,
+            "bold": true,
+            "italic": false,
+            "color": "0077FF"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 5.369,
+          "y": 4.583,
+          "w": 1.744,
+          "h": 0.763,
+          "font": {
+            "name": "Play",
+            "size_pt": 40.0,
+            "bold": true,
+            "italic": false,
+            "color": "0077FF"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 5.369,
+          "y": 5.74,
+          "w": 1.744,
+          "h": 0.763,
+          "font": {
+            "name": "Play",
+            "size_pt": 40.0,
+            "bold": true,
+            "italic": false,
+            "color": "0077FF"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.429,
+          "y": 1.111,
+          "w": 5.435,
+          "h": 0.649,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.429,
+          "y": 2.318,
+          "w": 5.435,
+          "h": 0.649,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.429,
+          "y": 3.473,
+          "w": 5.435,
+          "h": 0.649,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.429,
+          "y": 4.646,
+          "w": 5.435,
+          "h": 0.649,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.429,
+          "y": 5.801,
+          "w": 5.435,
+          "h": 0.649,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.14813333333333334,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 12,
+        "body_chars": 313,
+        "usable_body_zones": 5,
+        "body_area_ratio": 0.161,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 10,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": true,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 0,
+        "complexity": 0.138,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        2
+      ],
+      "layout_assets": [
+        "layout1_85_cfe817658c.png",
+        "layout1_109_0806c62bdc.png",
+        "layout1_110_795f99d95d.png",
+        "layout1_112_b318ede934.png"
+      ],
+      "slide_assets": [],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-3",
+      "name": "Exemplar slide 3",
+      "source_kind": "slide_exemplar",
+      "layout_index": 2,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 1.597,
+          "w": 4.227,
+          "h": 1.277,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.098,
+          "y": 1.813,
+          "w": 5.187,
+          "h": 0.698,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.098,
+          "y": 3.505,
+          "w": 5.187,
+          "h": 0.698,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.353,
+          "y": 5.402,
+          "w": 5.95,
+          "h": 1.467,
+          "font": {
+            "name": "Play",
+            "size_pt": 14.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 1.852,
+          "h": 0.607,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "bold": true,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "center "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.06186666666666667,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 28,
+        "body_chars": 714,
+        "usable_body_zones": 4,
+        "body_area_ratio": 0.214,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 4,
+        "bullets_per_zone": 5,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0.003,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 4,
+        "complexity": 0.225,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        3
+      ],
+      "layout_assets": [
+        "layout2_114_3f71399196.png",
+        "layout2_116_53382c16e2.png"
+      ],
+      "slide_assets": [
+        "slide3_409_e2a804b19e.png",
+        "slide3_412_3eaead17bd.png",
+        "slide3_416_ac79081c3c.png"
+      ],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-4",
+      "name": "Exemplar slide 4",
+      "source_kind": "slide_exemplar",
+      "layout_index": 3,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.47,
+          "y": 2.315,
+          "w": 5.118,
+          "h": 0.742,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.47,
+          "y": 3.363,
+          "w": 5.118,
+          "h": 0.742,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.47,
+          "y": 4.427,
+          "w": 5.118,
+          "h": 0.742,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.47,
+          "y": 5.504,
+          "w": 5.118,
+          "h": 0.742,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 6.47,
+          "y": 1.577,
+          "w": 6.324,
+          "h": 0.543,
+          "font": {
+            "name": "Play",
+            "size_pt": 24.0,
+            "bold": false,
+            "italic": false,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.21026666666666666,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 48,
+        "body_chars": 641,
+        "usable_body_zones": 5,
+        "body_area_ratio": 0.261,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 5,
+        "bullets_per_zone": 6,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0.004,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 4,
+        "complexity": 0.275,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        4
+      ],
+      "layout_assets": [
+        "layout3_118_86c28a85a0.png",
+        "layout3_119_1f845ede74.png",
+        "layout3_141_84fa67762e.png",
+        "layout3_142_14ca71da93.png",
+        "layout3_146_bb2a110258.png"
+      ],
+      "slide_assets": [
+        "slide4_426_9c36d99546.png",
+        "slide4_429_b66f982775.png",
+        "slide4_432_b7bc066626.png",
+        "slide4_435_cefba1a59b.png"
+      ],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-5",
+      "name": "Exemplar slide 5",
+      "source_kind": "slide_exemplar",
+      "layout_index": 2,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 0.686,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 5.887,
+          "y": 0.941,
+          "w": 6.472,
+          "h": 1.865,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "bold": false,
+            "italic": false,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 5.887,
+          "y": 2.964,
+          "w": 6.472,
+          "h": 1.865,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "bold": false,
+            "italic": false,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 5.887,
+          "y": 4.988,
+          "w": 6.472,
+          "h": 1.865,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "bold": false,
+            "italic": false,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.12546666666666667,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 297,
+        "body_chars": 739,
+        "usable_body_zones": 3,
+        "body_area_ratio": 0.3,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 3,
+        "bullets_per_zone": 4,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0.003,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 3,
+        "complexity": 0.2,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        5
+      ],
+      "layout_assets": [
+        "layout2_114_3f71399196.png",
+        "layout2_116_53382c16e2.png"
+      ],
+      "slide_assets": [
+        "slide5_445_55ed85285d.png",
+        "slide5_449_0976ef8b11.png",
+        "slide5_453_fa2456d563.png"
+      ],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-6",
+      "name": "Exemplar slide 6",
+      "source_kind": "slide_exemplar",
+      "layout_index": 4,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 8.453,
+          "y": 1.823,
+          "w": 3.74,
+          "h": 3.855,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "bold": false,
+            "italic": false,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.437,
+          "y": 1.823,
+          "w": 3.74,
+          "h": 3.855,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.455,
+          "y": 1.823,
+          "w": 3.74,
+          "h": 3.855,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.653,
+          "y": 3.564,
+          "w": 3.343,
+          "h": 0.275,
+          "font": {
+            "name": "Play",
+            "size_pt": 14.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.637,
+          "y": 3.564,
+          "w": 3.343,
+          "h": 0.275,
+          "font": {
+            "name": "Play",
+            "size_pt": 14.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.653,
+          "y": 3.564,
+          "w": 3.343,
+          "h": 0.275,
+          "font": {
+            "name": "Play",
+            "size_pt": 14.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.24306666666666665,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 287,
+        "body_chars": 843,
+        "usable_body_zones": 3,
+        "body_area_ratio": 0.398,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 6,
+        "bullets_per_zone": 7,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0.003,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 0,
+        "complexity": 0.2,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        6
+      ],
+      "layout_assets": [
+        "layout4_148_396f16b3a2.png",
+        "layout4_149_5e210e10ca.png",
+        "layout4_150_980db8614b.png",
+        "layout4_172_016d129c78.png",
+        "layout4_173_0c8c59bee0.png"
+      ],
+      "slide_assets": [
+        "slide6_464_878e616046.png",
+        "slide6_466_9399321857.png",
+        "slide6_468_88300e5a5c.png"
+      ],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-7",
+      "name": "Exemplar slide 7",
+      "source_kind": "slide_exemplar",
+      "layout_index": 5,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.468,
+          "y": 1.82,
+          "w": 3.976,
+          "h": 1.969,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.612,
+          "y": 1.82,
+          "w": 3.976,
+          "h": 1.969,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.757,
+          "y": 1.82,
+          "w": 3.976,
+          "h": 1.969,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.468,
+          "y": 3.956,
+          "w": 3.976,
+          "h": 1.969,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.612,
+          "y": 3.956,
+          "w": 3.976,
+          "h": 1.969,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.755,
+          "y": 3.956,
+          "w": 3.976,
+          "h": 1.969,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.24266666666666667,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 193,
+        "body_chars": 1234,
+        "usable_body_zones": 6,
+        "body_area_ratio": 0.501,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 6,
+        "bullets_per_zone": 7,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 0,
+        "complexity": 0.087,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        7
+      ],
+      "layout_assets": [
+        "layout5_196_c7816ad0f3.png",
+        "layout5_197_d15ed8b726.png",
+        "layout5_201_ed1188d387.png"
+      ],
+      "slide_assets": [],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-8",
+      "name": "Exemplar slide 8",
+      "source_kind": "slide_exemplar",
+      "layout_index": 5,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "data",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.478,
+          "y": 2.716,
+          "w": 3.759,
+          "h": 0.553,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.478,
+          "y": 1.741,
+          "w": 0.739,
+          "h": 0.739,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "0077FF"
+          },
+          "alignment": "center "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.478,
+          "y": 3.154,
+          "w": 3.759,
+          "h": 0.877,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "E4E7EA"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.779,
+          "y": 2.716,
+          "w": 3.759,
+          "h": 0.553,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.779,
+          "y": 1.741,
+          "w": 0.739,
+          "h": 0.739,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "0077FF"
+          },
+          "alignment": "center "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.779,
+          "y": 3.154,
+          "w": 3.759,
+          "h": 0.877,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "E4E7EA"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.478,
+          "y": 4.999,
+          "w": 3.759,
+          "h": 0.553,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.478,
+          "y": 4.025,
+          "w": 0.739,
+          "h": 0.739,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "0077FF"
+          },
+          "alignment": "center "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.478,
+          "y": 5.437,
+          "w": 3.759,
+          "h": 0.877,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "E4E7EA"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.779,
+          "y": 4.999,
+          "w": 3.759,
+          "h": 0.553,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.779,
+          "y": 4.025,
+          "w": 0.739,
+          "h": 0.739,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "0077FF"
+          },
+          "alignment": "center "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.779,
+          "y": 5.437,
+          "w": 3.759,
+          "h": 0.877,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "E4E7EA"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.08,
+          "y": 2.716,
+          "w": 3.759,
+          "h": 0.553,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.08,
+          "y": 1.741,
+          "w": 0.739,
+          "h": 0.739,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "0077FF"
+          },
+          "alignment": "center "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.08,
+          "y": 3.154,
+          "w": 3.759,
+          "h": 0.877,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "E4E7EA"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.08,
+          "y": 4.999,
+          "w": 3.759,
+          "h": 0.553,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.08,
+          "y": 4.025,
+          "w": 0.739,
+          "h": 0.739,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "0077FF"
+          },
+          "alignment": "center "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.08,
+          "y": 5.437,
+          "w": 3.759,
+          "h": 0.877,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "E4E7EA"
+          },
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.23213333333333336,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 17,
+        "body_chars": 887,
+        "usable_body_zones": 7,
+        "body_area_ratio": 0.307,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 18,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": true,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 0,
+        "complexity": 0.237,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        8
+      ],
+      "layout_assets": [
+        "layout5_196_c7816ad0f3.png",
+        "layout5_197_d15ed8b726.png",
+        "layout5_201_ed1188d387.png"
+      ],
+      "slide_assets": [],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-9",
+      "name": "Exemplar slide 9",
+      "source_kind": "slide_exemplar",
+      "layout_index": 5,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.468,
+          "y": 1.632,
+          "w": 2.966,
+          "h": 2.118,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.468,
+          "y": 3.905,
+          "w": 2.966,
+          "h": 2.118,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.607,
+          "y": 1.632,
+          "w": 2.966,
+          "h": 2.118,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.607,
+          "y": 3.905,
+          "w": 2.966,
+          "h": 2.118,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.755,
+          "y": 1.632,
+          "w": 2.966,
+          "h": 2.118,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.755,
+          "y": 3.905,
+          "w": 2.966,
+          "h": 2.118,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.902,
+          "y": 1.632,
+          "w": 2.966,
+          "h": 2.118,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.902,
+          "y": 3.905,
+          "w": 2.966,
+          "h": 2.118,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.2176,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 196,
+        "body_chars": 1641,
+        "usable_body_zones": 8,
+        "body_area_ratio": 0.549,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 8,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0.018,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 0,
+        "complexity": 0.713,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        9
+      ],
+      "layout_assets": [
+        "layout5_196_c7816ad0f3.png",
+        "layout5_197_d15ed8b726.png",
+        "layout5_201_ed1188d387.png"
+      ],
+      "slide_assets": [
+        "slide9_520_dccfe44bd2.png",
+        "slide9_521_dd97c1e215.png",
+        "slide9_523_c44ad52f83.png",
+        "slide9_524_8da9acb435.png",
+        "slide9_526_39d69af3eb.png",
+        "slide9_527_816a7a7e97.png",
+        "slide9_529_f6d75ccc9f.png",
+        "slide9_530_b26dbacd81.png",
+        "slide9_532_25cf4784c7.png",
+        "slide9_533_79cf13cc09.png",
+        "slide9_535_9749566dbb.png",
+        "slide9_536_a65e600475.png",
+        "slide9_538_901389261f.png",
+        "slide9_539_faef955e9b.png",
+        "slide9_541_7fb0861cf6.png",
+        "slide9_542_3246adb0f6.png"
+      ],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-10",
+      "name": "Exemplar slide 10",
+      "source_kind": "slide_exemplar",
+      "layout_index": 2,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 0.686,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 5.887,
+          "y": 0.941,
+          "w": 6.472,
+          "h": 1.865,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 5.887,
+          "y": 2.964,
+          "w": 6.472,
+          "h": 1.865,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 5.887,
+          "y": 4.988,
+          "w": 6.472,
+          "h": 1.865,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.12546666666666667,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 297,
+        "body_chars": 739,
+        "usable_body_zones": 3,
+        "body_area_ratio": 0.3,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 3,
+        "bullets_per_zone": 4,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0.003,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 3,
+        "complexity": 0.2,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        10
+      ],
+      "layout_assets": [
+        "layout2_114_3f71399196.png",
+        "layout2_116_53382c16e2.png"
+      ],
+      "slide_assets": [
+        "slide10_551_5f2fb7cb9f.png",
+        "slide10_555_e0b38f809f.png",
+        "slide10_559_ff7417a383.png"
+      ],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-11",
+      "name": "Exemplar slide 11",
+      "source_kind": "slide_exemplar",
+      "layout_index": 4,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.468,
+          "y": 2.424,
+          "w": 3.692,
+          "h": 0.748,
+          "font": {
+            "name": "Play",
+            "size_pt": 13.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.468,
+          "y": 1.741,
+          "w": 3.36,
+          "h": 0.436,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "color": "6DBCFF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.468,
+          "y": 3.259,
+          "w": 3.692,
+          "h": 0.748,
+          "font": {
+            "name": "Play",
+            "size_pt": 13.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.468,
+          "y": 4.093,
+          "w": 3.692,
+          "h": 0.748,
+          "font": {
+            "name": "Play",
+            "size_pt": 13.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.468,
+          "y": 4.928,
+          "w": 3.692,
+          "h": 0.748,
+          "font": {
+            "name": "Play",
+            "size_pt": 13.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.107,
+          "y": 1.805,
+          "w": 1.053,
+          "h": 0.425,
+          "font": {
+            "name": "Play",
+            "size_pt": 14.0,
+            "color": "000000"
+          },
+          "alignment": "center "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.771,
+          "y": 2.424,
+          "w": 3.692,
+          "h": 0.748,
+          "font": {
+            "name": "Play",
+            "size_pt": 13.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.771,
+          "y": 1.741,
+          "w": 3.36,
+          "h": 0.436,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "color": "6DBCFF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.771,
+          "y": 3.259,
+          "w": 3.692,
+          "h": 0.748,
+          "font": {
+            "name": "Play",
+            "size_pt": 13.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.771,
+          "y": 4.093,
+          "w": 3.692,
+          "h": 0.748,
+          "font": {
+            "name": "Play",
+            "size_pt": 13.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.771,
+          "y": 4.928,
+          "w": 3.692,
+          "h": 0.748,
+          "font": {
+            "name": "Play",
+            "size_pt": 13.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.41,
+          "y": 1.805,
+          "w": 1.053,
+          "h": 0.425,
+          "font": {
+            "name": "Play",
+            "size_pt": 14.0,
+            "color": "000000"
+          },
+          "alignment": "center "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.075,
+          "y": 2.424,
+          "w": 3.692,
+          "h": 0.748,
+          "font": {
+            "name": "Play",
+            "size_pt": 13.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.075,
+          "y": 1.741,
+          "w": 3.36,
+          "h": 0.436,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "color": "6DBCFF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.075,
+          "y": 3.259,
+          "w": 3.692,
+          "h": 0.748,
+          "font": {
+            "name": "Play",
+            "size_pt": 13.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.075,
+          "y": 4.093,
+          "w": 3.692,
+          "h": 0.748,
+          "font": {
+            "name": "Play",
+            "size_pt": 13.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.075,
+          "y": 4.928,
+          "w": 3.692,
+          "h": 0.748,
+          "font": {
+            "name": "Play",
+            "size_pt": 13.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 11.714,
+          "y": 1.805,
+          "w": 1.053,
+          "h": 0.425,
+          "font": {
+            "name": "Play",
+            "size_pt": 14.0,
+            "color": "000000"
+          },
+          "alignment": "center "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.23213333333333336,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 29,
+        "body_chars": 1829,
+        "usable_body_zones": 13,
+        "body_area_ratio": 0.441,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 18,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0.007,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 12,
+        "complexity": 0.838,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        11
+      ],
+      "layout_assets": [
+        "layout4_148_396f16b3a2.png",
+        "layout4_149_5e210e10ca.png",
+        "layout4_150_980db8614b.png",
+        "layout4_172_016d129c78.png",
+        "layout4_173_0c8c59bee0.png"
+      ],
+      "slide_assets": [
+        "slide11_569_4478748bee.png",
+        "slide11_572_11bd3e985e.png",
+        "slide11_575_086dfa7ed1.png",
+        "slide11_578_2e07294ffc.png",
+        "slide11_583_fb8837ef20.png",
+        "slide11_586_ec75a96904.png",
+        "slide11_589_72b387b6bc.png",
+        "slide11_592_fcdb594307.png",
+        "slide11_597_d66dd128c3.png",
+        "slide11_600_d8b5a4249c.png",
+        "slide11_603_8d0c033361.png",
+        "slide11_606_e01613f3ff.png"
+      ],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-12",
+      "name": "Exemplar slide 12",
+      "source_kind": "slide_exemplar",
+      "layout_index": 5,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.468,
+          "y": 1.645,
+          "w": 5.095,
+          "h": 0.444,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.468,
+          "y": 3.237,
+          "w": 5.095,
+          "h": 0.444,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 1.134,
+          "y": 2.175,
+          "w": 2.124,
+          "h": 0.519,
+          "font": {
+            "name": "Play",
+            "size_pt": 12.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.3,
+          "y": 2.175,
+          "w": 2.124,
+          "h": 0.519,
+          "font": {
+            "name": "Play",
+            "size_pt": 12.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.331,
+          "y": 2.175,
+          "w": 2.124,
+          "h": 0.519,
+          "font": {
+            "name": "Play",
+            "size_pt": 12.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 10.497,
+          "y": 2.175,
+          "w": 2.124,
+          "h": 0.519,
+          "font": {
+            "name": "Play",
+            "size_pt": 12.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.468,
+          "y": 3.75,
+          "w": 3.074,
+          "h": 1.046,
+          "font": {
+            "name": "Play",
+            "size_pt": 12.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.621,
+          "y": 3.75,
+          "w": 3.074,
+          "h": 1.046,
+          "font": {
+            "name": "Play",
+            "size_pt": 12.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.773,
+          "y": 3.75,
+          "w": 3.074,
+          "h": 1.046,
+          "font": {
+            "name": "Play",
+            "size_pt": 12.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.926,
+          "y": 3.75,
+          "w": 3.074,
+          "h": 1.046,
+          "font": {
+            "name": "Play",
+            "size_pt": 12.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.468,
+          "y": 4.871,
+          "w": 3.074,
+          "h": 1.046,
+          "font": {
+            "name": "Play",
+            "size_pt": 12.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.621,
+          "y": 4.871,
+          "w": 3.074,
+          "h": 1.046,
+          "font": {
+            "name": "Play",
+            "size_pt": 12.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.773,
+          "y": 4.871,
+          "w": 3.074,
+          "h": 1.046,
+          "font": {
+            "name": "Play",
+            "size_pt": 12.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.926,
+          "y": 4.871,
+          "w": 3.074,
+          "h": 1.046,
+          "font": {
+            "name": "Play",
+            "size_pt": 12.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.21933333333333332,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 45,
+        "body_chars": 1693,
+        "usable_body_zones": 9,
+        "body_area_ratio": 0.367,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 14,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0.011,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 4,
+        "complexity": 0.463,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        12
+      ],
+      "layout_assets": [
+        "layout5_196_c7816ad0f3.png",
+        "layout5_197_d15ed8b726.png",
+        "layout5_201_ed1188d387.png"
+      ],
+      "slide_assets": [
+        "slide12_619_23002350f7.png",
+        "slide12_620_a4986645a5.png",
+        "slide12_621_a9eba75260.png",
+        "slide12_635_9bad949c44.png",
+        "slide12_638_f9750be478.png",
+        "slide12_641_b9c4d40e22.png"
+      ],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-13",
+      "name": "Exemplar slide 13",
+      "source_kind": "slide_exemplar",
+      "layout_index": 6,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "image",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 0.736,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.458,
+          "y": 4.268,
+          "w": 2.804,
+          "h": 1.397,
+          "font": {
+            "name": "Play",
+            "size_pt": 12.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 1.269,
+          "y": 2.389,
+          "w": 1.993,
+          "h": 0.634,
+          "font": {
+            "name": "Play",
+            "size_pt": 14.0,
+            "color": "FDFEFE"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.469,
+          "y": 1.767,
+          "w": 4.202,
+          "h": 0.457,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "color": "6DBCFF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 3.766,
+          "w": 4.202,
+          "h": 0.457,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.442,
+          "y": 4.268,
+          "w": 2.804,
+          "h": 1.397,
+          "font": {
+            "name": "Play",
+            "size_pt": 12.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.427,
+          "y": 4.268,
+          "w": 2.804,
+          "h": 1.397,
+          "font": {
+            "name": "Play",
+            "size_pt": 12.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.412,
+          "y": 4.268,
+          "w": 2.804,
+          "h": 1.397,
+          "font": {
+            "name": "Play",
+            "size_pt": 12.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.253,
+          "y": 2.389,
+          "w": 1.993,
+          "h": 0.634,
+          "font": {
+            "name": "Play",
+            "size_pt": 14.0,
+            "color": "FDFEFE"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.253,
+          "y": 2.389,
+          "w": 1.993,
+          "h": 0.634,
+          "font": {
+            "name": "Play",
+            "size_pt": 14.0,
+            "color": "FDFEFE"
+          },
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.23559999999999998,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 47,
+        "body_chars": 1023,
+        "usable_body_zones": 5,
+        "body_area_ratio": 0.22,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 9,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 0.187,
+        "content_image_count": 1,
+        "content_image_area_ratio": 0.185,
+        "shape_count": 3,
+        "complexity": 0.312,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        13
+      ],
+      "layout_assets": [
+        "layout6_203_78c44e54b2.png",
+        "layout6_204_fb6458ff44.png",
+        "layout6_206_3ceaa6ff4c.png",
+        "layout6_207_0d0268bab6.png"
+      ],
+      "slide_assets": [
+        "slide13_653_4696389156.png",
+        "slide13_661_228a21fa28.png",
+        "slide13_665_15d6738d41.png",
+        "slide13_666_d52be32cb2.png"
+      ],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-14",
+      "name": "Exemplar slide 14",
+      "source_kind": "slide_exemplar",
+      "layout_index": 7,
+      "master_index": 0,
+      "roles": [
+        "data"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.468,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {},
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.06186666666666667,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 269,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": true,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 1,
+        "complexity": 0.025,
+        "rhetorical_pattern": "data",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        14
+      ],
+      "layout_assets": [
+        "layout7_230_9c678483cd.png"
+      ],
+      "slide_assets": [],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-15",
+      "name": "Exemplar slide 15",
+      "source_kind": "slide_exemplar",
+      "layout_index": 7,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.468,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.468,
+          "y": 2.009,
+          "w": 3.976,
+          "h": 2.211,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.612,
+          "y": 2.009,
+          "w": 3.976,
+          "h": 2.211,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.757,
+          "y": 2.009,
+          "w": 3.976,
+          "h": 2.211,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.463,
+          "y": 6.052,
+          "w": 7.18,
+          "h": 0.432,
+          "font": {
+            "name": "Play",
+            "size_pt": 14.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.468,
+          "y": 5.395,
+          "w": 1.953,
+          "h": 0.433,
+          "font": {
+            "name": "Play",
+            "size_pt": 14.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.26786666666666664,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 216,
+        "body_chars": 701,
+        "usable_body_zones": 3,
+        "body_area_ratio": 0.285,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 5,
+        "bullets_per_zone": 6,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 1,
+        "complexity": 0.087,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        15
+      ],
+      "layout_assets": [
+        "layout7_230_9c678483cd.png"
+      ],
+      "slide_assets": [],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-16",
+      "name": "Exemplar slide 16",
+      "source_kind": "slide_exemplar",
+      "layout_index": 4,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.645,
+          "y": 2.387,
+          "w": 3.422,
+          "h": 0.337,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "color": "212121"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.645,
+          "y": 3.108,
+          "w": 3.422,
+          "h": 0.942,
+          "font": {
+            "name": "Play",
+            "size_pt": 12.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.691,
+          "y": 2.387,
+          "w": 3.422,
+          "h": 0.337,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "color": "212121"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.691,
+          "y": 3.108,
+          "w": 3.422,
+          "h": 0.942,
+          "font": {
+            "name": "Play",
+            "size_pt": 12.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.737,
+          "y": 2.402,
+          "w": 3.757,
+          "h": 0.337,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "color": "212121"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.737,
+          "y": 3.108,
+          "w": 3.422,
+          "h": 0.942,
+          "font": {
+            "name": "Play",
+            "size_pt": 12.0,
+            "bold": false,
+            "italic": false,
+            "color": "000000",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.472,
+          "y": 1.36,
+          "w": 10.608,
+          "h": 0.705,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "CAD0D5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {},
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.18133333333333335,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 233,
+        "body_chars": 806,
+        "usable_body_zones": 4,
+        "body_area_ratio": 0.206,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 7,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 5,
+        "complexity": 0.163,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        16
+      ],
+      "layout_assets": [
+        "layout4_148_396f16b3a2.png",
+        "layout4_149_5e210e10ca.png",
+        "layout4_150_980db8614b.png",
+        "layout4_172_016d129c78.png",
+        "layout4_173_0c8c59bee0.png"
+      ],
+      "slide_assets": [],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-17",
+      "name": "Exemplar slide 17",
+      "source_kind": "slide_exemplar",
+      "layout_index": 8,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 6.908,
+          "y": 1.36,
+          "w": 5.183,
+          "h": 2.092,
+          "font": {
+            "name": "Play",
+            "size_pt": 80.0,
+            "bold": true,
+            "color": "70C3FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.908,
+          "y": 3.935,
+          "w": 5.183,
+          "h": 2.832,
+          "font": {
+            "name": "Play",
+            "size_pt": 80.0,
+            "bold": true,
+            "color": "70C3FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.472,
+          "y": 1.36,
+          "w": 3.97,
+          "h": 0.705,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "CAD0D5"
+          },
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.18133333333333335,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 2,
+        "title_chars": 14,
+        "body_chars": 374,
+        "usable_body_zones": 3,
+        "body_area_ratio": 0.284,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 3,
+        "bullets_per_zone": 4,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 0,
+        "complexity": 0.05,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        17
+      ],
+      "layout_assets": [
+        "layout8_235_fc2be5be8e.png",
+        "layout8_257_c70cd9b8ba.png",
+        "layout8_258_d8cc108604.png",
+        "layout8_259_eec82db616.png"
+      ],
+      "slide_assets": [],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-18",
+      "name": "Exemplar slide 18",
+      "source_kind": "slide_exemplar",
+      "layout_index": 8,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 5.179,
+          "y": 1.939,
+          "w": 6.533,
+          "h": 4.137,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "center "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.469,
+          "y": 1.939,
+          "w": 4.243,
+          "h": 3.463,
+          "font": {
+            "name": "Play",
+            "size_pt": 54.0,
+            "bold": true,
+            "color": "70C3FF"
+          },
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.25853333333333334,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 1,
+        "title_chars": 40,
+        "body_chars": 934,
+        "usable_body_zones": 2,
+        "body_area_ratio": 0.38,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 2,
+        "bullets_per_zone": 3,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 0,
+        "complexity": 0.037,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        18
+      ],
+      "layout_assets": [
+        "layout8_235_fc2be5be8e.png",
+        "layout8_257_c70cd9b8ba.png",
+        "layout8_258_d8cc108604.png",
+        "layout8_259_eec82db616.png"
+      ],
+      "slide_assets": [],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-19",
+      "name": "Exemplar slide 19",
+      "source_kind": "slide_exemplar",
+      "layout_index": 9,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "image",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 12.418,
+          "h": 0.839,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.155,
+          "y": 3.938,
+          "w": 2.191,
+          "h": 0.599,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "center "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.588,
+          "y": 3.067,
+          "w": 3.118,
+          "h": 0.528,
+          "font": {
+            "name": "Play",
+            "size_pt": 60.0,
+            "bold": true,
+            "color": "0077FF"
+          },
+          "alignment": "center "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.037,
+          "y": 3.473,
+          "w": 1.472,
+          "h": 0.528,
+          "font": {
+            "name": "Play",
+            "size_pt": 32.0,
+            "color": "000000",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "center "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.714,
+          "y": 5.908,
+          "w": 1.472,
+          "h": 0.528,
+          "font": {
+            "name": "Play",
+            "size_pt": 28.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "center "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.48,
+          "y": 5.162,
+          "w": 3.118,
+          "h": 0.528,
+          "font": {
+            "name": "Play",
+            "size_pt": 54.0,
+            "bold": true,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 4.299,
+          "w": 2.022,
+          "h": 0.555,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "000000",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "center "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.48,
+          "y": 2.753,
+          "w": 3.118,
+          "h": 0.528,
+          "font": {
+            "name": "Play",
+            "size_pt": 54.0,
+            "bold": true,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.469,
+          "y": 1.89,
+          "w": 2.022,
+          "h": 0.555,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "center "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.252,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 2,
+        "title_chars": 35,
+        "body_chars": 256,
+        "usable_body_zones": 1,
+        "body_area_ratio": 0.104,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 8,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 0.995,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 0,
+        "complexity": 0.15,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        19
+      ],
+      "layout_assets": [
+        "layout9_261_1abb28e6f7.png",
+        "layout9_263_11e5ccae20.png",
+        "layout9_264_9adbdd0462.png"
+      ],
+      "slide_assets": [
+        "slide19_727_d35c52cf29.png"
+      ],
+      "background": {
+        "color": "000000",
+        "source": "slide_image"
+      }
+    },
+    {
+      "id": "slide-20",
+      "name": "Exemplar slide 20",
+      "source_kind": "slide_exemplar",
+      "layout_index": 9,
+      "master_index": 0,
+      "roles": [
+        "section",
+        "image"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 12.418,
+          "h": 0.839,
+          "font": {},
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.06186666666666667,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 256,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 0.672,
+        "content_image_count": 2,
+        "content_image_area_ratio": 0.672,
+        "shape_count": 0,
+        "complexity": 0.087,
+        "rhetorical_pattern": "image_text",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        20
+      ],
+      "layout_assets": [
+        "layout9_261_1abb28e6f7.png",
+        "layout9_263_11e5ccae20.png",
+        "layout9_264_9adbdd0462.png"
+      ],
+      "slide_assets": [
+        "slide20_742_d00da8dd62.png",
+        "slide20_743_05c041dc3a.png"
+      ],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-21",
+      "name": "Exemplar slide 21",
+      "source_kind": "slide_exemplar",
+      "layout_index": 9,
+      "master_index": 0,
+      "roles": [
+        "section",
+        "image"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 12.418,
+          "h": 0.839,
+          "font": {},
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.06186666666666667,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 256,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 0.666,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 0,
+        "complexity": 0.05,
+        "rhetorical_pattern": "image_text",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        21
+      ],
+      "layout_assets": [
+        "layout9_261_1abb28e6f7.png",
+        "layout9_263_11e5ccae20.png",
+        "layout9_264_9adbdd0462.png"
+      ],
+      "slide_assets": [
+        "slide21_750_065c582c09.png"
+      ],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-22",
+      "name": "Exemplar slide 22",
+      "source_kind": "slide_exemplar",
+      "layout_index": 10,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "title",
+          "x": 7.173,
+          "y": 1.068,
+          "w": 4.816,
+          "h": 1.029,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "EB4250"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.173,
+          "y": 2.545,
+          "w": 4.816,
+          "h": 1.029,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "EB4250"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.173,
+          "y": 4.049,
+          "w": 4.816,
+          "h": 1.029,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "EB4250"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.173,
+          "y": 5.597,
+          "w": 4.816,
+          "h": 1.029,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "EB4250"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 2.545,
+          "w": 4.92,
+          "h": 1.277,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.472,
+          "y": 3.859,
+          "w": 4.918,
+          "h": 0.705,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.1424,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 154,
+        "body_chars": 725,
+        "usable_body_zones": 5,
+        "body_area_ratio": 0.246,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 5,
+        "bullets_per_zone": 6,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0.003,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 4,
+        "complexity": 0.275,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        22
+      ],
+      "layout_assets": [
+        "layout10_266_4dc6240c24.png",
+        "layout10_267_a1a6a017a2.png",
+        "layout10_269_fa8dd2fb49.png",
+        "layout10_270_c6e0e1b9d0.png"
+      ],
+      "slide_assets": [
+        "slide22_764_2559cdf572.png",
+        "slide22_765_9084c8f717.png",
+        "slide22_766_d0def23970.png",
+        "slide22_767_28ac91be66.png"
+      ],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-23",
+      "name": "Exemplar slide 23",
+      "source_kind": "slide_exemplar",
+      "layout_index": 10,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.468,
+          "y": 2.407,
+          "w": 3.963,
+          "h": 1.343,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.678,
+          "y": 2.407,
+          "w": 3.963,
+          "h": 1.343,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.888,
+          "y": 2.407,
+          "w": 3.963,
+          "h": 1.343,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.468,
+          "y": 3.917,
+          "w": 3.963,
+          "h": 1.343,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.678,
+          "y": 3.917,
+          "w": 3.963,
+          "h": 1.343,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.888,
+          "y": 3.917,
+          "w": 3.963,
+          "h": 1.343,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.06186666666666667,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 269,
+        "body_chars": 996,
+        "usable_body_zones": 6,
+        "body_area_ratio": 0.319,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 6,
+        "bullets_per_zone": 7,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0.003,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 6,
+        "complexity": 0.388,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        23
+      ],
+      "layout_assets": [
+        "layout10_266_4dc6240c24.png",
+        "layout10_267_a1a6a017a2.png",
+        "layout10_269_fa8dd2fb49.png",
+        "layout10_270_c6e0e1b9d0.png"
+      ],
+      "slide_assets": [
+        "slide23_788_bc259afc37.png",
+        "slide23_789_ddbd648ec2.png",
+        "slide23_790_cc1e980c75.png",
+        "slide23_791_3779598767.png",
+        "slide23_792_a03d1f6dc1.png",
+        "slide23_793_f8018ffabe.png"
+      ],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-24",
+      "name": "Exemplar slide 24",
+      "source_kind": "slide_exemplar",
+      "layout_index": 11,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "image",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.469,
+          "y": 1.76,
+          "w": 5.253,
+          "h": 2.053,
+          "font": {
+            "size_pt": 66.0,
+            "bold": true
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.5,
+          "y": 1.639,
+          "w": 3.812,
+          "h": 3.812,
+          "font": {
+            "name": "Play",
+            "size_pt": 24.0,
+            "bold": true,
+            "color": "000000",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "center "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 4.306,
+          "w": 2.893,
+          "h": 0.821,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "000000",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "center "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.23466666666666666,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 1,
+        "title_chars": 20,
+        "body_chars": 275,
+        "usable_body_zones": 2,
+        "body_area_ratio": 0.169,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 2,
+        "bullets_per_zone": 3,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 0.303,
+        "content_image_count": 2,
+        "content_image_area_ratio": 0.297,
+        "shape_count": 2,
+        "complexity": 0.175,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        24
+      ],
+      "layout_assets": [
+        "layout11_293_d2a2992906.png",
+        "layout11_294_69c7926692.png",
+        "layout11_295_17e2c01895.png"
+      ],
+      "slide_assets": [
+        "slide24_799_8f903a4ba6.png",
+        "slide24_805_066320dbdd.png",
+        "slide24_806_c08f07b311.png"
+      ],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-25",
+      "name": "Exemplar slide 25",
+      "source_kind": "slide_exemplar",
+      "layout_index": 6,
+      "master_index": 0,
+      "roles": [
+        "image",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 1.134,
+          "y": 1.482,
+          "w": 2.124,
+          "h": 0.519,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 1.134,
+          "y": 2.261,
+          "w": 2.124,
+          "h": 0.519,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 1.134,
+          "y": 3.053,
+          "w": 2.124,
+          "h": 0.519,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 1.134,
+          "y": 3.845,
+          "w": 2.124,
+          "h": 0.519,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 1.134,
+          "y": 4.637,
+          "w": 2.124,
+          "h": 0.519,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.1976,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 34,
+        "body_chars": 269,
+        "usable_body_zones": 1,
+        "body_area_ratio": 0.109,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 5,
+        "bullets_per_zone": 6,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 0.565,
+        "content_image_count": 1,
+        "content_image_area_ratio": 0.563,
+        "shape_count": 5,
+        "complexity": 0.362,
+        "rhetorical_pattern": "multi_card",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        25
+      ],
+      "layout_assets": [
+        "layout6_203_78c44e54b2.png",
+        "layout6_204_fb6458ff44.png",
+        "layout6_206_3ceaa6ff4c.png",
+        "layout6_207_0d0268bab6.png"
+      ],
+      "slide_assets": [
+        "slide25_816_6ea546bb3f.png",
+        "slide25_820_8219a5bc0b.png",
+        "slide25_824_e60755de47.png",
+        "slide25_828_500e247638.png",
+        "slide25_832_65d67ad474.png",
+        "slide25_833_8de4f02cee.png"
+      ],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-26",
+      "name": "Exemplar slide 26",
+      "source_kind": "slide_exemplar",
+      "layout_index": 6,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 3.992,
+          "w": 2.893,
+          "h": 0.649,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.63,
+          "y": 3.992,
+          "w": 2.893,
+          "h": 0.649,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.791,
+          "y": 3.992,
+          "w": 2.893,
+          "h": 0.649,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.952,
+          "y": 3.992,
+          "w": 2.893,
+          "h": 0.649,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 1.023,
+          "y": 2.844,
+          "w": 1.946,
+          "h": 0.601,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "color": "000000",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "center "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.102,
+          "y": 2.844,
+          "w": 1.946,
+          "h": 0.601,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "color": "000000",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "center "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.264,
+          "y": 2.844,
+          "w": 1.946,
+          "h": 0.601,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "color": "000000",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "center "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 10.364,
+          "y": 2.844,
+          "w": 1.946,
+          "h": 0.601,
+          "font": {
+            "name": "Play",
+            "size_pt": 18.0,
+            "color": "000000",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "center "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.06186666666666667,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 269,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 8,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 5,
+        "complexity": 0.175,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        26
+      ],
+      "layout_assets": [
+        "layout6_203_78c44e54b2.png",
+        "layout6_204_fb6458ff44.png",
+        "layout6_206_3ceaa6ff4c.png",
+        "layout6_207_0d0268bab6.png"
+      ],
+      "slide_assets": [],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-27",
+      "name": "Exemplar slide 27",
+      "source_kind": "slide_exemplar",
+      "layout_index": 6,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "data",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.469,
+          "y": 0.464,
+          "w": 8.56,
+          "h": 1.277,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 4.264,
+          "w": 2.893,
+          "h": 0.649,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.63,
+          "y": 4.264,
+          "w": 2.893,
+          "h": 0.649,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.791,
+          "y": 4.264,
+          "w": 2.893,
+          "h": 0.649,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.952,
+          "y": 4.264,
+          "w": 2.893,
+          "h": 0.649,
+          "font": {
+            "name": "Play",
+            "size_pt": 20.0,
+            "bold": false,
+            "italic": false,
+            "color": "FFFFFF",
+            "color_theme_ref": "lt1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 3.056,
+          "w": 1.933,
+          "h": 0.98,
+          "font": {
+            "name": "Play",
+            "size_pt": 66.0,
+            "bold": true,
+            "italic": false,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.625,
+          "y": 3.056,
+          "w": 1.933,
+          "h": 0.98,
+          "font": {
+            "name": "Play",
+            "size_pt": 66.0,
+            "bold": true,
+            "italic": false,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.781,
+          "y": 3.056,
+          "w": 1.933,
+          "h": 0.98,
+          "font": {
+            "name": "Play",
+            "size_pt": 66.0,
+            "bold": true,
+            "italic": false,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.95,
+          "y": 3.056,
+          "w": 1.933,
+          "h": 0.98,
+          "font": {
+            "name": "Play",
+            "size_pt": 66.0,
+            "bold": true,
+            "italic": false,
+            "color": "0077FF"
+          },
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.06186666666666667,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 269,
+        "body_chars": 80,
+        "usable_body_zones": 4,
+        "body_area_ratio": 0.076,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 8,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": true,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 3,
+        "complexity": 0.15,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        27
+      ],
+      "layout_assets": [
+        "layout6_203_78c44e54b2.png",
+        "layout6_204_fb6458ff44.png",
+        "layout6_206_3ceaa6ff4c.png",
+        "layout6_207_0d0268bab6.png"
+      ],
+      "slide_assets": [],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-28",
+      "name": "Exemplar slide 28",
+      "source_kind": "slide_exemplar",
+      "layout_index": 12,
+      "master_index": 0,
+      "roles": [
+        "section"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.469,
+          "y": 2.506,
+          "w": 8.56,
+          "h": 2.053,
+          "font": {
+            "size_pt": 144.0,
+            "bold": true
+          },
+          "alignment": "left "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.3341333333333333,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 12,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 0,
+        "complexity": 0.013,
+        "rhetorical_pattern": "section",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        28
+      ],
+      "layout_assets": [
+        "layout12_297_22261f54f0.png",
+        "layout12_319_fa4180b735.png",
+        "layout12_325_af778ac0c8.png"
+      ],
+      "slide_assets": [],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    },
+    {
+      "id": "slide-29",
+      "name": "Exemplar slide 29",
+      "source_kind": "slide_exemplar",
+      "layout_index": 13,
+      "master_index": 0,
+      "roles": [
+        "closing",
+        "two_column",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.469,
+          "y": 2.506,
+          "w": 8.56,
+          "h": 2.053,
+          "font": {},
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 1.652,
+          "y": 4.996,
+          "w": 2.421,
+          "h": 0.912,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "bold": false,
+            "italic": false,
+            "color": "AFB8C2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 5.009,
+          "y": 4.996,
+          "w": 2.421,
+          "h": 0.912,
+          "font": {
+            "name": "Play",
+            "size_pt": 16.0,
+            "bold": false,
+            "italic": false,
+            "color": "AFB8C2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 10.151,
+          "y": 0.693,
+          "w": 2.736,
+          "h": 2.736,
+          "font": {
+            "name": "Play",
+            "size_pt": 24.0,
+            "bold": true,
+            "color": "000000",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "center "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0924,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 3,
+        "title_chars": 104,
+        "body_chars": 571,
+        "usable_body_zones": 3,
+        "body_area_ratio": 0.22,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 3,
+        "bullets_per_zone": 4,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 2,
+        "complexity": 0.075,
+        "rhetorical_pattern": "closing",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        29
+      ],
+      "layout_assets": [
+        "layout13_327_d2dc8d2082.png",
+        "layout13_351_83e1031dc0.png",
+        "layout13_352_d653cbd156.png"
+      ],
+      "slide_assets": [],
+      "background": {
+        "color": "000000",
+        "source": "layout"
+      }
+    }
+  ]
+}

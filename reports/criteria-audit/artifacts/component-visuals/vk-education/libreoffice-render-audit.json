@@ -1,0 +1,335 @@
+{
+  "renderer": "LibreOffice",
+  "stage": "External acceptance checks on saved artifact; no repairs",
+  "fill": {
+    "status": "warning",
+    "slides": [
+      {
+        "slide": 2,
+        "coverage": 0.065
+      },
+      {
+        "slide": 3,
+        "coverage": 0.061
+      },
+      {
+        "slide": 4,
+        "coverage": 0.299
+      },
+      {
+        "slide": 5,
+        "coverage": 0.343
+      },
+      {
+        "slide": 6,
+        "coverage": 0.356
+      },
+      {
+        "slide": 7,
+        "coverage": 0.204
+      },
+      {
+        "slide": 8,
+        "coverage": 0.285
+      },
+      {
+        "slide": 9,
+        "coverage": 0.306
+      }
+    ],
+    "issues": [
+      {
+        "id": "0e329e826d00260a",
+        "slide": 2,
+        "code": "slide_underfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.065,
+        "bounds": [],
+        "message": "Контент занимает 7% слайда (меньше четверти)",
+        "repairable": true
+      },
+      {
+        "id": "60e1f26014181938",
+        "slide": 3,
+        "code": "slide_underfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.061,
+        "bounds": [],
+        "message": "Контент занимает 6% слайда (меньше четверти)",
+        "repairable": true
+      },
+      {
+        "id": "30fe899dba4378b0",
+        "slide": 7,
+        "code": "slide_underfilled",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "coverage": 0.204,
+        "bounds": [],
+        "message": "Контент занимает 20% слайда (меньше четверти)",
+        "repairable": true
+      }
+    ]
+  },
+  "contrast": {
+    "status": "warning",
+    "checked_spans": 60,
+    "uncertain_spans": 0,
+    "issues": [
+      {
+        "slide": 1,
+        "code": "rendered_low_contrast",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "ratio": 4.13,
+        "text": "Проверка нативных",
+        "foreground": "#FFFFFF",
+        "background": "#0077FF",
+        "bounds": [
+          {
+            "x": 0.6807,
+            "y": 3.251,
+            "w": 4.7225,
+            "h": 0.669
+          }
+        ],
+        "message": "Контраст текста 4.13:1 ниже 4.5:1 после офисного рендера",
+        "repairable": false,
+        "id": "844b5eb335360c80"
+      },
+      {
+        "slide": 1,
+        "code": "rendered_low_contrast",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "ratio": 4.13,
+        "text": "объектов",
+        "foreground": "#FFFFFF",
+        "background": "#0077FF",
+        "bounds": [
+          {
+            "x": 0.6807,
+            "y": 3.9408,
+            "w": 2.1425,
+            "h": 0.669
+          }
+        ],
+        "message": "Контраст текста 4.13:1 ниже 4.5:1 после офисного рендера",
+        "repairable": false,
+        "id": "30fbde9cc991bd25"
+      },
+      {
+        "slide": 2,
+        "code": "rendered_low_contrast",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "ratio": 4.13,
+        "text": "Два подразделения: 60 и 90 участников",
+        "foreground": "#0077FF",
+        "background": "#FFFFFF",
+        "bounds": [
+          {
+            "x": 0.7405,
+            "y": 0.8128,
+            "w": 9.2769,
+            "h": 0.669
+          }
+        ],
+        "message": "Контраст текста 4.13:1 ниже 4.5:1 после офисного рендера",
+        "repairable": false,
+        "id": "b8ae8711b5555001"
+      },
+      {
+        "slide": 3,
+        "code": "rendered_low_contrast",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "ratio": 4.13,
+        "text": "Доля участников по подразделениям",
+        "foreground": "#0077FF",
+        "background": "#FFFFFF",
+        "bounds": [
+          {
+            "x": 0.7405,
+            "y": 0.8128,
+            "w": 8.6499,
+            "h": 0.669
+          }
+        ],
+        "message": "Контраст текста 4.13:1 ниже 4.5:1 после офисного рендера",
+        "repairable": false,
+        "id": "d1b674f8acdc29a5"
+      },
+      {
+        "slide": 4,
+        "code": "rendered_low_contrast",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "ratio": 4.13,
+        "text": "Пилот рассчитан на шесть недель",
+        "foreground": "#0077FF",
+        "background": "#FFFFFF",
+        "bounds": [
+          {
+            "x": 0.7405,
+            "y": 0.8128,
+            "w": 8.0114,
+            "h": 0.669
+          }
+        ],
+        "message": "Контраст текста 4.13:1 ниже 4.5:1 после офисного рендера",
+        "repairable": false,
+        "id": "7cd641573a8dffb8"
+      },
+      {
+        "slide": 5,
+        "code": "rendered_low_contrast",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "ratio": 4.13,
+        "text": "Проверяем путь обращения",
+        "foreground": "#0077FF",
+        "background": "#FFFFFF",
+        "bounds": [
+          {
+            "x": 0.7413,
+            "y": 0.8128,
+            "w": 6.5519,
+            "h": 0.669
+          }
+        ],
+        "message": "Контраст текста 4.13:1 ниже 4.5:1 после офисного рендера",
+        "repairable": false,
+        "id": "1e41320eb426fb00"
+      },
+      {
+        "slide": 6,
+        "code": "rendered_low_contrast",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "ratio": 4.13,
+        "text": "Качество улучшаем после проверки",
+        "foreground": "#0077FF",
+        "background": "#FFFFFF",
+        "bounds": [
+          {
+            "x": 0.7413,
+            "y": 0.8128,
+            "w": 8.4084,
+            "h": 0.669
+          }
+        ],
+        "message": "Контраст текста 4.13:1 ниже 4.5:1 после офисного рендера",
+        "repairable": false,
+        "id": "942e80f55f64a43c"
+      },
+      {
+        "slide": 7,
+        "code": "rendered_low_contrast",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "ratio": 4.13,
+        "text": "У каждого участника есть роль",
+        "foreground": "#0077FF",
+        "background": "#FFFFFF",
+        "bounds": [
+          {
+            "x": 0.7405,
+            "y": 0.8128,
+            "w": 7.1849,
+            "h": 0.669
+          }
+        ],
+        "message": "Контраст текста 4.13:1 ниже 4.5:1 после офисного рендера",
+        "repairable": false,
+        "id": "c6df050b06597c28"
+      },
+      {
+        "slide": 8,
+        "code": "rendered_low_contrast",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "ratio": 4.13,
+        "text": "Измеряем три результата",
+        "foreground": "#0077FF",
+        "background": "#FFFFFF",
+        "bounds": [
+          {
+            "x": 0.7405,
+            "y": 0.8128,
+            "w": 6.0344,
+            "h": 0.669
+          }
+        ],
+        "message": "Контраст текста 4.13:1 ниже 4.5:1 после офисного рендера",
+        "repairable": false,
+        "id": "9e3399907a80b12b"
+      },
+      {
+        "slide": 9,
+        "code": "rendered_low_contrast",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "ratio": 4.13,
+        "text": "Решение принимаем по итогам пилота",
+        "foreground": "#0077FF",
+        "background": "#FFFFFF",
+        "bounds": [
+          {
+            "x": 0.7405,
+            "y": 0.8128,
+            "w": 9.0649,
+            "h": 0.669
+          }
+        ],
+        "message": "Контраст текста 4.13:1 ниже 4.5:1 после офисного рендера",
+        "repairable": false,
+        "id": "0bc6ae8a0eaea0fe"
+      },
+      {
+        "slide": 10,
+        "code": "rendered_low_contrast",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "ratio": 4.13,
+        "text": "Объекты доступны для",
+        "foreground": "#FFFFFF",
+        "background": "#0077FF",
+        "bounds": [
+          {
+            "x": 0.6787,
+            "y": 2.7719,
+            "w": 5.5334,
+            "h": 0.669
+          }
+        ],
+        "message": "Контраст текста 4.13:1 ниже 4.5:1 после офисного рендера",
+        "repairable": false,
+        "id": "6b04eeba3296edcb"
+      },
+      {
+        "slide": 10,
+        "code": "rendered_low_contrast",
+        "severity": "warning",
+        "check_type": "deterministic",
+        "ratio": 4.13,
+        "text": "редактирования",
+        "foreground": "#FFFFFF",
+        "background": "#0077FF",
+        "bounds": [
+          {
+            "x": 0.6787,
+            "y": 3.4617,
+            "w": 3.777,
+            "h": 0.669
+          }
+        ],
+        "message": "Контраст текста 4.13:1 ниже 4.5:1 после офисного рендера",
+        "repairable": false,
+        "id": "b0e4d206037025b0"
+      }
+    ]
+  }
+}

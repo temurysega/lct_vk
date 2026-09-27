@@ -1,0 +1,5002 @@
+{
+  "schema_version": "1.6",
+  "pattern_count": 17,
+  "patterns": [
+    {
+      "id": "layout-0",
+      "name": "ppt169_brutalism_field_guide — Blank",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "image",
+        "blank"
+      ],
+      "placeholders": [
+        {
+          "idx": 10,
+          "type": "date_",
+          "x": 0.5,
+          "y": 6.951,
+          "w": 2.333,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": 11,
+          "type": "footer_",
+          "x": 3.417,
+          "y": 6.951,
+          "w": 3.167,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        },
+        {
+          "idx": 12,
+          "type": "slide_number_",
+          "x": 7.167,
+          "y": 6.951,
+          "w": 2.333,
+          "h": 0.399,
+          "font": {},
+          "alignment": null
+        }
+      ],
+      "capacity": {
+        "has_title_zone": false,
+        "title_top_ratio": 0,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 80,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 1,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 1,
+        "supports_image": true,
+        "supports_data": false,
+        "image_area_ratio": 0.247,
+        "content_image_count": 1,
+        "content_image_area_ratio": 0.247,
+        "shape_count": 25,
+        "complexity": 0.388,
+        "rhetorical_pattern": "content",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "layout_assets": [],
+      "background": {
+        "type": "inherit"
+      }
+    },
+    {
+      "id": "slide-1",
+      "name": "Exemplar slide 1",
+      "source_kind": "slide_exemplar",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "cover",
+        "two_column",
+        "data",
+        "image",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 0.421,
+          "w": 4.099,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 11.268,
+          "y": 0.396,
+          "w": 1.587,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.479,
+          "y": 1.913,
+          "w": 4.833,
+          "h": 2.479,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 48.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.243,
+          "y": 6.275,
+          "w": 4.31,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.827,
+          "y": 4.983,
+          "w": 1.031,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.825,
+          "y": 5.302,
+          "w": 3.621,
+          "h": 1.258,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "F2F0EA"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.491,
+          "y": 6.909,
+          "w": 5.399,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 10.349,
+          "y": 6.817,
+          "w": 2.011,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "center "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0528,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 12,
+        "body_chars": 202,
+        "usable_body_zones": 2,
+        "body_area_ratio": 0.165,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 7,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": true,
+        "image_area_ratio": 0.247,
+        "content_image_count": 1,
+        "content_image_area_ratio": 0.247,
+        "shape_count": 6,
+        "complexity": 0.212,
+        "rhetorical_pattern": "hero",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        1
+      ],
+      "layout_assets": [],
+      "slide_assets": [
+        "slide1_11_d24dd762b4.png"
+      ],
+      "background": {
+        "color": "F2F0EA",
+        "source": "slide"
+      }
+    },
+    {
+      "id": "slide-2",
+      "name": "Exemplar slide 2",
+      "source_kind": "slide_exemplar",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "data",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 0.421,
+          "w": 2.183,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 11.268,
+          "y": 0.396,
+          "w": 1.587,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 0.91,
+          "w": 6.766,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 0.479,
+          "y": 1.771,
+          "w": 3.132,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 3.254,
+          "w": 1.432,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 3.656,
+          "w": 3.985,
+          "h": 1.571,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 5.427,
+          "w": 3.996,
+          "h": 1.258,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.242,
+          "y": 2.01,
+          "w": 5.058,
+          "h": 1.258,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.242,
+          "y": 3.469,
+          "w": 5.166,
+          "h": 1.258,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.41,
+          "y": 5.067,
+          "w": 0.208,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "6E6A62",
+            "color_theme_ref": "accent3"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.95,
+          "y": 5.031,
+          "w": 3.768,
+          "h": 0.321,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.41,
+          "y": 5.692,
+          "w": 0.208,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.95,
+          "y": 5.656,
+          "w": 3.33,
+          "h": 0.321,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "F2F0EA"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.41,
+          "y": 6.275,
+          "w": 0.208,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "6E6A62",
+            "color_theme_ref": "accent3"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.95,
+          "y": 6.24,
+          "w": 4.152,
+          "h": 0.633,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.495,
+          "y": 7.185,
+          "w": 2.621,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 12.384,
+          "y": 7.185,
+          "w": 0.454,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "right "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.23613333333333333,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 12,
+        "body_chars": 868,
+        "usable_body_zones": 5,
+        "body_area_ratio": 0.272,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 16,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": true,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 9,
+        "complexity": 0.325,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        2
+      ],
+      "layout_assets": [],
+      "slide_assets": [],
+      "background": {
+        "color": "F2F0EA",
+        "source": "slide"
+      }
+    },
+    {
+      "id": "slide-3",
+      "name": "Exemplar slide 3",
+      "source_kind": "slide_exemplar",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "data",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 0.421,
+          "w": 2.183,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 11.268,
+          "y": 0.396,
+          "w": 1.587,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 0.91,
+          "w": 5.604,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 1.973,
+          "w": 0.957,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.013,
+          "y": 2.031,
+          "w": 4.892,
+          "h": 0.946,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 3.223,
+          "w": 0.957,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.013,
+          "y": 3.281,
+          "w": 4.767,
+          "h": 0.946,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 4.473,
+          "w": 0.957,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.013,
+          "y": 4.531,
+          "w": 4.517,
+          "h": 0.946,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 5.723,
+          "w": 0.957,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.013,
+          "y": 5.781,
+          "w": 4.694,
+          "h": 0.946,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.492,
+          "y": 3.323,
+          "w": 2.465,
+          "h": 1.883,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.493,
+          "y": 5.233,
+          "w": 2.253,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.495,
+          "y": 7.185,
+          "w": 2.621,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 12.384,
+          "y": 7.185,
+          "w": 0.454,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "right "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0528,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 12,
+        "body_chars": 797,
+        "usable_body_zones": 5,
+        "body_area_ratio": 0.225,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 14,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 1,
+        "supports_image": false,
+        "supports_data": true,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 10,
+        "complexity": 0.312,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        3
+      ],
+      "layout_assets": [],
+      "slide_assets": [],
+      "background": {
+        "color": "F2F0EA",
+        "source": "slide"
+      }
+    },
+    {
+      "id": "slide-4",
+      "name": "Exemplar slide 4",
+      "source_kind": "slide_exemplar",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "data",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 0.421,
+          "w": 2.183,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 11.268,
+          "y": 0.396,
+          "w": 1.587,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 0.91,
+          "w": 4.815,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 2.01,
+          "w": 3.35,
+          "h": 1.571,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 3.781,
+          "w": 3.465,
+          "h": 1.258,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 5.24,
+          "w": 3.246,
+          "h": 0.946,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.889,
+          "y": 2.025,
+          "w": 3.261,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.875,
+          "y": 2.333,
+          "w": 4.957,
+          "h": 1.271,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 60.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.887,
+          "y": 3.243,
+          "w": 1.956,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.875,
+          "y": 3.625,
+          "w": 3.927,
+          "h": 1.271,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 60.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.887,
+          "y": 4.534,
+          "w": 1.106,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 5.221,
+          "y": 5.323,
+          "w": 5.683,
+          "h": 1.258,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "F2F0EA"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 5.223,
+          "y": 6.608,
+          "w": 2.067,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "9A958B",
+            "color_theme_ref": "accent6"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.495,
+          "y": 7.185,
+          "w": 2.621,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 12.384,
+          "y": 7.185,
+          "w": 0.454,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "right "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0528,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 12,
+        "body_chars": 730,
+        "usable_body_zones": 6,
+        "body_area_ratio": 0.311,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 14,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 1,
+        "supports_image": false,
+        "supports_data": true,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 6,
+        "complexity": 0.263,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        4
+      ],
+      "layout_assets": [],
+      "slide_assets": [],
+      "background": {
+        "color": "F2F0EA",
+        "source": "slide"
+      }
+    },
+    {
+      "id": "slide-5",
+      "name": "Exemplar slide 5",
+      "source_kind": "slide_exemplar",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "data",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 0.421,
+          "w": 2.218,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 11.268,
+          "y": 0.396,
+          "w": 1.587,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 0.91,
+          "w": 5.953,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 2.01,
+          "w": 6.652,
+          "h": 1.571,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 3.781,
+          "w": 6.527,
+          "h": 1.571,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 5.552,
+          "w": 6.517,
+          "h": 1.258,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.056,
+          "y": 2.171,
+          "w": 2.403,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.047,
+          "y": 2.577,
+          "w": 0.262,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.492,
+          "y": 2.656,
+          "w": 2.688,
+          "h": 0.321,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.047,
+          "y": 3.16,
+          "w": 0.262,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.492,
+          "y": 3.24,
+          "w": 3.33,
+          "h": 0.321,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.047,
+          "y": 3.744,
+          "w": 0.262,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.492,
+          "y": 3.823,
+          "w": 2.673,
+          "h": 0.633,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.054,
+          "y": 4.302,
+          "w": 1.242,
+          "h": 0.321,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.381,
+          "y": 4.89,
+          "w": 1.898,
+          "h": 1.411,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "F2F0EA"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.056,
+          "y": 6.317,
+          "w": 2.872,
+          "h": 0.715,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.495,
+          "y": 7.185,
+          "w": 2.621,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 12.384,
+          "y": 7.185,
+          "w": 0.454,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "right "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0528,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 12,
+        "body_chars": 1167,
+        "usable_body_zones": 5,
+        "body_area_ratio": 0.336,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 17,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": true,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 10,
+        "complexity": 0.35,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        5
+      ],
+      "layout_assets": [],
+      "slide_assets": [],
+      "background": {
+        "color": "F2F0EA",
+        "source": "slide"
+      }
+    },
+    {
+      "id": "slide-6",
+      "name": "Exemplar slide 6",
+      "source_kind": "slide_exemplar",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 0.421,
+          "w": 2.218,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 11.268,
+          "y": 0.396,
+          "w": 1.587,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 0.91,
+          "w": 9.044,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 2.181,
+          "w": 2.445,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 2.574,
+          "y": 2.305,
+          "w": 0.66,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.626,
+          "y": 2.305,
+          "w": 0.724,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.678,
+          "y": 2.305,
+          "w": 0.724,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 5.73,
+          "y": 2.305,
+          "w": 0.853,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.907,
+          "y": 2.305,
+          "w": 2.367,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.355,
+          "y": 2.305,
+          "w": 0.994,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 2.802,
+          "w": 4.781,
+          "h": 1.488,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 4.385,
+          "w": 4.944,
+          "h": 1.196,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 5.677,
+          "w": 4.746,
+          "h": 1.488,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.658,
+          "y": 2.802,
+          "w": 4.173,
+          "h": 1.196,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.658,
+          "y": 4.094,
+          "w": 3.954,
+          "h": 1.488,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.495,
+          "y": 7.185,
+          "w": 2.621,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 12.384,
+          "y": 7.185,
+          "w": 0.454,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "right "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0528,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 12,
+        "body_chars": 1098,
+        "usable_body_zones": 5,
+        "body_area_ratio": 0.31,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 16,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 10,
+        "complexity": 0.338,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        6
+      ],
+      "layout_assets": [],
+      "slide_assets": [],
+      "background": {
+        "color": "F2F0EA",
+        "source": "slide"
+      }
+    },
+    {
+      "id": "slide-7",
+      "name": "Exemplar slide 7",
+      "source_kind": "slide_exemplar",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "data",
+        "image",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 0.421,
+          "w": 2.218,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 11.268,
+          "y": 0.396,
+          "w": 1.587,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 0.91,
+          "w": 7.674,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.49,
+          "y": 1.975,
+          "w": 9.545,
+          "h": 0.698,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 18.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 2.796,
+          "w": 2.431,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 3.115,
+          "w": 5.454,
+          "h": 1.488,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.825,
+          "y": 4.969,
+          "w": 5.1,
+          "h": 1.779,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "F2F0EA"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.91,
+          "y": 6.733,
+          "w": 4.213,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.495,
+          "y": 7.185,
+          "w": 2.621,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 12.384,
+          "y": 7.185,
+          "w": 0.454,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "right "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0528,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 12,
+        "body_chars": 774,
+        "usable_body_zones": 3,
+        "body_area_ratio": 0.239,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 9,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": true,
+        "image_area_ratio": 0.181,
+        "content_image_count": 1,
+        "content_image_area_ratio": 0.181,
+        "shape_count": 8,
+        "complexity": 0.263,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        7
+      ],
+      "layout_assets": [],
+      "slide_assets": [
+        "slide7_22_a72bb16147.png"
+      ],
+      "background": {
+        "color": "F2F0EA",
+        "source": "slide"
+      }
+    },
+    {
+      "id": "slide-8",
+      "name": "Exemplar slide 8",
+      "source_kind": "slide_exemplar",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "data",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 0.421,
+          "w": 2.218,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 11.268,
+          "y": 0.396,
+          "w": 1.587,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 0.91,
+          "w": 9.235,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 1.969,
+          "w": 6.569,
+          "h": 1.488,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 3.552,
+          "w": 6.405,
+          "h": 1.488,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 5.052,
+          "w": 5.881,
+          "h": 0.904,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.848,
+          "y": 1.983,
+          "w": 2.597,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.845,
+          "y": 2.43,
+          "w": 1.083,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.845,
+          "y": 2.805,
+          "w": 2.033,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.845,
+          "y": 3.18,
+          "w": 1.7,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.845,
+          "y": 3.555,
+          "w": 0.583,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.845,
+          "y": 3.93,
+          "w": 1.417,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.096,
+          "y": 4.781,
+          "w": 3.131,
+          "h": 2.071,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.827,
+          "y": 6.15,
+          "w": 5.429,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.818,
+          "y": 6.515,
+          "w": 6.076,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "F2F0EA"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.495,
+          "y": 7.185,
+          "w": 2.621,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 12.384,
+          "y": 7.185,
+          "w": 0.454,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "right "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0528,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 12,
+        "body_chars": 1102,
+        "usable_body_zones": 4,
+        "body_area_ratio": 0.311,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 16,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": true,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 13,
+        "complexity": 0.375,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        8
+      ],
+      "layout_assets": [],
+      "slide_assets": [],
+      "background": {
+        "color": "F2F0EA",
+        "source": "slide"
+      }
+    },
+    {
+      "id": "slide-9",
+      "name": "Exemplar slide 9",
+      "source_kind": "slide_exemplar",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "data",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 0.421,
+          "w": 2.811,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 11.268,
+          "y": 0.396,
+          "w": 1.587,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 0.91,
+          "w": 8.747,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.618,
+          "y": 2.025,
+          "w": 0.891,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "bold": true,
+            "color": "F2F0EA"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.743,
+          "y": 2.025,
+          "w": 4.807,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "bold": true,
+            "color": "F2F0EA"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.491,
+          "y": 2.243,
+          "w": 1.905,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.618,
+          "y": 2.296,
+          "w": 8.072,
+          "h": 0.673,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.491,
+          "y": 2.951,
+          "w": 1.725,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.618,
+          "y": 3.004,
+          "w": 8.088,
+          "h": 0.673,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.491,
+          "y": 3.659,
+          "w": 1.225,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.618,
+          "y": 3.712,
+          "w": 7.755,
+          "h": 0.673,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.491,
+          "y": 4.368,
+          "w": 0.865,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.618,
+          "y": 4.421,
+          "w": 8.03,
+          "h": 0.673,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.491,
+          "y": 5.076,
+          "w": 1.225,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.618,
+          "y": 5.129,
+          "w": 7.613,
+          "h": 0.465,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.491,
+          "y": 5.576,
+          "w": 0.801,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.618,
+          "y": 5.629,
+          "w": 7.638,
+          "h": 0.465,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.491,
+          "y": 6.076,
+          "w": 0.994,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.618,
+          "y": 6.129,
+          "w": 7.613,
+          "h": 0.465,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.491,
+          "y": 6.576,
+          "w": 2.97,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 3.618,
+          "y": 6.629,
+          "w": 7.583,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.495,
+          "y": 7.185,
+          "w": 2.621,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 12.384,
+          "y": 7.185,
+          "w": 0.454,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "right "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0528,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 12,
+        "body_chars": 1190,
+        "usable_body_zones": 4,
+        "body_area_ratio": 0.215,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 22,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": true,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 16,
+        "complexity": 0.487,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        9
+      ],
+      "layout_assets": [],
+      "slide_assets": [],
+      "background": {
+        "color": "F2F0EA",
+        "source": "slide"
+      }
+    },
+    {
+      "id": "slide-10",
+      "name": "Exemplar slide 10",
+      "source_kind": "slide_exemplar",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "data",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 0.421,
+          "w": 2.811,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 11.268,
+          "y": 0.396,
+          "w": 1.587,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 0.91,
+          "w": 9.462,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.491,
+          "y": 1.951,
+          "w": 1.984,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 2.337,
+          "w": 3.397,
+          "h": 0.715,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 3.171,
+          "w": 3.205,
+          "h": 1.403,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 4.692,
+          "w": 3.397,
+          "h": 1.403,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.699,
+          "y": 1.951,
+          "w": 2.838,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.702,
+          "y": 2.337,
+          "w": 3.422,
+          "h": 1.403,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.702,
+          "y": 3.858,
+          "w": 3.197,
+          "h": 1.173,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.702,
+          "y": 5.15,
+          "w": 3.372,
+          "h": 0.944,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.908,
+          "y": 1.951,
+          "w": 2.708,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.91,
+          "y": 2.337,
+          "w": 3.372,
+          "h": 1.173,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.91,
+          "y": 3.629,
+          "w": 3.355,
+          "h": 1.173,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.91,
+          "y": 4.921,
+          "w": 3.505,
+          "h": 0.944,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.827,
+          "y": 6.504,
+          "w": 1.56,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 2.575,
+          "y": 6.469,
+          "w": 7.162,
+          "h": 0.613,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "F2F0EA"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.495,
+          "y": 7.185,
+          "w": 2.621,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 12.384,
+          "y": 7.185,
+          "w": 0.454,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "right "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0528,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 12,
+        "body_chars": 1918,
+        "usable_body_zones": 9,
+        "body_area_ratio": 0.346,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 18,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": true,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 10,
+        "complexity": 0.362,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        10
+      ],
+      "layout_assets": [],
+      "slide_assets": [],
+      "background": {
+        "color": "F2F0EA",
+        "source": "slide"
+      }
+    },
+    {
+      "id": "slide-11",
+      "name": "Exemplar slide 11",
+      "source_kind": "slide_exemplar",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "data",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 0.421,
+          "w": 2.811,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 11.268,
+          "y": 0.396,
+          "w": 1.587,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 0.91,
+          "w": 4.862,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.49,
+          "y": 1.996,
+          "w": 10.874,
+          "h": 0.385,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 18.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.479,
+          "y": 2.479,
+          "w": 1.587,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.491,
+          "y": 4.284,
+          "w": 1.058,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.771,
+          "y": 2.479,
+          "w": 2.359,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.782,
+          "y": 4.284,
+          "w": 1.995,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.146,
+          "y": 2.479,
+          "w": 3.132,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.158,
+          "y": 4.284,
+          "w": 2.226,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 4.927,
+          "w": 4.694,
+          "h": 1.196,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 6.219,
+          "w": 4.808,
+          "h": 0.904,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.193,
+          "y": 5.015,
+          "w": 2.025,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 7.2,
+          "y": 5.677,
+          "w": 4.298,
+          "h": 1.196,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.495,
+          "y": 7.185,
+          "w": 2.621,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 12.384,
+          "y": 7.185,
+          "w": 0.454,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "right "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0528,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 12,
+        "body_chars": 571,
+        "usable_body_zones": 6,
+        "body_area_ratio": 0.285,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 15,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": true,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 9,
+        "complexity": 0.312,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        11
+      ],
+      "layout_assets": [],
+      "slide_assets": [],
+      "background": {
+        "color": "F2F0EA",
+        "source": "slide"
+      }
+    },
+    {
+      "id": "slide-12",
+      "name": "Exemplar slide 12",
+      "source_kind": "slide_exemplar",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "data",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 0.421,
+          "w": 2.813,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 11.268,
+          "y": 0.396,
+          "w": 1.587,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 0.91,
+          "w": 3.729,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.82,
+          "y": 2.187,
+          "w": 7.132,
+          "h": 1.571,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 24.8,
+            "color": "F2F0EA"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.827,
+          "y": 3.692,
+          "w": 1.67,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.827,
+          "y": 3.983,
+          "w": 6.122,
+          "h": 0.486,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "9A958B",
+            "color_theme_ref": "accent6"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.479,
+          "y": 4.667,
+          "w": 0.814,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 1.554,
+          "y": 4.927,
+          "w": 5.235,
+          "h": 1.196,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 6.26,
+          "w": 6.517,
+          "h": 0.904,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.16,
+          "y": 6.317,
+          "w": 2.805,
+          "h": 0.715,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.495,
+          "y": 7.185,
+          "w": 2.621,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 12.384,
+          "y": 7.185,
+          "w": 0.454,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "right "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0528,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 12,
+        "body_chars": 687,
+        "usable_body_zones": 4,
+        "body_area_ratio": 0.254,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 11,
+        "bullets_per_zone": 2,
+        "source_bullet_count": 1,
+        "supports_image": true,
+        "supports_data": true,
+        "image_area_ratio": 0.154,
+        "content_image_count": 1,
+        "content_image_area_ratio": 0.154,
+        "shape_count": 6,
+        "complexity": 0.263,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        12
+      ],
+      "layout_assets": [],
+      "slide_assets": [
+        "slide12_22_a72bb16147.png"
+      ],
+      "background": {
+        "color": "F2F0EA",
+        "source": "slide"
+      }
+    },
+    {
+      "id": "slide-13",
+      "name": "Exemplar slide 13",
+      "source_kind": "slide_exemplar",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "data",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 0.421,
+          "w": 2.813,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 11.268,
+          "y": 0.396,
+          "w": 1.587,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 0.91,
+          "w": 3.355,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.577,
+          "y": 2.025,
+          "w": 0.876,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "bold": true,
+            "color": "F2F0EA"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.952,
+          "y": 2.025,
+          "w": 1.047,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "bold": true,
+            "color": "F2F0EA"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.118,
+          "y": 2.025,
+          "w": 0.487,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "bold": true,
+            "color": "F2F0EA"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 10.264,
+          "y": 2.025,
+          "w": 0.97,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "bold": true,
+            "color": "F2F0EA"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.577,
+          "y": 2.358,
+          "w": 1.289,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "bold": true,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.577,
+          "y": 2.712,
+          "w": 2.46,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.952,
+          "y": 2.712,
+          "w": 2.653,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.118,
+          "y": 2.712,
+          "w": 0.402,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 10.264,
+          "y": 2.712,
+          "w": 0.937,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.577,
+          "y": 3.087,
+          "w": 3.444,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.952,
+          "y": 3.087,
+          "w": 1.394,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.118,
+          "y": 3.087,
+          "w": 0.402,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 10.264,
+          "y": 3.087,
+          "w": 0.937,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.577,
+          "y": 3.462,
+          "w": 2.362,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.952,
+          "y": 3.462,
+          "w": 0.944,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.118,
+          "y": 3.462,
+          "w": 0.402,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 10.264,
+          "y": 3.462,
+          "w": 0.937,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.577,
+          "y": 3.837,
+          "w": 2.835,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.952,
+          "y": 3.837,
+          "w": 2.23,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.118,
+          "y": 3.837,
+          "w": 0.402,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 10.264,
+          "y": 3.837,
+          "w": 0.937,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.577,
+          "y": 4.213,
+          "w": 2.858,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.952,
+          "y": 4.213,
+          "w": 0.723,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.118,
+          "y": 4.213,
+          "w": 0.402,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 10.264,
+          "y": 4.213,
+          "w": 0.937,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.577,
+          "y": 4.588,
+          "w": 3.176,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.952,
+          "y": 4.588,
+          "w": 1.235,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.118,
+          "y": 4.588,
+          "w": 0.723,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 10.264,
+          "y": 4.588,
+          "w": 0.937,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.577,
+          "y": 4.963,
+          "w": 1.784,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "bold": true,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.577,
+          "y": 5.317,
+          "w": 1.611,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.952,
+          "y": 5.317,
+          "w": 2.608,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.118,
+          "y": 5.317,
+          "w": 0.402,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 10.264,
+          "y": 5.317,
+          "w": 2.136,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.577,
+          "y": 5.692,
+          "w": 2.369,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.952,
+          "y": 5.692,
+          "w": 0.723,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.118,
+          "y": 5.692,
+          "w": 0.402,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 10.264,
+          "y": 5.692,
+          "w": 1.221,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.577,
+          "y": 6.067,
+          "w": 1.914,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.952,
+          "y": 6.067,
+          "w": 2.425,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.118,
+          "y": 6.067,
+          "w": 0.402,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 10.264,
+          "y": 6.067,
+          "w": 2.061,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.577,
+          "y": 6.442,
+          "w": 2.275,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.952,
+          "y": 6.442,
+          "w": 0.723,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.118,
+          "y": 6.442,
+          "w": 0.402,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 10.264,
+          "y": 6.442,
+          "w": 1.221,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 6.921,
+          "w": 9.025,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.495,
+          "y": 7.185,
+          "w": 2.929,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 12.384,
+          "y": 7.185,
+          "w": 0.454,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "right "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0528,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 12,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 51,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": true,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 22,
+        "complexity": 0.925,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        13
+      ],
+      "layout_assets": [],
+      "slide_assets": [],
+      "background": {
+        "color": "F2F0EA",
+        "source": "slide"
+      }
+    },
+    {
+      "id": "slide-14",
+      "name": "Exemplar slide 14",
+      "source_kind": "slide_exemplar",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "data",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 0.421,
+          "w": 2.813,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 11.268,
+          "y": 0.396,
+          "w": 1.587,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 0.91,
+          "w": 5.247,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 2.004,
+          "w": 2.097,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 2.462,
+          "w": 3.167,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 2.879,
+          "w": 2.664,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 3.296,
+          "w": 2.319,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 3.712,
+          "w": 3.597,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 4.129,
+          "w": 3.625,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 4.65,
+          "w": 3.497,
+          "h": 1.298,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.785,
+          "y": 2.004,
+          "w": 1.166,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.785,
+          "y": 2.462,
+          "w": 3.288,
+          "h": 1.09,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 4.785,
+          "y": 3.712,
+          "w": 3.247,
+          "h": 1.09,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 8.827,
+          "y": 4.921,
+          "w": 3.205,
+          "h": 0.486,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.827,
+          "y": 6.15,
+          "w": 5.005,
+          "h": 0.715,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "F2F0EA"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 6.993,
+          "y": 5.838,
+          "w": 5.222,
+          "h": 1.298,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.495,
+          "y": 7.185,
+          "w": 2.621,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 12.384,
+          "y": 7.185,
+          "w": 0.454,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "right "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0528,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 12,
+        "body_chars": 1218,
+        "usable_body_zones": 5,
+        "body_area_ratio": 0.22,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 17,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": true,
+        "supports_data": true,
+        "image_area_ratio": 0.107,
+        "content_image_count": 1,
+        "content_image_area_ratio": 0.107,
+        "shape_count": 15,
+        "complexity": 0.45,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        14
+      ],
+      "layout_assets": [],
+      "slide_assets": [
+        "slide14_34_8cab851fd1.png"
+      ],
+      "background": {
+        "color": "F2F0EA",
+        "source": "slide"
+      }
+    },
+    {
+      "id": "slide-15",
+      "name": "Exemplar slide 15",
+      "source_kind": "slide_exemplar",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "two_column",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 0.421,
+          "w": 1.871,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 11.268,
+          "y": 0.396,
+          "w": 1.587,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 0.91,
+          "w": 3.715,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.479,
+          "y": 2.452,
+          "w": 7.812,
+          "h": 2.146,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 57.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 9.409,
+          "y": 3.254,
+          "w": 2.848,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "center "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.491,
+          "y": 5.43,
+          "w": 11.233,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 6.073,
+          "w": 8.652,
+          "h": 0.613,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.495,
+          "y": 7.185,
+          "w": 2.621,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 12.384,
+          "y": 7.185,
+          "w": 0.454,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "right "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0528,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 0,
+        "title_chars": 12,
+        "body_chars": 80,
+        "usable_body_zones": 1,
+        "body_area_ratio": 0.168,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 8,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": false,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 5,
+        "complexity": 0.175,
+        "rhetorical_pattern": "two_column",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        15
+      ],
+      "layout_assets": [],
+      "slide_assets": [],
+      "background": {
+        "color": "F2F0EA",
+        "source": "slide"
+      }
+    },
+    {
+      "id": "slide-16",
+      "name": "Exemplar slide 16",
+      "source_kind": "slide_exemplar",
+      "layout_index": 0,
+      "master_index": 0,
+      "roles": [
+        "closing",
+        "two_column",
+        "data",
+        "content"
+      ],
+      "placeholders": [
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 0.421,
+          "w": 1.871,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "title",
+          "x": 11.268,
+          "y": 0.396,
+          "w": 1.587,
+          "h": 1.896,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 90.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "right "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 0.91,
+          "w": 1.476,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.493,
+          "y": 2.358,
+          "w": 5.007,
+          "h": 0.257,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 12.0,
+            "color": "C8331E",
+            "color_theme_ref": "accent2"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.491,
+          "y": 2.93,
+          "w": 7.177,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.491,
+          "y": 3.389,
+          "w": 5.604,
+          "h": 0.353,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 16.5,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 4.094,
+          "w": 6.798,
+          "h": 0.633,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 4.99,
+          "w": 8.072,
+          "h": 0.321,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.492,
+          "y": 5.51,
+          "w": 7.34,
+          "h": 0.633,
+          "font": {
+            "name": "+mn-lt",
+            "size_pt": 15.0,
+            "color": "1C1A17",
+            "color_theme_ref": "dk1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.485,
+          "y": 6.598,
+          "w": 6.389,
+          "h": 0.578,
+          "font": {
+            "name": "+mj-lt",
+            "size_pt": 27.0,
+            "color": "14110F",
+            "color_theme_ref": "accent1"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 0.495,
+          "y": 7.185,
+          "w": 2.621,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "left "
+        },
+        {
+          "idx": null,
+          "type": "body",
+          "x": 12.384,
+          "y": 7.185,
+          "w": 0.454,
+          "h": 0.193,
+          "font": {
+            "name": "Consolas",
+            "size_pt": 9.0,
+            "color": "55514A",
+            "color_theme_ref": "accent5"
+          },
+          "alignment": "right "
+        }
+      ],
+      "capacity": {
+        "has_title_zone": true,
+        "title_top_ratio": 0.0528,
+        "out_of_canvas_body_zones": 0,
+        "specialized_labels": 1,
+        "title_chars": 12,
+        "body_chars": 80,
+        "usable_body_zones": 0,
+        "body_area_ratio": 0.0,
+        "image_slot_area_ratio": 0.0,
+        "body_zones": 11,
+        "bullets_per_zone": 8,
+        "source_bullet_count": 0,
+        "supports_image": false,
+        "supports_data": true,
+        "image_area_ratio": 0,
+        "content_image_count": 0,
+        "content_image_area_ratio": 0,
+        "shape_count": 5,
+        "complexity": 0.212,
+        "rhetorical_pattern": "closing",
+        "backdrop_area_ratio": 0.0
+      },
+      "example_slide_indices": [
+        16
+      ],
+      "layout_assets": [],
+      "slide_assets": [],
+      "background": {
+        "color": "F2F0EA",
+        "source": "slide"
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "renderer": "Microsoft PowerPoint for macOS",
+  "command": [
+    "osascript",
+    "examples/export_powerpoint_macos.applescript",
+    "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-tech/balanced/vk-tech-balanced.pptx",
+    "/Users/areluv/Downloads/путь в ML p.1/vk/lct_vk/reports/criteria-audit/artifacts/vk-tech/balanced/powerpoint.pdf"
+  ],
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "seconds": 15.522,
+  "pdf_exists": true
+}

@@ -1,0 +1,314 @@
+[
+  {
+    "deck": "with-renderer/artifacts/vk-tech/balanced",
+    "template_parts": {
+      "ppt/theme/": {
+        "original_parts": 3,
+        "byte_identical_parts": 3,
+        "canonical_xml_identical_parts": 3
+      },
+      "ppt/slideMasters/": {
+        "original_parts": 2,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 2
+      },
+      "ppt/slideLayouts/": {
+        "original_parts": 39,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 39
+      }
+    },
+    "pdf_fonts": {
+      "ArialUnicodeMS": 116,
+      "Arial-Black": 4
+    },
+    "source_units_not_literally_found_in_pdf": [],
+    "pdf_comparison_method": "Strip non-word characters; unmatched units need manual review, not proof of omission"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-tech/focus",
+    "template_parts": {
+      "ppt/theme/": {
+        "original_parts": 3,
+        "byte_identical_parts": 3,
+        "canonical_xml_identical_parts": 3
+      },
+      "ppt/slideMasters/": {
+        "original_parts": 2,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 2
+      },
+      "ppt/slideLayouts/": {
+        "original_parts": 39,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 39
+      }
+    },
+    "pdf_fonts": {
+      "ArialUnicodeMS": 123,
+      "Arial-Black": 4
+    },
+    "source_units_not_literally_found_in_pdf": [],
+    "pdf_comparison_method": "Strip non-word characters; unmatched units need manual review, not proof of omission"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-tech/columns",
+    "template_parts": {
+      "ppt/theme/": {
+        "original_parts": 3,
+        "byte_identical_parts": 3,
+        "canonical_xml_identical_parts": 3
+      },
+      "ppt/slideMasters/": {
+        "original_parts": 2,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 2
+      },
+      "ppt/slideLayouts/": {
+        "original_parts": 39,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 39
+      }
+    },
+    "pdf_fonts": {
+      "ArialUnicodeMS": 88,
+      "Arial-Black": 4
+    },
+    "source_units_not_literally_found_in_pdf": [],
+    "pdf_comparison_method": "Strip non-word characters; unmatched units need manual review, not proof of omission"
+  },
+  {
+    "deck": "with-renderer/artifacts/unseen-brutalism/balanced",
+    "template_parts": {
+      "ppt/theme/": {
+        "original_parts": 2,
+        "byte_identical_parts": 2,
+        "canonical_xml_identical_parts": 2
+      },
+      "ppt/slideMasters/": {
+        "original_parts": 1,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 1
+      },
+      "ppt/slideLayouts/": {
+        "original_parts": 1,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 1
+      }
+    },
+    "pdf_fonts": {
+      "DejaVuSansMono-Bold": 22,
+      "DejaVuSansMono": 116
+    },
+    "source_units_not_literally_found_in_pdf": [],
+    "pdf_comparison_method": "Strip non-word characters; unmatched units need manual review, not proof of omission"
+  },
+  {
+    "deck": "with-renderer/artifacts/unseen-brutalism/focus",
+    "template_parts": {
+      "ppt/theme/": {
+        "original_parts": 2,
+        "byte_identical_parts": 2,
+        "canonical_xml_identical_parts": 2
+      },
+      "ppt/slideMasters/": {
+        "original_parts": 1,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 1
+      },
+      "ppt/slideLayouts/": {
+        "original_parts": 1,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 1
+      }
+    },
+    "pdf_fonts": {
+      "DejaVuSansMono-Bold": 22,
+      "DejaVuSansMono": 116
+    },
+    "source_units_not_literally_found_in_pdf": [],
+    "pdf_comparison_method": "Strip non-word characters; unmatched units need manual review, not proof of omission"
+  },
+  {
+    "deck": "with-renderer/artifacts/unseen-brutalism/columns",
+    "template_parts": {
+      "ppt/theme/": {
+        "original_parts": 2,
+        "byte_identical_parts": 2,
+        "canonical_xml_identical_parts": 2
+      },
+      "ppt/slideMasters/": {
+        "original_parts": 1,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 1
+      },
+      "ppt/slideLayouts/": {
+        "original_parts": 1,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 1
+      }
+    },
+    "pdf_fonts": {
+      "DejaVuSansMono-Bold": 22,
+      "DejaVuSansMono": 116
+    },
+    "source_units_not_literally_found_in_pdf": [],
+    "pdf_comparison_method": "Strip non-word characters; unmatched units need manual review, not proof of omission"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-education/balanced",
+    "template_parts": {
+      "ppt/theme/": {
+        "original_parts": 3,
+        "byte_identical_parts": 3,
+        "canonical_xml_identical_parts": 3
+      },
+      "ppt/slideMasters/": {
+        "original_parts": 2,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 2
+      },
+      "ppt/slideLayouts/": {
+        "original_parts": 30,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 30
+      }
+    },
+    "pdf_fonts": {
+      "ArialUnicodeMS": 74,
+      "Arial-Black": 3
+    },
+    "source_units_not_literally_found_in_pdf": [],
+    "pdf_comparison_method": "Strip non-word characters; unmatched units need manual review, not proof of omission"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-education/focus",
+    "template_parts": {
+      "ppt/theme/": {
+        "original_parts": 3,
+        "byte_identical_parts": 3,
+        "canonical_xml_identical_parts": 3
+      },
+      "ppt/slideMasters/": {
+        "original_parts": 2,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 2
+      },
+      "ppt/slideLayouts/": {
+        "original_parts": 30,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 30
+      }
+    },
+    "pdf_fonts": {
+      "ArialUnicodeMS": 78,
+      "Arial-Black": 3
+    },
+    "source_units_not_literally_found_in_pdf": [],
+    "pdf_comparison_method": "Strip non-word characters; unmatched units need manual review, not proof of omission"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-education/columns",
+    "template_parts": {
+      "ppt/theme/": {
+        "original_parts": 3,
+        "byte_identical_parts": 3,
+        "canonical_xml_identical_parts": 3
+      },
+      "ppt/slideMasters/": {
+        "original_parts": 2,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 2
+      },
+      "ppt/slideLayouts/": {
+        "original_parts": 30,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 30
+      }
+    },
+    "pdf_fonts": {
+      "ArialUnicodeMS": 77,
+      "Arial-Black": 3
+    },
+    "source_units_not_literally_found_in_pdf": [],
+    "pdf_comparison_method": "Strip non-word characters; unmatched units need manual review, not proof of omission"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-workspace/balanced",
+    "template_parts": {
+      "ppt/theme/": {
+        "original_parts": 2,
+        "byte_identical_parts": 2,
+        "canonical_xml_identical_parts": 2
+      },
+      "ppt/slideMasters/": {
+        "original_parts": 1,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 1
+      },
+      "ppt/slideLayouts/": {
+        "original_parts": 15,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 15
+      }
+    },
+    "pdf_fonts": {
+      "ArialUnicodeMS": 84,
+      "Arial-Black": 2
+    },
+    "source_units_not_literally_found_in_pdf": [],
+    "pdf_comparison_method": "Strip non-word characters; unmatched units need manual review, not proof of omission"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-workspace/focus",
+    "template_parts": {
+      "ppt/theme/": {
+        "original_parts": 2,
+        "byte_identical_parts": 2,
+        "canonical_xml_identical_parts": 2
+      },
+      "ppt/slideMasters/": {
+        "original_parts": 1,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 1
+      },
+      "ppt/slideLayouts/": {
+        "original_parts": 15,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 15
+      }
+    },
+    "pdf_fonts": {
+      "ArialUnicodeMS": 79,
+      "Arial-Black": 2
+    },
+    "source_units_not_literally_found_in_pdf": [],
+    "pdf_comparison_method": "Strip non-word characters; unmatched units need manual review, not proof of omission"
+  },
+  {
+    "deck": "with-renderer/artifacts/vk-workspace/columns",
+    "template_parts": {
+      "ppt/theme/": {
+        "original_parts": 2,
+        "byte_identical_parts": 2,
+        "canonical_xml_identical_parts": 2
+      },
+      "ppt/slideMasters/": {
+        "original_parts": 1,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 1
+      },
+      "ppt/slideLayouts/": {
+        "original_parts": 15,
+        "byte_identical_parts": 0,
+        "canonical_xml_identical_parts": 15
+      }
+    },
+    "pdf_fonts": {
+      "ArialUnicodeMS": 79,
+      "Arial-Black": 2
+    },
+    "source_units_not_literally_found_in_pdf": [],
+    "pdf_comparison_method": "Strip non-word characters; unmatched units need manual review, not proof of omission"
+  }
+]

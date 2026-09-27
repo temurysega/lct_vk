@@ -1,0 +1,472 @@
+{
+  "language": "ru",
+  "title": "Пилот ИИ-помощника по внутренним регламентам",
+  "slides": [
+    {
+      "title": "Пилот ИИ-помощника по внутренним регламентам",
+      "role": "cover",
+      "subtitle": "",
+      "body": "",
+      "bullets": [],
+      "visual": null,
+      "speaker_notes": "",
+      "pattern_id": "slide-1",
+      "layout_index": 0,
+      "master_index": 0,
+      "pattern_selection": {
+        "selector": {
+          "mode": "heuristic"
+        },
+        "score": 17.7,
+        "layout_pattern": "hero",
+        "why_fit": "роль cover поддерживается; риторический паттерн hero; проверенный exemplar-слайд",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "layout-0",
+            "score": 16.2
+          },
+          {
+            "pattern_id": "layout-20",
+            "score": 16.0
+          },
+          {
+            "pattern_id": "slide-10",
+            "score": 2.7
+          }
+        ]
+      }
+    },
+    {
+      "title": "Поиск инструкции занимает до 30 минут, треть обращений повторяется",
+      "role": "content",
+      "subtitle": "",
+      "body": "",
+      "bullets": [],
+      "visual": {
+        "type": "icon_grid",
+        "items": [
+          "Сотрудник тратит до 30 минут на поиск нужной инструкции.",
+          "Регламенты находятся в нескольких источниках, и поиск отвлекает от основной работы.",
+          "Треть обращений в поддержку — повторяющиеся вопросы.",
+          "Специалисты снова тратят время на поиск одного и того же ответа."
+        ],
+        "origin": "offline_rules"
+      },
+      "speaker_notes": "",
+      "pattern_id": "slide-14",
+      "layout_index": 10,
+      "master_index": 1,
+      "pattern_selection": {
+        "selector": {
+          "mode": "heuristic"
+        },
+        "score": 20.95,
+        "layout_pattern": "two_column",
+        "why_fit": "роль content поддерживается; текст помещается по геометрической ёмкости; проверенный exemplar-слайд; крупная зона для схемы",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "layout-7",
+            "score": 20.92
+          },
+          {
+            "pattern_id": "slide-9",
+            "score": 20.82
+          },
+          {
+            "pattern_id": "layout-27",
+            "score": 20.77
+          }
+        ]
+      }
+    },
+    {
+      "title": "Сотруднику нужен источник ответа, специалисту — контекст вопроса",
+      "role": "content",
+      "subtitle": "",
+      "body": "",
+      "bullets": [
+        "Сотруднику нужен понятный ответ со ссылкой на документ-источник.",
+        "Специалисту нужен контекст вопроса, если автоматического ответа недостаточно.",
+        "Передача вопроса вместе с контекстом избавляет сотрудника от повторного объяснения."
+      ],
+      "visual": {
+        "type": "image",
+        "asset_id": "ce1df8e504b38abe",
+        "match": "lexical",
+        "match_score": 3.02
+      },
+      "speaker_notes": "",
+      "pattern_id": "slide-28",
+      "layout_index": 10,
+      "master_index": 1,
+      "pattern_selection": {
+        "selector": {
+          "mode": "heuristic"
+        },
+        "score": 22.43,
+        "layout_pattern": "two_column",
+        "why_fit": "роль content поддерживается; текст помещается по геометрической ёмкости; заменяемый слот изображения; проверенный exemplar-слайд",
+        "risk": "заголовок длиннее визуальной ёмкости",
+        "alternatives": [
+          {
+            "pattern_id": "slide-18",
+            "score": 15.7
+          },
+          {
+            "pattern_id": "slide-23",
+            "score": 15.23
+          },
+          {
+            "pattern_id": "slide-34",
+            "score": 14.77
+          }
+        ]
+      }
+    },
+    {
+      "title": "ИИ-помощник отвечает по регламентам и передаёт сложные вопросы специалисту",
+      "role": "content",
+      "subtitle": "",
+      "body": "",
+      "bullets": [],
+      "visual": {
+        "type": "icon_grid",
+        "items": [
+          "ИИ-помощник работает во внутреннем портале компании.",
+          "Он принимает вопрос сотрудника и ищет подходящий регламент.",
+          "Ответ сопровождается ссылкой на документ-источник.",
+          "Если подтверждённого ответа нет, вопрос принимает специалист поддержки."
+        ],
+        "origin": "offline_rules"
+      },
+      "speaker_notes": "",
+      "pattern_id": "layout-7",
+      "layout_index": 7,
+      "master_index": 1,
+      "pattern_selection": {
+        "selector": {
+          "mode": "heuristic"
+        },
+        "score": 20.92,
+        "layout_pattern": "content",
+        "why_fit": "роль content поддерживается; текст помещается по геометрической ёмкости; крупная зона для схемы",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "slide-9",
+            "score": 20.82
+          },
+          {
+            "pattern_id": "layout-27",
+            "score": 20.77
+          },
+          {
+            "pattern_id": "slide-14",
+            "score": 20.45
+          }
+        ]
+      }
+    },
+    {
+      "title": "Вопрос проходит путь от портала до ответа со ссылкой или эскалации",
+      "role": "content",
+      "subtitle": "",
+      "body": "",
+      "bullets": [
+        "Сотрудник задаёт вопрос во внутреннем портале.",
+        "Помощник ищет ответ в регламентах и показывает источник.",
+        "При отсутствии подтверждённого ответа вопрос передаётся специалисту.",
+        "Специалист получает контекст исходного обращения."
+      ],
+      "visual": null,
+      "speaker_notes": "",
+      "pattern_id": "layout-27",
+      "layout_index": 27,
+      "master_index": 1,
+      "pattern_selection": {
+        "selector": {
+          "mode": "heuristic"
+        },
+        "score": 21.4,
+        "layout_pattern": "content",
+        "why_fit": "роль content поддерживается; полноценная область для чтения; текст помещается по геометрической ёмкости",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "slide-14",
+            "score": 20.0
+          },
+          {
+            "pattern_id": "slide-9",
+            "score": 18.45
+          },
+          {
+            "pattern_id": "layout-7",
+            "score": 18.05
+          }
+        ]
+      }
+    },
+    {
+      "title": "Документы остаются внутри контура, неподтверждённый ответ проверяет специалист",
+      "role": "content",
+      "subtitle": "",
+      "body": "",
+      "bullets": [],
+      "visual": {
+        "type": "icon_grid",
+        "items": [
+          "Модель с открытыми весами работает внутри контура компании.",
+          "Документы не уходят наружу при обработке запроса.",
+          "Инструкция может устареть или не дать подтверждённого ответа.",
+          "В таком случае вопрос передаётся специалисту; ссылку на источник можно проверить."
+        ],
+        "origin": "offline_rules"
+      },
+      "speaker_notes": "",
+      "pattern_id": "slide-9",
+      "layout_index": 7,
+      "master_index": 1,
+      "pattern_selection": {
+        "selector": {
+          "mode": "heuristic"
+        },
+        "score": 20.82,
+        "layout_pattern": "two_column",
+        "why_fit": "роль content поддерживается; текст помещается по геометрической ёмкости; проверенный exemplar-слайд; крупная зона для схемы",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "slide-14",
+            "score": 20.45
+          },
+          {
+            "pattern_id": "layout-7",
+            "score": 20.42
+          },
+          {
+            "pattern_id": "layout-27",
+            "score": 20.27
+          }
+        ]
+      }
+    },
+    {
+      "title": "Пилот охватит 150 сотрудников двух подразделений за 6 недель",
+      "role": "content",
+      "subtitle": "",
+      "body": "",
+      "bullets": [
+        "Пилот охватывает 2 подразделения и 150 сотрудников.",
+        "Продолжительность пилота — 6 недель.",
+        "В пилоте проверяются ответы по регламентам и передача вопросов специалисту."
+      ],
+      "visual": null,
+      "speaker_notes": "",
+      "pattern_id": "layout-27",
+      "layout_index": 27,
+      "master_index": 1,
+      "pattern_selection": {
+        "selector": {
+          "mode": "heuristic"
+        },
+        "score": 20.9,
+        "layout_pattern": "content",
+        "why_fit": "роль content поддерживается; полноценная область для чтения; текст помещается по геометрической ёмкости",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "layout-7",
+            "score": 18.05
+          },
+          {
+            "pattern_id": "slide-9",
+            "score": 17.95
+          },
+          {
+            "pattern_id": "layout-29",
+            "score": 17.4
+          }
+        ]
+      }
+    },
+    {
+      "title": "Успех измерят временем поиска и долей обращений без специалиста",
+      "role": "content",
+      "subtitle": "",
+      "body": "",
+      "bullets": [
+        "Команда измеряет время поиска ответа.",
+        "Также измеряется доля обращений, закрытых без специалиста.",
+        "Целевые значения согласуются до запуска.",
+        "Фактических результатов пилота пока нет."
+      ],
+      "visual": null,
+      "speaker_notes": "",
+      "pattern_id": "layout-27",
+      "layout_index": 27,
+      "master_index": 1,
+      "pattern_selection": {
+        "selector": {
+          "mode": "heuristic"
+        },
+        "score": 20.4,
+        "layout_pattern": "content",
+        "why_fit": "роль content поддерживается; полноценная область для чтения; текст помещается по геометрической ёмкости",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "slide-14",
+            "score": 20.0
+          },
+          {
+            "pattern_id": "layout-7",
+            "score": 18.05
+          },
+          {
+            "pattern_id": "slide-9",
+            "score": 17.95
+          }
+        ]
+      }
+    },
+    {
+      "title": "Команда из 3 человек подготовит и проверит пилот",
+      "role": "content",
+      "subtitle": "",
+      "body": "",
+      "bullets": [
+        "Просим одобрить пилот и выделить команду из 3 человек.",
+        "Команда готовит инструкции, проверяет ответы и сопровождает запуск.",
+        "Дальнейшее использование решается после измерения результатов и обратной связи."
+      ],
+      "visual": null,
+      "speaker_notes": "",
+      "pattern_id": "layout-27",
+      "layout_index": 27,
+      "master_index": 1,
+      "pattern_selection": {
+        "selector": {
+          "mode": "heuristic"
+        },
+        "score": 19.9,
+        "layout_pattern": "content",
+        "why_fit": "роль content поддерживается; полноценная область для чтения; текст помещается по геометрической ёмкости",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "layout-7",
+            "score": 18.05
+          },
+          {
+            "pattern_id": "slide-9",
+            "score": 17.95
+          },
+          {
+            "pattern_id": "layout-29",
+            "score": 17.4
+          }
+        ]
+      }
+    },
+    {
+      "title": "Спасибо",
+      "role": "closing",
+      "subtitle": "Вопросы?",
+      "body": "",
+      "bullets": [],
+      "visual": null,
+      "speaker_notes": "",
+      "pattern_id": "slide-4",
+      "layout_index": 2,
+      "master_index": 0,
+      "pattern_selection": {
+        "selector": {
+          "mode": "heuristic"
+        },
+        "score": 17.7,
+        "layout_pattern": "closing",
+        "why_fit": "роль closing поддерживается; риторический паттерн closing; проверенный exemplar-слайд",
+        "risk": "низкий",
+        "alternatives": [
+          {
+            "pattern_id": "slide-5",
+            "score": 17.7
+          },
+          {
+            "pattern_id": "slide-6",
+            "score": 17.7
+          },
+          {
+            "pattern_id": "layout-4",
+            "score": 16.2
+          }
+        ]
+      }
+    }
+  ],
+  "planner": {
+    "mode": "offline",
+    "input": "source"
+  },
+  "assets": {
+    "42c709acf2b59b60": {
+      "asset_id": "42c709acf2b59b60",
+      "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/app-workspace/users/15d6851f2bda066bd688ae938fc90e06/assets/images/42c709acf2b59b60.png",
+      "source": "upload",
+      "label": "01 внутренний контур серверная",
+      "context": "",
+      "width": 1672,
+      "height": 941,
+      "origin": "01-внутренний_контур_серверная.png"
+    },
+    "ce1df8e504b38abe": {
+      "asset_id": "ce1df8e504b38abe",
+      "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/app-workspace/users/15d6851f2bda066bd688ae938fc90e06/assets/images/ce1df8e504b38abe.png",
+      "source": "upload",
+      "label": "02 сотрудник специалист поддержки",
+      "context": "",
+      "width": 1672,
+      "height": 941,
+      "origin": "02-сотрудник_специалист_поддержки.png"
+    }
+  },
+  "image_matching": {
+    "available": 2,
+    "placed": 1,
+    "placements": [
+      {
+        "asset_id": "ce1df8e504b38abe",
+        "slide": 3,
+        "match": "lexical",
+        "score": 3.02
+      }
+    ],
+    "unplaced": [
+      {
+        "asset_id": "42c709acf2b59b60",
+        "origin": "01-внутренний_контур_серверная.png",
+        "reason": "no matching slide"
+      }
+    ],
+    "rejected": []
+  },
+  "image_generation": {
+    "enabled": false,
+    "model": null,
+    "generated": [],
+    "errors": []
+  },
+  "contextual_audit": {
+    "status": "not_run",
+    "reason": "No configured model or audit disabled"
+  },
+  "variant": {
+    "id": "balanced",
+    "label": "Сбалансированный",
+    "axis": "layout_selection",
+    "content_sha256": "681fce16c52a310ca925602db0871524bb3e0f1c1f8e67ee0bd9974f7bec719d"
+  }
+}

@@ -1,0 +1,802 @@
+{
+  "output": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201101/output.pptx",
+  "slide_count": 10,
+  "patterns_used": [
+    "slide-1",
+    "layout-7",
+    "slide-23",
+    "slide-9",
+    "layout-27",
+    "layout-7",
+    "slide-9",
+    "layout-27",
+    "layout-7",
+    "slide-4"
+  ],
+  "source_patterns": [
+    "slide-1",
+    "layout-7",
+    "slide-23",
+    "slide-9",
+    "layout-27",
+    "layout-7",
+    "slide-9",
+    "layout-27",
+    "layout-7",
+    "slide-4"
+  ],
+  "composition_mode": "template_layout",
+  "visuals": {
+    "diagrams": 7,
+    "pictograms": 26,
+    "images": 1,
+    "illustrations": 0,
+    "by_type": {
+      "icon_grid": 7,
+      "image": 1
+    },
+    "slides": [
+      {
+        "slide": 2,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 2,
+        "icons": [
+          "users",
+          "file-text",
+          "headset",
+          "user"
+        ],
+        "icon_matches": 4,
+        "origin": "offline_rules"
+      },
+      {
+        "slide": 3,
+        "type": "image",
+        "asset_id": "ce1df8e504b38abe",
+        "source": "upload",
+        "match": "lexical",
+        "placement": "zone"
+      },
+      {
+        "slide": 4,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 2,
+        "icons": [
+          "building",
+          "circle-help",
+          "file-text",
+          "circle-check"
+        ],
+        "icon_matches": 4,
+        "origin": "offline_rules"
+      },
+      {
+        "slide": 5,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 2,
+        "icons": [
+          "users",
+          "life-buoy",
+          "circle-check",
+          "user"
+        ],
+        "icon_matches": 4,
+        "origin": "sparse_text",
+        "estimated_fill": 0.213
+      },
+      {
+        "slide": 6,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 2,
+        "icons": [
+          "brain",
+          "file-text",
+          "circle-check",
+          "user"
+        ],
+        "icon_matches": 4,
+        "origin": "offline_rules"
+      },
+      {
+        "slide": 7,
+        "type": "icon_grid",
+        "items": 3,
+        "native": true,
+        "columns": 2,
+        "icons": [
+          "rocket",
+          "hourglass",
+          "user"
+        ],
+        "icon_matches": 3,
+        "origin": "sparse_text",
+        "estimated_fill": 0.172
+      },
+      {
+        "slide": 8,
+        "type": "icon_grid",
+        "items": 4,
+        "native": true,
+        "columns": 2,
+        "icons": [
+          "users",
+          "chart-column",
+          "target",
+          "trophy"
+        ],
+        "icon_matches": 4,
+        "origin": "sparse_text",
+        "estimated_fill": 0.189
+      },
+      {
+        "slide": 9,
+        "type": "icon_grid",
+        "items": 3,
+        "native": true,
+        "columns": 2,
+        "icons": [
+          "rocket",
+          "users",
+          "chart-column"
+        ],
+        "icon_matches": 3,
+        "origin": "sparse_text",
+        "estimated_fill": 0.196
+      }
+    ],
+    "note": "Diagrams are native grouped shapes (SmartArt-style), not OOXML SmartArt parts."
+  },
+  "exemplar_cleanup": [
+    {
+      "slide": 3,
+      "removed": [
+        {
+          "shape": "Google Shape;991;p64",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Google Shape;992;p64",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;993;p64",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Google Shape;994;p64",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Google Shape;997;p64",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;999;p64",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Google Shape;1000;p64",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;1001;p64",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Google Shape;1002;p64",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Google Shape;1003;p64",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Google Shape;1006;p64",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;1007;p64",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Google Shape;1008;p64",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Google Shape;1011;p64",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;1016;p64",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;1018;p64",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;1019;p64",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;1020;p64",
+          "reason": "erased_sample"
+        },
+        {
+          "shape": "Google Shape;1021;p64",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 4,
+      "removed": [
+        {
+          "shape": "Google Shape;506;p50",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Google Shape;507;p50",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 7,
+      "removed": [
+        {
+          "shape": "Google Shape;506;p50",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Google Shape;507;p50",
+          "reason": "erased_sample"
+        }
+      ]
+    },
+    {
+      "slide": 10,
+      "removed": [
+        {
+          "shape": "Google Shape;432;p45",
+          "reason": "attached_to_erased"
+        },
+        {
+          "shape": "Google Shape;433;p45",
+          "reason": "erased_sample"
+        }
+      ]
+    }
+  ],
+  "presentation_id": "pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201101",
+  "presentation_dir": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201101",
+  "template_id": "vk-tech-shablon-cbbe3aa6",
+  "template_dir": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/templates/vk-tech-shablon-cbbe3aa6",
+  "source": "brief.md",
+  "inference_configured": false,
+  "inference_used": false,
+  "planner_mode": "offline",
+  "qa": {
+    "status": "passed",
+    "score": 100,
+    "output": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201101/output.pptx",
+    "file_size_bytes": 18117069,
+    "slide_count": 10,
+    "canvas": {
+      "width_inches": 10.0,
+      "height_inches": 5.625
+    },
+    "explicit_fonts": [
+      "Play"
+    ],
+    "issues": [],
+    "slides": [
+      {
+        "slide": 1,
+        "shape_count": 2,
+        "text_shape_count": 1
+      },
+      {
+        "slide": 2,
+        "shape_count": 2,
+        "text_shape_count": 5
+      },
+      {
+        "slide": 3,
+        "shape_count": 7,
+        "text_shape_count": 2
+      },
+      {
+        "slide": 4,
+        "shape_count": 2,
+        "text_shape_count": 5
+      },
+      {
+        "slide": 5,
+        "shape_count": 2,
+        "text_shape_count": 5
+      },
+      {
+        "slide": 6,
+        "shape_count": 2,
+        "text_shape_count": 5
+      },
+      {
+        "slide": 7,
+        "shape_count": 2,
+        "text_shape_count": 4
+      },
+      {
+        "slide": 8,
+        "shape_count": 2,
+        "text_shape_count": 5
+      },
+      {
+        "slide": 9,
+        "shape_count": 2,
+        "text_shape_count": 4
+      },
+      {
+        "slide": 10,
+        "shape_count": 3,
+        "text_shape_count": 2
+      }
+    ],
+    "powerpoint_render": {
+      "status": "skipped",
+      "score": null,
+      "renderer": "powerpoint_com",
+      "issues": [],
+      "previews": []
+    },
+    "content_coverage": "literal_coverage_complete",
+    "schema_version": "2.0",
+    "rendered_visual_audit": {
+      "status": "passed",
+      "checked_spans": 122,
+      "uncertain_spans": 3,
+      "issues": [],
+      "repairs": [
+        {
+          "slide": 3,
+          "shape": "BrandDeck Body",
+          "color": "#001515",
+          "issue_id": "f4fe02b35869acec"
+        }
+      ]
+    },
+    "rendered_fill_audit": {
+      "status": "passed",
+      "slides": [
+        {
+          "slide": 2,
+          "coverage": 0.356
+        },
+        {
+          "slide": 3,
+          "coverage": 0.418
+        },
+        {
+          "slide": 4,
+          "coverage": 0.348
+        },
+        {
+          "slide": 5,
+          "coverage": 0.359
+        },
+        {
+          "slide": 6,
+          "coverage": 0.353
+        },
+        {
+          "slide": 7,
+          "coverage": 0.36
+        },
+        {
+          "slide": 8,
+          "coverage": 0.356
+        },
+        {
+          "slide": 9,
+          "coverage": 0.369
+        }
+      ],
+      "issues": []
+    },
+    "structural_score": 100,
+    "contextual_audit": {
+      "status": "not_run",
+      "reason": "No configured model or audit disabled"
+    }
+  },
+  "content_coverage": {
+    "method": "literal_source_units_v1",
+    "semantic_verification": "not_performed",
+    "source_sha256": "90549b837bd647f9617199d9fbe59046f9652b3b00e0835008b8aeabda53b444",
+    "status": "literal_coverage_complete",
+    "units": [
+      {
+        "source_id": "s0001",
+        "text": "Пилот ИИ-помощника по внутренним регламентам",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0002",
+        "text": "Поиск инструкции занимает до 30 минут, треть обращений повторяется",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0003",
+        "text": "Сотрудник тратит до 30 минут на поиск нужной инструкции.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0004",
+        "text": "Регламенты находятся в нескольких источниках, и поиск отвлекает от основной работы.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0005",
+        "text": "Треть обращений в поддержку — повторяющиеся вопросы.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0006",
+        "text": "Специалисты снова тратят время на поиск одного и того же ответа.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0007",
+        "text": "Сотруднику нужен источник ответа, специалисту — контекст вопроса",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0008",
+        "text": "Сотруднику нужен понятный ответ со ссылкой на документ-источник.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0009",
+        "text": "Специалисту нужен контекст вопроса, если автоматического ответа недостаточно.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0010",
+        "text": "Передача вопроса вместе с контекстом избавляет сотрудника от повторного объяснения.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0011",
+        "text": "ИИ-помощник отвечает по регламентам и передаёт сложные вопросы специалисту",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0012",
+        "text": "ИИ-помощник работает во внутреннем портале компании.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0013",
+        "text": "Он принимает вопрос сотрудника и ищет подходящий регламент.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0014",
+        "text": "Ответ сопровождается ссылкой на документ-источник.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0015",
+        "text": "Если подтверждённого ответа нет, вопрос принимает специалист поддержки.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0016",
+        "text": "Вопрос проходит путь от портала до ответа со ссылкой или эскалации",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0017",
+        "text": "Сотрудник задаёт вопрос во внутреннем портале.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0018",
+        "text": "Помощник ищет ответ в регламентах и показывает источник.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0019",
+        "text": "При отсутствии подтверждённого ответа вопрос передаётся специалисту.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0020",
+        "text": "Специалист получает контекст исходного обращения.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0021",
+        "text": "Документы остаются внутри контура, неподтверждённый ответ проверяет специалист",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0022",
+        "text": "Модель с открытыми весами работает внутри контура компании.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0023",
+        "text": "Документы не уходят наружу при обработке запроса.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0024",
+        "text": "Инструкция может устареть или не дать подтверждённого ответа.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0025",
+        "text": "В таком случае вопрос передаётся специалисту; ссылку на источник можно проверить.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0026",
+        "text": "Пилот охватит 150 сотрудников двух подразделений за 6 недель",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0027",
+        "text": "Пилот охватывает 2 подразделения и 150 сотрудников.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0028",
+        "text": "Продолжительность пилота — 6 недель.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0029",
+        "text": "В пилоте проверяются ответы по регламентам и передача вопросов специалисту.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0030",
+        "text": "Успех измерят временем поиска и долей обращений без специалиста",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0031",
+        "text": "Команда измеряет время поиска ответа.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0032",
+        "text": "Также измеряется доля обращений, закрытых без специалиста.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0033",
+        "text": "Целевые значения согласуются до запуска.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0034",
+        "text": "Фактических результатов пилота пока нет.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0035",
+        "text": "Команда из 3 человек подготовит и проверит пилот",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0036",
+        "text": "Просим одобрить пилот и выделить команду из 3 человек.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0037",
+        "text": "Команда готовит инструкции, проверяет ответы и сопровождает запуск.",
+        "in_plan": true,
+        "in_pptx": true
+      },
+      {
+        "source_id": "s0038",
+        "text": "Дальнейшее использование решается после измерения результатов и обратной связи.",
+        "in_plan": true,
+        "in_pptx": true
+      }
+    ],
+    "missing_from_plan": [],
+    "missing_from_pptx": [],
+    "unsupported_numbers": [],
+    "note": "Unmatched paraphrases are not proof of omission; speaker notes do not count as slide content."
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "render_pass": 1,
+      "qa_status": "passed",
+      "qa_score": 100
+    }
+  ],
+  "cards_for_underfilled_slides": [],
+  "exports": {
+    "status": "passed",
+    "renderer": "libreoffice",
+    "artifacts": {
+      "pdf": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201101/exports/output.pdf",
+      "html": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201101/exports/output.html"
+    },
+    "previews": [
+      {
+        "slide": 1,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201101/exports/slide-1.png",
+        "width": 720.0,
+        "height": 405.01416015625
+      },
+      {
+        "slide": 2,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201101/exports/slide-2.png",
+        "width": 720.0,
+        "height": 405.01416015625
+      },
+      {
+        "slide": 3,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201101/exports/slide-3.png",
+        "width": 720.0,
+        "height": 405.01416015625
+      },
+      {
+        "slide": 4,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201101/exports/slide-4.png",
+        "width": 720.0,
+        "height": 405.01416015625
+      },
+      {
+        "slide": 5,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201101/exports/slide-5.png",
+        "width": 720.0,
+        "height": 405.01416015625
+      },
+      {
+        "slide": 6,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201101/exports/slide-6.png",
+        "width": 720.0,
+        "height": 405.01416015625
+      },
+      {
+        "slide": 7,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201101/exports/slide-7.png",
+        "width": 720.0,
+        "height": 405.01416015625
+      },
+      {
+        "slide": 8,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201101/exports/slide-8.png",
+        "width": 720.0,
+        "height": 405.01416015625
+      },
+      {
+        "slide": 9,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201101/exports/slide-9.png",
+        "width": 720.0,
+        "height": 405.01416015625
+      },
+      {
+        "slide": 10,
+        "path": "/private/tmp/branddeck-criteria-audit.TZjsAv/rendered-app-workspace/users/2f350defcc6af690b4b3161111783b7e/presentations/pilot-ii-pomoschnika-po-vnutrennim-reglamentam-20260927-201101/exports/slide-10.png",
+        "width": 720.0,
+        "height": 405.01416015625
+      }
+    ],
+    "issues": [],
+    "slide_count": 10
+  },
+  "status": "completed",
+  "elapsed_seconds": 14.435,
+  "workflow": {
+    "version": "1.7.0",
+    "files": {
+      "planner": "planner-v3.txt",
+      "analyzer": "analyzer-v1.txt",
+      "image": "image-v1.txt",
+      "brief-outline": "brief-outline-v1.txt",
+      "brief-slide": "brief-slide-v3.txt",
+      "context-audit": "context-audit-v2.txt"
+    },
+    "sha256": {
+      "planner": "f332e0e3b2857ae86342b74cb05a4ac77b02feebde170ba760403842b70d6c5d",
+      "analyzer": "d317316d81afafb12f938f497821818ff192eb76f65480b95018f392dcb3508f",
+      "image": "510c07113d1dc9af82249f868c50bf5584a75d5e6f3440378e300496658d2878",
+      "brief-outline": "8a695dc3e1c995dca4267a6d5072b48040082ef0b706415fb6ae5cc9cc6561a0",
+      "brief-slide": "56f5239c5f4f4353d55ff4af28cb3cdc1a40f35ff1c26fc83ce41123e2867944",
+      "context-audit": "c0dafd5a36d06c86465f91a42e04739c5bdf4210267c8aa32634edac68994fa5"
+    },
+    "pictograms": {
+      "package": "lucide-react",
+      "version": "0.468.0",
+      "license": "ISC",
+      "icons": 135,
+      "keywords_sha256": "8ce713fec09f1d30c82065ad0d8480152ee77fcc6593c51c010d7a568941ff71"
+    }
+  },
+  "variant": {
+    "id": "focus",
+    "label": "Единый акцент",
+    "axis": "layout_selection",
+    "content_sha256": "681fce16c52a310ca925602db0871524bb3e0f1c1f8e67ee0bd9974f7bec719d"
+  },
+  "revision": null,
+  "images": {
+    "available": 2,
+    "placed": 1,
+    "placements": [
+      {
+        "asset_id": "ce1df8e504b38abe",
+        "slide": 3,
+        "match": "lexical",
+        "score": 3.02
+      }
+    ],
+    "unplaced": [
+      {
+        "asset_id": "42c709acf2b59b60",
+        "origin": "01-внутренний_контур_серверная.png",
+        "reason": "no matching slide"
+      }
+    ],
+    "rejected": []
+  },
+  "image_generation": {
+    "enabled": false,
+    "model": null,
+    "generated": [],
+    "errors": []
+  }
+}

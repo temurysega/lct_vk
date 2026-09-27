@@ -1,0 +1,7 @@
+{
+  "candidate": "external-fixtures/expansion-20260922/templates/pptmaster-brutalism_field_guide.pptx",
+  "sha256": "5c41309bddb02ddc09c3fcf0591dbf5d4f24648493bc1a72b6d45adefa6dcaa2",
+  "checked_prior_json_files": 432,
+  "prior_mentions": [],
+  "limitation": "No local analysis/result record found; cannot prove never used anywhere. Selected before generation."
+}

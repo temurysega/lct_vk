@@ -1,0 +1,142 @@
+[
+  {
+    "module": "slide_agent.__init__",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.analyzer",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.api",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.audit",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.brief",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.cli",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.composer",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.config",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.contextual_audit",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.coverage",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.decor_audit",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.diagrams",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.exporter",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.imagegen",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.images",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.jobs",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.layout_geometry",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.llm",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.model_context",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.pdf_importer",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.pictograms",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.planner",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.powerpoint",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.prompt_config",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.qa",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.render_audit",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.renderer",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.resources",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.service",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.style_audit",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.typography",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.utils",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.vector",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.visual_diversity",
+    "status": "imported"
+  },
+  {
+    "module": "slide_agent.visual_planning",
+    "status": "imported"
+  }
+]

@@ -1,0 +1,48 @@
+{
+  "renderer": "LibreOffice",
+  "stage": "External acceptance checks on saved artifact; no repairs",
+  "fill": {
+    "status": "passed",
+    "slides": [
+      {
+        "slide": 2,
+        "coverage": 0.459
+      },
+      {
+        "slide": 3,
+        "coverage": 0.68
+      },
+      {
+        "slide": 4,
+        "coverage": 0.442
+      },
+      {
+        "slide": 5,
+        "coverage": 0.364
+      },
+      {
+        "slide": 6,
+        "coverage": 0.435
+      },
+      {
+        "slide": 7,
+        "coverage": 0.41
+      },
+      {
+        "slide": 8,
+        "coverage": 0.412
+      },
+      {
+        "slide": 9,
+        "coverage": 0.363
+      }
+    ],
+    "issues": []
+  },
+  "contrast": {
+    "status": "passed",
+    "checked_spans": 85,
+    "uncertain_spans": 0,
+    "issues": []
+  }
+}

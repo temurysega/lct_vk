@@ -1,0 +1,406 @@
+{
+  "method": "literal_source_units_v1",
+  "semantic_verification": "not_performed",
+  "source_sha256": "0cd470b574dc74ffce0f62fa74e05b78fb6e5535c618191d3f23fa365a751ee4",
+  "status": "needs_review",
+  "units": [
+    {
+      "source_id": "s0001",
+      "text": "Проверка нативных объектов",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0002",
+      "text": "Два подразделения: 60 и 90 участников",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0003",
+      "text": "bar_chart",
+      "in_plan": true,
+      "in_pptx": false
+    },
+    {
+      "source_id": "s0004",
+      "text": "Продажи",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0005",
+      "text": "Поддержка",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0006",
+      "text": "Сотрудники",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0007",
+      "text": "60",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0008",
+      "text": "90",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0009",
+      "text": "человек",
+      "in_plan": true,
+      "in_pptx": false
+    },
+    {
+      "source_id": "s0010",
+      "text": "Доля участников по подразделениям",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0011",
+      "text": "pie_chart",
+      "in_plan": true,
+      "in_pptx": false
+    },
+    {
+      "source_id": "s0012",
+      "text": "Продажи",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0013",
+      "text": "Поддержка",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0014",
+      "text": "60",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0015",
+      "text": "90",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0016",
+      "text": "Пилот рассчитан на шесть недель",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0017",
+      "text": "table",
+      "in_plan": true,
+      "in_pptx": false
+    },
+    {
+      "source_id": "s0018",
+      "text": "Этап",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0019",
+      "text": "Недели",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0020",
+      "text": "Ответственный",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0021",
+      "text": "Подготовка",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0022",
+      "text": "1–2",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0023",
+      "text": "Аналитик",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0024",
+      "text": "Запуск",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0025",
+      "text": "3–4",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0026",
+      "text": "Инженер",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0027",
+      "text": "Оценка",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0028",
+      "text": "5–6",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0029",
+      "text": "Менеджер",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0030",
+      "text": "Проверяем путь обращения",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0031",
+      "text": "process",
+      "in_plan": true,
+      "in_pptx": false
+    },
+    {
+      "source_id": "s0032",
+      "text": "Задать вопрос",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0033",
+      "text": "Найти регламент",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0034",
+      "text": "Показать источник",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0035",
+      "text": "Передать специалисту",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0036",
+      "text": "Качество улучшаем после проверки",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0037",
+      "text": "cycle",
+      "in_plan": true,
+      "in_pptx": false
+    },
+    {
+      "source_id": "s0038",
+      "text": "Собрать",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0039",
+      "text": "Проверить",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0040",
+      "text": "Запустить",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0041",
+      "text": "Измерить",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0042",
+      "text": "У каждого участника есть роль",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0043",
+      "text": "hierarchy",
+      "in_plan": true,
+      "in_pptx": false
+    },
+    {
+      "source_id": "s0044",
+      "text": "Команда пилота",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0045",
+      "text": "Аналитик",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0046",
+      "text": "Готовит материалы",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0047",
+      "text": "Инженер",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0048",
+      "text": "Настраивает сервис",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0049",
+      "text": "Менеджер",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0050",
+      "text": "Измеряет результаты",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0051",
+      "text": "Измеряем три результата",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0052",
+      "text": "icon_grid",
+      "in_plan": true,
+      "in_pptx": false
+    },
+    {
+      "source_id": "s0053",
+      "text": "Время поиска ответа",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0054",
+      "text": "Доля обращений без специалиста",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0055",
+      "text": "Оценка сотрудника",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0056",
+      "text": "Решение принимаем по итогам пилота",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0057",
+      "text": "table",
+      "in_plan": true,
+      "in_pptx": false
+    },
+    {
+      "source_id": "s0058",
+      "text": "Метрика",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0059",
+      "text": "Статус",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0060",
+      "text": "Время поиска",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0061",
+      "text": "Будет измерено",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0062",
+      "text": "Качество ответа",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0063",
+      "text": "Будет проверено",
+      "in_plan": true,
+      "in_pptx": true
+    },
+    {
+      "source_id": "s0064",
+      "text": "Объекты доступны для редактирования",
+      "in_plan": true,
+      "in_pptx": true
+    }
+  ],
+  "missing_from_plan": [],
+  "missing_from_pptx": [
+    "s0003",
+    "s0009",
+    "s0011",
+    "s0017",
+    "s0031",
+    "s0037",
+    "s0043",
+    "s0052",
+    "s0057"
+  ],
+  "unsupported_numbers": [],
+  "note": "Unmatched paraphrases are not proof of omission; speaker notes do not count as slide content."
+}

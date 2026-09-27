@@ -1,0 +1,48 @@
+{
+  "renderer": "PowerPoint",
+  "stage": "External acceptance checks on saved artifact; no repairs",
+  "fill": {
+    "status": "passed",
+    "slides": [
+      {
+        "slide": 2,
+        "coverage": 0.505
+      },
+      {
+        "slide": 3,
+        "coverage": 0.434
+      },
+      {
+        "slide": 4,
+        "coverage": 0.346
+      },
+      {
+        "slide": 5,
+        "coverage": 0.355
+      },
+      {
+        "slide": 6,
+        "coverage": 0.35
+      },
+      {
+        "slide": 7,
+        "coverage": 0.361
+      },
+      {
+        "slide": 8,
+        "coverage": 0.353
+      },
+      {
+        "slide": 9,
+        "coverage": 0.366
+      }
+    ],
+    "issues": []
+  },
+  "contrast": {
+    "status": "passed",
+    "checked_spans": 114,
+    "uncertain_spans": 5,
+    "issues": []
+  }
+}

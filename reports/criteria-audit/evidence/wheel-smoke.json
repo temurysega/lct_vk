@@ -1,0 +1,8 @@
+{
+  "wheel": "branddeck_ai-0.1.0-py3-none-any.whl",
+  "extractor_in_wheel": false,
+  "frontend_in_wheel": false,
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    import sys;sys.path.insert(0,sys.argv[1]);sys.path.append(sys.argv[2]);from slide_agent.analyzer import _load_extractor;print(_load_extractor())\n                                                                                                                                  ~~~~~~~~~~~~~~~^^\n  File \"/tmp/branddeck-criteria-audit.TZjsAv/wheel-site/slide_agent/analyzer.py\", line 35, in _load_extractor\n    raise FileNotFoundError(f\"Template extractor is missing: {script}\")\nFileNotFoundError: Template extractor is missing: /private/tmp/branddeck-criteria-audit.TZjsAv/wheel-site/shared/scripts/extract_template.py\n"
+}
