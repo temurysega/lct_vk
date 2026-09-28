@@ -97,6 +97,10 @@ def sanitize_diagram(value: dict[str, Any]) -> dict[str, Any] | None:
     items = [item for item in (_clean_item(entry) for entry in raw) if item]
     if kind in {"pyramid", "cycle"} and _independent_metric_items(items):
         kind = "icon_grid"
+    if kind == "pyramid" and len(items) == 2:
+        # Two items make no hierarchy: a two-level pyramid is a narrow triangle
+        # beside two captions, and cards state the same pair plainly.
+        kind = "icon_grid"
     minimum, maximum = ITEM_LIMITS[kind]
     if kind == "matrix" and len(items) != 4:
         kind, minimum, maximum = "icon_grid", *ITEM_LIMITS["icon_grid"]

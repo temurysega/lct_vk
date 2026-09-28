@@ -467,3 +467,14 @@ def test_underfilled_cycle_legend_uses_cards_over_the_zone_height(tmp_path: Path
         issue["code"] in {"text_overflow_risk", "text_overlap", "out_of_bounds"}
         for issue in inspect_presentation(output, expected_slide_count=1)["issues"]
     )
+
+
+def test_two_level_pyramid_becomes_cards_but_a_three_level_one_stays():
+    pair = [
+        {"label": "Время поиска ответа", "detail": "Сейчас до 30 минут"},
+        {"label": "Доля закрытых обращений", "detail": "Без специалиста"},
+    ]
+    assert sanitize_diagram({"type": "pyramid", "items": pair})["type"] == "icon_grid"
+    levels = [{"label": name} for name in ("Стратегия", "Тактика", "Операции")]
+    assert sanitize_diagram({"type": "pyramid", "items": levels})["type"] == "pyramid"
+    assert sanitize_diagram({"type": "funnel", "items": pair})["type"] == "funnel"

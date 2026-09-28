@@ -2,16 +2,18 @@
 # The same weights run on a GPU (CUDA build) or on a CPU-only machine.
 #   powershell -File deploy/llama/start-llama.ps1            # GPU
 #   powershell -File deploy/llama/start-llama.ps1 -Device cpu -Threads 8
-# With models/gpu/mmproj-F16.gguf present the server also reads images for the
-# optional visual slide audit; -NoVision starts a text-only server. The
-# projector fits next to the model on an 8 GB card (7.8 GB in use); on a
-# smaller card -ProjectorOnCpu keeps it in RAM, about five times slower.
+#   powershell -File deploy/llama/start-llama.ps1 -Vision  # + image projector
+# -Vision also loads models/gpu/mmproj-F16.gguf for the visual slide audit.
+# On an 8 GB card the projector fills the GPU memory (7.8 GB) and slows text
+# generation two to three times, so deck generation runs on the text-only
+# server and the audit on a -Vision one. -ProjectorOnCpu keeps the projector
+# in RAM: generation stays fast, one slide image takes about 33 s.
 param(
     [ValidateSet("gpu", "cpu")] [string] $Device = "gpu",
     [int] $Threads = 0,
     [int] $Port = 8080,
     [string] $Model = "models/gpu/Qwen3.5-9B-Q4_K_M.gguf",
-    [switch] $NoVision,
+    [switch] $Vision,
     [switch] $ProjectorOnCpu
 )
 $ErrorActionPreference = "Stop"
@@ -42,7 +44,10 @@ if ($Device -eq "gpu") {
     $arguments += @("--n-gpu-layers", "0")
 }
 $projector = Join-Path $root $config.mmproj_path
-if (-not $NoVision -and (Test-Path $projector)) {
+if ($Vision) {
+    if (-not (Test-Path $projector)) {
+        throw "Image projector not found: $projector. Run: python deploy/llama/setup_local.py"
+    }
     $arguments += @("--mmproj", $projector)
     if ($ProjectorOnCpu -or $Device -eq "cpu") {
         $arguments += @("--no-mmproj-offload")
