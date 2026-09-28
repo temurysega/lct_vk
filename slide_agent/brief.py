@@ -37,6 +37,7 @@ from .diagrams import ITEM_LIMITS
 from .images import stems
 from .llm import InferenceClient, InferenceError
 from .prompt_config import load_prompt
+from .visual_planning import sanitize_diagram
 
 PURPOSES_PATH = Path(__file__).with_name("assets") / "deck_purposes.json"
 DEFAULT_SLIDE_COUNT = 12
@@ -631,7 +632,14 @@ def revise_flagged_slides(
         if payload is None:
             continue
         old_title = str(plan["slides"][number - 1].get("title") or "")
-        plan["slides"][number - 1] = {**plan["slides"][number - 1], **payload}
+        slide = {**plan["slides"][number - 1], **payload}
+        visual = slide.get("visual")
+        if isinstance(visual, dict) and visual.get("type") in DIAGRAM_VISUALS:
+            # A rewritten diagram passes the same rules as a planned one.
+            slide["visual"] = sanitize_diagram(visual)
+            if slide["visual"] is None and not slide.get("bullets"):
+                slide["bullets"] = _visual_bullets(visual)[:5]
+        plan["slides"][number - 1] = slide
         revised.append(number)
         if plan["slides"][number - 1].get("title") != old_title:
             outline[number - 1]["title"] = plan["slides"][number - 1]["title"]

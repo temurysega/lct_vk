@@ -496,3 +496,39 @@ def test_foreign_word_in_a_title_is_sent_to_the_rewrite_with_the_title_open():
     assert revise_flagged_slides(plan, brief=source, client=Client(), audit=audit) == [2]
     assert plan["slides"][1]["title"] == fixed
     assert plan["brief"]["outline"][1]["title"] == fixed
+
+
+def test_a_rewritten_diagram_passes_the_same_visual_rules_as_a_planned_one():
+    source = "Сейчас поиск занимает до 30 минут. Цель: доля обращений без специалиста."
+    title = "Время поиска и доля закрытых обращений"
+    plan = {
+        "title": "Помощник",
+        "brief": {"purpose": "feature", "outline": [
+            {"title": "Помощник", "role": "cover", "goal": "", "visual": "none"},
+            {"title": title, "role": "content", "goal": "метрики", "visual": "pyramid"},
+            {"title": "Итог", "role": "closing", "goal": "", "visual": "none"},
+        ]},
+        "slides": [
+            {"title": "Помощник", "role": "cover"},
+            {"title": title, "role": "content", "bullets": ["Метрики пилота"]},
+            {"title": "Итог", "role": "closing"},
+        ],
+    }
+    audit = {"status": "reviewed", "issues": [{
+        "slide": 2, "code": "repeated_message", "quote": "Метрики пилота",
+        "reason": "Повтор",
+    }]}
+    pair = [
+        {"label": "Время поиска", "detail": "Сейчас до 30 минут"},
+        {"label": "Доля обращений", "detail": "Без специалиста"},
+    ]
+
+    class Client:
+        settings = type("Settings", (), {"parallel_requests": 1})()
+
+        def chat_json(self, **kwargs):
+            return {"subtitle": "", "bullets": [], "speaker_notes": "",
+                    "visual": {"type": "pyramid", "items": pair}}
+
+    assert revise_flagged_slides(plan, brief=source, client=Client(), audit=audit) == [2]
+    assert plan["slides"][1]["visual"]["type"] == "icon_grid"
