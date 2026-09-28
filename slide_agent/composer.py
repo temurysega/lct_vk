@@ -2656,8 +2656,9 @@ def _sparse_statement_cards(
     """
     bullets = [str(item) for item in slide_spec.get("bullets", []) if str(item).strip()]
     minimum, maximum = ITEM_LIMITS["icon_grid"]
+    # A data slide without a chart or table carries statements too.
     if (
-        slide_spec.get("role", "content") != "content"
+        slide_spec.get("role", "content") not in {"content", "data"}
         or slide_spec.get("visual")
         or slide_spec.get("body")
         or not minimum <= len(bullets) <= maximum

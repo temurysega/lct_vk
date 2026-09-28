@@ -233,6 +233,14 @@ def test_underfilled_table_slide_is_marked_to_fill_its_zone():
     assert _hint_cards_for_underfilled(plan, qa) == []
 
 
+def test_statements_of_a_data_slide_without_data_become_cards():
+    plan = {"slides": [{"role": "data", "title": "Запрос", "bullets": ["A.", "B."]}]}
+    qa = {"issues": [{"code": "slide_underfilled", "slide": 1}]}
+    assert _hint_cards_for_underfilled(plan, qa) == [1]
+    assert plan["slides"][0]["layout_hint"] == "cards"
+    assert "remap_underfilled" not in plan["slides"][0]
+
+
 def test_underfilled_cards_drawn_by_the_composer_get_another_layout():
     plan = {"slides": [{"role": "content", "title": "Итог", "bullets": ["A.", "B.", "C."]}]}
     qa = {"issues": [{"code": "slide_underfilled", "slide": 1}]}

@@ -142,7 +142,7 @@ def _hint_cards_for_underfilled(
         if slide.get("layout_hint") == "cards" or slide.get("remap_underfilled"):
             continue  # each slide is helped once
         if (
-            slide.get("role", "content") == "content"
+            slide.get("role", "content") in {"content", "data"}
             and not visual
             and not slide.get("body")
             and 2 <= len(bullets) <= 6
