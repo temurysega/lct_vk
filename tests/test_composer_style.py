@@ -493,7 +493,12 @@ def test_exemplar_visual_zone_stops_before_reserved_footer():
     assert result[1] + result[3] == pytest.approx(6.97)
 
 
-def test_long_cover_caption_fits_the_overflow_estimate_on_one_line():
+@pytest.mark.parametrize(
+    "heading",
+    ["Поиск инструкции занимает до 30 минут", "Сотрудники теряют до 30 минут на поиск инструкций"],
+)
+def test_long_cover_stack_fits_the_overflow_estimate_at_template_sizes(heading):
+    from slide_agent.composer import _TYPE_SCALE
     from slide_agent.qa import _overflow_ratio
 
     prs = Presentation()
@@ -506,13 +511,21 @@ def test_long_cover_caption_fits_the_overflow_estimate_on_one_line():
     title.top, title.height = Inches(1.5), Inches(0.87)
     subtitle.top, subtitle.height = Inches(2.41), Inches(0.31)
     caption = "Инициатива по внедрению ИИ-помощника для ускорения работы с регламентами"
-    _fill_slide(
-        slide,
-        {"role": "cover", "title": "Поиск инструкции занимает до 30 минут",
-         "subtitle": caption, "bullets": [], "body": ""},
-        {**_design(), "canvas": {"width_inches": 10, "height_inches": 5.625}},
-        set(),
-    )
+    # A template scale without the fitted sizes must not round text up.
+    token = _TYPE_SCALE.set([48.0, 24.4, 24.0, 18.0, 16.0, 13.2, 12.2, 12.0, 11.0])
+    try:
+        _fill_slide(
+            slide,
+            {"role": "cover", "title": heading, "subtitle": caption,
+             "bullets": [], "body": ""},
+            {**_design(), "canvas": {"width_inches": 10, "height_inches": 5.625}},
+            set(),
+        )
+    finally:
+        _TYPE_SCALE.reset(token)
     assert subtitle.text == caption
+    assert title.text.replace("\v", " ") == heading
+    assert _overflow_ratio(title, 24) <= 1.0
     assert _overflow_ratio(subtitle, 16) <= 1.0
+    assert title.text_frame.paragraphs[0].runs[0].font.size.pt >= 18
     assert subtitle.text_frame.paragraphs[0].runs[0].font.size.pt >= 11

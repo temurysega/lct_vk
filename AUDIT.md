@@ -36,7 +36,7 @@ PDF, PNG и SVG в HTML, а также неизменность исходног
 
 ### Список тестов
 
-`python -m pytest` собирает 251 случай (226 функций, часть параметризована) из
+`python -m pytest` собирает 252 случая (226 функций, часть параметризована) из
 29 файлов; на Windows с LibreOffice 28.09.2026 все прошли за 72 с. Браузерные
 сценарии `tests/browser_layout.cjs` и `tests/browser_smoke.cjs` запускаются
 отдельно через Playwright ([отчёт](reports/browser-2026-09-28/README.md)).

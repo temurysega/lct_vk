@@ -2318,8 +2318,8 @@ def _compact_centered_cover(
     if not (
         title
         and subtitle
-        and len(title) * preferred_title_size * 0.52 / 72 > w - 0.2
-        and len(subtitle) * preferred_subtitle_size * 0.52 / 72 > sw - 0.2
+        and len(title) * preferred_title_size * ESTIMATED_GLYPH_WIDTH_EM / 72 > w - 0.2
+        and len(subtitle) * preferred_subtitle_size * ESTIMATED_GLYPH_WIDTH_EM / 72 > sw - 0.2
         and 0.35 * width <= w <= 0.60 * width
         and 0.20 * height <= y <= 0.34 * height
         and abs(center - width / 2) <= 0.06 * width
@@ -2332,12 +2332,15 @@ def _compact_centered_cover(
     new_w = 0.76 * width
     new_x = center - new_w / 2
     inner_w = new_w - 0.2
-    single_size = min(preferred_title_size, inner_w * 72 / (len(title) * 0.52))
+    single_size = min(
+        preferred_title_size, inner_w * 72 / ((len(title) + 1) * ESTIMATED_GLYPH_WIDTH_EM)
+    )
     if single_size >= 20 * width / 10:
         title_text = title
         title_size = single_size
         new_y = y - min(0.2, 0.035 * height)
-        title_h = max(0.50, min(0.65, 0.10 * height))
+        # Line height, frame margins and the padding of the overflow check.
+        title_h = max(0.50, min(0.65, 0.10 * height), title_size * 1.22 / 72 + 0.2)
     else:
         words = title.split()
         if len(words) < 2:
@@ -2350,10 +2353,10 @@ def _compact_centered_cover(
         title_text = f"{left}\n{right}"
         title_size = min(
             preferred_title_size,
-            inner_w * 72 / (max(len(left), len(right)) * 0.52),
+            inner_w * 72 / ((max(len(left), len(right)) + 1) * ESTIMATED_GLYPH_WIDTH_EM),
         )
         new_y = y - min(0.31, 0.055 * height)
-        title_h = max(0.82, 2 * title_size * 1.22 / 72 + 0.06)
+        title_h = max(0.82, 2 * title_size * 1.22 / 72 + 0.2)
     subtitle_y = new_y + title_h + 0.11
     # Size and frame follow the same width estimate as the overflow check, so
     # QA does not reject the fitted stack. One smaller line keeps the stack
@@ -2361,7 +2364,8 @@ def _compact_centered_cover(
     readable = 11 * width / 10
     subtitle_size = min(
         preferred_subtitle_size,
-        inner_w * 72 / (max(1, len(subtitle)) * ESTIMATED_GLYPH_WIDTH_EM),
+        # One spare character: the check truncates characters per line.
+        inner_w * 72 / ((len(subtitle) + 1) * ESTIMATED_GLYPH_WIDTH_EM),
     )
     if subtitle_size < readable:
         subtitle_size = preferred_subtitle_size
@@ -2874,11 +2878,12 @@ def _fill_slide(
     if titles:
         _constrain_title_width(slide, titles[0])
         if cover_sizes:
+            # The fitted size snaps down to the template scale, never up.
             _set_text_frame(
                 titles[0],
                 [cover_sizes[2]],
                 font_size=cover_sizes[0],
-                min_font_size=cover_sizes[0],
+                min_font_size=round(cover_sizes[0] * 0.85, 1),
             )
         else:
             _set_text_frame(titles[0], [title])
@@ -2914,7 +2919,7 @@ def _fill_slide(
                 subtitles[0],
                 [subtitle],
                 font_size=cover_sizes[1],
-                min_font_size=cover_sizes[1],
+                min_font_size=round(cover_sizes[1] * 0.85, 1),
             )
         else:
             _set_text_frame(subtitles[0], [subtitle])
