@@ -15,6 +15,7 @@ from .composer import compose_presentation, outline_markdown
 from .config import InferenceSettings
 from .contextual_audit import review_content
 from .coverage import coverage_report, unsupported_numbers, visible_texts
+from .diagrams import DIAGRAM_TYPES
 from .exporter import export_presentation
 from .imagegen import generate_images
 from .images import ImageLibrary, attach_images, collect_content_images
@@ -157,7 +158,10 @@ def _hint_cards_for_underfilled(
         elif slide.get("role", "content") in {"content", "data"}:
             # A diagram or chart placed in a cramped exemplar zone. Picture
             # slots of image and comparison slides keep their layout: another
-            # one rarely gives the picture more room.
+            # one rarely gives the picture more room. A diagram also stretches
+            # over the full height of its new zone.
+            if visual.get("type") in DIAGRAM_TYPES:
+                visual["fill_zone"] = True
             slide["remap_underfilled"] = True
             hinted.append(number)
     return hinted

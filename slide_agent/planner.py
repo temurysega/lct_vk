@@ -604,6 +604,34 @@ def _score_pattern(
     return score, reasons, risks
 
 
+def _side_title_column(pattern: dict[str, Any]) -> bool:
+    """The title has its own column beside the main content zone.
+
+    Below such a title the column stays empty unless the slide has text for
+    it, so a slide carried by one diagram leaves much of the canvas blank.
+    """
+    zones = pattern.get("placeholders") or []
+    titles = [
+        zone for zone in zones
+        if str(zone.get("type", "")).startswith(("title", "center_title"))
+    ]
+    bodies = [
+        zone for zone in zones
+        if str(zone.get("type", "")).startswith(("body", "object"))
+        and float(zone.get("h", 0) or 0) >= 1.0
+    ]
+    if len(titles) != 1 or not bodies:
+        return False
+    title = titles[0]
+    main = max(bodies, key=lambda zone: float(zone["w"]) * float(zone["h"]))
+    title_bottom = float(title["y"]) + float(title["h"])
+    return (
+        float(title["x"]) + float(title["w"]) <= float(main["x"]) + 0.1
+        and float(main["y"]) < title_bottom
+        and float(main["y"]) + float(main["h"]) - title_bottom >= 1.5
+    )
+
+
 def assign_patterns(
     plan: dict[str, Any],
     pattern_catalog: dict[str, Any],
@@ -642,6 +670,18 @@ def assign_patterns(
                     reasons.append("крупная зона для схемы")
                 else:
                     risks.append("схема займёт общую зону контента")
+                if (
+                    slide.get("remap_underfilled")
+                    and not slide.get("bullets")
+                    and not slide.get("body")
+                ):
+                    # The render showed this diagram below a quarter of the
+                    # slide: the size of the new zone now matters most, and
+                    # the column under a side title would stay empty again.
+                    score += area * 40
+                    if _side_title_column(pattern):
+                        score -= 12.0
+                        risks.append("колонка под заголовком останется пустой")
             if requirements["body_chars"]:
                 zones = int(pattern.get("capacity", {}).get("usable_body_zones", 1))
                 if layout_strategy == "columns" and 2 <= zones <= 4:

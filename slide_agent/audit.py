@@ -78,6 +78,14 @@ def _language_issues(
     return issues
 
 
+def language_problems(text: str, language: str) -> list[str]:
+    """The same language checks for model text before it is laid out."""
+    return [
+        issue["message"]
+        for issue in _language_issues(text, 0, "", {"language": language})
+    ]
+
+
 def enrich_audit(
     path: Path, report: dict[str, Any], plan: dict[str, Any]
 ) -> dict[str, Any]:

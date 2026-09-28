@@ -12,6 +12,7 @@ from slide_agent.audit import _language_issues
 from slide_agent.brief import (
     _content_problems,
     _ensure_grounded,
+    _language_notes,
     _outline_problems,
     detect_purpose,
     outline_schema,
@@ -323,6 +324,25 @@ def test_language_checks():
     assert codes("Модель Qwen в VK WorkSpace, API, https://example.com") == []
     assert codes("Risks are handled", "en") == []
     assert codes("Risks and Mitigation") == ["language_mix"]
+
+
+def test_foreign_words_in_brief_text_go_back_to_the_model():
+    brief = "Помощник в VK WorkSpace отвечает сотрудникам. Пилот: 2 подразделения."
+    notes = _language_notes(
+        ["Пилот включает два подразделения и excludes другие отделы",
+         "Помощник в VK WorkSpace отвечает сотрудникам"],
+        brief,
+    )
+    assert notes == [(
+        "slide 1: Английские слова в русской колоде: excludes; "
+        "write every word in the deck language"
+    )]
+    # Latin words of the brief itself may be repeated.
+    assert _language_notes(["Интеграция с jira"], brief + " Задачи в jira.") == []
+    assert _language_notes(["Risks are handled"], "Risks and mitigation plan.") == []
+    content = {"subtitle": "", "bullets": ["Первый тезис", "Второй тезис handled"]}
+    slide = {"title": "Пилот", "role": "content", "visual": "none", "goal": ""}
+    assert any("handled" in problem for problem in _content_problems(content, slide, brief))
 
 
 def test_empty_diagram_becomes_bullets_and_is_retried():

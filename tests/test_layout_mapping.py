@@ -229,6 +229,7 @@ def test_underfilled_table_slide_is_marked_to_fill_its_zone():
     # A sparse table is already stretched over its zone, so the zone is small.
     assert plan["slides"][0]["visual"]["fill_zone"] is True
     assert plan["slides"][0]["remap_underfilled"] is True
+    assert plan["slides"][0]["visual"]["fill_zone"] is True
     assert _hint_cards_for_underfilled(plan, qa) == []
 
 
@@ -251,3 +252,38 @@ def test_underfilled_data_diagram_gets_another_layout_but_a_photo_comparison_doe
     qa = {"issues": [{"code": "slide_underfilled", "slide": number} for number in (1, 2)]}
     assert _hint_cards_for_underfilled(plan, qa) == [1]
     assert plan["slides"][0]["remap_underfilled"] is True
+    assert plan["slides"][0]["visual"]["fill_zone"] is True
+
+
+def test_underfilled_diagram_remap_avoids_an_empty_column_under_a_side_title():
+    def pattern(pattern_id, title, body):
+        return {
+            "id": pattern_id,
+            "layout_index": 0,
+            "master_index": 0,
+            "roles": ["content"],
+            "placeholders": [
+                {"type": "title_", **dict(zip("xywh", title))},
+                {"type": "body_", **dict(zip("xywh", body))},
+            ],
+            "capacity": {"body_area_ratio": 0.31, "body_chars": 900, "usable_body_zones": 1},
+        }
+
+    catalog = {"patterns": [
+        # Title on the left, one diagram zone on the right half.
+        pattern("side", (0.47, 0.37, 4.3, 0.82), (5.07, 0.74, 4.22, 4.09)),
+        pattern("side-copy", (0.47, 0.37, 4.3, 0.82), (5.07, 0.74, 4.22, 4.09)),
+        # Title on top, the zone below spans the slide.
+        pattern("top", (0.47, 0.3, 9.0, 0.8), (0.47, 1.4, 9.0, 3.4)),
+    ]}
+    visual = {"type": "pyramid", "items": [{"label": "A"}, {"label": "B"}]}
+    slide = {"role": "content", "title": "Вывод", "bullets": [], "visual": visual}
+    plan = assign_patterns({"slides": [dict(slide)]}, catalog)
+    assert plan["slides"][0]["pattern_id"] == "side"
+    retry = {**slide, "remap_underfilled": True}
+    plan = assign_patterns({"slides": [retry]}, catalog, avoid_by_slide={1: {"side"}})
+    assert plan["slides"][0]["pattern_id"] == "top"
+    # Statements under the title use that column, so it is not penalised.
+    with_text = {**retry, "bullets": ["Первый тезис.", "Второй тезис."]}
+    plan = assign_patterns({"slides": [with_text]}, catalog, avoid_by_slide={1: {"side"}})
+    assert plan["slides"][0]["pattern_id"] == "side-copy"

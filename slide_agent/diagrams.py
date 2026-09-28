@@ -739,6 +739,8 @@ def _process(shapes, items, zone, style, context, record) -> None:
             for detail in details
         )
         detail_h = min(h - arrow_h - 0.16, max(1.05, needed + 0.18))
+        if style.get("fill_zone"):
+            detail_h = h - arrow_h - 0.16
         top = _block_top(y, h, arrow_h + 0.12 + detail_h)
         for index, item in enumerate(items):
             ax = x + index * (arrow_w - depth + joint)
@@ -954,6 +956,8 @@ def _hierarchy(shapes, items, zone, style, context, record, root: str) -> None:
     size = style["size"]
     needed = max(text_height(_paragraphs(item), child_w - 0.28, size) for item in items)
     child_h = min(h - root_h - gap_v, max(1.1, needed + 0.42))
+    if style.get("fill_zone"):
+        child_h = h - root_h - gap_v
     y = _block_top(y, h, root_h + gap_v + child_h)
     root_x = x + (w - root_w) / 2
     root_shape = _box(
@@ -1048,8 +1052,9 @@ def _stacked(shapes, items, zone, style, context, record, *, funnel: bool) -> No
     x, y, w, h = zone
     count = len(items)
     # Two-level pyramids and funnels otherwise occupy a narrow strip in a
-    # full-size content zone and fail the rendered quarter-slide fill check.
-    used = min(h, max(count * 1.3, 3.2 if count == 2 else 0))
+    # full-size content zone and fail the rendered quarter-slide fill check;
+    # after an underfilled render (fill_zone) the levels take the whole zone.
+    used = h if style.get("fill_zone") else min(h, max(count * 1.3, 3.2 if count == 2 else 0))
     y, h = _block_top(y, h, used), used
     region_w = min(w * 0.44, h * (1.5 if funnel else 1.25))
     cx = x + region_w / 2

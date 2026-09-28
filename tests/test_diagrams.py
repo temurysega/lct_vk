@@ -401,3 +401,32 @@ def test_too_few_items_is_rejected():
             (0, 0, 8, 4),
             diagram_style(DESIGN),
         )
+
+
+@pytest.mark.parametrize(
+    "visual",
+    [
+        {"type": "pyramid", "items": ["Повторяющиеся вопросы", "Сложные запросы"]},
+        {"type": "funnel", "items": ["Все обращения", "Без специалиста"]},
+        {"type": "hierarchy", "items": ["Аналитик", "Разработчик"]},
+        {"type": "process", "items": ["Вопрос", "Поиск", "Ответ"]},
+    ],
+)
+def test_fill_zone_stretches_a_diagram_over_its_zone_height(visual):
+    def drawn_height(style):
+        prs = Presentation()
+        prs.slide_width, prs.slide_height = Inches(13.33), Inches(7.5)
+        slide = prs.slides.add_slide(prs.slide_layouts[6])
+        render_diagram(slide, dict(visual), zone, style)
+        shapes = list(slide.shapes[0].shapes)
+        top = min(shape.top for shape in shapes)
+        bottom = max(shape.top + shape.height for shape in shapes)
+        assert Inches(zone[1]) - 10 <= top and bottom <= Inches(zone[1] + zone[3]) + 10
+        return (bottom - top) / 914400
+
+    zone = (0.6, 1.6, 12.0, 4.9)
+    style = diagram_style(DESIGN)
+    compact = drawn_height(style)
+    stretched = drawn_height({**style, "fill_zone": True})
+    assert stretched > compact
+    assert stretched >= zone[3] - 0.1

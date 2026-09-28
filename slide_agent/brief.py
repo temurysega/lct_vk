@@ -23,6 +23,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
+from .audit import language_problems
 from .coverage import (
     grounding_findings,
     source_backed_baseline_fallback,
@@ -283,6 +284,31 @@ def _normalized_outline(outline: dict[str, Any], count: int) -> list[dict[str, A
     return slides
 
 
+def _language_notes(texts: list[str], brief: str) -> list[str]:
+    """Words in another language or script, reported by the structural audit.
+
+    The deck language follows the brief: mostly Cyrillic letters mean Russian.
+    Latin words of the brief itself, such as product names, may be repeated.
+    """
+    letters = re.findall(r"[^\W\d_]", brief)
+    cyrillic = sum(1 for letter in letters if re.match(r"[А-Яа-яЁё]", letter))
+    language = "ru" if letters and cyrillic * 2 > len(letters) else "en"
+    known = {word.casefold() for word in re.findall(r"[A-Za-z]+", brief)}
+
+    def unknown(text: str) -> str:
+        return re.sub(
+            r"(?<![А-Яа-яЁё])[A-Za-z]+(?![А-Яа-яЁё])",
+            lambda match: "" if match.group(0).casefold() in known else match.group(0),
+            text,
+        )
+
+    return [
+        f"slide {number}: {message}; write every word in the deck language"
+        for number, text in enumerate(texts, 1)
+        for message in language_problems(unknown(text), language)
+    ]
+
+
 def _outline_problems(slides: list[dict[str, Any]], brief: str = "") -> list[str]:
     problems = []
     seen: dict[str, int] = {}
@@ -401,6 +427,12 @@ def _content_problems(
         for cell in cells
         if long(cell, LIMITS["cell"])
     )
+    visible = [str(content.get("subtitle") or ""), *bullets]
+    for item in visual.get("items") or []:
+        if isinstance(item, dict):
+            visible += [str(item.get(key) or "") for key in ("label", "detail", "value")]
+    visible += [str(cell) for cell in cells]
+    problems += _language_notes(["\n".join(visible)], brief)
     if brief:
         payload = _slide_payload(content, slide)
         problems.extend(
@@ -626,9 +658,14 @@ def plan_from_brief(
         )
         outline = _normalized_outline(outline_raw, count)
         problems = _outline_problems(outline, brief)
-        if not problems:
+        # Foreign words go back to the model but never block the deck: the
+        # structural audit still flags any that remain.
+        notes = problems + _language_notes(
+            [f"{slide['title']}\n{slide['goal']}" for slide in outline], brief
+        )
+        if not notes:
             break
-        request["fix_previous_outline"] = problems
+        request["fix_previous_outline"] = notes
     outline_baseline_fallbacks = []
     if problems:
         for number, slide in enumerate(outline, 1):
