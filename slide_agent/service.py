@@ -165,7 +165,7 @@ def _hint_cards_for_underfilled(
             # slots of image and comparison slides keep their layout: another
             # one rarely gives the picture more room; a diagram of any role
             # moves, and stretches over the full height of its new zone.
-            if visual.get("type") in DIAGRAM_TYPES:
+            if visual.get("type") in DIAGRAM_TYPES or visual.get("type") == "image":
                 visual["fill_zone"] = True
             slide["remap_underfilled"] = True
             hinted.append(number)

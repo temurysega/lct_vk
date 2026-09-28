@@ -2433,13 +2433,21 @@ def _expand_small_image_zone(
     slide: Any,
     zone: tuple[float, float, float, float],
     design: dict[str, Any],
+    *,
+    underfilled: bool = False,
 ) -> tuple[float, float, float, float]:
-    """Use free space beside text when an exemplar offers a narrow photo zone."""
+    """Use free space beside text when an exemplar offers a narrow photo zone.
+
+    After a render below a quarter of the slide (``underfilled``) any photo
+    zone may grow into that free space, not only a small one.
+    """
     x, y, w, h = zone
     canvas = design["canvas"]
     canvas_w = float(canvas["width_inches"])
     canvas_h = float(canvas["height_inches"])
-    if w * h >= canvas_w * canvas_h * 0.16 or x + w >= canvas_w - 0.9:
+    if x + w >= canvas_w - 0.9 and not underfilled:
+        return zone
+    if w * h >= canvas_w * canvas_h * 0.16 and not underfilled:
         return zone
     candidate_w = canvas_w - 0.35 - x
     candidate_h = min(canvas_h - 0.45 - y, max(h, candidate_w / 1.65))
@@ -2983,7 +2991,13 @@ def _fill_slide(
         )
     else:
         if visual.get("type") == "image":
-            visual_zone = _expand_small_image_zone(slide, visual_zone, design)
+            grown = _expand_small_image_zone(
+                slide, visual_zone, design, underfilled=bool(visual.get("fill_zone"))
+            )
+            if grown != visual_zone and visual.get("fill_zone"):
+                # The grown photo steps back from the layout's logos.
+                grown = _clear_layout_art(grown, layout_art_boxes(slide, design))
+            visual_zone = grown
         elif slide_spec.get("visual") and visual_zone:
             visual_zone = _clear_layout_art(visual_zone, layout_art_boxes(slide, design))
         _add_visual(slide, slide_spec.get("visual"), visual_zone, design, context)

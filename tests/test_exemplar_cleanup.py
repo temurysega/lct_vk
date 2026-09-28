@@ -146,6 +146,20 @@ def test_small_photo_zone_expands_only_into_free_space():
     assert _expand_small_image_zone(slide, small, design) == small
 
 
+def test_photo_zone_of_an_underfilled_slide_grows_even_when_it_is_not_small():
+    prs = Presentation()
+    prs.slide_width, prs.slide_height = Inches(13.333), Inches(7.5)
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    _text(slide, "BrandDeck Body", (6.4, 1.9, 2.5, 3.0), "Текст")
+    # 3.2 x 5.1 inches is a sixth of the slide: not small, so it stays...
+    photo = (9.1, 1.8, 3.2, 5.1)
+    assert _expand_small_image_zone(slide, photo, DESIGN) == photo
+    # ...until the render found the slide below a quarter filled.
+    grown = _expand_small_image_zone(slide, photo, DESIGN, underfilled=True)
+    assert grown[:2] == photo[:2] and grown[2] > photo[2]
+    assert grown[0] + grown[2] <= 13.333 - 0.3
+
+
 def test_narrow_photo_zone_can_expand_width_without_growing_height():
     prs = Presentation()
     prs.slide_width, prs.slide_height = Inches(13.333), Inches(7.5)
