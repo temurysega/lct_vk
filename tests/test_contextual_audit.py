@@ -427,3 +427,36 @@ def test_stubborn_rewrite_does_not_report_a_pending_pilot_as_launched():
     assert plan["slides"][1]["title"] == "Пилот планируется в двух подразделениях"
     assert plan["brief"]["source_backed_pilot_status_fallbacks"] == [2]
     assert grounding_findings(source, plan) == []
+
+
+def test_stubborn_invented_number_is_dropped_instead_of_blocking_the_deck():
+    from slide_agent.service import _rewrite_audit
+
+    source = "Помощник отвечает на вопросы. Пилот: 150 сотрудников."
+    bullets = ["Помощник отвечает на вопросы", "Точность ответов 100 %"]
+    plan = {
+        "title": "Помощник",
+        "brief": {"purpose": "feature", "outline": [
+            {"title": "Помощник", "role": "cover", "goal": "", "visual": "none"},
+            {"title": "Ответы", "role": "content", "goal": "ответы", "visual": "none"},
+            {"title": "Итог", "role": "closing", "goal": "", "visual": "none"},
+        ]},
+        "slides": [
+            {"title": "Помощник", "role": "cover"},
+            {"title": "Ответы", "role": "content", "bullets": list(bullets)},
+            {"title": "Итог", "role": "closing"},
+        ],
+    }
+    audit = _rewrite_audit(source, plan, {"status": "not_run"})
+
+    class StubbornClient:
+        settings = type("Settings", (), {"parallel_requests": 1})()
+
+        def chat_json(self, **kwargs):
+            return {"subtitle": "", "bullets": list(bullets), "speaker_notes": ""}
+
+    assert revise_flagged_slides(
+        plan, brief=source, client=StubbornClient(), audit=audit
+    ) == [2]
+    assert plan["slides"][1]["bullets"] == ["Помощник отвечает на вопросы"]
+    assert plan["brief"]["dropped_invented_number_statements"] == [2]

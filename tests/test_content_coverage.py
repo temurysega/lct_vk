@@ -8,6 +8,7 @@ from slide_agent.coverage import (
     coverage_report,
     grounding_findings,
     source_backed_baseline_fallback,
+    source_backed_number_fallback,
     source_backed_pilot_status_fallback,
     unsupported_numbers,
 )
@@ -339,3 +340,24 @@ def test_offline_cover_has_no_service_caption():
     source = "# Пилот\n\n## Проблема\nПоиск занимает время.\n\n## Решение\nПомощник отвечает."
     cover = _fallback_plan(source, 4)["slides"][0]
     assert cover["role"] == "cover" and cover["subtitle"] == ""
+
+
+def test_statements_with_invented_numbers_are_dropped_only_when_content_remains():
+    source = "Пилот: 2 подразделения, 150 сотрудников, 6 недель."
+    slide = {
+        "role": "content",
+        "title": "Пилот охватывает 150 сотрудников",
+        "bullets": ["Два подразделения", "Точность ответов 100 %"],
+        "visual": {"type": "table", "headers": ["Параметр", "Значение"],
+                   "rows": [["Сотрудники", "150"], ["Экономия", "400 часов"]]},
+        "speaker_notes": "Пилот идёт 6 недель. Экономия составит 400 часов.",
+    }
+    repaired = source_backed_number_fallback(source, slide)
+    assert repaired["bullets"] == ["Два подразделения"]
+    assert repaired["visual"]["rows"] == [["Сотрудники", "150"]]
+    assert repaired["speaker_notes"] == "Пилот идёт 6 недель."
+    assert unsupported_numbers(source, {"slides": [repaired]}, include_notes=True) == []
+    # A number in the title, or a slide left empty, is not repaired.
+    assert source_backed_number_fallback(source, {**slide, "title": "Экономия 400 часов"}) is None
+    only = {"role": "content", "title": "Итог", "bullets": ["Точность 100 %"]}
+    assert source_backed_number_fallback(source, only) is None

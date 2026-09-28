@@ -447,6 +447,67 @@ def source_backed_pilot_status_fallback(source: str, slide: dict) -> dict | None
     return revised if changed else None
 
 
+def source_backed_number_fallback(source: str, slide: dict) -> dict | None:
+    """Drop the statements that carry numbers the brief never states.
+
+    Used only after the model repeated such numbers twice. A bullet, table
+    row, diagram item or notes sentence goes as a whole; the title cannot
+    go, and a slide left without content is not repaired.
+    """
+    from .diagrams import ITEM_LIMITS
+
+    known = _numbers(source)
+
+    def invented(value) -> bool:
+        return any(
+            number not in known and ("." in number or float(number) >= 10)
+            for text in _strings(value)
+            for number in _numbers(text)
+        )
+
+    if invented(slide.get("title", "")):
+        return None
+    revised = deepcopy(slide)
+    for key in ("subtitle", "body"):
+        if invented(revised.get(key, "")):
+            revised[key] = ""
+    revised["bullets"] = [
+        item for item in revised.get("bullets") or [] if not invented(item)
+    ]
+    notes = str(revised.get("speaker_notes") or "")
+    revised["speaker_notes"] = " ".join(
+        sentence
+        for sentence in re.split(r"(?<=[.!?])\s+", notes)
+        if sentence and not invented(sentence)
+    )
+    visual = revised.get("visual")
+    if isinstance(visual, dict) and invented(visual):
+        kind = visual.get("type")
+        items = visual.get("items")
+        rows = visual.get("rows")
+        if kind in ITEM_LIMITS and isinstance(items, list):
+            kept = [item for item in items if not invented(item)]
+            visual["items"] = kept
+            if len(kept) < ITEM_LIMITS[kind][0]:
+                revised["visual"] = None
+        elif kind == "table" and isinstance(rows, list) and not invented(
+            visual.get("headers")
+        ):
+            visual["rows"] = [row for row in rows if not invented(row)]
+            if not visual["rows"]:
+                revised["visual"] = None
+        else:
+            revised["visual"] = None
+    if revised == slide:
+        return None
+    framed = str(revised.get("role", "content")) in {"cover", "closing", "section"}
+    if not framed and not (
+        revised["bullets"] or revised.get("visual") or revised.get("body")
+    ):
+        return None
+    return revised
+
+
 def grounding_findings(source: str, plan: dict) -> list[dict]:
     """High-confidence, exact-quote findings for risky brief extrapolations.
 
