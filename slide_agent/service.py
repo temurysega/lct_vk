@@ -10,7 +10,7 @@ from typing import Any
 
 from .analyzer import analyze_template
 from .audit import REPAIRABLE
-from .brief import revise_flagged_slides
+from .brief import foreign_word_findings, revise_flagged_slides
 from .composer import compose_presentation, outline_markdown
 from .config import InferenceSettings
 from .contextual_audit import review_content
@@ -91,10 +91,12 @@ def _rewrite_audit(
     """Findings for the one rewrite of a brief plan.
 
     The editorial audit's findings count only when it has reviewed the plan;
-    numbers missing from the brief are a deterministic finding either way.
+    numbers missing from the brief and foreign words are deterministic
+    findings either way.
     """
     issues = list(review.get("issues") or []) if review.get("status") == "reviewed" else []
     issues.extend(_number_findings(source, plan))
+    issues.extend(foreign_word_findings(source, plan))
     return {"status": "reviewed" if issues else review.get("status"), "issues": issues}
 
 

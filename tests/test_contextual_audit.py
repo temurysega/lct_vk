@@ -460,3 +460,39 @@ def test_stubborn_invented_number_is_dropped_instead_of_blocking_the_deck():
     ) == [2]
     assert plan["slides"][1]["bullets"] == ["Помощник отвечает на вопросы"]
     assert plan["brief"]["dropped_invented_number_statements"] == [2]
+
+
+def test_foreign_word_in_a_title_is_sent_to_the_rewrite_with_the_title_open():
+    from slide_agent.service import _rewrite_audit
+
+    source = "Помощник отвечает на вопросы. Вопрос без ответа уходит специалисту."
+    bad = "Модель работает внутри контура, а unanswered вопросы уходят специалисту"
+    plan = {
+        "title": "Помощник",
+        "brief": {"purpose": "feature", "outline": [
+            {"title": "Помощник", "role": "cover", "goal": "", "visual": "none"},
+            {"title": bad, "role": "content", "goal": "маршрут", "visual": "none"},
+            {"title": "Итог", "role": "closing", "goal": "", "visual": "none"},
+        ]},
+        "slides": [
+            {"title": "Помощник", "role": "cover"},
+            {"title": bad, "role": "content", "bullets": ["Вопрос уходит специалисту"]},
+            {"title": "Итог", "role": "closing"},
+        ],
+    }
+    audit = _rewrite_audit(source, plan, {"status": "not_run"})
+    assert [(item["slide"], item["quote"]) for item in audit["issues"]] == [(2, bad)]
+    assert "unanswered" in audit["issues"][0]["reason"]
+    fixed = "Модель работает внутри контура, а вопросы без ответа уходят специалисту"
+
+    class Client:
+        settings = type("Settings", (), {"parallel_requests": 1})()
+
+        def chat_json(self, *, schema, **kwargs):
+            assert "title" in schema["required"]
+            return {"title": fixed, "subtitle": "",
+                    "bullets": ["Вопрос уходит специалисту"], "speaker_notes": ""}
+
+    assert revise_flagged_slides(plan, brief=source, client=Client(), audit=audit) == [2]
+    assert plan["slides"][1]["title"] == fixed
+    assert plan["brief"]["outline"][1]["title"] == fixed

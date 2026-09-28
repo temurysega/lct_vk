@@ -31,6 +31,7 @@ from .coverage import (
     source_backed_number_fallback,
     source_backed_pilot_status_fallback,
     unsupported_numbers,
+    visible_texts,
 )
 from .diagrams import ITEM_LIMITS
 from .images import stems
@@ -308,6 +309,28 @@ def _language_notes(texts: list[str], brief: str) -> list[str]:
         for number, text in enumerate(texts, 1)
         for message in language_problems(unknown(text), language)
     ]
+
+
+def foreign_word_findings(brief: str, plan: dict[str, Any]) -> list[dict[str, Any]]:
+    """Foreign words left on slides, as findings for the one slide rewrite.
+
+    A title keeps its outline wording otherwise; quoting it lets the rewrite
+    correct the title as well.
+    """
+    findings = []
+    for number, slide in enumerate(plan.get("slides", []), 1):
+        for text in visible_texts(slide):
+            messages = [note.split(": ", 1)[1] for note in _language_notes([text], brief)]
+            if messages:
+                findings.append(
+                    {
+                        "slide": number,
+                        "code": "unsupported_claim",
+                        "quote": text,
+                        "reason": "; ".join(messages),
+                    }
+                )
+    return findings
 
 
 def _outline_problems(slides: list[dict[str, Any]], brief: str = "") -> list[str]:
