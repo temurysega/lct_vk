@@ -21,6 +21,12 @@ from PIL import Image
 from pptx import Presentation
 
 ROOT = Path(__file__).resolve().parents[1]
+# Template names as examples/run_vision_audit.py reports them.
+NAMES_RU = {
+    "VK Tech шаблон": "VK Tech",
+    "VK_WorkSpace_Клиентская_конференция_Шаблон_03": "VK WorkSpace",
+    "Шаблон презентации VK Education": "VK Education",
+}
 NAMES = {
     "VK Tech шаблон": "vk-tech",
     "VK_WorkSpace_Клиентская_конференция_Шаблон_03": "vk-workspace",
@@ -85,8 +91,21 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--report", type=Path, required=True)
     parser.add_argument("--out", type=Path, default=ROOT / "deliverables")
+    parser.add_argument(
+        "--vision",
+        type=Path,
+        help="summary.json of examples/run_vision_audit.py for the same run",
+    )
     args = parser.parse_args()
     report = json.loads(args.report.read_text(encoding="utf-8"))
+    vision_decks = {}
+    if args.vision:
+        vision = json.loads(args.vision.read_text(encoding="utf-8"))
+        if vision["source_run"]["started_at_utc"] != report.get("started_at_utc"):
+            raise ValueError("The visual audit report belongs to another run")
+        vision_decks = {
+            (deck["template"], deck["variant"]): deck for deck in vision["decks"]
+        }
     runs = report.get("runs") or []
     if len(runs) != len(NAMES):
         raise ValueError(f"Expected {len(NAMES)} completed template runs, found {len(runs)}")
@@ -139,6 +158,10 @@ def main() -> int:
             )
             images = variant["images"]
             vision = qa.get("vision_audit") or {}
+            if vision.get("status") not in {"reviewed", "partial"}:
+                vision = vision_decks.get(
+                    (NAMES_RU.get(stem, stem), variant["variant"]["id"]), vision
+                )
             seen = (
                 f"{len(vision.get('issues') or [])} по {len(vision.get('reviewed_slides') or [])} сл."
                 if vision.get("status") in {"reviewed", "partial"}
