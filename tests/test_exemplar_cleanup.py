@@ -296,6 +296,36 @@ def test_rendered_fill_flags_sparse_content_slides(tmp_path: Path):
     assert report["issues"][0]["repairable"] is True
 
 
+@pytest.mark.skipif(not find_libreoffice(), reason="LibreOffice is unavailable")
+def test_rendered_fill_uses_cards_inside_generated_group(tmp_path: Path):
+    prs = Presentation()
+    prs.slide_width, prs.slide_height = Inches(10.833333), Inches(7.5)
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    _text(slide, "BrandDeck Title", (0.25, 0.03, 10.34, 0.64), "Заголовок")
+    diagram = slide.shapes.add_group_shape()
+    diagram.name = "BrandDeck Diagram icon_grid"
+    for index, (x, y) in enumerate(((0.25, 0.9), (5.52, 0.9), (0.25, 4.25), (5.52, 4.25)), 1):
+        card = diagram.shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE,
+            Inches(x), Inches(y), Inches(5.07), Inches(2.74),
+        )
+        card.name = f"BrandDeck Diagram Card {index}"
+        card.fill.solid()
+        card.fill.fore_color.rgb = RGBColor(230, 235, 240)
+        label = diagram.shapes.add_textbox(
+            Inches(x + 0.2), Inches(y + 0.3), Inches(4.6), Inches(1.0)
+        )
+        label.name = f"BrandDeck Diagram Text {index}"
+        label.text_frame.text = f"Карточка {index}"
+    output = tmp_path / "output.pptx"
+    prs.save(output)
+    assert export_presentation(output, tmp_path / "exports", expected_slide_count=1)["status"] == "passed"
+
+    report = inspect_rendered_fill(tmp_path / "exports/output.pdf", output, ["content"])
+    assert report["status"] == "passed"
+    assert 0.68 <= report["slides"][0]["coverage"] <= 0.75
+
+
 def test_diagram_slide_drops_the_exemplar_chart_beside_it():
     prs = _deck()
     slide = prs.slides.add_slide(prs.slide_layouts[6])

@@ -11,9 +11,17 @@ import pymupdf
 from PIL import Image, ImageDraw
 from pptx import Presentation
 from pptx.dml.color import RGBColor
+from pptx.enum.shapes import MSO_SHAPE_TYPE
 
 from .layout_geometry import box, has_text, is_generated, is_opaque, is_visible_box
 from .qa import _inspected_shapes
+
+
+def _fill_shapes(shape: Any) -> list[Any]:
+    """Measure a generated group's visible children, not its empty bounding box."""
+    if shape.shape_type != MSO_SHAPE_TYPE.GROUP:
+        return [shape]
+    return [child for member in shape.shapes for child in _fill_shapes(member)]
 
 
 def contrast_ratio(
@@ -164,30 +172,37 @@ def inspect_rendered_fill(
                 for x0, y0, x1, y1 in [line["bbox"]]
             ]
             boxes: list[tuple[float, float, float, float]] = []
-            for shape in slide.shapes:
-                if not is_generated(shape):
+            for generated in slide.shapes:
+                if not is_generated(generated):
                     continue
-                x, y, w, h = box(shape)
-                if is_opaque(shape) or (
-                    has_text(shape) and is_visible_box(shape)
-                ):
-                    boxes.append((x, y, x + w, y + h))
-                elif has_text(shape):
-                    inside = [
-                        line
-                        for line in lines
-                        if x - 0.05 <= (line[0] + line[2]) / 2 <= x + w + 0.05
-                        and y - 0.05 <= (line[1] + line[3]) / 2 <= y + h + 0.05
-                    ]
-                    if inside:
-                        boxes.append(
-                            (
-                                min(line[0] for line in inside),
-                                min(line[1] for line in inside),
-                                max(line[2] for line in inside),
-                                max(line[3] for line in inside),
+                for shape in _fill_shapes(generated):
+                    x, y, w, h = box(shape)
+                    # Cards and pictograms inside a generated diagram are
+                    # visible content. A connector line has almost no area,
+                    # even when its bounding rectangle is large.
+                    nested = shape is not generated
+                    if shape.shape_type == MSO_SHAPE_TYPE.LINE:
+                        continue
+                    if is_opaque(shape) or (
+                        is_visible_box(shape) and (nested or has_text(shape))
+                    ):
+                        boxes.append((x, y, x + w, y + h))
+                    elif has_text(shape):
+                        inside = [
+                            line
+                            for line in lines
+                            if x - 0.05 <= (line[0] + line[2]) / 2 <= x + w + 0.05
+                            and y - 0.05 <= (line[1] + line[3]) / 2 <= y + h + 0.05
+                        ]
+                        if inside:
+                            boxes.append(
+                                (
+                                    min(line[0] for line in inside),
+                                    min(line[1] for line in inside),
+                                    max(line[2] for line in inside),
+                                    max(line[3] for line in inside),
+                                )
                             )
-                        )
             mask = Image.new("L", (round(width * scale), round(height * scale)), 0)
             draw = ImageDraw.Draw(mask)
             for x0, y0, x1, y1 in boxes:

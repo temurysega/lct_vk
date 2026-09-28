@@ -514,36 +514,74 @@ def _grid_columns(count: int, w: float, h: float, gap: float) -> int:
     return best
 
 
-def _icon_grid(shapes, items, zone, style, context, record) -> None:
+def _icon_grid(shapes, items, zone, style, context, record, layout_variant: str) -> None:
     x, y, w, h = zone
     count = len(items)
     gap = min(0.24, max(0.12, w * 0.02))
-    columns = _grid_columns(count, w, h, gap)
-    if count <= 4 and w >= 6 and max(len(item["plain"]) for item in items) > 48:
-        columns = min(columns, 2)
-    rows = math.ceil(count / columns)
-    card_w = (w - gap * (columns - 1)) / columns
-    available_h = (h - gap * (rows - 1)) / rows
-    pad = min(0.24, max(0.12, card_w * 0.07))
-    diameter = min(0.66, max(0.4, min(card_w, available_h) * 0.28))
-    size = style["size"] + 2
-    horizontal = card_w / max(0.1, available_h) >= 1.9 and card_w >= 2.6
-    text_w = card_w - (diameter + pad * 2.6 if horizontal else pad * 1.4) - 0.08
-    needed = max(text_height(_paragraphs(item), text_w, size) for item in items)
-    if horizontal:
-        wanted = max(1.1, needed + pad * 1.2, diameter + pad * 2)
+    canvas_area = float(style.get("canvas_area") or 0)
+    focus_h = min(h, 0.70 * canvas_area / w) if canvas_area and w > 0 else h
+    boxes: list[tuple[float, float, float, float]]
+    if layout_variant == "columns" and w >= 5.6 and (h - gap * (count - 1)) / count >= 1.05:
+        card_h = (h - gap * (count - 1)) / count
+        boxes = [(x, y + index * (card_h + gap), w, card_h) for index in range(count)]
+        record["columns"] = 1
+    elif (
+        layout_variant == "focus"
+        and count >= 3
+        and w >= 7.5
+        and focus_h >= 3.0
+        and (focus_h - gap * (count - 2)) / (count - 1) >= 1.05
+    ):
+        # A full-height hero card plus its companions can cover over 75% of
+        # a compact template. Bound the card group and centre it in the slot.
+        y += (h - focus_h) / 2
+        h = focus_h
+        lead_w = w * 0.42
+        side_x = x + lead_w + gap
+        side_w = w - lead_w - gap
+        side_h = (h - gap * (count - 2)) / (count - 1)
+        boxes = [(x, y, lead_w, h)] + [
+            (side_x, y + index * (side_h + gap), side_w, side_h)
+            for index in range(count - 1)
+        ]
+        record["columns"] = 2
+        record["emphasis"] = "first"
     else:
-        wanted = max(1.7, pad * 2.2 + diameter + needed)
-    # Give the content cards a little breathing room; two-column grids with
-    # long copy otherwise leave a narrow, visually empty band around them.
-    # Cards sized to short text that would leave the slide below a quarter
-    # filled, or an underfilled render, make the cards take the zone's height.
-    card_h = min(available_h, wanted + 0.12)
-    grid_area = w * (card_h * rows + gap * (rows - 1))
-    if style.get("fill_zone") or grid_area < 0.27 * style.get("canvas_area", 0):
-        card_h = available_h
-    top = _block_top(y, h, card_h * rows + gap * (rows - 1))
-    record["columns"] = columns
+        layout_variant = "balanced"
+        columns = 2 if count == 4 and w >= 6.0 else _grid_columns(count, w, h, gap)
+        if count <= 4 and w >= 6 and max(len(item["plain"]) for item in items) > 48:
+            columns = min(columns, 2)
+        rows = math.ceil(count / columns)
+        card_w = (w - gap * (columns - 1)) / columns
+        available_h = (h - gap * (rows - 1)) / rows
+        pad = min(0.24, max(0.12, card_w * 0.07))
+        diameter = min(0.66, max(0.4, min(card_w, available_h) * 0.28))
+        size = style["size"] + 2
+        horizontal = card_w / max(0.1, available_h) >= 1.9 and card_w >= 2.6
+        text_w = card_w - (diameter + pad * 2.6 if horizontal else pad * 1.4) - 0.08
+        needed = max(text_height(_paragraphs(item), text_w, size) for item in items)
+        if horizontal:
+            wanted = max(1.1, needed + pad * 1.2, diameter + pad * 2)
+        else:
+            wanted = max(1.7, pad * 2.2 + diameter + needed)
+        # Short claims still fill the native card area instead of making an
+        # almost empty slide. Other variants use their full assigned zones.
+        card_h = min(available_h, wanted + 0.12)
+        grid_area = w * (card_h * rows + gap * (rows - 1))
+        if style.get("fill_zone") or grid_area < 0.27 * style.get("canvas_area", 0):
+            card_h = available_h
+        top = _block_top(y, h, card_h * rows + gap * (rows - 1))
+        boxes = [
+            (
+                x + (index % columns) * (card_w + gap),
+                top + (index // columns) * (card_h + gap),
+                card_w,
+                card_h,
+            )
+            for index in range(count)
+        ]
+        record["columns"] = columns
+    record["layout_variant"] = layout_variant
     hints = [
         resolve_icon(item.get("icon")) if item.get("icon") else None for item in items
     ]
@@ -554,26 +592,32 @@ def _icon_grid(shapes, items, zone, style, context, record) -> None:
     record["icons"] = [icon or "circle-dot" for icon in icons]
     record["icon_matches"] = sum(bool(icon) for icon in icons)
     # Cards share one size: the largest at which every card's text fits, so
-    # a longer statement does not print smaller than its neighbours.
-    if horizontal:
-        box_w, box_h = card_w - diameter - pad * 2.6, card_h - pad * 1.2
-    else:
-        box_w = card_w - pad * 1.4
-        box_h = card_h - pad * 1.5 - diameter - pad * 0.7
+    # the asymmetric variant does not shrink only one statement.
+    measures = []
+    for _, _, card_w, card_h in boxes:
+        pad = min(0.24, max(0.12, card_w * 0.07))
+        diameter = min(0.66, max(0.4, min(card_w, card_h) * 0.28))
+        horizontal = card_w / max(0.1, card_h) >= 1.9 and card_w >= 2.6
+        if horizontal:
+            box_w, box_h = card_w - diameter - pad * 2.6, card_h - pad * 1.2
+        else:
+            box_w = card_w - pad * 1.4
+            box_h = card_h - pad * 1.5 - diameter - pad * 0.7
+        measures.append((pad, diameter, horizontal, box_w, box_h))
     size = min(
         _fit(
             _paragraphs(item),
             max(0.1, box_w - 0.08),
             max(0.1, box_h - 0.04),
-            size,
+            style["size"] + 2,
             11.0,
             style.get("scale"),
         )
-        for item in items
+        for item, (_, _, _, box_w, box_h) in zip(items, measures)
     )
     for index, item in enumerate(items):
-        column, row = index % columns, index // columns
-        cx, cy = x + column * (card_w + gap), top + row * (card_h + gap)
+        cx, cy, card_w, card_h = boxes[index]
+        pad, diameter, horizontal, _, _ = measures[index]
         _box(
             shapes,
             MSO_SHAPE.ROUNDED_RECTANGLE,
@@ -1107,7 +1151,15 @@ def render_diagram(
     record: dict[str, Any] = {"type": kind, "items": len(items), "native": True}
     shapes = group.shapes
     if kind == "icon_grid":
-        _icon_grid(shapes, items, zone, style, context, record)
+        _icon_grid(
+            shapes,
+            items,
+            zone,
+            style,
+            context,
+            record,
+            str(visual.get("layout_variant") or "balanced"),
+        )
     elif kind == "process":
         _process(shapes, items, zone, style, context, record)
     elif kind == "cycle":

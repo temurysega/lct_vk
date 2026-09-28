@@ -66,9 +66,13 @@ def update_job(
 
 def get_job(job_id: str, workspace: str | Path | None = None) -> dict[str, Any]:
     path = job_directory(job_id, workspace) / "job.json"
-    if not path.is_file():
-        raise FileNotFoundError(f"Job not found: {job_id}")
-    return read_json(path)
+    # On Windows an open reader can temporarily prevent os.replace() in
+    # update_job. Serialize reads with writes in this API process; write_json
+    # also retries sharing violations from readers in other processes.
+    with _LOCK:
+        if not path.is_file():
+            raise FileNotFoundError(f"Job not found: {job_id}")
+        return read_json(path)
 
 
 @serialized_on_cpu

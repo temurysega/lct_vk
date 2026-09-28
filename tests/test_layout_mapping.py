@@ -101,6 +101,33 @@ def test_capacity_mapping_explains_selection_and_honors_qa_avoidance():
     assert feedback[0]["pattern_id"] == first
 
 
+def test_variant_selection_keeps_icon_grid_content_identical():
+    claims = ["Ответ со ссылкой", "История обращения", "Сводка пилота"]
+    catalog = {"patterns": [_pattern("cards", "bullet_list")]}
+    for strategy in ("balanced", "columns", "focus"):
+        plan = {
+            "slides": [
+                {
+                    "title": "Пилот",
+                    "role": "content",
+                    "visual": {"type": "icon_grid", "items": claims.copy()},
+                }
+            ]
+        }
+        assign_patterns(plan, catalog, layout_strategy=strategy)
+        assert plan["slides"][0]["layout_variant"] == strategy
+        visual = plan["slides"][0]["visual"]
+        assert visual["items"] == claims
+        assert visual == {"type": "icon_grid", "items": claims}
+
+
+def test_variant_hint_survives_without_a_planned_visual():
+    plan = {"slides": [{"title": "Три тезиса", "role": "content", "bullets": ["A", "B", "C"]}]}
+    assign_patterns(plan, {"patterns": [_pattern("plain", "bullet_list")]}, layout_strategy="columns")
+    assert plan["slides"][0]["layout_variant"] == "columns"
+    assert plan["slides"][0]["bullets"] == ["A", "B", "C"]
+
+
 def test_text_prefers_usable_layout_without_empty_image_slot():
     plain = _pattern("plain", "bullet_list")
     photo = _pattern("photo", "bullet_list")

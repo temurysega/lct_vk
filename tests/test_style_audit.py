@@ -126,6 +126,34 @@ def test_tints_of_the_palette_and_template_layouts_pass(tmp_path: Path):
     assert "off_palette_color" not in codes and "foreign_layout" not in codes
 
 
+def test_cyrillic_font_substitution_is_reported_only_for_cjk_template(tmp_path: Path):
+    prs = _deck()
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    shape = _text(slide, "BrandDeck Body", (1, 1, 8, 1), "Русский текст", 16)
+    shape.text_frame.paragraphs[0].runs[0].font.name = "Arial"
+    output = tmp_path / "cyrillic.pptx"
+    prs.save(output)
+
+    cjk_design = {
+        **DESIGN,
+        "typography": {
+            **DESIGN["typography"],
+            "primary_font": "游ゴシック",
+            "families": ["游ゴシック"],
+        },
+    }
+    with_fallback = inspect_presentation(output, design_system=cjk_design)
+    assert "foreign_fonts" not in {issue["code"] for issue in with_fallback["issues"]}
+    assert with_fallback["font_substitutions"][0]["to"] == "Arial"
+
+    latin_design = {
+        **DESIGN,
+        "typography": {**DESIGN["typography"], "primary_font": "Play", "families": ["Play"]},
+    }
+    without_fallback = inspect_presentation(output, design_system=latin_design)
+    assert "foreign_fonts" in {issue["code"] for issue in without_fallback["issues"]}
+
+
 def test_composer_snaps_sizes_to_the_template_scale():
     token = _TYPE_SCALE.set((12.0, 14.0, 16.0, 24.0))
     try:

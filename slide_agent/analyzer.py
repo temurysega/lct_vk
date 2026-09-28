@@ -26,7 +26,7 @@ from .utils import (
     write_json,
 )
 
-ANALYSIS_SCHEMA_VERSION = "1.6"
+ANALYSIS_SCHEMA_VERSION = "1.7"
 
 
 def _load_extractor():
@@ -400,13 +400,45 @@ def build_design_system(context: dict[str, Any]) -> dict[str, Any]:
         for ph in layout.get("placeholders", [])
         if isinstance(ph.get("left"), (int, float))
     ]
-    lefts = [float(ph["left"]) for ph in placeholders if ph.get("left", 0) > 0]
+    content_placeholders = [
+        ph
+        for ph in placeholders
+        if float(ph.get("top") or 0) < height * 0.85
+        and str(ph.get("type", "")).strip().lower().replace(" ", "_")
+        not in {"date", "footer", "slide_number"}
+        and float(ph.get("left") or 0) >= 0
+        and float(ph.get("left") or 0) + float(ph.get("width") or 0)
+        <= width + 0.02
+    ]
+    lefts = [
+        float(ph["left"])
+        for ph in content_placeholders
+        if float(ph.get("left") or 0) > 0
+    ]
     rights = [
         width - float(ph.get("left", 0)) - float(ph.get("width", 0))
-        for ph in placeholders
+        for ph in content_placeholders
     ]
     positive_rights = [value for value in rights if value > 0]
     slides = context.get("slides", [])
+    # A layout with only footer placeholders has no information about the
+    # content grid. Its footer's centre position is not a page margin.
+    exemplar_titles = [
+        element
+        for slide in slides[1:] or slides
+        for element in slide.get("text_elements", [])
+        if height * 0.07 <= float(element.get("top") or 0) <= height * 0.3
+        and float(element.get("width") or 0) >= width * 0.3
+        and float(element.get("height") or 0) >= 0.3
+    ]
+    exemplar_lefts = [
+        float(element["left"])
+        for element in exemplar_titles
+        if 0.1 <= float(element.get("left") or 0) <= width * 0.25
+    ]
+    exemplar_margin = (
+        round(statistics.median(exemplar_lefts), 2) if exemplar_lefts else 0.6
+    )
     slide_backgrounds = [
         _normal_color(slide.get("effective_background", {}).get("color")) or ""
         for slide in slides
@@ -524,11 +556,13 @@ def build_design_system(context: dict[str, Any]) -> dict[str, Any]:
         "spacing": {
             "typical_left_margin_inches": 0.65
             if source_model["fragmented"]
-            else (round(statistics.median(lefts), 2) if lefts else 0.6),
+            else (round(statistics.median(lefts), 2) if lefts else exemplar_margin),
             "typical_right_margin_inches": 0.65
             if source_model["fragmented"]
             else (
-                round(statistics.median(positive_rights), 2) if positive_rights else 0.6
+                round(statistics.median(positive_rights), 2)
+                if positive_rights
+                else exemplar_margin
             ),
             "minimum_gap_inches": 0.12,
         },

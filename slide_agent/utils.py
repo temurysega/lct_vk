@@ -5,6 +5,7 @@ import os
 import re
 import shutil
 import tempfile
+import time
 from contextvars import ContextVar
 from datetime import datetime
 from pathlib import Path
@@ -85,7 +86,17 @@ def write_json(path: Path, value: Any) -> None:
         with os.fdopen(fd, "w", encoding="utf-8") as stream:
             stream.write(payload)
             stream.write("\n")
-        os.replace(temp_name, path)
+        # A Windows reader (or indexer) can briefly hold the destination
+        # without FILE_SHARE_DELETE. Keep the atomic replace and retry only
+        # the sharing/access errors that Windows reports for that race.
+        for attempt in range(9):
+            try:
+                os.replace(temp_name, path)
+                break
+            except PermissionError as exc:
+                if getattr(exc, "winerror", None) not in {5, 32, 33} or attempt == 8:
+                    raise
+                time.sleep(min(0.01 * 2**attempt, 0.25))
     finally:
         if os.path.exists(temp_name):
             os.unlink(temp_name)

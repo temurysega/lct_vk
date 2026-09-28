@@ -65,6 +65,7 @@ def test_variants_share_content_and_preserve_source(template, tmp_path):
                         "layout_index",
                         "master_index",
                         "pattern_selection",
+                            "layout_variant",
                     }
                 }
                 for s in plan["slides"]

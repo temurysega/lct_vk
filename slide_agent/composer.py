@@ -50,6 +50,8 @@ from .typography import (
     ESTIMATED_GLYPH_WIDTH_EM,
     effective_font_size,
     estimated_line_count,
+    needs_cyrillic_font_fallback,
+    readable_font,
 )
 from .utils import read_json, write_json
 
@@ -59,6 +61,9 @@ NATIVE_VISUALS = set(DIAGRAM_TYPES) | {"image", "table"}
 FILL_SHARE = 0.27
 # Statements whose wrapped text would cover less of the slide become cards.
 SPARSE_FILL = 0.26
+_CYRILLIC_THEME_FALLBACK: ContextVar[str | None] = ContextVar(
+    "cyrillic_theme_fallback", default=None
+)
 # Average width of a rendered Cyrillic or Latin glyph at body sizes.
 RENDERED_GLYPH_WIDTH_EM = 0.55
 # Exemplar shapes that can be scaffolding; pictures are kept.
@@ -340,6 +345,37 @@ def _shape_text_style(shape: Any) -> dict[str, Any]:
     return style
 
 
+def _exemplar_text_shapes(
+    shapes: Any, *, grouped: bool = False
+) -> list[tuple[Any, bool]]:
+    """Find editable exemplar text, including text nested in PowerPoint groups."""
+    found: list[tuple[Any, bool]] = []
+    for shape in shapes:
+        if shape.shape_type == MSO_SHAPE_TYPE.GROUP:
+            transform = shape.element.grpSpPr.xfrm
+            # Child boxes are in slide coordinates only when the group's
+            # parent and child coordinate systems agree. A translated/scaled
+            # group needs transformed geometry, so leave its text to the
+            # normal cleanup and use a fresh slide text box instead.
+            if (
+                transform is not None
+                and not (transform.rot or transform.flipH or transform.flipV)
+                and all(
+                    abs(first - second) <= Inches(0.02)
+                    for first, second in (
+                        (transform.off.x, transform.chOff.x),
+                        (transform.off.y, transform.chOff.y),
+                        (transform.ext.cx, transform.chExt.cx),
+                        (transform.ext.cy, transform.chExt.cy),
+                    )
+                )
+            ):
+                found.extend(_exemplar_text_shapes(shape.shapes, grouped=True))
+        elif getattr(shape, "has_text_frame", False) and shape.text.strip():
+            found.append((shape, grouped))
+    return found
+
+
 def _infer_text_groups(
     slide: Any,
     titles: list[Any],
@@ -351,24 +387,50 @@ def _infer_text_groups(
     if titles and bodies:
         return titles, subtitles, bodies
     occupied = {shape.element for shape in titles + subtitles + bodies}
-    candidates = [
-        shape
-        for shape in slide.shapes
+    sources = [
+        (shape, grouped)
+        for shape, grouped in _exemplar_text_shapes(slide.shapes)
         if shape.element not in occupied
-        and getattr(shape, "has_text_frame", False)
-        and shape.text.strip()
         and shape.width / 914400 >= 1.0
         and shape.height / 914400 >= 0.18
+        # Some group transforms use coordinates outside the slide. Such a
+        # child is not a reliable editable text slot in slide coordinates.
+        and (
+            not grouped
+            or (
+                shape.left >= 0
+                and shape.top >= 0
+                and shape.left + shape.width <= int((canvas_width + 0.02) * 914400)
+                and shape.top + shape.height <= int((canvas_height + 0.02) * 914400)
+            )
+        )
     ]
+    grouped_elements = {shape.element for shape, grouped in sources if grouped}
+    candidates = [shape for shape, _ in sources]
+
+    def substantive_group_text(shape: Any) -> bool:
+        return shape.element not in grouped_elements or (
+            shape.height >= Inches(0.3)
+            and sum(char.isalpha() for char in shape.text) >= 15
+        )
+
     content_candidates = [
         shape
         for shape in candidates
-        if not is_navigation_label(
-            shape.text, shape.width / 914400, canvas_width
+        if not is_navigation_label(shape.text, shape.width / 914400, canvas_width)
+        and (
+            shape.element not in grouped_elements
+            or (
+                sum(char.isalpha() for char in shape.text) >= 2
+                and shape.top / 914400 < canvas_height * 0.9
+            )
         )
     ]
-    if content_candidates:
-        candidates = content_candidates
+    # A grouped page number alone is not a title or body slot. Keep the old
+    # fallback for ordinary ungrouped source text, where it may be intentional.
+    candidates = content_candidates or [
+        shape for shape in candidates if shape.element not in grouped_elements
+    ]
     if not titles and candidates:
         upper = [
             shape for shape in candidates if shape.top / 914400 < canvas_height * 0.28
@@ -377,6 +439,11 @@ def _infer_text_groups(
             shape for shape in candidates if shape.top / 914400 < canvas_height * 0.55
         ]
         pool = pool or candidates
+        readable = [
+            shape for shape in pool if sum(char.isalpha() for char in shape.text) >= 2
+        ]
+        if readable:
+            pool = readable
         wide_titles = [
             shape
             for shape in pool
@@ -398,6 +465,7 @@ def _infer_text_groups(
             if shape.top >= title_bottom
             and shape.top / 914400 < canvas_height * 0.85
             and _largest_font(shape) >= 11
+            and substantive_group_text(shape)
         ]
         if nearby:
             subtitles = [min(nearby, key=lambda shape: shape.top)]
@@ -407,6 +475,7 @@ def _infer_text_groups(
             shape
             for shape in candidates
             if shape.element not in subtitle_elements
+            and substantive_group_text(shape)
             and not (
                 shape.top / 914400 > canvas_height * 0.9 and _largest_font(shape) <= 10
             )
@@ -430,6 +499,10 @@ def _set_text_frame(
     if paragraphs and not str(shape.name).startswith("BrandDeck"):
         shape.name = f"BrandDeck Text {shape.shape_id}"
     font_name = font_name or existing_style.get("font_name")
+    combined_text = "\n".join(str(paragraph) for paragraph in paragraphs)
+    font_name = readable_font(font_name, combined_text)
+    if font_name is None and any("\u0400" <= char <= "\u052f" for char in combined_text):
+        font_name = _CYRILLIC_THEME_FALLBACK.get()
     font_size = (
         font_size or existing_style.get("font_size") or effective_font_size(shape)
     )
@@ -698,6 +771,16 @@ def _whole_visual_zone(
                 else bottom
             )
             result = (left, top, right - left, bottom - top)
+    # Source exemplars may place text into the footer. A new image or diagram
+    # must stay inside the content area even when it inherits that tall slot.
+    content_bottom = zone[1] + zone[3]
+    if result[1] + result[3] > content_bottom:
+        available = content_bottom - 0.08 - result[1]
+        result = (
+            (result[0], result[1], result[2], available)
+            if available >= 0.8
+            else zone
+        )
     for shape in body_shapes:
         _set_text_frame(shape, [])
         if getattr(shape, "is_placeholder", False):
@@ -2497,11 +2580,16 @@ def _choose_picture_slot(
     return chosen
 
 
-def _clear_group_text(group: Any) -> None:
+def _clear_group_text(group: Any, assigned_text: set[Any] | None = None) -> None:
+    assigned_text = assigned_text or set()
     for shape in group.shapes:
         if shape.shape_type == MSO_SHAPE_TYPE.GROUP:
-            _clear_group_text(shape)
-        elif getattr(shape, "has_text_frame", False) and shape.text.strip():
+            _clear_group_text(shape, assigned_text)
+        elif (
+            shape.element not in assigned_text
+            and getattr(shape, "has_text_frame", False)
+            and shape.text.strip()
+        ):
             _set_text_frame(shape, [])
 
 
@@ -2747,7 +2835,7 @@ def _fill_slide(
             _set_text_frame(shape, [])
         elif shape.shape_type == MSO_SHAPE_TYPE.GROUP:
             # Exemplar groups (chart legends, callouts) carry source text too.
-            _clear_group_text(shape)
+            _clear_group_text(shape, assigned_text)
     font = design["typography"]["primary_font"]
     colors = _theme_colors(design)
     title = slide_spec.get("title", "")
@@ -2842,6 +2930,20 @@ def _fill_slide(
         cards = _sparse_statement_cards(slide_spec, titles, bodies, design)
         if cards:
             slide_spec = {**slide_spec, "bullets": [], "visual": cards}
+    # The plan's visual claims remain identical across variants. Apply the
+    # slide-level layout hint only to the temporary rendering specification,
+    # including diagrams synthesized from sparse text during composition.
+    render_visual = slide_spec.get("visual")
+    layout_variant = slide_spec.get("layout_variant")
+    if (
+        isinstance(render_visual, dict)
+        and render_visual.get("type") == "icon_grid"
+        and layout_variant in {"balanced", "columns", "focus"}
+    ):
+        slide_spec = {
+            **slide_spec,
+            "visual": {**render_visual, "layout_variant": layout_variant},
+        }
     # A template picture slot keeps the full body area for text.
     text_spec = {**slide_spec, "visual": None} if slot is not None else slide_spec
     visual_zone = _add_body_text(slide, text_spec, bodies, zone, design)
@@ -2938,17 +3040,36 @@ def compose_presentation(
     output_path: Path,
     design_system: dict[str, Any],
 ) -> dict[str, Any]:
+    # Preserve the template's design tokens, but do not force Cyrillic text
+    # through a Japanese/Chinese font chosen for the source presentation.
+    generated_design = design_system
+    fallback = None
+    if plan.get("language") == "ru":
+        typography = design_system.get("typography", {})
+        if any(
+            needs_cyrillic_font_fallback(typography.get(key))
+            for key in ("primary_font", "heading_font")
+        ):
+            generated_design = copy.deepcopy(design_system)
+            for key in ("primary_font", "heading_font"):
+                original_font = typography.get(key)
+                generated_design["typography"][key] = readable_font(
+                    original_font, "Русский текст"
+                )
+            fallback = "Arial"
     scale = tuple(
         sorted(
             float(value)
-            for value in design_system.get("typography", {}).get("observed_sizes_pt", [])
+            for value in generated_design.get("typography", {}).get("observed_sizes_pt", [])
             if 8 <= float(value) <= 96
         )
     )
     token = _TYPE_SCALE.set(scale)
+    font_token = _CYRILLIC_THEME_FALLBACK.set(fallback)
     try:
-        return _compose(template_dir, plan, output_path, design_system)
+        return _compose(template_dir, plan, output_path, generated_design)
     finally:
+        _CYRILLIC_THEME_FALLBACK.reset(font_token)
         _TYPE_SCALE.reset(token)
 
 

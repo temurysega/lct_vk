@@ -6,6 +6,7 @@ from pptx.oxml.ns import qn
 from pptx.util import Inches, Pt
 
 from slide_agent.composer import (
+    _CYRILLIC_THEME_FALLBACK,
     _add_body_text,
     _add_pie_chart,
     _constrain_title_width,
@@ -14,7 +15,31 @@ from slide_agent.composer import (
     _sparse_statement_cards,
     _whole_visual_zone,
 )
-from slide_agent.typography import effective_font_size, estimated_line_count
+from slide_agent.typography import (
+    effective_font_size,
+    estimated_line_count,
+    readable_font,
+)
+
+
+def test_east_asian_template_font_is_replaced_for_cyrillic_text():
+    prs = Presentation()
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    explicit = slide.shapes.add_textbox(Inches(1), Inches(1), Inches(5), Inches(1))
+    explicit.text = "Образец"
+    explicit.text_frame.paragraphs[0].runs[0].font.name = "游ゴシック"
+    _set_text_frame(explicit, ["Русский текст"])
+    assert explicit.text_frame.paragraphs[0].runs[0].font.name == "Arial"
+
+    inherited = slide.shapes.add_textbox(Inches(1), Inches(2), Inches(5), Inches(1))
+    token = _CYRILLIC_THEME_FALLBACK.set("Arial")
+    try:
+        _set_text_frame(inherited, ["Русский текст"])
+    finally:
+        _CYRILLIC_THEME_FALLBACK.reset(token)
+    assert inherited.text_frame.paragraphs[0].runs[0].font.name == "Arial"
+    assert readable_font("Play", "Русский текст") == "Play"
+    assert readable_font("游ゴシック", "English only") == "游ゴシック"
 
 
 def _design():
@@ -388,6 +413,31 @@ def test_few_short_statements_in_a_large_empty_zone_become_cards():
     )
 
 
+def test_sparse_cards_follow_variant_layout_without_changing_claims():
+    prs = Presentation()
+    slide = prs.slides.add_slide(prs.slide_layouts[1])
+    claims = ["Два подразделения.", "Шесть недель.", "Ответы по регламенту.", "Передача специалисту."]
+    _fill_slide(
+        slide,
+        {
+            "role": "content",
+            "title": "Границы пилота",
+            "bullets": claims,
+            "layout_variant": "columns",
+        },
+        _design(),
+        set(),
+    )
+
+    grid = next(shape for shape in slide.shapes if shape.name == "BrandDeck Diagram icon_grid")
+    cards = [shape for shape in grid.shapes if shape.name.startswith("BrandDeck Diagram Card")]
+    assert len(cards) == len(claims)
+    assert len({shape.left for shape in cards}) == 1
+    assert [
+        shape.text for shape in grid.shapes if shape.name.startswith("BrandDeck Diagram Text")
+    ] == claims
+
+
 def test_cards_are_not_forced_on_template_cards_or_dense_text():
     prs = Presentation()
     slide = prs.slides.add_slide(prs.slide_layouts[6])
@@ -428,3 +478,16 @@ def test_short_strip_of_exemplar_labels_extends_to_the_content_area():
     # Typical margins of a template with right-side art leave a narrow zone.
     zone = _whole_visual_zone(slide, [left, right], (1.1, 1.5, 5.0, 5.5), _design())
     assert zone == pytest.approx((0.3, 1.9, 9.5, 5.1))
+
+
+def test_exemplar_visual_zone_stops_before_reserved_footer():
+    prs = Presentation()
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    left = slide.shapes.add_textbox(Inches(0.5), Inches(2), Inches(5), Inches(5.2))
+    right = slide.shapes.add_textbox(Inches(5.6), Inches(2), Inches(5), Inches(5.2))
+    content = (0.48, 1.64, 12.37, 5.41)
+    design = {**_design(), "canvas": {"width_inches": 13.333, "height_inches": 7.5}}
+
+    result = _whole_visual_zone(slide, [left, right], content, design)
+
+    assert result[1] + result[3] == pytest.approx(6.97)

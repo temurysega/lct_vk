@@ -24,6 +24,7 @@ from .typography import (
     ESTIMATED_GLYPH_WIDTH_EM,
     effective_font_size,
     estimated_line_count,
+    needs_cyrillic_font_fallback,
 )
 from .utils import write_json
 
@@ -60,19 +61,18 @@ def _overflow_ratio(shape: Any, default_size: float) -> float:
 
 
 def _inspected_shapes(shapes: Any) -> list[tuple[Any, bool]]:
-    """Top-level shapes plus the children of generated (BrandDeck) groups.
+    """Top-level shapes and nested text/pictures in every group.
 
-    Template groups are left as authored; generated diagrams are groups, and
-    their text must pass the same overflow and overlap checks as plain text.
+    A filled exemplar text box can remain inside an original template group.
+    Inspecting only BrandDeck groups would count that slide as empty and skip
+    its text checks, even though PowerPoint displays the new content.
     """
     result: list[tuple[Any, bool]] = []
 
     def visit(collection: Any, nested: bool) -> None:
         for shape in collection:
             result.append((shape, nested))
-            if shape.shape_type == MSO_SHAPE_TYPE.GROUP and str(shape.name).startswith(
-                "BrandDeck"
-            ):
+            if shape.shape_type == MSO_SHAPE_TYPE.GROUP:
                 visit(shape.shapes, True)
 
     visit(shapes, False)
@@ -277,6 +277,7 @@ def inspect_presentation(
         (design_system or {}).get("typography", {}).get("body_size_pt", 18)
     )
     explicit_fonts: set[str] = set()
+    cyrillic_output = False
     slide_reports: list[dict[str, Any]] = []
     expects_native_grid = (design_system or {}).get("source_model", {}).get(
         "composition_mode"
@@ -306,6 +307,7 @@ def inspect_presentation(
                 if getattr(shape, "has_text_frame", False) and shape.text.strip():
                     text_count += 1
                     text_shapes.append(shape)
+                    cyrillic_output |= any("\u0400" <= char <= "\u052f" for char in shape.text)
                     ratio = _overflow_ratio(shape, default_body)
                     if ratio > 1.45:
                         slide_issues.append(
@@ -380,6 +382,7 @@ def inspect_presentation(
             if getattr(shape, "has_text_frame", False) and shape.text.strip():
                 text_count += 1
                 text_shapes.append(shape)
+                cyrillic_output |= any("\u0400" <= char <= "\u052f" for char in shape.text)
                 ratio = _overflow_ratio(shape, default_body)
                 if ratio > 1.45:
                     slide_issues.append(
@@ -507,10 +510,25 @@ def inspect_presentation(
             }
         )
 
-    allowed_fonts = set((design_system or {}).get("typography", {}).get("families", []))
-    primary = (design_system or {}).get("typography", {}).get("primary_font")
+    typography = (design_system or {}).get("typography", {})
+    allowed_fonts = set(typography.get("families", []))
+    primary = typography.get("primary_font")
     if primary:
         allowed_fonts.add(primary)
+    cjk_fonts = [
+        str(typography.get(key))
+        for key in ("primary_font", "heading_font")
+        if needs_cyrillic_font_fallback(typography.get(key))
+    ]
+    font_substitutions = []
+    if cyrillic_output and cjk_fonts and "Arial" in explicit_fonts:
+        # The composer substitutes Arial only for Cyrillic in a CJK-themed
+        # deck. Report that deliberate deviation, rather than flagging it as
+        # an arbitrary font that violates the imported template.
+        allowed_fonts.add("Arial")
+        font_substitutions.append(
+            {"from": sorted(set(cjk_fonts)), "to": "Arial", "reason": "cyrillic_readability"}
+        )
     foreign_fonts = sorted(explicit_fonts - allowed_fonts) if allowed_fonts else []
     if foreign_fonts:
         issues.append(
@@ -534,6 +552,7 @@ def inspect_presentation(
         "slide_count": len(prs.slides),
         "canvas": {"width_inches": slide_width, "height_inches": slide_height},
         "explicit_fonts": sorted(explicit_fonts),
+        "font_substitutions": font_substitutions,
         "issues": issues,
         "slides": slide_reports,
     }

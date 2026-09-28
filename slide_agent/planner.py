@@ -619,6 +619,9 @@ def assign_patterns(
         raise ValueError("Template has no usable slide layouts")
     usage: dict[str, int] = {}
     for slide_index, slide in enumerate(plan.get("slides", []), 1):
+        # Keep the mode on the slide too: a sparse text slide may become a
+        # native icon grid only during composition, after pattern assignment.
+        slide["layout_variant"] = layout_strategy
         requirements = _slide_requirements(slide)
         diagram = (slide.get("visual") or {}).get("type") in DIAGRAM_TYPES
         scored: list[tuple[float, dict[str, Any], list[str], list[str]]] = []

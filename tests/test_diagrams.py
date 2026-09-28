@@ -159,6 +159,79 @@ def test_icon_grid_records_matched_pictograms(tmp_path: Path):
     assert len(set(grid["icons"])) == 3
 
 
+def test_icon_grid_variants_keep_claims_and_change_card_geometry(tmp_path: Path):
+    claims = [
+        "Сотрудник получает ответ со ссылкой на инструкцию",
+        "Специалист поддержки видит историю обращения",
+        "Руководитель получает сводку результатов пилота",
+        "Команда обновляет регламент после проверки",
+    ]
+    prs = Presentation()
+    prs.slide_width = Inches(13.333)
+    prs.slide_height = Inches(7.5)
+    positions = {}
+    for variant in ("balanced", "columns", "focus"):
+        slide = prs.slides.add_slide(prs.slide_layouts[6])
+        record = render_diagram(
+            slide,
+            {"type": "icon_grid", "items": claims, "layout_variant": variant},
+            (0.5, 1.7, 12.3, 5.1),
+            diagram_style(DESIGN),
+        )
+        assert record["layout_variant"] == variant
+        group = slide.shapes[0]
+        cards = {
+            shape.name: shape
+            for shape in group.shapes
+            if shape.name.startswith("BrandDeck Diagram Card ")
+        }
+        texts = {
+            shape.name: shape.text
+            for shape in group.shapes
+            if shape.name.startswith("BrandDeck Diagram Text ")
+        }
+        assert [texts[f"BrandDeck Diagram Text {i}"] for i in range(1, 5)] == claims
+        positions[variant] = [
+            (
+                cards[f"BrandDeck Diagram Card {i}"].left / 914400,
+                cards[f"BrandDeck Diagram Card {i}"].top / 914400,
+                cards[f"BrandDeck Diagram Card {i}"].width / 914400,
+                cards[f"BrandDeck Diagram Card {i}"].height / 914400,
+            )
+            for i in range(1, 5)
+        ]
+
+    balanced, columns, focus = (positions[name] for name in positions)
+    assert balanced[0][1] == balanced[1][1]
+    assert balanced[2][1] > balanced[0][1]
+    assert len({round(card[0], 3) for card in columns}) == 1
+    assert [card[1] for card in columns] == sorted(card[1] for card in columns)
+    assert focus[0][3] > focus[1][3] * 2
+    assert focus[1][0] > focus[0][0] + focus[0][2]
+    output = tmp_path / "icon-grid-variants.pptx"
+    prs.save(output)
+    assert not any(
+        issue["code"] in {"text_overflow_risk", "text_overlap", "out_of_bounds"}
+        for issue in inspect_presentation(output, expected_slide_count=3)["issues"]
+    )
+
+
+def test_focus_grid_limits_card_coverage_on_compact_canvas():
+    prs = Presentation()
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    style = {**diagram_style(DESIGN), "canvas_area": 10.833333 * 7.5}
+    record = render_diagram(
+        slide,
+        {"type": "icon_grid", "items": ["Первое", "Второе", "Третье", "Четвёртое"],
+         "layout_variant": "focus"},
+        (0.25, 0.85, 10.34, 5.82),
+        style,
+    )
+    group = slide.shapes[0]
+    assert record["layout_variant"] == "focus"
+    assert group.width / 914400 * group.height / 914400 <= style["canvas_area"] * 0.701
+
+
 @pytest.mark.parametrize(
     "background", ["FFFFFF", "FAFCFF", "000000", "0077FF", "EBF3F9", "7F56D9"]
 )

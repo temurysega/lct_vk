@@ -12,6 +12,27 @@ from pptx.enum.shapes import PP_PLACEHOLDER
 ESTIMATED_GLYPH_WIDTH_EM = 0.6
 
 
+def needs_cyrillic_font_fallback(font_name: str | None) -> bool:
+    """East Asian template fonts can render Cyrillic with broken spacing."""
+    name = str(font_name or "").casefold()
+    return bool(
+        any("\u3040" <= char <= "\u9fff" or "\uac00" <= char <= "\ud7af" for char in name)
+        or any(
+            token in name
+            for token in ("yu gothic", "yu mincho", "meiryo", "malgun gothic", "noto sans cjk")
+        )
+    )
+
+
+def readable_font(font_name: str | None, text: str) -> str | None:
+    """Use a Cyrillic-capable sans font only when the template font is CJK."""
+    if needs_cyrillic_font_fallback(font_name) and any(
+        "\u0400" <= char <= "\u052f" for char in text
+    ):
+        return "Arial"
+    return font_name
+
+
 def estimated_line_count(text: str, characters_per_line: int) -> int:
     """Approximate wrapping at word boundaries, including explicit newlines."""
     return sum(
