@@ -138,9 +138,15 @@ def main() -> int:
                 1 for issue in qa.get("issues", []) if issue.get("check_type") == "contextual"
             )
             images = variant["images"]
+            vision = qa.get("vision_audit") or {}
+            seen = (
+                f"{len(vision.get('issues') or [])} по {len(vision.get('reviewed_slides') or [])} сл."
+                if vision.get("status") in {"reviewed", "partial"}
+                else "—"
+            )
             rows.append(
                 f"| {stem} | {variant['variant']['id']} | [PPTX]({target}.pptx) · [PDF]({target}.pdf) "
-                f"| {qa['score']} | {images['placed']} из {images['available']} | {editorial} |"
+                f"| {qa['score']} | {images['placed']} из {images['available']} | {editorial} | {seen} |"
             )
     timings = " · ".join(
         f"{PureWindowsPath(run['template']).stem}: {run['elapsed_seconds']:.0f} с"
@@ -154,8 +160,8 @@ def main() -> int:
         "вёрстка, аудит и экспорт — сервис. Конфиг: `examples/brief_demo.json`.",
         f"Время трёх вариантов на шаблон: {timings}.",
         "",
-        "| Шаблон | Вариант | Файлы | QA | Картинки | Подсказки редактору |",
-        "|---|---|---|---:|---|---:|",
+        "| Шаблон | Вариант | Файлы | QA | Картинки | Подсказки редактору | Визуальная проверка |",
+        "|---|---|---|---:|---|---:|---:|",
         *rows,
         "",
         "Копии для публикации: из PPTX удалены неиспользуемые макеты шаблона, крупные",
@@ -164,7 +170,10 @@ def main() -> int:
         "",
         "QA — балл структурных и визуальных проверок (см. AUDIT.md). Подсказки",
         "редактору — замечания текстовой модели после одной автоматической",
-        "переписи; они не входят в балл и требуют проверки человеком.",
+        "переписи; они не входят в балл и требуют проверки человеком. Визуальная",
+        "проверка — замечания той же модели по PNG каждого итогового слайда на",
+        "вопросы Приложения 1 ТЗ (число замечаний по числу просмотренных слайдов);",
+        "это тоже подсказки, а не балл.",
         "",
     ]
     (args.out / "README.md").write_text("\n".join(readme), encoding="utf-8")

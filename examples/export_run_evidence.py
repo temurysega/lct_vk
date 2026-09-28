@@ -132,6 +132,7 @@ def make_evidence(report_path: Path) -> dict:
             pdf_match = original_pdf_hash == artifacts["pdf"]["sha256"] if original_pdf_hash else None
             pdf_copies_match &= pdf_match is True
             contextual = variant["qa"].get("contextual_audit") or {}
+            vision = variant["qa"].get("vision_audit") or {}
             result["variants"].append({
                 "id": variant_id,
                 "status": variant.get("status"),
@@ -140,6 +141,13 @@ def make_evidence(report_path: Path) -> dict:
                 "qa_status": variant["qa"]["status"],
                 "qa_score": variant["qa"]["score"],
                 "editorial_suggestions": len(contextual.get("issues") or []),
+                "vision_audit": {
+                    "status": vision.get("status", "not_run"),
+                    "method": vision.get("method"),
+                    "reviewed_slides": len(vision.get("reviewed_slides") or []),
+                    "suggestions": len(vision.get("issues") or []),
+                    "answers": vision.get("summary"),
+                },
                 "images_placed": variant.get("images", {}).get("placed", 0),
                 "images_available": variant.get("images", {}).get("available", 0),
                 "artifacts": artifacts,

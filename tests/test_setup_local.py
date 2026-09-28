@@ -25,6 +25,12 @@ def server():
             self.send_response(206 if start else 200)
             self.send_header("Content-Length", str(len(body) - start))
             self.end_headers()
+            cut = files.get("cut:" + self.path)
+            if cut and not start:
+                # The server drops the connection in the middle of the file.
+                self.wfile.write(body[:cut])
+                self.close_connection = True
+                return
             self.wfile.write(body[start:])
 
         def log_message(self, *args):
@@ -49,6 +55,17 @@ def test_download_resumes_and_verifies(server, tmp_path):
     assert target.read_bytes() == data and ranges == ["bytes=1000-"]
     fetch(base + "/model.gguf", target, len(data), digest)
     assert len(ranges) == 1  # verified file is not downloaded again
+
+
+def test_a_connection_closed_mid_file_is_resumed(server, tmp_path):
+    base, files, ranges = server
+    data = bytes(range(256)) * 400
+    files["/mmproj.gguf"] = data
+    files["cut:/mmproj.gguf"] = 30000
+    target = tmp_path / "mmproj.gguf"
+    fetch(base + "/mmproj.gguf", target, len(data), hashlib.sha256(data).hexdigest())
+    assert target.read_bytes() == data
+    assert ranges == [None, "bytes=30000-"]
 
 
 def test_wrong_checksum_leaves_nothing(server, tmp_path):
@@ -87,6 +104,7 @@ def test_profile_pins_every_download():
     profile = json.loads(PROFILE.read_text(encoding="utf-8"))
     assets = [
         (profile["download_url"], profile["gguf_sha256"]),
+        (profile["mmproj_url"], profile["mmproj_sha256"]),
         *(
             (asset["url"], asset["sha256"])
             for device in profile["llama_cpp_windows"].values()

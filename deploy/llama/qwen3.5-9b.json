@@ -10,6 +10,11 @@
   "gguf_sha256": "03b74727a860a56338e042c4420bb3f04b2fec5734175f4cb9fa853daf52b7e8",
   "download_url": "https://huggingface.co/unsloth/Qwen3.5-9B-GGUF/resolve/3885219b6810b007914f3a7950a8d1b469d598a5/Qwen3.5-9B-Q4_K_M.gguf",
   "model_path": "models/gpu/Qwen3.5-9B-Q4_K_M.gguf",
+  "mmproj_file": "mmproj-F16.gguf",
+  "mmproj_bytes": 918166080,
+  "mmproj_sha256": "f70dc3509053962b0d0d3ee8a7eacebf5d60aa560cad78254ae8698516ae029f",
+  "mmproj_url": "https://huggingface.co/unsloth/Qwen3.5-9B-GGUF/resolve/3885219b6810b007914f3a7950a8d1b469d598a5/mmproj-F16.gguf",
+  "mmproj_path": "models/gpu/mmproj-F16.gguf",
   "llama_cpp_release": "b11053",
   "llama_cpp_revision": "1af554f8fc78ba029665a47b839484d9763e2a75",
   "llama_cpp_windows": {

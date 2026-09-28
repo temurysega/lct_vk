@@ -577,7 +577,11 @@ def _generate_from_plan(
         # Model feedback is useful for an editor, but is not deterministic
         # evidence of a defect. Keep the measurable QA score independent.
     vision = review_rendered_slides(
-        exports, client, expected_slide_count=len(current_plan["slides"])
+        exports,
+        client,
+        expected_slide_count=len(current_plan["slides"]),
+        roles=[str(slide.get("role", "content")) for slide in current_plan["slides"]],
+        source=source_text,
     )
     _attach_vision_audit(qa, vision)
     write_json(run_dir / "qa_report.json", qa)
