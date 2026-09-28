@@ -1,7 +1,7 @@
 """Run the visual slide audit with the real model over the decks of a dataset run.
 
 The audit is optional in the pipeline (``INFERENCE_RENDER_AUDIT=1``) and takes
-45–100 s per deck on an 8 GB GPU, so the timed 3 × 3 run leaves it off; this
+70–120 s per deck on an 8 GB GPU, so the timed 3 × 3 run leaves it off; this
 script applies it to the finished decks and saves a shareable report:
 
     python examples/run_vision_audit.py \\
