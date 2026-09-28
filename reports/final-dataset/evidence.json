@@ -1,19 +1,19 @@
 {
   "schema_version": 1,
-  "source_report_sha256": "7aaaa6d502787185ff83d94bcda6817b95e1a948f0cc42aa0f911a67cc3250c8",
-  "run_started_at_utc": null,
-  "run_finished_at_utc": null,
-  "git_revision_at_run_start": null,
-  "source_digest_at_run": "0fb0a9445fec0f9b74432ada0ad51b632aefe03bd8e75fb87f8cf5b16e954d82",
-  "source_digest_after_run": "0fb0a9445fec0f9b74432ada0ad51b632aefe03bd8e75fb87f8cf5b16e954d82",
-  "source_digest_at_export": "4b45d8fc1049a3cff628a3f8d69e6831178318520867edee95b44a9686c0d524",
+  "source_report_sha256": "5f0c386aad063390c71c0a83f8bcb60cf280311432ddc319426b0ad09f9cec68",
+  "run_started_at_utc": "2026-09-28T15:54:41.562712+00:00",
+  "run_finished_at_utc": "2026-09-28T16:04:36.819211+00:00",
+  "git_revision_at_run_start": "f96244b9559220c07cf23bb8c53f790b1b46a2e2",
+  "source_digest_at_run": "28460b5644bd9a6e76f1f44d33faa9c26bf5f1cc12ef5a7e3bc6938d99625371",
+  "source_digest_after_run": "28460b5644bd9a6e76f1f44d33faa9c26bf5f1cc12ef5a7e3bc6938d99625371",
+  "source_digest_at_export": "28460b5644bd9a6e76f1f44d33faa9c26bf5f1cc12ef5a7e3bc6938d99625371",
   "config": {
     "path": "examples/brief_demo.json",
-    "sha256": "2002f27ef02ac7089a7fe86bcd8f0be71e93168755da3e7d57380cbb415c56d6",
+    "sha256": "cc7ba229f1c11991cd7658714f3da4ff6ac917930bdbe0e74361a9beba6696e6",
     "content_kind": "synthetic_demo",
     "mode": "brief",
     "offline": false,
-    "slide_count": 12,
+    "slide_count": 10,
     "max_seconds_per_template": 300,
     "min_images_placed": 2,
     "inference_model": "qwen3.5-9b"
@@ -28,11 +28,15 @@
     "images": [
       {
         "path": "examples/acceptance_images/внутренний_контур_серверная.png",
-        "sha256": "926bedda4311fd11a8e42c7c4967502eefb018473587f2f03a90b6f353d66def"
+        "sha256": "926bedda4311fd11a8e42c7c4967502eefb018473587f2f03a90b6f353d66def",
+        "reported_sha256": "926bedda4311fd11a8e42c7c4967502eefb018473587f2f03a90b6f353d66def",
+        "matches_report": true
       },
       {
         "path": "examples/acceptance_images/сотрудник_специалист_поддержки.png",
-        "sha256": "a252b019c5490b70a935d0b29eb53802f7447697b1e1f8bd07e8214d1d50a873"
+        "sha256": "a252b019c5490b70a935d0b29eb53802f7447697b1e1f8bd07e8214d1d50a873",
+        "reported_sha256": "a252b019c5490b70a935d0b29eb53802f7447697b1e1f8bd07e8214d1d50a873",
+        "matches_report": true
       }
     ],
     "templates_directory": "../task+data/Датасет"
@@ -44,28 +48,26 @@
       "template_sha256_on_disk": "cbbe3aa6a21d23cebc4d1383b93dd07a9cea460d683de1903567b616c839485d",
       "template_matches_report": true,
       "template_unchanged_during_run": true,
-      "elapsed_seconds": 271.0,
+      "elapsed_seconds": 170.8,
       "planner": {
         "mode": "inference",
         "input": "brief"
       },
       "brief_timings_seconds": {
-        "outline": 15.04,
-        "slides": 24.97
+        "outline": 12.72,
+        "slides": 18.09
       },
       "status": "completed",
       "diversity_status": "passed",
       "workflow": {
-        "version": "1.7.0",
+        "version": "1.9.0",
         "prompt_sha256": {
           "planner": "f332e0e3b2857ae86342b74cb05a4ac77b02feebde170ba760403842b70d6c5d",
-          "planner-cpu": "3fe64b4a2a95fca05bc715765d60d0824bea3abf5a8789c04224d02f35aea727",
           "analyzer": "d317316d81afafb12f938f497821818ff192eb76f65480b95018f392dcb3508f",
-          "layout": "9b42cfe84dce4c553c5fb38527599d8090651a08f36b57b07e3da62aaabd5e3c",
           "image": "510c07113d1dc9af82249f868c50bf5584a75d5e6f3440378e300496658d2878",
-          "brief-outline": "8a695dc3e1c995dca4267a6d5072b48040082ef0b706415fb6ae5cc9cc6561a0",
-          "brief-slide": "56f5239c5f4f4353d55ff4af28cb3cdc1a40f35ff1c26fc83ce41123e2867944",
-          "context-audit": "c0dafd5a36d06c86465f91a42e04739c5bdf4210267c8aa32634edac68994fa5"
+          "brief-outline": "de271e3e0c1de8fdbf99ce95f880556150e40fd3e85e25616a85b46e7a97dadd",
+          "brief-slide": "69c20ee20d153aecbaf0eac0c47cf14378000c45e65cf65af1812f177ef6aa32",
+          "context-audit": "5eeb6295ca0abd75a2e4a843ca147b00ed0e38c47154e7acd72406ffb6e64904"
         },
         "pictograms": {
           "package": "lucide-react",
@@ -79,8 +81,8 @@
         {
           "id": "balanced",
           "status": "completed",
-          "slides": 12,
-          "elapsed_seconds": 41.992,
+          "slides": 10,
+          "elapsed_seconds": 31.532,
           "qa_status": "passed",
           "qa_score": 100,
           "editorial_suggestions": 3,
@@ -89,13 +91,13 @@
           "artifacts": {
             "pptx": {
               "path": "deliverables/vk-tech-balanced.pptx",
-              "sha256": "1c00c86722a00e4478918d4b9b23bfc689e5c7e547181d5ca1ef7b32b40519b5",
-              "bytes": 3908271
+              "sha256": "14f7298a37676354fa7ec07f2e4812c0cb44397338b8b9f220cd11c9ca273fd5",
+              "bytes": 3814704
             },
             "pdf": {
               "path": "deliverables/vk-tech-balanced.pdf",
-              "sha256": "48c39bc7b9acc6c388648d83438f99c1f1668ba4ea1e38cef1059f6a6b006c75",
-              "bytes": 1682334
+              "sha256": "bb103ded7483fb13756916332b61ebdafe85d71ce19e4a3440e4cb290193917b",
+              "bytes": 1626248
             }
           },
           "pdf_matches_run_export": true
@@ -103,8 +105,8 @@
         {
           "id": "columns",
           "status": "completed",
-          "slides": 12,
-          "elapsed_seconds": 72.94,
+          "slides": 10,
+          "elapsed_seconds": 34.074,
           "qa_status": "passed",
           "qa_score": 100,
           "editorial_suggestions": 3,
@@ -113,13 +115,13 @@
           "artifacts": {
             "pptx": {
               "path": "deliverables/vk-tech-columns.pptx",
-              "sha256": "b03d2a7ceb7f52af6cb7ad8c1f67bc7def28fbf6f49f076d23b1ea7afb392dde",
-              "bytes": 3661179
+              "sha256": "a2e2ff718304f36019dbe4f3ac7e437f2f7595fae939400964d939f775d6864a",
+              "bytes": 3657533
             },
             "pdf": {
               "path": "deliverables/vk-tech-columns.pdf",
-              "sha256": "1d06f0b6e64eb7297b7b79b163296ab583e8394ece59453f60e570b7b4ced5a5",
-              "bytes": 1669552
+              "sha256": "5b6f89f5c4118a0094c9429b0d5cd944cf364f93cd996804fea9cfee67663dc0",
+              "bytes": 1666945
             }
           },
           "pdf_matches_run_export": true
@@ -127,8 +129,8 @@
         {
           "id": "focus",
           "status": "completed",
-          "slides": 12,
-          "elapsed_seconds": 39.0,
+          "slides": 10,
+          "elapsed_seconds": 31.887,
           "qa_status": "passed",
           "qa_score": 100,
           "editorial_suggestions": 3,
@@ -137,13 +139,13 @@
           "artifacts": {
             "pptx": {
               "path": "deliverables/vk-tech-focus.pptx",
-              "sha256": "1f1a5b5138bfb23126843c0c7988498289b6545b0a2ac48e474b3ccdb4f83444",
-              "bytes": 3260047
+              "sha256": "e4195801b02142d2c40dcc9e18ad8cf0c300685c58c8dac9850862361f660a54",
+              "bytes": 3542634
             },
             "pdf": {
               "path": "deliverables/vk-tech-focus.pdf",
-              "sha256": "8a8f00acc009ec6d9aac14f8b94a769227ff58cdbb96ec1e4ecc1b11e0d01915",
-              "bytes": 1642598
+              "sha256": "05fcbeaf815fdc457c6a05fc8a738c1443ed09825b5d8d5887e2070908367b2a",
+              "bytes": 1596058
             }
           },
           "pdf_matches_run_export": true
@@ -156,28 +158,26 @@
       "template_sha256_on_disk": "1b8883114486c69dff706e9c4fd9382727c4506c2cfa3ec34f86987f1e852f2f",
       "template_matches_report": true,
       "template_unchanged_during_run": true,
-      "elapsed_seconds": 230.4,
+      "elapsed_seconds": 199.8,
       "planner": {
         "mode": "inference",
         "input": "brief"
       },
       "brief_timings_seconds": {
-        "outline": 35.44,
-        "slides": 27.0
+        "outline": 12.32,
+        "slides": 19.51
       },
       "status": "completed",
       "diversity_status": "passed",
       "workflow": {
-        "version": "1.7.0",
+        "version": "1.9.0",
         "prompt_sha256": {
           "planner": "f332e0e3b2857ae86342b74cb05a4ac77b02feebde170ba760403842b70d6c5d",
-          "planner-cpu": "3fe64b4a2a95fca05bc715765d60d0824bea3abf5a8789c04224d02f35aea727",
           "analyzer": "d317316d81afafb12f938f497821818ff192eb76f65480b95018f392dcb3508f",
-          "layout": "9b42cfe84dce4c553c5fb38527599d8090651a08f36b57b07e3da62aaabd5e3c",
           "image": "510c07113d1dc9af82249f868c50bf5584a75d5e6f3440378e300496658d2878",
-          "brief-outline": "8a695dc3e1c995dca4267a6d5072b48040082ef0b706415fb6ae5cc9cc6561a0",
-          "brief-slide": "56f5239c5f4f4353d55ff4af28cb3cdc1a40f35ff1c26fc83ce41123e2867944",
-          "context-audit": "c0dafd5a36d06c86465f91a42e04739c5bdf4210267c8aa32634edac68994fa5"
+          "brief-outline": "de271e3e0c1de8fdbf99ce95f880556150e40fd3e85e25616a85b46e7a97dadd",
+          "brief-slide": "69c20ee20d153aecbaf0eac0c47cf14378000c45e65cf65af1812f177ef6aa32",
+          "context-audit": "5eeb6295ca0abd75a2e4a843ca147b00ed0e38c47154e7acd72406ffb6e64904"
         },
         "pictograms": {
           "package": "lucide-react",
@@ -191,23 +191,23 @@
         {
           "id": "balanced",
           "status": "completed",
-          "slides": 12,
-          "elapsed_seconds": 44.234,
+          "slides": 10,
+          "elapsed_seconds": 36.416,
           "qa_status": "passed",
           "qa_score": 100,
-          "editorial_suggestions": 2,
+          "editorial_suggestions": 6,
           "images_placed": 2,
           "images_available": 2,
           "artifacts": {
             "pptx": {
               "path": "deliverables/vk-workspace-balanced.pptx",
-              "sha256": "0299557f8c39849759e53ed929663769c3413b80baf717ea74ed54af32a0b175",
-              "bytes": 4288652
+              "sha256": "17e7d08e72ce9584b3a062fdcb376327aadac44951d2b4bbfbe7cca0906d84cb",
+              "bytes": 1038196
             },
             "pdf": {
               "path": "deliverables/vk-workspace-balanced.pdf",
-              "sha256": "67d946b522050afb0d9be635180b91087bb3156d5fbe23c9636224e0154012a3",
-              "bytes": 2325193
+              "sha256": "6cb9b452aec4354ee613e109e15f58d741a0d75ababde3f2da8c5828bf6e016e",
+              "bytes": 1028582
             }
           },
           "pdf_matches_run_export": true
@@ -215,23 +215,23 @@
         {
           "id": "columns",
           "status": "completed",
-          "slides": 12,
-          "elapsed_seconds": 43.218,
+          "slides": 10,
+          "elapsed_seconds": 34.303,
           "qa_status": "passed",
           "qa_score": 100,
-          "editorial_suggestions": 2,
+          "editorial_suggestions": 6,
           "images_placed": 2,
           "images_available": 2,
           "artifacts": {
             "pptx": {
               "path": "deliverables/vk-workspace-columns.pptx",
-              "sha256": "92b73be40c3aac74f2afdc40fbc27c6277b1aa7be023ac237fc48b4763656042",
-              "bytes": 4210778
+              "sha256": "3f33577d6e41d38233db26c462993838469269bcb33b1e621aa27ed4183d87eb",
+              "bytes": 1112797
             },
             "pdf": {
               "path": "deliverables/vk-workspace-columns.pdf",
-              "sha256": "9a05df6a0b9ee3c44f02bba3a1986299d5550192d0c77e428ee02c994efb3c3b",
-              "bytes": 2302348
+              "sha256": "8ba408afc86f140c44d7069c04284057a07b08657cd81354bafa8e86a0466659",
+              "bytes": 1047580
             }
           },
           "pdf_matches_run_export": true
@@ -239,23 +239,23 @@
         {
           "id": "focus",
           "status": "completed",
-          "slides": 12,
-          "elapsed_seconds": 44.039,
+          "slides": 10,
+          "elapsed_seconds": 36.879,
           "qa_status": "passed",
           "qa_score": 100,
-          "editorial_suggestions": 2,
+          "editorial_suggestions": 6,
           "images_placed": 2,
           "images_available": 2,
           "artifacts": {
             "pptx": {
               "path": "deliverables/vk-workspace-focus.pptx",
-              "sha256": "babfcd12dd2bd41bdcd49df233facb8a7ee514f6ffced53fcfede1f7fb95fba8",
-              "bytes": 4288485
+              "sha256": "57e2726df9464d0a8c7bdeffcc2bf5e978e889bb5539edb7b6d636a30ef9343f",
+              "bytes": 1038375
             },
             "pdf": {
               "path": "deliverables/vk-workspace-focus.pdf",
-              "sha256": "bb8f036de5caa8de1701f639656126f8f628e269f8fd84b2e1f769ab270ee357",
-              "bytes": 2318588
+              "sha256": "66bce3324a9f79bb7f0bc9ab647dfc88e634967e78385205b432fd5fb3104317",
+              "bytes": 1029989
             }
           },
           "pdf_matches_run_export": true
@@ -268,28 +268,26 @@
       "template_sha256_on_disk": "9ef2323ed5f49f464aee5ae7065f1f57bb92c8be3a635be507d59819e285cfe0",
       "template_matches_report": true,
       "template_unchanged_during_run": true,
-      "elapsed_seconds": 183.6,
+      "elapsed_seconds": 224.3,
       "planner": {
         "mode": "inference",
         "input": "brief"
       },
       "brief_timings_seconds": {
-        "outline": 15.96,
-        "slides": 23.18
+        "outline": 28.64,
+        "slides": 31.29
       },
       "status": "completed",
       "diversity_status": "passed",
       "workflow": {
-        "version": "1.7.0",
+        "version": "1.9.0",
         "prompt_sha256": {
           "planner": "f332e0e3b2857ae86342b74cb05a4ac77b02feebde170ba760403842b70d6c5d",
-          "planner-cpu": "3fe64b4a2a95fca05bc715765d60d0824bea3abf5a8789c04224d02f35aea727",
           "analyzer": "d317316d81afafb12f938f497821818ff192eb76f65480b95018f392dcb3508f",
-          "layout": "9b42cfe84dce4c553c5fb38527599d8090651a08f36b57b07e3da62aaabd5e3c",
           "image": "510c07113d1dc9af82249f868c50bf5584a75d5e6f3440378e300496658d2878",
-          "brief-outline": "8a695dc3e1c995dca4267a6d5072b48040082ef0b706415fb6ae5cc9cc6561a0",
-          "brief-slide": "56f5239c5f4f4353d55ff4af28cb3cdc1a40f35ff1c26fc83ce41123e2867944",
-          "context-audit": "c0dafd5a36d06c86465f91a42e04739c5bdf4210267c8aa32634edac68994fa5"
+          "brief-outline": "de271e3e0c1de8fdbf99ce95f880556150e40fd3e85e25616a85b46e7a97dadd",
+          "brief-slide": "69c20ee20d153aecbaf0eac0c47cf14378000c45e65cf65af1812f177ef6aa32",
+          "context-audit": "5eeb6295ca0abd75a2e4a843ca147b00ed0e38c47154e7acd72406ffb6e64904"
         },
         "pictograms": {
           "package": "lucide-react",
@@ -303,23 +301,23 @@
         {
           "id": "balanced",
           "status": "completed",
-          "slides": 12,
-          "elapsed_seconds": 31.07,
+          "slides": 10,
+          "elapsed_seconds": 40.492,
           "qa_status": "passed",
           "qa_score": 100,
-          "editorial_suggestions": 2,
+          "editorial_suggestions": 1,
           "images_placed": 2,
           "images_available": 2,
           "artifacts": {
             "pptx": {
               "path": "deliverables/vk-education-balanced.pptx",
-              "sha256": "bffac9df3d93d7144c686e1ff7a98d84398983e3623f538141db05692ed6a22f",
-              "bytes": 733816
+              "sha256": "c4626cd90e1b7bf67f71de05bbb1d9a9cb356d58cefb0d605c3546a16bff0dde",
+              "bytes": 726386
             },
             "pdf": {
               "path": "deliverables/vk-education-balanced.pdf",
-              "sha256": "76d844f1bdfbd28b15960ed66c19759e29a0fcda39395d417c1edd389e9191e1",
-              "bytes": 755807
+              "sha256": "0ca2fce51a0741a7a3d553eb8aa6d0df920ee91d380029c12cc5868d8a50faf1",
+              "bytes": 770870
             }
           },
           "pdf_matches_run_export": true
@@ -327,23 +325,23 @@
         {
           "id": "columns",
           "status": "completed",
-          "slides": 12,
-          "elapsed_seconds": 30.857,
+          "slides": 10,
+          "elapsed_seconds": 40.421,
           "qa_status": "passed",
           "qa_score": 100,
-          "editorial_suggestions": 2,
+          "editorial_suggestions": 1,
           "images_placed": 2,
           "images_available": 2,
           "artifacts": {
             "pptx": {
               "path": "deliverables/vk-education-columns.pptx",
-              "sha256": "22767818c5113969b8b3375e7b62da38f69106c419dd98296f213bc5bb9995d9",
-              "bytes": 771541
+              "sha256": "c72c2c94dda5212e35e4bc48484b5aa60dd68c27a7ec75e9f7afbd23a87e4c16",
+              "bytes": 727142
             },
             "pdf": {
               "path": "deliverables/vk-education-columns.pdf",
-              "sha256": "d53ceaec784d88b4eccec228e8234994529ec9bd25beaf7889d88415c114cf17",
-              "bytes": 762594
+              "sha256": "f0e1eb5a1c1058fe2883ee9ccbcfb6b5e59466bcbbbacf48a977803391a0e9eb",
+              "bytes": 753721
             }
           },
           "pdf_matches_run_export": true
@@ -351,23 +349,23 @@
         {
           "id": "focus",
           "status": "completed",
-          "slides": 12,
-          "elapsed_seconds": 30.22,
+          "slides": 10,
+          "elapsed_seconds": 39.969,
           "qa_status": "passed",
           "qa_score": 100,
-          "editorial_suggestions": 2,
+          "editorial_suggestions": 1,
           "images_placed": 2,
           "images_available": 2,
           "artifacts": {
             "pptx": {
               "path": "deliverables/vk-education-focus.pptx",
-              "sha256": "e5f136cb16b02eb15109f392ad9ea020419257d54cdaa3e26a32821fa35c4c2b",
-              "bytes": 732715
+              "sha256": "4db6f8d391d192c55a8396a5c3fb3c7454ecc8b0aa5620404f4b4ebf97b82c07",
+              "bytes": 724140
             },
             "pdf": {
               "path": "deliverables/vk-education-focus.pdf",
-              "sha256": "6a886b26046aa59f8c83eca84fb7e87e40f74bbceed1f14359dc7dcd7e0b5fb5",
-              "bytes": 760760
+              "sha256": "d4a503ae421d3119272a282dfeb5ae2e3cd33dd967ce62475c834abef4391bc8",
+              "bytes": 763392
             }
           },
           "pdf_matches_run_export": true
@@ -377,13 +375,13 @@
   ],
   "checks": {
     "source_unchanged_during_run": true,
-    "source_matched_git_head_at_run_start": null,
-    "inputs_unchanged_during_run": null,
-    "source_matches_current_tree": false,
+    "source_matched_git_head_at_run_start": true,
+    "inputs_unchanged_during_run": true,
+    "source_matches_current_tree": true,
     "config_matches_current_file": true,
     "content_matches_report": true,
     "image_names_match_report": true,
-    "image_hashes_match_report": null,
+    "image_hashes_match_report": true,
     "templates_match_report": true,
     "templates_unchanged_during_run": true,
     "all_artifacts_present": true,
