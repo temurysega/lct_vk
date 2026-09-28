@@ -52,11 +52,11 @@ def _clean_item(item: Any) -> Any:
 
 
 def _independent_metric_items(items: list[Any]) -> bool:
-    """A pyramid is misleading for unrelated quantities with different units.
+    """A pyramid or cycle misrepresents unrelated quantities as a relationship.
 
-    A numbered sequence such as 1/2/3 remains a pyramid: those numbers may
-    name genuine levels. Keep the rule deliberately narrow so that a model's
-    explicit hierarchy is otherwise preserved.
+    The quantity may be the card's label or detail. Numbered stages and items
+    with more than one quantity remain untouched: their relationship cannot be
+    inferred from a single metric.
     """
     if len(items) < 2:
         return False
@@ -65,10 +65,20 @@ def _independent_metric_items(items: list[Any]) -> bool:
     for item in items:
         if not isinstance(item, dict) or item.get("value"):
             return False
-        label = str(item.get("label") or "")
-        match = re.match(r"^\s*(\d+)\s+([^\W\d_]+)", label, re.UNICODE)
-        if match is None:
+        matches = [
+            match
+            for field in ("label", "detail")
+            if (
+                match := re.match(
+                    r"^\s*(\d+)\s+([^\W\d_]+)",
+                    str(item.get(field) or ""),
+                    re.UNICODE,
+                )
+            )
+        ]
+        if len(matches) != 1:
             return False
+        match = matches[0]
         quantities.append(int(match.group(1)))
         units.append(match.group(2).casefold()[:5])
     return len(set(units)) == len(units) and set(quantities) != set(
@@ -82,7 +92,7 @@ def sanitize_diagram(value: dict[str, Any]) -> dict[str, Any] | None:
         return None
     raw = value.get("items") if isinstance(value.get("items"), list) else []
     items = [item for item in (_clean_item(entry) for entry in raw) if item]
-    if kind == "pyramid" and _independent_metric_items(items):
+    if kind in {"pyramid", "cycle"} and _independent_metric_items(items):
         kind = "icon_grid"
     minimum, maximum = ITEM_LIMITS[kind]
     if kind == "matrix" and len(items) != 4:

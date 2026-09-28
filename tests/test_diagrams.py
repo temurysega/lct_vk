@@ -160,20 +160,42 @@ def test_icon_grid_records_matched_pictograms(tmp_path: Path):
     assert len(set(grid["icons"])) == 3
 
 
-def test_independent_quantities_do_not_become_pyramid_levels():
+def test_independent_quantities_do_not_become_pyramid_levels_or_cycle():
     items = [
         {"label": "2 подразделения", "detail": "Охват пилота"},
         {"label": "150 сотрудников", "detail": "Участники пилота"},
         {"label": "6 недель", "detail": "Срок пилота"},
     ]
-    visual = sanitize_diagram({"type": "pyramid", "items": items})
-    assert visual == {"type": "icon_grid", "items": items}
+    for kind in ("pyramid", "cycle"):
+        visual = sanitize_diagram({"type": kind, "items": items})
+        assert visual == {"type": "icon_grid", "items": items}
     assert sanitize_diagram({"type": "pyramid", "items": items[:2]}) == {
         "type": "icon_grid",
         "items": items[:2],
     }
+    detail_values = [
+        {"label": "Срок", "detail": "6 недель"},
+        {"label": "Сотрудники", "detail": "150 человек"},
+        {"label": "Подразделения", "detail": "2 отдела"},
+    ]
+    assert sanitize_diagram({"type": "pyramid", "items": detail_values}) == {
+        "type": "icon_grid",
+        "items": detail_values,
+    }
     levels = [{"label": f"{number} уровень"} for number in (1, 2, 3)]
     assert sanitize_diagram({"type": "pyramid", "items": levels})["type"] == "pyramid"
+    ordered_stages = [
+        {"label": "2 недели", "detail": "Проектирование"},
+        {"label": "3 месяца", "detail": "Разработка"},
+        {"label": "4 дня", "detail": "Запуск"},
+    ]
+    assert sanitize_diagram({"type": "process", "items": ordered_stages})["type"] == "process"
+    ambiguous = [
+        {"label": "2 отдела", "detail": "150 сотрудников"},
+        {"label": "6 недель", "detail": "Срок пилота"},
+        {"label": "3 человека", "detail": "Команда"},
+    ]
+    assert sanitize_diagram({"type": "cycle", "items": ambiguous})["type"] == "cycle"
 
 
 def test_narrow_metric_cards_fill_column_and_pyramid_apex_has_number():

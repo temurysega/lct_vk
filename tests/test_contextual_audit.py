@@ -393,3 +393,37 @@ def test_brief_rewrite_blocks_remaining_unsupported_budget():
         revise_flagged_slides(
             plan, brief="Просим одобрить пилот.", client=StubbornClient(), audit=audit
         )
+
+
+def test_stubborn_rewrite_does_not_report_a_pending_pilot_as_launched():
+    source = "Пилот: 2 подразделения, 6 недель. Просим одобрить пилот."
+    bad = "Пилот запущен в двух подразделениях"
+    plan = {
+        "title": "Помощник",
+        "brief": {"purpose": "feature", "outline": [
+            {"title": "Помощник", "role": "cover", "goal": "", "visual": "none"},
+            {"title": bad, "role": "content", "goal": "охват", "visual": "none"},
+            {"title": "Итог", "role": "closing", "goal": "", "visual": "none"},
+        ]},
+        "slides": [
+            {"title": "Помощник", "role": "cover"},
+            {"title": bad, "role": "content", "bullets": ["Срок — 6 недель"]},
+            {"title": "Итог", "role": "closing"},
+        ],
+    }
+    audit = {"status": "reviewed", "issues": grounding_findings(source, plan)}
+    assert [issue["slide"] for issue in audit["issues"]] == [2]
+
+    class StubbornClient:
+        settings = type("Settings", (), {"parallel_requests": 1})()
+
+        def chat_json(self, **kwargs):
+            return {"title": bad, "subtitle": "", "bullets": ["Срок — 6 недель"],
+                    "speaker_notes": ""}
+
+    assert revise_flagged_slides(
+        plan, brief=source, client=StubbornClient(), audit=audit
+    ) == [2]
+    assert plan["slides"][1]["title"] == "Пилот планируется в двух подразделениях"
+    assert plan["brief"]["source_backed_pilot_status_fallbacks"] == [2]
+    assert grounding_findings(source, plan) == []

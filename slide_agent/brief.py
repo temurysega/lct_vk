@@ -27,6 +27,7 @@ from .coverage import (
     grounding_findings,
     source_backed_baseline_fallback,
     source_backed_kpi_fallback,
+    source_backed_pilot_status_fallback,
     unsupported_numbers,
 )
 from .diagrams import ITEM_LIMITS
@@ -546,6 +547,7 @@ def revise_flagged_slides(
         for name, repair in (
             ("kpi", source_backed_kpi_fallback),
             ("baseline", source_backed_baseline_fallback),
+            ("pilot_status", source_backed_pilot_status_fallback),
         ):
             revised = repair(brief, fallback)
             if revised is not None:
@@ -565,7 +567,7 @@ def revise_flagged_slides(
     with ThreadPoolExecutor(max_workers=workers) as pool:
         results = list(pool.map(rewrite, sorted(findings)))
     revised = []
-    fallbacks: dict[str, list[int]] = {"kpi": [], "baseline": []}
+    fallbacks: dict[str, list[int]] = {"kpi": [], "baseline": [], "pilot_status": []}
     for number, payload, used_fallbacks in results:
         if payload is None:
             continue
@@ -582,6 +584,8 @@ def revise_flagged_slides(
         plan["brief"]["source_backed_kpi_fallbacks"] = fallbacks["kpi"]
     if fallbacks["baseline"]:
         plan["brief"]["source_backed_baseline_fallbacks"] = fallbacks["baseline"]
+    if fallbacks["pilot_status"]:
+        plan["brief"]["source_backed_pilot_status_fallbacks"] = fallbacks["pilot_status"]
     _ensure_grounded(brief, plan)
     return revised
 

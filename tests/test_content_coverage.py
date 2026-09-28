@@ -8,6 +8,7 @@ from slide_agent.coverage import (
     coverage_report,
     grounding_findings,
     source_backed_baseline_fallback,
+    source_backed_pilot_status_fallback,
     unsupported_numbers,
 )
 from slide_agent.planner import _fallback_plan, _sentences, normalize_plan
@@ -299,6 +300,27 @@ def test_pilot_does_not_imply_companywide_rollout():
     assert grounding_findings(source, conditional) == []
     explicit = "Пилот для 150 сотрудников. После пилота масштабируем на всю компанию."
     assert grounding_findings(explicit, {"slides": [plan["slides"][0]]}) == []
+
+
+def test_pilot_awaiting_approval_is_not_reported_as_launched():
+    source = "Пилот: 2 подразделения, 6 недель. Просим одобрить пилот и выделить команду."
+    claim = "Пилот запущен в двух подразделениях"
+    plan = {"slides": [{"title": claim, "bullets": ["Пилотный проект запущен на 6 недель"]}]}
+    findings = grounding_findings(source, plan)
+    assert [item["quote"] for item in findings] == [claim, "Пилотный проект запущен на 6 недель"]
+    repaired = source_backed_pilot_status_fallback(source, plan["slides"][0])
+    assert repaired["title"] == "Пилот планируется в двух подразделениях"
+    assert repaired["bullets"] == ["Пилотный проект планируется на 6 недель"]
+    assert grounding_findings(source, {"slides": [repaired]}) == []
+    # Planned or conditional wording and a brief with a reported launch stay as is.
+    planned = {"slides": [{"title": "Пилот будет запущен после одобрения"}]}
+    assert grounding_findings(source, planned) == []
+    launched = (
+        "Пилот запущен в двух подразделениях на 6 недель. "
+        "Просим одобрить пилот на весь отдел."
+    )
+    assert grounding_findings(launched, plan) == []
+    assert source_backed_pilot_status_fallback(launched, plan["slides"][0]) is None
 
 
 def test_too_little_content_does_not_create_empty_slides():

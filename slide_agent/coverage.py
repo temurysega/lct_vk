@@ -246,6 +246,36 @@ _ROLLOUT_DECISION = re.compile(
     r"consider|evaluate\s+whether)\b",
     re.IGNORECASE,
 )
+_PILOT_APPROVAL_REQUEST = re.compile(
+    r"\b(?:просим|request|seek)\b[^.!?;\n]{0,85}?"
+    r"\b(?:одобр\w*|утверд\w*|соглас\w*|approv\w*)\b"
+    r"[^.!?;\n]{0,55}?\b(?:пилот\w*|pilot|trial)\b",
+    re.IGNORECASE,
+)
+_PILOT_REPORTED_STATUS = re.compile(
+    r"\b(?:пилот\w*|pilot|trial)\b(?P<between>[^.!?;\n]{0,65}?)"
+    r"\b(?:запущен\w*|запустил\w*|стартовал\w*|начал(?:ся|ась|ись)|"
+    r"заверш[её]н\w*|завершил(?:ся|ась|ись)|окончен\w*|"
+    r"launched|started|completed|finished)\b",
+    re.IGNORECASE,
+)
+_PILOT_STATUS_MODAL = re.compile(
+    r"\b(?:не|будет|после|если|планиру\w*|ожида\w*|"
+    r"not|will|would|could|after|if|planned)\b",
+    re.IGNORECASE,
+)
+
+
+def _asserts_pilot_started_or_finished(text: str) -> bool:
+    """Recognise an affirmative completed status, not a proposed next step."""
+    return any(
+        not _PILOT_STATUS_MODAL.search(match.group("between"))
+        for match in _PILOT_REPORTED_STATUS.finditer(text)
+    )
+
+
+def _pilot_awaits_approval(source: str) -> bool:
+    return bool(_PILOT_APPROVAL_REQUEST.search(source)) and not _asserts_pilot_started_or_finished(source)
 
 
 def _time_unit(unit: str) -> str:
@@ -388,6 +418,35 @@ def source_backed_baseline_fallback(source: str, slide: dict) -> dict | None:
     return revised if changed else None
 
 
+def source_backed_pilot_status_fallback(source: str, slide: dict) -> dict | None:
+    """Correct only an explicit false launch of a pilot awaiting approval."""
+    if not _pilot_awaits_approval(source):
+        return None
+
+    def replacement(value: str) -> str:
+        return re.sub(
+            r"\b(пилот(?:ный проект)?)\s+запущен\b",
+            lambda match: f"{match.group(1)} планируется",
+            value,
+            flags=re.IGNORECASE,
+        )
+
+    revised = deepcopy(slide)
+    changed = False
+    for key in ("title", "subtitle", "body", "speaker_notes"):
+        value = revised.get(key)
+        if isinstance(value, str):
+            revised[key] = replacement(value)
+            changed |= revised[key] != value
+    bullets = revised.get("bullets")
+    if isinstance(bullets, list):
+        revised["bullets"] = [
+            replacement(item) if isinstance(item, str) else item for item in bullets
+        ]
+        changed |= revised["bullets"] != bullets
+    return revised if changed else None
+
+
 def grounding_findings(source: str, plan: dict) -> list[dict]:
     """High-confidence, exact-quote findings for risky brief extrapolations.
 
@@ -403,6 +462,7 @@ def grounding_findings(source: str, plan: dict) -> list[dict]:
     source_duties = _source_team_duties(source)
     source_allows_rollout = bool(_SOURCE_ROLLOUT.search(source))
     source_has_pilot = bool(_PILOT_EVENT.search(source))
+    source_pilot_pending = _pilot_awaits_approval(source)
     normalized_source = _normalized(source)
     findings = []
     seen = set()
@@ -445,6 +505,8 @@ def grounding_findings(source: str, plan: dict) -> list[dict]:
                     "В брифе текущее время указано как верхняя граница, а не точный "
                     "исходный уровень или целевой результат сокращения."
                 )
+            if source_pilot_pending and _asserts_pilot_started_or_finished(text):
+                reasons.append("Бриф просит одобрить пилот и не сообщает, что он уже начался или завершился.")
             broad_scope = _BROAD_ROLLOUT.search(text)
             if broad_scope and source_has_pilot and not source_allows_rollout:
                 before_scope = text[max(0, broad_scope.start() - 35) : broad_scope.start()]
