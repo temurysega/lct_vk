@@ -15,9 +15,12 @@ from .qa import _inspected_shapes
 REPAIRABLE = {
     "text_overflow_risk",
     "text_overlap",
+    "image_text_overlap",
+    "word_split_risk",
     "out_of_bounds",
     "native_text_too_small",
     "placeholder_text",
+    "template_sample_text",
     # Another layout removes the colliding or emptied exemplar block.
     "template_overlap",
     "emptied_template_block",

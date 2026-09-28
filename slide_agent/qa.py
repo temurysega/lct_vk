@@ -1,14 +1,17 @@
 from __future__ import annotations
 
+import math
 import zipfile
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
 from pptx import Presentation
-from pptx.enum.shapes import MSO_SHAPE_TYPE
+from pptx.enum.shapes import MSO_SHAPE_TYPE, PP_PLACEHOLDER
 
 from .decor_audit import decoration_overlap_issues
 from .layout_geometry import (
+    area,
     box,
     collides,
     has_text,
@@ -18,6 +21,9 @@ from .layout_geometry import (
     is_opaque,
     is_photo_frame,
     is_visible_box,
+)
+from .layout_geometry import (
+    intersection as box_intersection,
 )
 from .style_audit import inspect_style
 from .typography import (
@@ -60,6 +66,27 @@ def _overflow_ratio(shape: Any, default_size: float) -> float:
     return required_height / height
 
 
+# Average rendered width of a Cyrillic or Latin glyph. The composer fits with
+# the wider estimate; the check uses the rendered one to avoid false alarms.
+RENDERED_GLYPH_WIDTH_EM = 0.55
+
+
+def _split_word(shape: Any, default_size: float) -> str | None:
+    """A word wider than its frame: the renderer breaks it mid-word."""
+    frame = shape.text_frame
+    width = _inches(shape.width - frame.margin_left - frame.margin_right)
+    if width <= 0:
+        return None
+    fallback = _shape_font_size(shape, default_size)
+    for paragraph in frame.paragraphs:
+        for run in paragraph.runs:
+            size = run.font.size.pt if run.font.size else fallback
+            for word in run.text.split():
+                if len(word) * size * RENDERED_GLYPH_WIDTH_EM / 72 > width:
+                    return word
+    return None
+
+
 def _inspected_shapes(shapes: Any) -> list[tuple[Any, bool]]:
     """Top-level shapes and nested text/pictures in every group.
 
@@ -83,28 +110,63 @@ def _geometry(shape: Any) -> tuple[Any, ...]:
     return (shape.left, shape.top, shape.width, shape.height)
 
 
+FOOTER_PLACEHOLDERS = {
+    PP_PLACEHOLDER.SLIDE_NUMBER,
+    PP_PLACEHOLDER.FOOTER,
+    PP_PLACEHOLDER.DATE,
+}
+
+
+def _normal_text(value: str) -> str:
+    return " ".join(value.split()).lower()
+
+
+def _is_footer(shape: Any) -> bool:
+    try:
+        return shape.is_placeholder and shape.placeholder_format.type in FOOTER_PLACEHOLDERS
+    except (AttributeError, ValueError):
+        return False
+
+
 def _template_reference(
     template_path: str | Path | None,
-) -> tuple[set[tuple[Any, ...]], set[tuple[Any, ...]], set[str]]:
-    """Template shape geometry, shapes holding sample text, layout names.
+) -> tuple[set[tuple[Any, ...]], set[tuple[Any, ...]], set[str], set[str]]:
+    """Template shape geometry, shapes holding sample text, layout names and
+    the sample texts of its slides.
 
     Filled template blocks are renamed by the composer but keep their
     geometry, so geometry identifies template-origin shapes in the output.
+    Text repeated on many template slides is branding, not a sample.
     """
     if not template_path or not Path(template_path).exists():
-        return set(), set(), set()
+        return set(), set(), set(), set()
     try:
         template = Presentation(template_path)
     except Exception:  # noqa: BLE001 - the template reference is optional
-        return set(), set(), set()
+        return set(), set(), set(), set()
     shapes = [shape for slide in template.slides for shape in slide.shapes]
     layouts = {
         layout.name for master in template.slide_masters for layout in master.slide_layouts
     }
+    text_counts: Counter[str] = Counter(
+        text
+        for slide in template.slides
+        for text in {
+            _normal_text(shape.text)
+            for shape, _ in _inspected_shapes(slide.shapes)
+            if getattr(shape, "has_text_frame", False) and not _is_footer(shape)
+        }
+    )
+    recurring = max(3, math.ceil(len(template.slides) * 0.4))
     return (
         {_geometry(shape) for shape in shapes},
         {(str(shape.name), *_geometry(shape)) for shape in shapes if has_text(shape)},
         layouts,
+        {
+            text
+            for text, count in text_counts.items()
+            if count < recurring and sum(char.isalpha() for char in text) >= 2
+        },
     )
 
 
@@ -282,7 +344,9 @@ def inspect_presentation(
     expects_native_grid = (design_system or {}).get("source_model", {}).get(
         "composition_mode"
     ) == "native_grid"
-    template_shapes, sample_keys, layout_names = _template_reference(template_path)
+    template_shapes, sample_keys, layout_names, sample_texts = _template_reference(
+        template_path
+    )
     for slide_index, slide in enumerate(prs.slides, 1):
         slide_issues: list[dict[str, Any]] = []
         text_count = 0
@@ -449,6 +513,56 @@ def inspect_presentation(
                             "message": "Visible text boxes overlap",
                         }
                     )
+        pictures = [
+            shape
+            for shape in slide.shapes
+            if shape.shape_type == MSO_SHAPE_TYPE.PICTURE
+            and str(shape.name) == "BrandDeck Image"
+        ]
+        for text_shape in text_shapes:
+            if not is_generated(text_shape):
+                continue
+            for picture in pictures:
+                overlap = box_intersection(box(text_shape), box(picture))
+                smaller = min(area(box(text_shape)), area(box(picture)))
+                if smaller > 0 and overlap / smaller > 0.15:
+                    slide_issues.append(
+                        {
+                            "severity": "warning",
+                            "code": "image_text_overlap",
+                            "shape": f"{text_shape.name} / {picture.name}",
+                            "ratio": round(overlap / smaller, 2),
+                            "message": "Текст заходит под изображение",
+                        }
+                    )
+        for shape in text_shapes:
+            # Text a slot kept from its exemplar ("Mission", "Venus has a
+            # beautiful name"): Appendix 1 placeholder text and deck language.
+            if (
+                not is_generated(shape)
+                and not _is_footer(shape)
+                and _normal_text(shape.text) in sample_texts
+            ):
+                slide_issues.append(
+                    {
+                        "severity": "warning",
+                        "code": "template_sample_text",
+                        "shape": shape.name,
+                        "message": "Остался текст образца шаблона: «"
+                        + " ".join(shape.text.split())[:60]
+                        + "»",
+                    }
+                )
+            word = _split_word(shape, default_body) if is_generated(shape) else None
+            if word:
+                slide_issues.append(
+                    {
+                        "severity": "warning",
+                        "code": "word_split_risk",
+                        "shape": shape.name,
+                        "message": f"Слово «{word}» шире рамки и разорвётся посередине",
+                    }
+                )
         slide_issues.extend(
             _template_layer_issues(
                 slide, (slide_width, slide_height), template_shapes, sample_keys

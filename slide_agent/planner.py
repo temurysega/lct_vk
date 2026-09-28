@@ -21,6 +21,8 @@ from .visual_planning import (
 )
 
 PLANNER_SYSTEM = load_prompt("planner")
+# Target deck size of the brief when the user does not set a number.
+DEFAULT_SLIDE_RANGE = (10, 15)
 
 
 def load_content(value: str | Path) -> tuple[str, str]:
@@ -114,7 +116,10 @@ def _fallback_plan(text: str, slide_count: int | None) -> dict[str, Any]:
             "Презентация" if russian else "Presentation"
         )
 
-    desired = max(3, slide_count or min(10, max(5, len(sections) + 2)))
+    # The service targets 10-15 slides unless the user sets a number; thin
+    # material gives fewer slides rather than one statement per slide.
+    low, high = DEFAULT_SLIDE_RANGE
+    desired = max(3, slide_count or min(high, max(low, len(sections) + 2)))
     content_slots = desired - 2
     material: list[tuple[str, list[str]]] = []
     for index, (heading, lines) in enumerate(sections):
@@ -146,7 +151,7 @@ def _fallback_plan(text: str, slide_count: int | None) -> dict[str, Any]:
     while len(material) < content_slots:
         split_at = max(range(len(material)), key=lambda idx: len(material[idx][1]))
         heading, bullets = material[split_at]
-        if len(bullets) < 2:
+        if len(bullets) < (2 if slide_count is not None else 4):
             break
         midpoint = max(1, len(bullets) // 2)
         material[split_at : split_at + 1] = [

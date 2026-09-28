@@ -191,7 +191,7 @@ def test_export_reports_missing_renderer(template, tmp_path, monkeypatch):
     reason="LibreOffice not found; install it or set BRANDDECK_LIBREOFFICE to soffice",
 )
 def test_actual_office_export(template, tmp_path):
-    import fitz
+    import pymupdf as fitz
 
     original = template.read_bytes()
     count = len(Presentation(template).slides)
