@@ -54,9 +54,10 @@ def _clean_item(item: Any) -> Any:
 def _independent_metric_items(items: list[Any]) -> bool:
     """A pyramid or cycle misrepresents unrelated quantities as a relationship.
 
-    The quantity may be the card's label or detail. Numbered stages and items
-    with more than one quantity remain untouched: their relationship cannot be
-    inferred from a single metric.
+    The quantity may be the card's label or detail. A list of pilot parameters
+    («Команда — 3 человека», «Срок — 6 недель», «Цель — …») may leave one item
+    without a number. Numbered stages and items with more than one quantity
+    remain untouched: their relationship cannot be inferred from one metric.
     """
     if len(items) < 2:
         return False
@@ -76,13 +77,15 @@ def _independent_metric_items(items: list[Any]) -> bool:
                 )
             )
         ]
-        if len(matches) != 1:
+        if len(matches) > 1:
             return False
-        match = matches[0]
-        quantities.append(int(match.group(1)))
-        units.append(match.group(2).casefold()[:5])
-    return len(set(units)) == len(units) and set(quantities) != set(
-        range(1, len(items) + 1)
+        if matches:
+            quantities.append(int(matches[0].group(1)))
+            units.append(matches[0].group(2).casefold()[:5])
+    return (
+        len(quantities) >= max(2, len(items) - 1)
+        and len(set(units)) == len(units)
+        and set(quantities) != set(range(1, len(quantities) + 1))
     )
 
 

@@ -253,6 +253,10 @@ def test_underfilled_data_diagram_gets_another_layout_but_a_photo_comparison_doe
     assert _hint_cards_for_underfilled(plan, qa) == [1]
     assert plan["slides"][0]["remap_underfilled"] is True
     assert plan["slides"][0]["visual"]["fill_zone"] is True
+    # A diagram moves whatever the slide role; only picture slots stay.
+    funnel = {"slides": [{"role": "comparison", "title": "Маршрут вопроса",
+                          "visual": {"type": "funnel", "items": []}}]}
+    assert _hint_cards_for_underfilled(funnel, {"issues": [qa["issues"][0]]}) == [1]
 
 
 def test_underfilled_diagram_remap_avoids_an_empty_column_under_a_side_title():

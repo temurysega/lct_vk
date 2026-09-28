@@ -430,3 +430,40 @@ def test_fill_zone_stretches_a_diagram_over_its_zone_height(visual):
     stretched = drawn_height({**style, "fill_zone": True})
     assert stretched > compact
     assert stretched >= zone[3] - 0.1
+
+
+def test_pilot_parameters_with_one_unquantified_item_are_cards_not_a_cycle():
+    items = [
+        {"label": "Команда", "detail": "3 человека"},
+        {"label": "Срок", "detail": "6 недель"},
+        {"label": "Цель", "detail": "Измерить эффективность"},
+    ]
+    assert sanitize_diagram({"type": "cycle", "items": items})["type"] == "icon_grid"
+    # A real cycle of actions or a single measured stage stays as it is.
+    stages = [
+        {"label": "Сбор вопросов"},
+        {"label": "Ответ помощника", "detail": "2 минуты"},
+        {"label": "Разбор ошибок"},
+    ]
+    assert sanitize_diagram({"type": "cycle", "items": stages})["type"] == "cycle"
+
+
+def test_underfilled_cycle_legend_uses_cards_over_the_zone_height(tmp_path: Path):
+    prs = Presentation()
+    prs.slide_width, prs.slide_height = Inches(13.33), Inches(7.5)
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    zone = (0.6, 1.6, 12.0, 4.9)
+    style = {**diagram_style(DESIGN), "fill_zone": True}
+    visual = {"type": "cycle", "items": ["Сбор вопросов", "Ответ помощника", "Разбор ошибок"]}
+    record = render_diagram(slide, visual, zone, style)
+    assert record["layout"] == "ring_with_legend_cards"
+    shapes = list(slide.shapes[0].shapes)
+    cards = [shape for shape in shapes if shape.name.startswith("BrandDeck Diagram Legend Card")]
+    assert len(cards) == 3
+    assert sum(card.height for card in cards) / 914400 >= 0.9 * zone[3] - 0.3
+    output = tmp_path / "cycle-cards.pptx"
+    prs.save(output)
+    assert not any(
+        issue["code"] in {"text_overflow_risk", "text_overlap", "out_of_bounds"}
+        for issue in inspect_presentation(output, expected_slide_count=1)["issues"]
+    )

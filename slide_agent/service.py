@@ -155,11 +155,14 @@ def _hint_cards_for_underfilled(
             visual["fill_zone"] = True
             slide["remap_underfilled"] = True
             hinted.append(number)
-        elif slide.get("role", "content") in {"content", "data"}:
+        elif (
+            slide.get("role", "content") in {"content", "data"}
+            or visual.get("type") in DIAGRAM_TYPES
+        ):
             # A diagram or chart placed in a cramped exemplar zone. Picture
             # slots of image and comparison slides keep their layout: another
-            # one rarely gives the picture more room. A diagram also stretches
-            # over the full height of its new zone.
+            # one rarely gives the picture more room; a diagram of any role
+            # moves, and stretches over the full height of its new zone.
             if visual.get("type") in DIAGRAM_TYPES:
                 visual["fill_zone"] = True
             slide["remap_underfilled"] = True
@@ -464,6 +467,11 @@ def _generate_from_plan(
         from .audit import enrich_audit
 
         qa = enrich_audit(output_path, qa, current_plan)
+        drawn_cards = {
+            record["slide"]
+            for record in compose_result.get("visuals", {}).get("slides", [])
+            if record.get("origin") in {"sparse_text", "rendered_fill"}
+        }
         if exports["status"] == "passed":
             rendered_pdf = run_dir / "exports" / "output.pdf"
             theme = design.get("colors", {}).get("theme", [])
@@ -472,8 +480,21 @@ def _generate_from_plan(
             accents = [
                 c.get("hex", "") for c in theme if c.get("role") not in text_roles
             ]
+            # Recolouring text changes no geometry, so the fill is measured
+            # once. A deck rebuilt for underfilled slides is exported again:
+            # its contrast is repaired on that final render only.
+            fill_audit = inspect_rendered_fill(
+                rendered_pdf,
+                output_path,
+                [str(s.get("role", "content")) for s in current_plan["slides"]],
+            )
+            rebuild = not render_pass and bool(
+                _hint_cards_for_underfilled(
+                    copy.deepcopy(current_plan), fill_audit, drawn_cards
+                )
+            )
             repairs = []
-            for _ in range(3):
+            for _ in range(0 if rebuild else 3):
                 visual_audit = inspect_rendered_contrast(rendered_pdf, output_path)
                 next_repairs = repair_rendered_contrast(
                     output_path, visual_audit["issues"], palette, accents
@@ -495,11 +516,6 @@ def _generate_from_plan(
             qa["rendered_visual_audit"] = visual_audit
             rendered_issues = list(visual_audit["issues"])
             if exports["status"] == "passed":
-                fill_audit = inspect_rendered_fill(
-                    rendered_pdf,
-                    output_path,
-                    [str(s.get("role", "content")) for s in current_plan["slides"]],
-                )
                 qa["rendered_fill_audit"] = fill_audit
                 rendered_issues.extend(fill_audit["issues"])
             qa["issues"].extend(rendered_issues)
@@ -511,11 +527,6 @@ def _generate_from_plan(
         # statements as cards once, and the whole deck is audited again.
         if render_pass:
             break
-        drawn_cards = {
-            record["slide"]
-            for record in compose_result.get("visuals", {}).get("slides", [])
-            if record.get("origin") in {"sparse_text", "rendered_fill"}
-        }
         cards_for_underfilled = _hint_cards_for_underfilled(current_plan, qa, drawn_cards)
         if not cards_for_underfilled:
             break

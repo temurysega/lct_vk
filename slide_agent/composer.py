@@ -2355,7 +2355,30 @@ def _compact_centered_cover(
         new_y = y - min(0.31, 0.055 * height)
         title_h = max(0.82, 2 * title_size * 1.22 / 72 + 0.06)
     subtitle_y = new_y + title_h + 0.11
-    subtitle_h = max(0.42, min(0.50, subtitle_shape.height / 914400 + 0.1))
+    # Size and frame follow the same width estimate as the overflow check, so
+    # QA does not reject the fitted stack. One smaller line keeps the stack
+    # compact above the art; a caption that would be too small wraps once.
+    readable = 11 * width / 10
+    subtitle_size = min(
+        preferred_subtitle_size,
+        inner_w * 72 / (max(1, len(subtitle)) * ESTIMATED_GLYPH_WIDTH_EM),
+    )
+    if subtitle_size < readable:
+        subtitle_size = preferred_subtitle_size
+
+    def caption_lines(size: float) -> int:
+        per_line = int(inner_w * 72 / (size * ESTIMATED_GLYPH_WIDTH_EM))
+        return estimated_line_count(subtitle, max(1, per_line))
+
+    while caption_lines(subtitle_size) > 2 and subtitle_size > readable:
+        subtitle_size = max(readable, subtitle_size - 0.5)
+    if subtitle_size < readable or caption_lines(subtitle_size) > 2:
+        return None
+    subtitle_h = max(
+        0.42,
+        min(0.50, subtitle_shape.height / 914400 + 0.1),
+        caption_lines(subtitle_size) * subtitle_size * 1.22 / 72 + 0.2,
+    )
     if new_x < 0.05 * width or new_x + new_w > 0.95 * width:
         return None
     if subtitle_y + subtitle_h >= height * 0.52:
@@ -2374,11 +2397,7 @@ def _compact_centered_cover(
             if intersection(artwork, title_zone) or intersection(artwork, subtitle_zone):
                 return None
 
-    subtitle_size = min(
-        preferred_subtitle_size,
-        inner_w * 72 / (len(subtitle) * 0.52),
-    )
-    if title_size < 18 * width / 10 or subtitle_size < 11 * width / 10:
+    if title_size < 18 * width / 10:
         return None
     _set_geometry(title_shape, *(Inches(value) for value in title_zone))
     _set_geometry(subtitle_shape, *(Inches(value) for value in subtitle_zone))

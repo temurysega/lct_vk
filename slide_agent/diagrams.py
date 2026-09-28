@@ -911,15 +911,31 @@ def _cycle(shapes, items, zone, style, context, record) -> None:
         )
     legend_x = x + side + 0.35
     legend_w = w - side - 0.35
-    row_h = min(h / count, 1.35)
+    # After an underfilled render the legend rows share the zone height and
+    # sit on cards, so the diagram occupies the zone it was given.
+    cards = bool(style.get("fill_zone"))
+    row_h = h / count if cards else min(h / count, 1.35)
     top = y + (h - row_h * count) / 2
-    record["layout"] = "ring_with_legend"
+    inset = 0.14 if cards else 0.0
+    record["layout"] = "ring_with_legend_cards" if cards else "ring_with_legend"
     for index, item in enumerate(items):
         row_y = top + index * row_h
         small = min(0.34, row_h * 0.5)
+        if cards:
+            _box(
+                shapes,
+                MSO_SHAPE.ROUNDED_RECTANGLE,
+                legend_x,
+                row_y + 0.05,
+                legend_w,
+                row_h - 0.1,
+                style["surface"],
+                f"BrandDeck Diagram Legend Card {index + 1}",
+                radius=0.12,
+            )
         _badge(
             shapes,
-            legend_x + small / 2,
+            legend_x + inset + small / 2,
             row_y + row_h / 2,
             small,
             style,
@@ -929,17 +945,17 @@ def _cycle(shapes, items, zone, style, context, record) -> None:
         )
         box = _text_box(
             shapes,
-            legend_x + small + 0.16,
-            row_y + 0.02,
-            legend_w - small - 0.16,
-            row_h - 0.04,
+            legend_x + inset + small + 0.16,
+            row_y + 0.02 + inset / 3.5,
+            legend_w - 2 * inset - small - 0.16,
+            row_h - 0.04 - inset / 1.75,
             f"BrandDeck Diagram Text {index + 1}",
         )
         _write(
             box,
             item,
             style,
-            color=style["text"],
+            color=style["surface_text"] if cards else style["text"],
             size=style["size"] - 1,
             anchor=MSO_ANCHOR.MIDDLE,
         )

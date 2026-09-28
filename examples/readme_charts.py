@@ -178,7 +178,9 @@ def time_chart(after: dict[str, dict], theme: dict, out: Path) -> None:
     plt.close(fig)
 
 
-def qa_chart(before: dict[str, dict], after: dict[str, dict], theme: dict, out: Path) -> None:
+def qa_chart(
+    before: dict[str, dict], after: dict[str, dict], theme: dict, out: Path, revision: str
+) -> None:
     rows = [(name, variant) for name in ORDER for variant in VARIANTS]
     fig, ax = plt.subplots(figsize=(8, 4.6), dpi=DPI)
     fig.patch.set_facecolor(theme["surface"])
@@ -208,7 +210,7 @@ def qa_chart(before: dict[str, dict], after: dict[str, dict], theme: dict, out: 
     ax.set_xticks([80, 85, 90, 95, 100])
     ax.set_yticks([])
     heading(fig, theme, "Структурный QA тех же девяти колод до и после исправлений",
-            "Один бриф и три шаблона; «до» — прогон на коммите 238612e, «после» — финальный код")
+            f"Один бриф и три шаблона; «до» — прогон на коммите {revision}, «после» — финальный код")
     legend(fig, theme, [("До исправлений", theme["muted"], "dot"),
                         ("После исправлений", theme["series"][0], "dot")], 0.79)
     fig.savefig(out, facecolor=theme["surface"])
@@ -283,10 +285,14 @@ def main() -> int:
     parser.add_argument("--out", type=Path, default=ROOT / "docs/charts")
     args = parser.parse_args()
     before, after = load(args.before), load(args.after)
+    revision = str(
+        json.loads(args.before.read_text(encoding="utf-8")).get("git_revision_at_start")
+        or "238612e"
+    )[:7]
     args.out.mkdir(parents=True, exist_ok=True)
     for mode, theme in THEMES.items():
         time_chart(after, theme, args.out / f"time-{mode}.png")
-        qa_chart(before, after, theme, args.out / f"qa-{mode}.png")
+        qa_chart(before, after, theme, args.out / f"qa-{mode}.png", revision)
         fill_chart(after, theme, args.out / f"fill-{mode}.png")
     sys.stdout.reconfigure(encoding="utf-8")
     print(table(before, after))

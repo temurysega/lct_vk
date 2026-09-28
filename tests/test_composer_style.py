@@ -491,3 +491,28 @@ def test_exemplar_visual_zone_stops_before_reserved_footer():
     result = _whole_visual_zone(slide, [left, right], content, design)
 
     assert result[1] + result[3] == pytest.approx(6.97)
+
+
+def test_long_cover_caption_fits_the_overflow_estimate_on_one_line():
+    from slide_agent.qa import _overflow_ratio
+
+    prs = Presentation()
+    slide = prs.slides.add_slide(prs.slide_layouts[1])
+    title, subtitle = list(slide.placeholders)
+    for shape, size, value in ((title, 48, "Образец"), (subtitle, 16, "Подпись")):
+        shape.left, shape.width = Inches(2.71), Inches(4.69)
+        shape.text = value
+        shape.text_frame.paragraphs[0].runs[0].font.size = Pt(size)
+    title.top, title.height = Inches(1.5), Inches(0.87)
+    subtitle.top, subtitle.height = Inches(2.41), Inches(0.31)
+    caption = "Инициатива по внедрению ИИ-помощника для ускорения работы с регламентами"
+    _fill_slide(
+        slide,
+        {"role": "cover", "title": "Поиск инструкции занимает до 30 минут",
+         "subtitle": caption, "bullets": [], "body": ""},
+        {**_design(), "canvas": {"width_inches": 10, "height_inches": 5.625}},
+        set(),
+    )
+    assert subtitle.text == caption
+    assert _overflow_ratio(subtitle, 16) <= 1.0
+    assert subtitle.text_frame.paragraphs[0].runs[0].font.size.pt >= 11
