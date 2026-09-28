@@ -146,6 +146,21 @@ def test_small_photo_zone_expands_only_into_free_space():
     assert _expand_small_image_zone(slide, small, design) == small
 
 
+def test_narrow_photo_zone_can_expand_width_without_growing_height():
+    prs = Presentation()
+    prs.slide_width, prs.slide_height = Inches(13.333), Inches(7.5)
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    _text(slide, "BrandDeck Body", (5.89, 2.96, 2.71, 3.89), "Текст")
+    design = {"canvas": {"width_inches": 13.333, "height_inches": 7.5}}
+    narrow = (8.87, 2.96, 3.48, 3.89)
+    expanded = _expand_small_image_zone(slide, narrow, design)
+    assert expanded[:2] == narrow[:2]
+    assert expanded[2] > 4.0
+    assert expanded[3] == narrow[3]
+    _text(slide, "BrandDeck Note", (12.45, 3.0, 0.4, 0.5), "Не закрывать")
+    assert _expand_small_image_zone(slide, narrow, design) == narrow
+
+
 def test_cleanup_removes_scaffolding_and_keeps_design():
     prs = _deck()
     slide = prs.slides.add_slide(prs.slide_layouts[6])

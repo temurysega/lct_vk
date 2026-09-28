@@ -51,12 +51,39 @@ def _clean_item(item: Any) -> Any:
     return text or None
 
 
+def _independent_metric_items(items: list[Any]) -> bool:
+    """A pyramid is misleading for unrelated quantities with different units.
+
+    A numbered sequence such as 1/2/3 remains a pyramid: those numbers may
+    name genuine levels. Keep the rule deliberately narrow so that a model's
+    explicit hierarchy is otherwise preserved.
+    """
+    if len(items) < 2:
+        return False
+    quantities: list[int] = []
+    units: list[str] = []
+    for item in items:
+        if not isinstance(item, dict) or item.get("value"):
+            return False
+        label = str(item.get("label") or "")
+        match = re.match(r"^\s*(\d+)\s+([^\W\d_]+)", label, re.UNICODE)
+        if match is None:
+            return False
+        quantities.append(int(match.group(1)))
+        units.append(match.group(2).casefold()[:5])
+    return len(set(units)) == len(units) and set(quantities) != set(
+        range(1, len(items) + 1)
+    )
+
+
 def sanitize_diagram(value: dict[str, Any]) -> dict[str, Any] | None:
     kind = value.get("type")
     if kind not in DIAGRAM_TYPES:
         return None
     raw = value.get("items") if isinstance(value.get("items"), list) else []
     items = [item for item in (_clean_item(entry) for entry in raw) if item]
+    if kind == "pyramid" and _independent_metric_items(items):
+        kind = "icon_grid"
     minimum, maximum = ITEM_LIMITS[kind]
     if kind == "matrix" and len(items) != 4:
         kind, minimum, maximum = "icon_grid", *ITEM_LIMITS["icon_grid"]

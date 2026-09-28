@@ -85,6 +85,13 @@ _ABSOLUTE = re.compile(
     r"абсолют\w*|zero|eliminat\w*|guarantee\w*|impossible|never)\b|100\s*%",
     re.IGNORECASE,
 )
+_GUARANTEE = re.compile(r"\b(?:гарантир\w*|guarantee\w*)\b", re.IGNORECASE)
+_DATA_CONTAINMENT = re.compile(
+    r"\b(?:документ\w*|данн\w*|информаци\w*|documents?|data|information)\b"
+    r".{0,85}?\b(?:не\s+(?:покида\w*|уход\w*|выход\w*)|"
+    r"(?:never\s+)?leav\w*|remain\w*|stay\w*)\b",
+    re.IGNORECASE,
+)
 _SELF_SERVICE = re.compile(
     r"\b(?:дол\w*|процент\w*|числ\w*|количеств\w*|share|rate|number)\b"
     r".{0,100}?\b(?:обращени\w*|вопрос\w*|запрос\w*|tickets?|requests?)\b"
@@ -188,6 +195,7 @@ _TIME_QUANTITY = re.compile(
 )
 _DELIVERY_DEADLINE = (
     r"(?:запуст\w*|внедр\w*|разверн\w*|launch\w*|deploy\w*|release\w*|"
+    r"начать|начн\w*|старт\w*|start\w*|begin\w*|"
     r"(?:для|до|к)\s+(?:запуск\w*|внедрен\w*|релиз\w*)|"
     r"запуск\w*.{0,40}(?:ожида\w*|запланир\w*|намеч\w*|долж\w*|состо\w*|произойд\w*))"
 )
@@ -421,6 +429,15 @@ def grounding_findings(source: str, plan: dict) -> list[dict]:
                     reasons.append("Бриф не запрашивает утверждение бюджета.")
             if _SECURITY.search(text) and _ABSOLUTE.search(text):
                 reasons.append("Абсолютная гарантия безопасности не следует из брифа; используйте его точную формулировку.")
+            if (
+                _GUARANTEE.search(text)
+                and _DATA_CONTAINMENT.search(text)
+                and not _GUARANTEE.search(source)
+            ):
+                reasons.append(
+                    "Бриф утверждает, что документы остаются внутри контура, "
+                    "но не даёт основания обещать гарантию этого свойства."
+                )
             if _decreases_self_service(text) and not source_decreases_self_service:
                 reasons.append("Уменьшение доли обращений без специалиста меняет смысл метрики успеха.")
             if _baseline_as_target(source, text):

@@ -520,11 +520,40 @@ def _icon_grid(shapes, items, zone, style, context, record, layout_variant: str)
     gap = min(0.24, max(0.12, w * 0.02))
     canvas_area = float(style.get("canvas_area") or 0)
     focus_h = min(h, 0.70 * canvas_area / w) if canvas_area and w > 0 else h
+    wide_pair = count == 2 and w >= 7.5
     boxes: list[tuple[float, float, float, float]]
-    if layout_variant == "columns" and w >= 5.6 and (h - gap * (count - 1)) / count >= 1.05:
+    narrow_stack = w < 5.6 and (h - gap * (count - 1)) / count >= 1.05
+    if layout_variant == "focus" and wide_pair and focus_h >= 2.4:
+        # A pair of equal cards would render exactly like the balanced mode.
+        # Give the lead claim more width while both keep the same height.
+        focus_h = min(focus_h, 3.0)
+        y += (h - focus_h) / 2
+        h = focus_h
+        lead_w = w * 0.58
+        boxes = [(x, y, lead_w, h), (x + lead_w + gap, y, w - lead_w - gap, h)]
+        record["columns"] = 2
+        record["emphasis"] = "first"
+    elif (
+        (layout_variant == "columns" and w >= 5.6) or narrow_stack
+    ) and (h - gap * (count - 1)) / count >= 1.05:
         card_h = (h - gap * (count - 1)) / count
         boxes = [(x, y + index * (card_h + gap), w, card_h) for index in range(count)]
         record["columns"] = 1
+        if narrow_stack:
+            record["narrow_stack"] = True
+        if narrow_stack and layout_variant == "focus" and count == 2:
+            lead_h = (h - gap) * 0.6
+            other_h = h - gap - lead_h
+            if other_h >= 1.05 and all(
+                text_height(_paragraphs(item), max(0.1, w - 1.0), 11)
+                + 0.25
+                <= card_h_candidate
+                for item, card_h_candidate in zip(
+                    items, (lead_h, other_h), strict=True
+                )
+            ):
+                boxes = [(x, y, w, lead_h), (x, y + lead_h + gap, w, other_h)]
+                record["emphasis"] = "first"
     elif (
         layout_variant == "focus"
         and count >= 3
@@ -557,7 +586,9 @@ def _icon_grid(shapes, items, zone, style, context, record, layout_variant: str)
         pad = min(0.24, max(0.12, card_w * 0.07))
         diameter = min(0.66, max(0.4, min(card_w, available_h) * 0.28))
         size = style["size"] + 2
-        horizontal = card_w / max(0.1, available_h) >= 1.9 and card_w >= 2.6
+        horizontal = wide_pair or (
+            card_w / max(0.1, available_h) >= 1.9 and card_w >= 2.6
+        )
         text_w = card_w - (diameter + pad * 2.6 if horizontal else pad * 1.4) - 0.08
         needed = max(text_height(_paragraphs(item), text_w, size) for item in items)
         if horizontal:
@@ -567,10 +598,17 @@ def _icon_grid(shapes, items, zone, style, context, record, layout_variant: str)
         # Short claims still fill the native card area instead of making an
         # almost empty slide. Other variants use their full assigned zones.
         card_h = min(available_h, wanted + 0.12)
-        grid_area = w * (card_h * rows + gap * (rows - 1))
-        if style.get("fill_zone") or grid_area < 0.27 * style.get("canvas_area", 0):
-            card_h = available_h
-        top = _block_top(y, h, card_h * rows + gap * (rows - 1))
+        if count == 2 and w >= 7.5 and not style.get("fill_zone"):
+            # Two short claims need breathing room without a mostly empty
+            # full-height card. Three inches still cover the required quarter
+            # of a standard wide slide when both cards span the content zone.
+            card_h = min(available_h, max(3.0, card_h))
+        else:
+            grid_area = w * (card_h * rows + gap * (rows - 1))
+            if style.get("fill_zone") or grid_area < 0.27 * style.get("canvas_area", 0):
+                card_h = available_h
+        used_h = card_h * rows + gap * (rows - 1)
+        top = y + (h - used_h) / 2 if count == 2 and w >= 7.5 else _block_top(y, h, used_h)
         boxes = [
             (
                 x + (index % columns) * (card_w + gap),
@@ -597,7 +635,9 @@ def _icon_grid(shapes, items, zone, style, context, record, layout_variant: str)
     for _, _, card_w, card_h in boxes:
         pad = min(0.24, max(0.12, card_w * 0.07))
         diameter = min(0.66, max(0.4, min(card_w, card_h) * 0.28))
-        horizontal = card_w / max(0.1, card_h) >= 1.9 and card_w >= 2.6
+        horizontal = wide_pair or (
+            card_w / max(0.1, card_h) >= 1.9 and card_w >= 2.6
+        )
         if horizontal:
             box_w, box_h = card_w - diameter - pad * 2.6, card_h - pad * 1.2
         else:
@@ -1044,7 +1084,7 @@ def _stacked(shapes, items, zone, style, context, record, *, funnel: bool) -> No
         apex = not funnel and index == 0
         # The apex is a near-triangle: its label sits in the wide lower part.
         inner = bottom_w * 0.55 if apex else min(top_w, bottom_w)
-        if inner >= 0.5:
+        if inner >= (0.3 if apex else 0.5):
             _write(
                 level,
                 label,

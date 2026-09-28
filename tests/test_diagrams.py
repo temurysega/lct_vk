@@ -17,6 +17,7 @@ from slide_agent.diagrams import (
     tint_series,
 )
 from slide_agent.qa import inspect_presentation
+from slide_agent.visual_planning import sanitize_diagram
 
 DESIGN = {
     "colors": {
@@ -157,6 +158,94 @@ def test_icon_grid_records_matched_pictograms(tmp_path: Path):
     grid = next(record for record in records if record["type"] == "icon_grid")
     assert grid["icon_matches"] == 3
     assert len(set(grid["icons"])) == 3
+
+
+def test_independent_quantities_do_not_become_pyramid_levels():
+    items = [
+        {"label": "2 подразделения", "detail": "Охват пилота"},
+        {"label": "150 сотрудников", "detail": "Участники пилота"},
+        {"label": "6 недель", "detail": "Срок пилота"},
+    ]
+    visual = sanitize_diagram({"type": "pyramid", "items": items})
+    assert visual == {"type": "icon_grid", "items": items}
+    assert sanitize_diagram({"type": "pyramid", "items": items[:2]}) == {
+        "type": "icon_grid",
+        "items": items[:2],
+    }
+    levels = [{"label": f"{number} уровень"} for number in (1, 2, 3)]
+    assert sanitize_diagram({"type": "pyramid", "items": levels})["type"] == "pyramid"
+
+
+def test_narrow_metric_cards_fill_column_and_pyramid_apex_has_number():
+    prs = Presentation()
+    prs.slide_width = Inches(10)
+    prs.slide_height = Inches(5.625)
+    zone = (5.08, 0.84, 4.22, 3.84)
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    record = render_diagram(
+        slide,
+        {
+            "type": "icon_grid",
+            "items": ["2 подразделения", "150 сотрудников", "6 недель"],
+            "layout_variant": "balanced",
+        },
+        zone,
+        {**diagram_style(DESIGN), "canvas_area": 56.25},
+    )
+    assert record["columns"] == 1 and record["narrow_stack"] is True
+    cards = [
+        shape
+        for shape in slide.shapes[0].shapes
+        if shape.name.startswith("BrandDeck Diagram Card ")
+    ]
+    assert len(cards) == 3
+    assert len({card.left for card in cards}) == 1
+    assert sum(card.width * card.height for card in cards) / (prs.slide_width * prs.slide_height) > 0.25
+
+    pyramid_slide = prs.slides.add_slide(prs.slide_layouts[6])
+    render_diagram(
+        pyramid_slide,
+        {"type": "pyramid", "items": ["Стратегия", "Тактика", "Операции"]},
+        zone,
+        diagram_style(DESIGN),
+    )
+    apex = next(
+        shape
+        for shape in pyramid_slide.shapes[0].shapes
+        if shape.name == "BrandDeck Diagram Level 1"
+    )
+    assert apex.text == "01"
+
+
+@pytest.mark.parametrize("zone", [(0.47, 1.94, 11.24, 4.14), (5.08, 0.84, 4.22, 3.84)])
+def test_two_item_focus_grid_differs_from_balanced(zone):
+    items = [
+        {"label": "Поиск ответа", "detail": "До 30 минут"},
+        {"label": "Поддержка", "detail": "Повторяющиеся вопросы"},
+    ]
+    positions = {}
+    for variant in ("balanced", "focus"):
+        prs = Presentation()
+        slide = prs.slides.add_slide(prs.slide_layouts[6])
+        record = render_diagram(
+            slide,
+            {"type": "icon_grid", "items": items, "layout_variant": variant},
+            zone,
+            {**diagram_style(DESIGN), "canvas_area": 100},
+        )
+        cards = [
+            shape
+            for shape in slide.shapes[0].shapes
+            if shape.name.startswith("BrandDeck Diagram Card ")
+        ]
+        assert len(cards) == 2
+        positions[variant] = [(card.left, card.top, card.width, card.height) for card in cards]
+        if variant == "focus":
+            assert record["emphasis"] == "first"
+        if zone[2] >= 7.5:
+            assert all(card.height <= Inches(3.01) for card in cards)
+            assert all(card.top > Inches(zone[1]) for card in cards)
+    assert positions["balanced"] != positions["focus"]
 
 
 def test_icon_grid_variants_keep_claims_and_change_card_geometry(tmp_path: Path):

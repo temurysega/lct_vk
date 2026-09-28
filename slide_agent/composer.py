@@ -2411,16 +2411,21 @@ def _expand_small_image_zone(
     zone: tuple[float, float, float, float],
     design: dict[str, Any],
 ) -> tuple[float, float, float, float]:
-    """Use free space beside text when an exemplar offers a tiny photo zone."""
+    """Use free space beside text when an exemplar offers a narrow photo zone."""
     x, y, w, h = zone
     canvas = design["canvas"]
     canvas_w = float(canvas["width_inches"])
     canvas_h = float(canvas["height_inches"])
-    if w * h >= canvas_w * canvas_h * 0.13 or x + w >= canvas_w - 0.9:
+    if w * h >= canvas_w * canvas_h * 0.16 or x + w >= canvas_w - 0.9:
         return zone
     candidate_w = canvas_w - 0.35 - x
     candidate_h = min(canvas_h - 0.45 - y, max(h, candidate_w / 1.65))
-    if candidate_w <= w or candidate_h <= h:
+    # An exemplar may already use the full content height while leaving a
+    # wide empty strip on the right. Widening alone still increases the
+    # rendered content area without moving the neighboring text.
+    candidate_w = max(w, candidate_w)
+    candidate_h = max(h, candidate_h)
+    if candidate_w <= w and candidate_h <= h:
         return zone
     candidate = (x, y, candidate_w, candidate_h)
     for shape in slide.shapes:

@@ -178,6 +178,39 @@ def test_explicit_launch_deadline_and_pilot_duration_remain_supported():
     assert grounding_findings(source, plan) == []
 
 
+def test_pilot_duration_does_not_become_start_deadline_in_closing_bullet():
+    source = "Пилот: 2 подразделения, 150 сотрудников, 6 недель."
+    bad = "Начать пилот в течение 6 недель."
+    findings = grounding_findings(source, {"slides": [{"bullets": [bad]}]})
+    assert [(item["slide"], item["quote"]) for item in findings] == [(1, bad)]
+    assert "другому событию" in findings[0]["reason"]
+    assert grounding_findings(
+        source, {"slides": [{"bullets": ["Пилот длится 6 недель."]}]}
+    ) == []
+    explicit_deadline = source + " Начать пилот нужно в течение 6 недель."
+    assert grounding_findings(explicit_deadline, {"slides": [{"bullets": [bad]}]}) == []
+
+
+def test_speaker_note_cannot_add_guarantee_of_document_containment():
+    source = (
+        "Модель с открытыми весами работает внутри контура компании, "
+        "документы не уходят наружу."
+    )
+    bad = (
+        "Модель размещена внутри контура компании, что гарантирует, "
+        "что документы не покидают внутреннюю среду."
+    )
+    findings = grounding_findings(source, {"slides": [{"speaker_notes": bad}]})
+    assert [(item["slide"], item["quote"]) for item in findings] == [(1, bad)]
+    assert "гарантию" in findings[0]["reason"]
+    assert grounding_findings(
+        source,
+        {"slides": [{"speaker_notes": "Модель работает внутри контура; документы не уходят наружу."}]},
+    ) == []
+    explicit_guarantee = source + " Такая архитектура гарантирует, что документы не уходят наружу."
+    assert grounding_findings(explicit_guarantee, {"slides": [{"speaker_notes": bad}]}) == []
+
+
 def test_current_search_duration_cannot_become_same_reduction_target():
     source = (
         "Сейчас сотрудник тратит до 30 минут, чтобы найти нужную инструкцию, "
