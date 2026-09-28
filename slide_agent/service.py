@@ -645,6 +645,10 @@ VARIANTS = {
     "columns": "Несколько блоков",
     "focus": "Единый акцент",
 }
+# Layout retries of each variant. A retry only recomposes and re-inspects;
+# a clean deck stops after the first attempt, so the limit costs nothing
+# unless a defect is still left for another layout to fix.
+VARIANT_QA_RETRIES = 3
 
 
 def _diversity_hybrid_plan(
@@ -789,7 +793,7 @@ def generate_variants(
             client=client,
             export_formats=export_formats,
             progress=on_progress,
-            qa_retries=2,
+            qa_retries=VARIANT_QA_RETRIES,
         )
         results.append(result)
         final = read_json(Path(result["presentation_dir"]) / "deck_plan.final.json")
@@ -811,7 +815,7 @@ def generate_variants(
             workspace_path=workspace_path,
             client=client,
             export_formats=export_formats,
-            qa_retries=2,
+            qa_retries=VARIANT_QA_RETRIES,
         )
         revised_visual = inspect_visual_diversity(
             [revised if index == target_index else item for index, item in enumerate(results)],
