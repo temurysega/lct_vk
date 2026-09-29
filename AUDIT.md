@@ -3,7 +3,7 @@
 ```powershell
 python -m pip install -e ".[api,documents,export,dev]"
 python -m pytest
-python -m ruff check slide_agent tests examples/run_dataset.py examples/run_baseline.py
+python -m ruff check slide_agent tests examples/run_dataset.py examples/run_baseline.py examples/rebuild_deliverables.py
 python -m compileall -q slide_agent
 git diff --check
 ```
@@ -36,8 +36,8 @@ PDF, PNG и SVG в HTML, а также неизменность исходног
 
 ### Список тестов
 
-`python -m pytest` собирает 271 случай (245 функций, часть параметризована) из
-31 файла; на Windows с LibreOffice 29.09.2026 все прошли за 2 мин. Браузерные
+`python -m pytest` собирает 276 случаев (250 функций, часть параметризована) из
+32 файлов; на Windows с LibreOffice 29.09.2026 все прошли за 2 мин. Браузерные
 сценарии `tests/browser_layout.cjs` и `tests/browser_smoke.cjs` запускаются
 отдельно через Playwright ([отчёт](reports/browser-2026-09-28/README.md)).
 
@@ -72,6 +72,7 @@ PDF, PNG и SVG в HTML, а также неизменность исходног
 | `test_job_storage.py` | 2 | API | Атомарная запись заданий при параллельном опросе в Windows |
 | `test_accounts.py` | 8 | API | Регистрация, сессии, Origin, лимит входа, изоляция файлов |
 | `test_setup_local.py` | 5 | развёртывание | Докачка (в том числе после обрыва соединения) и SHA-256 весов, проектора изображений и сервера llama.cpp |
+| `test_rebuild_deliverables.py` | 5 | воспроизводимость | Проверка перед пересборкой 3 × 3: шаблоны организаторов по SHA-256 и без лишних PPTX, закоммиченные код и входы, старая CRLF-копия переписывается с LF без потери правок, ответ сервера модели на `/models`, прежняя папка прогона не смешивается с новой |
 | `test_unseen_templates.py` | 7 | парсинг, вёрстка, аудит | Незнакомые публичные шаблоны: шкала кеглей из макетов и мастера, служебные страницы не становятся образцами, финал по строке «Thanks!», очистка незаполненных слотов образца, рост длинного заголовка со сдвигом пустого слота, слово не шире узкой колонки, проверки `template_sample_text`, `image_text_overlap` и `word_split_risk` |
 | `test_versions.py` | 2 | версии | Версия сервиса одна в `pyproject.toml` и коде и описана в CHANGELOG; каждый активный промпт — файл `-vN`, указанный в CHANGELOG |
 

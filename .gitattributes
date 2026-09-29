@@ -1,0 +1,8 @@
+# reports/final-dataset/evidence.json stores SHA-256 of these files' bytes
+# (code, prompts, rules, run config, brief). One line ending on every OS keeps
+# `python examples/export_run_evidence.py --verify` valid on any clone.
+slide_agent/**/*.py text eol=lf
+slide_agent/**/*.txt text eol=lf
+slide_agent/**/*.json text eol=lf
+examples/*.json text eol=lf
+examples/*.md text eol=lf
