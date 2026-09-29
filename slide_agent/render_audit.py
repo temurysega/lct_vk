@@ -85,6 +85,15 @@ def inspect_rendered_contrast(pdf_path: Path, pptx_path: Path) -> dict[str, Any]
             )
             width_scale = prs.slide_width / 914400 / page.rect.width
             height_scale = prs.slide_height / 914400 / page.rect.height
+            generated = (
+                [
+                    box(shape)
+                    for shape, _ in _inspected_shapes(prs.slides[slide_number - 1].shapes)
+                    if is_generated(shape) and getattr(shape, "has_text_frame", False)
+                ]
+                if slide_number <= len(prs.slides)
+                else []
+            )
             for block_index, block in enumerate(page.get_text("dict")["blocks"]):
                 for line_index, line in enumerate(block.get("lines", [])):
                     worst: dict[str, Any] | None = None
@@ -108,10 +117,19 @@ def inspect_rendered_contrast(pdf_path: Path, pptx_path: Path) -> dict[str, Any]
                         if ratio >= 4.5 or (worst and ratio >= worst["ratio"]):
                             continue
                         x0, y0, x1, y1 = span["bbox"]
+                        cx = (x0 + x1) / 2 * width_scale
+                        cy = (y0 + y1) / 2 * height_scale
+                        # Text the template draws itself (a credit line of its
+                        # layout) is reported, but the deck cannot recolour it.
+                        own = any(
+                            x - 0.05 <= cx <= x + w + 0.05 and y - 0.05 <= cy <= y + h + 0.05
+                            for x, y, w, h in generated
+                        )
                         worst = {
                             "slide": slide_number,
                             "code": "rendered_low_contrast",
-                            "severity": "warning",
+                            "severity": "warning" if own else "info",
+                            "origin": "generated" if own else "template",
                             "check_type": "deterministic",
                             "ratio": round(ratio, 2),
                             "text": value[:100],
@@ -125,7 +143,11 @@ def inspect_rendered_contrast(pdf_path: Path, pptx_path: Path) -> dict[str, Any]
                                     "h": round((y1 - y0) * height_scale, 4),
                                 }
                             ],
-                            "message": f"Контраст текста {ratio:.2f}:1 ниже 4.5:1 после офисного рендера",
+                            "message": (
+                                f"Контраст текста {ratio:.2f}:1 ниже 4.5:1 после офисного рендера"
+                                if own
+                                else f"Контраст текста шаблона {ratio:.2f}:1 ниже 4.5:1"
+                            ),
                             "repairable": False,
                         }
                     if worst:
@@ -133,7 +155,9 @@ def inspect_rendered_contrast(pdf_path: Path, pptx_path: Path) -> dict[str, Any]
                         worst["id"] = hashlib.sha256(identity.encode()).hexdigest()[:16]
                         issues.append(worst)
     return {
-        "status": "warning" if issues else "passed",
+        "status": "warning"
+        if any(issue["severity"] == "warning" for issue in issues)
+        else "passed",
         "checked_spans": checked,
         "uncertain_spans": uncertain,
         "issues": issues,

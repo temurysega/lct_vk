@@ -171,4 +171,4 @@ def test_offline_deck_contains_native_diagrams_and_literal_coverage(tmp_path: Pa
     ]
     assert len(groups) == result["visuals"]["diagrams"]
     assert result["workflow"]["pictograms"]["license"] == "ISC"
-    assert result["workflow"]["files"]["planner"] == "planner-v3.txt"
+    assert result["workflow"]["files"]["planner"] == "planner-v4.txt"

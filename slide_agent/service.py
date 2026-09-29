@@ -349,8 +349,11 @@ def _generate_from_plan(
     cards_for_underfilled: list[int] = []
     current_plan = plan
     avoided_patterns: dict[int, set[str]] = {}
+    carried: tuple[int, dict[str, Any]] | None = None
     for render_pass in range(2):
-        best: tuple[int, dict[str, Any]] | None = None
+        # A rebuild for underfilled slides competes with the deck it started
+        # from: when every new layout scores worse, the first deck is restored.
+        best: tuple[int, dict[str, Any]] | None = carried
         restoring = False
         # One extra round rebuilds the best attempt when the last retry was worse.
         for attempt in range(max(0, qa_retries) + 2):
@@ -458,6 +461,7 @@ def _generate_from_plan(
                 ]
             write_json(run_dir / f"deck_plan.retry-{attempt + 1}.json", current_plan)
 
+        carried = (qa["score"], copy.deepcopy(current_plan))
         template_manifest = read_json(template_dir / "manifest.json")
         report("export", 94)
         exports = export_presentation(
@@ -521,9 +525,11 @@ def _generate_from_plan(
                 qa["rendered_fill_audit"] = fill_audit
                 rendered_issues.extend(fill_audit["issues"])
             qa["issues"].extend(rendered_issues)
-            if rendered_issues and qa["status"] == "passed":
+            # Template text the deck cannot change is reported as info only.
+            defects = [i for i in rendered_issues if i.get("severity") != "info"]
+            if defects and qa["status"] == "passed":
                 qa["status"] = "warning"
-            qa["score"] = max(0, qa["score"] - 4 * len(rendered_issues))
+            qa["score"] = max(0, qa["score"] - 4 * len(defects))
 
         # The rendered fill decides: slides still below a quarter get their
         # statements as cards once, and the whole deck is audited again.

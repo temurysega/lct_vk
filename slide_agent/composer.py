@@ -43,6 +43,7 @@ from .layout_geometry import (
     is_navigation_label,
     is_opaque,
     is_photo_frame,
+    is_structural,
     is_visible_box,
 )
 from .pictograms import add_icon, assign_icons
@@ -83,6 +84,7 @@ BODY_TYPES = {
     PP_PLACEHOLDER.VERTICAL_BODY,
     PP_PLACEHOLDER.VERTICAL_OBJECT,
 }
+FOOTER_TYPES = {PP_PLACEHOLDER.SLIDE_NUMBER, PP_PLACEHOLDER.FOOTER, PP_PLACEHOLDER.DATE}
 
 
 def _hex(value: str | None, fallback: str) -> str:
@@ -518,6 +520,11 @@ def _set_text_frame(
             0.01, (shape.height - frame.margin_top - frame.margin_bottom) / 914400
         )
         fitted_size = float(font_size)
+        # A word wider than the frame is broken mid-word by the office renderer
+        # ("специалист / у"), so the longest word must fit the width too.
+        longest = max(
+            (len(word) for text in paragraphs for word in str(text).split()), default=0
+        )
         while fitted_size > min_font_size:
             chars_per_line = max(
                 1, int(width * 72 / (fitted_size * ESTIMATED_GLYPH_WIDTH_EM))
@@ -531,7 +538,8 @@ def _set_text_frame(
             required_height = (
                 line_count * fitted_size * 1.22 / 72 + paragraph_gap + 0.06
             )
-            if required_height <= height:
+            word_width = longest * fitted_size * ESTIMATED_GLYPH_WIDTH_EM / 72
+            if required_height <= height and word_width <= width:
                 break
             fitted_size = max(min_font_size, fitted_size - 0.5)
         font_size = _snap_size(max(min_font_size, fitted_size), min_font_size)
@@ -851,7 +859,18 @@ def _add_body_text(
         bottom = max(shape.top + shape.height for shape in preferred) / 914400
         source_zone = (left, top, right - left, bottom - top)
         if source_zone[2] >= 2.8 and source_zone[3] >= 0.75:
-            zone = source_zone
+            # Stay inside the zone the caller left, e.g. beside a picture slot:
+            # the exemplar's text area may run under the photo.
+            clip_left = max(source_zone[0], zone[0])
+            clip_top = max(source_zone[1], zone[1])
+            clipped = (
+                clip_left,
+                clip_top,
+                min(source_zone[0] + source_zone[2], zone[0] + zone[2]) - clip_left,
+                min(source_zone[1] + source_zone[3], zone[1] + zone[3]) - clip_top,
+            )
+            if clipped[2] >= 1.6 and clipped[3] >= 0.75:
+                zone = clipped
         elif zone[0] < left < zone[0] + zone[2] - 2.8:
             # Keep the exemplar's text indent: the column left of it usually
             # holds list markers or icons that stay on the slide.
@@ -2264,12 +2283,16 @@ def _remove_unmatched_content_images(
     return slot
 
 
-def _constrain_title_width(slide: Any, title: Any) -> None:
+def _constrain_title_width(
+    slide: Any, title: Any, design: dict[str, Any] | None = None
+) -> None:
     """Keep a title to the left of intersecting template artwork.
 
     Inspect inherited pictures too: a layout picture may cover slide text even
     though it is absent from slide.shapes. Full backgrounds do not start inside
-    the title and therefore do not narrow it.
+    the title and therefore do not narrow it. Layout ornaments drawn with
+    shapes in the title band narrow it from their side as well: a longer
+    title would otherwise run into them.
     """
     right = title.left + title.width
     for layer in (slide, slide.slide_layout, slide.slide_layout.slide_master):
@@ -2282,12 +2305,101 @@ def _constrain_title_width(slide: Any, title: Any) -> None:
                 and shape.top + shape.height > title.top
             ):
                 right = min(right, shape.left - Inches(0.15))
-    if right - title.left >= Inches(1.5):
+    left = title.left
+    if design is not None:
+        top, bottom = title.top / 914400, (title.top + title.height) / 914400
+        middle = (title.left + title.width / 2) / 914400
+        for x, y, w, h in layout_art_boxes(slide, design):
+            if min(bottom, y + h) - max(top, y) <= 0.5 * min(h, bottom - top):
+                continue
+            if middle < x < right / 914400:
+                right = min(right, Inches(x - 0.15))
+            elif left / 914400 < x + w < middle:
+                left = max(left, Inches(x + w + 0.15))
+    if right - left < max(Inches(1.5), title.width // 2):
+        left = title.left  # too narrow from both sides: keep the left edge
+    if right - left >= Inches(1.5):
         # Setting one dimension of an inherited placeholder can zero the others
         # in python-pptx; materialize the complete geometry first.
-        left, top, height = title.left, title.top, title.height
+        top, height = title.top, title.height
         title.left, title.top = left, top
         title.width, title.height = right - left, height
+
+
+def _grow_title_frame(slide: Any, title: Any, text: str, design: dict[str, Any]) -> None:
+    """Give a long title more lines before it is shrunk to fit.
+
+    Template title frames are sized for a short heading. A conclusion title
+    squeezed into one line of such a frame drops far below the template's
+    size (Appendix 1: readability, type scale). The frame grows down into
+    free space until the text fits two lines at 80 % of the template size. It
+    stops above shapes and layout art below it and within the top 38 % of the
+    slide; an empty text slot of the layout below (its body placeholder)
+    moves down by up to a quarter of its height instead. The content zone is
+    measured from the grown title.
+    """
+    base = effective_font_size(title)
+    if not base or not text.strip() or title.width is None or title.height is None:
+        return
+    frame = title.text_frame
+    width = (title.width - frame.margin_left - frame.margin_right) / 914400
+    target = base * 0.8
+    chars_per_line = max(1, int(width * 72 / (target * ESTIMATED_GLYPH_WIDTH_EM)))
+    lines = min(2, estimated_line_count(text, chars_per_line))
+    needed = (
+        lines * target * 1.22 / 72
+        + 0.06
+        + (frame.margin_top + frame.margin_bottom) / 914400
+    )
+    left, top = title.left / 914400, title.top / 914400
+    right, bottom = left + title.width / 914400, top + title.height / 914400
+    if top + needed <= bottom:
+        return
+    canvas = (
+        float(design["canvas"]["width_inches"]),
+        float(design["canvas"]["height_inches"]),
+    )
+    limit = canvas[1] * 0.38
+    movable = []
+
+    def below(zone: tuple[float, float, float, float], slot: bool = False) -> bool:
+        # Bands and panels frame the slide; a large text slot still holds text.
+        x, y, w, _ = zone
+        return (
+            x < right - 0.02
+            and x + w > left + 0.02
+            and y >= bottom - 0.02
+            and (slot or not is_structural(zone, canvas))
+        )
+
+    for shape in slide.shapes:
+        zone = box(shape)
+        if shape.element is title.element or not below(zone, shape.is_placeholder):
+            continue
+        if shape.is_placeholder and _placeholder_type(shape) in FOOTER_TYPES:
+            continue
+        if shape.is_placeholder and not has_text(shape) and zone[3] >= 1.5:
+            movable.append(shape)
+            limit = min(limit, zone[1] + zone[3] * 0.25 - 0.1)
+        elif shape.is_placeholder or has_text(shape) or is_visible_box(shape):
+            limit = min(limit, zone[1] - 0.08)
+    for zone in layout_art_boxes(slide, design):
+        if below(zone):
+            limit = min(limit, zone[1] - 0.08)
+    new_bottom = min(top + needed, limit)
+    if new_bottom <= bottom:
+        return
+    # Materialize inherited geometry before changing one dimension.
+    _set_geometry(
+        title, title.left, title.top, title.width, Inches(new_bottom - top)
+    )
+    for shape in movable:
+        y, h = shape.top / 914400, shape.height / 914400
+        shift = max(0.0, new_bottom + 0.1 - y)
+        if shift:
+            _set_geometry(
+                shape, shape.left, Inches(y + shift), shape.width, Inches(h - shift)
+            )
 
 
 def _compact_centered_cover(
@@ -2629,6 +2741,38 @@ def _clear_group_text(group: Any, assigned_text: set[Any] | None = None) -> None
             _set_text_frame(shape, [])
 
 
+def _normal_text(value: str) -> str:
+    return " ".join(value.split()).lower()
+
+
+def _clear_unused_sample_text(
+    slide: Any, had_text: set[Any], recurring: set[str]
+) -> None:
+    """Erase exemplar text in slots the plan did not fill.
+
+    A multi-column exemplar offers more title and caption slots than a slide
+    uses; an untouched slot still shows its sample text (Appendix 1:
+    placeholder text, one language per deck). Generated text is named
+    ``BrandDeck``; page numbers, footers and text repeated across the
+    template (branding) stay.
+    """
+
+    def visit(shapes: Any) -> None:
+        for shape in shapes:
+            if shape.shape_type == MSO_SHAPE_TYPE.GROUP:
+                visit(shape.shapes)
+            elif (
+                not is_generated(shape)
+                and getattr(shape, "has_text_frame", False)
+                and shape.text.strip()
+                and _placeholder_type(shape) not in FOOTER_TYPES
+                and _normal_text(shape.text) not in recurring
+            ):
+                _set_text_frame(shape, [])
+
+    visit([shape for shape in slide.shapes if shape.element in had_text])
+
+
 def _empty_picture_placeholders(slide: Any) -> list[Any]:
     return [
         shape
@@ -2884,7 +3028,8 @@ def _fill_slide(
         )
 
     if titles:
-        _constrain_title_width(slide, titles[0])
+        framed = slide_spec.get("role") in {"cover", "closing", "section"}
+        _constrain_title_width(slide, titles[0], None if framed else design)
         if cover_sizes:
             # The fitted size snaps down to the template scale, never up.
             _set_text_frame(
@@ -2894,6 +3039,8 @@ def _fill_slide(
                 min_font_size=round(cover_sizes[0] * 0.85, 1),
             )
         else:
+            if not framed:
+                _grow_title_frame(slide, titles[0], title, design)
             _set_text_frame(titles[0], [title])
     else:
         margin = float(design["spacing"].get("typical_left_margin_inches", 0.6))
@@ -3011,6 +3158,9 @@ def _fill_slide(
             _record(
                 context, _fill_picture_slot(slide, placeholder, None, design, context)
             )
+    _clear_unused_sample_text(
+        slide, had_text, (context or {}).get("recurring_text", set())
+    )
     final_visual = slide_spec.get("visual") or {}
     removed = _remove_exemplar_leftovers(
         slide,
@@ -3142,6 +3292,18 @@ def _compose(
         for image_hash, count in image_hash_counts.items()
         if count >= recurring_threshold
     }
+    text_counts: Counter[str] = Counter(
+        text
+        for source_slide in source_slides
+        for text in {
+            _normal_text(shape.text)
+            for shape in source_slide.shapes
+            if getattr(shape, "has_text_frame", False) and shape.text.strip()
+        }
+    )
+    recurring_text = {
+        text for text, count in text_counts.items() if count >= recurring_threshold
+    }
     pdf_shape_count = sum(
         str(shape.name).lower().startswith("pdf ")
         for source_slide in source_slides
@@ -3201,6 +3363,7 @@ def _compose(
             "assets": assets,
             "records": visual_records,
             "cleanup": cleanup_records,
+            "recurring_text": recurring_text,
         }
         use_native_grid = (
             native_grid_source or pattern.get("source_kind") == "native_grid"

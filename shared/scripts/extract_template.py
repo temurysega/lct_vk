@@ -1649,6 +1649,9 @@ def extract_template_context(pptx_path: str, output_dir: str) -> None:
         m_info["shapes"] = shapes
         m_info["images"] = [{k: v for k, v in img.items() if k != "base64_data"} for img in images]
         all_images.extend(images)
+        # Layout placeholders without their own size inherit it from these
+        # (Google Slides exports keep the title size here, not in txStyles).
+        m_info["placeholders"] = _extract_placeholders(master.placeholders, resolved_tc)
 
         text_styles = _extract_master_text_styles(master, resolved_tc)
         if text_styles:

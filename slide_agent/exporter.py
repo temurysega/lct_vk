@@ -63,7 +63,7 @@ def export_presentation(
         )
         return result
     try:
-        import fitz
+        import pymupdf as fitz
 
         # An isolated profile prevents collisions with the user's running office
         # application and permits concurrent API jobs. All arguments stay literal.

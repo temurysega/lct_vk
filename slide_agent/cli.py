@@ -157,7 +157,7 @@ def _doctor() -> dict[str, Any]:
         "pillow": bool(importlib.util.find_spec("PIL")),
         "fastapi": bool(importlib.util.find_spec("fastapi")),
         "libreoffice": find_libreoffice(),
-        "pdf_renderer": bool(importlib.util.find_spec("fitz")),
+        "pdf_renderer": bool(importlib.util.find_spec("pymupdf")),
         "uvicorn": bool(importlib.util.find_spec("uvicorn")),
         "inference_configured": client is not None,
         "inference_model": os.getenv("INFERENCE_MODEL", ""),

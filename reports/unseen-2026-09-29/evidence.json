@@ -1,0 +1,267 @@
+{
+  "config_path": "examples/unseen_2026_09_29.json",
+  "config_sha256": "a11d3a0dc5fae08a5097a9265ac08498d8290551e2ad811bedb7a8e0989dc1cf",
+  "started_at_utc": "2026-09-28T21:38:08.883720+00:00",
+  "finished_at_utc": "2026-09-28T21:47:58.861865+00:00",
+  "git_revision_at_start": "cb2f89e6143787cbd7350e4e3949f5c7331a067b",
+  "source_matches_git_head_at_start": true,
+  "source_digest_before": "a96bf54bcc01a0b2c037fa27dce82c80adf2388f4ffd80df68a4be8e9ef79a94",
+  "source_digest_after": "a96bf54bcc01a0b2c037fa27dce82c80adf2388f4ffd80df68a4be8e9ef79a94",
+  "content_sha256": "733b7907ccfaa674b3b22fcb1d612267f8eb0750e6a0af08b3e14630dd4f9838",
+  "inputs_unchanged_during_run": true,
+  "source_unchanged_during_run": true,
+  "runs": [
+    {
+      "template": "editorial.pptx",
+      "template_sha256": "277e60dea0cbf618b38bb84567d75fd42ab309f78b927ad091034f371d8d62b0",
+      "elapsed_seconds": 54.8,
+      "status": "completed",
+      "diversity_status": "passed",
+      "diversity_changed_slides": {
+        "balanced/columns": 8,
+        "balanced/focus": 6,
+        "columns/focus": 6
+      },
+      "variants": [
+        {
+          "variant": "balanced",
+          "qa_status": "passed",
+          "qa_score": 100,
+          "issues": {},
+          "slide_count": 10,
+          "images_placed": 1,
+          "exports": "passed",
+          "output_pptx_sha256": "a9168ba59ddf5cc70029b93e2e389592c2fe791efd94fb46159af93651194d84",
+          "patterns": [
+            "slide-1",
+            "layout-9",
+            "layout-1",
+            "layout-9",
+            "layout-10",
+            "layout-1",
+            "layout-10",
+            "layout-10",
+            "layout-9",
+            "slide-3"
+          ]
+        },
+        {
+          "variant": "columns",
+          "qa_status": "passed",
+          "qa_score": 100,
+          "issues": {},
+          "slide_count": 10,
+          "images_placed": 1,
+          "exports": "passed",
+          "output_pptx_sha256": "9aeaa67a657a778dd0184734edfa865c9419fa282defbb95e47da7264b008d55",
+          "patterns": [
+            "slide-1",
+            "layout-1",
+            "layout-10",
+            "layout-1",
+            "layout-9",
+            "layout-9",
+            "layout-9",
+            "layout-3",
+            "layout-10",
+            "slide-3"
+          ]
+        },
+        {
+          "variant": "focus",
+          "qa_status": "passed",
+          "qa_score": 100,
+          "issues": {},
+          "slide_count": 10,
+          "images_placed": 1,
+          "exports": "passed",
+          "output_pptx_sha256": "1f68d6aae80f335860a27e242398c1347649a980449a6c6dacd250f7916e558e",
+          "patterns": [
+            "slide-1",
+            "layout-10",
+            "layout-9",
+            "layout-10",
+            "layout-1",
+            "layout-10",
+            "layout-1",
+            "layout-9",
+            "layout-1",
+            "slide-3"
+          ]
+        }
+      ]
+    },
+    {
+      "template": "outer-galaxies.pptx",
+      "template_sha256": "ccf78b27c0fac0f956a598635995e33593cef6864f79d67d9a3efeae87fb44f9",
+      "elapsed_seconds": 282.3,
+      "status": "completed",
+      "diversity_status": "passed",
+      "diversity_changed_slides": {
+        "balanced/columns": 6,
+        "balanced/focus": 2,
+        "columns/focus": 4
+      },
+      "variants": [
+        {
+          "variant": "balanced",
+          "qa_status": "passed",
+          "qa_score": 100,
+          "issues": {
+            "template_bleed:info": 4
+          },
+          "slide_count": 10,
+          "images_placed": 1,
+          "exports": "passed",
+          "output_pptx_sha256": "b29aff762f5161da20bad21b50dd5f239d7f7909fd425e0a3664532d605ff645",
+          "patterns": [
+            "slide-1",
+            "layout-2",
+            "layout-2",
+            "layout-2",
+            "layout-22",
+            "layout-2",
+            "layout-22",
+            "layout-2",
+            "layout-22",
+            "slide-26"
+          ]
+        },
+        {
+          "variant": "columns",
+          "qa_status": "passed",
+          "qa_score": 100,
+          "issues": {
+            "template_bleed:info": 4
+          },
+          "slide_count": 10,
+          "images_placed": 1,
+          "exports": "passed",
+          "output_pptx_sha256": "1d903f7896b31fc8130682f6369be32eac8992ff93026baace5da032b9a54e84",
+          "patterns": [
+            "slide-1",
+            "layout-22",
+            "layout-2",
+            "layout-22",
+            "layout-2",
+            "layout-22",
+            "layout-2",
+            "layout-22",
+            "layout-2",
+            "slide-26"
+          ]
+        },
+        {
+          "variant": "focus",
+          "qa_status": "passed",
+          "qa_score": 100,
+          "issues": {
+            "template_bleed:info": 4
+          },
+          "slide_count": 10,
+          "images_placed": 1,
+          "exports": "passed",
+          "output_pptx_sha256": "0e970eed227857e354d452f7e5c187d434b7c7b7128a38b5b28937de5cad4102",
+          "patterns": [
+            "slide-1",
+            "layout-22",
+            "layout-2",
+            "layout-22",
+            "layout-22",
+            "layout-2",
+            "layout-22",
+            "layout-2",
+            "layout-22",
+            "slide-26"
+          ]
+        }
+      ]
+    },
+    {
+      "template": "tech-consulting.pptx",
+      "template_sha256": "f367823f18c42a1a24e8bda1ca9fa3ebb9e76a9837e2a94da79f71d3a7c36587",
+      "elapsed_seconds": 252.7,
+      "status": "completed",
+      "diversity_status": "passed",
+      "diversity_changed_slides": {
+        "balanced/columns": 5,
+        "balanced/focus": 7,
+        "columns/focus": 7
+      },
+      "variants": [
+        {
+          "variant": "balanced",
+          "qa_status": "passed",
+          "qa_score": 100,
+          "issues": {
+            "rendered_low_contrast:info": 3
+          },
+          "slide_count": 10,
+          "images_placed": 1,
+          "exports": "passed",
+          "output_pptx_sha256": "1f866e270a1d66effe09bc34209d5c6b68252278aaf56803e9a6085b1a34c90d",
+          "patterns": [
+            "layout-0",
+            "layout-21",
+            "slide-12",
+            "layout-21",
+            "layout-21",
+            "layout-21",
+            "layout-21",
+            "slide-7",
+            "layout-21",
+            "slide-29"
+          ]
+        },
+        {
+          "variant": "columns",
+          "qa_status": "passed",
+          "qa_score": 100,
+          "issues": {
+            "rendered_low_contrast:info": 3
+          },
+          "slide_count": 10,
+          "images_placed": 1,
+          "exports": "passed",
+          "output_pptx_sha256": "56e9da5cacc6dadbd8c8a84e3100d74308a18c2e4614782d41fbeb2feaad4d5a",
+          "patterns": [
+            "layout-0",
+            "layout-21",
+            "slide-12",
+            "slide-7",
+            "slide-15",
+            "layout-21",
+            "slide-6",
+            "slide-25",
+            "slide-15",
+            "slide-29"
+          ]
+        },
+        {
+          "variant": "focus",
+          "qa_status": "passed",
+          "qa_score": 100,
+          "issues": {
+            "rendered_low_contrast:info": 3
+          },
+          "slide_count": 10,
+          "images_placed": 1,
+          "exports": "passed",
+          "output_pptx_sha256": "e79fffed459aa554bb9b04627e148b1949a4b80ca09ad2e53396b071fbab40a3",
+          "patterns": [
+            "layout-0",
+            "layout-21",
+            "slide-12",
+            "layout-21",
+            "layout-21",
+            "layout-21",
+            "layout-21",
+            "layout-21",
+            "layout-21",
+            "slide-29"
+          ]
+        }
+      ]
+    }
+  ]
+}

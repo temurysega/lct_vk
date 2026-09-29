@@ -1,0 +1,16 @@
+{
+  "templates": "external-fixtures/unseen-2026-09-29",
+  "content": "examples/acceptance_content.md",
+  "images": "examples/acceptance_images",
+  "workspace": "slide-workspace/unseen-2026-09-29",
+  "slide_count": 10,
+  "offline": true,
+  "mode": "source",
+  "export_formats": [
+    "pdf",
+    "html"
+  ],
+  "strict_qa": true,
+  "min_images_placed": 1,
+  "max_seconds_per_template": 900
+}

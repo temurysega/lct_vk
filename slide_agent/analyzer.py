@@ -26,7 +26,7 @@ from .utils import (
     write_json,
 )
 
-ANALYSIS_SCHEMA_VERSION = "1.7"
+ANALYSIS_SCHEMA_VERSION = "1.8"
 
 
 def _load_extractor():
@@ -107,6 +107,39 @@ def _font_samples(context: dict[str, Any]) -> list[tuple[str, float, str, bool]]
                 if name and isinstance(size, (int, float)):
                     samples.append((name, float(size), role, bool(font.get("bold"))))
     return samples
+
+
+def _inherited_sizes(context: dict[str, Any]) -> list[float]:
+    """Sizes of layout placeholders, resolved through their master.
+
+    Slides often carry no explicit size: the template's type scale then lives
+    in layout and master placeholders (Google Slides exports keep the title
+    size on the master title placeholder, not in its text styles).
+    """
+    master_sizes: dict[tuple[int, str], float] = {}
+    for position, master in enumerate(context.get("slide_masters", [])):
+        for placeholder in master.get("placeholders", []):
+            size = (placeholder.get("font") or {}).get("size_pt")
+            kind = str(placeholder.get("type", "")).strip().lower()
+            if isinstance(size, (int, float)):
+                group = "title" if kind in {"title", "center_title"} else "body"
+                master_sizes.setdefault(
+                    (int(master.get("index", position)), group), float(size)
+                )
+    sizes: list[float] = []
+    for layout in context.get("slide_layouts", []):
+        master_index = int(layout.get("master_index", 0))
+        for placeholder in layout.get("placeholders", []):
+            kind = str(placeholder.get("type", "")).strip().lower()
+            if kind in {"date", "footer", "slide_number", "picture"}:
+                continue
+            size = (placeholder.get("font") or {}).get("size_pt")
+            if not isinstance(size, (int, float)):
+                group = "title" if kind in {"title", "center_title"} else "body"
+                size = master_sizes.get((master_index, group))
+            if isinstance(size, (int, float)) and size > 0:
+                sizes.append(float(size))
+    return sizes
 
 
 def _mode(values: Iterable[str], fallback: str) -> str:
@@ -526,7 +559,9 @@ def build_design_system(context: dict[str, Any]) -> dict[str, Any]:
             "cover_title_size_pt": min(52.0, max(40.0, content_title_size * 1.35)),
             "body_size_pt": body_size,
             "observed_sizes_pt": sorted(
-                {size for _, size, _, _ in samples}, reverse=True
+                {size for _, size, _, _ in samples}
+                | {round(size, 1) for size in _inherited_sizes(context)},
+                reverse=True,
             ),
         },
         "colors": {
@@ -856,6 +891,83 @@ def _capacity_profile(
     }
 
 
+# Thank-you and contact slides close a deck; matched on the exemplar's text.
+CLOSING_WORDS = (
+    "спасибо",
+    "благодарю за внимание",
+    "есть вопросы",
+    "ваши вопросы",
+    "вопросы?",
+    "контакты",
+    "thank",
+    "any questions",
+    "contacts",
+)
+# Public templates ship pages about the template itself: usage instructions,
+# fonts and credits, icon and illustration sheets. They are not layouts.
+SERVICE_WORDS = (
+    "slidesgo",
+    "slidescarnival",
+    "storyset",
+    "flaticon",
+    "instructions for use",
+    "icon pack",
+    "editable icons",
+    "editable graphic",
+    "fonts & colors",
+    "fonts and colors",
+    "this presentation has been made",
+    "this template",
+    "you can delete this slide",
+    "alternative resources",
+    "инструкция по использованию",
+    "удалите этот слайд",
+)
+# Headings of credit and resource pages.
+SERVICE_HEADINGS = {"resources", "credits", "attribution", "ресурсы"}
+# Icon and illustration sheets are thousands of tiny shapes.
+SERVICE_SHAPE_COUNT = 300
+
+
+def _paragraphs(slide: dict[str, Any]) -> list[str]:
+    return [
+        " ".join(str(paragraph.get("text", "")).split()).lower()
+        for element in slide.get("text_elements", [])
+        for paragraph in element.get("paragraphs", [])
+    ]
+
+
+def _slide_text(slide: dict[str, Any]) -> str:
+    return " ".join(_paragraphs(slide))
+
+
+def _is_closing_slide(slide: dict[str, Any]) -> bool:
+    """A short line says thank you or invites questions ("Thanks!").
+
+    Only short paragraphs count: instructions that mention "a thanks slide"
+    do not close a deck.
+    """
+    return any(
+        len(text.split()) <= 6 and any(word in text for word in CLOSING_WORDS)
+        for text in _paragraphs(slide)
+    )
+
+
+def _is_service_slide(slide: dict[str, Any], position: int) -> bool:
+    """A page about the template itself, never a layout for new content.
+
+    The cover and thank-you slides stay even when they carry a credit line.
+    """
+    if position == 1 or _is_closing_slide(slide):
+        return False
+    text = _slide_text(slide)
+    return (
+        any(word in text for word in SERVICE_WORDS)
+        or any(line.strip(" :") in SERVICE_HEADINGS for line in _paragraphs(slide))
+        or len(slide.get("shapes", [])) >= SERVICE_SHAPE_COUNT
+    )
+
+
 def _slide_roles(
     slide: dict[str, Any],
     *,
@@ -863,13 +975,10 @@ def _slide_roles(
     slide_count: int,
     canvas_width: float,
     canvas_height: float,
+    closing_elsewhere: bool = False,
 ) -> list[str]:
     text_elements = slide.get("text_elements", [])
-    text = " ".join(
-        paragraph.get("text", "")
-        for element in text_elements
-        for paragraph in element.get("paragraphs", [])
-    ).lower()
+    text = _slide_text(slide)
     shapes = slide.get("shapes", [])
     images = slide.get("images", [])
     has_structured_data = any(
@@ -883,9 +992,10 @@ def _slide_roles(
     roles: list[str] = []
     if slide_number == 1:
         roles.append("cover")
-    if slide_number == slide_count or any(
-        token in text for token in ("спасибо", "thank you", "контакты", "contacts")
-    ):
+    # The last slide closes the deck unless it is a text-free end card and
+    # another slide says thank you.
+    last = slide_number == slide_count and (bool(text.strip()) or not closing_elsewhere)
+    if last or _is_closing_slide(slide):
         roles.append("closing")
     if len(text_elements) <= 2 and not has_structured_data and "cover" not in roles:
         roles.append("section")
@@ -916,7 +1026,14 @@ def _slide_exemplar_patterns(context: dict[str, Any]) -> list[dict[str, Any]]:
     slides = context.get("slides", [])
     layouts = context.get("slide_layouts", [])
     patterns: list[dict[str, Any]] = []
+    closing_slides = {
+        position
+        for position, slide in enumerate(slides, 1)
+        if _is_closing_slide(slide)
+    }
     for position, slide in enumerate(slides, 1):
+        if _is_service_slide(slide, position):
+            continue
         layout_index = int(slide.get("layout_index", 0))
         layout = layouts[layout_index] if 0 <= layout_index < len(layouts) else {}
         elements = [
@@ -991,6 +1108,7 @@ def _slide_exemplar_patterns(context: dict[str, Any]) -> list[dict[str, Any]]:
             slide_count=len(slides),
             canvas_width=width,
             canvas_height=height,
+            closing_elsewhere=bool(closing_slides - {position}),
         )
         capacity = _capacity_profile(
             zones=zones,
@@ -1035,8 +1153,12 @@ def build_pattern_catalog(context: dict[str, Any]) -> dict[str, Any]:
     canvas_width = float(presentation.get("slide_width_inches", 13.333))
     canvas_height = float(presentation.get("slide_height_inches", 7.5))
     slides_by_layout: dict[int, list[dict[str, Any]]] = defaultdict(list)
-    for slide in context.get("slides", []):
-        if isinstance(slide.get("layout_index"), int):
+    for position, slide in enumerate(context.get("slides", []), 1):
+        # Instruction and resource pages would lend a layout their text,
+        # numbers and icons; the layout itself stays available.
+        if isinstance(slide.get("layout_index"), int) and not _is_service_slide(
+            slide, position
+        ):
             slides_by_layout[slide["layout_index"]].append(slide)
 
     patterns: list[dict[str, Any]] = []
