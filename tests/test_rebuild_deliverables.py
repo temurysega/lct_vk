@@ -69,16 +69,19 @@ def test_old_crlf_checkout_is_rewritten_with_lf(tmp_path):
     git("init", "-q")
     git("config", "user.email", "test@example.com")
     git("config", "user.name", "Test")
-    git("config", "core.autocrlf", "false")
-    (tmp_path / ".gitattributes").write_text("code/*.py text eol=lf\n", encoding="utf-8")
+    # A Windows checkout made before .gitattributes: autocrlf keeps LF in Git
+    # and CRLF on disk, and the index caches the files as up to date.
+    git("config", "core.autocrlf", "true")
     (tmp_path / "code").mkdir()
-    (tmp_path / "code" / "module.py").write_bytes(b"x = 1\ny = 2\n")
-    (tmp_path / "code" / "other.py").write_bytes(b"z = 3\n")
+    (tmp_path / "code" / "module.py").write_bytes(b"x = 1\r\ny = 2\r\n")
+    (tmp_path / "code" / "other.py").write_bytes(b"z = 3\r\n")
     git("add", ".")
     git("commit", "-q", "-m", "init")
-    # A checkout made before .gitattributes existed, with autocrlf on Windows,
-    # and a real local edit that must survive.
-    (tmp_path / "code" / "module.py").write_bytes(b"x = 1\r\ny = 2\r\n")
+    (tmp_path / ".gitattributes").write_text("code/*.py text eol=lf\n", encoding="utf-8")
+    git("add", ".gitattributes")
+    git("commit", "-q", "-m", "attributes")
+    assert rebuild.check_committed(tmp_path, ["code"]) == []
+    # A real local edit must survive.
     (tmp_path / "code" / "other.py").write_bytes(b"z = 4\r\n")
 
     assert rebuild.normalize_line_endings(tmp_path, ["code"]) == ["code/module.py"]

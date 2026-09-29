@@ -121,6 +121,10 @@ def normalize_line_endings(root: Path, paths: list[str]) -> list[str]:
     ).stdout.split("\n")
     stale = [path for path in stale if path not in edited]
     if stale:
+        # checkout-index skips a file whose cached stat still matches, so remove
+        # it first; the committed content is in the index and is written back.
+        for path in stale:
+            (root / path).unlink()
         subprocess.run(["git", "checkout-index", "--force", "--index", "--", *stale], cwd=root, check=True)
     return stale
 
